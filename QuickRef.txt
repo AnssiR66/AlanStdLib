@@ -1,0 +1,977 @@
+Quick Reference for ALAN Standard Library v2.0
+
+
+This document describes in short how to implement various things in the ALAN interactive fiction language, using
+the Standard Library v2.0. Straight examples without much explanation are given. More thorough examples with
+detailed explanations are in the library manual.
+
+
+The contents:
+-------------
+
+
+LOCATIONS
+
+A basic location
+An indoor location
+An outdoor location
+A dark location
+Counting the times a location has been visited
+Keeping track of the times the location has been described
+Nested locations
+
+
+OBJECTS
+
+A basic object
+A clothing object
+A container object
+ + listing the contents of a container object after 'inventory'
+ + putting things in containers
+A device
+Distant and background objects
+ + a background object which is present in many places at once
+A door
+ + locked doors and matching keys
+ + the 'otherside' attribute
+A lightsource
+A liquid
+Not reachable objects
+A scenery object
+A supporter object
+ + a combined supporter and container object (e.g. a table with a thing on top + drawers inside)
+A weapon
+A window
+
+
+ACTORS
+
+A basic actor
+A person (e.g. 'a man')
+A named person (e.g. 'Mr Brown')
+ + changing an unnamed actor to named in mid-game
+The hero
+Describing NPCs
+A following NPC
+Compliant and not compliant actors
+
+
+THE MY_GAME INSTANCE
+
+
+
+
+LOCATIONS
+=========
+
+
+A basic location
+=================
+
+
+THE bedroom ISA LOCATION
+
+	DESCRIPTION "This is your bedroom. The bathroom is to the north, and there is a closet to the east."
+
+	EXIT north TO bathroom.
+
+	
+	EXIT east TO closet
+		CHECK "The closet is locked."
+	END EXIT.
+
+END THE.
+
+
+THE bathroom ISA LOCATION
+
+	DESCRIPTION "This is the bathroom. Your bedroom is to the south."
+
+	EXIT south TO bedroom.
+
+END THE.
+
+
+
+An indoor location
+==================
+
+
+- all ROOMS automatically have a ceiling, walls and a floor.
+ 
+
+THE inside_shop ISA ROOM
+	
+	NAME 'In the candy shop'
+
+	DESCRIPTION "Everything here is on sale."
+
+	EXIT out to street_corner.
+
+END THE.
+
+
+
+An outdoor location
+===================
+
+
+- all SITES automatically have a ground and a sky.
+
+
+THE street_corner ISA SITE
+ 
+        NAME street corner
+
+	DESCRIPTION "There's a lot of traffic today."
+
+	EXIT east TO inside_shop.
+
+END THE.
+
+
+
+A dark location
+===============
+
+
+THE basement ISA DARK_LOCATION
+
+	DESCRIPTION "Only useless junk can be seen lying around."
+
+	EXIT up TO hall.
+
+END THE.
+
+- The description above is shown only when/if the dark location is lighted by any means.
+- Otherwise the description is "It is pitch black. You can't see anything at all." This default can be changed
+  by editing the dark_loc_desc attribute of the my_game instance.
+- If a dark location in your game is never supposed to be lighted, you can leave out any description of your own:
+
+
+THE basement ISA DARK_LOCATION
+
+	EXIT up TO hall.
+
+END THE.
+
+
+
+Counting the times a location has been visited
+==============================================
+
+
+The bedroom IS A ROOM
+
+	DESCRIPTION 
+		"This is a tastefully decorated bedroom."
+		IF visited OF bedroom = 1  (= this is your first visit in the location)
+			THEN "You have never been in this bedroom before."
+			ELSE "YOu have been here" SAY visited OF bedroom - 1. "times before."
+			      (or just: "You have been here before.", etc.)
+		END IF.
+
+END THE.
+
+
+
+Keeping track of the times a location has been described
+========================================================
+
+
+1)
+
+THE bedroom ISA ROOM
+
+	DESCRIPTION
+		"This is a tastefully decorated bedroom."
+			IF described OF bedroom = 1  (= the first-time description)
+				THEN "Sunshine pours in from the window."
+				ELSE "Sunshine keeps pouring in from the window." (all subsequent times)
+			END IF.
+
+END THE.
+
+
+
+2)
+
+THE meadow ISA SITE
+
+	DESCRIPTION
+		"Flies and other insects buzz around you"	
+		IF described OF meadow > 5
+			THEN ", which starts to annoy you little by little"
+		END IF.
+		"."
+
+END THE.	
+
+
+
+
+OBJECTS
+=======
+
+
+
+A basic object
+===============
+
+
+THE ball ISA OBJECT AT bedroom
+
+	DESCRIPTION "A red ball lies in the middle of the floor."
+
+	VERB examine 
+		DOES ONLY "It is an ordinary red ball."
+	END VERB.
+	
+END THE.
+
+
+
+A clothing object
+==================
+
+
+1) Clothing worn by the player:
+
+
+THE shirt ISA CLOTHING IN worn
+
+	IS topcover 8.  		-- the value of this attribute must be taken from the clothing table (below)
+
+END THE.
+
+
+
+2) Clothing worn by an NPC:
+ 
+
+THE hat ISA CLOTHING IN mr_brown
+
+END THE.
+
+
+
+THE mr_brown ISA PERSON IN Room1
+
+	IS wearing {hat}.                  -- this is needed for things to work properly
+
+		
+	VERB examine
+		DOES ONLY "A middle-aged man with a limp."
+			LIST mr_brown.     -- This lists both what Mr Brown is carrying and
+					   -- what he is wearing.
+	END VERB.
+
+END THE.
+
+
+
+
+-- Clothing 			Headcover	Topcover 	Botcover 	Footcover 	Handcover
+
+-- hat				2		0		0		0		0
+-- vest/bra			0		2 		0		0		0
+-- undies/panties		0		0		2		0		0
+-- teddy			0		4		4		0		0
+-- blouse/shirt/T-shirt		0		8		0		0		0
+-- dress/coveralls		0		8		32		0		0
+-- skirt			0		0		32		0		0
+-- trousers/shorts		0		0		16		0		0
+-- sweater/pullover		0		16		0		0		0
+-- jacket			0		32		0		0		0
+-- coat				0		64		64		0		0
+-- socks/stockings		0		0		0		2		0
+-- tights/pantiehose		0		0		8		2		0
+-- shoes/boots			0		0		0		4		0			
+-- gloves			0		0		0		0		2
+
+
+
+
+A container object
+==================
+
+
+1)
+
+
+THE box ISA LISTED_CONTAINER IN Room1	
+
+END THE.
+	
+
+THE ball ISA OBJECT IN box
+
+END THE.
+
+
+
+
+2) 
+
+
+THE box ISA LISTED_CONTAINER IN Room1 
+	
+	OPAQUE CONTAINER		= cannot be seen through when closed
+	
+	IS closeable. IS closed.
+
+END THE.
+
+- an opaque container will become NOT opaque automatically when it is opened (this is defined by the library).
+
+
+
+THE ball ISA OBJECT IN box
+
+END THE.
+
+
+
+
+
++ listing contents of a container object after 'inventory':
+-----------------------------------------------------------
+
+
+For example, if the hero is carrying a box and you wish that the contents of the box are listed at >inventory, 
+you should implement this in the following way:
+
+
+THE my_game ISA DEFINITION_BLOCK
+
+  VERB inventory				
+
+	DOES
+
+		IF box IN hero 		
+			THEN LIST box.	
+		END IF.			
+
+  END VERB.
+
+END THE my_game.
+
+
+
++ putting things in containers
+------------------------------
+
+
+It is only possible to put something into a container if this something is included in the ‘allowed’ set of the
+container object.
+
+
+THE drawer ISA LISTED_CONTAINER IN nightstand
+
+	HAS allowed {diary, keys}.
+         …
+END THE drawer.
+
+
+In the example above, it wouldn’t be possible to put anything else in the drawer, for example a teacup, a chair or a suitcase. 
+The default response would be “The [object] doesn’t belong in the drawer.”.
+
+This applies not only to the verb put_in but also to empty_in, pour_in and throw_in.
+
+Everything programmed to be in a container by the author at the start of the game will be automatically included in 
+the ‘allowed’ set of the container. Thus, for example if the author has an apple in a bowl in their game and and the 
+hero character takes it, it will be possible to put the apple back into the bowl, without the author having to implement
+any separate ‘allowed’ attribute. 
+
+
+
+
+Distant and background objects
+==============================
+
+
+THE sun ISA OBJECT AT garden
+	IS distant.
+END THE.
+
+
+
++ a "background" object which is present in many places at once:
+--------------------------------------------------------------
+
+In the following example, the sun is found in 'garden', 'by_the_pond' and 'crossing_paths:
+
+
+THE sun ISA OBJECT AT garden_area
+
+	IS distant.
+
+	DESCRIPTION ""
+
+END THE.
+
+
+THE garden_area ISA LOCATION
+
+END THE.
+
+
+THE garden ISA SITE AT garden_area
+
+END THE.
+
+
+THE by_the_pond ISA SITE AT garden_area
+
+END THE.
+
+
+THE crossing_paths ISA SITE AT garden_area
+
+END THE.
+
+
+The sun being found in these locations means that it is in scope 
+(for example >examine sun  would produce a message like "The sun is shining brightly today." 
+(or whatever message(s) the author implements for the sun instance), and not
+"You can't see any sun here." However, the sun is not automatically mentioned in the location
+descriptions; this must be taken care of by the author.
+
+
+
+A device
+========
+
+
+THE thingummyjig ISA DEVICE AT lab
+
+END THE.
+
+
+
+
+A door
+======
+
+
+THE white_door ISA DOOR AT lobby
+
+END THE.
+
+
+
++ locked doors and matching keys:
+---------------------------------
+
+
+THE wooden_door ISA DOOR AT cellar
+
+	NAME wooden door
+	IS lockable. IS locked.
+	HAS matching_key iron_key.
+
+END THE locked_door.
+
+
+THE iron_key ISA OBJECT IN drawer
+
+END THE.
+
+
+
++ the 'otherside' attribute:
+----------------------------
+
+
+Doors cannot be placed "between rooms" in the game code. Just make them
+present in the location. You have to have a similar door object in the other room 
+(= where the door is leading to) and take care that it is closed/open properly
+in accordance with its counterpart door object. This is handled automatically by the
+library when using the 'otherside' attribute:
+
+
+THE wooden_door1 ISA DOOR AT room1
+
+	NAME wooden door
+	IS lockable. IS locked.
+	HAS matching_key iron_key.
+	HAS otherside wooden_door2.
+
+END THE locked_door.
+
+
+
+THE wooden_door2 ISA DOOR AT room2
+
+	NAME wooden door
+
+END THE.
+
+
+Above, the wooden_door2 is also lockable and locked at the start of the game, 
+has wooden_door1 as its otherside and can be opened with iron_key, even if none
+of that was explicitly implemented at the wooden_door2 code.
+
+
+
+
+A liquid
+========
+
+
+1) Liquids that are not in containers (and thus cannot be carried):
+
+
+THE puddle ISA LIQUID AT road
+
+	NAME puddle NAME muddy water
+
+END THE.
+
+
+
+2) Liquids in containers:
+
+
+THE juice ISA LIQUID IN glass
+
+END THE.
+
+
+
+THE glass ISA LISTED_CONTAINER AT room1 
+
+END THE.
+
+
+
+
+A lightsource
+=============
+
+
+1)
+
+
+THE lamp ISA LIGHTSOURCE AT bedroom
+
+	IS NOT natural.
+
+END THE.
+
+
+2)
+
+
+THE match ISA LIGHTSOURCE IN matchbox
+
+END THE.
+
+
+
+Lightsource objects are by default natural. A natural lightsource cannot be switched on or off,
+only lighted (lit) and extinguished (put out).
+
+
+
+
+
+A scenery object
+================
+
+
+THE flowerpot ISA OBJECT AT living_room
+
+	IS scenery.
+
+END THE.
+
+
+
+
+A supporter object
+==================
+
+
+THE table ISA SUPPORTER AT living_room
+
+END THE.
+
+
+
+THE coffee_cup ISA OBJECT IN table			-- note the 'IN' here
+
+	NAME 'coffee cup'
+
+END THE.
+
+
+
++ combined supporter and container objects:
+-------------------------------------------
+
+
+In the following example, a table has both a cup on it and a drawer in it:
+
+
+
+THE table ISA SUPPORTER AT living_room
+
+	HAS component {drawer}.
+
+	VERB examine
+		DOES ONLY LIST table.
+		          FOR EACH c IN component OF THIS DO
+				SAY "The table has" SAY AN c. "." LIST c.
+			  END FOR.
+	END VERB.
+
+END THE.
+
+
+
+THE cup ISA OBJECT IN table.
+
+END THE.
+
+
+
+THE drawer ISA OBJECT AT livingroom   -- and not "IN table"
+
+	IS closeable. IS closed.
+	
+END THE.
+
+
+
+
+
+
+
+
+A weapon
+========
+
+
+1)
+
+
+THE pistol ISA WEAPON IN table
+	
+	IS fireable.
+
+END THE.
+
+
+
+2)
+
+
+THE sword ISA WEAPON IN hero	
+
+END THE.
+	
+
+(By default, weapons are NOT fireable.)
+
+
+
+
+
+A window
+========
+
+
+THE bedroom_Window ISA WINDOW AT bedroom
+
+END THE.
+
+
+
+
+
+
+
+ACTORS
+======
+
+
+
+A basic actor
+=============
+
+
+THE cat ISA ACTOR AT living_room
+
+END THE.
+
+
+THE bob ISA ACTOR AT street
+
+END THE.
+
+
+
+A person
+========
+
+
+THE clerk ISA PERSON AT office
+
+END THE.
+
+
+- the difference between a basic actor and a person is that persons have the ability to talk
+
+
+
+A named person
+==============
+
+
+THE jim ISA PERSON
+
+	NAME Jim
+
+	IS named.		(by default, all actors are NOT named)
+
+END THE.
+
+
+
++ changing an unnamed person to named mid-game:
+-----------------------------------------------
+
+
+THE jim ISA PERSON
+	
+	NAME man NAME Jim
+
+	MENTIONED 
+		IF jim IS NOT named 
+			THEN "man"
+			ELSE "Jim"
+		END IF.
+
+
+	VERB greet
+		DOES 
+			IF jim IS NOT named
+				THEN """Hello, what's your name?"", you ask the man.
+					$p""Jim,"" he answers."
+					MAKE jim named.
+				ELSE "You have already greeted Jim."
+			END IF.
+	END VERB.
+
+END THE.
+
+
+
+The hero
+========
+
+The hero instance is not defined in the library. In the ALAN system the hero is pre-defined as being
+an actor having the container property and the name 'hero'. The library also defines some synonyms
+for it such as 'me' and 'myself'. Some verb checks and outcomes in the library take the hero 
+into account, as well. In any case, you are free to define your own hero instance as you please:
+
+THE hero ISA ACTOR
+    IS hungry.
+    HAS health 10.
+
+    VERB examine
+	 DOES ONLY "You're John Smith, proud of your unusual name."
+    END VERB.
+
+END THE.
+
+etc.  
+
+The hero will always be a container actor (so that it can take, carry and drop objects);
+you won't ever have to define the CONTAINER property for it separately.
+
+
+
+
+Describing NPCs
+===============
+
+
+
+THE boy ISA PERSON
+   IS wearing {hat}.         -- This attribute is needed for clothing
+			      -- objects worn by an NPC to show correctly 
+			      -- when the possessions of the NPC are listed	
+
+   VERB examine 
+          DOES ONLY “A boy about twelve years old.” LIST boy.
+   END VERB.
+
+END THE boy.
+
+
+THE coin ISA OBJECT IN boy
+END THE.
+
+
+THE hat ISA CLOTHING IN boy
+END THE.
+
+
+
+The above will result in:
+
+>examine boy
+A boy about twelve years old. The boy is carrying a coin and a hat (being worn).
+
+
+
+
+
+
+A following NPC (non-player character)
+======================================
+
+
+
+1) An NPC that follows the hero from the start of the game:
+
+
+THE servant ISA PERSON AT kitchen
+
+	IS following.
+
+END THE.
+
+
+
+2) Making an NPC following mid-game:
+
+
+
+THE bob ISA PERSON AT street
+
+	...
+
+	VERB give
+		WHEN  recip		
+		DOES 
+			IF obj = money
+				THEN 	"""Ok, I'll come with you"", Bob says."
+					MAKE bob following.
+				ELSE """No deal,"", Bob snaps."
+			END IF.
+	END VERB.
+
+
+END THE.
+
+
+
+3) Stopping an NPC from following
+
+
+THE bob ISA PERSON AT street
+
+	...
+
+
+	VERB stop
+		DOES ONLY """Ok, I'll wait here"", Bob says."
+			   MAKE bob NOT following.
+	END VERB.
+
+
+END THE.
+
+
+
+
+Compliant and not compliant actors
+==================================
+
+
+By default, actors are not compliant, i.e. they don't let the hero have their possessions. 
+For example the verbs 'take' and 'take_from' won't have successful results when you try to 
+take something from an NPC. Also implicit taking is not successful.
+
+>take apple from Jack
+That seems to belong to Jack.
+
+>eat apple
+That seems to belong to Jack.
+
+
+The only default case when you can make an NPC give you something is to ask the NPC for it:
+
+>ask jack for apple
+Jack gives the apple to you.
+
+
+If you wish to disable even this, use DOES ONLY at the instance level:
+
+THE jack ISA ACTOR AT room1
+   ...
+   VERB ask_for
+       WHEN act
+          DOES ONLY
+              "Jack doesn't seem to be cooperative."
+   END VERB.
+
+END THE.     
+
+
+You can make any actor compliant, and then taking objects from them will work: 
+
+
+THE jack ISA ACTOR AT room1
+        ...
+	IS compliant.
+
+END THE.
+
+
+
+>take apple from jack
+You take the apple from Jack.
+
+
+
+
+
+
+
+
+THE MY_GAME INSTANCE
+====================
+
+
+A meta instance called 'my_game' is obligatory in every new game,
+Its shortest formulation is
+
+
+THE my_game ISA DEFINITION_BLOCK
+END THE.
+
+
+Within it, you can for example implement default game attributes and change default library verb outcomes:
+
+
+THE my_game ISA DEFINITION_BLOCK
+     HAS treasures_found 0.
+
+     VERB jump
+         DOES ONLY "In this game you don't feel like jumping."
+     END VERB.
+
+     		
+END THE.
+
+
+You can also import the file 'mygame_import.i' to your game project and edit the various attributes of the my_game instance there.
+In that case, you don't have to define your own my_game instance, as you import that instance to your game with that file.
+
+
+
+
