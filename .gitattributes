@@ -1,0 +1,156 @@
+################################################################################
+# The Standard Library for ALAN Interactive Fiction Language                   #
+# https://github.com/AnssiR66/AlanStdLib                                       #
+################################################################################
+
+# Set Git's default behaviour to text-files autodetection, in case users don't
+# have `core.autocrlf` set:
+* text=auto
+
+# ==============================================================================
+#                      File Extensions Setting: Text/Binary                     
+# ==============================================================================
+# Explicitly declare all used file extensions as either text or binary, and tell
+# Git how to handle line-endings normalization.
+
+## ==========
+## Alan Files
+## ==========
+*.a3c      binary
+*.alan     text
+*.i        text
+*.ifid     text
+*.sav      binary
+
+## ===================
+## Game Scripts & Logs
+## ===================
+*.log      text
+*.script   text
+
+## =============
+## AlanIDE Files
+## =============
+.project   text
+
+## =============
+## SHELL SCRIPTS
+## =============
+*.bat      text eol=crlf
+*.com      text eol=crlf
+*.sh       text eol=lf
+*.ps1      text eol=crlf
+
+## ==================
+## MISC. DATA FORMATS
+## ==================
+*.json     text
+*.xml      text
+*.xhtml    text
+*.yaml     text
+*.yml      text
+
+## =================
+## WEB-RELATED FILES
+## =================
+*.htm      text
+*.html     text
+*.css      text
+*.js       text
+
+## ===================
+## DOCUMENTATION FILES
+## ===================
+*.docx       binary
+*.markdown   text
+*.md         text
+*.pdf        binary
+*.txt        text
+COPYING      text
+LICENSE      text
+
+## ============
+## CONFIG FILES
+## ============
+*.cnf          text
+*.conf         text
+*.config       text
+*.ini          text
+*.prefs        text
+.editorconfig  text
+.gitattributes text
+.gitconfig     text
+.gitignore     text
+.gitmodules    text
+
+## ========
+## ARCHIVES
+## ========
+*.7z    binary
+*.gz    binary
+*.jar   binary
+*.rar   binary
+*.tar   binary
+*.zip   binary
+
+## ========
+## GRAPHICS
+## ========
+*.ai    binary
+*.bmp   binary
+*.eps   binary
+*.gif   binary
+*.ico   binary
+*.jng   binary
+*.jp2   binary
+*.jpg   binary
+*.jpeg  binary
+*.jpx   binary
+*.jxr   binary
+*.png   binary
+*.psb   binary
+*.psd   binary
+*.svg   binary
+*.svgz  binary
+*.tif   binary
+*.tiff  binary
+*.wbmp  binary
+*.webp  binary
+
+# ==============================================================================
+#                                GitHub Linguist                                
+# ==============================================================================
+#  -- https://github.com/github/linguist
+#
+# Manually define/override some extension so that GitHub's Linguist library can
+# 1) Correctly gather statistics on source files, and
+# 2) Use proper syntax highlighting on GitHub's WebUI.
+
+# NOTE: Alan syntax is not supported by Linguist:
+#      https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
+
+## =================
+## Alan Source Files
+## =================
+# Even if Alan syntax is not supported, hopefully these settings might help the
+# repo statics to show up correctly (long-shot guess):
+*.alan    linguist-language=Alan
+*.i       linguist-language=Alan
+*.alan    linguist-detectable=true
+*.i       linguist-detectable=true
+
+*.ifid    linguist-generated=true
+
+## =============
+## AlanIDE Files
+## =============
+.project   linguist-language=XML
+.project   linguist-generated=true
+
+## Sample Patterns
+## ---------------------------
+# *.ext    linguist-detectable=true
+# *.ext    linguist-documentation=true
+# *.ext    linguist-generated=true
+# *.ext    linguist-language=LANG
+# *.ext    linguist-vendored=true
