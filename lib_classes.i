@@ -263,7 +263,7 @@ EVERY clothing ISA OBJECT
 
 
     -- all clothing acquired and worn by the hero or an NPC mid-game is checked to
-           -- show correctly when the possessions of an actor are listed:
+    -- show correctly when the possessions of an actor are listed:
 
 
     SCHEDULE worn_clothing_check AFTER 0.
@@ -274,7 +274,7 @@ EVERY clothing ISA OBJECT
   -- to allow for example a wallet to be put into a jacket
 
   -- If the clothing contains something, for example if a jacket contains a wallet,
-      -- the wallet will be mentioned by default when the jacket is examined:
+  -- the wallet will be mentioned by default when the jacket is examined:
 
 
   VERB examine
@@ -738,24 +738,25 @@ END EVENT.
 -- create nasty bugs:
 
 
--- Clothing       Headcover Topcover  Botcover  Footcover   Handcover
-
--- hat        2   0   0   0   0
--- vest/bra               0         2           0   0   0
--- undies/panties   0   0   2   0   0
--- teddy        0   4   4   0   0
--- blouse/shirt/T-shirt 0   8   0   0   0
--- dress/coveralls    0   8   32    0   0
--- skirt        0   0   32    0   0
--- trousers/shorts    0   0   16    0   0
--- sweater/pullover   0   16    0   0   0
--- jacket       0   32    0   0   0
--- coat       0   64    64    0   0
--- socks/stockings    0   0   0   2   0
--- tights/pantiehose    0   0   8   2   0
--- shoes/boots      0   0   0   4   0
--- gloves       0   0   0   0   2
-
+--+--------------------------+----------+----------+-----------+-----------+
+--| Clothing     | Headcover | Topcover | Botcover | Footcover | Handcover |
+--+--------------------------+----------+----------+-----------+-----------+
+--| hat                    2 |        0 |        0 |         0 |         0 |
+--| vest/bra               0 |        2 |        0 |         0 |         0 |
+--| undies/panties         0 |        0 |        2 |         0 |         0 |
+--| teddy                  0 |        4 |        4 |         0 |         0 |
+--| blouse/shirt/T-shirt   0 |        8 |        0 |         0 |         0 |
+--| dress/coveralls        0 |        8 |       32 |         0 |         0 |
+--| skirt                  0 |        0 |       32 |         0 |         0 |
+--| trousers/shorts        0 |        0 |       16 |         0 |         0 |
+--| sweater/pullover       0 |       16 |        0 |         0 |         0 |
+--| jacket                 0 |       32 |        0 |         0 |         0 |
+--| coat                   0 |       64 |       64 |         0 |         0 |
+--| socks/stockings        0 |        0 |        0 |         2 |         0 |
+--| tights/pantiehose      0 |        0 |        8 |         2 |         0 |
+--| shoes/boots            0 |        0 |        0 |         4 |         0 |
+--| gloves                 0 |        0 |        0 |         0 |         2 |
+--+--------------------------+----------+----------+-----------+-----------+
 
 
 
