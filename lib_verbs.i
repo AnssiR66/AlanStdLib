@@ -113,6 +113,7 @@
 ----- put_near                                                    put (obj) near (bulk)               2       x
 ----- put_on                                                      put (obj) on (surface)              2       x
 ----- put_under                                                   put (obj) under (bulk)              2       x
+----- quit        (+ q)                                           quit                                0
 ----- read                                                        read (obj)                          1       x
 ----- remove                                                      remove (obj)                        1       x
 ----- restart                                                     restart                             0
