@@ -2005,7 +2005,7 @@ ADD TO EVERY ACTOR
       THEN
         IF THIS IS NOT plural
           THEN "a"
-          ELSE ""
+          ELSE "some"
         END IF.
       ELSE ""
     END IF.
