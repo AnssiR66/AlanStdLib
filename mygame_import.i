@@ -174,8 +174,8 @@ THE my_game ISA DEFINITION_BLOCK
 
 	HAS illegal_parameter_act "That doesn't make sense.".							-- empty_in, pour_in, put_in, throw_in
 	
-	HAS illegal_parameter_consult_sg "That's not something you can find information		-- consult_about
-								about.".
+	HAS illegal_parameter_consult_sg "That's not something you can find information		
+								                    about.". -- consult_about
 	HAS illegal_parameter_consult_pl "Those are not something you can find 			
 								information about.".
 
