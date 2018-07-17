@@ -1141,7 +1141,7 @@ VERB lie_down
 		-- If you need this to work, insert the following lines instead of the above:
 			-- DOES "You lie down."
 			-- MAKE hero lying_down.
-			-- MAKE hero NOT sitting_down.
+			-- MAKE hero NOT sitting.
 END VERB.
 
 
