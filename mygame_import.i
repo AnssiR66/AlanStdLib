@@ -336,8 +336,8 @@ THE my_game ISA DEFINITION_BLOCK
 	-- containment checks for actors other than the hero (checks for the hero are listed separately below):
 	-------------------------------------------------------------------------------------------------------
 	
-	HAS check_act_near_hero "You don't quite know where $+1 went.  					-- follow
-		You should state a direction where you want to go.".
+  HAS check_act_near_hero "You don't quite know where $+1 went.           
+                           You should state a direction where you want to go.". -- follow
 
 	HAS check_obj_in_act_sg "$+2 doesn't have $+1.".							-- take_from
 	HAS check_obj_in_act_pl "$+2 don't have $+1.".
