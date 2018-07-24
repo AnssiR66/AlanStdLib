@@ -108,7 +108,7 @@
 ----- put         (+ lay, place)                                  put (obj)                           1       x
 ----- put_against                                                 put (obj) against (bulk))           2       x
 ----- put_behind                                                  put (obj) behind (bulk)             2       x
------ put_down                                                    put down (obj)                      1       x
+----- put_down    (= defined at the verb 'drop')                  put down (obj)                      1       x
 ----- put_in      (+ insert)                                      put (obj) in (cont)                 2       x
 ----- put_near                                                    put (obj) near (bulk)               2       x
 ----- put_on                                                      put (obj) on (surface)              2       x
@@ -179,7 +179,7 @@
 ----- where_am_i                                                  where am i                          0
 ----- where_is                                                    where is (obj)                      1       x
 ----- who_am_i                                                    who am i                            0
------ who_is                                                      who is (obj)                        1       x
+----- who_is                                                      who is (act)                        1
 ----- write                                                       write (txt) on (obj)                2       x
 ----- yes                                                         yes                                 0
 
