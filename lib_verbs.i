@@ -4736,7 +4736,7 @@ ADD TO EVERY OBJECT
           END IF.
       AND instr IS examinable
         ELSE
-          IF obj IS NOT plural
+          IF instr IS NOT plural
             THEN SAY check_obj2_suitable_with_sg OF my_game.
             ELSE SAY check_obj2_suitable_with_pl OF my_game.
           END IF.
