@@ -295,8 +295,7 @@ EVERY definition_block ISA LOCATION
 
   HAS illegal_parameter_act "That doesn't make sense.".             -- empty_in, pour_in, put_in, throw_in
 
-  HAS illegal_parameter_consult_sg "That's not something you can find information   -- consult_about
-                about.".
+  HAS illegal_parameter_consult_sg "That's not something you can find information about.". -- consult_about
   HAS illegal_parameter_consult_pl "Those are not something you can find
                 information about.".
 
@@ -398,7 +397,8 @@ EVERY definition_block ISA LOCATION
   HAS check_obj_reachable_ask "$+1 can't reach $+2.".         -- ask_for
   HAS check_obj_not_distant_sg "$+1 is too far away.".          -- (numerous)
   HAS check_obj_not_distant_pl "$+1 are too far away.".
-  HAS check_obj2_not_distant_sg "$+2 is too far away.".         -- empty_in, fill_with, pour_in, put_in, show, take_from,                                  -- + throw_at, throw_in, throw_to
+  HAS check_obj2_not_distant_sg "$+2 is too far away.".         -- empty_in, fill_with, pour_in, put_in, show, take_from,
+                                                                -- + throw_at, throw_in, throw_to
   HAS check_obj2_not_distant_pl "$+2 are too far away.".
 
 
@@ -458,8 +458,8 @@ EVERY definition_block ISA LOCATION
   -- containment checks for actors other than the hero (checks for the hero are listed separately below):
   -------------------------------------------------------------------------------------------------------
 
-  HAS check_act_near_hero "You don't quite know where $+1 went.           -- follow
-    You should state a direction where you want to go.".
+  HAS check_act_near_hero "You don't quite know where $+1 went.           
+                           You should state a direction where you want to go.". -- follow
 
   HAS check_obj_in_act_sg "$+2 doesn't have $+1.".              -- take_from
   HAS check_obj_in_act_pl "$+2 don't have $+1.".
@@ -544,14 +544,15 @@ EVERY definition_block ISA LOCATION
   HAS check_obj_not_obj2_in "It doesn't make sense to $v something into itself.".   -- empty_in, pour_in, put_in, throw_in
   HAS check_obj_not_obj2_on "It doesn't make sense to $v something onto itself.".   -- empty_on, pour_on, put_on
   HAS check_obj_not_obj2_to "It doesn't make sense to $v something to itself.".   -- give, show, throw_to, tie_to
-  HAS check_obj_not_obj2_with "It doesn't make sense to $v something with itself.".   -- attack_with, break_with, burn_with, close_with,                                       -- + cut_with, fill_with, lock_with,
-                                     -- + open_with, push_with, pry_with, shoot_with,
-                                     -- + touch_withm unlock_with, use_with
+  HAS check_obj_not_obj2_with "It doesn't make sense to $v something with itself.".   -- attack_with, break_with, burn_with, close_with,
+                                                                                      -- + cut_with, fill_with, lock_with,
+                                                                                      -- + open_with, push_with, pry_with, shoot_with,
+                                                                                      -- + touch_withm unlock_with, use_with
 
   HAS check_obj_not_obj2_put "That doesn't make sense." .         -- put_against, put_behind, put_near, put_under
 
 
-      -- f) additional checks for classes:
+  -- f) additional checks for classes:
   ------------------------------------
 
   HAS check_clothing_sex "On second thoughts you decide $+1 won't really suit you.".      -- clothing: wear
