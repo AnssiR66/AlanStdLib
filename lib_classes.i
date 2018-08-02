@@ -1742,19 +1742,62 @@ EVERY LISTED_CONTAINER ISA OBJECT
 
 
 -- Note that closed listed_containers are by default opaque and they become "not opaque" when
--- they are opened:
+-- they are opened.
+
+-- In order to support this behavior also on lockable listed_containers,
+-- before changing the opaqueness state we need to check that the cointainer is
+-- actually in the expected open/close state --- eg, if the player tries to open
+-- a locked listed_container for which he doesn't have the matching_key, then
+-- the 'open' action will have failed. Similarly, to be on the safe side, we'll
+-- also implement this behavior on other verbs that could potentially affect
+-- the open/close state of a listed_container (ie, if an author implements
+-- them on some class or instance).
 
 
   VERB open
     DOES
-      MAKE THIS NOT OPAQUE.
-      LIST THIS.
+      IF THIS IS open
+        THEN
+          MAKE THIS NOT OPAQUE.
+          LIST THIS.
+      END IF.
   END VERB.
 
 
-  VERB close
+  VERB open_with
+    WHEN obj DOES
+      IF THIS IS open
+        THEN
+          MAKE THIS NOT OPAQUE.
+          LIST THIS.
+      END IF.
+  END VERB.
+
+
+  VERB close, lock
     DOES
-      MAKE THIS OPAQUE.
+      IF THIS IS NOT open
+        THEN
+          MAKE THIS OPAQUE.
+      END IF.
+  END VERB.
+
+
+  VERB close_with
+    WHEN obj DOES
+      IF THIS IS NOT open
+        THEN
+          MAKE THIS OPAQUE.
+      END IF.
+  END VERB.
+
+
+  VERB lock_with
+    WHEN obj DOES
+      IF THIS IS NOT open
+        THEN
+          MAKE THIS OPAQUE.
+      END IF.
   END VERB.
 
 
