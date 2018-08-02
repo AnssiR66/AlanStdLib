@@ -8025,7 +8025,7 @@ ADD TO EVERY THING
       AND obj <> hero
       ELSE SAY check_obj_not_hero3 OF my_game.
       AND obj IS inanimate
-      ELSE SAY check_obj_inanimate2 OF my_game. "."
+      ELSE SAY check_obj_inanimate2 OF my_game.
           DOES
           "You feel nothing unexpected."
   END VERB.
