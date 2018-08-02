@@ -64,7 +64,7 @@
 ----- give                                                        give (obj) to (recipient)           2       x
 ----- go_to                                                       go to (dest)                        1
 ----- hint        (+ hints)                                       hint                                0
------ i           (+ inv, inventory                               inventory                           0
+----- i           (+ inv, inventory)                              inventory                           0
 ----- jump                                                        jump                                0
 ----- jump_in                                                     jump in (cont)                      1
 ----- jump_on                                                     jump on (surface)                   1
@@ -91,12 +91,12 @@
 ----- look_under                                                  look under (bulk)                   1
 ----- look_up                                                     look up                             0
 ----- no                                                          no                                  0
------ notify (on, off)                                            notify. notify on. notify off       0
+----- notify (on, off)                                            notify.  notify on.  notify off     0
 ----- open                                                        open (obj)                          1       x
 ----- open_with                                                   open (obj) with (instr)             2       x
 ----- play                                                        play (obj)                          1       x
 ----- play_with                                                   play with (obj)                     1       x
------ pour        (= defined at the verb 'empty)                  pour (obj)                          1       x
+----- pour        (= defined at the verb 'empty')                 pour (obj)                          1       x
 ----- pour_in     (= defined at the verb 'emtpy_in')              pour (obj) in (cont)                2       x
 ----- pour_on     (= defined at the verb 'empty_on')              pour (obj) on (surface)             2       x
 ----- pray                                                        pray                                0
@@ -124,7 +124,7 @@
 ----- say_to                                                      say (topic) to (act)                2
 ----- score                                                       score                               0
 ----- scratch                                                     scratch (obj)                       1       x
------ script                                                      script. script on. script off.      0
+----- script                                                      script.  script on.  script off.    0
 ----- search                                                      search (obj)                        1       x
 ----- sell                                                        sell (item)                         1
 ----- shake                                                       shake (obj)                         1       x
@@ -145,8 +145,8 @@
 ----- swim                                                        swim                                0
 ----- swim_in                                                     swim in (liq)                       1
 ----- switch                                                      switch (obj)                        1       x
------ switch_on   (defined at the verb 'turn_on')                 switch on (app)                     1
------ switch_off  (defined at the verb 'turn_off')                switch off (app)                    1
+----- switch_on   (= defined at the verb 'turn_on')               switch on (app)                     1
+----- switch_off  (= defined at the verb 'turn_off')              switch off (app)                    1
 ----- take        (+ carry, get, grab, hold, obtain)              take (obj)                          1       x
 ----- take_from   (+ remove from)                                 take (obj) from (holder)            2       x
 ----- talk                                                        talk                                0
@@ -163,6 +163,7 @@
 ----- tie                                                         tie (obj)                           1       x
 ----- tie_to                                                      tie (obj) to (target)               2       x
 ----- touch       (+ feel)                                        touch (obj)                         1       x
+----- touch_with  (+ feel)                                        touch (ogg) 'with' (strum)          2       x
 ----- turn        (+ rotate)                                      turn (obj)                          1       x
 ----- turn_on                                                     turn on (app)                       1
 ----- turn_off                                                    turn off (app)                      1
@@ -8024,7 +8025,7 @@ ADD TO EVERY THING
       AND obj <> hero
       ELSE SAY check_obj_not_hero3 OF my_game.
       AND obj IS inanimate
-      ELSE SAY check_obj_inanimate2 OF my_game. "."
+      ELSE SAY check_obj_inanimate2 OF my_game.
           DOES
           "You feel nothing unexpected."
   END VERB.
