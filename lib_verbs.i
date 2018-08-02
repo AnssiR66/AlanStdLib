@@ -758,7 +758,7 @@ ADD TO EVERY OBJECT
           END IF.
       AND instr IS examinable
         ELSE
-          IF obj IS NOT plural
+          IF instr IS NOT plural
             THEN SAY check_obj2_suitable_with_sg OF my_game.
             ELSE SAY check_obj2_suitable_with_pl OF my_game.
           END IF.
@@ -874,7 +874,7 @@ SYNTAX burn_with = burn (obj) 'with' (instr)
       END IF.
   AND instr ISA OBJECT
     ELSE
-      IF obj IS NOT plural
+      IF instr IS NOT plural
         THEN SAY illegal_parameter2_with_sg OF my_game.
         ELSE SAY illegal_parameter2_with_pl OF my_game.
       END IF.
@@ -893,7 +893,7 @@ ADD TO EVERY OBJECT
           END IF.
       AND instr IS examinable
         ELSE
-          IF obj IS NOT plural
+          IF instr IS NOT plural
             THEN SAY check_obj2_suitable_with_sg OF my_game.
             ELSE SAY check_obj2_suitable_with_pl OF my_game.
           END IF.
@@ -1331,7 +1331,7 @@ SYNTAX close_with = close (obj) 'with' (instr)
       END IF.
   AND instr ISA OBJECT
         ELSE
-      IF obj IS NOT plural
+      IF instr IS NOT plural
         THEN SAY illegal_parameter2_with_sg OF my_game.
         ELSE SAY illegal_parameter2_with_pl OF my_game.
       END IF.
@@ -1350,7 +1350,7 @@ ADD TO EVERY OBJECT
           END IF.
       AND instr IS examinable
         ELSE
-          IF obj IS NOT plural
+          IF instr IS NOT plural
             THEN SAY check_obj2_suitable_with_sg OF my_game.
             ELSE SAY check_obj2_suitable_with_pl OF my_game.
           END IF.
@@ -1574,7 +1574,7 @@ ADD TO EVERY OBJECT
           END IF.
       AND instr IS examinable
         ELSE
-          IF obj IS NOT plural
+          IF instr IS NOT plural
             THEN SAY check_obj2_suitable_with_sg OF my_game.
             ELSE SAY check_obj2_suitable_with_pl OF my_game.
           END IF.
@@ -3147,7 +3147,7 @@ SYNTAX give = 'give' (obj) 'to' (recipient)
         ELSE SAY illegal_parameter_obj OF my_game.
       AND recipient ISA ACTOR
         ELSE
-      IF obj IS NOT plural
+      IF recipient IS NOT plural
         THEN SAY illegal_parameter2_to_sg OF my_game.
         ELSE SAY illegal_parameter2_to_pl OF my_game.
       END IF.
@@ -4216,7 +4216,7 @@ ADD TO EVERY OBJECT
           END IF.
       AND key IS examinable
         ELSE
-          IF obj IS NOT plural
+          IF key IS NOT plural
             THEN SAY check_obj2_suitable_with_sg OF my_game.
             ELSE SAY check_obj2_suitable_with_pl OF my_game.
           END IF.
@@ -4736,7 +4736,7 @@ ADD TO EVERY OBJECT
           END IF.
       AND instr IS examinable
         ELSE
-          IF obj IS NOT plural
+          IF instr IS NOT plural
             THEN SAY check_obj2_suitable_with_sg OF my_game.
             ELSE SAY check_obj2_suitable_with_pl OF my_game.
           END IF.
@@ -4991,7 +4991,7 @@ SYNTAX pry_with = pry (obj) 'with' (instr)
         END IF.
     AND instr ISA OBJECT
       ELSE
-        IF obj IS NOT plural
+        IF instr IS NOT plural
           THEN SAY illegal_parameter2_with_sg OF my_game.
           ELSE SAY illegal_parameter2_with_pl OF my_game.
         END IF.
@@ -5010,7 +5010,7 @@ VERB pry_with
       END IF.
   AND instr IS examinable
     ELSE
-      IF obj IS NOT plural
+      IF instr IS NOT plural
         THEN SAY check_obj2_suitable_with_sg OF my_game.
         ELSE SAY check_obj2_suitable_with_pl OF my_game.
       END IF.
@@ -5179,7 +5179,7 @@ ADD TO EVERY THING
         ELSE SAY check_obj_not_obj2_with OF my_game.
       AND instr IS examinable
         ELSE
-          IF obj IS NOT plural
+          IF instr IS NOT plural
             THEN SAY check_obj2_suitable_with_sg OF my_game.
             ELSE SAY check_obj2_suitable_with_pl OF my_game.
           END IF.
@@ -8053,7 +8053,7 @@ SYNTAX touch_with = touch (obj) 'with' (instr)
       END IF.
   AND instr ISA OBJECT
         ELSE
-      IF obj IS NOT plural
+      IF instr IS NOT plural
         THEN SAY illegal_parameter2_with_sg OF my_game.
         ELSE SAY illegal_parameter2_with_pl OF my_game.
       END IF.
@@ -8410,7 +8410,7 @@ ADD TO EVERY OBJECT
           END IF.
       AND key IS examinable
         ELSE
-          IF obj IS NOT plural
+          IF key IS NOT plural
             THEN SAY check_obj2_suitable_with_sg OF my_game.
             ELSE SAY check_obj2_suitable_with_pl OF my_game.
           END IF.
