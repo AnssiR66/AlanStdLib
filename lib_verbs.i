@@ -1305,7 +1305,7 @@ ADD TO EVERY OBJECT
 
     DOES
           MAKE obj NOT open.
-          "You close the" SAY THE obj. "."
+          "You close" SAY THE obj. "."
   END VERB.
 END ADD TO.
 

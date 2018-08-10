@@ -435,7 +435,7 @@ EVERY clothing ISA OBJECT
     IF wear_flag OF hero >1
       THEN
         IF THIS NOT IN hero
-          THEN "You pick up the" SAY THE THIS. "."
+          THEN "You pick up" SAY THE THIS. "."
         END IF.
 
         LOCATE THIS IN hero.
@@ -450,7 +450,7 @@ EVERY clothing ISA OBJECT
       THEN
         LOCATE THIS IN worn.
 
-        "You pick up the" SAY THE THIS.
+        "You pick up" SAY THE THIS.
 
         IF THIS IS NOT plural
           THEN "and put it on."
