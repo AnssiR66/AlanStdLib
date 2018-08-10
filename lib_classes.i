@@ -2033,8 +2033,6 @@ ADD TO EVERY ACTOR
   -- to be held by an NPC who is not compliant.
   IS NOT takeable.
 
-  IS NOT present_actor.
-
 
     DEFINITE ARTICLE
     IF THIS IS NOT named
