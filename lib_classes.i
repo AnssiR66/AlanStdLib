@@ -16,8 +16,8 @@
 ADD TO EVERY OBJECT
 
   DESCRIPTION
-      CHECK THIS IS NOT scenery
-      ELSE SAY "".
+    CHECK THIS IS NOT scenery
+    ELSE SAY "".
 
 END ADD.
 
@@ -493,8 +493,8 @@ VERB remove
 
   SET tempcovered OF hero TO SUM OF topcover DIRECTLY IN worn /2.
   IF topcover OF THIS <> 0 AND topcover OF THIS < tempcovered OF hero
-     THEN
-      INCREASE wear_flag OF hero BY 1.
+    THEN
+    INCREASE wear_flag OF hero BY 1.
   END IF.
 
 
@@ -614,23 +614,23 @@ END THE tempworn.
 
 
 EVENT worn_clothing_check
-   FOR EACH ac ISA ACTOR
-  DO
-    FOR EACH cl ISA CLOTHING, IN wearing OF ac
-      DO
-        IF ac = hero
-          THEN
-            IF cl NOT IN worn
-              THEN LOCATE cl IN worn.
-                MAKE cl donned.
-            END IF.
-          ELSE
-            IF cl NOT IN ac
-              THEN LOCATE cl IN ac.
-                MAKE cl donned.
-            END IF.
-        END IF.
-    END FOR.
+  FOR EACH ac ISA ACTOR
+    DO
+      FOR EACH cl ISA CLOTHING, IN wearing OF ac
+        DO
+          IF ac = hero
+            THEN
+              IF cl NOT IN worn
+                THEN LOCATE cl IN worn.
+                  MAKE cl donned.
+              END IF.
+            ELSE
+              IF cl NOT IN ac
+                THEN LOCATE cl IN ac.
+                  MAKE cl donned.
+              END IF.
+          END IF.
+      END FOR.
    END FOR.
    SCHEDULE worn_clothing_check AFTER 1.
 END EVENT.
@@ -651,71 +651,80 @@ END EVENT.
 -- something similar to the following four examples:
 
 
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- THE jacket ISA CLOTHING AT lobby
 --  IS topcover 32.
 -- END THE.
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 -- use IN to refer to containers:
 
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- THE jeans ISA CLOTHING IN wardrobe
 --  IS botcover 16.
 -- END THE.
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 -- IN worn = worn by the player character (hero):
 
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- THE hat ISA CLOTHING IN hero   -- declaring the initial location is optional
 --  IS headcover 2.
 -- END THE.
-
+--
 -- THE hero ISA ACTOR
 --    IS wearing {hat}.
 -- END THE hero.
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 -- worn by an NPC called Joe:
 
--- THE sweater ISA CLOTHING IN joe    -- declaring the initial location is optional
-  -- Don't declare clothing attributes for NPCs (unless the hero is meant to take
-  -- and wear the NPC's clothing).
-  -- NPCs cannot wear clothing in layers!
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- THE sweater ISA CLOTHING IN joe  -- declaring the initial location is optional!
+--   -- Don't declare clothing attributes for NPCs (unless the hero is meant to
+--   -- take and wear the NPC's clothing). NPCs cannot wear clothing in layers!
 -- END THE.
-
+--
 -- THE joe ISA ACTOR AT room1
-  -- IS wearing {sweater}.
+--   IS wearing {sweater}.
 -- END THE joe.
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--- Note that if the piece of clothing worn
--- by an NPC is not meant to be takeable by the
--- player character, you should declare the
--- the piece of clothing to be NOT takeable.
+-- Note that if the piece of clothing worn by an NPC is not meant to be takeable
+-- by the player character, you should declare the the piece of clothing to be
+-- NOT takeable.
 
 
 -- In defining a piece of clothing, you should
 --
 --  1) define it ISA CLOTHING (and not: ISA OBJECT)
 --
---  2) give it one of five attributes 'headcover', 'topcover', botcover', 'footcover'
---  or 'handcover'; sometimes two of these are needed.
---  Which attribute(s) to use depends on the type of clothing; see the clothing table below.
+--  2) give it one of five attributes 'headcover', 'topcover', botcover',
+--     'footcover' or 'handcover'; sometimes two of these are needed.
+--     Which attribute(s) to use depends on the type of clothing; see the clothing
+--     table below.
 
 --  3) A number 2, 4, 8, 16, 32 or 64 needs to be added after the above attribute.
---  You cannot decide the number yourself; look it up from the clothing table below.
---  If the value of an attribute for a piece of clothing is 0 in the table, don't mention
---  this attribute in connection with your clothing object.
+--     You cannot decide the number yourself; look it up from the clothing table
+--     below. If the value of an attribute for a piece of clothing is 0 in the
+--     table, don't mention this attribute in connection with your clothing object.
 
 -- If the piece of clothing is initially worn by either the hero or another actor,
 -- the attribute 'IS wearing', followed by the piece(s) of clothing in curly brackets,
 -- is needed at the respective actor instance:
 
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- THE hero ISA ACTOR
-     -- IS wearing {jeans, shirt, flipflops}.
+--   IS wearing {jeans, shirt, flipflops}.
 -- END THE hero.
-
+--
 -- THE jill ISA ACTOR
-  -- IS wearing {dress}.
+--   IS wearing {dress}.
 -- END THE jill.
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 
@@ -908,16 +917,17 @@ EVERY door ISA OBJECT
 
 
   HAS otherside null_door.
-  -- The other side of the door in the next room will be automatically taken care of
-  -- so that it shows correctly in any room or object descriptions.
+  -- The other side of the door in the next room will be automatically taken care
+  -- of so that it shows correctly in any room or object descriptions.
   -- 'null_door' is a dummy default that can be ignored.
 
 
 
   INITIALIZE
 
-    -- ensuring that the author didn't forget to declare a locked door closed (= NOT open), as well. This is
-    -- just double-checking, as any door is by default closed (= "NOT open") at the start of the game:
+    -- ensuring that the author didn't forget to declare a locked door closed
+    -- (= NOT open), as well. This is just double-checking, as any door is by
+    -- default closed (= "NOT open") at the start of the game:
 
     IF THIS IS locked
       THEN
@@ -926,16 +936,17 @@ EVERY door ISA OBJECT
         END IF.
     END IF.
 
-    -- ensuring that if a door has an otherside attribute declared, this otherside will have the original
-    -- door as its otherside in turn:
+    -- ensuring that if a door has an otherside attribute declared, this
+    -- otherside will have the original door as its otherside in turn:
 
     IF otherside OF THIS <> null_door
       THEN
         SET otherside OF otherside OF THIS TO THIS.
 
 
-      -- next, ensuring that some attributes are correctly assigned to the otherside of the door, as well.
-      -- Only some non-default cases need to be addressed here:
+      -- next, ensuring that some attributes are correctly assigned to the
+      -- otherside of the door, as well. Only some non-default cases need to be
+      -- addressed here:
 
         IF THIS IS NOT openable
           THEN MAKE otherside OF THIS NOT openable.
@@ -963,17 +974,18 @@ EVERY door ISA OBJECT
     END IF.
 
 
-  -- If a door is lockable/locked, you should state at the door instance
-  -- which object will unlock it, with the matching_key attribute.
-    -- for example
+  -- If a door is lockable/locked, you should state at the door instance which
+  -- object will unlock it, with the matching_key attribute. For example:
 
-    -- THE attic_door ISA DOOR
-      -- HAS matching_key brass_key.
-      -- ...
-    --   END THE.
-
-    -- THE brass_key ISA OBJECT AT basement
-    -- END THE.
+  -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  -- THE attic_door ISA DOOR
+  --   HAS matching_key brass_key.
+  --   ...
+  -- END THE.
+  --
+  -- THE brass_key ISA OBJECT AT basement
+  -- END THE.
+  -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   -- (null_key is a default dummy object that can be ignored.)
 
@@ -1003,7 +1015,6 @@ EVERY door ISA OBJECT
             THEN "."
             ELSE "$$s."
           END IF.
-
       END IF.
   END VERB.
 
@@ -1321,14 +1332,15 @@ EVERY liquid ISA OBJECT
   -- If you have some liquid in a container in your game, you should declare the
   -- liquid instance thus:
 
-  -- THE juice ISA LIQUID
-  --      IN bottle
+  -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  -- THE juice ISA LIQUID IN bottle
   -- END THE juice.
+  -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  -- The verb 'pour', as defined in this library, also works for the container of a liquid;
-  -- i.e. if there is some juice in a bottle, 'pour bottle' and 'pour juice' will work equally well.
-  -- Note, however, that the verb 'empty' is not a synonym for 'pour';
-  -- 'empty' only works for container objects.
+  -- The verb 'pour', as defined in this library, also works for the container
+  -- of a liquid; i.e. if there is some juice in a bottle, 'pour bottle' and
+  -- 'pour juice' will work equally well. Note, however, that the verb 'empty'
+  -- is not a synonym for 'pour'; 'empty' only works for container objects.
 
 
 
@@ -1342,13 +1354,13 @@ EVERY liquid ISA OBJECT
           IF vessel OF THIS IS open
             THEN "You notice nothing unusual about" SAY THE THIS.
             ELSE "You can't, since" SAY THE vessel OF THIS.
-                IF THIS IS NOT plural
-                  THEN "is"
-                  ELSE "are"
-                END IF.
-                "closed."
-                -- Here we prohibit the player from examining
-                -- a liquid when the liquid is in a closed container.
+              IF THIS IS NOT plural
+                THEN "is"
+                ELSE "are"
+              END IF.
+              "closed."
+              -- Here we prohibit the player from examining
+              -- a liquid when the liquid is in a closed container.
           END IF.
         ELSE "You notice nothing unusual about" SAY THE THIS. "."
       END IF.
@@ -1362,13 +1374,13 @@ EVERY liquid ISA OBJECT
           IF vessel OF THIS IS open
             THEN "You see nothing special in" SAY THE THIS. "."
             ELSE "You can't, since" SAY THE vessel OF THIS.
-                IF THIS IS NOT plural
-                  THEN "is"
-                  ELSE "are"
-                END IF.
-                "closed."
-                -- Here we prohibit the player from looking into
-                -- a liquid when the liquid is in a closed container.
+              IF THIS IS NOT plural
+                THEN "is"
+                ELSE "are"
+              END IF.
+              "closed."
+              -- Here we prohibit the player from looking into
+              -- a liquid when the liquid is in a closed container.
           END IF.
         ELSE "You see nothing special in" SAY THE THIS. "."
       END IF.
@@ -1381,8 +1393,8 @@ EVERY liquid ISA OBJECT
     DOES ONLY
       IF vessel OF THIS = null_vessel OR vessel OF THIS IS NOT takeable
         THEN "You can't carry" SAY THE THIS. "around in your bare hands."
-      ELSE LOCATE vessel OF THIS IN hero.
-        "($$" SAY THE vessel OF THIS. "of" SAY THIS. "$$)$nTaken."
+        ELSE LOCATE vessel OF THIS IN hero.
+          "($$" SAY THE vessel OF THIS. "of" SAY THIS. "$$)$nTaken."
       END IF.
   END VERB.
 
@@ -1396,8 +1408,8 @@ EVERY liquid ISA OBJECT
     DOES ONLY
       IF vessel OF THIS = null_vessel OR vessel OF THIS IS NOT takeable
         THEN "You can't carry" SAY THE THIS. "around in your bare hands."
-      ELSE LOCATE vessel OF THIS IN hero.
-        "($$" SAY THE vessel OF THIS. "of" SAY THIS. "$$)$nTaken."
+        ELSE LOCATE vessel OF THIS IN hero.
+          "($$" SAY THE vessel OF THIS. "of" SAY THIS. "$$)$nTaken."
       END IF.
   END VERB.
 
@@ -1425,8 +1437,8 @@ EVERY liquid ISA OBJECT
         THEN
           IF vessel OF THIS = null_vessel OR vessel OF THIS IS NOT takeable
             THEN "You can't carry" SAY THE THIS. "around in your bare hands."
-          ELSE LOCATE vessel OF THIS IN hero.
-            "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
+            ELSE LOCATE vessel OF THIS IN hero.
+              "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
           END IF.
       END IF.
       -- end of implicit taking.
@@ -1451,11 +1463,11 @@ EVERY liquid ISA OBJECT
         THEN
           IF vessel OF THIS = null_vessel OR vessel OF THIS IS NOT takeable
             THEN "You can't pour" SAY THE THIS. "anywhere since you are not
-              carrying"
-                IF THIS IS NOT plural
-                  THEN "it."
-                  ELSE "them."
-                END IF.
+                  carrying"
+              IF THIS IS NOT plural
+                THEN "it."
+                ELSE "them."
+              END IF.
           ELSE LOCATE vessel OF THIS IN hero.
             "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
           END IF.
@@ -1466,10 +1478,10 @@ EVERY liquid ISA OBJECT
         THEN LOCATE THIS AT hero.
           SET vessel OF THIS TO null_vessel.
           "You pour" SAY THE THIS.
-            IF floor HERE
-              THEN "on the floor."
-              ELSE "on the ground."
-            END IF.
+          IF floor HERE
+            THEN "on the floor."
+            ELSE "on the ground."
+          END IF.
       END IF.
 
   END VERB.
@@ -1539,11 +1551,11 @@ EVERY liquid ISA OBJECT
               THEN LOCATE THIS AT hero.
                 "You pour" SAY THE THIS. "on" SAY THE surface. "."
                 SET vessel OF THIS TO null_vessel.
-            ELSIF surface ISA SUPPORTER
-              THEN LOCATE THIS IN surface.
-                "You pour" SAY THE THIS. "on" SAY THE surface. "."
+              ELSIF surface ISA SUPPORTER
+                THEN LOCATE THIS IN surface.
+                  "You pour" SAY THE THIS. "on" SAY THE surface. "."
                   SET vessel OF THIS TO null_vessel.
-            ELSE "It wouldn't be sensible to pour anything on" SAY THE surface.
+              ELSE "It wouldn't be sensible to pour anything on" SAY THE surface.
             END IF.
         END IF.
   END VERB.
@@ -1596,11 +1608,11 @@ EVERY liquid ISA OBJECT
                   "into" SAY THE vessel OF THIS. "of" SAY THIS. "."
               END IF.
             ELSE "You can't, since" SAY THE vessel OF THIS. "of" SAY THIS.
-                IF THIS IS NOT plural
-                  THEN "is"
-                  ELSE "are"
-                END IF.
-              "closed."
+              IF THIS IS NOT plural
+                THEN "is"
+                ELSE "are"
+              END IF.
+            "closed."
           END IF.
       END IF.
   END VERB.
@@ -1614,10 +1626,10 @@ EVERY liquid ISA OBJECT
           THEN
             IF vessel OF THIS = null_vessel
               THEN "You can't carry" SAY THE THIS. "around in your bare hands."
-            ELSIF vessel OF THIS IS NOT takeable
-              THEN "You don't have" SAY THE vessel OF THIS. "of" SAY THIS. "."
-            ELSE LOCATE vessel OF THIS IN hero.
-              "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
+              ELSIF vessel OF THIS IS NOT takeable
+                THEN "You don't have" SAY THE vessel OF THIS. "of" SAY THIS. "."
+              ELSE LOCATE vessel OF THIS IN hero.
+                "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
             END IF.
         END IF.
         -- end of implicit taking.
@@ -1672,7 +1684,7 @@ END THE.
 
 EVENT check_vessel
   FOR EACH liq ISA LIQUID, DIRECTLY AT CURRENT LOCATION DO
-      SET vessel OF liq TO null_vessel.
+    SET vessel OF liq TO null_vessel.
   END FOR.
   SCHEDULE check_vessel AFTER 1.
 END EVENT.
@@ -1827,10 +1839,10 @@ EVERY sound ISA OBJECT
 
   VERB smell
     DOES ONLY
-       IF THIS IS NOT plural
+      IF THIS IS NOT plural
         THEN "That's not"
         ELSE "Those are not"
-       END IF.
+      END IF.
       "something you can smell."
   END VERB.
 
@@ -1893,13 +1905,13 @@ EVERY supporter ISA OBJECT
 
 
   VERB put_in
-      WHEN cont
+    WHEN cont
     DOES ONLY "You can't put anything inside" SAY THE THIS. "."
   END VERB.
 
 
   VERB throw_in
-      WHEN cont
+    WHEN cont
     DOES ONLY "You can't put anything inside" SAY THE THIS. "."
   END VERB.
 
@@ -1982,19 +1994,19 @@ EVERY window ISA OBJECT
 
   VERB look_out_of
     DOES ONLY "You see nothing special looking out of the"
-        IF THIS IS NOT plural
-          THEN "window."
-          ELSE "windows."
-        END IF.
+      IF THIS IS NOT plural
+        THEN "window."
+        ELSE "windows."
+      END IF.
   END VERB.
 
 
   VERB look_through
     DOES ONLY "You see nothing special looking through the"
-        IF THIS IS NOT plural
-          THEN "window."
-          ELSE "windows."
-        END IF.
+      IF THIS IS NOT plural
+        THEN "window."
+        ELSE "windows."
+      END IF.
   END VERB.
 
 
@@ -2017,11 +2029,11 @@ END EVERY.
 
 
 ADD TO EVERY ACTOR
-    IS NOT inanimate.
-    IS NOT following.
-    IS NOT sitting.
-    IS NOT lying_down.
-    IS NOT named.
+  IS NOT inanimate.
+  IS NOT following.
+  IS NOT sitting.
+  IS NOT lying_down.
+  IS NOT named.
   -- = the actor's name is not known to the player
   IS wearing {null_clothing}.
   -- = the actor's clothing is not specified.
@@ -2034,87 +2046,88 @@ ADD TO EVERY ACTOR
   IS NOT takeable.
 
 
-    DEFINITE ARTICLE
-    IF THIS IS NOT named
-      THEN "the"
-      ELSE ""
-    END IF.
+  DEFINITE ARTICLE
+  IF THIS IS NOT named
+    THEN "the"
+    ELSE ""
+  END IF.
 
 
-    INDEFINITE ARTICLE
-    IF THIS IS NOT named
-      THEN
-        IF THIS IS NOT plural
-          THEN "a"
-          ELSE "some"
-        END IF.
-      ELSE ""
-    END IF.
+  INDEFINITE ARTICLE
+  IF THIS IS NOT named
+    THEN
+      IF THIS IS NOT plural
+        THEN "a"
+        ELSE "some"
+      END IF.
+    ELSE ""
+  END IF.
 
   -- if you need "an", you must declare it separately at the actor instance
 
 
-    CONTAINER
-    -- so that actors can receive and carry objects
-    HEADER
-      IF THIS = hero
-        THEN "You are carrying"
-        ELSE
+  CONTAINER
+  -- so that actors can receive and carry objects
+  HEADER
+    IF THIS = hero
+      THEN "You are carrying"
+      ELSE
 
-          IF THIS IS NOT named
-            THEN SAY THE THIS.
-            ELSE SAY THIS.
-          END IF.
+        IF THIS IS NOT named
+          THEN SAY THE THIS.
+          ELSE SAY THIS.
+        END IF.
 
-          IF THIS IS NOT plural
-            THEN "is carrying"
-            ELSE "are carrying"
-          END IF.
-      END IF.
-    ELSE
-      IF THIS = hero
-        THEN "You are empty-handed."
-        ELSE
-          IF THIS IS NOT named
-            THEN SAY THE THIS.
-            ELSE SAY THIS.
-          END IF.
-
-          IF THIS IS NOT plural
-            THEN "is not carrying anything."
-            ELSE "are not carrying anything."
-          END IF.
-
-      END IF.
-
-    EXTRACT
-      CHECK THIS IS compliant
-        ELSE
-          "That seems to belong to"
-          IF THIS IS NOT named
-            THEN SAY THE THIS.
-            ELSE SAY THIS.
-          END IF.
-          "."
-
-
-
-    INITIALIZE
-
-    MAKE hero compliant.
-    -- so that the hero can give, drop, etc. carried objects.
-
-
-    -- excluding the default dummy clothing object from all actors; ignore.
-
-    EXCLUDE null_clothing FROM wearing OF THIS.
-
-
-    -- all actors will obey this script from the start of the game:
-
-    IF THIS <> hero
-      THEN USE SCRIPT following_hero FOR THIS.
+        IF THIS IS NOT plural
+          THEN "is carrying"
+          ELSE "are carrying"
+        END IF.
     END IF.
+
+  ELSE
+    IF THIS = hero
+      THEN "You are empty-handed."
+      ELSE
+        IF THIS IS NOT named
+          THEN SAY THE THIS.
+          ELSE SAY THIS.
+        END IF.
+
+        IF THIS IS NOT plural
+          THEN "is not carrying anything."
+          ELSE "are not carrying anything."
+        END IF.
+
+    END IF.
+
+  EXTRACT
+    CHECK THIS IS compliant
+      ELSE
+        "That seems to belong to"
+        IF THIS IS NOT named
+          THEN SAY THE THIS.
+          ELSE SAY THIS.
+        END IF.
+        "."
+
+
+
+  INITIALIZE
+
+  MAKE hero compliant.
+  -- so that the hero can give, drop, etc. carried objects.
+
+
+  -- excluding the default dummy clothing object from all actors; ignore.
+
+  EXCLUDE null_clothing FROM wearing OF THIS.
+
+
+  -- all actors will obey this script from the start of the game:
+
+  IF THIS <> hero
+    THEN USE SCRIPT following_hero FOR THIS.
+  END IF.
 
 
 
@@ -2134,7 +2147,7 @@ ADD TO EVERY ACTOR
             END IF.
       END IF.
 
-      USE SCRIPT following_hero FOR THIS.
+    USE SCRIPT following_hero FOR THIS.
 
 
 
