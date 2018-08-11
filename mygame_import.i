@@ -357,8 +357,8 @@ THE my_game ISA DEFINITION_BLOCK
 
   HAS check_obj_not_at_hero_sg  "$+1 is right here.".                -- find, follow, go_to, where_is
   HAS check_obj_not_at_hero_pl  "$+1 are right here.".
-  HAS check_obj_in_hero         "You don't have the $+1.".              -- drop, fire, fire_at, put, show
-  HAS check_obj2_in_hero        "You don't have the $+2.".             -- (numerous)
+  HAS check_obj_in_hero         "You don't have $+1.".              -- drop, fire, fire_at, put, show
+  HAS check_obj2_in_hero        "You don't have $+2.".             -- (numerous)
   HAS check_obj_not_in_hero1    "It doesn't make sense to $v something you're holding.".   -- attack, attack_with, kick, lift, shoot, shoot_with
   HAS check_obj_not_in_hero2    "You already have $+1.".             -- take, take_from
   HAS check_obj2_not_in_hero1   "You are carrying $+2.".              -- throw_at, throw_in, throw_to
@@ -659,7 +659,7 @@ END VERB.
 VERB close
   DOES ONLY
         MAKE obj NOT open.
-        "You close the" SAY THE obj. "."
+        "You close" SAY THE obj. "."
 END VERB.
 
 
