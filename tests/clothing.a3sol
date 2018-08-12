@@ -1,0 +1,21 @@
+; ==============================================================================
+;                          HANDLING AND WEARING CLOTHES                         
+; ==============================================================================
+inventory
+wear t-shirt
+inventory
+drop t-shirt
+take off t-shirt
+inventory
+drop t-shirt
+take t-shirt
+wear t-shirt
+; ==============================================================================
+;                                INVALID ACTIONS                                
+; ==============================================================================
+wear chair
+take off chair
+wear assistant
+take off assistant
+wear me
+take off me
