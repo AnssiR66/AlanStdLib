@@ -1,0 +1,74 @@
+--==============================================================================
+-- "Actors Compliance Tests" by Tristano Ajmone, 2018.
+--==============================================================================
+IMPORT 'library.i'. -- ALAN Standard Library v2.1
+
+
+THE my_game IsA DEFINITION_BLOCK
+
+  HAS title    "Actors Compliance Tests".
+  HAS subtitle "An adventure to test actors compliance.".
+  HAS author   "Tristano Ajmone".
+  HAS year     2018.
+  HAS version  "1".
+
+END THE.
+
+
+-- =============================================================================
+
+----- Compliance "Debug Tools"
+
+-- =============================================================================
+-- A custom verb to check an actor's compliane state...
+
+SYNTAX compliance_test = test compliance 'of' (act)
+  WHERE act ISA ACTOR
+    ELSE "$+1 is not an actor!"
+
+ADD TO EVERY ACTOR
+  VERB compliance_test
+    DOES "$+1 is"
+      IF act IS NOT compliant
+        THEN "not"
+      END IF. "compliant."
+  END VERB compliance_test.
+END ADD TO ACTOR.
+
+--------------------------------------------------------------------------------
+THE beach IsA LOCATION.
+  
+END THE beach.
+--==============================================================================
+-- The Woman (compliant)
+--==============================================================================
+THE woman IsA female AT beach.
+  IS compliant.
+  HAS ex "A rather mysterious woman.".
+END THE woman.
+
+-- ================
+-- The Magic Mirror
+-- ================
+THE mirror IsA object IN woman.
+  NAME magic mirror.
+END THE mirror.
+
+--==============================================================================
+-- The Man (not compliant)
+--==============================================================================
+THE man IsA female AT beach.
+  IS NOT compliant.
+  HAS ex "A serious lookin man.".
+END THE man.
+
+-- ================
+-- The Sword
+-- ================
+THE sword IsA object IN man.
+END THE sword.
+
+
+--------------------------------------------------------------------------------
+Start at beach.
+DESCRIBE banner.

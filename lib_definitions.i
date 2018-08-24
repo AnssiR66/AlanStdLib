@@ -601,6 +601,14 @@ EVERY definition_block ISA LOCATION
       -- Records whether player has seen the notify verb
       -- instructions yet.
 
+  -- --------------------
+  -- Temporary Attributes
+  -- --------------------
+  -- The following attributes are used internally by the Library to temporarily
+  -- store values of attributes which need to be changed and then restored; ignore.
+  HAS temp_compliant.
+  
+
   INITIALIZE
     SCHEDULE check_score AFTER 0.
     SCHEDULE check_restriction AFTER 0.

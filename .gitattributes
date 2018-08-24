@@ -26,7 +26,8 @@
 ## Game Scripts & Logs
 ## ===================
 *.log      text
-*.script   text
+*.a3log    text
+*.a3sol    text
 
 ## =============
 ## AlanIDE Files
@@ -68,6 +69,7 @@
 *.txt        text
 COPYING      text
 LICENSE      text
+UNLICENSE    text
 
 ## ============
 ## CONFIG FILES

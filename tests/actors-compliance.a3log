@@ -1,0 +1,66 @@
+
+
+Actors Compliance Tests 
+An adventure to test actors compliance. 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta5
+Standard Library v2.1 
+Version 1 
+All rights reserved.
+
+
+Beach
+There is a woman here. There is a man here.
+
+> inventory
+You are empty-handed.
+
+> examine woman
+A rather mysterious woman. The woman is carrying a magic mirror.
+
+> examine man
+A serious lookin man. The man is carrying a sword.
+
+> ; ==============================================================================
+> ;                   Test Compliance Before and After 'ask_for'                  
+> ; ==============================================================================
+> ; See Issue #18 on the 'ask_for' problem!
+> ;-----------------------
+> ; Woman compliance-test:
+> ;-----------------------
+> test compliance of woman
+The woman is compliant.
+
+> ask woman for mirror
+The woman gives the magic mirror to you.
+
+> test compliance of woman
+The woman is compliant.
+
+> ; OK! compliance is as before.
+> ;---------------------
+> ; Man compliance-test:
+> ;---------------------
+> test compliance of man
+The man is not compliant.
+
+> ask man for sword
+The man gives the sword to you.
+
+> test compliance of man
+The man is not compliant.
+
+> ; OK! compliance is as before.
+> ;---------------------
+> inventory
+You are carrying a sword and a magic mirror.
+
+> examine woman
+A rather mysterious woman. The woman is empty-handed.
+
+> examine man
+A serious lookin man. The man is empty-handed.
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

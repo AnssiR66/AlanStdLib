@@ -1,0 +1,92 @@
+--==============================================================================
+-- "Clothing" by Tristano Ajmone, 2018.
+--==============================================================================
+-- A small adventure for testing the StdLib's clothing functionality and the
+-- predefined verb reponses.
+
+-- Released into the public domain via the Unlicense:
+--    http://unlicense.org/
+--------------------------------------------------------------------------------
+-- WIP NOTE: This file is still work-in-progress, and doesn't yet test all the
+--           commands and contexts related to clothing.
+--------------------------------------------------------------------------------
+IMPORT 'library.i'. -- ALAN Standard Library v2.1
+
+
+THE my_game IsA DEFINITION_BLOCK
+
+  HAS title    "Clothing".
+  HAS subtitle "An adventure to test clothing.".
+  HAS author   "Tristano Ajmone".
+  HAS year     2018.
+  HAS version  "1".
+
+END THE.
+
+
+-- =============================================================================
+
+
+----- The Dressing Room
+
+
+-- =============================================================================
+
+THE dressing_room IsA LOCATION.
+  
+END THE dressing_room.
+
+-- For now, let's put populate it with some items, just to allow testing. We'll
+-- polish the whole enviroment later on...
+--==============================================================================
+-- Clothing
+--==============================================================================
+
+THE tshirt IsA cl_tshirt AT dressing_room.
+  
+END THE tshirt.
+
+--==============================================================================
+-- Furniture and Props
+--==============================================================================
+
+THE chair IsA object AT dressing_room.
+  HAS ex "It's a plastic chair.".
+END THE chair.
+
+--==============================================================================
+-- NPC Actors
+--==============================================================================
+
+THE costumes_assistant IsA female AT dressing_room.
+  NAME 'costumes assistant'.
+  NAME assistant.
+  HAS ex "She's your costumes assistant.".
+END THE costumes_assistant.
+
+-- =============================================================================
+
+
+----- CLOTHES CLASSES
+
+
+-- =============================================================================
+-- Let's create some clothes classes to simplify the task of creating multiple
+-- clothing items of the same kind...
+
+EVERY cl_hat IsA clothing.
+  NAME hat.
+  HAS headcover 2.
+END EVERY cl_hat.
+
+EVERY cl_tshirt IsA clothing.
+  NAME 'T-shirt'.
+  NAME tshirt.
+  NAME tee.
+  HAS Topcover 2.
+END EVERY cl_tshirt.
+
+
+--------------------------------------------------------------------------------
+Start at dressing_room.
+DESCRIBE banner.

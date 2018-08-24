@@ -423,12 +423,20 @@ ADD TO EVERY ACTOR
           END IF.
 
       DOES
+        -- Let's preserve the current state of compliance of act:
+        IF act IS compliant
+          THEN MAKE my_game temp_compliant.
+          ELSE MAKE my_game NOT temp_compliant.
+        END IF.
         MAKE act compliant.
         -- It is only possible to get something from an NPC
         -- if the NPC is 'compliant'.
         LOCATE obj IN hero.
         SAY THE act. "gives" SAY THE obj. "to you."
-        MAKE act NOT compliant.
+        -- Now let's restore act to its original state of compliacne:
+        IF my_game IS NOT temp_compliant
+          THEN MAKE act NOT compliant.
+        END IF.
   END VERB.
 END ADD TO.
 
