@@ -1,4 +1,4 @@
-:: "RUNTESTS.bat" v2.0.0 (2018/08/23) MIT License
+:: "RUNTESTS.bat" v2.0.1 (2018/08/24) MIT License
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                                                                            ::
 ::                      ALAN STANDARD LIBRARY TEST SUITE                      ::
@@ -58,9 +58,9 @@ FOR %%i IN (*.alan) DO (
 :: ================================
 FOR %%i IN (*.alan) DO (
     SET /A _CNT=!_CNT! +1
-    ECHO %CYAN%
+    ECHO %BLUE%
     ECHO ================================================================================
-    ECHO !_CNT!/%_ADVSOURCES% -- ^"%YELLOW%%%i%CYAN%^"
+    ECHO !_CNT!/%_ADVSOURCES% -- ^"%YELLOW%%%i%BLUE%^"
     ECHO ================================================================================
     :: Only run tests if compilation succeeded:
     CALL :CompileAdv "%%i"  &&  CALL :RunTestScript "%%i"
@@ -68,7 +68,7 @@ FOR %%i IN (*.alan) DO (
 :: ==================
 :: Print Final Report
 :: ==================
-ECHO %CYAN%
+ECHO %BLUE%
 ECHO ================================================================================
 ECHO SUMMARY REPORT
 ECHO ================================================================================
@@ -149,7 +149,7 @@ CALL alan.exe %_COMPILE_OPTS% %1  > nul 2>&1 ^
         ECHO ~~~~~~~~~~~~~~~~~~~~~~~
         ECHO  COMPILATION FAILED^^!^^!^^! 
         ECHO ~~~~~~~~~~~~~~~~~~~~~~~
-        ECHO %RESET_COLORS%%CYAN%
+        ECHO %RESET_COLORS%%BLUE%
         ECHO Compiler report:%RED%
         :: Compile again in order to show compiler errors report
         CALL alan.exe %_COMPILE_OPTS% %1
@@ -196,6 +196,7 @@ SET RESET_COLORS=[0m
 :: ========================
 :: Foreground Colors
 :: ========================
+SET BLUE=[36m
 SET GRAY=[37m
 SET GREEN=[92m
 SET RED=[91m
@@ -216,6 +217,7 @@ EXIT /B
 :DestroyANSIColors
 
 SET RESET_COLORS=
+SET BLUE=
 SET GRAY=
 SET GREEN=
 SET RED=
