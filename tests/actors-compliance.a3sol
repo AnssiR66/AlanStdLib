@@ -1,8 +1,25 @@
-examine woman
-test compliance of woman
-ask woman for mirror
 inventory
 examine woman
+examine man
+; ==============================================================================
+;                   Test Compliance Before and After 'ask_for'                  
+; ==============================================================================
+; See Issue #18 on the 'ask_for' problem!
+;-----------------------
+; Woman compliance-test:
+;-----------------------
 test compliance of woman
-; ERROR!!! The 'ask_for' verb has made the woman 'NOT comliant'!
-;          (See Issue #18 on this problem)
+ask woman for mirror
+test compliance of woman
+; OK! compliance is as before.
+;---------------------
+; Man compliance-test:
+;---------------------
+test compliance of man
+ask man for sword
+test compliance of man
+; OK! compliance is as before.
+;---------------------
+inventory
+examine woman
+examine man
