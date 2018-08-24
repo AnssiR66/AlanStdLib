@@ -1,0 +1,36 @@
+
+
+Actors Compliance Tests 
+An adventure to test actors compliance. 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta5
+Standard Library v2.1 
+Version 1 
+All rights reserved.
+
+
+Beach
+There is a woman here.
+
+> examine woman
+A rather mysterious woman. The woman is carrying a magic mirror.
+
+> test compliance of woman
+The woman is compliant.
+
+> ask woman for mirror
+The woman gives the magic mirror to you.
+
+> inventory
+You are carrying a magic mirror.
+
+> examine woman
+A rather mysterious woman. The woman is empty-handed.
+
+> test compliance of woman
+The woman is not compliant.
+
+> ; ERROR!!! The 'ask_for' verb has made the woman 'NOT comliant'!
+> ;          (See Issue #18 on this problem)
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

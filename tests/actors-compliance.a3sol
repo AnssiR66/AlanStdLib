@@ -1,0 +1,8 @@
+examine woman
+test compliance of woman
+ask woman for mirror
+inventory
+examine woman
+test compliance of woman
+; ERROR!!! The 'ask_for' verb has made the woman 'NOT comliant'!
+;          (See Issue #18 on this problem)
