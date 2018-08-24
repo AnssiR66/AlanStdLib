@@ -2072,31 +2072,22 @@ ADD TO EVERY ACTOR
     IF THIS = hero
       THEN "You are carrying"
       ELSE
-
-        IF THIS IS NOT named
-          THEN SAY THE THIS.
-          ELSE SAY THIS.
-        END IF.
-
+        SAY THE THIS.
         IF THIS IS NOT plural
-          THEN "is carrying"
-          ELSE "are carrying"
-        END IF.
+          THEN "is"
+          ELSE "are"
+        END IF. "carrying"
     END IF.
 
   ELSE
     IF THIS = hero
       THEN "You are empty-handed."
       ELSE
-        IF THIS IS NOT named
-          THEN SAY THE THIS.
-          ELSE SAY THIS.
-        END IF.
-
+        SAY THE THIS.
         IF THIS IS NOT plural
-          THEN "is not carrying anything."
-          ELSE "are not carrying anything."
-        END IF.
+          THEN "is"
+          ELSE "are"
+        END IF. "not carrying anything."
 
     END IF.
 
@@ -2104,11 +2095,7 @@ ADD TO EVERY ACTOR
     CHECK THIS IS compliant
       ELSE
         "That seems to belong to"
-        IF THIS IS NOT named
-          THEN SAY THE THIS.
-          ELSE SAY THIS.
-        END IF.
-        "."
+        SAY THE THIS. "."
 
 
 
@@ -2205,29 +2192,21 @@ EVERY person ISA ACTOR
     HEADER
       SAY THE THIS.
       IF THIS IS NOT plural
-        THEN "is carrying"
-        ELSE "are carrying"
-      END IF.
+        THEN "is"
+        ELSE "are"
+      END IF. "carrying"
     ELSE
 
-      IF THIS IS NOT named
-        THEN SAY THE THIS.
-        ELSE SAY THIS.
-      END IF.
-
+      SAY THE THIS.
       IF THIS IS NOT plural
-        THEN "is empty-handed."
-        ELSE "are empty-handed."
-      END IF.
+        THEN "is"
+        ELSE "are"
+      END IF. "empty-handed."
 
     EXTRACT
       CHECK THIS IS compliant
         ELSE "That seems to belong to"
-          IF THIS IS NOT named
-            THEN SAY THE THIS.
-            ELSE SAY THIS.
-          END IF.
-          "."
+        SAY THE THIS. "."
 
 END EVERY.
 
