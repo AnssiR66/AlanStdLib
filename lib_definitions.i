@@ -1626,7 +1626,7 @@ END EVENT.
 -- ===========
 
 
-THE banner ISA DEFINITION_BLOCK
+THE banner ISA LOCATION
 
     DESCRIPTION
 
