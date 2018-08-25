@@ -1,4 +1,4 @@
-:: "RUNTESTS.bat" v2.0.1 (2018/08/24) MIT License
+:: "RUNTESTS.bat" v2.0.2 (2018/08/24) MIT License
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                                                                            ::
 ::                      ALAN STANDARD LIBRARY TEST SUITE                      ::
@@ -173,16 +173,16 @@ IF NOT EXIST %_SCRIPT% (
     ECHO %RESET_COLORS%%RED%
     ECHO Matching script "%YELLOW%%_SCRIPT%%RED%" not found.
 ) ELSE (
-    :: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    :: NOTE: The code doesn't actually check that ARun returned without error,
-    ::       or that the log was actually created. Should improve this!
-    :: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    REM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    REM NOTE: The code doesn't actually check that ARun returned without error,
+    REM       or that the log was actually created. Should improve this!
+    REM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     SET /A _SCRIPTSCNT=%_SCRIPTSCNT% +1
     CALL arun.exe -r %_ADVFILE% < %_SCRIPT% > %_LOG%
     ECHO %BG_GREEN%
-    ECHO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ECHO -----------------------------
     ECHO  TRANSCRIPT SAVED TO DISK^^!^^!^^! 
-    ECHO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ECHO -----------------------------
     ECHO %RESET_COLORS%%GREEN%
     ECHO Test transcript saved to "%YELLOW%%_LOG%%GREEN%".
 )
