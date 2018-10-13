@@ -1,0 +1,127 @@
+--==============================================================================
+-- "Restricted Actions Tests" by Tristano Ajmone, 2018.
+--==============================================================================
+IMPORT 'library.i'. -- ALAN Standard Library v2.1
+
+
+THE my_game IsA DEFINITION_BLOCK
+
+  HAS title    "Restricted Actions Tests".
+  HAS subtitle "An adventure to test StdLib 2.1 restricted actions".
+  HAS author   "Tristano Ajmone".
+  HAS year     2018.
+  HAS version  "1".
+
+END THE.
+
+--=============================================================================
+--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+--------------------------------------------------------------------------------
+-- § 1 - Restriction Level Rooms
+--------------------------------------------------------------------------------
+--//////////////////////////////////////////////////////////////////////////////
+--=============================================================================
+-- We'll create a room for each restriction level of the Library, so we can test
+-- restricted actions in each room accordingly. We also add a "level" debug verb
+-- to print out the current level of restriction.
+
+EVERY level_room IsA room.
+  HAS Level 0.
+  ENTERED
+    SET my_game:restricted_level TO Level OF THIS.
+
+END EVERY level_room.
+
+VERB level
+  DOES
+    "Current restriction level:"
+    SAY my_game:restricted_level. "."
+END VERB level.
+
+--==============================================================================
+--------------------------------------------------------------------------------
+-- § 1.0 - Restriction Level 0
+--------------------------------------------------------------------------------
+--==============================================================================
+THE Level0 IsA level_room.
+  NAME 'Restriction Level 0'
+  DESCRIPTION
+    "In this level all actions are allowed."
+  HAS Level 0.
+  EXIT east TO Level1.
+END THE Level0.
+--==============================================================================
+--------------------------------------------------------------------------------
+-- § 1.1 - Restriction Level 1
+--------------------------------------------------------------------------------
+--==============================================================================
+THE Level1 IsA level_room.
+  NAME 'Restriction Level 1'
+  DESCRIPTION
+    "In this level communication verbs are restricted."
+  HAS Level 1.
+  EXIT west TO Level0.
+  EXIT east TO Level2.
+END THE Level1.
+--==============================================================================
+--------------------------------------------------------------------------------
+-- § 1.2 - Restriction Level 2
+--------------------------------------------------------------------------------
+--==============================================================================
+THE Level2 IsA level_room.
+  NAME 'Restriction Level 2'
+  DESCRIPTION
+    "In this level all action and communication verbs are restricted."
+  HAS Level 2.
+  EXIT west TO Level1.
+  EXIT east TO Level3.
+END THE Level2.
+--==============================================================================
+--------------------------------------------------------------------------------
+-- § 1.3 - Restriction Level 3
+--------------------------------------------------------------------------------
+--==============================================================================
+THE Level3 IsA level_room.
+  NAME 'Restriction Level 3'
+  DESCRIPTION
+    "In this level all in-game verbs are restricted."
+  HAS Level 3.
+  EXIT west TO Level2.
+  EXIT east TO Level4.
+END THE Level3.
+--==============================================================================
+--------------------------------------------------------------------------------
+-- § 1.4 - Restriction Level 4
+--------------------------------------------------------------------------------
+--==============================================================================
+THE Level4 IsA level_room.
+  NAME 'Restriction Level 4'
+  DESCRIPTION
+    "In this level no verbs work, not even out-of-game verbs."
+  HAS Level 4.
+  EXIT west TO Level3.
+END THE Level4.
+
+--=============================================================================
+--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+--------------------------------------------------------------------------------
+-- § 2 - The Hero
+--------------------------------------------------------------------------------
+--//////////////////////////////////////////////////////////////////////////////
+--=============================================================================
+-- Let's equip our Hero with a few items to allow tests...
+
+THE cellphone IsA object IN HERO.
+  NAME cell phone.
+  HAS ex "A cheap cell phone, not the ""smart"" type.".
+END THE cellphone.
+
+--------------------------------------------------------------------------------
+Start at Level0.
+DESCRIBE banner.
+"$p~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ $nEvery room in this test has a different level of actions restriction.
+ $nYou can debug the current restriction level using the 'level' verb.
+ $n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+
+-- EOF --
