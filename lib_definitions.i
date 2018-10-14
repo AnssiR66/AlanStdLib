@@ -1065,15 +1065,17 @@ EVENT check_restriction
 
       IF restricted_level OF my_game >= 1  
         THEN
+          MAKE my_game NOT 'say'.
           MAKE my_game NOT answer.
           MAKE my_game NOT ask.
           MAKE my_game NOT ask_for.
-          MAKE my_game NOT 'say'.
           MAKE my_game NOT say_to.
           MAKE my_game NOT shout.
           MAKE my_game NOT sing.
+          MAKE my_game NOT talk.
+          MAKE my_game NOT talk_to.     -- (+ speak)
           MAKE my_game NOT tell.
-      END IF.
+     END IF.
       ----------------------
       -- Restriction Level 2
       ----------------------
@@ -1187,8 +1189,6 @@ EVENT check_restriction
           MAKE my_game NOT switch_off.
           MAKE my_game NOT take.        -- (+ carry, get, grab, hold, obtain)
           MAKE my_game NOT take_from.   -- (+ remove from)
-          MAKE my_game NOT talk.
-          MAKE my_game NOT talk_to.     -- (+ speak)
           MAKE my_game NOT taste.       -- (+ lick)
           MAKE my_game NOT tear.        -- (+ rip)
           MAKE my_game NOT throw.
