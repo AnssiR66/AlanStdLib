@@ -1,0 +1,291 @@
+
+
+Test Look Verbs 
+An adventure to test the family of look verbs. 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta5
+Standard Library v2.1 
+Version 1 
+All rights reserved.
+
+
+Inside The Bunker
+There is a trashcan here. The trashcan contains some litter. There is a 
+vampire here. Jason is here. There is a grue here. Elliot is here.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                     TESTING LOOK-RELATED VANILLA VERBS                     *
+> ; *                                                                            *
+> ; ******************************************************************************
+> look up
+Looking up, you see nothing unusual.
+
+> ; ==============================================================================
+> ; TEST WITH CONTAINERS
+> ; ==============================================================================
+> ; Let's test the verbs against various containers types...
+> ; ------------------------------------------------------------------------------
+> ; THE TRASHCAN | listed_container
+> ; ------------------------------------------------------------------------------
+> look trashcan
+The trashcan contains some litter.
+
+> look at trashcan
+The trashcan contains some litter.
+
+> look in the trashcan
+The trashcan contains some litter.
+
+> look under the trashcan
+You notice nothing unusual under the trashcan.
+
+> look behind the trashcan
+You notice nothing unusual behind the trashcan.
+
+> look out of the trashcan
+That's not something you can look out of.
+
+> look through the trashcan
+You can't see through the trashcan.
+
+> search trashcan
+The trashcan contains some litter.
+
+> ; ==============================================================================
+> ; TEST WITH OBJECTS
+> ; ==============================================================================
+> ; ------------------------------------------------------------------------------
+> ; THE LITTER (in trashcan) | object
+> ; ------------------------------------------------------------------------------
+> look litter
+It's just some old trash.
+
+> look at litter
+It's just some old trash.
+
+> look in the litter
+It's not possible to look there.
+
+> look under the litter
+You notice nothing unusual under the litter.
+
+> look behind the litter
+You notice nothing unusual behind the litter.
+
+> look out of the litter
+That's not something you can look out of.
+
+> look through the litter
+You can't see through the litter.
+
+> search litter
+You find nothing of interest.
+
+> ; ------------------------------------------------------------------------------
+> ; THE LITTER (held by Hero) | object
+> ; ------------------------------------------------------------------------------
+> take litter
+Taken.
+
+> look litter
+It's just some old trash.
+
+> look at litter
+It's just some old trash.
+
+> look in the litter
+It's not possible to look there.
+
+> look under the litter
+You notice nothing unusual under the litter.
+
+> look behind the litter
+You turn the litter in your hands but notice nothing unusual about it.
+
+> look out of the litter
+That's not something you can look out of.
+
+> look through the litter
+You can't see through the litter.
+
+> search litter
+You find nothing of interest.
+
+> ; ==============================================================================
+> ; TEST WITH ACTORS
+> ; ==============================================================================
+> ; We'll test the verbs against actors & persons, named and not named, and the
+> ; Hero as well.
+> ; ------------------------------------------------------------------------------
+> ; VAMPIRE | person > male + NOT named
+> ; ------------------------------------------------------------------------------
+> look the vampire
+Looks like a normal vampire, with fangs and all. The vampire is 
+empty-handed.
+
+> look at the vampire
+Looks like a normal vampire, with fangs and all. The vampire is 
+empty-handed.
+
+> ; @ FIXME:
+> look in the vampire
+It's not possible to look there.
+
+> look under the vampire
+You notice nothing unusual under the vampire.
+
+> look behind the vampire
+You notice nothing unusual behind the vampire.
+
+> ; @ IMPROVE:
+> look out of the vampire
+That's not something you can look out of.
+
+> look through the vampire
+You can't look through the vampire.
+
+> search the vampire
+The vampire wouldn't probably appreciate that.
+
+> ; ------------------------------------------------------------------------------
+> ; JASON | person > male + named
+> ; ------------------------------------------------------------------------------
+> look Jason
+It's Jason Voorhees, the original guy from "Friday the 13th". How cool! 
+Jason is empty-handed.
+
+> look at Jason
+It's Jason Voorhees, the original guy from "Friday the 13th". How cool! 
+Jason is empty-handed.
+
+> ; @ FIXME:
+> look in Jason
+It's not possible to look there.
+
+> look under Jason
+You notice nothing unusual under Jason.
+
+> look behind Jason
+You notice nothing unusual behind Jason.
+
+> ; @ IMPROVE:
+> look out of Jason
+That's not something you can look out of.
+
+> look through Jason
+You can't look through Jason.
+
+> search Jason
+Jason wouldn't probably appreciate that.
+
+> ; ------------------------------------------------------------------------------
+> ; THE GRUE | actor + NOT named
+> ; ------------------------------------------------------------------------------
+> look the grue
+It's a true grue. If it was pitch dark, you'd likely be eaten by it. The 
+grue is not carrying anything.
+
+> look at the grue
+It's a true grue. If it was pitch dark, you'd likely be eaten by it. The 
+grue is not carrying anything.
+
+> ; @ FIXME:
+> look in the grue
+It's not possible to look there.
+
+> look under the grue
+You notice nothing unusual under the grue.
+
+> look behind the grue
+You notice nothing unusual behind the grue.
+
+> ; @ IMPROVE:
+> look out of the grue
+That's not something you can look out of.
+
+> look through the grue
+You can't look through the grue.
+
+> search the grue
+The grue wouldn't probably appreciate that.
+
+> ; ------------------------------------------------------------------------------
+> ; ELLIOT | actor + named
+> ; ------------------------------------------------------------------------------
+> look Elliot
+It's Elliot the dragon. Elliot is not carrying anything.
+
+> look at Elliot
+It's Elliot the dragon. Elliot is not carrying anything.
+
+> ; @ FIXME:
+> look in Elliot
+It's not possible to look there.
+
+> look under Elliot
+You notice nothing unusual under Elliot.
+
+> look behind Elliot
+You notice nothing unusual behind Elliot.
+
+> ; @ IMPROVE:
+> look out of Elliot
+That's not something you can look out of.
+
+> look through Elliot
+You can't look through Elliot.
+
+> search Elliot
+Elliot wouldn't probably appreciate that.
+
+> ; ------------------------------------------------------------------------------
+> ; THE HERO
+> ; ------------------------------------------------------------------------------
+> look me
+You notice nothing unusual about yourself.
+
+> look at me
+You notice nothing unusual about yourself.
+
+> ; @ FIXME:
+> look in me
+It's not possible to look there.
+
+> look under me
+You notice nothing unusual under yourself.
+
+> look behind me
+Turning your head, you notice nothing unusual behind yourself.
+
+> ; @ FIXME:
+> look out of me
+That's not something you can look out of.
+
+> ; @ FIXME:
+> look through me
+You can't look through the hero.
+
+> search me
+You are carrying some litter.
+
+> ; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+> ;  TODOs SHOPPING LIST
+> ; //////////////////////////////////////////////////////////////////////////////
+> ; CONTAINERS:
+> ; -- opaque container (no listed_container)
+> ; -- non-opaque container (no listed_container)
+> ; -- vessel with liquid
+> ; THINGS/OBJECTS:
+> ; -- sound
+> ; -- door
+> ; -- window
+> ; -- scenery object
+> ; -- object + distant
+> ; -- object + NOT reachable
+> ; -- object + distant + NOT reachable
+> 
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 
