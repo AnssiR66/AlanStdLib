@@ -753,7 +753,6 @@ EVERY definition_block ISA LOCATION
   CAN lock.
   CAN lock_with.
   CAN 'look'.        -- (+ gaze, peek)
-  CAN look_at.
   CAN look_behind.
   CAN look_in.
   CAN look_out_of.
@@ -954,7 +953,6 @@ EVENT check_restriction
       MAKE my_game lock.
       MAKE my_game lock_with.
       MAKE my_game 'look'.        -- (+ gaze, peek)
-      MAKE my_game look_at.
       MAKE my_game look_behind.
       MAKE my_game look_in.
       MAKE my_game look_out_of.
@@ -1221,7 +1219,6 @@ EVENT check_restriction
           MAKE my_game NOT listen0.
           MAKE my_game NOT listen.
           MAKE my_game NOT 'look'.        -- (+ gaze, peek)
-          MAKE my_game NOT look_at.
           MAKE my_game NOT look_behind.
           MAKE my_game NOT look_in.
           MAKE my_game NOT look_out_of.

@@ -83,7 +83,6 @@
 ----- lock                                                        lock (obj)                          1       x
 ----- lock_with                                                   lock (obj) with (key)               2       x
 ----- look        (+ gaze, peek)                                  look                                0
------ look_at                                                     look at (obj)                       1       x
 ----- look_behind                                                 look behind (bulk)                  1
 ----- look_in                                                     look in (cont)                      1
 ----- look_out_of                                                 look out of (obj)                   1       x
