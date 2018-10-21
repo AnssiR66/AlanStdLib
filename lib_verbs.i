@@ -210,7 +210,7 @@
 SYNTAX 'about' = 'about'.
 
 
-VERB 'about'
+META VERB 'about'
   CHECK my_game CAN about
     ELSE SAY restricted_response OF my_game.
   DOES
@@ -823,7 +823,7 @@ END ADD TO.
 SYNTAX brief = brief.
 
 
-VERB brief
+META VERB brief
   CHECK my_game CAN brief
     ELSE SAY restricted_response OF my_game.
   DOES
@@ -1503,7 +1503,7 @@ END ADD TO.
 SYNTAX credits = credits.
 
 
-VERB credits
+META VERB credits
   CHECK my_game CAN credits
     ELSE SAY restricted_response OF my_game.
   DOES
@@ -3355,7 +3355,7 @@ SYNONYMS walk = go.
 SYNTAX hint = hint.
 
 
-VERB hint
+META VERB hint
   CHECK my_game CAN hint
     ELSE SAY restricted_response OF my_game.
 
@@ -4623,7 +4623,7 @@ SYNTAX notify = notify.
     -- In case (s)he adds the prepositions to the end anyway.
 
 
-VERB notify
+META VERB notify
   CHECK my_game CAN notify
     ELSE SAY restricted_response OF my_game.
   DOES
@@ -4637,7 +4637,7 @@ VERB notify
 END VERB.
 
 
-VERB notify_on
+META VERB notify_on
   CHECK my_game CAN notify_on
     ELSE SAY restricted_response OF my_game.
   DOES
@@ -4650,7 +4650,7 @@ VERB notify_on
 END VERB.
 
 
-VERB notify_off
+META VERB notify_off
   CHECK my_game CAN notify_off
     ELSE SAY restricted_response OF my_game.
   DOES
@@ -5680,7 +5680,7 @@ SYNTAX
   'quit' = 'quit'.
 
 
-VERB 'quit'
+META VERB 'quit'
   CHECK my_game CAN 'quit'
     ELSE SAY restricted_response OF my_game.
   DOES
@@ -5816,7 +5816,7 @@ END ADD TO.
 SYNTAX 'restart' = 'restart'.
 
 
-VERB 'restart'
+META VERB 'restart'
   CHECK my_game CAN 'restart'
     ELSE SAY restricted_response OF my_game.
   DOES
@@ -5837,7 +5837,7 @@ END VERB.
 SYNTAX 'restore' = 'restore'.
 
 
-VERB 'restore'
+META VERB 'restore'
   CHECK my_game CAN 'restore'
     ELSE SAY restricted_response OF my_game.
   DOES
@@ -5919,7 +5919,7 @@ SYNONYMS massage = rub.
 SYNTAX 'save' = 'save'.
 
 
-VERB 'save'
+META VERB 'save'
   CHECK my_game CAN 'save'
     ELSE SAY restricted_response OF my_game.
   DOES
@@ -6021,7 +6021,7 @@ END ADD TO.
 SYNTAX 'score' = 'score'.
 
 
-VERB 'score'
+META VERB 'score'
   CHECK my_game CAN 'score'
     ELSE SAY restricted_response OF my_game.
   DOES
@@ -6107,7 +6107,7 @@ SYNTAX 'script' = 'script'.
 
 SYNONYMS 'transcript' = 'script'.
 
-VERB 'script'
+META VERB 'script'
   CHECK my_game CAN 'script'
     ELSE SAY restricted_response OF my_game.
   DOES
@@ -6118,7 +6118,7 @@ VERB 'script'
     of the whole game."
 END VERB.
 
-VERB script_on
+META VERB script_on
   CHECK my_game CAN script_on
     ELSE SAY restricted_response OF my_game.
   DOES
@@ -6126,7 +6126,7 @@ VERB script_on
     "Transcripting turned on."
 END VERB.
 
-VERB script_off
+META VERB script_off
   CHECK my_game CAN script_off
     ELSE SAY restricted_response OF my_game.
   DOES
@@ -8681,7 +8681,7 @@ END ADD TO.
 SYNTAX verbose = verbose.
 
 
-VERB verbose
+META VERB verbose
   CHECK my_game CAN verbose
     ELSE SAY restricted_response OF my_game.
   DOES
