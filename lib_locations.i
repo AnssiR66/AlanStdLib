@@ -78,9 +78,9 @@ SYNONYMS
 -- THE piece_of_paper ISA OBJECT
 -- ...
 --    VERB tear
---    DOES ONLY "You tear the piece of paper to shreds."
---    LOCATE piece_of_paper AT nowhere.
---  END VERB.
+--      DOES ONLY "You tear the piece of paper to shreds."
+--        LOCATE piece_of_paper AT nowhere.
+--    END VERB tear.
 --
 -- END THE piece_of_paper.
 
@@ -166,30 +166,30 @@ THE floor ISA room_object
   VERB empty_in, pour_in
      WHEN cont
     DOES ONLY "That's not something you can $v things into."
-  END VERB.
+  END VERB empty_in.
 
 
   VERB look_in
     DOES ONLY "That's not possible."
-  END VERB.
+  END VERB look_in.
 
 
   VERB put_in
      WHEN cont
     DOES ONLY "That's not something you can $v things into."
-  END VERB.
+  END VERB put_in.
 
 
   VERB take_from
      WHEN holder
     DOES ONLY "If you want to pick up something, just TAKE it."
-  END VERB.
+  END VERB take_from.
 
 
   VERB throw_in
      WHEN cont
     DOES ONLY "That's not something you can $v things into."
-  END VERB.
+  END VERB throw_in.
 
 
 
@@ -229,30 +229,30 @@ THE ground ISA site_object
   VERB empty_in, pour_in
      WHEN cont
     DOES ONLY "That's not something you can $v things into."
-  END VERB.
+  END VERB empty_in.
 
 
   VERB look_in
     DOES ONLY "That's not possible."
-  END VERB.
+  END VERB look_in.
 
 
   VERB put_in
      WHEN cont
     DOES ONLY "That's not something you can $v things into."
-  END VERB.
+  END VERB put_in.
 
 
   VERB take_from
      WHEN holder
     DOES ONLY "If you want to pick up something, just TAKE it."
-  END VERB.
+  END VERB take_from.
 
 
   VERB throw_in
      WHEN cont
     DOES ONLY "That's not something you can $v things into."
-  END VERB.
+  END VERB throw_in.
 
 
 END THE.
@@ -275,16 +275,16 @@ ADD TO EVERY room_object
     WHEN bulk
       CHECK THIS = wall
         ELSE "That's not possible."
-  END VERB.
+  END VERB put_against.
 
   VERB put_behind, put_near, put_under
     WHEN bulk
       DOES ONLY "That's not possible."
-  END VERB.
+  END VERB put_behind.
 
   VERB look_behind, look_through, look_under
     DOES ONLY "That's not possible."
-  END VERB.
+  END VERB look_behind.
 
 END ADD TO.
 
@@ -294,11 +294,11 @@ ADD TO EVERY site_object
   VERB put_against, put_behind, put_near, put_under
     WHEN bulk
       DOES ONLY "That's not possible."
-  END VERB.
+  END VERB put_against.
 
   VERB look_behind, look_through, look_under
     DOES ONLY "That's not possible."
-  END VERB.
+  END VERB look_behind.
 
 END ADD TO.
 
@@ -318,7 +318,7 @@ END ADD TO.
 --          ELSIF...
 --          END IF.
 --    ...
--- END VERB.
+-- END VERB examine.
 --
 -- END THE my_game.
 

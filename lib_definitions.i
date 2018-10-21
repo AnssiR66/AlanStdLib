@@ -753,7 +753,6 @@ EVERY definition_block ISA LOCATION
   CAN lock.
   CAN lock_with.
   CAN 'look'.        -- (+ gaze, peek)
-  CAN look_at.
   CAN look_behind.
   CAN look_in.
   CAN look_out_of.
@@ -761,7 +760,7 @@ EVERY definition_block ISA LOCATION
   CAN look_under.
   CAN look_up.
   CAN 'no'.
-  CAN 'notify'.
+  CAN notify.
   CAN notify_on.
   CAN notify_off.
   CAN open.
@@ -954,7 +953,6 @@ EVENT check_restriction
       MAKE my_game lock.
       MAKE my_game lock_with.
       MAKE my_game 'look'.        -- (+ gaze, peek)
-      MAKE my_game look_at.
       MAKE my_game look_behind.
       MAKE my_game look_in.
       MAKE my_game look_out_of.
@@ -962,7 +960,7 @@ EVENT check_restriction
       MAKE my_game look_under.
       MAKE my_game look_up.
       MAKE my_game 'no'.
-      MAKE my_game 'notify'.
+      MAKE my_game notify.
       MAKE my_game notify_on.
       MAKE my_game notify_off.
       MAKE my_game open.
@@ -1221,7 +1219,6 @@ EVENT check_restriction
           MAKE my_game NOT listen0.
           MAKE my_game NOT listen.
           MAKE my_game NOT 'look'.        -- (+ gaze, peek)
-          MAKE my_game NOT look_at.
           MAKE my_game NOT look_behind.
           MAKE my_game NOT look_in.
           MAKE my_game NOT look_out_of.
@@ -1253,7 +1250,7 @@ EVENT check_restriction
           MAKE my_game NOT credits.     -- (+ acknowledgments, author, copyright)
           MAKE my_game NOT hint.        -- (+ hints)
           MAKE my_game NOT 'no'.
-          MAKE my_game NOT 'notify'.
+          MAKE my_game NOT notify.
           MAKE my_game NOT notify_on.
           MAKE my_game NOT notify_off.
           MAKE my_game NOT 'quit'.
