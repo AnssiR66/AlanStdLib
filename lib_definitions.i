@@ -760,7 +760,7 @@ EVERY definition_block ISA LOCATION
   CAN look_under.
   CAN look_up.
   CAN 'no'.
-  CAN 'notify'.
+  CAN notify.
   CAN notify_on.
   CAN notify_off.
   CAN open.
@@ -960,7 +960,7 @@ EVENT check_restriction
       MAKE my_game look_under.
       MAKE my_game look_up.
       MAKE my_game 'no'.
-      MAKE my_game 'notify'.
+      MAKE my_game notify.
       MAKE my_game notify_on.
       MAKE my_game notify_off.
       MAKE my_game open.
@@ -1250,7 +1250,7 @@ EVENT check_restriction
           MAKE my_game NOT credits.     -- (+ acknowledgments, author, copyright)
           MAKE my_game NOT hint.        -- (+ hints)
           MAKE my_game NOT 'no'.
-          MAKE my_game NOT 'notify'.
+          MAKE my_game NOT notify.
           MAKE my_game NOT notify_on.
           MAKE my_game NOT notify_off.
           MAKE my_game NOT 'quit'.

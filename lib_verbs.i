@@ -6086,7 +6086,7 @@ ADD TO EVERY THING
     DOES
       "Nothing would be achieved by that."
 
-  END VERB 'score'.
+  END VERB scratch.
 END ADD TO.
 
 
