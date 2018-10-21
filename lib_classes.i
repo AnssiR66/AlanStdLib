@@ -285,7 +285,7 @@ EVERY clothing ISA OBJECT
             THEN LIST THIS.
           END IF.
       END IF.
-  END VERB.
+  END VERB examine.
 
 
 
@@ -464,7 +464,7 @@ EVERY clothing ISA OBJECT
       "You put on" SAY THE THIS. "."
     END IF.
 
-END VERB.
+END VERB wear.
 
 
 
@@ -579,7 +579,7 @@ VERB remove
       EXCLUDE THIS FROM wearing OF hero.
       MAKE THIS NOT donned.
   END IF.
-END VERB.
+END VERB remove.
 
 
 END EVERY.
@@ -795,7 +795,7 @@ EVERY device ISA OBJECT
         THEN "currently on."
         ELSE "currently off."
       END IF.
-  END VERB.
+  END VERB examine.
 
 
   VERB turn_on
@@ -827,7 +827,7 @@ EVERY device ISA OBJECT
     DOES ONLY
       "You turn on" SAY THE THIS. "."
       MAKE THIS 'on'.
-  END VERB.
+  END VERB turn_on.
 
 
   VERB turn_off
@@ -857,7 +857,7 @@ EVERY device ISA OBJECT
     DOES ONLY
       "You turn off" SAY THE THIS. "."
       MAKE THIS NOT 'on'.
-  END VERB.
+  END VERB turn_off.
 
 
 -- The following verb switches a device off if the device is on, and vice versa.
@@ -890,7 +890,7 @@ EVERY device ISA OBJECT
         ELSE "You switch on" SAY THE THIS. "."
           MAKE THIS 'on'.
       END IF.
-  END VERB.
+  END VERB switch.
 
 END EVERY.
 
@@ -1002,7 +1002,7 @@ EVERY door ISA OBJECT
         THEN "currently closed."
         ELSE "currently open."
       END IF.
-  END VERB.
+  END VERB examine.
 
 
 
@@ -1016,7 +1016,7 @@ EVERY door ISA OBJECT
             ELSE "$$s."
           END IF.
       END IF.
-  END VERB.
+  END VERB knock.
 
 
 
@@ -1034,7 +1034,7 @@ EVERY door ISA OBJECT
             ELSE "$$s."
           END IF.
       END IF.
-  END VERB.
+  END VERB look_behind.
 
 
 
@@ -1053,7 +1053,7 @@ EVERY door ISA OBJECT
             ELSE "."
           END IF.
       END IF.
-  END VERB.
+  END VERB look_under.
 
 
 
@@ -1062,7 +1062,7 @@ EVERY door ISA OBJECT
       IF otherside OF THIS <> null_door
         THEN MAKE otherside OF THIS NOT open.
       END IF.
-  END VERB.
+  END VERB close.
 
 
   VERB lock
@@ -1071,7 +1071,7 @@ EVERY door ISA OBJECT
         THEN MAKE otherside OF THIS NOT open.
           MAKE otherside OF THIS locked.
       END IF.
-  END VERB.
+  END VERB lock.
 
 
   VERB open
@@ -1080,7 +1080,7 @@ EVERY door ISA OBJECT
         THEN MAKE otherside OF THIS open.
           MAKE otherside OF THIS NOT locked.
       END IF.
-  END VERB.
+  END VERB open.
 
 
   VERB unlock
@@ -1088,7 +1088,7 @@ EVERY door ISA OBJECT
       IF otherside OF THIS <> null_door
         THEN MAKE otherside OF THIS NOT locked.
       END IF.
-  END VERB.
+  END VERB unlock.
 
 
 END EVERY.
@@ -1156,7 +1156,7 @@ EVERY lightsource ISA OBJECT
               "currently off."
           END IF.
       END IF.
-  END VERB.
+  END VERB examine.
 
 
   VERB light
@@ -1175,7 +1175,7 @@ EVERY lightsource ISA OBJECT
         ELSE "You turn on" SAY THE THIS. "."
           MAKE THIS lit.
       END IF.
-  END VERB.
+  END VERB light.
 
 
   VERB extinguish
@@ -1187,7 +1187,7 @@ EVERY lightsource ISA OBJECT
         END IF.
     DOES ONLY "You extinguish" SAY THE THIS. "."
       MAKE THIS NOT lit.
-  END VERB.
+  END VERB extinguish.
 
 
   VERB turn_on
@@ -1209,7 +1209,7 @@ EVERY lightsource ISA OBJECT
       "You turn on" SAY THE THIS. "."
       MAKE THIS lit.
 
-  END VERB.
+  END VERB turn_on.
 
 
   VERB turn_off
@@ -1230,7 +1230,7 @@ EVERY lightsource ISA OBJECT
       "You turn off" SAY THE THIS. "."
       MAKE THIS NOT lit.
 
-  END VERB.
+  END VERB turn_off.
 
 
 -- The following verb switches a NOT natural lightsource on if it is off, and vice versa
@@ -1259,7 +1259,7 @@ EVERY lightsource ISA OBJECT
         ELSE "You switch on" SAY THE THIS. "."
           MAKE THIS lit.
       END IF.
-  END VERB.
+  END VERB switch.
 
 
 END EVERY.
@@ -1364,7 +1364,7 @@ EVERY liquid ISA OBJECT
           END IF.
         ELSE "You notice nothing unusual about" SAY THE THIS. "."
       END IF.
-  END VERB.
+  END VERB examine.
 
 
   VERB look_in
@@ -1384,7 +1384,7 @@ EVERY liquid ISA OBJECT
           END IF.
         ELSE "You see nothing special in" SAY THE THIS. "."
       END IF.
-  END VERB.
+  END VERB look_in.
 
 
   VERB take
@@ -1396,7 +1396,7 @@ EVERY liquid ISA OBJECT
         ELSE LOCATE vessel OF THIS IN hero.
           "($$" SAY THE vessel OF THIS. "of" SAY THIS. "$$)$nTaken."
       END IF.
-  END VERB.
+  END VERB take.
 
 
   VERB take_from
@@ -1411,7 +1411,7 @@ EVERY liquid ISA OBJECT
         ELSE LOCATE vessel OF THIS IN hero.
           "($$" SAY THE vessel OF THIS. "of" SAY THIS. "$$)$nTaken."
       END IF.
-  END VERB.
+  END VERB take_from.
 
 
   VERB drop
@@ -1419,14 +1419,14 @@ EVERY liquid ISA OBJECT
       LOCATE vessel OF THIS AT hero.
       "($$" SAY THE vessel OF THIS. "of" SAY THIS. "$$)$nDropped."
 
-  END VERB.
+  END VERB drop.
 
 
   VERB ask_for
     DOES ONLY
       LOCATE vessel OF THIS IN hero.
       SAY THE act. "gives" SAY THE vessel OF THIS. "of" SAY THIS. "to you."
-  END VERB.
+  END VERB ask_for.
 
 
   VERB give
@@ -1453,7 +1453,7 @@ EVERY liquid ISA OBJECT
       -- there is no 'ELSE' statement in this last IF -clause, as the 'IF THIS NOT
       -- IN hero' clause above it takes care of the 'ELSE' alternative.
 
-  END VERB.
+  END VERB give.
 
 
   VERB pour
@@ -1484,7 +1484,7 @@ EVERY liquid ISA OBJECT
           END IF.
       END IF.
 
-  END VERB.
+  END VERB pour.
 
 
   VERB pour_in
@@ -1525,7 +1525,7 @@ EVERY liquid ISA OBJECT
                 "closed."
             END IF.
         END IF.
-  END VERB.
+  END VERB pour_in.
 
 
   VERB pour_on
@@ -1558,7 +1558,7 @@ EVERY liquid ISA OBJECT
               ELSE "It wouldn't be sensible to pour anything on" SAY THE surface.
             END IF.
         END IF.
-  END VERB.
+  END VERB pour_on.
 
 
   VERB fill_with
@@ -1566,7 +1566,7 @@ EVERY liquid ISA OBJECT
     -- vessel of the liquid:
     WHEN substance
        DOES SET vessel OF THIS TO cont.
-  END VERB.
+  END VERB fill_with.
 
 
   VERB put_in
@@ -1615,7 +1615,7 @@ EVERY liquid ISA OBJECT
             "closed."
           END IF.
       END IF.
-  END VERB.
+  END VERB put_in.
 
 
   VERB put_on
@@ -1640,7 +1640,7 @@ EVERY liquid ISA OBJECT
         END IF.
     WHEN surface
       DOES ONLY "It is not possible to $v" SAY obj. "onto" SAY THE THIS. "."
-  END VERB.
+  END VERB put_on.
 
 
 
@@ -1651,17 +1651,17 @@ EVERY liquid ISA OBJECT
   VERB 'empty'
     WHEN obj
     DOES ONLY "You can only empty containers."
-  END VERB.
+  END VERB 'empty'.
 
   VERB empty_in
     WHEN obj
     DOES ONLY "You can only empty containers."
-  END VERB.
+  END VERB empty_in.
 
   VERB empty_on
     WHEN obj
     DOES ONLY "You can only empty containers."
-  END VERB.
+  END VERB empty_on.
 
 
 END EVERY.
@@ -1731,7 +1731,7 @@ EVERY LISTED_CONTAINER ISA OBJECT
         THEN LIST THIS.
         ELSE "You can't see inside" SAY THE THIS. "."
       END IF.
-  END VERB.
+  END VERB examine.
 
 
   VERB look_in
@@ -1740,7 +1740,7 @@ EVERY LISTED_CONTAINER ISA OBJECT
         THEN LIST THIS.
         ELSE "You can't see inside" SAY THE THIS. "."
       END IF.
-  END VERB.
+  END VERB look_in.
 
 
   VERB search
@@ -1749,7 +1749,7 @@ EVERY LISTED_CONTAINER ISA OBJECT
         THEN LIST THIS.
         ELSE "You can't see inside" SAY THE THIS. "."
       END IF.
-  END VERB.
+  END VERB search.
 
 
 
@@ -1773,7 +1773,7 @@ EVERY LISTED_CONTAINER ISA OBJECT
           MAKE THIS NOT OPAQUE.
           LIST THIS.
       END IF.
-  END VERB.
+  END VERB open.
 
 
   VERB open_with
@@ -1783,7 +1783,7 @@ EVERY LISTED_CONTAINER ISA OBJECT
           MAKE THIS NOT OPAQUE.
           LIST THIS.
       END IF.
-  END VERB.
+  END VERB open_with.
 
 
   VERB close, lock
@@ -1792,7 +1792,7 @@ EVERY LISTED_CONTAINER ISA OBJECT
         THEN
           MAKE THIS OPAQUE.
       END IF.
-  END VERB.
+  END VERB close.
 
 
   VERB close_with
@@ -1801,7 +1801,7 @@ EVERY LISTED_CONTAINER ISA OBJECT
         THEN
           MAKE THIS OPAQUE.
       END IF.
-  END VERB.
+  END VERB close_with.
 
 
   VERB lock_with
@@ -1810,7 +1810,7 @@ EVERY LISTED_CONTAINER ISA OBJECT
         THEN
           MAKE THIS OPAQUE.
       END IF.
-  END VERB.
+  END VERB lock_with.
 
 
 END EVERY.
@@ -1844,7 +1844,7 @@ EVERY sound ISA OBJECT
         ELSE "Those are not"
       END IF.
       "something you can smell."
-  END VERB.
+  END VERB smell.
 
 
 END EVERY.
@@ -1877,7 +1877,7 @@ EVERY supporter ISA OBJECT
   VERB examine
     DOES
       LIST THIS.
-  END VERB.
+  END VERB examine.
 
 
   -- in the following, we disable some verbs that are defined to work with normal containers:
@@ -1890,7 +1890,7 @@ EVERY supporter ISA OBJECT
         ELSE "Those are not"
       END IF.
       "something you can look into."
-  END VERB.
+  END VERB look_in.
 
 
   VERB empty_in, pour_in
@@ -1901,19 +1901,19 @@ EVERY supporter ISA OBJECT
         ELSE "Those are not"
       END IF.
       "something you can pour things into."
-  END VERB.
+  END VERB empty_in.
 
 
   VERB put_in
     WHEN cont
     DOES ONLY "You can't put anything inside" SAY THE THIS. "."
-  END VERB.
+  END VERB put_in.
 
 
   VERB throw_in
     WHEN cont
     DOES ONLY "You can't put anything inside" SAY THE THIS. "."
-  END VERB.
+  END VERB throw_in.
 
 
 END EVERY.
@@ -1983,13 +1983,13 @@ EVERY window ISA OBJECT
           END IF.
           "currently open."
       END IF.
-  END VERB.
+  END VERB examine.
 
 
   VERB look_behind
     DOES ONLY
       "That's not possible."
-  END VERB.
+  END VERB look_behind.
 
 
   VERB look_out_of
@@ -1998,7 +1998,7 @@ EVERY window ISA OBJECT
         THEN "window."
         ELSE "windows."
       END IF.
-  END VERB.
+  END VERB look_out_of.
 
 
   VERB look_through
@@ -2007,7 +2007,7 @@ EVERY window ISA OBJECT
         THEN "window."
         ELSE "windows."
       END IF.
-  END VERB.
+  END VERB look_through.
 
 
 END EVERY.
@@ -2161,7 +2161,7 @@ ADD TO EVERY ACTOR
         THEN
           LIST THIS.
       END IF.
-  END VERB.
+  END VERB examine.
 
 
 END ADD TO.

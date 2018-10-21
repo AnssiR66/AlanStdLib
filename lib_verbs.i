@@ -224,7 +224,7 @@ META VERB 'about'
     later on.
     $pType CREDITS to see information about the author and the copyright issues.
     $pTo stop playing and end the program, type QUIT.]$p"
-END VERB.
+END VERB 'about'.
 
 
 SYNONYMS help, info = 'about'.
@@ -249,7 +249,7 @@ VERB again
   DOES
     "[The AGAIN command is not supported in this game. As a workaround, try using
      the 'up' and 'down' arrow keys to scroll through your previous commands.]"
-END VERB.
+END VERB again.
 
 
 SYNONYMS g = again.
@@ -276,7 +276,7 @@ ADD TO EVERY STRING
       ELSE SAY restricted_response OF my_game.
     DOES
       "What was the question?"
-    END VERB.
+    END VERB answer.
 END ADD TO.
 
 
@@ -338,7 +338,7 @@ ADD TO EVERY ACTOR
       
       DOES
         "There is no reply."
-  END VERB.
+  END VERB ask.
 END ADD TO.
 
 
@@ -436,7 +436,7 @@ ADD TO EVERY ACTOR
         IF my_game IS NOT temp_compliant
           THEN MAKE act NOT compliant.
         END IF.
-  END VERB.
+  END VERB ask_for.
 END ADD TO.
 
 
@@ -455,7 +455,7 @@ ADD TO EVERY OBJECT
     DOES
       "Please use the formulation ASK PERSON FOR THING to ask somebody for
        something."
-  END VERB.
+  END VERB ask_for_error.
 END ADD TO.
 
 
@@ -518,7 +518,7 @@ ADD TO EVERY THING
 
     DOES
       "Resorting to brute force is not the solution here."
-  END VERB.
+  END VERB attack.
 END ADD TO.
 
 
@@ -597,7 +597,7 @@ ADD TO EVERY THING
 
     DOES
       "Resorting to brute force is not the solution here."
-  END VERB.
+  END VERB attack_with.
 END ADD TO.
 
 
@@ -671,7 +671,7 @@ ADD TO EVERY OBJECT
           ELSE "They taste nothing out of the ordinary."
         END IF.
 
-  END VERB.
+  END VERB bite.
 END ADD TO.
 
 
@@ -727,7 +727,7 @@ ADD TO EVERY OBJECT
 
     DOES
       "Resorting to brute force is not the solution here."
-  END VERB.
+  END VERB break.
 END ADD TO.
 
 
@@ -801,7 +801,7 @@ ADD TO EVERY OBJECT
       DOES
         "Trying to break" SAY THE obj. "with" SAY THE instr.
         "wouldn't accomplish anything."
-  END VERB.
+  END VERB break_with.
 END ADD TO.
 
 
@@ -830,7 +830,7 @@ META VERB brief
     Visits 1000.
     "Brief mode is now on. Location descriptions will only be shown
     the first time you visit."
-END VERB.
+END VERB brief.
 
 
 
@@ -867,7 +867,7 @@ ADD TO EVERY OBJECT
 
     DOES
       "You must state what you want to burn" SAY THE obj. "with."
-  END VERB.
+  END VERB burn.
 END ADD TO.
 
 
@@ -937,7 +937,7 @@ ADD TO EVERY OBJECT
 
       DOES
         "You can't burn" SAY THE obj. "with" SAY THE instr. "."
-  END VERB.
+  END VERB burn_with.
 END ADD TO.
 
 
@@ -977,7 +977,7 @@ ADD TO EVERY OBJECT
         ELSE "Those are not"
       END IF.
       "for sale."
-  END VERB.
+  END VERB buy.
 END ADD TO.
 
 
@@ -1028,7 +1028,7 @@ ADD TO EVERY THING
         ELSE "Those don't"
       END IF.
       "need to be caught."
-  END VERB.
+  END VERB catch.
 END ADD TO.
 
 
@@ -1082,7 +1082,7 @@ ADD TO EVERY OBJECT
 
     DOES
       "Nothing would be achieved by that."
-  END VERB.
+  END VERB clean.
 END ADD TO.
 
 
@@ -1150,7 +1150,7 @@ ADD TO EVERY OBJECT
         ELSE "Those are not"
       END IF.
       "something you can climb."
-  END VERB.
+  END VERB climb.
 END ADD TO.
 
 
@@ -1205,7 +1205,7 @@ ADD TO EVERY SUPPORTER
         ELSE "Those are not"
       END IF.
       "something you can climb on."
-  END VERB.
+  END VERB climb_on.
 END ADD TO.
 
 
@@ -1266,7 +1266,7 @@ ADD TO EVERY OBJECT
         ELSE "Those are not"
       END IF.
       "something you can climb through."
-  END VERB.
+  END VERB climb_through.
 END ADD TO.
 
 
@@ -1326,7 +1326,7 @@ ADD TO EVERY OBJECT
     DOES
       MAKE obj NOT open.
       "You close" SAY THE obj. "."
-  END VERB.
+  END VERB close.
 END ADD TO.
 
 
@@ -1405,7 +1405,7 @@ ADD TO EVERY OBJECT
 
       DOES
         "You can't $v" SAY THE obj. "with" SAY THE instr. "."
-  END VERB.
+  END VERB close_with.
 END ADD TO.
 
 
@@ -1468,7 +1468,7 @@ ADD TO EVERY THING
 
       DOES
         "You find nothing useful about" SAY THE topic. "in" SAY THE source. "."
-  END VERB.
+  END VERB consult.
 END ADD TO.
 
 
@@ -1486,7 +1486,7 @@ ADD TO EVERY THING
     DOES
       "To consult something, please use the formulation CONSULT THING ABOUT 
        PERSON/THING."
-  END VERB.
+  END VERB consult_error.
 END ADD TO.
 
 
@@ -1514,7 +1514,7 @@ META VERB credits
     about the ALAN system can be obtained from
     the World Wide Web Internet site
     $ihttp://www.alanif.se$p"
-END VERB.
+END VERB credits.
 
 
 SYNONYMS acknowledgments, author, copyright = credits.
@@ -1553,7 +1553,7 @@ ADD TO EVERY OBJECT
       ELSE SAY check_current_loc_lit OF my_game.
 
     DOES "You need to specify what you want to cut" SAY THE obj. "with."
-  END VERB.
+  END VERB cut.
 END ADD TO.
 
 
@@ -1623,7 +1623,7 @@ ADD TO EVERY OBJECT
 
       DOES
         "You can't cut" SAY THE obj. "with" SAY THE instr. "."
-  END VERB.
+  END VERB cut_with.
 END ADD TO.
 
 
@@ -1652,7 +1652,7 @@ VERB dance
 
   DOES
     "How about a waltz?"
-END VERB.
+END VERB dance.
 
 
 
@@ -1702,7 +1702,7 @@ ADD TO EVERY OBJECT
 
     DOES
       "There is nothing suitable to dig here."
-  END VERB.
+  END VERB dig.
 END ADD TO.
 
 
@@ -1731,7 +1731,7 @@ VERB dive
 
   DOES
     "There is no water suitable for swimming here."
-END VERB.
+END VERB dive.
 
 
 
@@ -1779,7 +1779,7 @@ ADD TO EVERY OBJECT
         ELSE "Those are not"
       END IF.
       "something you can dive in."
-  END VERB.
+  END VERB dive_in.
 END ADD TO.
 
 
@@ -1861,7 +1861,7 @@ ADD TO EVERY LIQUID
               LOCATE liq AT nowhere.
           END IF.
       END IF.
-  END VERB.
+  END VERB drink.
 END ADD TO.
 
 
@@ -1923,7 +1923,7 @@ ADD TO EVERY OBJECT
         ELSE "Those are not"
       END IF.
       "something you can drive."
-  END VERB.
+  END VERB drive.
 END ADD TO.
 
 
@@ -1935,7 +1935,7 @@ SYNTAX drive_error = drive.
 
 VERB drive_error
   DOES "To drive something, use the phrasing DRIVE SOMETHING."
-END VERB.
+END VERB drive_error.
 
 
 
@@ -1975,7 +1975,7 @@ ADD TO EVERY OBJECT
     DOES
       LOCATE obj HERE.
       "Dropped."
-  END VERB.
+  END VERB drop.
 END ADD TO.
 
 
@@ -2043,7 +2043,7 @@ ADD TO EVERY OBJECT
       "You eat all of" SAY THE food. "."
       LOCATE food AT nowhere.
 
-  END VERB.
+  END VERB eat.
 END ADD.
 
 
@@ -2144,7 +2144,7 @@ ADD TO EVERY OBJECT
           EMPTY obj AT hero.
       END IF.
 
-  END VERB.
+  END VERB 'empty'.
 END ADD TO.
 
 
@@ -2285,7 +2285,7 @@ ADD TO EVERY OBJECT
           "You $v the contents of" SAY THE obj.
           "in" SAY THE cont. "."
       END IF.
-  END VERB.
+  END VERB empty_in.
 END ADD TO.
 
 
@@ -2403,7 +2403,7 @@ ADD TO EVERY THING
             "You $v the contents of" SAY THE obj.
             "on" SAY THE surface. "."
         END IF.
-  END VERB.
+  END VERB empty_on.
 END ADD TO.
 
 
@@ -2448,7 +2448,7 @@ ADD TO EVERY OBJECT
         ELSE "Those are not"
       END IF.
       "something you can enter."
-  END VERB.
+  END VERB enter.
 END ADD TO.
 
 
@@ -2460,7 +2460,7 @@ SYNTAX enter_error = enter.
 
 VERB enter_error
   DOES "You must state what you want to enter."
-END VERB.
+END VERB enter_error.
 
 
 
@@ -2528,7 +2528,7 @@ ADD TO EVERY THING
             ELSE "You notice nothing unusual about" SAY THE obj. "."
           END IF.
       END IF.
-  END VERB.
+  END VERB examine.
 END ADD TO.
 
 
@@ -2572,7 +2572,7 @@ ADD TO EVERY OBJECT
         ELSE "Those are not"
       END IF.
       "something you can exit."
-  END VERB.
+  END VERB 'exit'.
 END ADD TO.
 
 
@@ -2585,7 +2585,7 @@ SYNTAX exit_error = 'exit'.
 VERB exit_error
   DOES
     "You must state what you want to exit."
-END VERB.
+END VERB exit_error.
 
 
 
@@ -2644,7 +2644,7 @@ ADD TO EVERY OBJECT
         ELSE "Those are not"
       END IF.
       "on fire."
-  END VERB.
+  END VERB extinguish.
 END ADD TO.
 
 
@@ -2691,7 +2691,7 @@ ADD TO EVERY OBJECT
 
     DOES
       "You have to say what you want to fill" SAY THE cont. "with."
-  END VERB.
+  END VERB fill.
 END ADD TO.
 
 
@@ -2779,7 +2779,7 @@ ADD TO EVERY OBJECT
       DOES
         "You can't fill" SAY THE cont. "with" SAY THE substance. "."
         -- allow the action at individual substances only
-  END VERB.
+  END VERB fill_with.
 END ADD TO.
 
 
@@ -2820,7 +2820,7 @@ ADD TO EVERY THING
 
     DOES
       "You'll have to $v it yourself."
-  END VERB.
+  END VERB find.
 END ADD TO.
 
 
@@ -2861,7 +2861,7 @@ ADD TO EVERY WEAPON
 
     DOES
       "You fire" SAY THE weapon. "into the air."
-  END VERB.
+  END VERB fire.
 END ADD TO.
 
 
@@ -2916,7 +2916,7 @@ ADD TO EVERY WEAPON
 
       DOES
         "Resorting to violence is not the solution here."
-  END VERB.
+  END VERB fire_at.
 END ADD TO.
 
 
@@ -2943,7 +2943,7 @@ ADD TO EVERY THING
 
     DOES
       "Resorting to violence is not the solution here."
-  END VERB.
+  END VERB fire_at_error.
 END ADD TO.
 
 
@@ -2996,7 +2996,7 @@ ADD TO EVERY OBJECT
 
     DOES
       "Please be more specific. How do you intend to fix it?"
-  END VERB.
+  END VERB fix.
 END ADD TO.
 
 
@@ -3046,7 +3046,7 @@ ADD TO EVERY THING
     DOES
       LOCATE hero AT act.
       "You follow" SAY THE act. "."
-  END VERB.
+  END VERB follow.
 END ADD TO.
 
 
@@ -3104,7 +3104,7 @@ ADD TO EVERY THING
         THEN "That doesn't need to be $vd."
         ELSE "Those don't need to be $vd."
       END IF.
-  END VERB.
+  END VERB free.
 END ADD TO.
 
 
@@ -3141,7 +3141,7 @@ ADD TO EVERY SUPPORTER
           MAKE hero NOT sitting.
         ELSE "You're standing up already."
       END IF.
-    END VERB.
+    END VERB get_off.
 END ADD TO.
 
 
@@ -3172,7 +3172,7 @@ VERB get_up
           MAKE hero NOT sitting.
       ELSE "You're standing up already."
     END IF.
-END VERB.
+END VERB get_up.
 
 
 
@@ -3258,7 +3258,7 @@ ADD TO EVERY OBJECT
         LOCATE obj IN recipient.
         "You give" SAY THE obj. "to" SAY THE recipient. "."
 
-  END VERB.
+  END VERB give.
 END ADD TO.
 
 
@@ -3319,7 +3319,7 @@ ADD TO EVERY THING
     DOES
       "You can't see" SAY THE dest. "anywhere nearby. You must state a
       direction where you want to go."
-  END VERB.
+  END VERB go_to.
 END ADD TO.
 
 
@@ -3361,7 +3361,7 @@ META VERB hint
 
   DOES
     "Unfortunately hints are not available in this game."
-END VERB.
+END VERB hint.
 
 
 SYNONYMS
@@ -3393,7 +3393,7 @@ VERB i
       THEN LIST worn.     -- This code will list what the hero is wearing.
     END IF.
 
-END VERB.
+END VERB i.
 
 
 SYNONYMS inv, inventory  = i.
@@ -3422,7 +3422,7 @@ VERB jump
 
   DOES
     "You jump on the spot, to no avail."
-END VERB.
+END VERB jump.
 
 
 
@@ -3483,7 +3483,7 @@ ADD TO EVERY OBJECT
         ELSE "Those are not something you can jump into."
       END IF.
 
-  END VERB.
+  END VERB jump_in.
 END ADD TO.
 
 
@@ -3524,7 +3524,7 @@ ADD TO EVERY OBJECT
       END IF.
       "something you can jump onto."
 
-  END VERB.
+  END VERB jump_on.
 END ADD TO.
 
 
@@ -3583,7 +3583,7 @@ ADD TO EVERY THING
 
     DOES "Resorting to brute force is not the solution here."
 
-  END VERB.
+  END VERB kick.
 END ADD TO.
 
 
@@ -3623,7 +3623,7 @@ ADD TO EVERY ACTOR
 
     DOES "You have to state what you want to kill" SAY THE victim. "with."
 
-  END VERB.
+  END VERB kill.
 END ADD TO.
 
 
@@ -3673,7 +3673,7 @@ ADD TO EVERY ACTOR
       DOES
         "That would be needlessly brutal."
 
-  END VERB.
+  END VERB kill_with.
 END ADD TO.
 
 
@@ -3732,7 +3732,7 @@ ADD TO EVERY THING
         ELSE "Nothing would be achieved by that."
       END IF.
 
-  END VERB.
+  END VERB kiss.
 END ADD TO.
 
 
@@ -3791,7 +3791,7 @@ ADD TO EVERY OBJECT
     DOES
       "You knock on" SAY THE obj. "$$. Nothing happens."
 
-  END VERB.
+  END VERB knock.
 END ADD TO.
 
 
@@ -3804,7 +3804,7 @@ SYNTAX knock_error = knock.
 VERB knock_error
   DOES
     "Please use the formulation KNOCK ON SOMETHING to knock on something."
-END VERB.
+END VERB knock_error.
 
 
 
@@ -3834,7 +3834,7 @@ VERB lie_down
         -- DOES "You lie down."
         -- MAKE hero lying_down.
         -- MAKE hero NOT sitting_down.
-END VERB.
+END VERB lie_down.
 
 
 -- When the hero is sitting or lying down, it will be impossible for her/him to
@@ -3905,7 +3905,7 @@ ADD TO EVERY OBJECT
       -- Remember to: MAKE hero lying_down.
       -- Presently, an actor cannot be located inside a container object.
 
-  END VERB.
+  END VERB lie_in.
 END ADD TO.
 
 
@@ -3972,7 +3972,7 @@ ADD TO EVERY OBJECT
                 -- Presently, an actor cannot be located inside a container object
       -- or on a supporter.
 
-  END VERB.
+  END VERB lie_on.
 END ADD TO.
 
 
@@ -4047,7 +4047,7 @@ ADD TO EVERY OBJECT
     DOES
       "That wouldn't accomplish anything."
 
-  END VERB.
+  END VERB lift.
 END ADD TO.
 
 
@@ -4105,7 +4105,7 @@ ADD TO EVERY OBJECT
       END IF.
       "something you can $v."
 
-  END VERB.
+  END VERB light.
 END ADD TO.
 
 
@@ -4130,7 +4130,7 @@ VERB listen0
     ELSE SAY restricted_response OF my_game.
   DOES
     "You hear nothing unusual."
-END VERB.
+END VERB listen0.
 
 
 
@@ -4175,7 +4175,7 @@ ADD TO EVERY THING
         THEN "You can't hear" SAY THE obj. "very well from here."
       END IF.
 
-  END VERB.
+  END VERB listen.
 END ADD TO.
 
 
@@ -4247,7 +4247,7 @@ ADD TO EVERY OBJECT
             ELSE  "You have to state what you want to lock" SAY THE obj. "with."
       END IF.
 
-  END VERB.
+  END VERB lock.
 END ADD TO.
 
 
@@ -4331,7 +4331,7 @@ ADD TO EVERY OBJECT
         END IF.
         "lock" SAY THE obj. "with" SAY THE key. "."
 
-  END VERB.
+  END VERB lock_with.
 END ADD TO.
 
 
@@ -4355,7 +4355,7 @@ VERB 'look'
     INCREASE described OF CURRENT LOCATION.
     -- see 'locations.i', attribute 'described'.
     LOOK.
-END VERB.
+END VERB 'look'.
 
 
 SYNONYMS l = 'look'.
@@ -4405,7 +4405,7 @@ ADD TO EVERY THING
         ELSE "You notice nothing unusual behind" SAY THE bulk. "."
       END IF.
 
-  END VERB.
+  END VERB look_behind.
 END ADD TO.
 
 
@@ -4445,7 +4445,7 @@ ADD TO EVERY OBJECT
     DOES
       LIST cont.
 
-  END VERB.
+  END VERB look_in.
 END ADD TO.
 
 
@@ -4489,7 +4489,7 @@ ADD TO EVERY OBJECT
       END IF.
       "something you can look out of."
 
-  END VERB.
+  END VERB look_out_of.
 END ADD TO.
 
 
@@ -4521,7 +4521,7 @@ ADD TO EVERY OBJECT
     DOES
       "You can't see through" SAY THE bulk. "."
 
-  END VERB.
+  END VERB look_through.
 END ADD TO.
 
 
@@ -4555,7 +4555,7 @@ ADD TO EVERY THING
     DOES
       "You notice nothing unusual under" SAY THE bulk. "."
 
-  END VERB.
+  END VERB look_under.
 END ADD TO.
 
 
@@ -4576,7 +4576,7 @@ VERB look_up
   CHECK my_game CAN look_up
     ELSE SAY restricted_response OF my_game.
   DOES "Looking up, you see nothing unusual."
-END VERB.
+END VERB look_up.
 
 
 
@@ -4596,7 +4596,7 @@ VERB 'no'
   CHECK my_game CAN 'no'
     ELSE SAY restricted_response OF my_game.
   DOES "Really?"
-END VERB.
+END VERB 'no'.
 
 
 
@@ -4634,7 +4634,7 @@ META VERB notify
       ELSE MAKE my_game notify_turned_on. "Score notification is now enabled.
         (You can turn it off using the NOTIFY command again.)"
     END IF.
-END VERB.
+END VERB notify.
 
 
 META VERB notify_on
@@ -4647,7 +4647,7 @@ META VERB notify_on
         "Score notification is now enabled.
         (You can turn it off using the NOTIFY command again.)"
     END IF.
-END VERB.
+END VERB notify_on.
 
 
 META VERB notify_off
@@ -4660,7 +4660,7 @@ META VERB notify_off
         using the NOTIFY command again.)"
       ELSE "Score notification is already disabled."
     END IF.
-END VERB.
+END VERB notify_off.
 
 
 -- The 'notify' verb allows the players to disable the score change
@@ -4778,7 +4778,7 @@ ADD TO EVERY OBJECT
         "You open" SAY THE obj. "."
       END IF.
 
-  END VERB.
+  END VERB open.
 END ADD TO.
 
 
@@ -4870,7 +4870,7 @@ ADD TO EVERY OBJECT
           ELSE "You can't open" SAY THE obj. "with" SAY THE instr. "."
         END IF.
 
-  END VERB.
+  END VERB open_with.
 END ADD TO.
 
 
@@ -4928,7 +4928,7 @@ ADD TO EVERY OBJECT
       END IF.
       "something you can play."
 
-  END VERB.
+  END VERB 'play'.
 END ADD TO.
 
 
@@ -4986,7 +4986,7 @@ ADD TO EVERY THING
       "After second thought you don't find it purposeful to start
        playing with" SAY THE obj. "."
 
-  END VERB.
+  END VERB play_with.
 END ADD TO.
 
 
@@ -5022,7 +5022,7 @@ VERB pray
   CHECK my_game CAN pray
     ELSE SAY restricted_response OF my_game.
   DOES "Your prayers don't seem to help right now."
-END VERB.
+END VERB pray.
 
 
 
@@ -5059,7 +5059,7 @@ ADD TO EVERY OBJECT
 
     DOES "You must state what you want to pry" SAY THE obj. "with."
 
-  END VERB.
+  END VERB pry.
 END ADD TO.
 
 
@@ -5129,7 +5129,7 @@ ADD TO EVERY OBJECT
 
     DOES "That doesn't work."
 
-  END VERB.
+  END VERB pry_with.
 END ADD TO.
 
 
@@ -5183,7 +5183,7 @@ ADD TO EVERY OBJECT
     DOES
       "That wouldn't accomplish anything."
 
-  END VERB.
+  END VERB pull.
 END ADD TO.
 
 
@@ -5237,7 +5237,7 @@ ADD TO EVERY THING
     DOES
       "You give" SAY THE obj. "a little push. Nothing happens."
 
-  END VERB.
+  END VERB push.
 END ADD TO.
 
 
@@ -5307,7 +5307,7 @@ ADD TO EVERY THING
       DOES
         "That wouldn't accomplish anything."
 
-  END VERB.
+  END VERB push_with.
 END ADD TO.
 
 
@@ -5343,7 +5343,7 @@ ADD TO EVERY OBJECT
         ELSE "them."
       END IF.
 
-  END VERB.
+  END VERB put.
 END ADD TO.
 
 
@@ -5458,7 +5458,7 @@ ADD TO EVERY OBJECT
         LOCATE obj IN cont.
         "You put" SAY THE obj. "into" SAY THE cont. "."
 
-  END VERB.
+  END VERB put_in.
 END ADD TO.
 
 
@@ -5555,7 +5555,7 @@ ADD TO EVERY OBJECT
       DOES
         "That wouldn't accomplish anything."
 
-  END VERB.
+  END VERB put_against.
 END ADD TO.
 
 
@@ -5649,7 +5649,7 @@ ADD TO EVERY OBJECT
 
         "You put" SAY THE obj. "on" SAY THE surface. "."
 
-  END VERB.
+  END VERB put_on.
 END ADD TO.
 
 
@@ -5685,7 +5685,7 @@ META VERB 'quit'
     ELSE SAY restricted_response OF my_game.
   DOES
     QUIT.
-END VERB.
+END VERB 'quit'.
 
 
 SYNONYMS q = 'quit'.
@@ -5742,7 +5742,7 @@ ADD TO EVERY OBJECT
           """$$" SAY text OF obj. "$$""."
       END IF.
 
-  END VERB.
+  END VERB read.
 END ADD TO.
 
 
@@ -5786,7 +5786,7 @@ ADD TO EVERY OBJECT
         ELSE "them."
       END IF.
 
-  END VERB.
+  END VERB remove.
 END ADD TO.
 
 
@@ -5821,7 +5821,7 @@ META VERB 'restart'
     ELSE SAY restricted_response OF my_game.
   DOES
     RESTART.
-END VERB.
+END VERB 'restart'.
 
 
 
@@ -5842,7 +5842,7 @@ META VERB 'restore'
     ELSE SAY restricted_response OF my_game.
   DOES
     RESTORE.
-END VERB.
+END VERB 'restore'.
 
 
 
@@ -5899,7 +5899,7 @@ ADD TO EVERY THING
     DOES
       "Nothing would be achieved by that."
 
-  END VERB.
+  END VERB rub.
 END ADD TO.
 
 
@@ -5924,7 +5924,7 @@ META VERB 'save'
     ELSE SAY restricted_response OF my_game.
   DOES
     SAVE.
-END VERB.
+END VERB 'save'.
 
 
 
@@ -5950,7 +5950,7 @@ ADD TO EVERY STRING
     DOES
       "Nothing happens."
 
-  END VERB.
+  END VERB 'say'.
 END ADD TO.
 
 
@@ -6004,7 +6004,7 @@ ADD TO EVERY ACTOR
       END IF.
       "interested."
 
-  END VERB.
+  END VERB say_to.
 END ADD TO.
 
 
@@ -6086,7 +6086,7 @@ ADD TO EVERY THING
     DOES
       "Nothing would be achieved by that."
 
-  END VERB.
+  END VERB 'score'.
 END ADD TO.
 
 
@@ -6116,7 +6116,7 @@ META VERB 'script'
     $pIn a GUI version you can also find this in the drop-down menu in the interpreter.
     $pIn a command line version you can start your game with the '-s' switch to get a transcript
     of the whole game."
-END VERB.
+END VERB 'script'.
 
 META VERB script_on
   CHECK my_game CAN script_on
@@ -6124,7 +6124,7 @@ META VERB script_on
   DOES
     TRANSCRIPT ON.
     "Transcripting turned on."
-END VERB.
+END VERB script_on.
 
 META VERB script_off
   CHECK my_game CAN script_off
@@ -6132,7 +6132,7 @@ META VERB script_off
   DOES
     TRANSCRIPT OFF.
     "Transcripting turned off."
-END VERB.
+END VERB script_off.
 
 
 
@@ -6183,7 +6183,7 @@ ADD TO EVERY THING
     DOES
       "You find nothing of interest."
 
-  END VERB.
+  END VERB search.
 END ADD TO.
 
 
@@ -6222,7 +6222,7 @@ ADD TO EVERY OBJECT
     DOES
       "There's nobody here who would be interested in buying" SAY THE item. "."
 
-  END VERB.
+  END VERB sell.
 END ADD TO.
 
 -- Depending on the situation, it might be good to add a check whether the item is carried
@@ -6285,7 +6285,7 @@ ADD TO EVERY OBJECT
         ELSE "There is no reason to start shaking" SAY THE obj. "."
       END IF.
 
-  END VERB.
+  END VERB shake.
 END ADD TO.
 
 
@@ -6342,7 +6342,7 @@ ADD TO EVERY THING
         ELSE "That wouldn't accomplish anything."
       END IF.
 
-  END VERB.
+  END VERB shoot.
 END ADD TO.
 
 
@@ -6358,7 +6358,7 @@ SYNTAX shoot_error = shoot.
 VERB shoot_error
   DOES
     "You must state what you want to shoot, for example SHOOT BEAR WITH RIFLE."
-END VERB.
+END VERB shoot_error.
 
 
 
@@ -6423,7 +6423,7 @@ ADD TO EVERY THING
         ELSE "That wouldn't accomplish anything."
       END IF.
 
-  END VERB.
+  END VERB shoot_with.
 END ADD TO.
 
 
@@ -6445,7 +6445,7 @@ VERB shout
     ELSE SAY restricted_response OF my_game.
     DOES
         "Nothing results from your $ving."
-END VERB.
+END VERB shout.
 
 
 SYNONYMS scream, yell = shout.
@@ -6501,7 +6501,7 @@ ADD TO EVERY OBJECT
       END IF.
       "not especially interested."
 
-  END VERB.
+  END VERB 'show'.
 END ADD TO.
 
 
@@ -6526,7 +6526,7 @@ VERB sing
     ELSE SAY restricted_response OF my_game.
   DOES
     "You $v a little tune."
-END VERB.
+END VERB sing.
 
 
 SYNONYMS hum, whistle = sing.
@@ -6607,7 +6607,7 @@ ADD TO EVERY LIQUID
           END IF.
       END IF.
 
-  END VERB.
+  END VERB sip.
 END ADD TO.
 
 
@@ -6643,7 +6643,7 @@ VERB sit
     --  ELSE "You sit down."
     -- END IF.
     -- MAKE hero sitting.
-END VERB.
+END VERB sit.
 
 -- When the hero is sitting or lying down, it will be impossible for her/him to
 -- perform certain actions, as numerous verbs in the library have checks for this.
@@ -6709,7 +6709,7 @@ ADD TO EVERY SUPPORTER
       -- END IF.
       -- MAKE hero sitting.
 
-  END VERB.
+  END VERB sit_on.
 END ADD TO.
 
 
@@ -6741,7 +6741,7 @@ VERB sleep
     ELSE SAY restricted_response OF my_game.
   DOES
     "There's no need to $v right now."
-END VERB.
+END VERB sleep.
 
 
 SYNONYMS rest = sleep.
@@ -6765,7 +6765,7 @@ VERB smell0
     ELSE SAY restricted_response OF my_game.
   DOES
     "You smell nothing unusual."
-END VERB.
+END VERB smell0.
 
 
 
@@ -6793,7 +6793,7 @@ ADD TO EVERY THING
       ELSE SAY restricted_response OF my_game.
     DOES
       "You smell nothing unusual."
-  END VERB.
+  END VERB smell.
 END ADD TO.
 
 
@@ -6847,7 +6847,7 @@ ADD TO EVERY THING
     DOES
       "Trying to squeeze" SAY THE obj. "wouldn't accomplish anything."
 
-  END VERB.
+  END VERB squeeze.
 END ADD TO.
 
 
@@ -6876,7 +6876,7 @@ VERB stand
         MAKE hero NOT lying_down.
       ELSE "You're standing up already."
     END IF.
-END VERB.
+END VERB stand.
 
 
 
@@ -6931,7 +6931,7 @@ ADD TO EVERY SUPPORTER
       -- you implement a nested location.)
       -- MAKE hero NOT sitting. MAKE hero NOT lying_down.
 
-  END VERB.
+  END VERB stand_on.
 END ADD TO.
 
 
@@ -6959,7 +6959,7 @@ VERB swim
     ELSE SAY check_current_loc_lit OF my_game.
   DOES
     "There is no water suitable for swimming here."
-END VERB.
+END VERB swim.
 
 
 
@@ -7015,7 +7015,7 @@ ADD TO EVERY OBJECT
       END IF.
       "something you can swim in."
 
-  END VERB.
+  END VERB swim_in.
 END ADD TO.
 
 
@@ -7058,7 +7058,7 @@ ADD TO EVERY OBJECT
         ELSE "Those are not"
       END IF.
       "not something you can switch."
-  END VERB.
+  END VERB switch.
 END ADD TO.
 
 
@@ -7190,7 +7190,7 @@ ADD TO EVERY THING
         -- Objects held by NPCs cannot be taken by the hero by default.
         -- The hero must *ask for* the object to obtain it.
 
-  END VERB.
+  END VERB take.
 END ADD TO.
 
 
@@ -7336,7 +7336,7 @@ ADD TO EVERY THING
         -- Objects held by NPCs cannot be taken by the hero by default.
         -- The hero must *ask for* the object to obtain it.
 
-  END VERB.
+  END VERB take_from.
 END ADD TO.
 
 
@@ -7359,7 +7359,7 @@ VERB talk
   DOES
     "To talk to somebody, you can ASK PERSON ABOUT THING
      or TELL PERSON ABOUT THING."
-END VERB.
+END VERB talk.
 
 
 
@@ -7388,7 +7388,7 @@ ADD TO EVERY ACTOR
     DOES
       "To talk to somebody, you can ASK PERSON ABOUT THING or
        TELL PERSON ABOUT THING."
-  END VERB.
+  END VERB talk_to.
 END ADD TO.
 
 
@@ -7448,7 +7448,7 @@ ADD TO EVERY OBJECT
     DOES
       "You taste nothing unexpected."
 
-  END VERB.
+  END VERB taste.
 END ADD TO.
 
 
@@ -7505,7 +7505,7 @@ ADD TO EVERY OBJECT
     DOES
       "Trying to $v" SAY THE obj. "would be futile."
 
-  END VERB.
+  END VERB tear.
 END ADD TO.
 
 
@@ -7565,7 +7565,7 @@ ADD TO EVERY ACTOR
       END IF.
       "look interested."
 
-  END VERB.
+  END VERB tell.
 END ADD TO.
 
 
@@ -7590,7 +7590,7 @@ VERB think
     ELSE SAY restricted_response OF my_game.
   DOES
     "Nothing helpful comes to your mind."
-END VERB.
+END VERB think.
 
 
 SYNONYMS ponder, meditate, reflect = think.
@@ -7621,7 +7621,7 @@ ADD TO EVERY THING
       ELSE SAY restricted_response OF my_game.
     DOES
       "Nothing helpful comes to your mind."
-    END VERB.
+    END VERB think_about.
 END ADD TO.
 
 
@@ -7695,7 +7695,7 @@ ADD TO EVERY OBJECT
       "nearby."
       LOCATE projectile AT hero.
 
-  END VERB.
+  END VERB throw.
 END ADD TO.
 
 
@@ -7811,7 +7811,7 @@ ADD TO EVERY OBJECT
           -- when attacking enemies.
         END IF.
 
-  END VERB.
+  END VERB throw_at.
 END ADD TO.
 
 
@@ -7888,7 +7888,7 @@ ADD TO EVERY OBJECT
       "It wouldn't accomplish anything trying to throw"
       SAY the projectile. "to" SAY THE recipient. "."
 
-  END VERB.
+  END VERB throw_to.
 END ADD TO.
 
 
@@ -7994,7 +7994,7 @@ ADD TO EVERY OBJECT
       -- default; this is to avoid successful outcomes for commands like
       -- 'throw plate into cupboard' etc.
 
-  END VERB.
+  END VERB throw_in.
 END ADD TO.
 
 
@@ -8033,7 +8033,7 @@ ADD TO EVERY OBJECT
     DOES
       "You must state where you want to tie" SAY THE obj. "."
 
-  END VERB.
+  END VERB tie.
 END ADD TO.
 
 
@@ -8115,7 +8115,7 @@ ADD TO EVERY THING
 
       "It's not possible to tie" SAY THE obj. "to" SAY THE target. "."
 
-  END VERB.
+  END VERB tie_to.
 END ADD TO.
 
 
@@ -8173,7 +8173,7 @@ ADD TO EVERY THING
     DOES
       "You feel nothing unexpected."
 
-  END VERB.
+  END VERB touch.
 END ADD TO.
 
 
@@ -8251,7 +8251,7 @@ ADD TO EVERY THING
     DOES
       "You touch" SAY THE obj. "with" SAY THE instr. ". Nothing special happens."
 
-  END VERB.
+  END VERB touch_with.
 END ADD TO.
 
 
@@ -8321,7 +8321,7 @@ ADD TO EVERY OBJECT
         ELSE "That wouldn't accomplish anything."
       END IF.
 
-  END VERB.
+  END VERB turn.
 END ADD TO.
 
 
@@ -8377,7 +8377,7 @@ ADD TO EVERY OBJECT
       END IF.
       "something you can $v on."
 
-  END VERB.
+  END VERB turn_on.
 END ADD TO.
 
 
@@ -8429,7 +8429,7 @@ ADD TO EVERY OBJECT
         ELSE "Those are not"
       END IF.
       "something you can $v off."
-  END VERB.
+  END VERB turn_off.
 END ADD TO.
 
 
@@ -8459,7 +8459,7 @@ VERB undress
       --     "You remove all the items you were wearing."
       --   ELSE "You're not wearing anything you can remove."
       -- END IF.
-END VERB.
+END VERB undress.
 
 
 
@@ -8523,7 +8523,7 @@ ADD TO EVERY OBJECT
         ELSE "You don't have the key that unlocks" SAY THE obj. "."
       END IF.
 
-  END VERB.
+  END VERB unlock.
 END ADD TO.
 
 
@@ -8599,7 +8599,7 @@ ADD TO EVERY OBJECT
       MAKE obj NOT locked.
       "You unlock" SAY THE obj. "with" SAY THE key. "."
 
-  END VERB.
+  END VERB unlock_with.
 END ADD TO.
 
 
@@ -8631,7 +8631,7 @@ ADD TO EVERY OBJECT
         ELSE "them?"
       END IF.
 
-  END VERB.
+  END VERB 'use'.
 END ADD TO.
 
 
@@ -8663,7 +8663,7 @@ ADD TO EVERY OBJECT
     DOES
       "Please be more specific. How do you intend to use them together?"
 
-  END VERB.
+  END VERB use_with.
 END ADD TO.
 
 
@@ -8688,7 +8688,7 @@ META VERB verbose
     VISITS 0.
     "Verbose mode is now on. Location descriptions will be
     always shown in full."
-END VERB.
+END VERB verbose.
 
 
 
@@ -8709,7 +8709,7 @@ VERB 'wait'
     ELSE SAY restricted_response OF my_game.
   DOES
     "Time passes..."
-END VERB.
+END VERB 'wait'.
 
 
 SYNONYMS
@@ -8777,7 +8777,7 @@ ADD TO EVERY OBJECT
       END IF.
       "something you can wear."
 
-  END VERB.
+  END VERB wear.
 END ADD TO.
 
 
@@ -8799,7 +8799,7 @@ VERB what_am_i
     ELSE SAY restricted_response OF my_game.
   DOES
     "Maybe examining yourself might help."
-END VERB.
+END VERB what_am_i.
 
 
 
@@ -8829,7 +8829,7 @@ ADD TO EVERY THING
       ELSE SAY restricted_response OF my_game.
     DOES
       "You'll have to find it out yourself."
-  END VERB.
+  END VERB what_is.
 END ADD TO.
 
 
@@ -8851,7 +8851,7 @@ VERB where_am_i
     ELSE SAY restricted_response OF my_game.
   DOES
     LOOK.
-END VERB.
+END VERB where_am_i.
 
 
 
@@ -8887,7 +8887,7 @@ ADD TO EVERY THING
         END IF.
     DOES
       "You'll have to find it out yourself."
-  END VERB.
+  END VERB where_is.
 END ADD TO.
 
 
@@ -8909,7 +8909,7 @@ VERB who_am_i
     ELSE SAY restricted_response OF my_game.
   DOES
     "Maybe examining yourself might help."
-END VERB.
+END VERB who_am_i.
 
 
 
@@ -8939,7 +8939,7 @@ ADD TO EVERY ACTOR
       ELSE SAY restricted_response OF my_game.
     DOES
       "You'll have to find it out yourself."
-  END VERB.
+  END VERB who_is.
 END ADD TO.
 
 
@@ -8999,7 +8999,7 @@ ADD TO EVERY OBJECT
       -- "You write ""$$" SAY txt. "$$"" on" SAY THE obj. "."
         -- MAKE obj readable.
 
-  END VERB.
+  END VERB write.
 END ADD TO.
 
 
@@ -9017,7 +9017,7 @@ ADD TO EVERY OBJECT
   VERB write_error1
     DOES "Please use the formulation WRITE ""TEXT"" ON (IN) OBJECT
           to write something."
-  END VERB.
+  END VERB write_error1.
 END ADD TO.
 
 
@@ -9026,7 +9026,7 @@ SYNTAX write_error2 = write.
 VERB write_error2
   DOES "Please use the formulation WRITE ""TEXT"" ON (IN) OBJECT
         to write something."
-END VERB.
+END VERB write_error2.
 
 
 SYNTAX write_error3 = write (txt)
@@ -9039,7 +9039,7 @@ ADD TO EVERY STRING
   VERB write_error3
     DOES "Please use the formulation WRITE ""TEXT"" ON (IN) OBJECT
           to write something."
-  END VERB.
+  END VERB write_error3.
 END ADD TO.
 
 
@@ -9060,7 +9060,7 @@ VERB yes
   CHECK my_game CAN yes
     ELSE SAY restricted_response OF my_game.
   DOES "Really?"
-END VERB.
+END VERB yes.
 
 
 

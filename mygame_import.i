@@ -43,7 +43,7 @@
 --         -- this is the original default response defined by the library, 
 --         -- and in the list of verbs further below.
 --     END IF.
--- END VERB.
+-- END VERB look_through.
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 -- Above, the author has added an IF clause to cater for both window objects and
@@ -57,7 +57,7 @@
 -- EVERY cat ISA ACTOR
 --   VERB examine 
 --     DOES ONLY "It's just an ordinary cat"
---   END VERB.
+--   END VERB examine.
 -- END EVERY.  
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -72,7 +72,7 @@
 --   CHECK strength OF hero > 5            -- your own check, added in this file 
 --     ELSE "You feel too weak."           -- and not in the library files!
 --   DOES "You jump on the spot, to no avail."
--- END VERB.
+-- END VERB jump.
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -490,7 +490,7 @@ VERB 'about'
      RESTORE it later on.
      $pType CREDITS to see information about the author and the copyright issues.
      $pTo stop playing and end the program, type QUIT.]$p"
-END VERB.
+END VERB 'about'.
 
 
 
@@ -498,21 +498,21 @@ VERB 'again'
   DOES ONLY
     "[The AGAIN command is not supported in this game. As a workaround, try using
      the 'up' and 'down' arrow keys to scroll through your previous commands.]" 
-END VERB.
+END VERB 'again'.
 
 
 
 VERB answer
   DOES ONLY
     "What was the question?"
-END VERB.
+END VERB answer.
 
 
 
 VERB ask
   WHEN act
     DOES ONLY "There is no reply."
-END VERB.
+END VERB ask.
 
 
 
@@ -524,14 +524,14 @@ VERB ask_for
     LOCATE obj IN hero.
     SAY THE act. "gives" SAY THE obj. "to you."
     MAKE act NOT compliant.
-END VERB.
+END VERB ask_for.
 
 
 
 VERB attack
   DOES ONLY
     "Resorting to brute force is not the solution here."
-END VERB.
+END VERB attack.
 
 
 
@@ -539,7 +539,7 @@ VERB attack_with
   WHEN target
     DOES ONLY
       "Resorting to brute force is not the solution here."
-END VERB.
+END VERB attack_with.
 
 
 
@@ -552,14 +552,14 @@ VERB bite
           ELSE "They taste nothing out of the ordinary."
         END IF.
     END IF.
-END VERB.
+END VERB bite.
 
 
 
 VERB break
   DOES ONLY
     "Resorting to brute force is not the solution here."
-END VERB.
+END VERB break.
 
 
 
@@ -567,7 +567,7 @@ VERB break_with
   DOES ONLY   
     "Trying to break" SAY THE obj. "with" SAY THE instr. 
     "wouldn't accomplish anything."
-END VERB.
+END VERB break_with.
 
 
 
@@ -576,21 +576,21 @@ VERB 'brief'
     Visits 1000.
     "Brief mode is now on. Location descriptions will only be shown
      the first time you visit."
-END VERB.
+END VERB 'brief'.
 
 
 
 VERB burn
   DOES ONLY
     "You must state what you want to burn" SAY THE obj. "with."
-END VERB.
+END VERB burn.
 
 
 
 VERB burn_with
   DOES ONLY
     "You can't burn" SAY THE obj. "with" SAY THE instr. "."
-END VERB.
+END VERB burn_with.
 
 
 
@@ -601,7 +601,7 @@ VERB buy
       ELSE "Those are not"
     END IF. 
     "for sale."
-END VERB.
+END VERB buy.
 
 
 
@@ -612,14 +612,14 @@ VERB catch
       ELSE "Those don't"
     END IF.
     "need to be caught."
-END VERB.
+END VERB catch.
 
 
 
 VERB clean
   DOES ONLY
     "Nothing would be achieved by that."
-END VERB.
+END VERB clean.
 
 
 
@@ -630,7 +630,7 @@ VERB climb
       ELSE "Those are not"
     END IF. 
     "something you can climb."
-END VERB.
+END VERB climb.
 
 
 
@@ -641,7 +641,7 @@ VERB climb_on
       ELSE "Those are not"
     END IF.
     "something you can climb on."
-END VERB.
+END VERB climb_on.
 
 
 
@@ -652,7 +652,7 @@ VERB climb_through
       ELSE "Those are not"
     END IF.
     "something you can climb through."
-END VERB.
+END VERB climb_through.
 
 
 
@@ -660,21 +660,21 @@ VERB close
   DOES ONLY
         MAKE obj NOT open.
         "You close" SAY THE obj. "."
-END VERB.
+END VERB close.
 
 
 
 VERB close_with
   DOES ONLY
         "You can't $v" SAY THE obj. "with" SAY THE instr. "."
-END VERB.
+END VERB close_with.
 
 
 
 VERB consult
   DOES ONLY
     "You find nothing useful about" SAY THE topic. "in" SAY THE source. "."
-END VERB.
+END VERB consult.
 
 
 
@@ -687,42 +687,42 @@ VERB credits
      about the ALAN system can be obtained from
      the World Wide Web Internet site
      $ihttp://www.alanif.se$p"
-END VERB.
+END VERB credits.
 
 
 
 VERB cut
   DOES ONLY
     "You need to specify what you want to cut" SAY THE obj. "with."
-END VERB.
+END VERB cut.
 
 
 
 VERB cut_with
   DOES ONLY
     "You can't cut" SAY THE obj. "with" SAY THE instr. "."
-END VERB.
+END VERB cut_with.
 
 
 
 VERB dance
   DOES ONLY
         "How about a waltz?"
-END VERB.
+END VERB dance.
 
 
 
 VERB dig
   DOES ONLY
     "There is nothing suitable to dig here."
-END VERB.
+END VERB dig.
 
 
 
 VERB dive
   DOES ONLY 
     "There is no water suitable for swimming here."
-END VERB.
+END VERB dive.
 
 
 
@@ -733,7 +733,7 @@ VERB dive_in
       ELSE "Those are not"
     END IF.
     "something you can dive in."
-END VERB.
+END VERB dive_in.
 
 
 
@@ -770,7 +770,7 @@ VERB drink
         END IF.
     END IF.
 
-END VERB.
+END VERB drink.
 
 
 
@@ -781,7 +781,7 @@ VERB drive
       ELSE "Those are not"
     END IF.
     "something you can drive."
-END VERB.
+END VERB drive.
 
 
 
@@ -789,7 +789,7 @@ VERB drop
   DOES ONLY
         LOCATE obj HERE.
         "Dropped."
-END VERB.
+END VERB drop.
 
 
 
@@ -804,7 +804,7 @@ VERB eat
       
     "You eat all of" SAY THE food. "."
     LOCATE food AT nowhere.
-END VERB.
+END VERB eat.
 
 
 
@@ -827,7 +827,7 @@ VERB 'empty'
           END IF.
         EMPTY obj AT hero.
     END IF.
-END VERB.
+END VERB 'empty'.
 
 
 
@@ -847,7 +847,7 @@ VERB empty_in, pour_in
         "You $v the contents of" SAY THE obj.
         "in" SAY THE cont. "."
     END IF.
-END VERB. 
+END VERB empty_in. 
     
 
 
@@ -870,7 +870,7 @@ VERB empty_on, pour_on
         "You $v the contents of" SAY THE obj.
         "on" SAY THE surface. "."
     END IF.
-END VERB.
+END VERB empty_on.
 
 
 
@@ -881,7 +881,7 @@ VERB enter
       ELSE "Those are not"
     END IF.
     "something you can enter."
-END VERB.
+END VERB enter.
 
 
 
@@ -905,7 +905,7 @@ VERB examine
           ELSE "You notice nothing unusual about" SAY THE obj. "."
         END IF. 
     END IF.
-END VERB.
+END VERB examine.
 
 
 
@@ -916,7 +916,7 @@ VERB 'exit'
       ELSE "Those are not"
     END IF.   
     "something you can exit."
-END VERB.
+END VERB 'exit'.
 
 
 
@@ -927,14 +927,14 @@ VERB extinguish
       ELSE "Those are not"
     END IF.
     "on fire."
-END VERB.
+END VERB extinguish.
 
 
 
 VERB fill
   DOES ONLY
     "You have to say what you want to fill" SAY THE cont. "with."
-END VERB.
+END VERB fill.
 
 
 
@@ -942,35 +942,35 @@ VERB fill_with
   DOES ONLY 
     "You can't fill" SAY THE cont. "with" SAY THE substance. "."
     -- allow the action at individual substances only
-END VERB.
+END VERB fill_with.
 
 
 
 VERB find
   DOES ONLY
     "You'll have to $v it yourself."
-END VERB.
+END VERB find.
 
 
 
 VERB fire
   DOES ONLY
     "You fire" SAY THE weapon. "into the air."
-END VERB.
+END VERB fire.
 
 
 
 VERB fire_at
   DOES ONLY
     "Resorting to violence is not the solution here."
-END VERB.
+END VERB fire_at.
 
 
 
 VERB fix
   DOES ONLY
     "Please be more specific. How do you intend to fix it?"
-END VERB.
+END VERB fix.
 
 
 
@@ -978,7 +978,7 @@ VERB follow
   DOES ONLY 
     LOCATE hero AT act.
     "You follow" SAY THE act. "."   
-END VERB.
+END VERB follow.
 
 
 
@@ -988,7 +988,7 @@ VERB free
       THEN "That doesn't need to be $vd."
       ELSE "Those don't need to be $vd."
     END IF.
-END VERB.
+END VERB free.
 
 
 
@@ -1000,7 +1000,7 @@ VERB get_off
         MAKE hero NOT sitting.
       ELSE "You're standing up already."
     END IF.
-END VERB.
+END VERB get_off.
 
 
 
@@ -1016,7 +1016,7 @@ VERB get_up
         MAKE hero NOT sitting.
     ELSE "You're standing up already."
     END IF.
-END VERB.
+END VERB get_up.
 
 
 
@@ -1031,7 +1031,7 @@ VERB give
 
     LOCATE obj IN recipient.  
     "You give" SAY THE obj. "to" SAY THE recipient. "."
-END VERB.
+END VERB give.
 
 
 
@@ -1039,14 +1039,14 @@ VERB go_to
   DOES ONLY
     "You can't see" SAY THE dest. "anywhere nearby. You must state a
     direction where you want to go."
-END VERB.
+END VERB go_to.
 
 
 
 VERB hint
   DOES ONLY
     "Unfortunately hints are not available in this game."
-END VERB.
+END VERB hint.
 
 
 
@@ -1070,14 +1070,14 @@ VERB i
       THEN LIST worn.     -- This code will list what the hero is wearing.
     END IF.
   
-END VERB.
+END VERB i.
 
 
 
 VERB jump
   DOES ONLY
     "You jump on the spot, to no avail."
-END VERB.
+END VERB jump.
 
 
 
@@ -1087,7 +1087,7 @@ VERB jump_in
       THEN "That's not something you can jump into."
       ELSE "Those are not something you can jump into."
     END IF.
-END VERB.
+END VERB jump_in.
 
 
 
@@ -1098,21 +1098,21 @@ VERB jump_on
       ELSE "Those are not"
     END IF.
     "something you can jump onto."  
-END VERB.
+END VERB jump_on.
 
 
 
 VERB kick
   DOES ONLY
     "Resorting to brute force is not the solution here."
-END VERB.
+END VERB kick.
 
 
 
 VERB kill
   DOES ONLY
     "You have to state what you want to kill" SAY THE victim. "with."
-END VERB.
+END VERB kill.
 
 
 
@@ -1120,7 +1120,7 @@ VERB kill_with
    WHEN victim
   DOES ONLY
     "That would be needlessly brutal."
-END VERB.
+END VERB kill_with.
 
 
 
@@ -1130,14 +1130,14 @@ VERB kiss
       THEN SAY THE obj. "avoids your advances."
       ELSE "Nothing would be achieved by that."
     END IF.
-END VERB.
+END VERB kiss.
 
 
 
 VERB knock
   DOES ONLY
     "You knock on" SAY THE obj. "$$. Nothing happens."
-END VERB.
+END VERB knock.
 
 
 
@@ -1148,7 +1148,7 @@ VERB lie_down
       -- DOES "You lie down."
       -- MAKE hero lying_down.
       -- MAKE hero NOT sitting.
-END VERB.
+END VERB lie_down.
 
 
 
@@ -1159,7 +1159,7 @@ VERB lie_in
     -- (e.g. THE in_bed ISA LOCATION AT bedroom; etc.)
     -- Remember to: MAKE hero lying_down.
     -- Presently, an actor cannot be located inside a container object. 
-END VERB.
+END VERB lie_in.
 
 
 
@@ -1171,14 +1171,14 @@ VERB lie_on
     -- Remember to: MAKE hero lying_down.
     -- Presently, an actor cannot be located inside a container object
     -- or on a supporter.
-END VERB.
+END VERB lie_on.
 
 
 
 VERB lift
   DOES ONLY
     "That wouldn't accomplish anything."  
-END VERB.
+END VERB lift.
 
 
 
@@ -1189,14 +1189,14 @@ VERB light
       ELSE "Those are not"
     END IF.
     "something you can $v."
-END VERB.
+END VERB light.
 
 
 
 VERB listen0
   DOES ONLY
     "You hear nothing unusual."
-END VERB.
+END VERB listen0.
 
 
 
@@ -1208,7 +1208,7 @@ VERB listen
       THEN "You can't hear" SAY THE obj. "very well from here."
       ELSE "You can't hear anything."
     END IF.
-END VERB.
+END VERB listen.
 
 
 
@@ -1227,7 +1227,7 @@ VERB lock
         "lock" SAY THE obj. "."
           ELSE  "You have to state what you want to lock" SAY THE obj. "with."
     END IF.
-END VERB.
+END VERB lock.
 
 
 
@@ -1241,7 +1241,7 @@ VERB lock_with
       END IF.
 
      "lock" SAY THE obj. "with" SAY THE key. "."
-END VERB.
+END VERB lock_with.
 
 
 
@@ -1250,7 +1250,7 @@ VERB 'look'
     INCREASE described OF CURRENT LOCATION.     
     -- see 'locations.i', attribute 'described'.
     LOOK.
-END VERB.
+END VERB 'look'.
 
 
 
@@ -1260,14 +1260,14 @@ VERB look_behind
       THEN "You turn" SAY THE bulk. "in your hands but notice nothing unusual about it."
       ELSE "You notice nothing unusual behind" SAY THE bulk. "."
     END IF.
-END VERB.
+END VERB look_behind.
 
 
 
 VERB look_in
   DOES ONLY 
     LIST cont.
-END VERB.
+END VERB look_in.
 
 
 
@@ -1278,77 +1278,77 @@ VERB look_out_of
       ELSE "Those are not"
     END IF.
     "something you can look out of."
-END VERB.
+END VERB look_out_of.
 
 
 
 VERB look_through
   DOES ONLY
     "You can't see through" SAY THE bulk. "."
-END VERB.
+END VERB look_through.
 
 
 
 VERB look_under
   DOES ONLY
     "You notice nothing unusual under" SAY THE bulk. "."
-END VERB.
+END VERB look_under.
 
 
 
 VERB look_up
   DOES ONLY
     "Looking up, you see nothing unusual."
-END VERB.
+END VERB look_up.
 
 
 
 VERB 'no'
   DOES ONLY 
     "Really?"
-END VERB.
+END VERB 'no'.
 
 
 
 VERB pray
   DOES ONLY 
     "Your prayers don't seem to help right now."
-END VERB.
+END VERB pray.
 
 
 
 VERB pry
   DOES ONLY 
     "You must state what you want to pry" SAY THE obj. "with."
-END VERB.
+END VERB pry.
 
 
 
 VERB pry_with
   DOES ONLY 
     "That doesn't work."
-END VERB.
+END VERB pry_with.
 
 
 
 VERB pull 
   DOES ONLY 
     "That wouldn't accomplish anything."
-END VERB.
+END VERB pull.
 
 
 
 VERB push
   DOES ONLY 
     "You give" SAY THE obj. "a little push. Nothing happens."
-END VERB.
+END VERB push.
 
 
 
 VERB push_with
   DOES ONLY 
     "That wouldn't accomplish anything."
-END VERB. 
+END VERB push_with. 
 
 
 
@@ -1359,7 +1359,7 @@ VERB put
         THEN "it."
         ELSE "them."
       END IF.
-END VERB.
+END VERB put.
 
 
 
@@ -1367,14 +1367,14 @@ VERB put_in
   DOES ONLY 
     LOCATE obj IN cont.
     "You put" SAY THE obj. "into" SAY THE cont. "." 
-END VERB.
+END VERB put_in.
 
 
 
 VERB put_against, put_behind, put_near, put_under
   DOES ONLY 
     "That wouldn't accomplish anything."
-END VERB.
+END VERB put_against.
 
 
 
@@ -1389,14 +1389,14 @@ VERB put_on
             "You put" SAY THE obj. "on" SAY THE surface. "."
           END IF. 
       END IF.
-END VERB.
+END VERB put_on.
 
 
 
 VERB 'quit'
   DOES ONLY
     QUIT.
-END VERB.
+END VERB 'quit'.
 
 
 
@@ -1411,7 +1411,7 @@ VERB read
         END IF.
         """$$" SAY text OF obj. "$$""." 
     END IF.
-END VERB.
+END VERB read.
 
 
 
@@ -1428,42 +1428,42 @@ VERB remove
       THEN "it."
       ELSE "them."
     END IF. 
-END VERB.
+END VERB remove.
 
 
 
 VERB 'restart'
   DOES ONLY
     RESTART.
-END VERB.
+END VERB 'restart'.
 
 
 
 VERB 'restore'
   DOES ONLY
     RESTORE.
-END VERB.
+END VERB 'restore'.
 
 
 
 VERB rub 
   DOES ONLY 
     "Nothing would be achieved by that."
-END VERB.
+END VERB rub.
 
 
 
 VERB 'save'
   DOES ONLY
     SAVE.
-END VERB.
+END VERB 'save'.
 
 
 
 VERB 'say'
       DOES ONLY 
     "Nothing happens."
-END VERB.
+END VERB 'say'.
 
 
 
@@ -1475,7 +1475,7 @@ VERB say_to
         ELSE "don't look"
       END IF.
       "interested."
-END VERB.
+END VERB say_to.
 
 
 
@@ -1485,14 +1485,14 @@ VERB 'score'
     -- (or, if you wish to disable the score, use the following kind of 
       -- line instead of the above:
     -- "There is no score in this game.")
-END VERB.
+END VERB 'score'.
 
 
 
 VERB scratch
   DOES ONLY 
     "Nothing would be achieved by that."
-END VERB.
+END VERB scratch.
 
 
 
@@ -1503,7 +1503,7 @@ VERB 'script'
     $pIn a GUI version you can also find this in the drop-down menu in the interpreter. 
     $pIn a command line version you can start your game with the '-s' switch to get a transcript 
     of the whole game."
-END VERB.
+END VERB 'script'.
 
 
 
@@ -1511,7 +1511,7 @@ VERB script_on
     DOES ONLY
         TRANSCRIPT ON.
         "Transcripting turned on."
-END VERB.
+END VERB script_on.
 
 
 
@@ -1519,21 +1519,21 @@ VERB script_off
     DOES ONLY
         TRANSCRIPT OFF.
         "Transcripting turned off."
-END VERB.
+END VERB script_off.
 
 
 
 VERB search
   DOES ONLY 
     "You find nothing of interest."
-END VERB.
+END VERB search.
 
 
 
 VERB sell
   DOES ONLY 
     "There's nobody here who would be interested in buying" SAY THE item. "."
-END VERB.
+END VERB sell.
 
 
 
@@ -1543,28 +1543,28 @@ VERB shake
       THEN "You shake" SAY THE obj. "cautiously in your hands. Nothing happens."
       ELSE "There is no reason to start shaking" SAY THE obj. "."
     END IF.
-END VERB.
+END VERB shake.
 
 
 
 VERB shoot
   DOES ONLY 
     "Resorting to violence is not the solution here."
-END VERB.
+END VERB shoot.
 
 
 
 VERB shoot_with
   DOES ONLY 
     "Resorting to violence is not the solution here."
-END VERB.
+END VERB shoot_with.
 
 
 
 VERB shout
     DOES ONLY
         "Nothing results from your $ving."
-END VERB.
+END VERB shout.
 
 
 
@@ -1578,14 +1578,14 @@ VERB 'show'
       END IF.
 
       "not especially interested."
-END VERB.
+END VERB 'show'.
 
 
 
 VERB sing
     DOES ONLY
         "You $v a little tune."
-END VERB.
+END VERB sing.
 
 
 
@@ -1618,7 +1618,7 @@ VERB sip
         END IF.
     END IF.
       
-END VERB.
+END VERB sip.
 
 
 
@@ -1632,7 +1632,7 @@ VERB sit
     --  ELSE "You sit down."
     -- END IF.
     -- MAKE hero sitting.
-END VERB.
+END VERB sit.
 
 
 
@@ -1647,35 +1647,35 @@ VERB sit_on
     --  ELSE "You sit down on" SAY THE surface. "."
     -- END IF.
     -- MAKE hero sitting.
-END VERB.
+END VERB sit_on.
 
 
 
 VERB sleep
   DOES ONLY
     "There's no need to $v right now."
-END VERB.
+END VERB sleep.
 
 
 
 VERB smell0
     DOES ONLY
     "You smell nothing unusual."
-END VERB.
+END VERB smell0.
 
 
 
 VERB smell
   DOES ONLY
         "You smell nothing unusual."  
-END VERB.
+END VERB smell.
 
 
 
 VERB squeeze
   DOES ONLY
         "Trying to squeeze" SAY THE obj. "wouldn't accomplish anything."    
-END VERB.
+END VERB squeeze.
 
 
 
@@ -1687,7 +1687,7 @@ VERB stand
         MAKE hero NOT lying_down.
       ELSE "You're standing up already."
     END IF.
-END VERB.
+END VERB stand.
 
 
 
@@ -1700,14 +1700,14 @@ VERB stand_on
     -- It is not possible to actually locate him on the surface (unless
     -- you implement a nested location.)  
     -- MAKE hero NOT sitting. MAKE hero NOT lying_down.
-END VERB.
+END VERB stand_on.
 
 
 
 VERB swim 
   DOES ONLY
     "There is no water suitable for swimming here."
-END VERB.
+END VERB swim.
 
 
 
@@ -1718,7 +1718,7 @@ VERB swim_in
       ELSE "Those are not"
     END IF.
     "something you can swim in."
-END VERB.
+END VERB swim_in.
 
 
 
@@ -1729,7 +1729,7 @@ VERB switch
       ELSE "Those are not"
     END IF.
     "not something you can switch."
-END VERB.
+END VERB switch.
 
 
 
@@ -1762,7 +1762,7 @@ VERB take
         -- Objects held by NPCs cannot be taken by the hero by default.
         -- The hero must *ask for* the object to obtain it.
               
-END VERB.
+END VERB take.
 
 
 
@@ -1784,7 +1784,7 @@ VERB take_from
           -- The hero must *ask for* the object to obtain it.
         
           
-END VERB.
+END VERB take_from.
 
 
 
@@ -1792,7 +1792,7 @@ VERB talk
   DOES ONLY
     "To talk to somebody, you can ASK PERSON ABOUT THING
     or TELL PERSON ABOUT THING."
-END VERB.
+END VERB talk.
 
 
 
@@ -1800,21 +1800,21 @@ VERB talk_to
   DOES ONLY
     "To talk to somebody, you can ASK PERSON ABOUT THING or
     TELL PERSON ABOUT THING." 
-END VERB.
+END VERB talk_to.
 
 
 
 VERB taste
   DOES ONLY
     "You taste nothing unexpected."
-END VERB.
+END VERB taste.
 
 
 
 VERB tear
   DOES ONLY
     "Trying to $v" SAY THE obj. "would be futile."
-END VERB.
+END VERB tear.
 
 
 
@@ -1829,21 +1829,21 @@ VERB tell
       END IF.
 
       "look interested."
-END VERB.
+END VERB tell.
 
 
 
 VERB think 
   DOES ONLY
     "Nothing helpful comes to your mind."
-END VERB.
+END VERB think.
 
 
 
 VERB think_about
   DOES ONLY
     "Nothing helpful comes to your mind."
-END VERB.
+END VERB think_about.
 
 
 
@@ -1872,7 +1872,7 @@ VERB throw
     "nearby."
         LOCATE projectile AT hero.
       
-END VERB.
+END VERB throw.
 
 
 VERB throw_at
@@ -1924,7 +1924,7 @@ VERB throw_at
             -- when attacking enemies.
           END IF.   
 
-END VERB.
+END VERB throw_at.
 
 
 
@@ -1941,7 +1941,7 @@ VERB throw_to
     "It wouldn't accomplish anything trying to throw"
     SAY the projectile. "to" SAY THE recipient. "."
 
-END VERB.
+END VERB throw_to.
 
 
 
@@ -1964,14 +1964,14 @@ VERB throw_in
     -- default; this is to avoid successful outcomes for commands like
     -- 'throw plate into cupboard' etc. 
   
-END VERB.
+END VERB throw_in.
 
 
 
 VERB tie
   DOES ONLY 
     "You must state where you want to tie" SAY THE obj. "."
-END VERB.
+END VERB tie.
 
 
 
@@ -1987,14 +1987,14 @@ VERB tie_to
                 
         "It's not possible to tie" SAY THE obj. "to" SAY THE target. "."  
 
-END VERB.
+END VERB tie_to.
 
 
 
 VERB touch
   DOES ONLY
         "You feel nothing unexpected."
-END VERB.
+END VERB touch.
 
 
 
@@ -2002,7 +2002,7 @@ VERB touch_with
     WHEN obj
     DOES ONLY
             "You touch" SAY THE obj. "with" SAY THE instr. ". Nothing special happens."
-END VERB.
+END VERB touch_with.
 
 
 
@@ -2012,7 +2012,7 @@ VERB turn
       THEN "You turn" SAY THE obj. "in your hands, noticing nothing special."
       ELSE "That wouldn't accomplish anything."
     END IF.
-END VERB.
+END VERB turn.
 
 
 
@@ -2024,7 +2024,7 @@ VERB turn_on
     END IF.
       
     "something you can $v on."
-END VERB.
+END VERB turn_on.
 
 
 
@@ -2036,7 +2036,7 @@ VERB turn_off
     END IF.
 
     "something you can $v off."
-END VERB.
+END VERB turn_off.
 
 
 
@@ -2050,7 +2050,7 @@ VERB undress
         --"You remove all the items you were wearing."
           --ELSE "You're not wearing anything you can remove."
         -- END IF.
-END VERB.
+END VERB undress.
 
 
 
@@ -2062,7 +2062,7 @@ VERB unlock
         "You unlock" SAY THE obj. "."
           ELSE "You don't have the key that unlocks" SAY THE obj. "."
     END IF.
-END VERB.
+END VERB unlock.
 
 
 
@@ -2071,7 +2071,7 @@ VERB unlock_with
   DOES ONLY
     MAKE obj NOT locked.
     "You unlock" SAY THE obj. "with" SAY THE key. "."
-END VERB.
+END VERB unlock_with.
 
 
 
@@ -2082,7 +2082,7 @@ VERB 'use'
       THEN "it?" 
       ELSE "them?"
     END IF.
-END VERB.
+END VERB 'use'.
 
 
 
@@ -2090,7 +2090,7 @@ VERB use_with
    WHEN obj
   DOES ONLY
     "Please be more specific. How do you intend to use them together?"
-END VERB.
+END VERB use_with.
 
 
 
@@ -2099,14 +2099,14 @@ VERB 'verbose'
     VISITS 0.
     "Verbose mode is now on. Location descriptions will be 
     always shown in full."
-END VERB.
+END VERB 'verbose'.
 
 
 
 VERB 'wait'
   DOES ONLY
     "Time passes..."
-END VERB.
+END VERB 'wait'.
 
 
 
@@ -2117,63 +2117,63 @@ VERB wear
       ELSE "Those are"
     END IF.
     "not something you can wear."
-END VERB.
+END VERB wear.
 
 
 
 VERB what_am_i
   DOES ONLY
     "Maybe examining yourself might help."
-END VERB.
+END VERB what_am_i.
 
 
 
 VERB what_is
   DOES ONLY
     "You'll have to find it out yourself."
-END VERB.
+END VERB what_is.
 
 
 
 VERB where_am_i
   DOES ONLY
     LOOK.
-END VERB.
+END VERB where_am_i.
 
 
 
 VERB where_is
   DOES ONLY
     "You'll have to find it out yourself."
-END VERB.
+END VERB where_is.
 
 
 
 VERB who_am_i 
   DOES ONLY
     "Maybe examining yourself might help."
-END VERB.
+END VERB who_am_i.
 
 
 
 VERB who_is
   DOES ONLY
     "You'll have to find it out yourself."
-END VERB.
+END VERB who_is.
 
 
 
 VERB write
   DOES  ONLY
     "You don't have anything to write with."
-END VERB.
+END VERB write.
 
 
 
 VERB yes 
   DOES ONLY 
     "Really?"
-END VERB.
+END VERB yes.
 
 
 
