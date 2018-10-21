@@ -1,0 +1,69 @@
+--==============================================================================
+-- "Test Look Verbs" by Tristano Ajmone, 2018.
+--==============================================================================
+IMPORT 'library.i'. -- ALAN Standard Library v2.1
+
+
+THE my_game IsA DEFINITION_BLOCK
+
+  HAS title    "Test Look Verbs".
+  HAS subtitle "An adventure to test the family of look verbs.".
+  HAS author   "Tristano Ajmone".
+  HAS year     2018.
+  HAS version  "1".
+
+END THE.
+
+
+
+-- =============================================================================
+
+----- THE BUNKER ROOM
+
+-- =============================================================================
+THE bunker IsA room.
+  NAME 'Inside The Bunker'.
+END THE.
+
+--==============================================================================
+-- CONTAINERS
+--==============================================================================
+THE trashcan IsA listed_container AT bunker.
+END THE trashcan.
+
+THE litter IsA object IN trashcan.
+  HAS ex "It's just some old trash.".
+  INDEFINITE ARTICLE "some"
+END THE.
+
+--==============================================================================
+-- ACTORS
+--==============================================================================
+-- We'll need named and unnamed persons for the tests.
+THE vampire IsA male AT bunker.
+  HAS ex "Looks like a normal vampire, with fangs and all.".
+END THE.
+
+THE Jason IsA male AT bunker.
+  IS named.
+  HAS ex
+    "It's Jason Voorhees, the original guy from ""Friday the 13th"". How cool!".
+END THE.
+
+-- We'll also need named and unnamed actors (not persons).
+THE grue IsA actor AT bunker.
+  HAS ex "It's a true grue. If it was pitch dark, you'd likely be eaten by it.".
+END THE.
+
+THE Elliot IsA actor AT bunker.
+  NAME Elliot.
+  NAME dragon.
+  IS named.
+  HAS ex
+    "It's Elliot the dragon.".
+END THE.
+
+
+--------------------------------------------------------------------------------
+Start at bunker.
+DESCRIBE banner.

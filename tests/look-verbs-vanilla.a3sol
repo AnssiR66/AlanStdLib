@@ -1,0 +1,134 @@
+; ******************************************************************************
+; *                                                                            *
+; *                     TESTING LOOK-RELATED VANILLA VERBS                     *
+; *                                                                            *
+; ******************************************************************************
+look up
+; ==============================================================================
+; TEST WITH CONTAINERS
+; ==============================================================================
+; Let's test the verbs against various containers types...
+; ------------------------------------------------------------------------------
+; THE TRASHCAN | listed_container
+; ------------------------------------------------------------------------------
+look trashcan
+look at trashcan
+look in the trashcan
+look under the trashcan
+look behind the trashcan
+look out of the trashcan
+look through the trashcan
+search trashcan
+; ==============================================================================
+; TEST WITH OBJECTS
+; ==============================================================================
+; ------------------------------------------------------------------------------
+; THE LITTER (in trashcan) | object
+; ------------------------------------------------------------------------------
+look litter
+look at litter
+look in the litter
+look under the litter
+look behind the litter
+look out of the litter
+look through the litter
+search litter
+; ------------------------------------------------------------------------------
+; THE LITTER (held by Hero) | object
+; ------------------------------------------------------------------------------
+take litter
+look litter
+look at litter
+look in the litter
+look under the litter
+look behind the litter
+look out of the litter
+look through the litter
+search litter
+; ==============================================================================
+; TEST WITH ACTORS
+; ==============================================================================
+; We'll test the verbs against actors & persons, named and not named, and the
+; Hero as well.
+; ------------------------------------------------------------------------------
+; VAMPIRE | person > male + NOT named
+; ------------------------------------------------------------------------------
+look the vampire
+look at the vampire
+; @ FIXME:
+look in the vampire
+look under the vampire
+look behind the vampire
+; @ IMPROVE:
+look out of the vampire
+look through the vampire
+search the vampire
+; ------------------------------------------------------------------------------
+; JASON | person > male + named
+; ------------------------------------------------------------------------------
+look Jason
+look at Jason
+; @ FIXME:
+look in Jason
+look under Jason
+look behind Jason
+; @ IMPROVE:
+look out of Jason
+look through Jason
+search Jason
+; ------------------------------------------------------------------------------
+; THE GRUE | actor + NOT named
+; ------------------------------------------------------------------------------
+look the grue
+look at the grue
+; @ FIXME:
+look in the grue
+look under the grue
+look behind the grue
+; @ IMPROVE:
+look out of the grue
+look through the grue
+search the grue
+; ------------------------------------------------------------------------------
+; ELLIOT | actor + named
+; ------------------------------------------------------------------------------
+look Elliot
+look at Elliot
+; @ FIXME:
+look in Elliot
+look under Elliot
+look behind Elliot
+; @ IMPROVE:
+look out of Elliot
+look through Elliot
+search Elliot
+; ------------------------------------------------------------------------------
+; THE HERO
+; ------------------------------------------------------------------------------
+look me
+look at me
+; @ FIXME:
+look in me
+look under me
+look behind me
+; @ FIXME:
+look out of me
+; @ FIXME:
+look through me
+search me
+; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+;  TODOs SHOPPING LIST
+; //////////////////////////////////////////////////////////////////////////////
+; CONTAINERS:
+; -- opaque container (no listed_container)
+; -- non-opaque container (no listed_container)
+; -- vessel with liquid
+; THINGS/OBJECTS:
+; -- sound
+; -- door
+; -- window
+; -- scenery object
+; -- object + distant
+; -- object + NOT reachable
+; -- object + distant + NOT reachable
+
