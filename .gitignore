@@ -8,7 +8,9 @@
 ## ==========
 *.a3c
 *.ifid
+*.log
 *.sav
+!tests/meta-verbs_arun-different.sav
 
 ## =============
 ## AlanIDE Files

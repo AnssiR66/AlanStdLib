@@ -1,0 +1,186 @@
+--==============================================================================
+-- "Meta Verbs Tests" by Tristano Ajmone, 2018.
+--==============================================================================
+OPTION WIDTH 82.
+
+IMPORT 'library.i'. -- ALAN Standard Library v2.1
+
+
+THE my_game IsA DEFINITION_BLOCK
+
+  HAS title    "Meta Verbs Tests".
+  HAS subtitle "Testing out-of-game commands (meta verbs).".
+  HAS author   "Tristano Ajmone".
+  HAS year     2018.
+  HAS version  "1".
+
+END THE.
+
+
+
+-- =============================================================================
+
+-- The Tests Lab
+
+-- =============================================================================
+
+THE testlab IsA LOCATION.
+  NAME 'Alan Library Test Laboratory'.
+  EXIT north TO wc.
+  DESCRIPTION
+    IF THIS:described = 1
+      THEN
+ 
+        "Here you are (a dream come true) at the famous top-secret lab where
+         bleeding edge versions of the StdLib are tested before public release.
+         
+         $pThis facility is so secretive that only a bunch of high brass in the
+         short chain of command that links the President to Anssi are in the know
+         of its exact location. Rumors say it's located somewhere in the Black
+         Forest, whereas others (with a more consiprative mindset) suggest it's
+         been moved into Area 51, Nevada.
+
+         $pYour invitation as ""external counseler"" hasn't shred any light on
+         the mistery of its whereabouts -- you were brought here by helicopter,
+         in the darkest hours of the night, blindfolded and sedated.
+
+         $pYou're presence here is justified only by the task you were asigned,
+         i.e. to test the out-of-game commands of the libary, and make sure they
+         do what they were designed to do. So, you better get going, for the
+         clock is ticking...$p"
+      ELSE
+        "The lab is shrouded in the hum of high-tech hardware processing the StdLib."
+      END IF.
+        "NORTH of the lab is a restroom.$n"
+END THE testlab.
+
+-- =============================================================================
+
+-- The Toilet
+
+-- =============================================================================
+
+THE wc IsA room.
+  NAME 'W.C.'.
+  EXIT south TO testlab.
+  DESCRIPTION
+    "Every lab worth its salt has a W.C. (better know as" STYLE EMPHASIZED. "loo"
+    STYLE NORMAL. "among the working class). The exit SOUTH leads back to the lab."
+END THE wc.
+-- =============================================================================
+
+-- Score Tests
+
+-- =============================================================================
+-- Some expedients to test score and verbs relating to it.
+
+--==============================================================================
+-- The Scoreboard
+--==============================================================================
+-- Let's hang high on the lab's wall a nice scoreboard that will always show the
+-- current score when examined...
+
+THE scoreboard IsA object AT testlab.
+  IS NOT takeable.
+  IS NOT reachable.
+  DESCRIPTION "Hanging high on the wall there is a scoreboard."
+  
+  VERB examine
+    DOES ONLY "The scoreboard displays" SAY SCORE. "points."
+  END VERB examine.
+END THE scoreboard.
+
+--==============================================================================
+-- FRUITS -- Disambiguation & Score Points
+--==============================================================================
+-- We'll create the 'fruit' class to introduce commands disambiguation in tests,
+-- just to test if it affects ticks.
+-- Also, we'll add to every fruit instance the verb 'eat' so that eating a fruit
+-- will reward some points (every fruit = 1 point, except the apple which gives
+-- 666 points).
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+-- NOTE: The SCORE command is evalued only once for each context, so if we had
+--       implemented point reward in the 'eat' verb inside the 'fruit' class, it
+--       would have rewarded only the first time a fruit was eaten. For this
+--       reason we have implemented 'eat' on each fruit instance.
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+EVERY fruit IsA object.
+  NAME fruit.
+  IS edible.
+  HAS ex "A fruit, looks inviting.".
+END EVERY.
+------------------------------------------------------------------------- ORANGE
+THE orange IsA fruit AT testlab.
+  NAME orange.
+  INDEFINITE ARTICLE "an"
+  HAS ex "A nice and juicy orange.".
+  
+  VERB eat
+    DOES AFTER SCORE 1.
+  END VERB.
+END THE.
+------------------------------------------------------------------------ AVOCADO
+THE avocado IsA fruit AT testlab.
+  NAME avocado.
+  INDEFINITE ARTICLE "an"
+  HAS ex "This avocado looks nice.".
+  
+  VERB eat
+    DOES AFTER SCORE 1.
+  END VERB.
+END THE.
+------------------------------------------------------------------------- BANANA
+THE banana IsA fruit AT testlab.
+  NAME banana.
+  HAS ex "Sometimes a banana is just a banana.".
+  
+  VERB eat
+    DOES AFTER SCORE 1.
+  END VERB.
+END THE.
+---------------------------------------------------------------------------- FIG
+THE fig IsA fruit AT testlab.
+  NAME fig.
+  HAS ex "Oh, a fig! You've read somewhere that back in the days they'd use its
+          leaves as underware.".
+  
+  VERB eat
+    DOES AFTER SCORE 1.
+  END VERB.
+END THE.
+-------------------------------------------------------------------------- APPLE
+THE apple IsA fruit AT testlab.
+  NAME apple.
+  INDEFINITE ARTICLE "an"
+  HAS ex
+    "This apple is so tempting ... A small sticker mentions that it was picked
+     in the Gan Eden.".
+  
+  VERB eat
+    DOES AFTER SCORE 666.
+  END VERB.
+END THE.
+
+-- =============================================================================
+
+-- The Ticker
+
+-- =============================================================================
+-- To test META VERBs we'll use a ticker event...
+ADD TO EVERY DEFINITION_BLOCK
+  HAS cnt 1.
+END ADD.
+
+EVENT ticker
+  "$p/// TICK (turn N°" SAY my_game:cnt. "$$) ///"
+  SET my_game:cnt TO my_game:cnt +1.
+  SCHEDULE ticker AT hero AFTER 1.
+END EVENT.
+
+
+
+--------------------------------------------------------------------------------
+Start at testlab.
+DESCRIBE banner.
+SCHEDULE ticker AT hero AFTER 0.
+
