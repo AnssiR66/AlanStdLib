@@ -1,0 +1,510 @@
+
+
+Meta Verbs Tests 
+Testing out-of-game commands (meta verbs). 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta5
+Standard Library v2.1 
+Version 1 
+All rights reserved.
+
+
+Alan Library Test Laboratory
+Here you are (a dream come true) at the famous top-secret lab where bleeding
+edge versions of the StdLib are tested before public release.
+
+This facility is so secretive that only a bunch of high brass in the short chain
+of command that links the President to Anssi are in the know of its exact
+location. Rumors say it's located somewhere in the Black Forest, whereas others
+(with a more consiprative mindset) suggest it's been moved into Area 51, Nevada.
+
+Your invitation as "external counseler" hasn't shred any light on the mistery of
+its whereabouts -- you were brought here by helicopter, in the darkest hours of
+the night, blindfolded and sedated.
+
+You're presence here is justified only by the task you were asigned, i.e. to
+test the out-of-game commands of the libary, and make sure they do what they
+were designed to do. So, you better get going, for the clock is ticking...
+
+NORTH of the lab is a restroom.
+Hanging high on the wall there is a scoreboard. There is an orange, an avocado, a 
+banana, a fig and an apple here. 
+
+/// TICK (turn N° 1) ///
+
+> look
+Alan Library Test Laboratory
+The lab is shrouded in the hum of high-tech hardware processing the StdLib. 
+NORTH of the lab is a restroom.
+Hanging high on the wall there is a scoreboard. There is an orange, an avocado, a 
+banana, a fig and an apple here. 
+
+/// TICK (turn N° 2) ///
+
+> ; ==============================================================================
+> ; TICKS/TURNS TRACKING
+> ; ==============================================================================
+> ; The ticker Event will help us check if META VERBs are behaving as expected: if
+> ; the counter ticks, a turn has been consumed.
+> ; ----------------------
+> ; EMPTY COMMANDS & TICKS
+> ; ----------------------
+> ; Now that sending and empty command line counts a turn:
+> 
+
+/// TICK (turn N° 3) ///
+
+> ; ----------------------
+> ; WRONG COMMANDS & TICKS
+> ; ----------------------
+> ; A wrong command should not consume a tick:
+> ABCDEFG
+I don't know the word 'ABCDEFG'.
+
+> ; ----------------------
+> ; DISAMBIGUATION & TICKS
+> ; ----------------------
+> ; Neither disambiguation should:
+> take fruit
+It is not clear if you mean the orange, the avocado, the banana, the fig or the 
+apple.
+
+> ; ---------------------
+> ; FAIL COMMANDS & TICKS
+> ; ---------------------
+> ; Let's see if commands that can't be carried out consume ticks:
+> east
+You can't go that way.
+
+> take all
+You can't refer to multiple objects with 'take'.
+
+> ask the apple about me
+That's not something you can talk to.
+
+> ; ==============================================================================
+> ; SAVING THE GAME
+> ; ==============================================================================
+> ; Let's test saving a game
+> save
+Enter file name to save in (meta-verbs.sav) : meta-verbs.sav
+
+> ; ==============================================================================
+> ; CREDITS
+> ; ==============================================================================
+> credits
+The author retains the copyright to this game.
+
+This game was written using the ALAN Adventure Language. ALAN is an interactive
+fiction authoring system by Thomas Nilsson.
+E-mail address: thomas@alanif.se
+
+Further information about the ALAN system can be obtained from the World Wide
+Web Internet site
+    http://www.alanif.se
+
+
+> ; ==============================================================================
+> ; BRIEF vs VERBOSE
+> ; ==============================================================================
+> ; The library has two modes: brief and verbose.
+> ; ----------
+> ; BRIEF MODE
+> ; ----------
+> brief
+Brief mode is now on. Location descriptions will only be shown the first time
+you visit.
+
+> north
+W.C.
+Every lab worth its salt has a W.C. (better know as loo among the working
+class). The exit SOUTH leads back to the lab. 
+
+/// TICK (turn N° 4) ///
+
+> south
+Alan Library Test Laboratory
+The lab is shrouded in the hum of high-tech hardware processing the StdLib. 
+NORTH of the lab is a restroom.
+Hanging high on the wall there is a scoreboard. There is an orange, an avocado, a 
+banana, a fig and an apple here. 
+
+/// TICK (turn N° 5) ///
+
+> north
+W.C.
+Every lab worth its salt has a W.C. (better know as loo among the working
+class). The exit SOUTH leads back to the lab. 
+
+/// TICK (turn N° 6) ///
+
+> south
+Alan Library Test Laboratory
+The lab is shrouded in the hum of high-tech hardware processing the StdLib. 
+NORTH of the lab is a restroom.
+Hanging high on the wall there is a scoreboard. There is an orange, an avocado, a 
+banana, a fig and an apple here. 
+
+/// TICK (turn N° 7) ///
+
+> ; !!! BRIEF TEST FAILED !!!
+> ; ------------
+> ; VERBOSE MDOE
+> ; ------------
+> verbose
+Verbose mode is now on. Location descriptions will be always shown in full.
+
+> north
+W.C.
+Every lab worth its salt has a W.C. (better know as loo among the working
+class). The exit SOUTH leads back to the lab. 
+
+/// TICK (turn N° 8) ///
+
+> south
+Alan Library Test Laboratory
+The lab is shrouded in the hum of high-tech hardware processing the StdLib. 
+NORTH of the lab is a restroom.
+Hanging high on the wall there is a scoreboard. There is an orange, an avocado, a 
+banana, a fig and an apple here. 
+
+/// TICK (turn N° 9) ///
+
+> ; ==============================================================================
+> ; SCORE & NOTIFICATIONS
+> ; ==============================================================================
+> ; NOTE: Eating a fruit will reward score points.
+> score
+You have scored 0 points out of 670.
+
+> ; The score can be checked also via the scoreboard:
+> examine the scoreboard
+The scoreboard displays 0 points. 
+
+/// TICK (turn N° 10) ///
+
+> ; ------------------------------------------------------------------------------
+> ; TEST Notify Commands
+> ; ------------------------------------------------------------------------------
+> ; Instructions about using the NOTIFY command should be shown only the first
+> ; time score is notified:
+> eat the avocado
+(taking the avocado first)
+You eat all of the avocado. 
+
+(Your score has just gone up by 1 point.) 
+
+(You can use the NOTIFY command to disable score change messages.) 
+
+/// TICK (turn N° 11) ///
+
+> ; Now the instructions shouldn't appear:
+> eat the orange
+(taking the orange first)
+You eat all of the orange. 
+
+(Your score has just gone up by 1 point.) 
+
+/// TICK (turn N° 12) ///
+
+> ; --------------------------
+> ; DISABLE SCORE NOTIFICATION
+> ; --------------------------
+> notify off
+Score notification is now disabled. (You can turn it back on using the NOTIFY
+command again.)
+
+> eat the apple
+(taking the apple first)
+You eat all of the apple. 
+
+/// TICK (turn N° 13) ///
+
+> examine the scoreboard
+The scoreboard displays 668 points. 
+
+/// TICK (turn N° 14) ///
+
+> ; -------------------------
+> ; ENABLE SCORE NOTIFICATION
+> ; -------------------------
+> notify on
+Score notification is now enabled. (You can turn it off using the NOTIFY command 
+again.)
+
+> examine the banana
+Sometimes a banana is just a banana. 
+
+/// TICK (turn N° 15) ///
+
+> eat it
+(taking the banana first)
+You eat all of the banana. 
+
+(Your score has just gone up by 1 point.) 
+
+/// TICK (turn N° 16) ///
+
+> examine the scoreboard
+The scoreboard displays 669 points. 
+
+/// TICK (turn N° 17) ///
+
+> ; -------------------------
+> ; TOGGLE SCORE NOTIFICATION
+> ; -------------------------
+> notify
+Score notification is now disabled. (You can turn it back on using the NOTIFY
+command again.)
+
+> eat the fig
+(taking the fig first)
+You eat all of the fig. 
+
+/// TICK (turn N° 18) ///
+
+> examine the scoreboard
+The scoreboard displays 670 points. 
+
+/// TICK (turn N° 19) ///
+
+> notify
+Score notification is now enabled. (You can turn it off using the NOTIFY command 
+again.)
+
+> notify
+Score notification is now disabled. (You can turn it back on using the NOTIFY
+command again.)
+
+> score
+You have scored 670 points out of 670.
+
+> ; ------------------------
+> ; REDUNDANT USES OF NOTIFY
+> ; ------------------------
+> ; Let's check the messages when requesting a notify mode already active:
+> notify off 
+Score notification is already disabled.
+
+> notify on 
+Score notification is now enabled. (You can turn it off using the NOTIFY command 
+again.)
+
+> notify on 
+Score notification is already enabled.
+
+> notify off 
+Score notification is now disabled. (You can turn it back on using the NOTIFY
+command again.)
+
+> notify off 
+Score notification is already disabled.
+
+> ; ==============================================================================
+> ; GAMEPLAY TRANSCRIPT
+> ; ==============================================================================
+> ; Time to test commands to activate/deactivate transcript.
+> script
+You can turn transcripting on and off using the 'script on/off' command within
+the game. The transcript will be available in a file with a name starting with
+the game name.
+
+In a GUI version you can also find this in the drop-down menu in the
+interpreter. 
+
+In a command line version you can start your game with the '-s' switch to get a 
+transcript of the whole game.
+
+> script on
+Transcripting turned on.
+
+> ; Let's populate the transcipt with some commands...
+> look
+Alan Library Test Laboratory
+The lab is shrouded in the hum of high-tech hardware processing the StdLib. 
+NORTH of the lab is a restroom.
+Hanging high on the wall there is a scoreboard. 
+
+/// TICK (turn N° 20) ///
+
+> inventory
+You are empty-handed. 
+
+/// TICK (turn N° 21) ///
+
+> script off
+Transcripting turned off.
+
+> ; ------------------------------------------------------------------------------
+> ; MANUALLY CHECK the transcript file "meta-verbs[timestamp].log"
+> ; ------------------------------------------------------------------------------
+> ; *** BUG Alan 3.0beta6 *** TRANSCRIPT FILE IS EMPTY!
+> ; ==============================================================================
+> ; RESTORING THE GAME
+> ; ==============================================================================
+> ; Let's test restoring the saved game
+> restore
+Enter file name to restore from (meta-verbs.sav) : meta-verbs.sav
+
+> ; All the fruits should be present since we saved before eating them:
+> look THEN examine the apple
+Alan Library Test Laboratory
+The lab is shrouded in the hum of high-tech hardware processing the StdLib. 
+NORTH of the lab is a restroom.
+Hanging high on the wall there is a scoreboard. There is an orange, an avocado, a 
+banana, a fig and an apple here. 
+
+/// TICK (turn N° 4) ///
+
+This apple is so tempting ... A small sticker mentions that it was picked in the
+Gan Eden. 
+
+/// TICK (turn N° 5) ///
+
+> ; ==============================================================================
+> ; RESTART THE GAME
+> ; ==============================================================================
+> ; Let's eat the apple and restart...
+> eat the apple
+(taking the apple first)
+You eat all of the apple. 
+
+(Your score has just gone up by 666 points.) 
+
+(You can use the NOTIFY command to disable score change messages.) 
+
+/// TICK (turn N° 6) ///
+
+> restart
+
+Are you sure (press ENTER to confirm)?
+
+
+Meta Verbs Tests 
+Testing out-of-game commands (meta verbs). 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta5
+Standard Library v2.1 
+Version 1 
+All rights reserved.
+
+
+Alan Library Test Laboratory
+Here you are (a dream come true) at the famous top-secret lab where bleeding
+edge versions of the StdLib are tested before public release.
+
+This facility is so secretive that only a bunch of high brass in the short chain
+of command that links the President to Anssi are in the know of its exact
+location. Rumors say it's located somewhere in the Black Forest, whereas others
+(with a more consiprative mindset) suggest it's been moved into Area 51, Nevada.
+
+Your invitation as "external counseler" hasn't shred any light on the mistery of
+its whereabouts -- you were brought here by helicopter, in the darkest hours of
+the night, blindfolded and sedated.
+
+You're presence here is justified only by the task you were asigned, i.e. to
+test the out-of-game commands of the libary, and make sure they do what they
+were designed to do. So, you better get going, for the clock is ticking...
+
+NORTH of the lab is a restroom.
+Hanging high on the wall there is a scoreboard. There is an orange, an avocado, a 
+banana, a fig and an apple here.
+
+> ; The apple should be here again:
+> examine the apple
+This apple is so tempting ... A small sticker mentions that it was picked in the
+Gan Eden. 
+
+/// TICK (turn N° 1) ///
+
+> ; ------------------------------------------------------------------------------
+> ; TEST 'SAVE_MISSING': restore a non-existing file
+> ; ------------------------------------------------------------------------------
+> restore
+Enter file name to restore from (meta-verbs.sav) : non-existing-file.sav
+Sorry, could not open the save file.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST 'NOT_A_SAVEFILE': restore a file which is not a saved game
+> ; ------------------------------------------------------------------------------
+> restore
+Enter file name to restore from (meta-verbs.sav) : meta-verbs.ifid
+That file does not seem to be an Alan game save file.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST 'SAVE_VERSION': restore a save file from a different ARun version
+> ; ------------------------------------------------------------------------------
+> ; File "meta-verbs_arun-different.sav" was created using older version of ARun:
+> restore
+Enter file name to restore from (meta-verbs.ifid) : meta-verbs_arun-different.sav
+Sorry, the save file was created by a different version.
+
+> ; ==============================================================================
+> ; QUITTING THE GAME
+> ; ==============================================================================
+> ; Let's test the various Quit options...
+> ; ------------------------------------------------------------------------------
+> ; QUIT + RESTART
+> ; ------------------------------------------------------------------------------
+> quit
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? restart
+
+
+
+Meta Verbs Tests 
+Testing out-of-game commands (meta verbs). 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta5
+Standard Library v2.1 
+Version 1 
+All rights reserved.
+
+
+Alan Library Test Laboratory
+Here you are (a dream come true) at the famous top-secret lab where bleeding
+edge versions of the StdLib are tested before public release.
+
+This facility is so secretive that only a bunch of high brass in the short chain
+of command that links the President to Anssi are in the know of its exact
+location. Rumors say it's located somewhere in the Black Forest, whereas others
+(with a more consiprative mindset) suggest it's been moved into Area 51, Nevada.
+
+Your invitation as "external counseler" hasn't shred any light on the mistery of
+its whereabouts -- you were brought here by helicopter, in the darkest hours of
+the night, blindfolded and sedated.
+
+You're presence here is justified only by the task you were asigned, i.e. to
+test the out-of-game commands of the libary, and make sure they do what they
+were designed to do. So, you better get going, for the clock is ticking...
+
+NORTH of the lab is a restroom.
+Hanging high on the wall there is a scoreboard. There is an orange, an avocado, a 
+banana, a fig and an apple here.
+
+> ; ------------------------------------------------------------------------------
+> ; QUIT + UNDO
+> ; ------------------------------------------------------------------------------
+> ; We bring up the Quit menu but then Undo ...
+> quit
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? undo
+'quit' undone.
+
+> ; ------------------------------------------------------------------------------
+> ; QUIT + RESTORE
+> ; ------------------------------------------------------------------------------
+> quit
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? restore
+Enter file name to restore from 
+(meta-verbs_arun-different.sav) : meta-verbs.sav
+
+> ; ------------------------------------------------------------------------------
+> ; QUIT + QUIT
+> ; ------------------------------------------------------------------------------
+> ; After quitting, the rest of the commands of this script should be ignored...
+> quit
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? quit
+

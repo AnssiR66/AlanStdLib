@@ -1,0 +1,179 @@
+look
+; ==============================================================================
+; TICKS/TURNS TRACKING
+; ==============================================================================
+; The ticker Event will help us check if META VERBs are behaving as expected: if
+; the counter ticks, a turn has been consumed.
+; ----------------------
+; EMPTY COMMANDS & TICKS
+; ----------------------
+; Now that sending and empty command line counts a turn:
+
+; ----------------------
+; WRONG COMMANDS & TICKS
+; ----------------------
+; A wrong command should not consume a tick:
+ABCDEFG
+; ----------------------
+; DISAMBIGUATION & TICKS
+; ----------------------
+; Neither disambiguation should:
+take fruit
+; ---------------------
+; FAIL COMMANDS & TICKS
+; ---------------------
+; Let's see if commands that can't be carried out consume ticks:
+east
+take all
+ask the apple about me
+; ==============================================================================
+; SAVING THE GAME
+; ==============================================================================
+; Let's test saving a game
+save
+meta-verbs.sav
+; ==============================================================================
+; CREDITS
+; ==============================================================================
+credits
+; ==============================================================================
+; BRIEF vs VERBOSE
+; ==============================================================================
+; The library has two modes: brief and verbose.
+; ----------
+; BRIEF MODE
+; ----------
+brief
+north
+south
+north
+south
+; !!! BRIEF TEST FAILED !!!
+; ------------
+; VERBOSE MDOE
+; ------------
+verbose
+north
+south
+; ==============================================================================
+; SCORE & NOTIFICATIONS
+; ==============================================================================
+; NOTE: Eating a fruit will reward score points.
+score
+; The score can be checked also via the scoreboard:
+examine the scoreboard
+; ------------------------------------------------------------------------------
+; TEST Notify Commands
+; ------------------------------------------------------------------------------
+; Instructions about using the NOTIFY command should be shown only the first
+; time score is notified:
+eat the avocado
+; Now the instructions shouldn't appear:
+eat the orange
+; --------------------------
+; DISABLE SCORE NOTIFICATION
+; --------------------------
+notify off
+eat the apple
+examine the scoreboard
+; -------------------------
+; ENABLE SCORE NOTIFICATION
+; -------------------------
+notify on
+examine the banana
+eat it
+examine the scoreboard
+; -------------------------
+; TOGGLE SCORE NOTIFICATION
+; -------------------------
+notify
+eat the fig
+examine the scoreboard
+notify
+notify
+score
+; ------------------------
+; REDUNDANT USES OF NOTIFY
+; ------------------------
+; Let's check the messages when requesting a notify mode already active:
+notify off 
+notify on 
+notify on 
+notify off 
+notify off 
+; ==============================================================================
+; GAMEPLAY TRANSCRIPT
+; ==============================================================================
+; Time to test commands to activate/deactivate transcript.
+script
+script on
+; Let's populate the transcipt with some commands...
+look
+inventory
+script off
+; ------------------------------------------------------------------------------
+; MANUALLY CHECK the transcript file "meta-verbs[timestamp].log"
+; ------------------------------------------------------------------------------
+; *** BUG Alan 3.0beta6 *** TRANSCRIPT FILE IS EMPTY!
+; ==============================================================================
+; RESTORING THE GAME
+; ==============================================================================
+; Let's test restoring the saved game
+restore
+meta-verbs.sav
+; All the fruits should be present since we saved before eating them:
+look THEN examine the apple
+; ==============================================================================
+; RESTART THE GAME
+; ==============================================================================
+; Let's eat the apple and restart...
+eat the apple
+restart
+
+; The apple should be here again:
+examine the apple
+; ------------------------------------------------------------------------------
+; TEST 'SAVE_MISSING': restore a non-existing file
+; ------------------------------------------------------------------------------
+restore
+non-existing-file.sav
+; ------------------------------------------------------------------------------
+; TEST 'NOT_A_SAVEFILE': restore a file which is not a saved game
+; ------------------------------------------------------------------------------
+restore
+meta-verbs.ifid
+; ------------------------------------------------------------------------------
+; TEST 'SAVE_VERSION': restore a save file from a different ARun version
+; ------------------------------------------------------------------------------
+; File "meta-verbs_arun-different.sav" was created using older version of ARun:
+restore
+meta-verbs_arun-different.sav
+; ==============================================================================
+; QUITTING THE GAME
+; ==============================================================================
+; Let's test the various Quit options...
+; ------------------------------------------------------------------------------
+; QUIT + RESTART
+; ------------------------------------------------------------------------------
+quit
+restart
+; ------------------------------------------------------------------------------
+; QUIT + UNDO
+; ------------------------------------------------------------------------------
+; We bring up the Quit menu but then Undo ...
+quit
+undo
+; ------------------------------------------------------------------------------
+; QUIT + RESTORE
+; ------------------------------------------------------------------------------
+quit
+restore
+meta-verbs.sav
+; ------------------------------------------------------------------------------
+; QUIT + QUIT
+; ------------------------------------------------------------------------------
+; After quitting, the rest of the commands of this script should be ignored...
+quit
+quit
+; !!!!! IF YOU CAN SEE THIS LINE ... "Houston, we have a problem" !!!!!
+inventory
