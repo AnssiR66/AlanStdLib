@@ -16,6 +16,7 @@ Contributed by [Tristano Ajmone] to the Alan Standard Library.
     - [Scripts Encoding](#scripts-encoding)
 - [How to Run the Tests](#how-to-run-the-tests)
 - [How Tests Work](#how-tests-work)
+    - [Files Naming Conventions](#files-naming-conventions)
 - [Licenses](#licenses)
     - [Alan Sources and Commands Scripts](#alan-sources-and-commands-scripts)
         - [The Unlicense](#the-unlicense)
@@ -49,7 +50,7 @@ In order to display correctly non Ascii characters, the following file extension
 
 These extensions where arbitrarily chosen in order to allow associating them to [ISO-8859-1] encoding without affecting common extensions like "`.log`" or "`.sol`", which are used in other contexts. The "`.a3`" prefix is intended to provide an intuitive association with Alan, and at the same time make hese extensions unique to this context.
 
-For more information, see the [Sublime-Alan documentation] on how these extensions are implemented in the [Alan package] for Sublime-Text.
+For more information, see the [Sublime-Alan documentation] on how these extensions are implemented in the [Alan package] for Sublime-Text, which adds syntax support for them along with some useful features.
 
 
 # How to Run the Tests
@@ -65,10 +66,26 @@ You can launch either via CMD it or from File Explorer.
 The test system is simple. For every "`*.alan`" file found in this folder, the "[`RUNTESTS.bat`][RUNTESTS]" batch script will:
 
 1. Compile "`<filename>.alan`" to "`<filename>.a3c`".
-2. Play the compiled adventure using the "`<filename>.a3sol`" commands file.
-3. Save the play session transcript to "`<filename>.a3log`".
+2. Play the compiled adventure against one or more associated commands scripts named as "`<filename>*.a3sol`".
+3. Save the play session transcript to "`<commandscript>.a3log`" (i.e. same name as the used command script, but with `.a3log` extension).
 4. Print a statistics and errors report on the terminal screen.
 
+## Files Naming Conventions
+
+The pattern "`<filename>*.a3sol`" allows to associate multiple commands scripts to each adventure, so that different tests can be carried out on a single adventure. In case of a single test file, it should be simply named "`<filename>.a3sol`", to keep associations simple.
+
+Here is an example of how multiple test files work:
+
+|         input file        |        output file        |
+|---------------------------|---------------------------|
+| `actors.alan`             | `actors.a3c`              |
+| `actors.a3sol`            | `actors.a3log`            |
+| `actors_advanced.a3sol`   | `actors_advanced.a3log`   |
+| `actors_compliance.a3sol` | `actors_compliance.a3log` |
+| `actors_named.a3sol`      | `actors_named.a3log`      |
+
+
+Beware that you should not create adventures whose name is the initial part of another adventure's name (e.g. "`actors.alan`" and "`actors_two.alan`) for the commands scripts of the latter would be executed also for the former, because they would match the partern `actors*.a3sol`.
 
 # Licenses
 
