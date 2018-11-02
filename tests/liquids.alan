@@ -1,0 +1,47 @@
+--==============================================================================
+-- "Liquid Tests" by Tristano Ajmone, 2018.
+--==============================================================================
+IMPORT 'library.i'. -- ALAN Standard Library v2.1
+
+
+THE my_game IsA DEFINITION_BLOCK
+
+  HAS title    "Liquid Tests".
+  HAS subtitle "Testing liquids behavior.".
+  HAS author   "Tristano Ajmone".
+  HAS year     2018.
+  HAS version  "1".
+
+END THE.
+
+
+THE start_loc IsA LOCATION.
+  
+END THE start_loc.
+
+--==============================================================================
+
+-- Liquids Containers
+
+--==============================================================================
+
+--------------------------------------------------------------------------------
+-- Empty Jar
+--------------------------------------------------------------------------------
+THE jar IsA listed_container AT start_loc.
+  HAS allowed {wine}.
+END THE.
+--------------------------------------------------------------------------------
+-- Wine Bottle
+--------------------------------------------------------------------------------
+THE bottle IsA listed_container AT start_loc.
+END THE.
+
+THE wine IsA liquid IN bottle.
+  HAS vessel bottle. 
+  INDEFINITE ARTICLE "some"
+END THE.
+
+--------------------------------------------------------------------------------
+Start at start_loc.
+DESCRIBE banner.
