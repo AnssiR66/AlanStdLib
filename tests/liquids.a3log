@@ -1,0 +1,40 @@
+
+
+Liquid Tests 
+Testing liquids behavior. 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta5
+Standard Library v2.1 
+Version 1 
+All rights reserved.
+
+
+Start_loc
+There is a jar and a bottle here. The bottle contains some wine.
+
+> ; ==============================================================================
+> ; INITIAL STATE OF CONTAINERS
+> ; ==============================================================================
+> ; The bottle has wine in it, the jar is empty:
+> x bottle
+The bottle contains some wine.
+
+> x jar
+The jar is empty.
+
+> ; ==============================================================================
+> ; THE 'FILL WITH' BUG!
+> ; ==============================================================================
+> ; Now we attempt to fill the jar with wine (it will fail by default):
+> fill jar with wine
+You can't fill the jar with the wine.
+
+> ; IMPLICIT TAKING REVEALS BUG:
+> pour wine
+(taking the jar of wine first)
+
+> ; NOTE: The wine has "magically" moved to the jar! This is due to a bug in how
+> ;       'fill_with' is implemented on liquids --- i.e. it always sets the vessel
+> ;       of 'substance' TO 'cont' (regardless if the action failed)!
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 
