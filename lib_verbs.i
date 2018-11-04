@@ -8747,11 +8747,7 @@ ADD TO EVERY OBJECT
     AND obj NOT IN worn
       ELSE SAY check_obj_not_in_worn1 OF my_game.
     AND obj IS takeable
-      ELSE
-        IF THIS IS NOT plural
-          THEN SAY check_obj_takeable OF my_game.
-          ELSE SAY check_obj_takeable OF my_game.
-        END IF.
+      ELSE SAY check_obj_takeable OF my_game.
     AND CURRENT LOCATION IS lit
       ELSE SAY check_current_loc_lit OF my_game.
     AND obj IS reachable AND obj IS NOT distant
