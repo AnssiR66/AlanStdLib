@@ -779,7 +779,6 @@ EVERY definition_block ISA LOCATION
   CAN put.         -- (+ lay, place)
   CAN put_against.
   CAN put_behind.
-  CAN put_down.
   CAN put_in.      -- (+ insert)
   CAN put_near.
   CAN put_on.
@@ -979,7 +978,6 @@ EVENT check_restriction
       MAKE my_game put.         -- (+ lay, place)
       MAKE my_game put_against.
       MAKE my_game put_behind.
-      MAKE my_game put_down.
       MAKE my_game put_in.      -- (+ insert)
       MAKE my_game put_near.
       MAKE my_game put_on.
@@ -1158,7 +1156,6 @@ EVENT check_restriction
           MAKE my_game NOT put.         -- (+ lay, place)
           MAKE my_game NOT put_against.
           MAKE my_game NOT put_behind.
-          MAKE my_game NOT put_down.
           MAKE my_game NOT put_in.      -- (+ insert)
           MAKE my_game NOT put_near.
           MAKE my_game NOT put_on.
