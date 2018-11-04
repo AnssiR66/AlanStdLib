@@ -1,0 +1,194 @@
+--==============================================================================
+-- "The House" by Tristano Ajmone, 2018.
+--==============================================================================
+IMPORT 'library.i'. -- ALAN Standard Library v2.1
+
+
+THE my_game IsA DEFINITION_BLOCK
+
+  HAS title    "The House".
+  HAS subtitle "A rooms & sites setting for various tests.".
+  HAS author   "Tristano Ajmone".
+  HAS year     2018.
+  HAS version  "1".
+
+END THE.
+
+-- =============================================================================
+
+-- ROOM: The Kitchen
+
+-- =============================================================================
+-- The kitchen will be our testing location for the 'room' class.
+
+THE kitchen IsA room.
+  NAME 'The Kitchen'.
+  EXIT south TO garden.
+  DESCRIPTION "The south exit leads to your back garden."
+  
+END THE kitchen.
+
+-- =============================================================================
+
+-- SITE: The Garden
+
+-- =============================================================================
+-- The garden will be our testing location for the 'site' class.
+
+THE garden IsA site.
+  NAME 'The Back Garden'.
+  EXIT north TO kitchen.
+  DESCRIPTION "To the north lies your home."
+  
+END THE garden.
+
+-- =============================================================================
+
+-- Kitchen Props
+
+-- =============================================================================
+
+--==============================================================================
+-- The Fridge (listed container + openable)
+--==============================================================================
+THE fridge IsA listed_container AT kitchen.
+  OPAQUE CONTAINER -- NOTE: The library doesn't initialize closed listed containers
+                   --       to be automatically opaque!
+  IS openable.
+  IS NOT open.
+
+  INITIALIZE -- Allow the fridge to contain every food item in the game:
+    FOR EACH fooditem IsA food
+      DO INCLUDE fooditem IN allowed OF THIS.
+    END FOR.
+  
+END THE fridge.
+--==============================================================================
+-- The Kitchen Table (supported)
+--==============================================================================
+
+THE kitchen_table IsA supporter AT kitchen.
+  IS NOT takeable.
+  NAME table.
+END THE kitchen_table.
+
+--==============================================================================
+-- Fruits Basket (listed container on table)
+--==============================================================================
+
+THE basket IsA listed_container IN kitchen_table.
+  
+END THE basket.
+
+-- =============================================================================
+
+-- Food & Beverages (Edibles & Drinkables)
+
+-- =============================================================================
+-- We'll create some 'edible' and 'drinkable' object classes and instances to
+-- allow testing with solids and liquids. Hierarchical subclassing will allow us
+-- to easily set which kind of food can be put where, and also provide a mean to
+-- test disambiguation.
+--==============================================================================
+-- Food Classes
+--==============================================================================
+EVERY food IsA object.
+  NAME food.
+  IS edible.
+END EVERY.
+
+EVERY beverage IsA liquid.
+  IS drinkable.
+  NAME beverage.
+END EVERY.
+
+EVERY snack IsA food.
+  NAME snack.
+END EVERY.
+--------------------------------------------------------------------------------
+-- Food Subclasses
+--------------------------------------------------------------------------------
+EVERY fruit IsA food.
+  NAME fruit.
+END EVERY fruit.
+--------------------------------------------------------------------------------
+-- Beverage Vessels
+--------------------------------------------------------------------------------
+-- Let's create a specialized class for beverage containers, to simplify pouring
+-- liquids from one container to another...
+EVERY beverage_vessel IsA listed_container.
+
+  INITIALIZE -- Allow every beverage vessel to contain every beverage in the game:
+    FOR EACH bevitem IsA beverage
+      DO INCLUDE bevitem IN allowed OF THIS.
+    END FOR.
+END EVERY beverage_vessel.
+--------------------------------------------------------------------------------
+-- Snacks Containers
+--------------------------------------------------------------------------------
+-- Snacks containers are small packages that can take small snacks (chips, olives,
+-- etc.) but not big food items (like fruits, etc.). Useful for testing responses
+-- of verbs that allow putting things in containers.
+
+EVERY snack_cont IsA listed_container.
+
+  INITIALIZE -- Allow every snack container to contain every snack in the game:
+    FOR EACH snackitem IsA snack
+      DO INCLUDE snackitem IN allowed OF THIS.
+    END FOR.
+END EVERY snack_cont.
+
+--==============================================================================
+-- FOOD INSTANCES: Fruits
+--==============================================================================
+-- Let's put some fruits in the fruit basket.
+
+THE apple IsA fruit IN basket.
+  NAME apple.
+END THE.
+
+THE banana IsA fruit IN basket.
+  NAME banana.
+END THE.
+
+THE pear IsA fruit IN basket.
+  NAME pear.
+END THE.
+--==============================================================================
+-- BEVERAGE INSTANCES
+--==============================================================================
+
+--------------------------------------------------------------------------------
+-- Empty Jar
+--------------------------------------------------------------------------------
+THE jar IsA beverage_vessel IN kitchen_table.
+  HAS allowed {wine}.
+END THE.
+--------------------------------------------------------------------------------
+-- Wine Bottle
+--------------------------------------------------------------------------------
+THE bottle IsA beverage_vessel IN kitchen_table.
+END THE.
+
+THE wine IsA liquid IN bottle.
+  HAS vessel bottle. 
+  INDEFINITE ARTICLE "some"
+END THE.
+--==============================================================================
+-- SNACKS INSTANCES
+--==============================================================================
+-- TODO: implemt it as a once-only openable container (ie, once open can't be
+--       closed again).
+THE chips_bag IsA snack_cont IN kitchen_table.
+  NAME 'chips bag'.
+  NAME bag.
+END THE chips_bag.
+
+THE chips IsA snack IN chips_bag.
+  INDEFINITE ARTICLE "some"
+  
+  
+END THE chips.
+--------------------------------------------------------------------------------
+Start at kitchen.
+DESCRIBE banner.
