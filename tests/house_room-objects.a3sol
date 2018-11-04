@@ -1,0 +1,64 @@
+; ******************************************************************************
+; *                                                                            *
+; *                             ROOM OBJECTS TESTS                             *
+; *                                                                            *
+; ******************************************************************************
+; This solution file carries out some tests on the 'room_object' class.
+x table
+x basket
+; ==============================================================================
+; ROOM FLOOR
+; ==============================================================================
+; The 'floor' instance (present in all 'room' instances) has its own VERB bodies
+; for: empty_in, pour_in, look_in, put_in, take_from, throw_in. We're going to
+; test if these are executed as expected...
+; ------------------------------------------------------------------------------
+; TEST VERB 'put_in'
+; ------------------------------------------------------------------------------
+; **FAIL** The 'put_in' verb body on the 'floor' instance should be executed and
+;          show "That's not something you can $v things into.":
+put apple in floor
+;          We got instead the response of the 'obj IN allowed OF cont' CHECK from
+;          the main 'put_in' verb definition in 'lib_verbs.i', which hinders the
+;          execution of the 'floor' body.
+; ------------------------------------------------------------------------------
+; TEST VERB 'pour_in'
+; ------------------------------------------------------------------------------
+; **FAIL** The 'pour_in' verb body on the 'floor' instance should be executed and
+;          show "That's not something you can $v things into.":
+pour wine in floor
+;          We got instead the response of the 'obj IN allowed OF cont' CHECK from
+;          the main 'pour_in' verb definition in 'lib_verbs.i', which hinders the
+;          execution of the 'floor' body.
+; ------------------------------------------------------------------------------
+; TEST VERB 'empty_in'
+; ------------------------------------------------------------------------------
+; **FAIL** Expecting "That's not something you can $v things into.":
+empty bag in floor
+;          Some as 'pour_in' verb (both share the same verb bodies in the main
+;          verb definition as well as on the 'floor' instance).
+; ------------------------------------------------------------------------------
+; TEST VERB 'throw_in'
+; ------------------------------------------------------------------------------
+; **FAIL** Expecting "That's not something you can $v things into.":
+throw bag in floor
+;          We got instead the response of the 'projectile IN allowed OF cont'
+;          CHECK from the main 'throw_in' verb definition in 'lib_verbs.i',
+;          which hinders the execution of the 'floor' body.
+; ------------------------------------------------------------------------------
+; TEST VERB 'look_in'
+; ------------------------------------------------------------------------------
+; (PASS) We expect the 'look_in' body defined on 'floor' instance to print out
+;        "That's not possible."
+look in floor
+; ------------------------------------------------------------------------------
+; TEST VERB 'take_from'
+; ------------------------------------------------------------------------------
+take apple
+drop apple
+; **FAIL** The 'take_from' body from 'floor' should print:
+;          "If you want to pick up something, just TAKE it."
+take apple from floor
+;          We got instead the 'check_obj_in_cont_sg' response ("$+1 is not in $+2.")
+;          from the main 'take_from' verb CHECK 'AND obj IN holder', which hinders
+;          the execution of the 'floor' verb body.
