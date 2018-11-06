@@ -142,9 +142,8 @@ That's not possible.
 > ; **FAIL** With 'sky', the 'put_under' verb defined on 'site_object' is not 
 > ;          being executed, and we're getting the response of the main verb instead:
 > put apple against sky
-The apple is too far away.
+The sky is too far away.
 
-> ; **BUG** We're getting the wrong parameter ($1) in the response:
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'put_behind'
 > ; ------------------------------------------------------------------------------
@@ -152,9 +151,8 @@ The apple is too far away.
 > put apple behind ground
 That's not possible.
 
-> ; **BUG** We're getting the wrong parameter ($1) in the response:
 > put apple behind sky
-The apple is too far away.
+The sky is too far away.
 
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'put_near'
@@ -163,9 +161,8 @@ The apple is too far away.
 > put apple near ground
 That's not possible.
 
-> ; **BUG** We're getting the wrong parameter ($1) in the response:
 > put apple near sky
-The apple is too far away.
+The sky is too far away.
 
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'put_under'
@@ -174,9 +171,8 @@ The apple is too far away.
 > put apple under ground
 That's not possible.
 
-> ; **BUG** We're getting the wrong parameter ($1) in the response:
 > put apple under sky
-The apple is too far away.
+The sky is too far away.
 
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'look_behind'

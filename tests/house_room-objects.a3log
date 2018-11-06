@@ -128,9 +128,8 @@ That's not possible.
 > put apple against wall
 That wouldn't accomplish anything.
 
-> ; **BUG** We're getting the wrong parameter ($1) in the response:
 > put apple against ceiling
-The apple is out of your reach.
+The ceiling is out of your reach.
 
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'put_behind'
@@ -142,9 +141,8 @@ That's not possible.
 > put apple behind wall
 That's not possible.
 
-> ; **BUG** We're getting the wrong parameter ($1) in the response:
 > put apple behind ceiling
-The apple is out of your reach.
+The ceiling is out of your reach.
 
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'put_near'
@@ -156,9 +154,8 @@ That's not possible.
 > put apple near wall
 That's not possible.
 
-> ; **BUG** We're getting the wrong parameter ($1) in the response:
 > put apple near ceiling
-The apple is out of your reach.
+The ceiling is out of your reach.
 
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'put_under'
@@ -170,9 +167,8 @@ That's not possible.
 > put apple under wall
 That's not possible.
 
-> ; **BUG** We're getting the wrong parameter ($1) in the response:
 > put apple under ceiling
-The apple is out of your reach.
+The ceiling is out of your reach.
 
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'look_behind'

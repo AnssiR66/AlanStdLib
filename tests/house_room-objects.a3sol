@@ -86,7 +86,6 @@ put apple against floor
 ; **FAIL** With 'wall', the 'put_under' verb defined on 'room_object' is not 
 ;          being executed, and we're getting the response of the main verb instead:
 put apple against wall
-; **BUG** We're getting the wrong parameter ($1) in the response:
 put apple against ceiling
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'put_behind'
@@ -94,7 +93,6 @@ put apple against ceiling
 ; EXPECTED: "That's not possible."
 put apple behind floor
 put apple behind wall
-; **BUG** We're getting the wrong parameter ($1) in the response:
 put apple behind ceiling
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'put_near'
@@ -102,7 +100,6 @@ put apple behind ceiling
 ; EXPECTED: "That's not possible."
 put apple near floor
 put apple near wall
-; **BUG** We're getting the wrong parameter ($1) in the response:
 put apple near ceiling
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'put_under'
@@ -110,7 +107,6 @@ put apple near ceiling
 ; EXPECTED: "That's not possible."
 put apple under floor
 put apple under wall
-; **BUG** We're getting the wrong parameter ($1) in the response:
 put apple under ceiling
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'look_behind'

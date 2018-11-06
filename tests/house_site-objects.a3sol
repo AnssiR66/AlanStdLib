@@ -91,27 +91,23 @@ put apple against ground
 ; **FAIL** With 'sky', the 'put_under' verb defined on 'site_object' is not 
 ;          being executed, and we're getting the response of the main verb instead:
 put apple against sky
-; **BUG** We're getting the wrong parameter ($1) in the response:
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'put_behind'
 ; ------------------------------------------------------------------------------
 ; EXPECTED: "That's not possible."
 put apple behind ground
-; **BUG** We're getting the wrong parameter ($1) in the response:
 put apple behind sky
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'put_near'
 ; ------------------------------------------------------------------------------
 ; EXPECTED: "That's not possible."
 put apple near ground
-; **BUG** We're getting the wrong parameter ($1) in the response:
 put apple near sky
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'put_under'
 ; ------------------------------------------------------------------------------
 ; EXPECTED: "That's not possible."
 put apple under ground
-; **BUG** We're getting the wrong parameter ($1) in the response:
 put apple under sky
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'look_behind'
