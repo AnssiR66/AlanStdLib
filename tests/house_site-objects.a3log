@@ -15,10 +15,10 @@ here. On the table you see a bottle, a chips bag, a jar and a basket.
 
 > ; ******************************************************************************
 > ; *                                                                            *
-> ; *                             ROOM OBJECTS TESTS                             *
+> ; *                             SITE OBJECTS TESTS                             *
 > ; *                                                                            *
 > ; ******************************************************************************
-> ; This solution file carries out some tests on the 'room_object' class.
+> ; This solution file carries out some tests on the 'site_object' class.
 > x table
 You notice nothing unusual about the table. On the table you see a bottle, 
 a chips bag, a jar and a basket.
@@ -26,93 +26,109 @@ a chips bag, a jar and a basket.
 > x basket
 The basket contains a pear, a banana and a apple.
 
+> take apple
+Taken.
+
+> take pear
+Taken.
+
+> take banana
+Taken.
+
+> take bottle
+Taken.
+
+> take bag
+Taken.
+
+> south
+The Back Garden
+To the north lies your home.
+
 > ; ==============================================================================
-> ; ROOM FLOOR
+> ; SITE FLOOR
 > ; ==============================================================================
-> ; The 'floor' instance (present in all 'room' instances) has its own VERB bodies
+> ; The 'ground' instance (present in all 'site' instances) has its own VERB bodies
 > ; for: empty_in, pour_in, look_in, put_in, take_from, throw_in. We're going to
 > ; test if these are executed as expected...
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'put_in' (FAIL)
 > ; ------------------------------------------------------------------------------
-> ; **FAIL** The 'put_in' verb body on the 'floor' instance should be executed and
+> ; **FAIL** The 'put_in' verb body on the 'ground' instance should be executed and
 > ;          show "That's not something you can $v things into.":
-> put apple in floor
-The apple doesn't belong in the floor.
+> put apple in ground
+The apple doesn't belong in the ground.
 
 > ;          We got instead the response of the 'obj IN allowed OF cont' CHECK from
 > ;          the main 'put_in' verb definition in 'lib_verbs.i', which hinders the
-> ;          execution of the 'floor' body.
+> ;          execution of the 'ground' body.
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'put_on' (???)
 > ; ------------------------------------------------------------------------------
 > ; **FAIL??** In the source of 'lib_locations.i' it mentions that the CONTAINER
-> ;            property is intended to "allow 'empty/pour/put something on floor'"
-> put pear on floor
+> ;            property is intended to "allow 'empty/pour/put something on ground'"
+> put pear on ground
 It's not possible to put anything there.
 
-> ;            But since there is no 'put_on' VERB override declared on floor, the
-> ;            main verb simply rejects it because floor is not a supporter:
+> ;            But since there is no 'put_on' VERB override declared on ground, the
+> ;            main verb simply rejects it because ground is not a supporter:
 > ;               WHERE ...
 > ;               ...
 > ;               AND surface ISA SUPPORTER
-> ;            Should the "put (obj) on floor" be an execption, and be understood
+> ;            Should the "put (obj) on ground" be an execption, and be understood
 > ;            as "drop"?
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'pour_in' (FAIL)
 > ; ------------------------------------------------------------------------------
-> ; **FAIL** The 'pour_in' verb body on the 'floor' instance should be executed and
+> ; **FAIL** The 'pour_in' verb body on the 'ground' instance should be executed and
 > ;          show "That's not something you can $v things into.":
-> pour wine in floor
-The wine doesn't belong in the floor.
+> pour wine in ground
+The wine doesn't belong in the ground.
 
 > ;          We got instead the response of the 'obj IN allowed OF cont' CHECK from
 > ;          the main 'pour_in' verb definition in 'lib_verbs.i', which hinders the
-> ;          execution of the 'floor' body.
+> ;          execution of the 'ground' body.
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'empty_in' (FAIL)
 > ; ------------------------------------------------------------------------------
 > ; **FAIL** Expecting "That's not something you can $v things into.":
-> empty bag in floor
-The chips bag doesn't belong in the floor.
+> empty bag in ground
+The chips bag doesn't belong in the ground.
 
 > ;          Some as 'pour_in' verb (both share the same verb bodies in the main
-> ;          verb definition as well as on the 'floor' instance).
+> ;          verb definition as well as on the 'ground' instance).
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'throw_in' (FAIL)
 > ; ------------------------------------------------------------------------------
 > ; **FAIL** Expecting "That's not something you can $v things into.":
-> throw bag in floor
-The chips bag doesn't belong in the floor.
+> throw bag in ground
+The chips bag doesn't belong in the ground.
 
 > ;          We got instead the response of the 'projectile IN allowed OF cont'
 > ;          CHECK from the main 'throw_in' verb definition in 'lib_verbs.i',
-> ;          which hinders the execution of the 'floor' body.
+> ;          which hinders the execution of the 'ground' body.
 > ; ------------------------------------------------------------------------------
-> ; TEST VERB 'look_in' (PASS)
+> ; TEST VERB 'look_in'
 > ; ------------------------------------------------------------------------------
-> ; (PASS) We expect the 'look_in' body defined on 'floor' instance to print out
+> ; (PASS) We expect the 'look_in' body defined on 'ground' instance to print out
 > ;        "That's not possible."
-> look in floor
+> look in ground
 That's not possible.
 
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'take_from' (FAIL)
 > ; ------------------------------------------------------------------------------
-> take apple
-Taken.
-
 > drop apple
 Dropped.
 
-> ; **FAIL** The apple should be IN floor since we dropped it:
-> take apple from floor
-The apple is not in the floor.
+> ; **FAIL** The apple should be IN ground since we dropped it:
+> take apple from ground
+The apple is not in the ground.
 
 > ; ==============================================================================
-> ; ROOM_OBJECTS
+> ; SITE_OBJECTS
 > ; ==============================================================================
-> ; The 'room_object' class has its own VERB bodies for: put_against, put_behind,
+> ; The 'site_object' class has its own VERB bodies for: put_against, put_behind,
 > ; put_near, put_under, look_behind, look_through, look_under.
 > ;
 > ; NOTE: The verbs 'put_against', 'put_behind', 'put_near' and 'put_under' share
@@ -120,97 +136,76 @@ The apple is not in the floor.
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'put_against'
 > ; ------------------------------------------------------------------------------
-> put apple against floor
+> put apple against ground
 That's not possible.
 
-> ; **FAIL** With 'wall', the 'put_under' verb defined on 'room_object' is not 
+> ; **FAIL** With 'sky', the 'put_under' verb defined on 'site_object' is not 
 > ;          being executed, and we're getting the response of the main verb instead:
-> put apple against wall
-That wouldn't accomplish anything.
+> put apple against sky
+The apple is too far away.
 
 > ; **BUG** We're getting the wrong parameter ($1) in the response:
-> put apple against ceiling
-The apple is out of your reach.
-
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'put_behind'
 > ; ------------------------------------------------------------------------------
 > ; EXPECTED: "That's not possible."
-> put apple behind floor
-That's not possible.
-
-> put apple behind wall
+> put apple behind ground
 That's not possible.
 
 > ; **BUG** We're getting the wrong parameter ($1) in the response:
-> put apple behind ceiling
-The apple is out of your reach.
+> put apple behind sky
+The apple is too far away.
 
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'put_near'
 > ; ------------------------------------------------------------------------------
 > ; EXPECTED: "That's not possible."
-> put apple near floor
-That's not possible.
-
-> put apple near wall
+> put apple near ground
 That's not possible.
 
 > ; **BUG** We're getting the wrong parameter ($1) in the response:
-> put apple near ceiling
-The apple is out of your reach.
+> put apple near sky
+The apple is too far away.
 
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'put_under'
 > ; ------------------------------------------------------------------------------
 > ; EXPECTED: "That's not possible."
-> put apple under floor
-That's not possible.
-
-> put apple under wall
+> put apple under ground
 That's not possible.
 
 > ; **BUG** We're getting the wrong parameter ($1) in the response:
-> put apple under ceiling
-The apple is out of your reach.
+> put apple under sky
+The apple is too far away.
 
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'look_behind'
 > ; ------------------------------------------------------------------------------
 > ; EXPECTED: "That's not possible."
-> look behind floor
+> look behind ground
 That's not possible.
 
-> look behind wall
-That's not possible.
-
-> look behind ceiling
+> look behind sky
 That's not possible.
 
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'look_through'
 > ; ------------------------------------------------------------------------------
 > ; EXPECTED: "That's not possible."
-> look through floor
+> look through ground
 That's not possible.
 
-> look through wall
-That's not possible.
-
-> look through ceiling
+> look through sky
 That's not possible.
 
 > ; ------------------------------------------------------------------------------
 > ; TEST VERB 'look_under'
 > ; ------------------------------------------------------------------------------
 > ; EXPECTED: "That's not possible."
-> look under floor
+> look under ground
 That's not possible.
 
-> look under wall
-That's not possible.
-
-> look under ceiling
+> look under sky
 That's not possible.
 
 > 

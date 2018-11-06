@@ -1,80 +1,85 @@
 ; ******************************************************************************
 ; *                                                                            *
-; *                             ROOM OBJECTS TESTS                             *
+; *                             SITE OBJECTS TESTS                             *
 ; *                                                                            *
 ; ******************************************************************************
-; This solution file carries out some tests on the 'room_object' class.
+; This solution file carries out some tests on the 'site_object' class.
 x table
 x basket
+take apple
+take pear
+take banana
+take bottle
+take bag
+south
 ; ==============================================================================
-; ROOM FLOOR
+; SITE FLOOR
 ; ==============================================================================
-; The 'floor' instance (present in all 'room' instances) has its own VERB bodies
+; The 'ground' instance (present in all 'site' instances) has its own VERB bodies
 ; for: empty_in, pour_in, look_in, put_in, take_from, throw_in. We're going to
 ; test if these are executed as expected...
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'put_in' (FAIL)
 ; ------------------------------------------------------------------------------
-; **FAIL** The 'put_in' verb body on the 'floor' instance should be executed and
+; **FAIL** The 'put_in' verb body on the 'ground' instance should be executed and
 ;          show "That's not something you can $v things into.":
-put apple in floor
+put apple in ground
 ;          We got instead the response of the 'obj IN allowed OF cont' CHECK from
 ;          the main 'put_in' verb definition in 'lib_verbs.i', which hinders the
-;          execution of the 'floor' body.
+;          execution of the 'ground' body.
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'put_on' (???)
 ; ------------------------------------------------------------------------------
 ; **FAIL??** In the source of 'lib_locations.i' it mentions that the CONTAINER
-;            property is intended to "allow 'empty/pour/put something on floor'"
-put pear on floor
-;            But since there is no 'put_on' VERB override declared on floor, the
-;            main verb simply rejects it because floor is not a supporter:
+;            property is intended to "allow 'empty/pour/put something on ground'"
+put pear on ground
+;            But since there is no 'put_on' VERB override declared on ground, the
+;            main verb simply rejects it because ground is not a supporter:
 ;               WHERE ...
 ;               ...
 ;               AND surface ISA SUPPORTER
-;            Should the "put (obj) on floor" be an execption, and be understood
+;            Should the "put (obj) on ground" be an execption, and be understood
 ;            as "drop"?
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'pour_in' (FAIL)
 ; ------------------------------------------------------------------------------
-; **FAIL** The 'pour_in' verb body on the 'floor' instance should be executed and
+; **FAIL** The 'pour_in' verb body on the 'ground' instance should be executed and
 ;          show "That's not something you can $v things into.":
-pour wine in floor
+pour wine in ground
 ;          We got instead the response of the 'obj IN allowed OF cont' CHECK from
 ;          the main 'pour_in' verb definition in 'lib_verbs.i', which hinders the
-;          execution of the 'floor' body.
+;          execution of the 'ground' body.
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'empty_in' (FAIL)
 ; ------------------------------------------------------------------------------
 ; **FAIL** Expecting "That's not something you can $v things into.":
-empty bag in floor
+empty bag in ground
 ;          Some as 'pour_in' verb (both share the same verb bodies in the main
-;          verb definition as well as on the 'floor' instance).
+;          verb definition as well as on the 'ground' instance).
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'throw_in' (FAIL)
 ; ------------------------------------------------------------------------------
 ; **FAIL** Expecting "That's not something you can $v things into.":
-throw bag in floor
+throw bag in ground
 ;          We got instead the response of the 'projectile IN allowed OF cont'
 ;          CHECK from the main 'throw_in' verb definition in 'lib_verbs.i',
-;          which hinders the execution of the 'floor' body.
+;          which hinders the execution of the 'ground' body.
 ; ------------------------------------------------------------------------------
-; TEST VERB 'look_in' (PASS)
+; TEST VERB 'look_in'
 ; ------------------------------------------------------------------------------
-; (PASS) We expect the 'look_in' body defined on 'floor' instance to print out
+; (PASS) We expect the 'look_in' body defined on 'ground' instance to print out
 ;        "That's not possible."
-look in floor
+look in ground
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'take_from' (FAIL)
 ; ------------------------------------------------------------------------------
-take apple
 drop apple
-; **FAIL** The apple should be IN floor since we dropped it:
-take apple from floor
+; **FAIL** The apple should be IN ground since we dropped it:
+take apple from ground
 ; ==============================================================================
-; ROOM_OBJECTS
+; SITE_OBJECTS
 ; ==============================================================================
-; The 'room_object' class has its own VERB bodies for: put_against, put_behind,
+; The 'site_object' class has its own VERB bodies for: put_against, put_behind,
 ; put_near, put_under, look_behind, look_through, look_under.
 ;
 ; NOTE: The verbs 'put_against', 'put_behind', 'put_near' and 'put_under' share
@@ -82,54 +87,47 @@ take apple from floor
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'put_against'
 ; ------------------------------------------------------------------------------
-put apple against floor
-; **FAIL** With 'wall', the 'put_under' verb defined on 'room_object' is not 
+put apple against ground
+; **FAIL** With 'sky', the 'put_under' verb defined on 'site_object' is not 
 ;          being executed, and we're getting the response of the main verb instead:
-put apple against wall
+put apple against sky
 ; **BUG** We're getting the wrong parameter ($1) in the response:
-put apple against ceiling
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'put_behind'
 ; ------------------------------------------------------------------------------
 ; EXPECTED: "That's not possible."
-put apple behind floor
-put apple behind wall
+put apple behind ground
 ; **BUG** We're getting the wrong parameter ($1) in the response:
-put apple behind ceiling
+put apple behind sky
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'put_near'
 ; ------------------------------------------------------------------------------
 ; EXPECTED: "That's not possible."
-put apple near floor
-put apple near wall
+put apple near ground
 ; **BUG** We're getting the wrong parameter ($1) in the response:
-put apple near ceiling
+put apple near sky
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'put_under'
 ; ------------------------------------------------------------------------------
 ; EXPECTED: "That's not possible."
-put apple under floor
-put apple under wall
+put apple under ground
 ; **BUG** We're getting the wrong parameter ($1) in the response:
-put apple under ceiling
+put apple under sky
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'look_behind'
 ; ------------------------------------------------------------------------------
 ; EXPECTED: "That's not possible."
-look behind floor
-look behind wall
-look behind ceiling
+look behind ground
+look behind sky
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'look_through'
 ; ------------------------------------------------------------------------------
 ; EXPECTED: "That's not possible."
-look through floor
-look through wall
-look through ceiling
+look through ground
+look through sky
 ; ------------------------------------------------------------------------------
 ; TEST VERB 'look_under'
 ; ------------------------------------------------------------------------------
 ; EXPECTED: "That's not possible."
-look under floor
-look under wall
-look under ceiling
+look under ground
+look under sky
