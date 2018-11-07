@@ -5541,14 +5541,14 @@ ADD TO EVERY OBJECT
           IF bulk IS NOT reachable
             THEN
               IF bulk IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY check_obj2_reachable_sg OF my_game.
+                ELSE SAY check_obj2_reachable_pl OF my_game.
               END IF.
           ELSIF bulk IS distant
             THEN
               IF bulk IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY check_obj2_not_distant_sg OF my_game.
+                ELSE SAY check_obj2_not_distant_pl OF my_game.
               END IF.
           END IF.
 

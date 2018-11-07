@@ -164,8 +164,8 @@ THE floor ISA room_object
 
 
   VERB empty_in, pour_in
-     WHEN cont
-    DOES ONLY "That's not something you can $v things into."
+    WHEN cont
+      DOES ONLY "That's not something you can $v things into."
   END VERB empty_in.
 
 
@@ -175,20 +175,20 @@ THE floor ISA room_object
 
 
   VERB put_in
-     WHEN cont
-    DOES ONLY "That's not something you can $v things into."
+    WHEN cont
+      DOES ONLY "That's not something you can $v things into."
   END VERB put_in.
 
 
   VERB take_from
-     WHEN holder
-    DOES ONLY "If you want to pick up something, just TAKE it."
+    WHEN holder
+      DOES ONLY "If you want to pick up something, just TAKE it."
   END VERB take_from.
 
 
   VERB throw_in
-     WHEN cont
-    DOES ONLY "That's not something you can $v things into."
+    WHEN cont
+      DOES ONLY "That's not something you can $v things into."
   END VERB throw_in.
 
 
@@ -227,8 +227,8 @@ THE ground ISA site_object
 
 
   VERB empty_in, pour_in
-     WHEN cont
-    DOES ONLY "That's not something you can $v things into."
+    WHEN cont
+      DOES ONLY "That's not something you can $v things into."
   END VERB empty_in.
 
 
@@ -238,20 +238,20 @@ THE ground ISA site_object
 
 
   VERB put_in
-     WHEN cont
-    DOES ONLY "That's not something you can $v things into."
+    WHEN cont
+      DOES ONLY "That's not something you can $v things into."
   END VERB put_in.
 
 
   VERB take_from
-     WHEN holder
-    DOES ONLY "If you want to pick up something, just TAKE it."
+    WHEN holder
+      DOES ONLY "If you want to pick up something, just TAKE it."
   END VERB take_from.
 
 
   VERB throw_in
-     WHEN cont
-    DOES ONLY "That's not something you can $v things into."
+    WHEN cont
+      DOES ONLY "That's not something you can $v things into."
   END VERB throw_in.
 
 
