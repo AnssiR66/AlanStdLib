@@ -1,0 +1,97 @@
+
+
+The House 
+A rooms & sites setting for various tests. 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta5
+Standard Library v2.1 
+Version 1 
+All rights reserved.
+
+
+The Kitchen
+The south exit leads to your back garden. There is a chair, a fridge and a 
+table here. On the table you see a bottle, a chips bag, a jar and a basket
+.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                                TEST SOUNDS                                 *
+> ; *                                                                            *
+> ; ******************************************************************************
+> listen
+You hear nothing unusual.
+
+> ; ==============================================================================
+> ; TEST ROOM AND SITE OBJECTS
+> ; ==============================================================================
+> ; **ERR!** Room and site objects are not in scope to the 'listen' verb!
+> ;          This is because the verb checks 'IF obj AT hero', but these objs are
+> ;          implemented AT outdoor/indoor, which are locations enwrapping the
+> ;          current hero's location -- i.e., the obj is never AT hero's location,
+> ;          but the inverse is true, for the hero is always AT obj's location!
+> ; ------------------------------------------------------------------------------
+> ; ROOM OBJECTS
+> ; ------------------------------------------------------------------------------
+> listen to ceiling
+
+> listen to floor
+
+> listen to wall
+
+> ; ------------------------------------------------------------------------------
+> ; SITE OBJECTS
+> ; ------------------------------------------------------------------------------
+> ; NOTE: 'listen' allows parameters not in current location (!):
+> listen to sky
+
+> listen to ground
+
+> ; ==============================================================================
+> ; THE CHIRP (sound AT garden + custom verbs)
+> ; ==============================================================================
+> south
+The Back Garden
+To the north lies your home. There is a table, a folding bed and a 
+swimming pool here.
+
+> listen
+You can ear a faint chirp.
+
+> listen to chirp
+It sounds like a sparrow's chirp.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST 'listen' INSIDE THE POOL
+> ; ------------------------------------------------------------------------------
+> enter pool
+You dive savagely into the pool, splashing water everywhere.
+
+Inside The Swimming Pool (in Garden)
+The pool is wide enough to enjoy swimming in it.
+
+> listen
+You can ear a faint chirp.
+
+> listen to chirp
+It sounds like a sparrow's chirp.
+
+> ; ------------------------------------------------------------------------------
+> ; SITE OBJECTS
+> ; ------------------------------------------------------------------------------
+> listen to sky
+
+> listen to ground
+
+> ; ------------------------------------------------------------------------------
+> ; ROOM OBJECTS
+> ; ------------------------------------------------------------------------------
+> ; These are not present at outdoor, but they are at kitchen (indoor), except
+> ; that the indoor is not directly adjacent to garden (kitchen is): 
+> listen to ceiling
+
+> listen to floor
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

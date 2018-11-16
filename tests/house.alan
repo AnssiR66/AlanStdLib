@@ -40,6 +40,11 @@ THE garden IsA site.
   EXIT north TO kitchen.
   DESCRIPTION "To the north lies your home."
   
+  -- Since we've excluded the 'chirp' sound from the room description, we'll
+  -- make it available at the garden via 'listen':
+  VERB listen0
+    DOES ONLY "You can ear a faint chirp."
+  END VERB listen0.
 END THE garden.
 
 -- =============================================================================
@@ -47,6 +52,24 @@ END THE garden.
 -- Kitchen Props
 
 -- =============================================================================
+
+--==============================================================================
+-- The Chair
+--==============================================================================
+-- Let's provide a usable chair.
+
+THE chair IsA supporter AT kitchen.
+  
+  VERB sit_on
+    DOES ONLY
+      IF hero IS lying_down
+        THEN "You get up and"
+          MAKE hero NOT lying_down.
+      END IF.
+      "you sit on $+1."
+      MAKE hero sitting.
+  END VERB sit_on.
+END THE chair.
 
 --==============================================================================
 -- The Fridge (listed container + openable)
@@ -186,9 +209,123 @@ END THE chips_bag.
 
 THE chips IsA snack IN chips_bag.
   INDEFINITE ARTICLE "some"
-  
-  
 END THE chips.
+
+-- =============================================================================
+
+-- Garden Props
+
+-- =============================================================================
+
+--==============================================================================
+-- Bird's Chirp
+--==============================================================================
+-- Let's add a 'sound' to test 'listen' and to also provide an object which is
+-- NOT examibable, takeable, reachable or movable.
+THE chirp IsA sound AT garden.
+  DESCRIPTION ""  -- We don't want it to show up in the room description
+                  -- (it'll show up when listening in the garden via listen0).
+  
+  VERB listen
+    DOES ONLY
+      IF hero AT obj
+        THEN "It sounds like a sparrow's chirp."
+      ELSIF obj NEAR hero
+        THEN "From this distance it's difficoult to tell which bird it might be."
+      END IF.
+  END VERB listen.
+END THE chirp.
+
+--==============================================================================
+-- The Garden's Table
+--==============================================================================
+THE garden_table IsA supporter AT garden.
+  IS NOT takeable.
+  NAME table.
+END THE garden_table.
+
+--==============================================================================
+-- Folding Bed
+--==============================================================================
+THE garden_bed IsA supporter AT garden.
+  NAME folding bed.
+  NAME bed.
+  HAS ex "It's a folding bed, ideal for beaches and camping.".
+  
+  VERB lie_on
+    DOES ONLY
+      IF hero IS sitting
+        THEN "You get up and"
+          MAKE hero NOT sitting.
+      END IF.
+      "you lie down on $+1."
+      MAKE hero lying_down.
+  END VERB lie_on.
+END THE garden_bed.
+
+--==============================================================================
+-- The Swimming Pool
+--==============================================================================
+-- Let's create a swimming pool to test both 'swim' and 'enter'.
+
+THE swimming_pool IsA liquid AT garden.
+  NAME swimming pool.
+  NAME water.
+  
+  VERB swim
+    DOES ONLY
+      IF hero DIRECTLY AT inside_pool
+        THEN "You are already in the swimming pool."
+        ELSE
+          LOCATE hero AT inside_pool.
+      END IF.
+  END VERB swim.
+  
+  VERB swim_in
+    DOES ONLY
+      IF hero DIRECTLY AT inside_pool
+        THEN "You are already in the swimming pool."
+        ELSE
+          LOCATE hero AT inside_pool.
+      END IF.
+  END VERB swim_in.
+    
+  VERB enter
+    DOES ONLY
+      IF hero DIRECTLY AT inside_pool
+        THEN "You are already in the swimming pool."
+        ELSE
+          LOCATE hero AT inside_pool.
+      END IF.
+  END VERB enter.
+
+  VERB 'exit'
+    DOES ONLY
+      IF hero NOT DIRECTLY AT inside_pool
+        THEN "You are not inside the swimming pool."
+        ELSE
+          "You climb over the pool border and get back on the grass."
+          LOCATE hero AT garden.
+      END IF.
+  END VERB 'exit'.
+END THE swimming_pool.
+
+--==============================================================================
+-- Inside The Swimmin Pool
+--==============================================================================
+-- To simulate the hero entering the pool we create a nested location AT the
+-- garden.
+
+THE inside_pool IsA location AT garden.
+  NAME 'Inside The Swimming Pool (in Garden)'.
+  DESCRIPTION
+    "The pool is wide enough to enjoy swimming in it."
+  
+  ENTERED
+    "You dive savagely into the pool, splashing water everywhere."
+  
+END THE inside_pool.
+
 --------------------------------------------------------------------------------
 Start at kitchen.
 DESCRIBE banner.

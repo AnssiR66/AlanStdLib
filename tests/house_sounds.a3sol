@@ -1,0 +1,50 @@
+; ******************************************************************************
+; *                                                                            *
+; *                                TEST SOUNDS                                 *
+; *                                                                            *
+; ******************************************************************************
+listen
+; ==============================================================================
+; TEST ROOM AND SITE OBJECTS
+; ==============================================================================
+; **ERR!** Room and site objects are not in scope to the 'listen' verb!
+;          This is because the verb checks 'IF obj AT hero', but these objs are
+;          implemented AT outdoor/indoor, which are locations enwrapping the
+;          current hero's location -- i.e., the obj is never AT hero's location,
+;          but the inverse is true, for the hero is always AT obj's location!
+; ------------------------------------------------------------------------------
+; ROOM OBJECTS
+; ------------------------------------------------------------------------------
+listen to ceiling
+listen to floor
+listen to wall
+; ------------------------------------------------------------------------------
+; SITE OBJECTS
+; ------------------------------------------------------------------------------
+; NOTE: 'listen' allows parameters not in current location (!):
+listen to sky
+listen to ground
+; ==============================================================================
+; THE CHIRP (sound AT garden + custom verbs)
+; ==============================================================================
+south
+listen
+listen to chirp
+; ------------------------------------------------------------------------------
+; TEST 'listen' INSIDE THE POOL
+; ------------------------------------------------------------------------------
+enter pool
+listen
+listen to chirp
+; ------------------------------------------------------------------------------
+; SITE OBJECTS
+; ------------------------------------------------------------------------------
+listen to sky
+listen to ground
+; ------------------------------------------------------------------------------
+; ROOM OBJECTS
+; ------------------------------------------------------------------------------
+; These are not present at outdoor, but they are at kitchen (indoor), except
+; that the indoor is not directly adjacent to garden (kitchen is): 
+listen to ceiling
+listen to floor
