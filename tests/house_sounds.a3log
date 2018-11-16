@@ -34,10 +34,13 @@ You hear nothing unusual.
 > ; ROOM OBJECTS
 > ; ------------------------------------------------------------------------------
 > listen to ceiling
+You hear nothing unusual.
 
 > listen to floor
+You hear nothing unusual.
 
 > listen to wall
+You hear nothing unusual.
 
 > ; ------------------------------------------------------------------------------
 > ; SITE OBJECTS
@@ -80,8 +83,10 @@ It sounds like a sparrow's chirp.
 > ; SITE OBJECTS
 > ; ------------------------------------------------------------------------------
 > listen to sky
+You hear nothing unusual.
 
 > listen to ground
+You hear nothing unusual.
 
 > ; ------------------------------------------------------------------------------
 > ; ROOM OBJECTS

@@ -7,11 +7,7 @@ listen
 ; ==============================================================================
 ; TEST ROOM AND SITE OBJECTS
 ; ==============================================================================
-; **ERR!** Room and site objects are not in scope to the 'listen' verb!
-;          This is because the verb checks 'IF obj AT hero', but these objs are
-;          implemented AT outdoor/indoor, which are locations enwrapping the
-;          current hero's location -- i.e., the obj is never AT hero's location,
-;          but the inverse is true, for the hero is always AT obj's location!
+; NOTE: 'listen' allows parameters not in current location (!).
 ; ------------------------------------------------------------------------------
 ; ROOM OBJECTS
 ; ------------------------------------------------------------------------------
@@ -21,7 +17,13 @@ listen to wall
 ; ------------------------------------------------------------------------------
 ; SITE OBJECTS
 ; ------------------------------------------------------------------------------
-; NOTE: 'listen' allows parameters not in current location (!):
+; **PROBLEM** With these site objects we get blank responses because they are
+;             neither at current location nor in an adjecent one (NEARBY).
+;             The reason is that the hero is now at an indoor location, and while
+;             the garden IS NEARBY it's wrapping outdoor location isn't, because
+;             it's not directly adjacent to the kitchen. This is the expected
+;             behavior, but the blank message doesn't look too nice, maybe it
+;             should say something like "XXX is not here or doesn't exisit"?
 listen to sky
 listen to ground
 ; ==============================================================================
