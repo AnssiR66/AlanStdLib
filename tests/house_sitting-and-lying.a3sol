@@ -1,0 +1,95 @@
+; ******************************************************************************
+; *                                                                            *
+; *                   TEST SITTING, LYING DOWN & GETTING UP                    *
+; *                                                                            *
+; ******************************************************************************
+sit
+sit down
+lie
+lie down
+stand
+get up
+; ==============================================================================
+; TEST VERB 'sit_on'
+; ==============================================================================
+; ------------------------------------------------------------------------------
+; THE CHAIR (supporter + custom 'sit_on' )
+; ------------------------------------------------------------------------------
+; We've created a chair on which the hero can sit.
+sit on chair
+sit on chair
+get up
+sit on chair
+get off the chair
+get off the chair
+; ==============================================================================
+; TEST VERB 'lie_on'
+; ==============================================================================
+south
+; ------------------------------------------------------------------------------
+; THE FOLDING BED (supporter + custom 'lie_on' )
+; ------------------------------------------------------------------------------
+; We've created a bed on which the hero can lie down.
+examine bed
+lie on bed
+lie on bed
+get off bed
+; ------------------------------------------------------------------------------
+; VANILLA TESTS
+; ------------------------------------------------------------------------------
+; Let's try the verb with surfaces which don't have a custom implementation of
+; the verb, so we can check the vanilla responses...
+north
+lie on table
+lie on chair
+; ------------------------------------------------------------------------------
+; TEST ILLEGAL PARAMETERS
+; ------------------------------------------------------------------------------
+; Let's test the verb with objects which are not 'supporter' (ie, no 'surface'):
+lie on basket
+; ==============================================================================
+; TEST VERB 'lie_in'
+; ==============================================================================
+; ------------------------------------------------------------------------------
+; VANILLA TESTS
+; ------------------------------------------------------------------------------
+; Let's try the verb with surfaces which don't have a custom implementation of
+; the verb, so we can check the vanilla responses...
+lie in chair
+lie in table
+; ------------------------------------------------------------------------------
+; TEST ILLEGAL PARAMETERS
+; ------------------------------------------------------------------------------
+; Let's test the verb with objects which are not containers:
+lie in apple
+; ==============================================================================
+; TEST VERBS WITH ROOM/SITE OBJECTS
+; ==============================================================================
+; ------------------------------------------------------------------------------
+; ROOM OBJECTS
+; ------------------------------------------------------------------------------
+; 'lie_in':
+lie in ceiling
+lie in floor
+lie in wall
+; 'lie_on':
+lie on ceiling
+lie on floor
+lie on wall
+; 'sit_on':
+sit on ceiling
+sit on floor
+sit on wall
+; ------------------------------------------------------------------------------
+; SITE OBJECTS
+; ------------------------------------------------------------------------------
+south
+; 'lie_in':
+lie in sky
+lie in ground
+; 'lie_on':
+lie on sky
+lie on ground
+; 'sit_on':
+sit on sky
+sit on ground

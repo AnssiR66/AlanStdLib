@@ -10,8 +10,9 @@ All rights reserved.
 
 
 The Kitchen
-The south exit leads to your back garden. There is a fridge and a table 
-here. On the table you see a bottle, a chips bag, a jar and a basket.
+The south exit leads to your back garden. There is a chair, a fridge and a 
+table here. On the table you see a bottle, a chips bag, a jar and a basket
+.
 
 > ; ******************************************************************************
 > ; *                                                                            *
@@ -43,7 +44,8 @@ Taken.
 
 > south
 The Back Garden
-To the north lies your home.
+To the north lies your home. There is a table, a folding bed and a 
+swimming pool here.
 
 > ; ==============================================================================
 > ; SITE FLOOR

@@ -4160,7 +4160,7 @@ ADD TO EVERY THING
       ELSE SAY check_obj_not_hero1 OF my_game.
 
     DOES
-      IF obj AT hero
+      IF hero AT obj
         THEN
           IF obj ISA ACTOR
             THEN SAY THE obj.

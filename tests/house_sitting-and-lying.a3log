@@ -1,0 +1,202 @@
+
+
+The House 
+A rooms & sites setting for various tests. 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta5
+Standard Library v2.1 
+Version 1 
+All rights reserved.
+
+
+The Kitchen
+The south exit leads to your back garden. There is a chair, a fridge and a 
+table here. On the table you see a bottle, a chips bag, a jar and a basket
+.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                   TEST SITTING, LYING DOWN & GETTING UP                    *
+> ; *                                                                            *
+> ; ******************************************************************************
+> sit
+You feel no urge to sit down at present.
+
+> sit down
+You feel no urge to sit down at present.
+
+> lie
+There's no need to lie down right now.
+
+> lie down
+There's no need to lie down right now.
+
+> stand
+You're standing up already.
+
+> get up
+You're standing up already.
+
+> ; ==============================================================================
+> ; TEST VERB 'sit_on'
+> ; ==============================================================================
+> ; ------------------------------------------------------------------------------
+> ; THE CHAIR (supporter + custom 'sit_on' )
+> ; ------------------------------------------------------------------------------
+> ; We've created a chair on which the hero can sit.
+> sit on chair
+You sit on the chair.
+
+> sit on chair
+You're sitting down already.
+
+> get up
+You stand up.
+
+> sit on chair
+You sit on the chair.
+
+> get off the chair
+You get off the chair.
+
+> get off the chair
+You're standing up already.
+
+> ; ==============================================================================
+> ; TEST VERB 'lie_on'
+> ; ==============================================================================
+> south
+The Back Garden
+To the north lies your home. There is a table, a folding bed and a 
+swimming pool here.
+
+> ; ------------------------------------------------------------------------------
+> ; THE FOLDING BED (supporter + custom 'lie_on' )
+> ; ------------------------------------------------------------------------------
+> ; We've created a bed on which the hero can lie down.
+> examine bed
+It's a folding bed, ideal for beaches and camping. There's nothing on the 
+folding bed.
+
+> lie on bed
+You lie down on the folding bed.
+
+> lie on bed
+You're lying down already.
+
+> get off bed
+You get off the folding bed.
+
+> ; ------------------------------------------------------------------------------
+> ; VANILLA TESTS
+> ; ------------------------------------------------------------------------------
+> ; Let's try the verb with surfaces which don't have a custom implementation of
+> ; the verb, so we can check the vanilla responses...
+> north
+The Kitchen
+The south exit leads to your back garden. There is a chair, a fridge and a 
+table here. On the table you see a bottle, a chips bag, a jar and a basket
+.
+
+> lie on table
+There's no need to lie down on the table.
+
+> lie on chair
+There's no need to lie down on the chair.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST ILLEGAL PARAMETERS
+> ; ------------------------------------------------------------------------------
+> ; Let's test the verb with objects which are not 'supporter' (ie, no 'surface'):
+> lie on basket
+That's not something you can lie on.
+
+> ; ==============================================================================
+> ; TEST VERB 'lie_in'
+> ; ==============================================================================
+> ; ------------------------------------------------------------------------------
+> ; VANILLA TESTS
+> ; ------------------------------------------------------------------------------
+> ; Let's try the verb with surfaces which don't have a custom implementation of
+> ; the verb, so we can check the vanilla responses...
+> lie in chair
+There's no need to lie down in the chair.
+
+> lie in table
+There's no need to lie down in the table.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST ILLEGAL PARAMETERS
+> ; ------------------------------------------------------------------------------
+> ; Let's test the verb with objects which are not containers:
+> lie in apple
+That's not something you can lie in.
+
+> ; ==============================================================================
+> ; TEST VERBS WITH ROOM/SITE OBJECTS
+> ; ==============================================================================
+> ; ------------------------------------------------------------------------------
+> ; ROOM OBJECTS
+> ; ------------------------------------------------------------------------------
+> ; 'lie_in':
+> lie in ceiling
+That's not something you can lie in.
+
+> lie in floor
+There's no need to lie down in the floor.
+
+> lie in wall
+That's not something you can lie in.
+
+> ; 'lie_on':
+> lie on ceiling
+That's not something you can lie on.
+
+> lie on floor
+That's not something you can lie on.
+
+> lie on wall
+That's not something you can lie on.
+
+> ; 'sit_on':
+> sit on ceiling
+That's not something you can sit on.
+
+> sit on floor
+That's not something you can sit on.
+
+> sit on wall
+That's not something you can sit on.
+
+> ; ------------------------------------------------------------------------------
+> ; SITE OBJECTS
+> ; ------------------------------------------------------------------------------
+> south
+The Back Garden
+To the north lies your home. There is a table, a folding bed and a 
+swimming pool here.
+
+> ; 'lie_in':
+> lie in sky
+That's not something you can lie in.
+
+> lie in ground
+There's no need to lie down in the ground.
+
+> ; 'lie_on':
+> lie on sky
+That's not something you can lie on.
+
+> lie on ground
+That's not something you can lie on.
+
+> ; 'sit_on':
+> sit on sky
+That's not something you can sit on.
+
+> sit on ground
+That's not something you can sit on.
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 
