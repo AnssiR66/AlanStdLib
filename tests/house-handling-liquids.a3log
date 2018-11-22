@@ -21,7 +21,7 @@ table here. On the table you see a bottle, a chips bag, a jar and a basket
 > ; ******************************************************************************
 > ; Liquids inside takable containers can be handled by using either the container
 > ; or the liquid itself as the verb object.
-> examine bottle 
+> x bottle 
 The bottle contains some wine.
 
 > ; ==============================================================================
@@ -58,20 +58,22 @@ You already have the wine.
 > put wine on table
 You put the bottle of wine onto the table.
 
-> ; **BUG!** Although the verb 'put_on' (implemented on LIQUID) is reporting that
-> ;          the bottle of wine has been placed on the table, it hasn't:
 > inventory
-You are carrying a bottle.
+You are empty-handed.
 
-> ;          The bottle of wine is still held by the player!
-> take wine from table
-The wine is not on the table.
+> x table
+You notice nothing unusual about the table. On the table you see a bottle, 
+a chips bag, a jar and a basket.
 
-> ;          The bottle of wine is not on the table!
 > x bottle
 The bottle contains some wine.
 
-> 
+> take wine from table
+(the bottle of wine)
+Taken.
+
+> take wine from table
+The wine is not on the table.
 
 > 
 

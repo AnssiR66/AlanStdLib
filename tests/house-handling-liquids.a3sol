@@ -5,7 +5,7 @@
 ; ******************************************************************************
 ; Liquids inside takable containers can be handled by using either the container
 ; or the liquid itself as the verb object.
-examine bottle 
+x bottle 
 ; ==============================================================================
 ; TEST HANDLING VIA CONTAINER
 ; ==============================================================================
@@ -21,11 +21,8 @@ put bottle on table
 take wine
 take wine
 put wine on table
-; **BUG!** Although the verb 'put_on' (implemented on LIQUID) is reporting that
-;          the bottle of wine has been placed on the table, it hasn't:
 inventory
-;          The bottle of wine is still held by the player!
-take wine from table
-;          The bottle of wine is not on the table!
+x table
 x bottle
-
+take wine from table
+take wine from table
