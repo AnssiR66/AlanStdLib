@@ -1,0 +1,28 @@
+; ******************************************************************************
+; *                                                                            *
+; *                           TEST HANDLING LIQUIDS                            *
+; *                                                                            *
+; ******************************************************************************
+; Liquids inside takable containers can be handled by using either the container
+; or the liquid itself as the verb object.
+x bottle 
+; ==============================================================================
+; TEST HANDLING VIA CONTAINER
+; ==============================================================================
+take bottle
+take bottle
+put bottle on table
+take bottle from table
+take bottle from table
+put bottle on table
+; ==============================================================================
+; TEST HANDLING VIA LIQUID
+; ==============================================================================
+take wine
+take wine
+put wine on table
+inventory
+x table
+x bottle
+take wine from table
+take wine from table

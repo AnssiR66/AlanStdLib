@@ -1561,14 +1561,6 @@ EVERY liquid ISA OBJECT
   END VERB pour_on.
 
 
-  VERB fill_with
-    -- when something is filled with a liquid, this something becomes the
-    -- vessel of the liquid:
-    WHEN substance
-       DOES SET vessel OF THIS TO cont.
-  END VERB fill_with.
-
-
   VERB put_in
     WHEN obj
       DOES ONLY
@@ -1628,15 +1620,17 @@ EVERY liquid ISA OBJECT
               THEN "You can't carry" SAY THE THIS. "around in your bare hands."
               ELSIF vessel OF THIS IS NOT takeable
                 THEN "You don't have" SAY THE vessel OF THIS. "of" SAY THIS. "."
-              ELSE LOCATE vessel OF THIS IN hero.
-                "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
+                ELSE LOCATE vessel OF THIS IN hero.
+                  "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
             END IF.
         END IF.
         -- end of implicit taking.
 
         IF THIS IN hero
           -- i.e. if the implicit taking was successful
-          THEN "You put" SAY THE vessel OF THIS. "of" SAY THIS. "onto" SAY THE surface. "."
+          THEN
+            "You put" SAY THE vessel OF THIS. "of" SAY THIS. "onto" SAY THE surface. "."
+            LOCATE vessel OF THIS IN surface.
         END IF.
     WHEN surface
       DOES ONLY "It is not possible to $v" SAY obj. "onto" SAY THE THIS. "."
@@ -1687,8 +1681,15 @@ EVENT check_vessel
     SET vessel OF liq TO null_vessel.
   END FOR.
   SCHEDULE check_vessel AFTER 1.
-END EVENT.
 
+  FOR EACH lc ISA LISTED_CONTAINER DO
+    FOR EACH liq ISA LIQUID, DIRECTLY IN lc
+      DO SET vessel OF liq TO lc.
+    END FOR.
+  END FOR.
+
+  SCHEDULE check_vessel AFTER 1.
+END EVENT.
 
 
 

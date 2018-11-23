@@ -1,0 +1,80 @@
+
+
+The House 
+A rooms & sites setting for various tests. 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta5
+Standard Library v2.1 
+Version 1 
+All rights reserved.
+
+
+The Kitchen
+The south exit leads to your back garden. There is a chair, a fridge and a 
+table here. On the table you see a bottle, a chips bag, a jar and a basket
+.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                           TEST HANDLING LIQUIDS                            *
+> ; *                                                                            *
+> ; ******************************************************************************
+> ; Liquids inside takable containers can be handled by using either the container
+> ; or the liquid itself as the verb object.
+> x bottle 
+The bottle contains some wine.
+
+> ; ==============================================================================
+> ; TEST HANDLING VIA CONTAINER
+> ; ==============================================================================
+> take bottle
+Taken.
+
+> take bottle
+You already have the bottle.
+
+> put bottle on table
+You put the bottle on the table.
+
+> take bottle from table
+You take the bottle from the table.
+
+> take bottle from table
+You already have the bottle.
+
+> put bottle on table
+You put the bottle on the table.
+
+> ; ==============================================================================
+> ; TEST HANDLING VIA LIQUID
+> ; ==============================================================================
+> take wine
+(the bottle of wine)
+Taken.
+
+> take wine
+You already have the wine.
+
+> put wine on table
+You put the bottle of wine onto the table.
+
+> inventory
+You are empty-handed.
+
+> x table
+You notice nothing unusual about the table. On the table you see a bottle, 
+a chips bag, a jar and a basket.
+
+> x bottle
+The bottle contains some wine.
+
+> take wine from table
+(the bottle of wine)
+Taken.
+
+> take wine from table
+The wine is not on the table.
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 
