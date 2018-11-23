@@ -1561,14 +1561,6 @@ EVERY liquid ISA OBJECT
   END VERB pour_on.
 
 
-  VERB fill_with
-    -- when something is filled with a liquid, this something becomes the
-    -- vessel of the liquid:
-    WHEN substance
-       DOES SET vessel OF THIS TO cont.
-  END VERB fill_with.
-
-
   VERB put_in
     WHEN obj
       DOES ONLY
@@ -1689,8 +1681,15 @@ EVENT check_vessel
     SET vessel OF liq TO null_vessel.
   END FOR.
   SCHEDULE check_vessel AFTER 1.
-END EVENT.
 
+  FOR EACH lc ISA LISTED_CONTAINER DO
+    FOR EACH liq ISA LIQUID, DIRECTLY IN lc
+      DO SET vessel OF liq TO lc.
+    END FOR.
+  END FOR.
+
+  SCHEDULE check_vessel AFTER 1.
+END EVENT.
 
 
 

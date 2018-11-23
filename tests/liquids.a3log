@@ -29,12 +29,16 @@ The jar is empty.
 > fill jar with wine
 You can't fill the jar with the wine.
 
-> ; IMPLICIT TAKING REVEALS BUG:
-> pour wine
-(taking the jar of wine first)
+> x bottle
+The bottle contains some wine.
 
-> ; NOTE: The wine has "magically" moved to the jar! This is due to a bug in how
-> ;       'fill_with' is implemented on liquids --- i.e. it always sets the vessel
-> ;       of 'substance' TO 'cont' (regardless if the action failed)!
+> x jar
+The jar is empty.
+
+> pour wine
+(taking the bottle of wine first)
+You pour the wine on the ground.
+
+> 
 
 Do you want to RESTART, RESTORE, QUIT or UNDO? 
