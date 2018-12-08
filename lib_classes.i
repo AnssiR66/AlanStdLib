@@ -1424,8 +1424,20 @@ EVERY liquid ISA OBJECT
 
   VERB ask_for
     DOES ONLY
+      -- Let's preserve the current state of compliance of act:
+      IF act IS compliant
+        THEN MAKE my_game temp_compliant.
+        ELSE MAKE my_game NOT temp_compliant.
+      END IF.
+      MAKE act compliant.
+      -- It is only possible to get something from an NPC
+      -- if the NPC is 'compliant'.
       LOCATE vessel OF THIS IN hero.
       SAY THE act. "gives" SAY THE vessel OF THIS. "of" SAY THIS. "to you."
+      -- Now let's restore act to its original state of compliacne:
+      IF my_game IS NOT temp_compliant
+        THEN MAKE act NOT compliant.
+      END IF.
   END VERB ask_for.
 
 

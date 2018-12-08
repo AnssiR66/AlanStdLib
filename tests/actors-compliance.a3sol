@@ -53,4 +53,6 @@ test compliance of woman
 ; ------------------------
 test compliance of man
 ask man for beer
-; !!!ERROR!!! The 'ask_for' verb is not handling compliance.
+inventory
+test compliance of man
+; OK! compliance is as before.

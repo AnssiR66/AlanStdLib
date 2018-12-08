@@ -106,16 +106,15 @@ The woman is compliant.
 The man is not compliant.
 
 > ask man for beer
-That seems to belong to the man.
+The man gives the beer can of beer to you.
 
 > inventory
-You are carrying a sword, a wine bottle and a magic mirror.
+You are carrying a sword, a beer can, a wine bottle and a magic mirror.
 
 > test compliance of man
 The man is not compliant.
 
-> 
-
+> ; OK! compliance is as before.
 > 
 
 Do you want to RESTART, RESTORE, QUIT or UNDO? 
