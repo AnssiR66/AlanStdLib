@@ -997,10 +997,10 @@ EVERY door ISA OBJECT
         THEN "It is"
         ELSE "They are"
       END IF.
-
+      "currently"
       IF THIS IS NOT open
-        THEN "currently closed."
-        ELSE "currently open."
+        THEN "closed."
+        ELSE "open."
       END IF.
   END VERB examine.
 
@@ -1979,22 +1979,16 @@ EVERY window ISA OBJECT
   IS NOT open.
   IS NOT takeable.
 
-
   VERB examine
     DOES
+      IF THIS IS NOT plural
+        THEN "It is"
+        ELSE "They are"
+      END IF.
+      "currently"
       IF THIS IS NOT open
-        THEN
-          IF THIS IS NOT plural
-            THEN "It is"
-            ELSE "They are"
-          END IF.
-          "currently closed."
-        ELSE
-          IF THIS IS NOT plural
-            THEN "It is"
-            ELSE "They are"
-          END IF.
-          "currently open."
+        THEN "closed."
+        ELSE "open."
       END IF.
   END VERB examine.
 
