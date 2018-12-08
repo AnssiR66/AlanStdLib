@@ -54,10 +54,21 @@ THE mirror IsA object IN woman.
   NAME magic mirror.
 END THE mirror.
 
+
+-- ===============
+-- The Wine Bottle
+-- ===============
+THE wine_bottle IsA listed_container IN woman.
+  NAME wine bottle.
+END THE wine_bottle.
+
+THE wine IsA liquid IN wine_bottle.
+END THE wine.
+
 --==============================================================================
 -- The Man (not compliant)
 --==============================================================================
-THE man IsA female AT beach.
+THE man IsA male AT beach.
   IS NOT compliant.
   HAS ex "A serious lookin man.".
 END THE man.
@@ -68,6 +79,16 @@ END THE man.
 THE sword IsA object IN man.
 END THE sword.
 
+
+-- ========
+-- Beer Can
+-- ========
+THE beer_can IsA listed_container IN man.
+  NAME beer 'can'.
+END THE beer_can.
+
+THE beer IsA liquid IN beer_can.
+END THE beer.
 
 --------------------------------------------------------------------------------
 Start at beach.
