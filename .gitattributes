@@ -57,7 +57,13 @@
 *.htm      text
 *.html     text
 *.css      text
+*.css.map  text
 *.js       text
+
+## ===============
+## SASS/SCSS FILES
+## ===============
+*.scss     text
 
 ## ===================
 ## DOCUMENTATION FILES

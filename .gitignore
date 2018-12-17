@@ -17,6 +17,10 @@
 ## =============
 .project
 
+# ==========
+# Sass Cache
+# ==========
+.sass-cache/
 
 ## Misc Work Files
 ## ===============
