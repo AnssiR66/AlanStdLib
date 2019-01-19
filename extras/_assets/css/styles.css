@@ -6,6 +6,9 @@
   font-weight: 400;
   font-style: normal; }
 /* Highlight Default Theme */
+.listingblock code[data-lang]::before {
+  color: #B4B7B4; }
+
 .listingblock pre[class="highlight"] {
   background-color: #FFFFFF;
   border-radius: 4px;
@@ -55,6 +58,9 @@
       color: #3971ED; }
 
 /* Highlight Theme for Alan */
+.listingblock code[data-lang]::before {
+  color: #D3D0C8; }
+
 .listingblock pre[class=highlight][lang=alan] {
   background-color: #2D2D2D;
   border-radius: 4px;
