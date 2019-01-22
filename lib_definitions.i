@@ -199,16 +199,21 @@ EVERY definition_block ISA LOCATION
   -- attributes for the start section (banner):
   -- ==========================================
 
-  HAS title "My New Game".
-      HAS subtitle "".
-      HAS author "An ALAN Author".
-      HAS year 2017.
-      HAS version "1".
-
   -- These will be shown at the start of the game if you add
-    -- DESCRIBE banner.
+  --    DESCRIBE banner.
   -- after START AT [location].
 
+  HAS    title  "My New Game".
+  HAS subtitle  "".
+  HAS   author  "An ALAN Author".
+  HAS     year  2017.
+  HAS  version  "1".
+  HAS    AlanV  "v3.0 beta6".
+
+  -- The predefined AlanV value is that of the latest Alan release at the time
+  -- the library was last updated. Authors are free to override this with a more
+  -- recent Alan version (or a different one, e.g. a developer snapshot) without
+  -- having to modify the library sources.
 
 
   -- messages for the hero:
@@ -1277,38 +1282,32 @@ END EVENT.
 
 
 
-
-
 -- The banner:
 -- ===========
 
 
 THE banner ISA LOCATION
 
-    DESCRIPTION
+  DESCRIPTION
 
     "$p" STYLE alert. SAY title OF my_game. STYLE normal.
 
     IF subtitle OF my_game <> ""
       THEN "$n" SAY subtitle OF my_game.
-      END IF.
+    END IF.
 
     "$n(C)" SAY year OF my_game. "by" SAY author OF my_game.
 
-    "$nProgrammed with the ALAN Interactive Fiction Language v3.0 beta5
-    $nStandard Library v2.1"
+    "$nProgrammed with the ALAN Interactive Fiction Language" SAY my_game:AlanV.
+    ".$nStandard Library v2.1"
 
     IF version OF my_game <> "0"
       THEN "$nVersion" SAY version OF my_game.
-      END IF.
+    END IF.
 
     "$nAll rights reserved."
 
 END THE banner.
-
-
-
-
 
 
 
