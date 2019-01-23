@@ -747,25 +747,25 @@ END EVENT.
 -- create nasty bugs:
 
 
---+--------------------------+----------+----------+-----------+-----------+
---| Clothing     | Headcover | Topcover | Botcover | Footcover | Handcover |
---+--------------------------+----------+----------+-----------+-----------+
---| hat                    2 |        0 |        0 |         0 |         0 |
---| vest/bra               0 |        2 |        0 |         0 |         0 |
---| undies/panties         0 |        0 |        2 |         0 |         0 |
---| teddy                  0 |        4 |        4 |         0 |         0 |
---| blouse/shirt/T-shirt   0 |        8 |        0 |         0 |         0 |
---| dress/coveralls        0 |        8 |       32 |         0 |         0 |
---| skirt                  0 |        0 |       32 |         0 |         0 |
---| trousers/shorts        0 |        0 |       16 |         0 |         0 |
---| sweater/pullover       0 |       16 |        0 |         0 |         0 |
---| jacket                 0 |       32 |        0 |         0 |         0 |
---| coat                   0 |       64 |       64 |         0 |         0 |
---| socks/stockings        0 |        0 |        0 |         2 |         0 |
---| tights/pantiehose      0 |        0 |        8 |         2 |         0 |
---| shoes/boots            0 |        0 |        0 |         4 |         0 |
---| gloves                 0 |        0 |        0 |         0 |         2 |
---+--------------------------+----------+----------+-----------+-----------+
+--+--------------------------+----------+----------+-----------+------------+
+--| Clothing     | Headcover | Topcover | Botcover | Feetcover | Handscover |
+--+--------------------------+----------+----------+-----------+------------+
+--| hat                    2 |        0 |        0 |         0 |          0 |
+--| vest/bra               0 |        2 |        0 |         0 |          0 |
+--| undies/panties         0 |        0 |        2 |         0 |          0 |
+--| teddy                  0 |        4 |        4 |         0 |          0 |
+--| blouse/shirt/T-shirt   0 |        8 |        0 |         0 |          0 |
+--| dress/coveralls        0 |        8 |       32 |         0 |          0 |
+--| skirt                  0 |        0 |       32 |         0 |          0 |
+--| trousers/shorts        0 |        0 |       16 |         0 |          0 |
+--| sweater/pullover       0 |       16 |        0 |         0 |          0 |
+--| jacket                 0 |       32 |        0 |         0 |          0 |
+--| coat                   0 |       64 |       64 |         0 |          0 |
+--| socks/stockings        0 |        0 |        0 |         2 |          0 |
+--| tights/pantiehose      0 |        0 |        8 |         2 |          0 |
+--| shoes/boots            0 |        0 |        0 |         4 |          0 |
+--| gloves                 0 |        0 |        0 |         0 |          2 |
+--+--------------------------+----------+----------+-----------+------------+
 
 
 
