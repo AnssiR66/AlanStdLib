@@ -1,0 +1,23 @@
+; ******************************************************************************
+; *                                                                            *
+; *                             TEST HERO CLOTHING                             *
+; *                                                                            *
+; ******************************************************************************
+; The hero starts the adventure with some clothing of his own. During the game
+; we need to keep track of clothing items belonging to the hero vs items of the
+; store for various reasons (eg. when we'll script store clerks to carry the
+; hero clothing while he tries on store items, and to pick up and put back store
+; items dropped by the hero).
+; ==============================================================================
+; STARTUP INVENTORY
+; ==============================================================================
+inventory
+examine sneakers
+dbg sneakers
+examine socks
+dbg socks
+examine boxers
+dbg boxers
+examine undershirt
+dbg undershirt
+

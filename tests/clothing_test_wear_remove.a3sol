@@ -1,0 +1,25 @@
+; ******************************************************************************
+; *                                                                            *
+; *                       TEST WEARING/REMOVING CLOTHES                        *
+; *                                                                            *
+; ******************************************************************************
+; This script checks that verbs 'wear' and 'remove' are handling correctly all
+; the attributes of 'clothing' instances as well as Hero's 'wearing' set and the
+; 'worn' instance.
+north
+north
+; ==============================================================================
+; TEST 'remove'
+; ==============================================================================
+inventory
+DBG boxers
+remove boxers
+DBG boxers
+; ==============================================================================
+; TEST 'wear'
+; ==============================================================================
+DBG jeans
+wear jeans
+DBG jeans
+; ** ERROR! ** Wearing the jeans should have made them 'donned' and added them
+;              to the 'wearing' set of Hero!

@@ -1,0 +1,19 @@
+; ******************************************************************************
+; *                                                                            *
+; *                  CLOTHING: TEST MOVING AROUND WORN ITEMS                   *
+; *                                                                            *
+; ******************************************************************************
+; This script will test how the library copes with worn items being moved around
+; and transferred by the various verbs that could dislocate a worn item, either
+; explicitly or implicitly.
+north
+north
+examine basket
+; NOTE: boxers are currently bing worn by hero!
+inventory
+examine boxers
+DBG boxers
+put boxers in basket
+; ** ERROR!!! ** The boxers are still considered donned and worn by Hero:
+DBG boxers
+examine basket

@@ -1,5 +1,5 @@
 --==============================================================================
--- "Clothing" by Tristano Ajmone, 2018.
+-- "Emporium Giorgio Alani" by Tristano Ajmone, 2018.
 --==============================================================================
 -- A small adventure for testing the StdLib's clothing functionality and the
 -- predefined verb reponses.
@@ -15,7 +15,7 @@ IMPORT 'library.i'. -- ALAN Standard Library v2.1
 
 THE my_game IsA DEFINITION_BLOCK
 
-  HAS title    "Clothing".
+  HAS title    "Emporium Giorgio Alani".
   HAS subtitle "An adventure to test clothing.".
   HAS author   "Tristano Ajmone".
   HAS year     2018.
@@ -23,70 +23,885 @@ THE my_game IsA DEFINITION_BLOCK
 
 END THE.
 
+--==============================================================================
+-- LOCATIONS TWEAKS
+--==============================================================================
+
+-- Let's add to all locations some custom attributes:
+
+-- 1. A string attribute with an alternative room name to show when referencing
+--    the room in custom output. Usally a shorter and lowercase version of the
+--    location printed name. Currently used in the 'Reactivate_Assistant' EVENT
+--    to mention where she came from (if the string is empty, 'LOCATION OF' will
+--    be used instead).
+
+-- 2. A string attribute to store the list of exits of a location. Currently
+--    used by the EXITS verb to print the exits on demand.
+
+ADD TO EVERY location
+  HAS room_alt_name "". -- (optional) alternative name to show in events.
+  HAS room_exits "".    -- (optional) text listing the location exits.
+END ADD TO location.
+
+
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+-- THE WORLD MAP
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
+
+-- Let's sketch out the world map rooms, we'll deal with props and furniture
+-- further on...
+
+--         +-------+-------+   +-------+-------+   +-------+-------+
+--         |   WORKSWEAR   |---|      ???      |---|      ???      |
+--         +-------+-------+   +-------+-------+   +-------+-------+
+--                 |        \          |          /        |
+--                 |         \         |         /         |
+--                 |          \        |        /          |
+--         +-------+-------+   +-------+-------+   +-------+-------+
+--         |  SPORTSWEAR   |---| DRESSING ROOM |---|   COSTUMES    |
+--         +-------+-------+   +-------+-------+   +-------+-------+
+--                 |          /        |        \          |
+--                 |         /         |         \         |
+--                 |        /          |          \        |
+--         +-------+-------+   +-------+-------+   +-------+-------+
+--         |  WOMENSWEAR   |---|   MAIN HALL   |---|   MENSWEAR    |
+--         +---------------+   +---------------+   +---------------+
+
+
 
 -- =============================================================================
 
+-- Emporium GA Entrance
 
------ The Dressing Room
+-- =============================================================================
+-- We provide a street connection to the emporium so that later on we can move
+-- the emporium into the main test adventure instead of having separate files.
 
+THE ega_entrance IsA site.
+  NAME 'Outside Emporium Alani'.
+  EXIT north TO ega_hall
+    DOES
+      ----------------
+      -- Sliding Doors
+      ----------------
+      SAY ega_doors:traverse_txt.
+      LOCATE ega_doors AT ega_hall.
+      LOCATE ega_doorframe AT ega_hall.
+      ---------------------
+      -- Personal Assistant
+      ---------------------
+      MAKE personal_assistant following.
+  END EXIT.
+  DESCRIPTION
+    "You're standing in front of the Giorgio Alani Emporium entrance."
+  HAS room_exits "NORTH into the Alan store.".
+END THE ega_entrance.
+--==============================================================================
+
+-- The Main Hall
+
+--==============================================================================
+THE ega_hall IsA room.
+  NAME 'Emporium Alani Main Hall'.
+  HAS room_alt_name "main hall".
+  EXIT east  TO ega_menswear.
+  EXIT west  TO ega_womenswear.
+  EXIT north TO dressing_room.
+  EXIT south TO ega_entrance
+    DOES
+      ----------------
+      -- Sliding Doors
+      ----------------
+      SAY ega_doors:traverse_txt.
+      LOCATE ega_doors AT ega_hall.
+      LOCATE ega_doorframe AT ega_hall.
+      ---------------------
+      -- Personal Assistant
+      ---------------------
+      MAKE personal_assistant NOT following.
+      "The assistant greets your farewell as you leave."
+  END EXIT.
+  DESCRIPTION
+    "This luxurious hall is the crossroad to the various clothing departments of
+     the emporium."
+  HAS room_exits
+    "EAST to Menswear dept., WEST to Womenswear dept., and
+     NORTH to the dressing room.".
+END THE ega_hall.
 
 -- =============================================================================
 
-THE dressing_room IsA LOCATION.
-  
+-- The Dressing Room
+
+-- =============================================================================
+-- We'll place the drssing room at the center of the EGA square, so it can be
+-- accessed from all departments.
+
+THE dressing_room IsA room.
+  NAME 'The Dressing Room'.
+  EXIT south TO ega_hall
+    DOES SCHEDULE Reactivate_Assistant AT hero AFTER 0.
+  END EXIT.
+  EXIT southeast TO ega_menswear
+    DOES SCHEDULE Reactivate_Assistant AT hero AFTER 0.
+  END EXIT.
+  EXIT east TO ega_costumes
+    DOES SCHEDULE Reactivate_Assistant AT hero AFTER 0.
+  END EXIT.
+  EXIT northeast TO ega_free2
+    DOES SCHEDULE Reactivate_Assistant AT hero AFTER 0.
+  END EXIT.
+  EXIT north TO ega_free1
+    DOES SCHEDULE Reactivate_Assistant AT hero AFTER 0.
+  END EXIT.
+  EXIT northwest TO ega_workwear
+    DOES SCHEDULE Reactivate_Assistant AT hero AFTER 0.
+  END EXIT.
+  EXIT west TO ega_sportswear
+    DOES SCHEDULE Reactivate_Assistant AT hero AFTER 0.
+  END EXIT.
+  EXIT southwest TO ega_womenswear
+    DOES SCHEDULE Reactivate_Assistant AT hero AFTER 0.
+  END EXIT.
+  DESCRIPTION
+    "The curtains surrounding this room provide you all the privacy you need to
+     disrobe yourself and try on clothing."
+  HAS room_exits
+    "NORTH to Dept. 1, NORTHEAST to Dept. 2,
+     EAST to Costumes,
+     SOUTHEAST to Menswear,
+     SOUTH to the hall,
+     SOUTHWEST to Womenswear,
+     WEST to Sportswear, and
+     NORTHWEST to Workswear.".
+  VERB undress -- Allow undressing action when in Dressing Room:
+    DOES ONLY
+      IF COUNT DIRECTLY IN worn, ISA CLOTHING > 0
+        THEN EMPTY worn IN hero.
+          "You remove all the items you were wearing."
+        ELSE "You're not wearing anything you can remove."
+      END IF.
+  END VERB undress.  
 END THE dressing_room.
 
--- For now, let's put populate it with some items, just to allow testing. We'll
--- polish the whole enviroment later on...
+-- =============================================================================
+
+-- The Mensware Department
+
+-- =============================================================================
+THE ega_menswear IsA room.
+  NAME 'Mensware Department'.
+  HAS room_alt_name "mensware dept.".
+  EXIT west      TO ega_hall.
+  EXIT north     TO ega_costumes.
+  EXIT northwest TO dressing_room.
+  DESCRIPTION
+    "Everything a man would ever dream wearing can be found here."
+  HAS room_exits
+    "NORTH to Costumes, NORTHWEST to the dressing room, and WEST to the hall.".
+  END THE ega_menswear.
+
+-- =============================================================================
+
+-- The Womensware Department
+
+-- =============================================================================
+THE ega_womenswear IsA room.
+  NAME 'Womensware Department'.
+  HAS room_alt_name "womensware dept.".
+  EXIT east      TO ega_hall.
+  EXIT north     TO ega_sportswear.
+  EXIT northeast TO dressing_room.
+  DESCRIPTION
+    "No woman's fashion dreams could be left unfulfilled by the clothes in this
+     department."
+  HAS room_exits
+    "NORTH to Sportswear, NORTHEAST to the dressing room, and EAST to the hall.".
+END THE ega_womenswear.
+
+-- =============================================================================
+
+-- The Costumes Department
+
+-- =============================================================================
+THE ega_costumes IsA room.
+  NAME 'Costumes Department'.
+  HAS room_alt_name "costumes dept.".
+  EXIT south TO ega_menswear.
+  EXIT west  TO dressing_room.
+  EXIT north TO ega_free2.
+  DESCRIPTION
+    "All around you, you can see costume for any occasion that comes to mind."
+  HAS room_exits
+    "SOUTH to Mensware, NORTH to Dept. 2, and WEST to the dressing room.".
+END THE ega_costumes.
+
+-- =============================================================================
+
+-- The Sportswear Department
+
+-- =============================================================================
+THE ega_sportswear IsA room.
+  NAME 'Sportswear Department'.
+  HAS room_alt_name "sportswear dept.".
+  EXIT north TO ega_workwear.
+  EXIT south TO ega_womenswear.
+  EXIT east  TO dressing_room.
+  DESCRIPTION
+    "Can't think of any sport that you couldn't find gear for in this room."
+  HAS room_exits
+    "NORTH to Workswear, SOUTH to Womensware, and EAST to the dressing room.".
+END THE ega_sportswear.
+
+
+-- =============================================================================
+
+-- The Workwear Department
+
+-- =============================================================================
+THE ega_workwear IsA room.
+  NAME 'Workwear and Safety Department'.
+  HAS room_alt_name "workwear dept.".
+  EXIT south      TO ega_sportswear.
+  EXIT east       TO ega_free1.
+  EXIT southeast  TO dressing_room.
+  DESCRIPTION
+    "Safety first, for every profession you'll find the right workwear here."
+  HAS room_exits
+    "SOUTH to Sportswear, EAST to Dept. 1, and SOUTHEAST to the dressing room.".
+END THE ega_workwear.
+
+-- =============================================================================
+
+-- Department 1 (Unassigned)
+
+-- =============================================================================
+THE ega_free1 IsA room.
+  NAME 'Department #1 (empty)'.
+  HAS room_alt_name "Dept #1".
+  EXIT south TO dressing_room.
+  EXIT east  TO ega_free2.
+  EXIT west  TO ega_workwear.
+  DESCRIPTION
+    "This department is currently unassigned, its showcases empty and awaiting."
+  HAS room_exits
+    "EAST to Dept. 2, WEST to Workwear, and SOUTH to the dressing room.".
+END THE ega_free1.
+
+
+-- =============================================================================
+
+-- Department 2 (Unassigned)
+
+-- =============================================================================
+THE ega_free2 IsA room.
+  NAME 'Department #2 (empty)'.
+  HAS room_alt_name "Dept #2".
+  EXIT southwest TO dressing_room.
+  EXIT west      TO ega_free1.
+  EXIT south     TO ega_costumes.
+  DESCRIPTION
+    "This department is currently unassigned, its showcases empty and awaiting."
+  HAS room_exits
+    "SOUTH to Costumes, WEST to Dept. 1, and SOUTHWEST to the dressing room.".
+END THE ega_free2.
+
+
 --==============================================================================
--- Clothing
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+-- SPECIALIZED CLASSES 
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
-THE tshirt IsA cl_tshirt AT dressing_room.
-  
-END THE tshirt.
+-- Let's create some specialized classes to simplify our coding life...
+
+--=============================================================================
+--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+--------------------------------------------------------------------------------
+-- CLOTHING CLASSES
+-------------------------------------------------------------------------------
+--//////////////////////////////////////////////////////////////////////////////
+--=============================================================================
+
+-- Let's create some clothes classes to simplify the task of creating multiple
+-- clothing items of the same kind...
+
+-- All clothing classes name start with the 'cl_' prefix.
+-- We'll be creating two types of clothing subclasses:
+-- 
+--   (1) Prototypes -- 'proto_' prefix.
+--   (2) General purpose classes -- 'cl_' prefix.
+
+-- The Clothing Table
+--+--------------------------+----------+----------+-----------+------------+
+--| Clothing     | Headcover | Topcover | Botcover | Feetcover | Handscover |
+--+--------------------------+----------+----------+-----------+------------+
+--| hat                    2 |        0 |        0 |         0 |          0 |
+--| vest/bra               0 |        2 |        0 |         0 |          0 |
+--| undies/panties         0 |        0 |        2 |         0 |          0 |
+--| teddy                  0 |        4 |        4 |         0 |          0 |
+--| blouse/shirt/T-shirt   0 |        8 |        0 |         0 |          0 |
+--| dress/coveralls        0 |        8 |       32 |         0 |          0 |
+--| skirt                  0 |        0 |       32 |         0 |          0 |
+--| trousers/shorts        0 |        0 |       16 |         0 |          0 |
+--| sweater/pullover       0 |       16 |        0 |         0 |          0 |
+--| jacket                 0 |       32 |        0 |         0 |          0 |
+--| coat                   0 |       64 |       64 |         0 |          0 |
+--| socks/stockings        0 |        0 |        0 |         2 |          0 |
+--| tights/pantiehose      0 |        0 |        8 |         2 |          0 |
+--| shoes/boots            0 |        0 |        0 |         4 |          0 |
+--| gloves                 0 |        0 |        0 |         0 |          2 |
+--+--------------------------+----------+----------+-----------+------------+
 
 --==============================================================================
--- Furniture and Props
+-- HEADWEAR
 --==============================================================================
+EVERY proto_headwear IsA clothing.
+  HAS headcover 2.
+END EVERY.
+
+EVERY cl_hat IsA proto_headwear.
+  NAME hat.
+END EVERY.
+--==============================================================================
+-- UNDERWEAR
+--==============================================================================
+EVERY proto_underwear IsA clothing.
+  NAME underwear.
+END EVERY.
+--------
+-- Chest
+--------
+EVERY cl_undershirt IsA proto_underwear.
+  NAME undershirt.
+  HAS topcover 2.
+END EVERY.
+---------
+-- Pelvis
+---------
+EVERY cl_underpants IsA proto_underwear.
+  NAME underpants.
+  HAS botcover 2.
+  INDEFINITE ARTICLE "a pair of"
+END EVERY.
+-------
+-- Feet
+-------
+EVERY cl_socks IsA clothing.
+  NAME socks.
+  HAS feetcover 2.
+  INDEFINITE ARTICLE "a pair of"
+END EVERY.
+
+--==============================================================================
+-- FOOTWEAR
+--==============================================================================
+EVERY cl_shoes IsA clothing.
+  NAME shoes.
+  HAS feetcover 4.
+  INDEFINITE ARTICLE "a pair of"
+END EVERY.
+
+--==============================================================================
+-- SHIRTS & OTHER 'Topcover 8' CLOTHES
+--==============================================================================
+EVERY proto_shirt IsA clothing.
+  HAS topcover 8.
+END EVERY.
+
+EVERY cl_tshirt IsA proto_shirt.
+  NAME 'T-shirt'.
+  NAME tshirt.
+  NAME tee.
+END EVERY.
+
+--==============================================================================
+-- LEGWEAR
+--==============================================================================
+
+EVERY proto_skirt IsA clothing.
+  NAME skirt.
+  HAS botcover 32.
+END EVERY.
+
+EVERY proto_trousers IsA clothing.
+  NAME trousers.
+  IS plural.
+  INDEFINITE ARTICLE "a pair of"
+  HAS botcover 16.
+END EVERY.
+
+EVERY proto_pantyhose IsA clothing.
+  NAME pantyhose.
+  IS plural.
+  INDEFINITE ARTICLE "a pair of"
+  HAS botcover 8.
+END EVERY.
+
+
+--==============================================================================
+-- COVERALLS & OVERALLS
+--==============================================================================
+
+EVERY proto_coverall IsA clothing.
+  NAME coverall.
+  NAME coveralls.
+  HAS topcover 8.
+  HAS botcover 32.
+END EVERY.
+
+EVERY proto_overall IsA clothing.
+  NAME overall.
+  NAME overalls.
+  HAS topcover 8.
+  HAS botcover 32.
+END EVERY.
+
+
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+-- CUSTOM VERBS 
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
+
+--==============================================================================
+-- DEBUG CLOTHING VALUES
+--==============================================================================
+-- A helper verb to check the coverage values of individual clothing items.
+
+SYNTAX dbg = dbg (obj)
+  WHERE obj IsA clothing
+    ELSE "This verb can only be used with clothing items."
+
+ADD TO EVERY clothing
+  VERB dbg
+    DOES
+      ---------------------------------------
+      -- Show coverage values (non-zero only)
+      ---------------------------------------
+      "'$1' VALUES:"
+      IF obj:headcover = 0 AND obj:topcover = 0 AND obj:botcover = 0
+      AND obj:feetcover = 0 AND obj:handscover = 0
+        THEN
+          "(none)"
+        ELSE
+          IF obj:headcover > 0
+            THEN "| headcover:" SAY obj:headcover.
+          END IF.
+          IF obj:topcover > 0
+            THEN "| topcover:" SAY obj:topcover.
+          END IF.
+          IF obj:botcover > 0
+            THEN "| botcover:" SAY obj:botcover.
+          END IF.
+          IF obj:feetcover > 0
+            THEN "| feetcover:" SAY obj:feetcover.
+          END IF.
+          IF obj:handscover > 0
+            THEN "| handscover:" SAY obj:handscover.
+          END IF.
+          "|"
+      END IF.
+      ------------------------
+      -- Show if donned or not
+      ------------------------
+      "$nDONNED:"
+      IF obj:donned
+        THEN "Yes"
+        ELSE "No."
+      END IF.
+      -------------------------
+      -- Show if in Hero's worn
+      -------------------------
+      "$nIN WORN:"
+      IF obj IN worn
+        THEN "Yes"
+        ELSE "No."
+      END IF.
+      -----------------------------------------------
+      -- Show in which actors' wearing set is present
+      -----------------------------------------------
+      "$nIN WEARING OF:"
+      FOR EACH ac IsA ACTOR
+        DO
+          IF obj IN wearing OF ac
+            THEN "| " SAY ac.
+          END IF.
+      END FOR.
+  END VERB dbg.
+END ADD TO clothing.
+
+--==============================================================================
+-- LIST EXITS
+--==============================================================================
+
+-- The list of exits in most rooms is too long (and hugly) to be shown in the
+-- description, so I've added a new 'room_exits' attribute on every location to
+-- store a string with the exits lists, which will be shown  on demand via the
+-- EXITS verb.
+
+-- TODO: Find an easy way to print room_exits the first time a room is visited.
+
+SYNTAX exits = exits.
+
+VERB exits
+  DOES
+    IF room_exits OF CURRENT LOCATION <> ""
+      THEN "You can go:" SAY room_exits OF CURRENT LOCATION.
+      ELSE "Sorry, there isn't an exits list available for this location."
+    END IF.
+END VERB exits.
+
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+-- ROOMS FURNITURE & PROPS 
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
+
+-- Time to fill the various rooms with props and stuff...
+
+--=============================================================================
+--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+--------------------------------------------------------------------------------
+-- Emporium GA Entrance 
+-------------------------------------------------------------------------------
+--//////////////////////////////////////////////////////////////////////////////
+--=============================================================================
+
+--==============================================================================
+-- Emporium Doors
+--==============================================================================
+-- These fake doors are automatic-opening doors. They are moved from the emporium
+-- entrance to the main hall when the hero wals in and out of it, to avoid having
+-- recreate them inside too. 
+
+THE ega_doors IsA object AT ega_entrance.
+  NAME 'emporium doors'.
+  NAME doors.
+  DESCRIPTION
+    IF THIS AT ega_entrance
+      THEN
+        "Two large brass doors await northward your entrance into the sanctuary
+         of fashion consumism."
+      ELSE
+        "Two large brass doors lead the way south, out of the fashion temple and
+         back into the world of mortal souls."
+    END IF.
+  NAME door.
+  HAS ex "Engraved on the large brass doors the striped eagle of the ""GA"" logo
+          stares down at you like a g*d upon his humble servant.
+          There are no handles on doors, but you notice a small sensor just above
+          the doorframe".
+  IS NOT takeable.
+  IS NOT movable.
+  HAS traverse_txt
+    "As you move toward the doors they automagically slide open before you.".
+END THE ega_doors.
+
+THE ega_doorframe IsA object AT ega_entrance.
+  NAME doorframe.
+  NAME door frame.
+  NAME sensor.
+  MENTIONED "the doorframe and the sensor"
+  IS scenery.
+  IS plural.
+END THE ega_doorframe.
+
+
+--=============================================================================
+--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+--------------------------------------------------------------------------------
+-- The Dressing Room 
+-------------------------------------------------------------------------------
+--//////////////////////////////////////////////////////////////////////////////
+--=============================================================================
 
 THE chair IsA object AT dressing_room.
   HAS ex "It's a plastic chair.".
 END THE chair.
 
+
+THE basket IsA listed_container AT dressing_room.
+  HAS ex "It's a wicker basket where you can drop discarded clothing items.".
+  INITIALIZE
+    -- We must allow the basket to contain any clothing item:
+    FOR EACH cl ISA clothing
+      DO INCLUDE cl IN allowed OF THIS.
+    END FOR.
+END THE basket.
+
+
 --==============================================================================
--- NPC Actors
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+-- NPC ACTORS
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
-THE costumes_assistant IsA female AT dressing_room.
-  NAME 'costumes assistant'.
+--==============================================================================
+--------------------------------------------------------------------------------
+-- The Personal Assistant 
+--------------------------------------------------------------------------------
+--==============================================================================
+-- This NPC is intended not just a simple clerk but as "personal assistant"
+-- thuroughout the whole visit to the Emporium.
+-- It should be automated to carry out some basic chores:
+--   [x] follow the hero inside the emporium, but:
+--       [x] not leave the Emporium when the Hero does.
+--       [ ] not enter the Dressing Room.
+-- (Still need to implement some of these.)
+
+-- Since the EGA has a single entrance/exit, the Assistant 'following' can be
+-- set and unset via EXITs.
+
+THE personal_assistant IsA female AT ega_hall.
   NAME assistant.
-  HAS ex "She's your costumes assistant.".
-END THE costumes_assistant.
+  NAME personal assistant.
+  INDEFINITE FORM "your personal assistant"
+  HAS ex "She's your personal shopping assistant.".
+END THE personal_assistant.
 
--- =============================================================================
+-- Prevent following hero in Dressing Room:
+WHEN hero AT dressing_room
+  => MAKE personal_assistant NOT following.
+END WHEN.
+
+-- To reactivate following we use this event, triggered by Dressing Room EXITS:
+EVENT Reactivate_Assistant
+  -- If the hero exits the dressing room to a different location than the one
+  -- he entered from then the assistant will need to catch up with him:
+  IF personal_assistant NOT AT hero
+    THEN
+      "The assistant comes running into the room, all the way from the"
+      IF room_alt_name OF location of personal_assistant <> ""
+        THEN SAY room_alt_name OF location of personal_assistant.
+        ELSE SAY location OF personal_assistant.
+      END IF.
+      ", where you left her."
+      LOCATE personal_assistant AT hero.
+  END IF.
+  MAKE personal_assistant following.
+END EVENT.
 
 
------ CLOTHES CLASSES
+
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+-- CLOTHING ITEMS 
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
+
+-- Now let's create the actual clothing items and place them in the various
+-- store departments...
 
 
--- =============================================================================
--- Let's create some clothes classes to simplify the task of creating multiple
--- clothing items of the same kind...
+--==============================================================================
+-- The Dressing Room (temporary) 
+--==============================================================================
+-- For the sake of initial testing, some clothing items will be located in the
+-- Dressing Room, temporarily...
 
-EVERY cl_hat IsA clothing.
-  NAME hat.
+THE dungarees IsA proto_overall AT dressing_room.
+  NAME dungarees.
+  IS plural.
+  INDEFINITE ARTICLE "a pair of"
+  HAS ex "It's a bib-and-brace overalls, fashioned out of blue denim.".
+END THE.
+
+THE red_skirt IsA proto_skirt AT dressing_room.
+  HAS ex "It's a red skirt.".
+END THE.
+
+THE white_pantyhose IsA proto_pantyhose AT dressing_room.
+  NAME white pantyhose.
+  HAS ex "It's a pair of white nylon pantyhose.".
+END THE.
+
+THE blue_jeans IsA proto_trousers AT dressing_room.
+  NAME jeans.
+  NAME blue jeans.
+  HAS ex "It's a pair of blue jeans.".
+END THE.
+
+--=============================================================================
+--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+--------------------------------------------------------------------------------
+-- Mensware Department Clothing
+-------------------------------------------------------------------------------
+--//////////////////////////////////////////////////////////////////////////////
+--=============================================================================
+
+THE tshirt IsA cl_tshirt AT ega_menswear.
+  
+END THE.
+
+--=============================================================================
+--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+--------------------------------------------------------------------------------
+-- Sportsware Department Clothing
+-------------------------------------------------------------------------------
+--//////////////////////////////////////////////////////////////////////////////
+--=============================================================================
+
+THE balaclava IsA clothing AT ega_sportswear.
   HAS headcover 2.
-END EVERY cl_hat.
+  HAS ex
+    "It's a cotton balaclava for winter sports. Basically, a head hood with holes
+     for the eyes and mouth, like the ones used in robberies.".
+END THE.
 
-EVERY cl_tshirt IsA clothing.
-  NAME 'T-shirt'.
-  NAME tshirt.
-  NAME tee.
-  HAS Topcover 2.
-END EVERY cl_tshirt.
+THE ski_goggles IsA clothing AT ega_sportswear.
+  NAME ski goggles.
+  IS plural.
+  HAS headcover 4.
+  INDEFINITE ARTICLE "a pair of"
+  HAS ex
+    "A pair of goggles for skiing, with an elastic band to hold them in place.
+     Its front B-shaped single lens has a special coating adaptative to light.".
+END THE.
+
+--==============================================================================
+-- VALUELESS ITEMS (ORNAMENTALS)
+--==============================================================================
+-- Some wearables that don't have any coverage values and can therefore be worn
+-- freely, without blocking checks...
+
+THE sports_watch IsA clothing AT ega_sportswear.
+  NAME sports watch.
+  HAS ex
+    "A digital watch with all sorts of apps to monitor the heart, measure the
+     temperature, geo-localize, etc.".
+END THE.
+
+--------------------------------------------------------------------------------
+-- Scarfs
+--------------------------------------------------------------------------------
+THE white_scarf IsA clothing AT ega_sportswear.
+  NAME white scarf.
+  HAS ex "Just a white wool scarf.".
+END THE.
+
+THE blue_scarf IsA clothing AT ega_sportswear.
+  NAME blue wool scarf.
+  HAS ex "Just a blue wool scarf.".
+END THE.
+
+THE black_scarf IsA clothing AT ega_sportswear.
+  NAME black scarf.
+  HAS ex "A black wool scarf.".
+END THE.
+
+
+
+
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+-- THE HERO 
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
+
+-- Let's provide our hero with some clothing of its own to start with (we can't
+-- expect him to walk into Alani's emporium naked, right?).
+
+-- TODO:
+-- [ ] Add an attribute to distinguish hero original clothes from Emporium items,
+--     so that the assistant can hold the former for the hero while he's trying
+--     the latter. Also, the assistant will be putting back dropped emporium
+--     clothes to keep the place tidy.
+
+--==============================================================================
+-- CLOTHING
+--==============================================================================
+
+-- TODO:
+-- [ ] Could use an 'owned' attribute to allow INITIALIZE all hero clothing to
+--     have same ARTICLE and place them IN WORN, and slim down code here.
+-- [ ] Order of creation matters: items will be listed in inverse order.
+
+THE hero_socks IsA cl_socks IN worn.
+  NAME socks.
+  NAME my white socks.
+  INDEFINITE ARTICLE "your"
+  DEFINITE ARTICLE "your"
+  HAS ex
+    "A pair of plain white socks turned nicotine yellow in the course of time.
+     The right sock has a hole big enough for your toe to pop out.".
+END THE hero_socks.
+
+THE hero_boxers IsA cl_underpants IN worn.
+  NAME boxers.
+  NAME my white boxers.
+  INDEFINITE ARTICLE "your"
+  DEFINITE ARTICLE "your"
+  HAS ex "Just your boxer shorts (the loose type), white and plain.".
+END THE hero_boxers.
+
+THE hero_undershirt IsA cl_undershirt IN worn.
+  NAME undershirt.
+  NAME my white undershirt.
+  INDEFINITE ARTICLE "your"
+  DEFINITE ARTICLE "your"
+  HAS ex "A plain white T-shaped undershirt, a few stains here and there.".
+END THE.
+
+THE hero_shoes IsA cl_shoes IN worn.
+  NAME sneakers.
+  NAME my black converse sneakers.
+  INDEFINITE ARTICLE "your"
+  DEFINITE ARTICLE "your"
+  HAS ex "Your old and beloved black Converse sneakers, a bit worn out.".
+END THE.
 
 
 --------------------------------------------------------------------------------
-Start at dressing_room.
+START AT ega_entrance.
 DESCRIBE banner.
+"$pType" STYLE EMPHASIZED. "EXITS" STYLE NORMAL.
+  "to view the list of exits of a room."
+"$nUse the" STYLE EMPHASIZED. "DBG" STYLE NORMAL.
+  "command (DGB <ITEM NAME>) to show the coverage values of any clothing item."
+
+-- EOF --

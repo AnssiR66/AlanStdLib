@@ -1,0 +1,44 @@
+; ******************************************************************************
+; *                                                                            *
+; *                          TEST PERSONAL ASSISTANT                           *
+; *                                                                            *
+; ******************************************************************************
+; In the Emporium Alan the hero is met by a personal assistant who follows him
+; everywere he goes into the store, except for the dressing room and when he
+; leaves the emporium. This test if for checking that the assistant automation
+; is working as expected...
+north
+examine assistant
+; ==============================================================================
+; TEST FOLLOWING
+; ==============================================================================
+east
+west
+; ------------------------------------------------------------------------------
+; Leaving The Store
+; ------------------------------------------------------------------------------
+; She should not follow us outside the store...
+south
+; But resume following when we enter again...
+north
+east
+; ==============================================================================
+; DRESSING ROOM
+; ==============================================================================
+; She should not enter the dressing room with us...
+northwest
+; But resume following when we leave...
+southeast
+west
+west
+; ------------------------------------------------------------------------------
+; Chasing The Customer
+; ------------------------------------------------------------------------------
+; Since the Dressing Room is at the center of the store, when the hero exits it
+; to a different room than the one he entered from, the assistant will be left
+; in the original room and she'll have to cross the store to catch up...
+northeast
+southeast
+; And restore following us again...
+west
+

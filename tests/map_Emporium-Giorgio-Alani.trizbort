@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<trizbort version="1.7.1.0">
+	<info>
+		<title>Map of Emporium Giorgio Alani</title>
+		<author>Tristano Ajmoe</author>
+		<description>A map of the Emporium Giorgio Alani setting used for the clothing tests adventure.</description>
+	</info>
+	<map>
+		<room id="1" name="MAIN HALL" subtitle="" x="-96" y="-96" w="128" h="96" region="Emporium Giorgio Alani" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<room id="2" name="STREET" subtitle="Outside EGA" x="-96" y="64" w="128" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" isStartRoom="yes" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<line id="3" name="north" description="" door="yes" lockable="no" openable="no" locked="no" open="no" startText="S" endText="N">
+			<dock index="0" id="1" port="s" />
+			<dock index="1" id="2" port="n" />
+		</line>
+		<room id="4" name="MENSWEAR" subtitle="" x="64" y="-96" w="128" h="96" region="Emporium Giorgio Alani" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<line id="5" name="" description="" startText="E" endText="W">
+			<dock index="0" id="1" port="e" />
+			<dock index="1" id="4" port="w" />
+		</line>
+		<room id="6" name="WOMENSWEAR" subtitle="" x="-256" y="-96" w="128" h="96" region="Emporium Giorgio Alani" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<line id="7" name="" description="" startText="E" endText="W">
+			<dock index="0" id="6" port="e" />
+			<dock index="1" id="1" port="w" />
+		</line>
+		<room id="8" name="DRESSING ROOM" subtitle="" x="-96" y="-224" w="128" h="96" region="Emporium Giorgio Alani" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<line id="9" name="" description="" startText="S" endText="N">
+			<dock index="0" id="8" port="s" />
+			<dock index="1" id="1" port="n" />
+		</line>
+		<line id="10" name="" description="" startText="NE" endText="SW">
+			<dock index="0" id="6" port="ne" />
+			<dock index="1" id="8" port="sw" />
+		</line>
+		<line id="11" name="" description="" startText="SE" endText="NW">
+			<dock index="0" id="8" port="se" />
+			<dock index="1" id="4" port="nw" />
+		</line>
+		<room id="12" name="SPORTSWEAR" subtitle="" x="-256" y="-224" w="128" h="96" region="Emporium Giorgio Alani" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<line id="13" name="" description="" startText="N" endText="S">
+			<dock index="0" id="6" port="n" />
+			<dock index="1" id="12" port="s" />
+		</line>
+		<line id="14" name="" description="" startText="E" endText="W">
+			<dock index="0" id="12" port="e" />
+			<dock index="1" id="8" port="w" />
+		</line>
+		<room id="15" name="COSTUMES" subtitle="" x="64" y="-224" w="128" h="96" region="Emporium Giorgio Alani" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<line id="17" name="" description="" startText="W" endText="E">
+			<dock index="0" id="15" port="w" />
+			<dock index="1" id="8" port="e" />
+		</line>
+		<line id="16" name="" description="" startText="N" endText="S">
+			<dock index="0" id="4" port="n" />
+			<dock index="1" id="15" port="s" />
+		</line>
+		<room id="18" name="WORKWEAR &amp; SAFETY" subtitle="" x="-256" y="-352" w="128" h="96" region="Emporium Giorgio Alani" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<line id="19" name="" description="" startText="S" endText="N">
+			<dock index="0" id="18" port="s" />
+			<dock index="1" id="12" port="n" />
+		</line>
+		<room id="20" name="UNASSINGED 1" subtitle="" x="-96" y="-352" w="128" h="96" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<room id="21" name="UNASSINGED 2" subtitle="" x="64" y="-352" w="128" h="96" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<line id="22" name="" description="" startText="S" endText="N">
+			<dock index="0" id="21" port="s" />
+			<dock index="1" id="15" port="n" />
+		</line>
+		<line id="23" name="" description="" startText="S" endText="N">
+			<dock index="0" id="20" port="s" />
+			<dock index="1" id="8" port="n" />
+		</line>
+		<line id="24" name="" description="" startText="E" endText="W">
+			<dock index="0" id="18" port="e" />
+			<dock index="1" id="20" port="w" />
+		</line>
+		<line id="25" name="" description="" startText="W" endText="E">
+			<dock index="0" id="21" port="w" />
+			<dock index="1" id="20" port="e" />
+		</line>
+		<line id="26" name="" description="" startText="SE" endText="NW">
+			<dock index="0" id="18" port="se" />
+			<dock index="1" id="8" port="nw" />
+		</line>
+		<line id="27" name="" description="" startText="SW" endText="NE">
+			<dock index="0" id="21" port="sw" />
+			<dock index="1" id="8" port="ne" />
+		</line>
+	</map>
+	<settings>
+		<colors>
+			<canvas>White</canvas>
+			<border>MidnightBlue</border>
+			<line>MidnightBlue</line>
+			<selectedLine>Gold</selectedLine>
+			<hoverLine>DarkOrange</hoverLine>
+			<subTitle>MidnightBlue</subTitle>
+			<smallText>MidnightBlue</smallText>
+			<lineText>MidnightBlue</lineText>
+			<grid>#F5F5F5</grid>
+			<startRoom>GreenYellow</startRoom>
+			<endRoom>Red</endRoom>
+		</colors>
+		<regions>
+			<Emporium____Giorgio____Alani Name="Emporium Giorgio Alani" TextColor="MidnightBlue">#FDFBB3</Emporium____Giorgio____Alani>
+			<NoRegion Name="NoRegion" TextColor="Blue">White</NoRegion>
+		</regions>
+		<fonts>
+			<room size="13">Arial</room>
+			<object size="11">Arial</object>
+			<subTitle size="9">Arial</subTitle>
+			<line size="9">Arial</line>
+		</fonts>
+		<grid>
+			<snapTo>yes</snapTo>
+			<visible>yes</visible>
+			<showOrigin>yes</showOrigin>
+			<size>32</size>
+		</grid>
+		<lines>
+			<width>2</width>
+			<arrowSize>12</arrowSize>
+			<textOffset>4</textOffset>
+		</lines>
+		<rooms>
+			<darknessStripeSize>24</darknessStripeSize>
+			<objectListOffset>4</objectListOffset>
+			<connectionStalkLength>32</connectionStalkLength>
+			<preferredDistanceBetweenRooms>64</preferredDistanceBetweenRooms>
+			<defaultRoomName>Cave</defaultRoomName>
+			<defaultRoomShape>0</defaultRoomShape>
+		</rooms>
+		<ui>
+			<handleSize>12</handleSize>
+			<snapToElementSize>16</snapToElementSize>
+		</ui>
+		<margins>
+			<documentSpecific>no</documentSpecific>
+			<horizontal>0</horizontal>
+			<vertical>0</vertical>
+		</margins>
+		<keypadNavigation>
+			<creationModifier>control</creationModifier>
+			<unexploredModifier>alt</unexploredModifier>
+		</keypadNavigation>
+	</settings>
+</trizbort>

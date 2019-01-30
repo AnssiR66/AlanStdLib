@@ -1,0 +1,138 @@
+
+
+Emporium Giorgio Alani 
+An adventure to test clothing. 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta5
+Standard Library v2.1 
+Version 1 
+All rights reserved. 
+
+Type EXITS to view the list of exits of a room. 
+Use the DBG command (DGB <ITEM NAME>) to show the coverage values of any
+clothing item.
+
+
+Outside Emporium Alani
+You're standing in front of the Giorgio Alani Emporium entrance. Two
+large brass doors await northward your entrance into the sanctuary of
+fashion consumism.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                             CLOTHING PROBLEMS                              *
+> ; *                                                                            *
+> ; ******************************************************************************
+> ; The goal of this test is to highlight problems with the clothing class. 
+> north
+As you move toward the doors they automagically slide open before you.
+
+Emporium Alani Main Hall
+This luxurious hall is the crossroad to the various clothing departments
+of the emporium. Two large brass doors lead the way south, out of the
+fashion temple and back into the world of mortal souls.There is your
+personal assistant here.
+
+> north
+The Dressing Room
+The curtains surrounding this room provide you all the privacy you need
+to disrobe yourself and try on clothing. There is a chair, a basket, a
+pair of dungarees, a skirt, a pair of white pantyhose and a pair of jeans 
+here.
+
+> ; ==============================================================================
+> ; DEBUG CLOTHES VALUES
+> ; ==============================================================================
+> dbg skirt
+'skirt' VALUES: | botcover: 32 | 
+DONNED: No. 
+IN WORN: No. 
+IN WEARING OF:
+
+> dbg jeans
+'jeans' VALUES: | botcover: 16 | 
+DONNED: No. 
+IN WORN: No. 
+IN WEARING OF:
+
+> dbg dungarees
+'dungarees' VALUES: | topcover: 8 | botcover: 32 | 
+DONNED: No. 
+IN WORN: No. 
+IN WEARING OF:
+
+> dbg pantyhose
+'white pantyhose' VALUES: | botcover: 8 | 
+DONNED: No. 
+IN WORN: No. 
+IN WEARING OF:
+
+> ; ==============================================================================
+> ; TEST SKIRT
+> ; ==============================================================================
+> ; The code is designed to allow wearing/removing lower legwear while wearing a
+> ; skirt, on the assumption that a skirt doesn't prevent it.
+> wear skirt
+You pick up the skirt and put it on.
+
+> ; ------------------------------------------------------------------------------
+> ; SKIRT + PANTYHOSE
+> ; ------------------------------------------------------------------------------
+> wear pantyhose
+You pick up the white pantyhose and put them on.
+
+> ; ------------------------------------------------------------------------------
+> ; SKIRT + TROUSERS
+> ; ------------------------------------------------------------------------------
+> ; Although trousers have a lower 'botcover' value (16) than skirt (32) it's not
+> ; possible to wear them while wearing a skirt.
+> ; 
+> ; ** ERR??? ** Is this an error or is it intended to be so?
+> wear jeans
+You pick up the jeans. You're already wearing your socks (being worn), 
+your boxers (being worn), your undershirt (being worn), your sneakers 
+(being worn), a pair of white pantyhose and a skirt. Trying to put the 
+jeans on isn't very sensible.
+
+> ; Check if removing pantyhose changes this:
+> remove pantyhose
+You take off the white pantyhose.
+
+> wear jeans
+You're already wearing your boxers (being worn), your undershirt (being
+worn), your sneakers (being worn), your socks (being worn) and a skirt. 
+Trying to put the jeans on isn't very sensible.
+
+> ; ==============================================================================
+> ; TEST COVERALLS
+> ; ==============================================================================
+> ; Since coveralls (as indicated in the Clothing Table) have the same 'botcover'
+> ; value of skirts, they end up also allowing wearing lower legwear while worn:
+> undress
+You remove all the items you were wearing.
+
+> examine dungarees
+It's a bib-and-brace overalls, fashioned out of blue denim.
+
+> wear dungarees
+You pick up the dungarees and put them on.
+
+> ; ------------------------------------------------------------------------------
+> ; COVERALLS + PANTYHOSE
+> ; ------------------------------------------------------------------------------
+> ; ** ERR!!! ** Coveralls should prevent wearing other legwear:
+> wear pantyhose
+You put on the white pantyhose.
+
+> ; ------------------------------------------------------------------------------
+> ; COVERALLS + TROUSERS
+> ; ------------------------------------------------------------------------------
+> wear jeans
+You're already wearing your socks (being worn), your boxers (being worn), 
+your undershirt (being worn), your sneakers (being worn), a pair of white
+pantyhose (being worn) and a pair of dungarees. Trying to put the jeans 
+on isn't very sensible.
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

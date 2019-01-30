@@ -1,0 +1,89 @@
+
+
+Emporium Giorgio Alani 
+An adventure to test clothing. 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta5
+Standard Library v2.1 
+Version 1 
+All rights reserved. 
+
+Type EXITS to view the list of exits of a room. 
+Use the DBG command (DGB <ITEM NAME>) to show the coverage values of any
+clothing item.
+
+
+Outside Emporium Alani
+You're standing in front of the Giorgio Alani Emporium entrance. Two
+large brass doors await northward your entrance into the sanctuary of
+fashion consumism.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                       TEST WEARING/REMOVING CLOTHES                        *
+> ; *                                                                            *
+> ; ******************************************************************************
+> ; This script checks that verbs 'wear' and 'remove' are handling correctly all
+> ; the attributes of 'clothing' instances as well as Hero's 'wearing' set and the
+> ; 'worn' instance.
+> north
+As you move toward the doors they automagically slide open before you.
+
+Emporium Alani Main Hall
+This luxurious hall is the crossroad to the various clothing departments
+of the emporium. Two large brass doors lead the way south, out of the
+fashion temple and back into the world of mortal souls.There is your
+personal assistant here.
+
+> north
+The Dressing Room
+The curtains surrounding this room provide you all the privacy you need
+to disrobe yourself and try on clothing. There is a chair, a basket, a
+pair of dungarees, a skirt, a pair of white pantyhose and a pair of jeans 
+here.
+
+> ; ==============================================================================
+> ; TEST 'remove'
+> ; ==============================================================================
+> inventory
+You are empty-handed. You are wearing your undershirt, your sneakers, your 
+boxers and your socks.
+
+> DBG boxers
+'boxers' VALUES: | botcover: 2 | 
+DONNED: Yes 
+IN WORN: Yes 
+IN WEARING OF: | hero
+
+> remove boxers
+You take off your boxers.
+
+> DBG boxers
+'boxers' VALUES: | botcover: 2 | 
+DONNED: No. 
+IN WORN: No. 
+IN WEARING OF:
+
+> ; ==============================================================================
+> ; TEST 'wear'
+> ; ==============================================================================
+> DBG jeans
+'jeans' VALUES: | botcover: 16 | 
+DONNED: No. 
+IN WORN: No. 
+IN WEARING OF:
+
+> wear jeans
+You pick up the jeans and put them on.
+
+> DBG jeans
+'jeans' VALUES: | botcover: 16 | 
+DONNED: No. 
+IN WORN: Yes 
+IN WEARING OF:
+
+> ; ** ERROR! ** Wearing the jeans should have made them 'donned' and added them
+> ;              to the 'wearing' set of Hero!
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

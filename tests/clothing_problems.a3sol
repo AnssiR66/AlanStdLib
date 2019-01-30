@@ -1,0 +1,53 @@
+; ******************************************************************************
+; *                                                                            *
+; *                             CLOTHING PROBLEMS                              *
+; *                                                                            *
+; ******************************************************************************
+; The goal of this test is to highlight problems with the clothing class. 
+north
+north
+; ==============================================================================
+; DEBUG CLOTHES VALUES
+; ==============================================================================
+dbg skirt
+dbg jeans
+dbg dungarees
+dbg pantyhose
+; ==============================================================================
+; TEST SKIRT
+; ==============================================================================
+; The code is designed to allow wearing/removing lower legwear while wearing a
+; skirt, on the assumption that a skirt doesn't prevent it.
+wear skirt
+; ------------------------------------------------------------------------------
+; SKIRT + PANTYHOSE
+; ------------------------------------------------------------------------------
+wear pantyhose
+; ------------------------------------------------------------------------------
+; SKIRT + TROUSERS
+; ------------------------------------------------------------------------------
+; Although trousers have a lower 'botcover' value (16) than skirt (32) it's not
+; possible to wear them while wearing a skirt.
+; 
+; ** ERR??? ** Is this an error or is it intended to be so?
+wear jeans
+; Check if removing pantyhose changes this:
+remove pantyhose
+wear jeans
+; ==============================================================================
+; TEST COVERALLS
+; ==============================================================================
+; Since coveralls (as indicated in the Clothing Table) have the same 'botcover'
+; value of skirts, they end up also allowing wearing lower legwear while worn:
+undress
+examine dungarees
+wear dungarees
+; ------------------------------------------------------------------------------
+; COVERALLS + PANTYHOSE
+; ------------------------------------------------------------------------------
+; ** ERR!!! ** Coveralls should prevent wearing other legwear:
+wear pantyhose
+; ------------------------------------------------------------------------------
+; COVERALLS + TROUSERS
+; ------------------------------------------------------------------------------
+wear jeans

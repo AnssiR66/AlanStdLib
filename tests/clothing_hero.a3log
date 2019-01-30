@@ -1,0 +1,79 @@
+
+
+Emporium Giorgio Alani 
+An adventure to test clothing. 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta5
+Standard Library v2.1 
+Version 1 
+All rights reserved. 
+
+Type EXITS to view the list of exits of a room. 
+Use the DBG command (DGB <ITEM NAME>) to show the coverage values of any
+clothing item.
+
+
+Outside Emporium Alani
+You're standing in front of the Giorgio Alani Emporium entrance. Two
+large brass doors await northward your entrance into the sanctuary of
+fashion consumism.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                             TEST HERO CLOTHING                             *
+> ; *                                                                            *
+> ; ******************************************************************************
+> ; The hero starts the adventure with some clothing of his own. During the game
+> ; we need to keep track of clothing items belonging to the hero vs items of the
+> ; store for various reasons (eg. when we'll script store clerks to carry the
+> ; hero clothing while he tries on store items, and to pick up and put back store
+> ; items dropped by the hero).
+> ; ==============================================================================
+> ; STARTUP INVENTORY
+> ; ==============================================================================
+> inventory
+You are empty-handed. You are wearing your undershirt, your sneakers, your 
+boxers and your socks.
+
+> examine sneakers
+Your old and beloved black Converse sneakers, a bit worn out.
+
+> dbg sneakers
+'sneakers' VALUES: | feetcover: 4 | 
+DONNED: Yes 
+IN WORN: Yes 
+IN WEARING OF: | hero
+
+> examine socks
+A pair of plain white socks turned nicotine yellow in the course of time.
+The right sock has a hole big enough for your toe to pop out.
+
+> dbg socks
+'socks' VALUES: | feetcover: 2 | 
+DONNED: Yes 
+IN WORN: Yes 
+IN WEARING OF: | hero
+
+> examine boxers
+Just your boxer shorts (the loose type), white and plain.
+
+> dbg boxers
+'boxers' VALUES: | botcover: 2 | 
+DONNED: Yes 
+IN WORN: Yes 
+IN WEARING OF: | hero
+
+> examine undershirt
+A plain white T-shaped undershirt, a few stains here and there.
+
+> dbg undershirt
+'undershirt' VALUES: | topcover: 2 | 
+DONNED: Yes 
+IN WORN: Yes 
+IN WEARING OF: | hero
+
+> 
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 
