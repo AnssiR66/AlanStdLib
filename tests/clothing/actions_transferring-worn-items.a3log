@@ -3,7 +3,7 @@
 Emporium Giorgio Alani 
 An adventure to test clothing. 
 (C) 2018 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0 beta5
+Programmed with the ALAN Interactive Fiction Language v3.0 beta6.
 Standard Library v2.1 
 Version 1 
 All rights reserved. 
@@ -16,22 +16,16 @@ clothing item.
 Outside Emporium Alani
 You're standing in front of the Giorgio Alani Emporium entrance. Two
 large brass doors await northward your entrance into the sanctuary of
-fashion consumism.
+fashion consumism. 
 
 > ; ******************************************************************************
 > ; *                                                                            *
-> ; *                            CLOTHING: CRASH BUG                             *
+> ; *                  CLOTHING: TEST MOVING AROUND WORN ITEMS                   *
 > ; *                                                                            *
 > ; ******************************************************************************
-> ; This test demonstrated a bug that crashes Alan, related to clothing:
-> ; 
-> ;     SYSTEM ERROR: Stack is not empty in main loop
-> ; 
-> ; This crash occurs at the next command after giving away a clothing item that
-> ; was worn by the hero.
-> ; 
-> ; The bug was confirmed to occur with both latest Alan release (v3.0 beta6) as
-> ; well as latest dev snapshot (v3.0 beta6 build 1862).
+> ; This script will test how the library copes with worn items being moved around
+> ; and transferred by the various verbs that could dislocate a worn item, either
+> ; explicitly or implicitly.
 > north
 As you move toward the doors they automagically slide open before you.
 
@@ -41,6 +35,17 @@ of the emporium. Two large brass doors lead the way south, out of the
 fashion temple and back into the world of mortal souls.There is your
 personal assistant here.
 
+> north
+The Dressing Room
+The curtains surrounding this room provide you all the privacy you need
+to disrobe yourself and try on clothing. There is a chair, a basket, a
+pair of dungarees, a skirt, a pair of white pantyhose and a pair of jeans 
+here.
+
+> examine basket
+The basket is empty.
+
+> ; NOTE: boxers are currently bing worn by hero!
 > inventory
 You are empty-handed. You are wearing your undershirt, your sneakers, your 
 boxers and your socks.
@@ -48,33 +53,25 @@ boxers and your socks.
 > examine boxers
 Just your boxer shorts (the loose type), white and plain.
 
-> ; NOTE: boxers are currently bing worn by hero!
-> dbg boxers
+> DBG boxers
 'boxers' VALUES: | botcover: 2 | 
 DONNED: Yes 
 IN WORN: Yes 
 IN WEARING OF: | hero
 
-> give boxers to assistant
-(taking your boxers first)
-You give your boxers to the assistant.
+> put boxers in basket
+You put your boxers into the basket.
 
-> ; Now comes the crash (using 3.0beta6):
-> dbg boxers
+> ; ** ERROR!!! ** The boxers are still considered donned and worn by Hero:
+> DBG boxers
 'boxers' VALUES: | botcover: 2 | 
 DONNED: Yes 
-IN WORN: No. 
-IN WEARING OF: | hero 
+IN WORN: Yes 
+IN WEARING OF: | hero
 
-As you enter the twilight zone of Adventures, you stumble and fall to
-your knees. In front of you, you can vaguely see the outlines of an
-Adventure that never was.
+> examine basket
+The basket is empty.
 
-SYSTEM ERROR: Stack is not empty in main loop
-At source line 696 in 'clothing.alan':
-WHEN hero AT dressing_room
+> 
 
-<If you are the creator of this piece of Interactive Fiction, please help
-debug this Alan system error. Collect *all* the sources, and, if
-possible, an exact transcript of the commands that led to this error, in
-a zip-file and send it to support@alanif.se. Thank you!>
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

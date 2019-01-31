@@ -10,12 +10,17 @@
 *.ifid
 *.log
 *.sav
-!tests/meta-verbs_arun-different.sav
+!tests/misc/meta-verbs_arun-different.sav
 
 ## =============
 ## AlanIDE Files
 ## =============
 .project
+
+## =================
+## Trizbort Settings
+## =================
+appsettings.json
 
 # ==========
 # Sass Cache

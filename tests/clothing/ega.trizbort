@@ -3,7 +3,7 @@
 	<info>
 		<title>Map of Emporium Giorgio Alani</title>
 		<author>Tristano Ajmoe</author>
-		<description>A map of the Emporium Giorgio Alani setting used for the clothing tests adventure.</description>
+		<description>A map of the Emporium Giorgio Alani adventure used to test clothing in the Alan Standard Library.</description>
 	</info>
 	<map>
 		<room id="1" name="MAIN HALL" subtitle="" x="-96" y="-96" w="128" h="96" region="Emporium Giorgio Alani" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
@@ -58,8 +58,8 @@
 			<dock index="0" id="18" port="s" />
 			<dock index="1" id="12" port="n" />
 		</line>
-		<room id="20" name="UNASSINGED 1" subtitle="" x="-96" y="-352" w="128" h="96" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
-		<room id="21" name="UNASSINGED 2" subtitle="" x="64" y="-352" w="128" h="96" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<room id="20" name="UNASSIGNED 1" subtitle="" x="-96" y="-352" w="128" h="96" region="Emporium Giorgio Alani" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<room id="21" name="UNASSIGNED 2" subtitle="" x="64" y="-352" w="128" h="96" region="Emporium Giorgio Alani" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
 		<line id="22" name="" description="" startText="S" endText="N">
 			<dock index="0" id="21" port="s" />
 			<dock index="1" id="15" port="n" />
