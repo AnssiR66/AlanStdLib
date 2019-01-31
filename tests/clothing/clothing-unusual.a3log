@@ -87,7 +87,8 @@ You pick up the ski goggles and put them on.
 
 > inv
 You are empty-handed. You are wearing your socks, your boxers, your 
-undershirt, your sneakers, a pair of ski goggles and a balaclava.
+undershirt, your sneakers, your khakis, a pair of ski goggles and a 
+balaclava.
 
 > ; Test inverse order:
 > remove goggles and balaclava
@@ -100,9 +101,9 @@ You put on the ski goggles.
 
 > wear balaclava
 You're already wearing your boxers (being worn), your undershirt (being
-worn), your sneakers (being worn), your socks (being worn) and a pair of 
-ski goggles (being worn). Trying to put the balaclava on isn't very
-sensible.
+worn), your sneakers (being worn), your khakis (being worn), your socks 
+(being worn) and a pair of ski goggles (being worn). Trying to put the 
+balaclava on isn't very sensible.
 
 > ; ==============================================================================
 > ; VALUELESS ITEMS (ORNAMENTALS)
@@ -124,7 +125,8 @@ You pick up the sports watch and put it on.
 
 > inv
 You are carrying a balaclava. You are wearing your socks, your boxers, 
-your undershirt, your sneakers, a sports watch and a pair of ski goggles.
+your undershirt, your sneakers, your khakis, a sports watch and a pair of 
+ski goggles.
 
 > ; ------------------------------------------------------------------------------
 > ; WEARNING MULTIPLE SAME-ITEMS (SCARFS)
@@ -171,7 +173,7 @@ You pick up the black scarf and put it on.
 > inv
 You are carrying a balaclava. You are wearing a white scarf, a blue wool
 scarf, a black scarf, your socks, your boxers, your undershirt, your 
-sneakers, a sports watch and a pair of ski goggles.
+sneakers, your khakis, a sports watch and a pair of ski goggles.
 
 > 
 

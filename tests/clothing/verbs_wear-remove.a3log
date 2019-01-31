@@ -47,7 +47,7 @@ here.
 > ; ==============================================================================
 > inventory
 You are empty-handed. You are wearing your undershirt, your sneakers, your 
-boxers and your socks.
+khakis, your boxers and your socks.
 
 > DBG boxers
 'boxers' VALUES: | botcover: 2 | 
@@ -56,13 +56,14 @@ IN WORN: Yes
 IN WEARING OF: | hero
 
 > remove boxers
-You take off your boxers.
+You are wearing your undershirt, your sneakers, your khakis, your boxers 
+and your socks. Trying to take your boxers off isn't very sensible.
 
 > DBG boxers
 'boxers' VALUES: | botcover: 2 | 
-DONNED: No. 
-IN WORN: No. 
-IN WEARING OF:
+DONNED: Yes 
+IN WORN: Yes 
+IN WEARING OF: | hero
 
 > ; ==============================================================================
 > ; TEST 'wear'
@@ -74,12 +75,15 @@ IN WORN: No.
 IN WEARING OF:
 
 > wear jeans
-You pick up the jeans and put them on.
+You pick up the jeans. You're already wearing your undershirt (being worn)
+, your sneakers (being worn), your khakis (being worn), your boxers 
+(being worn) and your socks (being worn). Trying to put the jeans on
+isn't very sensible.
 
 > DBG jeans
 'jeans' VALUES: | botcover: 16 | 
 DONNED: No. 
-IN WORN: Yes 
+IN WORN: No. 
 IN WEARING OF:
 
 > ; ** ERROR! ** Wearing the jeans should have made them 'donned' and added them
