@@ -940,6 +940,11 @@ THE hero_shoes IsA cl_shoes IN worn.
   HAS ex "Your old and beloved black Converse sneakers, a bit worn out.".
 END THE.
 
+--------------------------------------------------------------------------------
+-- Trousers
+--------------------------------------------------------------------------------
+
+
 THE hero_trousers IsA proto_trousers IN worn.
   NAME khakis.
   NAME my khakis.
@@ -948,6 +953,32 @@ THE hero_trousers IsA proto_trousers IN worn.
   DEFINITE ARTICLE "your"
   HAS ex "A pair of khaki beige cotton pants.".
 END THE.
+
+-- Clothes are also containers (to allow pockets, etc.).
+-- We'll add some things the Hero's trousers to test how their are dealt with...
+
+-- ----------
+-- The Wallet
+-- ----------
+THE wallet IsA object IN hero_trousers.
+  INDEFINITE ARTICLE "your"
+  DEFINITE ARTICLE "your"
+  HAS ex "Your leather wallet.".
+END THE wallet.
+
+
+-- ----------
+-- The Kippah
+-- ----------
+-- We also add a wearable item in the trousers, to check that it's seen as being
+-- carried and not worn.
+
+THE kippah IsA clothing IN hero_trousers.
+  HAS head_cover 2.
+  INDEFINITE ARTICLE "your"
+  DEFINITE ARTICLE "your"
+  HAS ex "It's your kippah. You always carry it around with you.".
+END THE kippah.
 
 
 --------------------------------------------------------------------------------

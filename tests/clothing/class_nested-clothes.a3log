@@ -1,0 +1,65 @@
+
+
+Emporium Giorgio Alani 
+An adventure to test clothing. 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta6.
+Standard Library v2.1 
+Version 1 
+All rights reserved. 
+
+Type EXITS to view the list of exits of a room. 
+Use the DBG command (DGB <ITEM NAME>) to show the coverage values of any
+clothing item.
+
+
+Outside Emporium Alani
+You're standing in front of the Giorgio Alani Emporium entrance. Two
+large brass doors await northward your entrance into the sanctuary of
+fashion consumism.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                            TEST NESTED CLOTHING                            *
+> ; *                                                                            *
+> ; ******************************************************************************
+> ; The library defines the 'clothing' class as a container, to allow pockets, etc.
+> ; Here we must test how the library handles clothing items inside other clothes,
+> ; and that wearing the latter doesn't affect the former.
+> 
+
+> ; ** NOTE ** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ;            This test file will become truely useful only after the current
+> ;            initialization problems with nested clothing are solved. It would
+> ;            then be used to do extensive testing on handling nested clothes,
+> ;            like moving them around, have NPCs wear and remove them, etc.
+> ;            Currently this file can't get into any advanced testing.
+> ;            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> examine khakis
+A pair of khaki beige cotton pants. Your khakis contain your kippah and 
+your wallet.
+
+> DBG khakis
+'khakis' VALUES: | botcover: 16 | 
+DONNED: Yes 
+IN WORN: Yes 
+IN WEARING OF: | hero
+
+> ; Inside the trousers (pocket) we have kippah, which is a wearable item.
+> examine kippah
+It's your kippah. You always carry it around with you.
+
+> DBG kippah
+'kippah' VALUES: (none) 
+DONNED: Yes 
+IN WORN: Yes 
+IN WEARING OF: | hero
+
+> ; ** ERROR! ** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ;              The kippah shouldn't be accounted as being worn, but just carried.
+> ;              The library needs to check at initialize time that only clothes
+> ;              which are DIRECTLY in Hero should be treated as worn items.
+> ;              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

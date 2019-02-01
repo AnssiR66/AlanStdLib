@@ -41,6 +41,37 @@ pair of dungarees, a skirt, a pair of white pantyhose and a pair of jeans
 here.
 
 > ; ==============================================================================
+> ; NESTED CLOTHING
+> ; ==============================================================================
+> ; The library defines the 'clothing' class as a container, to allow pockets, etc.
+> ; Here we must test how the library handles clothing items inside other clothes,
+> ; and that wearing the latter doesn't affect the former.
+> examine khakis
+A pair of khaki beige cotton pants. Your khakis contain your kippah and 
+your wallet.
+
+> DBG khakis
+'khakis' VALUES: | botcover: 16 | 
+DONNED: Yes 
+IN WORN: Yes 
+IN WEARING OF: | hero
+
+> ; Inside the trousers (pocket) we have kippah, which is a wearable item.
+> examine kippah
+It's your kippah. You always carry it around with you.
+
+> DBG kippah
+'kippah' VALUES: (none) 
+DONNED: Yes 
+IN WORN: Yes 
+IN WEARING OF: | hero
+
+> ; ** ERROR! ** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ;              The kippah shouldn't be accounted as being worn, but just carried.
+> ;              The library needs to check at initialize time that only clothes
+> ;              which are DIRECTLY in Hero should be treated as worn items.
+> ;              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ; ==============================================================================
 > ; DEBUG CLOTHES VALUES
 > ; ==============================================================================
 > dbg skirt
