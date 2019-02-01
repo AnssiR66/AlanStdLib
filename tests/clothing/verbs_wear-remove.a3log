@@ -32,7 +32,7 @@ As you move toward the doors they automagically slide open before you.
 Emporium Alani Main Hall
 This luxurious hall is the crossroad to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
-fashion temple and back into the world of mortal souls.There is your
+fashion temple and back into the world of mortal souls. There is your
 personal assistant here.
 
 > north
@@ -81,12 +81,10 @@ You pick up the jeans and put them on.
 
 > DBG jeans
 'jeans' VALUES: | botcover: 16 | 
-DONNED: No. 
+DONNED: Yes 
 IN WORN: Yes 
-IN WEARING OF:
+IN WEARING OF: | hero
 
-> ; ** ERROR! ** Wearing the jeans should have made them 'donned' and added them
-> ;              to the 'wearing' set of Hero!
 > 
 
 Do you want to RESTART, RESTORE, QUIT or UNDO? 

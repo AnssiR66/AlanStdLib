@@ -22,5 +22,3 @@ DBG boxers
 DBG jeans
 wear jeans
 DBG jeans
-; ** ERROR! ** Wearing the jeans should have made them 'donned' and added them
-;              to the 'wearing' set of Hero!

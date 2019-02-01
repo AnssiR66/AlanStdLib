@@ -347,9 +347,6 @@ EVERY clothing ISA OBJECT
 --------------------------------------------------------------------
 
 
-    --IF THIS IN tempworn
-      --THEN
-
     IF handscover OF THIS <> 0 AND handscover OF THIS <= SUM OF handscover DIRECTLY IN worn
       THEN
         INCREASE wear_flag OF hero BY 5.
@@ -434,32 +431,42 @@ EVERY clothing ISA OBJECT
 
     IF wear_flag OF hero >1
       THEN
+        -- -------------------------------
+        -- The clothing item can't be worn
+        -- -------------------------------
         IF THIS NOT IN hero
+        -- >>> implicit taking: >>>
           THEN "You pick up" SAY THE THIS. "."
         END IF.
-
         LOCATE THIS IN hero.
-        LIST worn.
+        -- <<< implicit taking. <<<
 
+        LIST worn.
         "Trying to put" SAY THE THIS. "on isn't very sensible."
 
-
-    ELSIF wear_flag OF hero = 1
-      THEN
+      ELSE
+        -- -----------------------------
+        -- The clothing item can be worn
+        -- -----------------------------
+        MAKE THIS donned.
         LOCATE THIS IN worn.
-
-        "You pick up" SAY THE THIS.
-
-        IF THIS IS NOT plural
-          THEN "and put it on."
-          ELSE "and put them on."
-        END IF.
-
-    ELSE
-      LOCATE THIS IN worn.
-      MAKE THIS donned.
-      INCLUDE THIS IN wearing OF hero.
-      "You put on" SAY THE THIS. "."
+        INCLUDE THIS IN wearing OF hero.
+        IF wear_flag OF hero = 1
+          THEN
+            -- --------------------------
+            -- The item is taken and worn
+            -- --------------------------
+            "You pick up" SAY THE THIS.
+            IF THIS IS NOT plural
+              THEN "and put it on."
+              ELSE "and put them on."
+            END IF.
+          ELSE
+            -- -----------------------
+            -- The item is simply worn
+            -- -----------------------
+            "You put on" SAY THE THIS. "."
+          END IF.
     END IF.
 
 END VERB wear.
