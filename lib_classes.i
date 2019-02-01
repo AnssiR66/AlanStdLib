@@ -439,12 +439,10 @@ EVERY clothing ISA OBJECT
         END IF.
 
         LOCATE THIS IN hero.
-        EMPTY worn IN tempworn.
-        LIST tempworn.
+        LIST worn.
 
         "Trying to put" SAY THE THIS. "on isn't very sensible."
 
-        EMPTY tempworn IN worn.
 
     ELSIF wear_flag OF hero = 1
       THEN
