@@ -16,7 +16,7 @@ clothing item.
 Outside Emporium Alani
 You're standing in front of the Giorgio Alani Emporium entrance. Two
 large brass doors await northward your entrance into the sanctuary of
-fashion consumism. 
+fashion consumism.
 
 > ; ******************************************************************************
 > ; *                                                                            *
@@ -73,19 +73,17 @@ IN WEARING OF:
 > ; The code is designed to allow wearing/removing lower legwear while wearing a
 > ; skirt, on the assumption that a skirt doesn't prevent it.
 > wear skirt
-You pick up the skirt. You're already wearing your undershirt (being worn)
-, your sneakers (being worn), your khakis (being worn), your boxers 
-(being worn) and your socks (being worn). Trying to put the skirt on
-isn't very sensible.
+You pick up the skirt. You are wearing your undershirt, your sneakers, 
+your khakis, your boxers and your socks. Trying to put the skirt on isn't
+very sensible.
 
 > ; ------------------------------------------------------------------------------
 > ; SKIRT + PANTYHOSE
 > ; ------------------------------------------------------------------------------
 > wear pantyhose
-You pick up the white pantyhose. You're already wearing your undershirt 
-(being worn), your sneakers (being worn), your khakis (being worn), your 
-boxers (being worn) and your socks (being worn). Trying to put the white
-pantyhose on isn't very sensible.
+You pick up the white pantyhose. You are wearing your undershirt, your 
+sneakers, your khakis, your boxers and your socks. Trying to put the 
+white pantyhose on isn't very sensible.
 
 > ; ------------------------------------------------------------------------------
 > ; SKIRT + TROUSERS
@@ -95,19 +93,17 @@ pantyhose on isn't very sensible.
 > ; 
 > ; ** ERR??? ** Is this an error or is it intended to be so?
 > wear jeans
-You pick up the jeans. You're already wearing your undershirt (being worn)
-, your sneakers (being worn), your khakis (being worn), your boxers 
-(being worn) and your socks (being worn). Trying to put the jeans on
-isn't very sensible.
+You pick up the jeans. You are wearing your undershirt, your sneakers, 
+your khakis, your boxers and your socks. Trying to put the jeans on isn't
+very sensible.
 
 > ; Check if removing pantyhose changes this:
 > remove pantyhose
 You are not wearing the white pantyhose.
 
 > wear jeans
-You're already wearing your undershirt (being worn), your sneakers (being
-worn), your khakis (being worn), your boxers (being worn) and your socks 
-(being worn). Trying to put the jeans on isn't very sensible.
+You are wearing your undershirt, your sneakers, your khakis, your boxers 
+and your socks. Trying to put the jeans on isn't very sensible.
 
 > ; ==============================================================================
 > ; TEST COVERALLS
@@ -121,9 +117,8 @@ You remove all the items you were wearing.
 It's a bib-and-brace overalls, fashioned out of blue denim.
 
 > wear dungarees
-You pick up the dungarees. You're already wearing your undershirt (being
-worn), your sneakers (being worn), your khakis (being worn), your boxers 
-(being worn) and your socks (being worn). Trying to put the dungarees on
+You pick up the dungarees. You are wearing your undershirt, your sneakers, 
+your khakis, your boxers and your socks. Trying to put the dungarees on
 isn't very sensible.
 
 > ; ------------------------------------------------------------------------------
@@ -131,17 +126,15 @@ isn't very sensible.
 > ; ------------------------------------------------------------------------------
 > ; ** ERR!!! ** Coveralls should prevent wearing other legwear:
 > wear pantyhose
-You're already wearing your undershirt (being worn), your sneakers (being
-worn), your khakis (being worn), your boxers (being worn) and your socks 
-(being worn). Trying to put the white pantyhose on isn't very sensible.
+You are wearing your undershirt, your sneakers, your khakis, your boxers 
+and your socks. Trying to put the white pantyhose on isn't very sensible.
 
 > ; ------------------------------------------------------------------------------
 > ; COVERALLS + TROUSERS
 > ; ------------------------------------------------------------------------------
 > wear jeans
-You're already wearing your undershirt (being worn), your sneakers (being
-worn), your khakis (being worn), your boxers (being worn) and your socks 
-(being worn). Trying to put the jeans on isn't very sensible.
+You are wearing your undershirt, your sneakers, your khakis, your boxers 
+and your socks. Trying to put the jeans on isn't very sensible.
 
 > 
 

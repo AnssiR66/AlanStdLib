@@ -28,9 +28,6 @@ inventory
 ; ------------------------------------------------------------------------------
 ; When the 'wear' verb fails, it reports all the items worn by the Hero:
 wear jeans
-; ** FIXME ** The use of both "You're already wearing" and "(being worn)" here
-;             is redundant (See Issue #58 on this).
-; 
 ; ** NOTE ** Having 'wear' list all the worn items as an attempt to show to the
 ;            player why the item of the parameter can't be worn is a bit odd,
 ;            for the list could easily become quite long.
