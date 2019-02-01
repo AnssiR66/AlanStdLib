@@ -47,8 +47,8 @@ here.
 > ; Here we must test how the library handles clothing items inside other clothes,
 > ; and that wearing the latter doesn't affect the former.
 > examine khakis
-A pair of khaki beige cotton pants. Your khakis contain your kippah and 
-your wallet.
+A pair of khaki beige cotton pants. Inside the khakis pockets there are 
+your kippah and your wallet.
 
 > DBG khakis
 'khakis' VALUES: | botcover: 16 | 

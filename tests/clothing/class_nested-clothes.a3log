@@ -26,8 +26,7 @@ fashion consumism.
 > ; The library defines the 'clothing' class as a container, to allow pockets, etc.
 > ; Here we must test how the library handles clothing items inside other clothes,
 > ; and that wearing the latter doesn't affect the former.
-> 
-
+> ; 
 > ; ** NOTE ** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > ;            This test file will become truely useful only after the current
 > ;            initialization problems with nested clothing are solved. It would
@@ -35,9 +34,12 @@ fashion consumism.
 > ;            like moving them around, have NPCs wear and remove them, etc.
 > ;            Currently this file can't get into any advanced testing.
 > ;            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ; ==============================================================================
+> ; TROUSERS POCKETS
+> ; ==============================================================================
 > examine khakis
-A pair of khaki beige cotton pants. Your khakis contain your kippah and 
-your wallet.
+A pair of khaki beige cotton pants. Inside the khakis pockets there are 
+your kippah and your wallet.
 
 > DBG khakis
 'khakis' VALUES: | botcover: 16 | 
@@ -60,6 +62,42 @@ IN WEARING OF: | hero
 > ;              The library needs to check at initialize time that only clothes
 > ;              which are DIRECTLY in Hero should be treated as worn items.
 > ;              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ; ------------------------------------------------------------------------------
+> ; NESTED WEARABLE CAN'T BE HANDLED
+> ; ------------------------------------------------------------------------------
+> ; The kippah is stuck in the trousers for it's seen as being worn
+> drop kippah
+You'll have to take off your kippah first.
+
+> ; ** ERROR! ** This shows the unexpected consequences of this problem.
+> remove kippah
+You take off your kippah.
+
+> examine khakis
+A pair of khaki beige cotton pants. Inside the khakis pockets there is 
+your wallet.
+
+> ; ------------------------------------------------------------------------------
+> ; NON WEARABLES BEING TREATED AS WORN
+> ; ------------------------------------------------------------------------------
+> ; Altough the wallet is not an instance of clothing, it's being treated as one
+> ; by various verbs:
+> drop wallet
+You'll have to take off your wallet first.
+
+> ; ** ERROR! ** The wallet is not worn! (not even a clothing item)
+> remove wallet
+That's not something you can remove since you're not wearing it.
+
+> ; ** CATCH 22 ** Can't drop it until we remove it,
+> ;                Can't remove it 'cos it aint a clothing item!
+> empty khakis   ; Only way to take it out is by brute force...
+(taking your khakis first)
+You empty the contents of your khakis on the ground.
+
+> examine khakis
+A pair of khaki beige cotton pants.
+
 > 
 
 Do you want to RESTART, RESTORE, QUIT or UNDO? 

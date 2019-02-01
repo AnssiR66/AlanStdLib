@@ -952,6 +952,16 @@ THE hero_trousers IsA proto_trousers IN worn.
   INDEFINITE ARTICLE "your"
   DEFINITE ARTICLE "your"
   HAS ex "A pair of khaki beige cotton pants.".
+  -- -------------------------------------
+  -- Customize Description of Its Contents
+  -- -------------------------------------
+  CONTAINER
+    HEADER
+      "Inside the khakis pockets there"
+      IF COUNT IsA thing, DIRECTLY IN THIS >1
+        THEN "are"
+        ELSE "is"
+      END IF.
 END THE.
 
 -- Clothes are also containers (to allow pockets, etc.).
