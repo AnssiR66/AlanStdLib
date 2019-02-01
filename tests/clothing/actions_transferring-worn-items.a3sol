@@ -8,12 +8,59 @@
 ; explicitly or implicitly.
 north
 north
+; ------------------------------------------------------------------------------
+; TEST TRYING REMOVE INEXISTINT ITEM
+; ------------------------------------------------------------------------------
+; Later on this command will fail silently, probably due to an Alan bug:
+remove XYZZY
+; ==============================================================================
+; TEST FROM ACTORS TO INANIMATE OBJECTS
+; ==============================================================================
+; Let's test moving worn items from their wearer to an inanimate object...
+; ------------------------------------------------------------------------------
+; TEST 'put' WORN -> CONTAINER
+; ------------------------------------------------------------------------------
+; Using 'put' verb with a worn item...
 examine basket
-; NOTE: boxers are currently bing worn by hero!
+; NOTE: boxers are currently bing worn by hero, underneath trousers (khakis)!
 inventory
 examine boxers
 DBG boxers
 put boxers in basket
-; ** ERROR!!! ** The boxers are still considered donned and worn by Hero:
+; ** ERROR!!! ** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;                The boxers are worn by Hero, underneath his trousers, so he
+;                shouldn't be able to just put them anywhere before first
+;                REMOVING trousers AND THEN boxers!
+;                This breaks right through the whole logic of layered clothing!
+;                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 DBG boxers
+; ** ERROR!!! ** The boxers are still considered donned and worn by Hero:
 examine basket
+west
+; ==============================================================================
+; TEST FROM NPCs TO HERO
+; ==============================================================================
+; The Hero can acquire clothes worn by NPCs in different ways (get, ask, etc.),
+; some of which might require the NPC to be compliant, other not.
+examine assistant
+dbg boots
+take assistant boots
+ask assistant for boots
+dbg boots
+; ** ERROR!!! ** The boots are still 'donned' and in 'wearing' of assistant :
+wear boots
+; ** ERROR!!! ** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;                Of course, trying to wear the boots now fails because they are
+;                still seen as worn and held by the (non-compliant) assistant!
+;                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+remove sneakers
+wear boots
+; ------------------------------------------------------------------------------
+; ODD BUG: REMOVING NON EXISTING ITEMS
+; ------------------------------------------------------------------------------
+; Let's try again removing a non exisiting item, like we did at the beginning:
+remove XYZZY
+; ** ERROR!!! ** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;                Now 'remove' is failing silently, which seems to indicate that
+;                somthing during the tests has messed up Alan memory!
+;                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

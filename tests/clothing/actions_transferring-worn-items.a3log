@@ -42,13 +42,28 @@ to disrobe yourself and try on clothing. There is a chair, a basket, a
 pair of dungarees, a skirt, a pair of white pantyhose and a pair of jeans 
 here.
 
+> ; ------------------------------------------------------------------------------
+> ; TEST TRYING REMOVE INEXISTINT ITEM
+> ; ------------------------------------------------------------------------------
+> ; Later on this command will fail silently, probably due to an Alan bug:
+> remove XYZZY
+I don't know the word 'XYZZY'.
+
+> ; ==============================================================================
+> ; TEST FROM ACTORS TO INANIMATE OBJECTS
+> ; ==============================================================================
+> ; Let's test moving worn items from their wearer to an inanimate object...
+> ; ------------------------------------------------------------------------------
+> ; TEST 'put' WORN -> CONTAINER
+> ; ------------------------------------------------------------------------------
+> ; Using 'put' verb with a worn item...
 > examine basket
 The basket is empty.
 
-> ; NOTE: boxers are currently bing worn by hero!
+> ; NOTE: boxers are currently bing worn by hero, underneath trousers (khakis)!
 > inventory
 You are empty-handed. You are wearing your undershirt, your sneakers, your 
-boxers and your socks.
+khakis, your boxers and your socks.
 
 > examine boxers
 Just your boxer shorts (the loose type), white and plain.
@@ -62,16 +77,80 @@ IN WEARING OF: | hero
 > put boxers in basket
 You put your boxers into the basket.
 
-> ; ** ERROR!!! ** The boxers are still considered donned and worn by Hero:
+> ; ** ERROR!!! ** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ;                The boxers are worn by Hero, underneath his trousers, so he
+> ;                shouldn't be able to just put them anywhere before first
+> ;                REMOVING trousers AND THEN boxers!
+> ;                This breaks right through the whole logic of layered clothing!
+> ;                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > DBG boxers
 'boxers' VALUES: | botcover: 2 | 
 DONNED: Yes 
 IN WORN: Yes 
 IN WEARING OF: | hero
 
+> ; ** ERROR!!! ** The boxers are still considered donned and worn by Hero:
 > examine basket
 The basket is empty.
 
+> west
+Sportswear Department
+Can't think of any sport that you couldn't find gear for in this room. 
+There is a balaclava, a pair of ski goggles, a sports watch, a white scarf
+, a blue wool scarf and a black scarf here. The assistant comes running
+into the room, all the way from the main hall, where you left her.
+
+> ; ==============================================================================
+> ; TEST FROM NPCs TO HERO
+> ; ==============================================================================
+> ; The Hero can acquire clothes worn by NPCs in different ways (get, ask, etc.),
+> ; some of which might require the NPC to be compliant, other not.
+> examine assistant
+She's your personal shopping assistant. The assistant is carrying a pair
+of fashion boots (being worn) and a uniform (being worn).
+
+> dbg boots
+'fashion boots' VALUES: | feetcover: 4 | 
+DONNED: Yes 
+IN WORN: No. 
+IN WEARING OF: | assistant
+
+> take assistant boots
+That seems to belong to the assistant.
+
+> ask assistant for boots
+The assistant gives the fashion boots to you.
+
+> dbg boots
+'fashion boots' VALUES: | feetcover: 4 | 
+DONNED: Yes 
+IN WORN: No. 
+IN WEARING OF: | assistant
+
+> ; ** ERROR!!! ** The boots are still 'donned' and in 'wearing' of assistant :
+> wear boots
+You pick up the fashion boots. That seems to belong to the assistant.
+
+> ; ** ERROR!!! ** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ;                Of course, trying to wear the boots now fails because they are
+> ;                still seen as worn and held by the (non-compliant) assistant!
+> ;                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> remove sneakers
+You take off your sneakers.
+
+> wear boots
+That seems to belong to the assistant.
+
+> ; ------------------------------------------------------------------------------
+> ; ODD BUG: REMOVING NON EXISTING ITEMS
+> ; ------------------------------------------------------------------------------
+> ; Let's try again removing a non exisiting item, like we did at the beginning:
+> remove XYZZY
+
+> ; ** ERROR!!! ** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ;                Now 'remove' is failing silently, which seems to indicate that
+> ;                somthing during the tests has messed up Alan memory!
+> ;                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > 
 
-Do you want to RESTART, RESTORE, QUIT or UNDO? 
+

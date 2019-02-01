@@ -41,6 +41,37 @@ pair of dungarees, a skirt, a pair of white pantyhose and a pair of jeans
 here.
 
 > ; ==============================================================================
+> ; NESTED CLOTHING
+> ; ==============================================================================
+> ; The library defines the 'clothing' class as a container, to allow pockets, etc.
+> ; Here we must test how the library handles clothing items inside other clothes,
+> ; and that wearing the latter doesn't affect the former.
+> examine khakis
+A pair of khaki beige cotton pants. Inside the khakis pockets there are 
+your kippah and your wallet.
+
+> DBG khakis
+'khakis' VALUES: | botcover: 16 | 
+DONNED: Yes 
+IN WORN: Yes 
+IN WEARING OF: | hero
+
+> ; Inside the trousers (pocket) we have kippah, which is a wearable item.
+> examine kippah
+It's your kippah. You always carry it around with you.
+
+> DBG kippah
+'kippah' VALUES: (none) 
+DONNED: Yes 
+IN WORN: Yes 
+IN WEARING OF: | hero
+
+> ; ** ERROR! ** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ;              The kippah shouldn't be accounted as being worn, but just carried.
+> ;              The library needs to check at initialize time that only clothes
+> ;              which are DIRECTLY in Hero should be treated as worn items.
+> ;              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ; ==============================================================================
 > ; DEBUG CLOTHES VALUES
 > ; ==============================================================================
 > dbg skirt
@@ -73,13 +104,17 @@ IN WEARING OF:
 > ; The code is designed to allow wearing/removing lower legwear while wearing a
 > ; skirt, on the assumption that a skirt doesn't prevent it.
 > wear skirt
-You pick up the skirt and put it on.
+You pick up the skirt. You are wearing your undershirt, your sneakers, 
+your khakis, your boxers and your socks. Trying to put the skirt on isn't
+very sensible.
 
 > ; ------------------------------------------------------------------------------
 > ; SKIRT + PANTYHOSE
 > ; ------------------------------------------------------------------------------
 > wear pantyhose
-You pick up the white pantyhose and put them on.
+You pick up the white pantyhose. You are wearing your undershirt, your 
+sneakers, your khakis, your boxers and your socks. Trying to put the 
+white pantyhose on isn't very sensible.
 
 > ; ------------------------------------------------------------------------------
 > ; SKIRT + TROUSERS
@@ -89,19 +124,17 @@ You pick up the white pantyhose and put them on.
 > ; 
 > ; ** ERR??? ** Is this an error or is it intended to be so?
 > wear jeans
-You pick up the jeans. You're already wearing your socks (being worn), 
-your boxers (being worn), your undershirt (being worn), your sneakers 
-(being worn), a pair of white pantyhose and a skirt. Trying to put the 
-jeans on isn't very sensible.
+You pick up the jeans. You are wearing your undershirt, your sneakers, 
+your khakis, your boxers and your socks. Trying to put the jeans on isn't
+very sensible.
 
 > ; Check if removing pantyhose changes this:
 > remove pantyhose
-You take off the white pantyhose.
+You are not wearing the white pantyhose.
 
 > wear jeans
-You're already wearing your boxers (being worn), your undershirt (being
-worn), your sneakers (being worn), your socks (being worn) and a skirt. 
-Trying to put the jeans on isn't very sensible.
+You are wearing your undershirt, your sneakers, your khakis, your boxers 
+and your socks. Trying to put the jeans on isn't very sensible.
 
 > ; ==============================================================================
 > ; TEST COVERALLS
@@ -115,23 +148,24 @@ You remove all the items you were wearing.
 It's a bib-and-brace overalls, fashioned out of blue denim.
 
 > wear dungarees
-You pick up the dungarees and put them on.
+You pick up the dungarees. You are wearing your undershirt, your sneakers, 
+your khakis, your boxers and your socks. Trying to put the dungarees on
+isn't very sensible.
 
 > ; ------------------------------------------------------------------------------
 > ; COVERALLS + PANTYHOSE
 > ; ------------------------------------------------------------------------------
 > ; ** ERR!!! ** Coveralls should prevent wearing other legwear:
 > wear pantyhose
-You put on the white pantyhose.
+You are wearing your undershirt, your sneakers, your khakis, your boxers 
+and your socks. Trying to put the white pantyhose on isn't very sensible.
 
 > ; ------------------------------------------------------------------------------
 > ; COVERALLS + TROUSERS
 > ; ------------------------------------------------------------------------------
 > wear jeans
-You're already wearing your socks (being worn), your boxers (being worn), 
-your undershirt (being worn), your sneakers (being worn), a pair of white
-pantyhose (being worn) and a pair of dungarees. Trying to put the jeans 
-on isn't very sensible.
+You are wearing your undershirt, your sneakers, your khakis, your boxers 
+and your socks. Trying to put the jeans on isn't very sensible.
 
 > 
 

@@ -416,6 +416,12 @@ EVERY cl_shoes IsA clothing.
   INDEFINITE ARTICLE "a pair of"
 END EVERY.
 
+EVERY cl_boots IsA clothing.
+  NAME boots.
+  HAS feetcover 4.
+  INDEFINITE ARTICLE "a pair of"
+END EVERY.
+
 --==============================================================================
 -- SHIRTS & OTHER 'Topcover 8' CLOTHES
 --==============================================================================
@@ -467,6 +473,16 @@ END EVERY.
 EVERY proto_overall IsA clothing.
   NAME overall.
   NAME overalls.
+  HAS topcover 8.
+  HAS botcover 32.
+END EVERY.
+
+--==============================================================================
+-- DRESS
+--==============================================================================
+
+EVERY proto_dress IsA clothing.
+  NAME dress.
   HAS topcover 8.
   HAS botcover 32.
 END EVERY.
@@ -690,6 +706,16 @@ THE personal_assistant IsA female AT ega_hall.
   NAME personal assistant.
   INDEFINITE FORM "your personal assistant"
   HAS ex "She's your personal shopping assistant.".
+  
+  INITIALIZE
+    -- ---------------------------------------------------------
+    -- Turn every clothing IN assistant into an item worn by her
+    -- ---------------------------------------------------------
+    FOR EACH cl IsA clothing, IN THIS
+      DO
+        MAKE cl donned.
+        INCLUDE cl IN wearing OF THIS.
+    END FOR.
 END THE personal_assistant.
 
 -- Prevent following hero in Dressing Room:
@@ -714,6 +740,25 @@ EVENT Reactivate_Assistant
   MAKE personal_assistant following.
 END EVENT.
 
+--==============================================================================
+-- Personal Assistant Clothing
+--==============================================================================
+-- We'll dress her with some clothing items so that we can test how worn items
+-- are shown when she's examined, and how various vanilla library verbs deal
+-- with her worn clothing (ask, take, etc.).
+
+THE assistant_uniform IsA proto_dress IN personal_assistant.
+  NAME uniform.
+  NAME assistant dress.
+  NAME assistant uniform.
+  HAS ex "Her uniform is a one piece dress, elegant and professional.".
+END THE.
+
+THE assistant_shoes IsA cl_boots IN personal_assistant.
+  NAME fashion boots.
+  NAME assistant boots.
+  HAS ex "A pair of high-heeled knee-high black leather fashion boots.".
+END THE.
 
 
 --==============================================================================
@@ -894,6 +939,56 @@ THE hero_shoes IsA cl_shoes IN worn.
   DEFINITE ARTICLE "your"
   HAS ex "Your old and beloved black Converse sneakers, a bit worn out.".
 END THE.
+
+--------------------------------------------------------------------------------
+-- Trousers
+--------------------------------------------------------------------------------
+
+
+THE hero_trousers IsA proto_trousers IN worn.
+  NAME khakis.
+  NAME my khakis.
+  NAME khaki pants.
+  INDEFINITE ARTICLE "your"
+  DEFINITE ARTICLE "your"
+  HAS ex "A pair of khaki beige cotton pants.".
+  -- -------------------------------------
+  -- Customize Description of Its Contents
+  -- -------------------------------------
+  CONTAINER
+    HEADER
+      "Inside the khakis pockets there"
+      IF COUNT IsA thing, DIRECTLY IN THIS >1
+        THEN "are"
+        ELSE "is"
+      END IF.
+END THE.
+
+-- Clothes are also containers (to allow pockets, etc.).
+-- We'll add some things the Hero's trousers to test how their are dealt with...
+
+-- ----------
+-- The Wallet
+-- ----------
+THE wallet IsA object IN hero_trousers.
+  INDEFINITE ARTICLE "your"
+  DEFINITE ARTICLE "your"
+  HAS ex "Your leather wallet.".
+END THE wallet.
+
+
+-- ----------
+-- The Kippah
+-- ----------
+-- We also add a wearable item in the trousers, to check that it's seen as being
+-- carried and not worn.
+
+THE kippah IsA clothing IN hero_trousers.
+  HAS head_cover 2.
+  INDEFINITE ARTICLE "your"
+  DEFINITE ARTICLE "your"
+  HAS ex "It's your kippah. You always carry it around with you.".
+END THE kippah.
 
 
 --------------------------------------------------------------------------------

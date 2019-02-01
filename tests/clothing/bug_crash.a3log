@@ -43,7 +43,7 @@ personal assistant here.
 
 > inventory
 You are empty-handed. You are wearing your undershirt, your sneakers, your 
-boxers and your socks.
+khakis, your boxers and your socks.
 
 > examine boxers
 Just your boxer shorts (the loose type), white and plain.
@@ -71,7 +71,7 @@ your knees. In front of you, you can vaguely see the outlines of an
 Adventure that never was.
 
 SYSTEM ERROR: Stack is not empty in main loop
-At source line 696 in 'ega.alan':
+At source line 722 in 'ega.alan':
 WHEN hero AT dressing_room
 
 <If you are the creator of this piece of Interactive Fiction, please help

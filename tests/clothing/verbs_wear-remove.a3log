@@ -47,13 +47,16 @@ here.
 > ; ==============================================================================
 > inventory
 You are empty-handed. You are wearing your undershirt, your sneakers, your 
-boxers and your socks.
+khakis, your boxers and your socks.
 
 > DBG boxers
 'boxers' VALUES: | botcover: 2 | 
 DONNED: Yes 
 IN WORN: Yes 
 IN WEARING OF: | hero
+
+> remove khakis
+You take off your khakis.
 
 > remove boxers
 You take off your boxers.
