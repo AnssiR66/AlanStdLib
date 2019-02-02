@@ -603,16 +603,6 @@ END ADD TO.
 
 
 --------------------------------------------------------------------
--- A container used to provide a temporary storage space - ignore!
---------------------------------------------------------------------
-
-THE tempworn ISA OBJECT
-  CONTAINER TAKING CLOTHING.
-  HEADER "You're already wearing"
-END THE tempworn.
-
-
---------------------------------------------------------------------
 -- An event checking that clothing acquired and worn by an actor
 -- mid-game is recognised to be worn by the actor:
 --------------------------------------------------------------------
