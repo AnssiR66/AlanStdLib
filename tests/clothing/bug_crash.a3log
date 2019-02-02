@@ -3,7 +3,8 @@
 Emporium Giorgio Alani 
 An adventure to test clothing. 
 (C) 2018 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0 beta6.
+Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1866
+.
 Standard Library v2.1 
 Version 1 
 All rights reserved. 
@@ -57,22 +58,15 @@ IN WEARING OF: | hero
 
 > give boxers to assistant
 (taking your boxers first)
-You give your boxers to the assistant.
-
-> ; Now comes the crash (using 3.0beta6):
-> dbg boxers
-'boxers' VALUES: | botcover: 2 | 
-DONNED: Yes 
-IN WORN: No. 
-IN WEARING OF: | hero 
+You give your boxers to the assistant. 
 
 As you enter the twilight zone of Adventures, you stumble and fall to
 your knees. In front of you, you can vaguely see the outlines of an
 Adventure that never was.
 
-SYSTEM ERROR: Stack is not empty in main loop
-At source line 722 in 'ega.alan':
-WHEN hero AT dressing_room
+SYSTEM ERROR: Stack is not empty after event execution
+At source line 2053 in '..\..\/lib_classes.i':
+    THEN "the"
 
 <If you are the creator of this piece of Interactive Fiction, please help
 debug this Alan system error. Collect *all* the sources, and, if

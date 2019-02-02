@@ -3,7 +3,8 @@
 Emporium Giorgio Alani 
 An adventure to test clothing. 
 (C) 2018 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0 beta6.
+Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1866
+.
 Standard Library v2.1 
 Version 1 
 All rights reserved. 
@@ -32,7 +33,7 @@ As you move toward the doors they automagically slide open before you.
 Emporium Alani Main Hall
 This luxurious hall is the crossroad to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
-fashion temple and back into the world of mortal souls. There is your
+fashion temple and back into the world of mortal souls.There is your
 personal assistant here.
 
 > north

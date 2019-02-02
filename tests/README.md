@@ -1,6 +1,8 @@
 # Alan StdLib Test Suite
 
-    Alan SDK: Alan v3.0 beta6
+> Required **Alan SDK**: [Alan v3.0 beta6 build 1866][SDK]
+
+[SDK]: https://www.alanif.se/download-alan-v3/development-snapshots/development-snapshots/build1866 "Go to the download page of this specific Alan SDK release"
 
 This directory tree contains test adventures and automated game commands scripts for testing the Library verbs, messages and features. The purpose of these tests is to check that all library messages are displayed correctly, to detect unexpected edge cases and to track the global impact of code changes on library messages.
 
@@ -136,13 +138,18 @@ Due to scarce reusability of the tests in the `misc/` subfolder (which usually s
 
 All scripts are designed for MS Windows.
 
-In order to use these scripts, make sure that the correct version of the __Alan compiler__ (`alan.exe`) and __Arun interpreter__ (`arun.exe`) are either available on your system PATH or inside this folder.
+In order to use these scripts, make sure that the correct version of the __Alan compiler__ (`alan.exe`) and __Arun interpreter__ (`arun.exe`) are available on your system PATH.
 
 > __IMPORTANT!__ — The Alan SDK version required to run these tests is the one indicated at the very beginning of this document. Using different version (older releases, or developer snapshots) might produce unexpected results.
 > 
 > Tests transcripts obtained with different versions of the Alan SDK should not be commmited to the project, as they might not reflect the correct status of results.
 
-You can safely copy the "`alan.exe`" and "`arun.exe`" executables into this folder, as the repository is configured so that Git will ignore them. Adding a copy of these binaries into the folder has the advantage that you can control which specific version of the executables the scripts should be run with (even if other versions are available on the system PATH); this might be useful if you wish to run the tests using prerelease versions of the compiler and interpreter, or if the Alan SDK on your path is of a different version than the one required for the test suite.
+<!-- sep -->
+
+> __NOTE__ — Just copying the  "`alan.exe`" and "`arun.exe`" executables into this folder wouldn't work because the batch script that runs the tests switches working the directory every time it runs tests in one of the tests subfolders.
+> 
+> A viable workaround to using the system PATH would require you to create symlinks to "`alan.exe`" and "`arun.exe`" in every tests subfoler, making them point to the correct version of the binaries they represent. This would be better than having to add multiple copies (three) of these binaries in every subfolder. You could then place the required binaries inside this folder, and have symlinks in the subfolders point to them, so whenever you override the binaries real the symlinks will reflect the new versions.
+
 
 Both "`alan.exe`" and "`arun.exe`" can be found inside the Alan SDK (Development Kit). Make sure that you are download the appropriate SDK version required by the test suite from Alan website:
 
