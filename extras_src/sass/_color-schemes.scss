@@ -1,0 +1,66 @@
+// "_color-schemes.scss"                v1.1.0 | 2019/04/09 | by Tristano Ajmone
+// *****************************************************************************
+// *                                                                           *
+// *                         Color Schemes & Palettes                          *
+// *                                                                           *
+// *****************************************************************************
+// Custom color schemes for additional styling of the documentation.
+
+// --------------
+// Default Colors
+// --------------
+$verbatim-default-background: #FEFEFE;
+$verbatim-default-normal:     #000;
+
+// ---------------
+// Alan Sourcecode
+// ---------------
+// Based on "github.com style" for highlight.js:
+// https://github.com/highlightjs/highlight.js/blob/master/src/styles/github.css
+// Author:  (c) Vasily Polovnyov <vast@whiteants.net>
+$Alan-background:    #F8F8F8;
+$Alan-normal:        #333;
+$Alan-comment:       #998;
+$Alan-linenums:      $Alan-comment; // untested (might need better color)
+$Alan-string:        #008080;
+$Alan-predefined:    #000080;
+$Alan-keyword:       #990000;
+$Alan-escapes:       #ff980b; // $p $n $i $t $a $l $v $$
+$Alan-interpolation: #d572f1; // $<n> $+<n> $0<n> $-<n> $!<n> $o
+
+// ---------
+// BNF Rules
+// ---------
+$BNF-background: #FFEBD6;
+$BNF-normal:     #492E11;
+
+// ---------------
+// Game Transcript
+// ---------------
+// Some transcript styles are added by the script that processes "*.a3log" files.
+$Transcript-background: #F7FDFF;
+$Transcript-border:     #CCF2FF;
+$Transcript-normal:     #0089B6;
+$Transcript-command:    #bcbcbc; // GREY -- Player input
+$Transcript-comment:    #d90000; // RED  -- Player input comment (i.e. ";")
+
+// --------------
+// Shell Examples
+// --------------
+// Based on Windows 10 new CMD default colors:
+// https://blogs.msdn.microsoft.com/commandline/2017/08/02/updating-the-windows-console-colors/
+$CMD-Black: #0C0C0C;
+$CMD-White: #F2F2F2;
+// Callouts BG:
+$CMD-callouts-background: #FFF945; // bright yellow
+
+// -------------------
+// Inline Highlighting
+// -------------------
+// Used to provide a highlighter marker effect to both text and code examples.
+// Mainly used in "ALAN Beginner's Guide" to mark added code in the source code
+// examples.
+
+$highlighter-green: #A3FF8A;
+
+// EOF //

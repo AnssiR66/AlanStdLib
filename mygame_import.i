@@ -1065,6 +1065,8 @@ VERB i
     -- This way, 'inventory' will yield e.g. "You are carrying a bag. The bag contains a book."
     -- If you leave the above addition out, the outcome will be just "You are carrying a bag.", with
     -- no comment on what is inside the bag.
+
+-- >>> dev-clothing: FIXME >>> Reference to 'worn'
     
     IF COUNT DIRECTLY IN worn > 0   -- See the file 'classes.i', subclass 'clothing'.
       THEN LIST worn.     -- This code will list what the hero is wearing.
@@ -2043,7 +2045,9 @@ END VERB turn_off.
 VERB undress
   DOES ONLY 
     "You don't feel like undressing is a good idea right now."
-                                            
+ 
+ -- >>> dev-clothing: FIXME >>> Reference to 'worn' (commented examples)
+                                           
       -- To make it work, use the following lines instead:          
         --IF COUNT DIRECTLY IN worn, ISA CLOTHING > 0 
       --THEN EMPTY worn IN hero.

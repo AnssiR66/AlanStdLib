@@ -3,7 +3,7 @@
 Test Look Verbs 
 An adventure to test the family of look verbs. 
 (C) 2018 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1866
+Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880
 .
 Standard Library v2.1 
 Version 1 
@@ -122,12 +122,10 @@ You find nothing of interest.
 > ; VAMPIRE | person > male + NOT named
 > ; ------------------------------------------------------------------------------
 > look the vampire
-Looks like a normal vampire, with fangs and all. The vampire is 
-empty-handed.
+Looks like a normal vampire, with fangs and all.
 
 > look at the vampire
-Looks like a normal vampire, with fangs and all. The vampire is 
-empty-handed.
+Looks like a normal vampire, with fangs and all.
 
 > ; @ FIXME:
 > look in the vampire
@@ -153,12 +151,10 @@ The vampire wouldn't probably appreciate that.
 > ; JASON | person > male + named
 > ; ------------------------------------------------------------------------------
 > look Jason
-It's Jason Voorhees, the original guy from "Friday the 13th". How cool! 
-Jason is empty-handed.
+It's Jason Voorhees, the original guy from "Friday the 13th". How cool!
 
 > look at Jason
-It's Jason Voorhees, the original guy from "Friday the 13th". How cool! 
-Jason is empty-handed.
+It's Jason Voorhees, the original guy from "Friday the 13th". How cool!
 
 > ; @ FIXME:
 > look in Jason
@@ -184,12 +180,10 @@ Jason wouldn't probably appreciate that.
 > ; THE GRUE | actor + NOT named
 > ; ------------------------------------------------------------------------------
 > look the grue
-It's a true grue. If it was pitch dark, you'd likely be eaten by it. The 
-grue is not carrying anything.
+It's a true grue. If it was pitch dark, you'd likely be eaten by it.
 
 > look at the grue
-It's a true grue. If it was pitch dark, you'd likely be eaten by it. The 
-grue is not carrying anything.
+It's a true grue. If it was pitch dark, you'd likely be eaten by it.
 
 > ; @ FIXME:
 > look in the grue
@@ -215,10 +209,10 @@ The grue wouldn't probably appreciate that.
 > ; ELLIOT | actor + named
 > ; ------------------------------------------------------------------------------
 > look Elliot
-It's Elliot the dragon. Elliot is not carrying anything.
+It's Elliot the dragon.
 
 > look at Elliot
-It's Elliot the dragon. Elliot is not carrying anything.
+It's Elliot the dragon.
 
 > ; @ FIXME:
 > look in Elliot

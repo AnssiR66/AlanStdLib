@@ -17,6 +17,7 @@
 ## Alan Files
 ## ==========
 *.a3c      binary
+*.a3r      binary
 *.alan     text
 *.i        text
 *.ifid     text
@@ -41,13 +42,15 @@
 *.com      text eol=crlf
 *.sh       text eol=lf
 *.ps1      text eol=crlf
+*.sed      text eol=lf
 
 ## ==================
 ## MISC. DATA FORMATS
 ## ==================
+*.haml     text
 *.json     text
-*.xml      text
 *.xhtml    text
+*.xml      text
 *.yaml     text
 *.yml      text
 
@@ -56,7 +59,7 @@
 ## =================
 *.htm      text
 *.html     text
-*.css      text
+*.css      text eol=lf
 *.css.map  text
 *.js       text
 

@@ -1,0 +1,336 @@
+= The Clothing Guide
+Tristano Ajmone <tajmone@gmail.com>
+v2, 2019-04-09
+:lang: en
+// TOC Settings:
+:toc: left
+:toclevels: 5
+// Sections Numbering:
+:sectnums!:
+:sectnumlevels: 2
+// Cross References:
+:xrefstyle: short
+:section-refsig: Sect.
+// Misc Settings:
+:experimental: true
+:icons: font
+:linkattrs: true
+:reproducible: true
+:sectanchors:
+// Highlight settings;
+:source-highlighter: highlight
+
+
+////
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+** ALAN CODE THEMES **
+
+Listing blocks for Alan code can have different color themes (via 'role') to
+help the reader distinguish which code belongs to what:
+
+-- Default (no role)
+-- Library code: 'role=lib'
+-- Tutorial code: 'role=tutorial'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+////
+
+// The {utf8dir} attribute points to a folder containing UTF8 versions of Alan
+// sources and transcripts, to allow including them in this doc:
+:utf8dir: ./alan/utf8
+// *****************************************************************************
+// *                                                                           *
+// *                            Document Preamble                              *
+// *                                                                           *
+// *****************************************************************************
+
+An introductory reference guide to using the Standard Library clothing features and undestanding the coverage attributes of the `clothing` class, and how to set their values in clothes istances.
+
+[WARNING]
+==============================================================
+This document is currently undergoing adaptation from the old clothing system to the new one.
+The text needs to be revised, and since there is no fixed-values _Clothing Table_ in the new system, we need to provide on or more arbitrary examples of layers enumerations so that the reader can refer to them along the tutorial.
+==============================================================
+
+
+== Introduction
+
+The Standard Library adds some useful classes and verbs for handling clothing to allow the main character to wear and disrobe clothes in a layered manner -- i.e. to prevent putting on or removing a clothing item when a worn item of a higher layer stands in the way (e.g. wearing socks on top of shoes).
+
+Optionally, the library also allows to assign a `sex` value to clothes, in order to prevent the main character from wearing clothes that don't match his/her own `sex` value.
+
+This document explores these features and provides some examples on how to implement clothing in your own adventures.
+
+
+== The Clothing Class
+
+The library defines the `clothing` class for clothing items, which adds to its instances some special attributes:
+
+.Predefined attributes of `clothing` class -- defined in `lib_classes.i`
+[source,alan,role=lib]
+--------------------------------------------------------------------------------
+EVERY clothing ISA OBJECT
+
+  IS wearable.
+
+  IS sex 0. -- If not zero, restricts wearing to actors with same 'sex' value.
+
+  -- Body coverage layered-values, by area:
+  IS headcover  0.  -- Head.
+  IS facecover  0.  -- Face.
+  IS handscover 0.  -- Hands.
+  IS feetcover  0.  -- Feet.
+  IS topcover   0.  -- Chest and arms.
+  IS botcover   0.  -- Pelvis and legs.
+
+  -- Attributes for special clothing (skirts, coats, bikinis, etc.):
+
+  IS blockslegs.
+  -- i.e. the item prevents wearing/removing legsware from the layers below
+  -- (skirts and coats are 'NOT blockslegs').
+
+  IS NOT twopieces.
+  -- For items covering legs + torso ('topcover' & 'botcover' <> 0) that should
+  -- be treated as a single piece (e.g. a one-piece swimming suite).
+  -- Items which are 'twopieces' (eg. a bikini) can be worn/removed while
+  -- wearing a skirt for, although handled as a single clothing item, they cover
+  -- legs and torso via two separate pieces.
+--------------------------------------------------------------------------------
+
+Clothing also rely on the `worn` attribute, which is defined on `EVERY THING` in `lib_definitions.i`:
+
+
+.The `worn` attribute on `THING` -- defined in `lib_definitions.i`
+[source,alan,role=lib]
+--------------------------------------------------------------------------------
+ADD TO EVERY THING
+  ...
+  IS NOT worn.
+    -- (for 'clothing' instances) it's not worn by any actor.
+    -- -------------------------------------------------------------------------
+    -- NOTE: Authors can also use this attribute to implement wearables other
+    --       than clothing (eg. devices, like headphones, a VR headset, etc.).
+    --       The library ensures that any verbs which could remove a thing from
+    --       an actor also set the thing as 'NOT worn', in case authors are
+    --       using this attribute outside of the 'clothing' class context.
+    -- -------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+
+We shall now look into these attributes and how they can be used to personalize clothing in your adventures.
+
+
+=== Body Coverage Attributes
+
+By default, all new clothing instances will have all body coverage attributes set to zero.
+When you create new clothing items, you need to assign to them some arbitrary body coverage values that are consistent throughout your adventure.
+
+The body coverage values of a clothing item indicate:
+
+1. the body areas it covers,
+2. the wearing layer(s) it belongs to.
+
+The body area is indicated by the attribute name, where a value of zero indicates that the clothing item doesn't affect that area at all.
+The layer of interest is indicated by the value itself, where higher values indicate higher layers (i.e. further away from the skin).
+Layer values are integer numbers, and authors are free to chose arbitrary layers values without constraints -- i.e. you are not obliged to assign layers in consecutive order, you can for example start from layer 5, and assing to every next layer the value of the previous one plus 3.
+
+Leaving gaps between layers is actually a good strategy, for if you later on realize that you need to assign a new layer to accomodate new clothing items in intermediate layers (e.g. a jumper that goes on top of a shirt and below a coat) you can use the unassigned layers for it.
+
+[WARNING]
+=============
+These must be expanded upon, broken in smaller senteces and provide examples, to make it simpler for the reader.
+=============
+
+Some body areas can take multiple layers of clothes, but each body layer can only be wearing one item at the time.
+For example, the hero can be wearing over his chest a vest, a shirt and a sweater, for each one of them occupies a different layer in the `topcover` area (e.g. 1, 2 and 3).
+But he can't wear a sweater and a pullover at the same time, for they both occupy the same area and layer (`topcover 3`).
+
+[WARNING]
+=============
+The paragraph above only made sense in reference to the old _Clothing Table_, which had fixed values.
+I'll need to add an example at the start of the tutorial, to provide references to an arbitrary layer numbering system that the reader can related to.
+=============
+
+Although he might put on trousers even if he isn't wearing any underpants, he can neither put on nor remove underpants while wearing trousers, because the latter prevent access to the layer occupied by the former.
+In other words, while the library doesn't impose wearing clothes on each layer, it will prevent putting on or removing clothing when another item stands in the way.
+
+////
+** SPECIAL CLOTHING (old text) **
+
+But there are smart exceptions to this rule; for example, skirts and coats.
+Although a skirt occupies a higher layer than tights or panties (`botcover 32` vs `8` and `2`), the library "`knows`" that it's a special type of leg-covering clothing that (unlike trousers) doesn't prevent its wearer from putting on tights or panties.
+Coats don't prevent wearing leg-covering clothing either, including trousers and skirts.
+////
+
+As you might have noticed, the library tries to implement a realistic approach to clothing, simulating how common cases are handled in real life.
+
+
+
+== Practical Examples
+
+
+Now let's dive into some practical examples of how to use clothing, from simple to complex.
+
+
+=== Simple Clothing
+
+:adv-source:  clothing-01-simple.alan
+:adv-transc1: clothing-01-simple__play1.a3ADocLog
+:adv-transc2: clothing-01-simple__play2.a3ADocLog
+// :adv-transc1: clothing-01-simple__play1.a3log
+// :adv-transc2: clothing-01-simple__play2.a3log
+
+* link:{adv-source}[`{adv-source}`]
+
+We'll create a very simple adventure where there's only a single clothing item, and the Hero can be either naked or dressed.
+Here's the adventure outline:
+
+============
+The Hero is a waiter in his one-bedroom flat who must take a shower, get dressed and rush to work.
+He won't be able to take a shower if he's wearing or carrying clothes, and he won't be allowed to leave the flat unless dressed.
+The adventure ends when he leaves the flat.
+============
+
+So, we'll need to implement:
+
+* A bedroom location.
+* A waiter uniform.
+* A shower object with the '`take shower`' verb.
+* An exit leading to the game end.
+
+// ** BEDROOM **
+
+Let's start by implementing the bedroom.
+
+[source,alan,role=tutorial]
+---------------------------------------------
+include::{utf8dir}/{adv-source}[tag=step_one]
+---------------------------------------------
+
+// ** UNIFORM **
+
+Next, we need to implement the Hero's clothing.
+Since in the whole game he only has his waiter uniform to wear, we don't need to worry about clothing layers attributes at all.
+Also, we'll treat the uniform as a single clothing item, for the purpose here is to distinguish between the Hero being naked or dressed, so there is no need to implement it as separate items (i.e. trousers, shirt, shoes, jacket, etc.).
+
+When the game starts, the Hero will be in his bedroom, naked, so we'll just place the uniform lying around in the bedroom.
+
+[source,alan,role=tutorial]
+--------------------------------------------
+include::{utf8dir}/{adv-source}[tag=uniform]
+--------------------------------------------
+
+// ** SHOWER **
+
+Now it's time to implement the shower.
+We'll create it as an object and add to it the `take` verb.
+
+[source,alan,role=tutorial]
+-------------------------------------------
+include::{utf8dir}/{adv-source}[tag=shower]
+-------------------------------------------
+
+Its implementation is quite straightforward, so here we'll only comment on the `Check` that prevents taking a shower while carrying/wearing the uniform:
+
+[source,alan,role=tutorial,indent=0]
+-------------------------------------------------
+include::{utf8dir}/{adv-source}[tag=shower_check]
+-------------------------------------------------
+
+The actual `Check` only needs to verify that the uniform is `not in hero`, for the action is to be prevented regarless of wether the clothing item is being carried or worn -- the whole idea is that it shouldn't get wet.
+If the check condition is violated, we then resort to an `If` statement in order to produce an appropriate response depending on wether the uniform `is worn` or just carried (`else`) by the Hero.
+
+
+Let's compile our draft adventure to test that it's behaving as expected.
+
+[example,role="gametranscript"]
+================================================================================
+include::{utf8dir}/{adv-transc1}[]
+================================================================================
+
+////
+*VERBATIM TRANSCRIPT* -- We could also include the unsanitized version of the game transcript, in case it relied on monospace fonts (eg. debguggin):
+
+....................................................
+include::{utf8dir}/clothing-01-simple__play1.a3log[]
+....................................................
+
+But we'd need to give it some CSS styling though.
+
+////
+
+
+// ** ROOM EXIT **
+
+Everything works fine with the shower, so let's carry on and implement the bedroom exit.
+Edit the `bedroom` code as follows:
+
+[source,alan,role=tutorial]
+-------------------------------------------------
+include::{utf8dir}/{adv-source}[tag=bedroom_exit]
+-------------------------------------------------
+
+Here we used `Check uniform directly in hero and uniform is worn` to make sure the Hero doesn't leave the flat without wearing his uniform:
+
+[source,alan,role=tutorial,indent=0]
+-----------------------------------------------
+include::{utf8dir}/{adv-source}[tag=exit_check]
+-----------------------------------------------
+
+This being the logical succession for checking if an actor is wearing a specific clothing item:
+
+1. We first check that the item is `directly in` the actor, for he can't be possibly wearing:
+** something he doesn't possess (not `IN` him), nor
+** something which is _indirectly_ inside him (e.g. inside a bag he's carrying).
+2. Then we check that the item is actually `worn` (and not just carried).
+
+[NOTE]
+================
+In this context we could have omitted `directly` and use just `Check uniform in hero` instead, since there are no carriable containers in the game.
+
+Acutally, it would have been sufficient to just `Check uniform is worn`, since there are no other actors in this game it's implicit that only the Hero could be wearing it -- but, hey, this is a tutorial!
+================
+
+
+Let's compile the final adventure to test that everything is working as expected.
+
+[example,role="gametranscript"]
+================================================================================
+include::{utf8dir}/{adv-transc2}[]
+================================================================================
+
+Here ends our first tutorial on how to implement very simple clothing.
+
+
+== Clothing Table Example
+
+Here's an example of how common clothing can be mapped to layer values in an adventure.
+
+.Common Clothes Examples
+[cols="<25d,5*^15m",options="header"]
+|=========================================================================
+| Clothing       | headcover | topcover | botcover | footcover | handcover
+
+| hat                  |   2 |        0 |        0 |         0 |         0
+| vest/bra             |   0 |        2 |        0 |         0 |         0
+| undies/panties       |   0 |        0 |        2 |         0 |         0
+| teddy                |   0 |        4 |        4 |         0 |         0
+| blouse/shirt/T-shirt |   0 |        8 |        0 |         0 |         0
+| dress/coveralls      |   0 |        8 |       32 |         0 |         0
+| skirt                |   0 |        0 |       32 |         0 |         0
+| trousers/shorts      |   0 |        0 |       16 |         0 |         0
+| sweater/pullover     |   0 |       16 |        0 |         0 |         0
+| jacket               |   0 |       32 |        0 |         0 |         0
+| coat                 |   0 |       64 |       64 |         0 |         0
+| socks/stockings      |   0 |        0 |        0 |         2 |         0
+| tights/pantiehose    |   0 |        0 |        8 |         2 |         0
+| shoes/boots          |   0 |        0 |        0 |         4 |         0
+| gloves               |   0 |        0 |        0 |         0 |         2
+|=========================================================================
+
+Of course, every adventure is different, so you'll need to work out your own layering system to cover the needs of your adventure.
+Some adventure genres might envolve more clothing items (and therefore, layers) than others -- e.g. in the _fantasy_ genre you might need dedicated layers for armors, cloaks, magic garnments (talismans, etc.).
+
+It's strongly reccomended that you do layout a clothing table like the above, so you can use it as a lookup reference when creating new clothing items.
+
+
+// EOF //

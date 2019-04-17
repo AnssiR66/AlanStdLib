@@ -1,0 +1,41 @@
+// "_hl-theme_alan-tutorial.scss"       v2.0.0 | 2019/03/31 | by Tristano Ajmone
+// *****************************************************************************
+/* Highlight Theme for Alan tutorial -- Base16 Google, by  Seth Wright */
+// *****************************************************************************
+// Provides an alternative color theme for Alan code with "role=lib".
+
+// Used in the "ALAN Beginner's Guide" to distinguish between the code of the
+// tutorial and that of the Library sources. 
+
+$HL-Role: 'tutorial';
+
+@import 'base16-google-dark';  // Base16 Google Dark color scheme (light).
+
+$HL-Canvas:             $base07;
+$HL-Default:            $base02;
+
+$HL-Border-color:       $base06;
+
+$HL-LineNum:            $base05;
+
+$HL-Comment:            $base03;
+$HL-String:             $base0B;
+$HL-Number:             $HL-Default; //$base09;
+$HL-Operator:           $HL-Default;
+$HL-Escape:             $base09; // $p $n $i $t $a $l $v $$
+$HL-Interpolation:      $base0F; // $<n> $+<n> $0<n> $-<n> $!<n> $o
+$HL-Keywords1:          $base08;
+$HL-Keywords2:          $base0A;
+$HL-Keywords3:          $base0D;
+
+// -----------------
+// Highlight Markers
+// -----------------
+$HL-MarkerYellow1: #f5ff87;
+$HL-MarkerYellow2: $HL-MarkerYellow1;
+$HL-MarkerGreen1:  lighten($base0B, 60%);
+$HL-MarkerGreen2:  $HL-MarkerGreen1;
+
+@import 'hl-template-alan'; // Reusable template for Alan themes.
+
+// EOF //

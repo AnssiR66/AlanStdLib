@@ -83,8 +83,15 @@ ADD TO EVERY THING
 
   CAN NOT talk.
 
-
-
+  IS NOT worn.
+    -- (for 'clothing' instances) it's not worn by any actor.
+    -- -------------------------------------------------------------------------
+    -- NOTE: Authors can also use this attribute to implement wearables other
+    --       than clothing (eg. devices, like headphones, a VR headset, etc.).
+    --       The library ensures that any verbs which could remove a thing from
+    --       an actor also set the thing as 'NOT worn', in case authors are
+    --       using this attribute outside of the 'clothing' class context.
+    -- -------------------------------------------------------------------------
 
 -- We still define that plural nouns are preceded by "some" (and not by "a" or "an"):
 
@@ -98,18 +105,18 @@ INDEFINITE ARTICLE
 END ADD TO.
 
 
+-- NOTE: If you need to use "an" instead, you should declare it directly on the
+--       instance, e.g.:
+--
+--       ~~~~~~~~~~~~~~~~~~~~~~~~~~
+--       THE owl ISA ACTOR AT woods
+--         INDEFINITE ARTICLE "an"
+--       END THE.
+--       ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--- If you need "an", you should declare it separately at the instance, for example:
 
--- THE owl ISA ACTOR
---    AT woods
---    INDEFINITE ARTICLE "an"
--- END THE.
-
-
--- (We add the 'plural' attribute to the 'entity' class, because the plural
--- applies not only to things but also to for example parameters in syntax statements; ignore.)
-
+-- We add the 'plural' attribute to the 'entity' class, because it doesn't apply
+-- just to things but also (e.g.) to parameters in syntax statements; ignore.
 
 ADD TO EVERY ENTITY
   IS NOT plural.
@@ -464,7 +471,7 @@ EVERY definition_block ISA LOCATION
   -- containment checks for actors other than the hero (checks for the hero are listed separately below):
   -------------------------------------------------------------------------------------------------------
 
-  HAS check_act_near_hero "You don't quite know where $+1 went.           
+  HAS check_act_near_hero "You don't quite know where $+1 went.
                            You should state a direction where you want to go.". -- follow
 
   HAS check_obj_in_act_sg "$+2 doesn't have $+1.".              -- take_from
@@ -514,9 +521,11 @@ EVERY definition_block ISA LOCATION
 
   HAS check_obj_in_worn "You are not wearing $+1.".                 -- remove, take_off ('classes.i')
   HAS check_obj_not_in_worn1 "You are already wearing $+1.".            -- put_on, wear ('classes.i')
-      HAS check_obj_not_in_worn2 "It doesn't make sense to $v something you're wearing.". -- attack, attack_with, kick, shoot, shoot_with
+  HAS check_obj_not_in_worn2 "It doesn't make sense to $v something you're wearing.". -- attack, attack_with, kick, shoot, shoot_with
   HAS check_obj_not_in_worn3 "You'll have to take off $+1 first.".        -- drop
 
+  HAS check_obj1_not_worn_by_NPC_sg "Currently $+1 is worn by".  -- wear
+  HAS check_obj1_not_worn_by_NPC_pl "Currently $+1 are worn by".  -- wear
 
   -- c) checking location states
   ------------------------------
@@ -1064,7 +1073,7 @@ EVENT check_restriction
       ----------------------
       -- This level restricts communication verbs.
 
-      IF restricted_level OF my_game >= 1  
+      IF restricted_level OF my_game >= 1
         THEN
           MAKE my_game NOT 'say'.
           MAKE my_game NOT answer.
@@ -1086,7 +1095,7 @@ EVENT check_restriction
       -- It doesn't affect out-of-game verbs (extradiegetic actions).
 
       IF restricted_level OF my_game >= 2
-        THEN  
+        THEN
           MAKE my_game NOT attack.      -- (+ beat, fight, hit, punch)
           MAKE my_game NOT attack_with.
           MAKE my_game NOT bite.        -- (+ chew)

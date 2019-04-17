@@ -13,7 +13,7 @@ THE my_game IsA DEFINITION_BLOCK
   HAS author   "Tristano Ajmone".
   HAS year     2018.
   HAS version  "1".
-  HAS AlanV    "v3.0beta6 build 1866".
+  HAS AlanV    "v3.0beta6 build 1880".
 
 END THE.
 
@@ -99,12 +99,12 @@ END THE scoreboard.
 -- Also, we'll add to every fruit instance the verb 'eat' so that eating a fruit
 -- will reward some points (every fruit = 1 point, except the apple which gives
 -- 666 points).
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- NOTE: The SCORE command is evalued only once for each context, so if we had
 --       implemented point reward in the 'eat' verb inside the 'fruit' class, it
 --       would have rewarded only the first time a fruit was eaten. For this
 --       reason we have implemented 'eat' on each fruit instance.
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 EVERY fruit IsA object.
   NAME fruit.
   IS edible.

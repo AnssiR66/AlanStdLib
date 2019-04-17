@@ -1,24 +1,77 @@
 ; ******************************************************************************
 ; *                                                                            *
-; *                       TEST WEARING/REMOVING CLOTHES                        *
+; *                             TEST WEAR & REMOVE                             *
 ; *                                                                            *
 ; ******************************************************************************
-; This script checks that verbs 'wear' and 'remove' are handling correctly all
-; the attributes of 'clothing' instances as well as Hero's 'wearing' set and the
-; 'worn' instance.
+; General purpose tests for 'wear' and 'remove' verbs. Checks that layered order
+; and 'donned' status are being handled correctly.
+; ******************************************************************************
+; TEST INVALID ACTIONS
+; ******************************************************************************
+; ==============================================================================
+; WEAR -> ALREADY WORN
+; ==============================================================================
+wear sneakers
+; ==============================================================================
+; REMOVE -> NOT WORN
+; ==============================================================================
+remove kippah
+; ******************************************************************************
+; TEST BODY AREAS
+; ******************************************************************************
+; We need to test how our custom layering system implemented in EGA adventure
+; is working out. It's both a demo of the library potential uses as well as
+; a test that everything is working as expected.
 north
+west
 north
+; Let's collect some clothes:
+take balaclava
+take helmet
+take goggles
+; and take them to the dressing room, where we can quickly 'undress'
+east
 ; ==============================================================================
-; TEST 'remove'
+; HEAD AND FACE
 ; ==============================================================================
-inventory
-DBG boxers
-remove khakis
-remove boxers
-DBG boxers
-; ==============================================================================
-; TEST 'wear'
-; ==============================================================================
-DBG jeans
-wear jeans
-DBG jeans
+; We have various face and head wearable items here.
+; ------------------------------------------------------------------------------
+; BALACLAVA
+; ------------------------------------------------------------------------------
+; The balaclava cover both face and head, occupying the lowest layer (direct
+; skin contact) to allow wearing hats and goggles over it...
+x balaclava
+DBG_CLOTHES it
+wear it
+; /// VERIFY -> IS DONNED (OK!)
+DBG_CLOTHES it
+; ------------------------------------------------------------------------------
+; BALACLAVA & GOGGLES
+; ------------------------------------------------------------------------------
+x goggles
+DBG_CLOTHES it
+wear it
+; /// VERIFY -> IS DONNED (OK!)
+DBG_CLOTHES it
+; /// REMOVE -> NO -> BLOCKERS: GOGGLES (OK!) ///
+remove balaclava
+; ------------------------------------------------------------------------------
+; BALACLAVA + SKI HELMET
+; ------------------------------------------------------------------------------
+x helmet
+DBG_CLOTHES it
+wear it
+; /// REMOVE -> NO -> BLOCKERS: GOGGLES & HELMET (OK!) ///
+remove balaclava
+remove goggles
+; /// REMOVE -> NO -> BLOCKERS: HELMET (OK!) ///
+remove balaclava
+undress
+; ------------------------------------------------------------------------------
+; TEST BALACLAVA OVER GOGGLES & HELMET
+; ------------------------------------------------------------------------------
+; The balaclava shouldn't be wearable on top of the helmet or the goggles...
+wear helmet
+wear goggles
+; /// WEAR -> NO -> BLOCKERS: GOGGLES & HELMET (OK!) ///
+wear balaclava

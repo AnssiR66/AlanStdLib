@@ -1,0 +1,103 @@
+
+
+Emporium Giorgio Alani 
+An adventure to test clothing. 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880
+.
+Standard Library v2.1 
+Version 1 
+All rights reserved. 
+
+Type EXITS to view the list of exits of a room. 
+Use the DBG command (DGB <ITEM NAME>) to show the coverage values of any
+clothing item.
+
+
+Outside Emporium Alani
+You're standing in front of the Giorgio Alani Emporium entrance. Two
+large brass doors await northward your entrance into the sanctuary of
+fashion consumism.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                        TEST CLOTHING INITIALIZATION                        *
+> ; *                                                                            *
+> ; ******************************************************************************
+> ; We must check that with the new system all clothing items are initialized
+> ; correctly.
+> ;
+> ; Now authors only need to create a clothing instance directly in the wearing
+> ; actor and set it as `IS donned`; the library will take care of the rest.
+> ;
+> ; ==============================================================================
+> ; HERO'S CLOTHING
+> ; ==============================================================================
+> inventory
+You are empty-handed. You are wearing your socks, your boxers, your 
+undershirt, your sneakers and your khakis.
+
+> ; /// CHECK ITEMS ARE DONNED: (OK!) ///
+> DBG_CLOTHES boxers
+'boxers' VALUES: | botcover: 2 | 
+WORN: Yes (by hero)
+
+> DBG_CLOTHES khakis
+'khakis' VALUES: | botcover: 16 | 
+WORN: Yes (by hero)
+
+> DBG_CLOTHES sneakers
+'sneakers' VALUES: | feetcover: 4 | 
+WORN: Yes (by hero)
+
+> DBG_CLOTHES socks
+'socks' VALUES: | feetcover: 2 | 
+WORN: Yes (by hero)
+
+> DBG_CLOTHES undershirt
+'undershirt' VALUES: | topcover: 2 | 
+WORN: Yes (by hero)
+
+> ; ------------------------------------------------------------------------------
+> ; NESTED CLOTHES
+> ; ------------------------------------------------------------------------------
+> x khakis
+A pair of khaki beige cotton pants. Inside the khakis pockets there are 
+your kippah and your wallet.
+
+> x kippah
+It's your kippah. You always carry it around with you.
+
+> ; /// CHECK NESTED ITEM IS NOT DONNED: (OK!) ///
+> DBG_CLOTHES kippah
+'kippah' VALUES: (none) 
+WORN: No
+
+> ; ==============================================================================
+> ; NPCS' CLOTHING
+> ; ==============================================================================
+> north
+As you move toward the doors they automagically slide open before you.
+
+Emporium Alani Main Hall
+This luxurious hall is the crossroad to the various clothing departments
+of the emporium. Two large brass doors lead the way south, out of the
+fashion temple and back into the world of mortal souls.There is a trashcan 
+here. Behind a desk stands the emporium manager. There is your personal
+assistant here.
+
+> x assistant
+She's your personal shopping assistant. The assistant is wearing a uniform 
+and a pair of fashion boots.
+
+> DBG_CLOTHES boots
+'fashion boots' VALUES: | feetcover: 4 | 
+WORN: Yes (by assistant)
+
+> DBG_CLOTHES uniform
+'uniform' VALUES: | topcover: 8 | botcover: 32 | NOT blockslegs | 
+WORN: Yes (by assistant)
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

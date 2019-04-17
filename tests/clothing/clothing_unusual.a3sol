@@ -1,0 +1,56 @@
+; ******************************************************************************
+; *                                                                            *
+; *                        TEST UNUSUAL CLOTHING ITEMS                         *
+; *                                                                            *
+; ******************************************************************************
+; Test out-of-the-ordinary clothing items and see how the library handles them.
+north
+west
+north
+; ==============================================================================
+; SPORTS GEAR
+; ==============================================================================
+examine balaclava
+DBG_CLOTHES balaclava
+; These goggles have headcover=4, so they can be worn over the balaclava:
+examine ski goggles
+DBG_CLOTHES ski goggles
+; ** NOTE ** The problem here is that these will conflict with other headgear,
+;            like hats, for there isn't a distinction between the face area and
+;            the head.
+; ------------------------------------------------------------------------------
+; Balaclava + Ski Goggles
+; ------------------------------------------------------------------------------
+; Ski goggles should be wearable on top of a balaclava.
+wear balaclava
+wear goggles
+inv
+; Test inverse order:
+remove goggles and balaclava
+wear goggles
+wear balaclava
+; ==============================================================================
+; VALUELESS ITEMS (ORNAMENTALS)
+; ==============================================================================
+; Some small items, like watches, necklaces, etc., might be created without any
+; coverage values at all, so they can be freely worn reagardless of other items.
+examine watch
+DBG_CLOTHES watch
+wear it
+inv
+; ------------------------------------------------------------------------------
+; WEARNING MULTIPLE SAME-ITEMS (SCARFS)
+; ------------------------------------------------------------------------------
+; This might provide a quick solution that works in most cases, but it prevents
+; checking that multiple items of the same type are being worn at once.
+examine white scarf
+DBG_CLOTHES white scarf
+examine blue scarf
+DBG_CLOTHES blue scarf
+examine black scarf
+DBG_CLOTHES black scarf
+; WEAR MULTIPLE SCARFS:
+wear white scarf
+wear blue scarf
+wear black scarf
+inv

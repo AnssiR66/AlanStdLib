@@ -1,139 +1,139 @@
 ; ==============================================================================
-;                               Restricted Level 0                              
+;                               Restricted Level 0
 ; ==============================================================================
 ; None of the following commands should fail at Level 0:
 ; ------------------------------------------------------------------------------
-; TEST/PASS: Level 0 Actions                             
+; TEST/PASS: Level 0 Actions
 ; ------------------------------------------------------------------------------
 drop phone
 take phone
 ; ------------------------------------------------------------------------------
-; TEST/PASS: Level 1 Actions (communication verbs)                            
+; TEST/PASS: Level 1 Actions (communication verbs)
 ; ------------------------------------------------------------------------------
 say "hello world"
 shout
 sing
 ; ------------------------------------------------------------------------------
-; TEST/PASS: Level 2 Actions (examine, look and sensory)                             
+; TEST/PASS: Level 2 Actions (examine, look and sensory)
 ; ------------------------------------------------------------------------------
 look
 inventory
 ; ------------------------------------------------------------------------------
-; TEST/PASS: Level 3 Actions (out-of-game actions)                             
+; TEST/PASS: Level 3 Actions (out-of-game actions)
 ; ------------------------------------------------------------------------------
 score
 ; ==============================================================================
-;                               Restricted Level 1                              
+;                               Restricted Level 1
 ; ==============================================================================
 ; With restriction level 1, all communication verbs should be blocked.
 east
 
 ; ------------------------------------------------------------------------------
-; TEST/PASS: Level 0 Actions                             
+; TEST/PASS: Level 0 Actions
 ; ------------------------------------------------------------------------------
 drop phone
 take phone
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-; TEST/FAIL: Level 1 Actions (communication verbs)                            
+; TEST/FAIL: Level 1 Actions (communication verbs)
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ; THESE ACTIONS SHOULD BE BLOCKED:
 say "hello world"
 shout
 sing
 ; ------------------------------------------------------------------------------
-; TEST/PASS: Level 2 Actions (examine, look and sensory)                             
+; TEST/PASS: Level 2 Actions (examine, look and sensory)
 ; ------------------------------------------------------------------------------
 look
 inventory
 ; ------------------------------------------------------------------------------
-; TEST/PASS: Level 3 Actions (out-of-game actions)                             
+; TEST/PASS: Level 3 Actions (out-of-game actions)
 ; ------------------------------------------------------------------------------
 score
 ; ==============================================================================
-;                               Restricted Level 2                              
+;                               Restricted Level 2
 ; ==============================================================================
 ; With restriction level 2,  only verbs like 'examine', 'look', 'inventory, 'think'
 ; 'wait' and sensory verbs as well as all out-of-game verbs should work.
 east
 
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-; TEST/FAIL: Level 0 Actions                             
+; TEST/FAIL: Level 0 Actions
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 drop phone
 take phone
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-; TEST/FAIL: Level 1 Actions (communication verbs)                            
+; TEST/FAIL: Level 1 Actions (communication verbs)
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ; THESE ACTIONS SHOULD BE BLOCKED:
 say "hello world"
 shout
 sing
 ; ------------------------------------------------------------------------------
-; TEST/PASS: Level 2 Actions (examine, look and sensory)                             
+; TEST/PASS: Level 2 Actions (examine, look and sensory)
 ; ------------------------------------------------------------------------------
 look
 inventory
 smell
 ; ------------------------------------------------------------------------------
-; TEST/PASS: Level 3 Actions (out-of-game actions)                             
+; TEST/PASS: Level 3 Actions (out-of-game actions)
 ; ------------------------------------------------------------------------------
 score
 ; ==============================================================================
-;                               Restricted Level 3                              
+;                               Restricted Level 3
 ; ==============================================================================
 ; With restriction level 3, only out-of-game verbs (like 'save', 'quit', etc)
 ; should work.
 east
 
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-; TEST/FAIL: Level 0 Actions                             
+; TEST/FAIL: Level 0 Actions
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 drop phone
 take phone
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-; TEST/FAIL: Level 1 Actions (communication verbs)                            
+; TEST/FAIL: Level 1 Actions (communication verbs)
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ; THESE ACTIONS SHOULD BE BLOCKED:
 say "hello world"
 shout
 sing
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-; TEST/FAIL: Level 2 Actions (examine, look and sensory)                             
+; TEST/FAIL: Level 2 Actions (examine, look and sensory)
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 look
 inventory
 smell
 ; ------------------------------------------------------------------------------
-; TEST/PASS: Level 3 Actions (out-of-game actions)                             
+; TEST/PASS: Level 3 Actions (out-of-game actions)
 ; ------------------------------------------------------------------------------
 score
 ; ==============================================================================
-;                               Restricted Level 4                              
+;                               Restricted Level 4
 ; ==============================================================================
 ; With restriction level 4 no verbs should work, not even out-of-game actions;
 ; only exits directions.
 east
 
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-; TEST/FAIL: Level 0 Actions                             
+; TEST/FAIL: Level 0 Actions
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 drop phone
 take phone
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-; TEST/FAIL: Level 1 Actions (communication verbs)                            
+; TEST/FAIL: Level 1 Actions (communication verbs)
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ; THESE ACTIONS SHOULD BE BLOCKED:
 say "hello world"
 shout
 sing
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-; TEST/FAIL: Level 2 Actions (examine, look and sensory)                             
+; TEST/FAIL: Level 2 Actions (examine, look and sensory)
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 look
 inventory
 smell
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-; TEST/FAIL: Level 3 Actions (out-of-game actions)                             
+; TEST/FAIL: Level 3 Actions (out-of-game actions)
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 score
 about

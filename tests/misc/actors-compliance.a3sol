@@ -11,7 +11,7 @@ inventory
 examine woman
 examine man
 ; ==============================================================================
-; Test compliance before and after 'ask_for'                  
+; Test compliance before and after 'ask_for'
 ; ==============================================================================
 ; The 'test compliance of' verb debugs the compliance state of an actor.
 ; (See Issue #18 on the previous 'ask_for' problem).

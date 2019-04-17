@@ -1,0 +1,33 @@
+// "_hl-theme_alan-lib.scss"            v2.0.0 | 2019/03/31 | by Tristano Ajmone
+// *****************************************************************************
+/* Highlight Theme for Alan Library -- Base16 Eighties, by Chris Kempson */
+// *****************************************************************************
+// Provides an alternative color theme for Alan code with "role=lib".
+
+// Used in the "ALAN Beginner's Guide" to distinguish between the code of the
+// tutorial and that of the Library sources. 
+
+$HL-Role: 'lib';
+
+@import 'base16-eighties';  // Base16 Eighties color scheme.
+
+$HL-Canvas:             $base00;
+$HL-Default:            $base05;
+
+$HL-Border-color:       $base04;
+
+$HL-LineNum:            $base03;
+
+$HL-Number:             $base09;
+$HL-Escape:             $base09; // $p $n $i $t $a $l $v $$
+$HL-Interpolation:      $base0F; // $<n> $+<n> $0<n> $-<n> $!<n> $o
+$HL-String:             $base0B;
+$HL-Comment:            $base04;
+$HL-Operator:           $HL-Default;
+$HL-Keywords1:          $base08;
+$HL-Keywords2:          $base0A;
+$HL-Keywords3:          $base0D;
+
+@import 'hl-template-alan'; // Reusable template for Alan themes.
+
+// EOF //

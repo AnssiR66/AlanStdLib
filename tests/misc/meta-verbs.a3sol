@@ -96,11 +96,11 @@ score
 ; REDUNDANT USES OF NOTIFY
 ; ------------------------
 ; Let's check the messages when requesting a notify mode already active:
-notify off 
-notify on 
-notify on 
-notify off 
-notify off 
+notify off
+notify on
+notify on
+notify off
+notify off
 ; ==============================================================================
 ; GAMEPLAY TRANSCRIPT
 ; ==============================================================================

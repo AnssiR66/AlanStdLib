@@ -3,7 +3,7 @@
 The House 
 A rooms & sites setting for various tests. 
 (C) 2018 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1866
+Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880
 .
 Standard Library v2.1 
 Version 1 
@@ -95,7 +95,7 @@ You hear nothing unusual.
 > ; ROOM OBJECTS
 > ; ------------------------------------------------------------------------------
 > ; These are not present at outdoor, but they are at kitchen (indoor), except
-> ; that the indoor is not directly adjacent to garden (kitchen is): 
+> ; that the indoor is not directly adjacent to garden (kitchen is):
 > listen to ceiling
 
 > listen to floor

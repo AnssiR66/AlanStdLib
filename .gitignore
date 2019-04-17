@@ -22,9 +22,10 @@
 ## =================
 appsettings.json
 
-# ==========
-# Sass Cache
-# ==========
+## ==========
+## Sass Cache
+## ==========
+## In case someone still uses Ruby Sass:
 .sass-cache/
 
 ## Misc Work Files

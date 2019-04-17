@@ -1,0 +1,59 @@
+// "_common.scss"                       v1.0.0 | 2019/04/09 | by Tristano Ajmone
+// *****************************************************************************
+// *                                                                           *
+// *                        Common Styles Definitions                          *
+// *                                                                           *
+// *****************************************************************************
+
+// =============================================================================
+//                            Blocks & Code Mockups                             
+// =============================================================================
+// Some code block are not syntax higlighted but just given some basic colors
+// for background, foreground and border. Mockups are fake-code blocks, usually
+// employed to illustrate the styling notation of the document, or for some
+// pseudocode examples that can't be highlighted properly.
+
+// -----------------------------------------------------------------------------
+/* Shell/CMD */
+// -----------------------------------------------------------------------------
+// This isn't a syntax highlighted block, it's just a literal block with custom
+// styles to emulate the look and feel of a Windows CMD, but we throw it in here
+// to keep it simpler...
+
+div.literalblock.shell pre {
+    background-color: $CMD-Black;
+    color: $CMD-White;
+    
+    // AsciiDoc Callouts
+    .conum {
+        background: $CMD-callouts-background !important;
+        color: $CMD-Black !important;
+    }
+}
+// -----------------------------------------------------------------------------
+/* Game Transcripts */
+// -----------------------------------------------------------------------------
+// This isn't a syntax highlighted block, it's just an example block with custom
+// colors.
+
+.exampleblock.gametranscript>.content {
+    background: $Transcript-background;
+    color: $Transcript-normal;
+    border-color: $Transcript-border;
+    // -------------------------------------------------------------------------
+    // The styles below target ADoc elements automatically handled by the update
+    // script that processes game transcripts and detects user input and comment
+    // input lines, and styles them accordingly via sed manipulations.
+    // (found in "*.a3ADocLog" files)
+    // -------------------------------------------------------------------------
+    span.comment {
+        // Comments in user input are styled via:  #[comment]; some text#
+        color: $Transcript-command;
+        // font-style: italic;
+    }
+    em {
+        color: $Transcript-comment;
+    }
+}
+
+// EOF //

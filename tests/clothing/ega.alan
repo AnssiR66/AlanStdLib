@@ -10,7 +10,8 @@
 -- WIP NOTE: This file is still work-in-progress, and doesn't yet test all the
 --           commands and contexts related to clothing.
 --------------------------------------------------------------------------------
-IMPORT 'library.i'. -- ALAN Standard Library v2.1
+IMPORT 'library.i'.      -- ALAN Standard Library v2.1
+IMPORT '../inc_debug.i'. -- Debugging Module (adds useful test verbs)
 
 
 THE my_game IsA DEFINITION_BLOCK
@@ -20,7 +21,7 @@ THE my_game IsA DEFINITION_BLOCK
   HAS author   "Tristano Ajmone".
   HAS year     2018.
   HAS version  "1".
-  HAS AlanV    "v3.0beta6 build 1866".
+  HAS AlanV    "v3.0beta6 build 1880".
 
 END THE.
 
@@ -185,12 +186,17 @@ THE dressing_room IsA room.
      NORTHWEST to Workswear.".
   VERB undress -- Allow undressing action when in Dressing Room:
     DOES ONLY
-      IF COUNT DIRECTLY IN worn, ISA CLOTHING > 0
-        THEN EMPTY worn IN hero.
+      IF COUNT IsA clothing, DIRECTLY IN hero, IS worn > 0
+        THEN
           "You remove all the items you were wearing."
+          FOR EACH worncl IsA clothing, DIRECTLY IN hero, IS worn
+            DO
+              MAKE worncl NOT worn.
+              LOCATE worncl AT CURRENT LOCATION.
+          END FOR.
         ELSE "You're not wearing anything you can remove."
       END IF.
-  END VERB undress.  
+  END VERB undress.
 END THE dressing_room.
 
 -- =============================================================================
@@ -321,7 +327,7 @@ END THE ega_free2.
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --------------------------------------------------------------------------------
 --
--- SPECIALIZED CLASSES 
+-- SPECIALIZED CLASSES
 --
 --------------------------------------------------------------------------------
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -343,11 +349,17 @@ END THE ega_free2.
 
 -- All clothing classes name start with the 'cl_' prefix.
 -- We'll be creating two types of clothing subclasses:
--- 
+--
 --   (1) Prototypes -- 'proto_' prefix.
 --   (2) General purpose classes -- 'cl_' prefix.
 
--- The Clothing Table
+-- >>> FIXME >>> EGA Clothing Table
+--     +-----------------------------------------------------------------------+
+--     | Since the new clothing system doesn't enforce any more exponential    |
+--     | layer values, I shuould customize these values according to needs.    |
+--     +-----------------------------------------------------------------------+
+
+-- Custom Clothing Table
 --+--------------------------+----------+----------+-----------+------------+
 --| Clothing     | Headcover | Topcover | Botcover | Feetcover | Handscover |
 --+--------------------------+----------+----------+-----------+------------+
@@ -369,8 +381,11 @@ END THE ega_free2.
 --+--------------------------+----------+----------+-----------+------------+
 
 --==============================================================================
--- HEADWEAR
+-- HEADWEAR & FACEWEAR
 --==============================================================================
+-- Hats will cover layer 2 of the head, layer 1 being reserved for balaclavas
+-- which are in direct skin contact and can be worn underneath hats, helmets, etc..
+
 EVERY proto_headwear IsA clothing.
   HAS headcover 2.
 END EVERY.
@@ -378,6 +393,7 @@ END EVERY.
 EVERY cl_hat IsA proto_headwear.
   NAME hat.
 END EVERY.
+
 --==============================================================================
 -- UNDERWEAR
 --==============================================================================
@@ -419,6 +435,7 @@ END EVERY.
 
 EVERY cl_boots IsA clothing.
   NAME boots.
+  IS plural.
   HAS feetcover 4.
   INDEFINITE ARTICLE "a pair of"
 END EVERY.
@@ -437,12 +454,21 @@ EVERY cl_tshirt IsA proto_shirt.
 END EVERY.
 
 --==============================================================================
+-- SWEATERS & PULLOVERS
+--==============================================================================
+
+EVERY proto_pullover IsA clothing.
+  HAS topcover 16.
+END EVERY.
+
+
+--==============================================================================
 -- LEGWEAR
 --==============================================================================
 
 EVERY proto_skirt IsA clothing.
   NAME skirt.
-  HAS botcover 32.
+  HAS botcover 32. NOT blockslegs. --> Skirts don't prevent wearing lower legswear!
 END EVERY.
 
 EVERY proto_trousers IsA clothing.
@@ -485,88 +511,30 @@ END EVERY.
 EVERY proto_dress IsA clothing.
   NAME dress.
   HAS topcover 8.
-  HAS botcover 32.
+  HAS botcover 32. NOT blockslegs. --> Skirts don't prevent wearing lower legswear!
 END EVERY.
 
+--==============================================================================
+-- COATS
+--==============================================================================
+
+EVERY cl_coat IsA clothing.
+  NAME coat.
+  HAS topcover 64.
+  HAS botcover 64. NOT blockslegs. --> Coats don't prevent wearing lower legswear!
+END EVERY.
 
 --==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --------------------------------------------------------------------------------
 --
--- CUSTOM VERBS 
+-- CUSTOM VERBS
 --
 --------------------------------------------------------------------------------
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
-
---==============================================================================
--- DEBUG CLOTHING VALUES
---==============================================================================
--- A helper verb to check the coverage values of individual clothing items.
-
-SYNTAX dbg = dbg (obj)
-  WHERE obj IsA clothing
-    ELSE "This verb can only be used with clothing items."
-
-ADD TO EVERY clothing
-  VERB dbg
-    DOES
-      ---------------------------------------
-      -- Show coverage values (non-zero only)
-      ---------------------------------------
-      "'$1' VALUES:"
-      IF obj:headcover = 0 AND obj:topcover = 0 AND obj:botcover = 0
-      AND obj:feetcover = 0 AND obj:handscover = 0
-        THEN
-          "(none)"
-        ELSE
-          IF obj:headcover > 0
-            THEN "| headcover:" SAY obj:headcover.
-          END IF.
-          IF obj:topcover > 0
-            THEN "| topcover:" SAY obj:topcover.
-          END IF.
-          IF obj:botcover > 0
-            THEN "| botcover:" SAY obj:botcover.
-          END IF.
-          IF obj:feetcover > 0
-            THEN "| feetcover:" SAY obj:feetcover.
-          END IF.
-          IF obj:handscover > 0
-            THEN "| handscover:" SAY obj:handscover.
-          END IF.
-          "|"
-      END IF.
-      ------------------------
-      -- Show if donned or not
-      ------------------------
-      "$nDONNED:"
-      IF obj:donned
-        THEN "Yes"
-        ELSE "No."
-      END IF.
-      -------------------------
-      -- Show if in Hero's worn
-      -------------------------
-      "$nIN WORN:"
-      IF obj IN worn
-        THEN "Yes"
-        ELSE "No."
-      END IF.
-      -----------------------------------------------
-      -- Show in which actors' wearing set is present
-      -----------------------------------------------
-      "$nIN WEARING OF:"
-      FOR EACH ac IsA ACTOR
-        DO
-          IF obj IN wearing OF ac
-            THEN "| " SAY ac.
-          END IF.
-      END FOR.
-  END VERB dbg.
-END ADD TO clothing.
 
 --==============================================================================
 -- LIST EXITS
@@ -594,7 +562,7 @@ END VERB exits.
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --------------------------------------------------------------------------------
 --
--- ROOMS FURNITURE & PROPS 
+-- ROOMS FURNITURE & PROPS
 --
 --------------------------------------------------------------------------------
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -606,7 +574,7 @@ END VERB exits.
 --=============================================================================
 --\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 --------------------------------------------------------------------------------
--- Emporium GA Entrance 
+-- FURNITURE & PROPS: Emporium GA Entrance
 -------------------------------------------------------------------------------
 --//////////////////////////////////////////////////////////////////////////////
 --=============================================================================
@@ -616,7 +584,7 @@ END VERB exits.
 --==============================================================================
 -- These fake doors are automatic-opening doors. They are moved from the emporium
 -- entrance to the main hall when the hero wals in and out of it, to avoid having
--- recreate them inside too. 
+-- recreate them inside too.
 
 THE ega_doors IsA object AT ega_entrance.
   NAME 'emporium doors'.
@@ -654,7 +622,72 @@ END THE ega_doorframe.
 --=============================================================================
 --\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 --------------------------------------------------------------------------------
--- The Dressing Room 
+-- FURNITURE & PROPS: Main Hall
+-------------------------------------------------------------------------------
+--//////////////////////////////////////////////////////////////////////////////
+--=============================================================================
+
+-- Having a surface to carry out tests in the Hall is convenient:
+
+THE desk IsA supporter AT ega_hall.
+  DESCRIPTION "" -- We'll describe the desk along with the manager.
+  HAS ex
+    "This luxurios mahogany desk is where customers go and pay their purchased
+     merchandise, a bit like the supermarket cash, but more discrete.".
+  VERB look_behind
+    DOES ONLY
+      "Peeking behind the desk you notice a gun, hidden out of sight but readily
+       grabbable if the need comes. They must keep it there for emergencies."
+      LOCATE gun AT ega_hall.
+  END VERB look_behind.
+END THE desk.
+
+-- In orders to test verbs that need a weapon, we'll hide a gun behind the desk,
+-- which will become visible after looking behind the desk.
+
+THE gun IsA weapon.
+  NAME gun.
+  NAME pistol.
+  CAN shoot.
+  IS hidden.
+  MENTIONED
+    "gun"
+    IF THIS IS hidden
+      THEN "(hidden behind the desk)"
+    END IF.
+  HAS ex "A semiautomatic pistol, seemingly loaded.".
+
+  VERB take
+    DOES AFTER
+      MAKE THIS NOT hidden.
+  END VERB take.
+END THE gun.
+
+
+THE trashcan IsA listed_container AT ega_hall.
+  NAME trashcan.
+  NAME bin.
+  WITH CONTAINER
+    HEADER "Inside the trashcan you can see"
+  IS NOT moveable. NOT takeable.
+  HAS ex "Just a trashcan.".
+
+  INITIALIZE
+    -- Let's ensure that the trashcan can contain any object of the game:
+    FOR EACH obj IsA object
+      DO INCLUDE obj IN allowed OF THIS.
+    END FOR.
+  
+  VERB examine
+    DOES ONLY
+      LIST THIS.
+  END VERB examine.
+END THE.
+
+--=============================================================================
+--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+--------------------------------------------------------------------------------
+-- FURNITURE & PROPS: The Dressing Room
 -------------------------------------------------------------------------------
 --//////////////////////////////////////////////////////////////////////////////
 --=============================================================================
@@ -688,7 +721,40 @@ END THE basket.
 
 --==============================================================================
 --------------------------------------------------------------------------------
--- The Personal Assistant 
+-- The Manager
+--------------------------------------------------------------------------------
+--==============================================================================
+
+-- We'll place this NPC in the Main Hall, so that we might test those verbs
+-- that would transfer (implicitly) worn clothing from one NPC to another.
+
+THE manager IsA male AT ega_hall.
+  DESCRIPTION "Behind a desk stands the emporium manager."
+END THE manager.
+
+--==============================================================================
+-- Abbigliamento Manager
+--==============================================================================
+THE manager_trousers IsA proto_trousers IN manager.
+  IS worn.
+  NAME pleated trousers.
+  NAME his pleated.
+END THE.
+
+THE manager_pullover IsA proto_pullover IN manager.
+  IS worn.
+  NAME pullover.
+  NAME his pullover.
+END THE.
+
+THE manager_shoes IsA cl_shoes IN manager.
+  IS worn.
+  NAME loafers.
+END THE.
+
+--==============================================================================
+--------------------------------------------------------------------------------
+-- The Personal Assistant
 --------------------------------------------------------------------------------
 --==============================================================================
 -- This NPC is intended not just a simple clerk but as "personal assistant"
@@ -713,9 +779,7 @@ THE personal_assistant IsA female AT ega_hall.
     -- Turn every clothing IN assistant into an item worn by her
     -- ---------------------------------------------------------
     FOR EACH cl IsA clothing, IN THIS
-      DO
-        MAKE cl donned.
-        INCLUDE cl IN wearing OF THIS.
+      DO MAKE cl worn.
     END FOR.
 END THE personal_assistant.
 
@@ -767,7 +831,7 @@ END THE.
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --------------------------------------------------------------------------------
 --
--- CLOTHING ITEMS 
+-- CLOTHING ITEMS
 --
 --------------------------------------------------------------------------------
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -779,7 +843,7 @@ END THE.
 
 
 --==============================================================================
--- The Dressing Room (temporary) 
+-- The Dressing Room (temporary)
 --==============================================================================
 -- For the sake of initial testing, some clothing items will be located in the
 -- Dressing Room, temporarily...
@@ -815,8 +879,22 @@ END THE.
 --=============================================================================
 
 THE tshirt IsA cl_tshirt AT ega_menswear.
-  
 END THE.
+
+THE black_shirt IsA cl_tshirt AT ega_menswear.
+  NAME black shirt.
+END THE.
+
+THE red_shirt IsA cl_tshirt AT ega_menswear.
+  NAME red shirt.
+END THE.
+
+THE man_coat IsA cl_coat AT ega_menswear.
+  NAME 'men''s coat'.
+  NAME men man coat.
+END THE.
+
+
 
 --=============================================================================
 --\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -826,8 +904,19 @@ END THE.
 --//////////////////////////////////////////////////////////////////////////////
 --=============================================================================
 
+
+
+--==============================================================================
+--------------------------------------------------------------------------------
+-- Winter Sports Gear
+--------------------------------------------------------------------------------
+--==============================================================================
+
+-- A balaclava covers both face and head, and it's in direct skin contact.
+
 THE balaclava IsA clothing AT ega_sportswear.
-  HAS headcover 2.
+  HAS headcover 1.
+  HAS facecover 1.
   HAS ex
     "It's a cotton balaclava for winter sports. Basically, a head hood with holes
      for the eyes and mouth, like the ones used in robberies.".
@@ -836,12 +925,55 @@ END THE.
 THE ski_goggles IsA clothing AT ega_sportswear.
   NAME ski goggles.
   IS plural.
-  HAS headcover 4.
+  HAS facecover 2.
   INDEFINITE ARTICLE "a pair of"
   HAS ex
     "A pair of goggles for skiing, with an elastic band to hold them in place.
      Its front B-shaped single lens has a special coating adaptative to light.".
 END THE.
+
+THE ski_helmet IsA clothing AT ega_sportswear.
+  NAME ski helmet.
+  HAS headcover 2.
+  HAS ex
+    "It's a hard plastic helmet covering head and ears, with soft padding inside.
+     A chinstrap allows securing it firmly in place.".
+END THE.
+
+
+
+--==============================================================================
+--------------------------------------------------------------------------------
+-- Swimming Gear
+--------------------------------------------------------------------------------
+--==============================================================================
+
+
+--------------------------------------------------------------------------------
+-- One-Piece Swimsuit
+--------------------------------------------------------------------------------
+-- The one-piece swimsuit is like a teddy for it covers both legs and torso in
+-- a single piece; so it's useful for testing skirts.
+
+THE onepiece_swimsuit IsA clothing AT ega_sportswear.
+  NAME swimsuit.
+  HAS topcover 2.
+  HAS botcover 2.
+  HAS ex "A one-piece swimsuit, for women swimmers.".
+END THE.
+
+--------------------------------------------------------------------------------
+-- Bikini (two pieces leg + torso)
+--------------------------------------------------------------------------------
+-- The bikini is a special item for it covers both legs and torso but in two
+-- separate pieces, although it's treated as a single item.
+
+THE bikini IsA clothing AT ega_sportswear.
+  HAS topcover 2.
+  HAS botcover 2. IS twopieces. --> legs and torso are covered separately
+  HAS ex "A two-piece swimsuit, for women.".
+END THE.
+
 
 --==============================================================================
 -- VALUELESS ITEMS (ORNAMENTALS)
@@ -882,7 +1014,7 @@ END THE.
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --------------------------------------------------------------------------------
 --
--- THE HERO 
+-- THE HERO
 --
 --------------------------------------------------------------------------------
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -907,7 +1039,8 @@ END THE.
 --     have same ARTICLE and place them IN WORN, and slim down code here.
 -- [ ] Order of creation matters: items will be listed in inverse order.
 
-THE hero_socks IsA cl_socks IN worn.
+THE hero_socks IsA cl_socks IN hero.
+  IS worn.
   NAME socks.
   NAME my white socks.
   INDEFINITE ARTICLE "your"
@@ -917,7 +1050,8 @@ THE hero_socks IsA cl_socks IN worn.
      The right sock has a hole big enough for your toe to pop out.".
 END THE hero_socks.
 
-THE hero_boxers IsA cl_underpants IN worn.
+THE hero_boxers IsA cl_underpants IN hero.
+  IS worn.
   NAME boxers.
   NAME my white boxers.
   INDEFINITE ARTICLE "your"
@@ -925,7 +1059,8 @@ THE hero_boxers IsA cl_underpants IN worn.
   HAS ex "Just your boxer shorts (the loose type), white and plain.".
 END THE hero_boxers.
 
-THE hero_undershirt IsA cl_undershirt IN worn.
+THE hero_undershirt IsA cl_undershirt IN hero.
+  IS worn.
   NAME undershirt.
   NAME my white undershirt.
   INDEFINITE ARTICLE "your"
@@ -933,7 +1068,8 @@ THE hero_undershirt IsA cl_undershirt IN worn.
   HAS ex "A plain white T-shaped undershirt, a few stains here and there.".
 END THE.
 
-THE hero_shoes IsA cl_shoes IN worn.
+THE hero_shoes IsA cl_shoes IN hero.
+  IS worn.
   NAME sneakers.
   NAME my black converse sneakers.
   INDEFINITE ARTICLE "your"
@@ -946,7 +1082,8 @@ END THE.
 --------------------------------------------------------------------------------
 
 
-THE hero_trousers IsA proto_trousers IN worn.
+THE hero_trousers IsA proto_trousers IN hero.
+  IS worn.
   NAME khakis.
   NAME my khakis.
   NAME khaki pants.

@@ -1,0 +1,53 @@
+Import 'library.i'.
+
+The my_game IsA DEFINITION_BLOCK
+End the.
+
+The bedroom IsA room.
+  Description
+    "The exit is west."
+  
+  Exit west, leave to bedroom -- also allow using 'leave' to exit!
+    Check uniform directly in hero and uniform is worn
+      else "You can't leave the house naked!"
+    And shower is taken
+      else "Being late is no excuse for not taking a shower!"
+    Does
+      "You dart out of your flat and make it to
+       the restaurant just in time.
+       $p*** You've won! ***" Quit.
+  End exit.
+End the bedroom.
+
+The shower IsA object at bedroom.
+  Name shower stall. Name shower.
+  Is not taken. -- i.e. the Hero hasn't yet taken his shower.
+  
+  Verb take
+    Check this is not taken
+      else "There's no time left for a second shower."
+    And uniform not in hero
+      else "You should"
+        If uniform is worn then
+          "remove"
+        else
+          "drop"
+        end if.
+        "your uniform first!"
+    Does only
+      "You take a quick shower."
+      Make this taken. -- the Hero has showered.
+  End verb.
+End the shower.
+
+The uniform IsA clothing at bedroom.
+  Has ex "It's your waiter uniform, spotless as usual.".
+  -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  -- No need to worry about layer coverage attributes here.
+  -- We'll stick to the default values (all layers = zero).
+  -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+End the uniform.
+
+Start at bedroom.
+"You're late for work!$nQuickly, take a shower,
+ wear that uniform an leave the flat..."

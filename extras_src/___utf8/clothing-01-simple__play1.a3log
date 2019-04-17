@@ -1,0 +1,44 @@
+
+You're late for work!
+Quickly, take a shower, wear that uniform an leave the flat...
+
+
+Bedroom
+The exit is west. There is a shower stall and a uniform here.
+
+> examine uniform
+It's your waiter uniform, spotless as usual.
+
+> wear uniform
+You pick up the uniform and put it on.
+
+> take shower
+You should remove your uniform first!
+
+> inventory
+You are empty-handed. You are wearing a uniform.
+
+> remove uniform
+You take off the uniform.
+
+> inventory
+You are carrying a uniform.
+
+> take shower
+You should drop your uniform first!
+
+> drop uniform
+Dropped.
+
+> inventory
+You are empty-handed.
+
+> take shower
+You take a quick shower.
+
+> take shower
+There's no time left for a second shower.
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

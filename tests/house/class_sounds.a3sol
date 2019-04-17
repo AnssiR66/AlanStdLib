@@ -47,6 +47,6 @@ listen to ground
 ; ROOM OBJECTS
 ; ------------------------------------------------------------------------------
 ; These are not present at outdoor, but they are at kitchen (indoor), except
-; that the indoor is not directly adjacent to garden (kitchen is): 
+; that the indoor is not directly adjacent to garden (kitchen is):
 listen to ceiling
 listen to floor

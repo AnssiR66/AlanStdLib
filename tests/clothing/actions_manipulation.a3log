@@ -1,0 +1,385 @@
+
+
+Emporium Giorgio Alani 
+An adventure to test clothing. 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880
+.
+Standard Library v2.1 
+Version 1 
+All rights reserved. 
+
+Type EXITS to view the list of exits of a room. 
+Use the DBG command (DGB <ITEM NAME>) to show the coverage values of any
+clothing item.
+
+
+Outside Emporium Alani
+You're standing in front of the Giorgio Alani Emporium entrance. Two
+large brass doors await northward your entrance into the sanctuary of
+fashion consumism.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                      TEST MANIPULATING WORN CLOTHING                       *
+> ; *                                                                            *
+> ; ******************************************************************************
+> ; This script tests that manipulating worn clothing is handled correctly by those
+> ; verbs that could dislocate a worn item from its wearer.
+> ; ******************************************************************************
+> ; WORN BY HERO
+> ; ******************************************************************************
+> ; Let's check how how clothing items worn by the Hero are handled.
+> inventory
+You are empty-handed. You are wearing your socks, your boxers, your 
+undershirt, your sneakers and your khakis.
+
+> ; ==============================================================================
+> ; DROPPING & TAKING
+> ; ==============================================================================
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'DROP'
+> ; ------------------------------------------------------------------------------
+> ; A worn item can't be dropped:
+> drop sneakers
+You'll have to take off your sneakers first.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'TAKE' -> WORN
+> ; ------------------------------------------------------------------------------
+> ; An item that we're already wearing can't be taken:
+> take undershirt
+You already have your undershirt.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'TAKE' -> NESTED IN WORN
+> ; ------------------------------------------------------------------------------
+> ; Let's take a clothing item which is inside an item we're wearing:
+> take kippah
+Taken.
+
+> ; //// CHECK 'NOT worn' (OK!): ////
+> DBG_CLOTHES kippah
+'kippah' VALUES: (none) 
+WORN: No
+
+> ; To be safe, let's test it also with a non-clothing item:
+> take wallet
+Taken.
+
+> ; ==============================================================================
+> ; EMPTYING
+> ; ==============================================================================
+> ; Let's put the wallet and the kippah back in the trousers...
+> put wallet in khakis
+You put your wallet into your khakis.
+
+> put kippah in khakis
+You put your kippah into your khakis.
+
+> ; Let's check that the settings of wearables are correctly preserved:
+> DBG_CLOTHES kippah
+'kippah' VALUES: (none) 
+WORN: No
+
+> inventory
+You are empty-handed. You are wearing your socks, your boxers, your 
+undershirt, your sneakers and your khakis.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'EMPTY'
+> ; ------------------------------------------------------------------------------
+> ; Clothing are also containers, and the trousers contain objects.
+> examine khakis
+A pair of khaki beige cotton pants. Inside the khakis pockets there are 
+your kippah and your wallet.
+
+> empty khakis
+You empty the contents of your khakis on the ground.
+
+> ; Now the wallet and the kippah are on the floor:
+> look
+Outside Emporium Alani
+You're standing in front of the Giorgio Alani Emporium entrance. Two
+large brass doors await northward your entrance into the sanctuary of
+fashion consumism.There is your wallet and your kippah here.
+
+> ; Let's check that the 'worn' state of the trousers hasn't changed:
+> DBG_CLOTHES khakis
+'khakis' VALUES: | botcover: 16 | 
+WORN: Yes (by hero)
+
+> ; [... intermediate actions ...]
+> take wallet
+Taken.
+
+> north
+As you move toward the doors they automagically slide open before you.
+
+Emporium Alani Main Hall
+This luxurious hall is the crossroad to the various clothing departments
+of the emporium. Two large brass doors lead the way south, out of the
+fashion temple and back into the world of mortal souls.There is a trashcan 
+here. Behind a desk stands the emporium manager. There is your personal
+assistant here.
+
+> ; ==============================================================================
+> ; PUTTING
+> ; ==============================================================================
+> ; The verbs 'put_on' and 'put_in' will not be executed with worn clothing.
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'PUT ON' (SUPPORTER)
+> ; ------------------------------------------------------------------------------
+> ; Let's try to transfer worn clothing onto supporters.
+> put khakis on desk
+You'll have to take off your khakis first.
+
+> remove khakis
+You take off your khakis.
+
+> put khakis on desk
+You put your khakis on the desk.
+
+> x desk
+This luxurios mahogany desk is where customers go and pay their purchased
+merchandise, a bit like the supermarket cash, but more discrete. On the 
+desk you see your khakis.
+
+> ; //// CHECK 'NOT worn' (OK!): ////
+> DBG_CLOTHES khakis
+'khakis' VALUES: | botcover: 16 | 
+WORN: No
+
+> ; [... intermediate actions ...]
+> wear khakis
+You pick up your khakis and put them on.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'PUT IN' (CONTAINER)
+> ; ------------------------------------------------------------------------------
+> ; Let's try to transfer worn clothing into containers.
+> put khakis in trashcan
+You'll have to take off your khakis first.
+
+> remove khakis
+You take off your khakis.
+
+> put khakis in trashcan
+You put your khakis into the trashcan.
+
+> x trashcan
+Inside the trashcan you can see your khakis.
+
+> ; //// CHECK 'NOT worn' (OK!): ////
+> DBG_CLOTHES khakis
+'khakis' VALUES: | botcover: 16 | 
+WORN: No
+
+> ; ==============================================================================
+> ; THROWING
+> ; ==============================================================================
+> ; Let's try throwing clothing worn by the Hero, the action should alwyas be
+> ; blocked.
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'THROW'
+> ; ------------------------------------------------------------------------------
+> throw boxers
+You'll have to take off your boxers first.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'THROW TO' (NPC)
+> ; ------------------------------------------------------------------------------
+> throw sneakers to manager
+You'll have to take off your sneakers first.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'THROW AT' (NPC)
+> ; ------------------------------------------------------------------------------
+> throw sneakers at manager
+You'll have to take off your sneakers first.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'THROW AT' (IND WORN)
+> ; ------------------------------------------------------------------------------
+> throw wallet at boxers
+It doesn't make sense to throw something you're wearing.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'THROW IN' (CONTAINER)
+> ; ------------------------------------------------------------------------------
+> throw sneakers in trashcan
+You'll have to take off your sneakers first.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'THROW IN' (WORN CONTAINER)
+> ; ------------------------------------------------------------------------------
+> throw wallet in sneakers
+It doesn't make sense to throw something you're wearing.
+
+> ; ==============================================================================
+> ; GIVING
+> ; ==============================================================================
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'GIVE'
+> ; ------------------------------------------------------------------------------
+> ; Let's try to transfer clothing worn by Hero and NPCs
+> give undershirt to assistant
+You'll have to take off your undershirt first.
+
+> remove undershirt
+You take off your undershirt.
+
+> give undershirt to assistant
+You give your undershirt to the assistant.
+
+> ; //// CHECK 'NOT worn' (OK!): ////
+> DBG_CLOTHES undershirt
+'undershirt' VALUES: | topcover: 2 | 
+WORN: No
+
+> x assistant
+She's your personal shopping assistant. The assistant is carrying your 
+undershirt. The assistant is wearing a uniform and a pair of fashion boots
+.
+
+> ; ******************************************************************************
+> ; WORN BY NPC
+> ; ******************************************************************************
+> ; Let's check how clothing worn by NPCs are handled.
+> ; ==============================================================================
+> ; PUTTING
+> ; ==============================================================================
+> ; The verbs 'put_on' and 'put_in' will not be executed with worn clothing.
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'PUT ON' (SUPPORTER)
+> ; ------------------------------------------------------------------------------
+> put boots on desk
+Currently the fashion boots are worn by the assistant.
+
+> put uniform on desk
+Currently the uniform is worn by the assistant.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'PUT IN' (CONTAINER)
+> ; ------------------------------------------------------------------------------
+> ; Let's try to transfer clothing worn by NPCs into containers:
+> put boots in trashcan
+Currently the fashion boots are worn by the assistant.
+
+> put uniform in trashcan
+Currently the uniform is worn by the assistant.
+
+> ; ==============================================================================
+> ; ASKING
+> ; ==============================================================================
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'ASK'
+> ; ------------------------------------------------------------------------------
+> ; The 'ask' verb always works, even with worn clothing. The library contains
+> ; a commented out code example on how to prevent this:
+> ask assistant for uniform
+The assistant gives the uniform to you.
+
+> ; //// CHECK 'NOT worn' (OK!): ////
+> DBG_CLOTHES uniform
+'uniform' VALUES: | topcover: 8 | botcover: 32 | NOT blockslegs | 
+WORN: No
+
+> inventory
+You are carrying a uniform and your wallet. You are wearing your socks, 
+your boxers and your sneakers.
+
+> ; ==============================================================================
+> ; TAKING
+> ; ==============================================================================
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'TAKE' -> NPC NOT COMPLIANT
+> ; ------------------------------------------------------------------------------
+> DBG_COMP assistant
+| the assistant | COMPLIANT: No |
+
+> ; Let's try and take clothing from a non compliant NPC...
+> take boots
+That seems to belong to the assistant.
+
+> DBG_CLOTHES boots
+'fashion boots' VALUES: | feetcover: 4 | 
+WORN: Yes (by assistant)
+
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'TAKE' -> NPC COMPLIANT
+> ; ------------------------------------------------------------------------------
+> ; The debug module offers the 'subjugate' command to flip the compliance state
+> ; of actors:
+> subjugate assistant
+Using your mental powers you force the assistant to become compliant.
+
+> DBG_COMP assistant
+| the assistant | COMPLIANT: Yes |
+
+> ; Now, let's try and take clothing from a compliant NPC...
+> take boots
+Taken.
+
+> ; //// CHECK 'NOT worn' (OK!): ////
+> DBG_CLOTHES boots
+'fashion boots' VALUES: | feetcover: 4 | 
+WORN: No
+
+> ; ******************************************************************************
+> ; MISC VERBS
+> ; ******************************************************************************
+> look behind desk
+Peeking behind the desk you notice a gun, hidden out of sight but readily
+grabbable if the need comes. They must keep it there for emergencies.
+
+> take gun
+Taken.
+
+> ; ==============================================================================
+> ; ATTACKING/KICKING
+> ; ==============================================================================
+> inventory
+You are carrying a gun, a uniform, a pair of fashion boots and your wallet
+. You are wearing your socks, your boxers and your sneakers.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'ATTACK' -> WORN BY HERO
+> ; ------------------------------------------------------------------------------
+> attack boxers
+It doesn't make sense to attack something you're wearing.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'ATTACK WITH' -> WORN BY HERO
+> ; ------------------------------------------------------------------------------
+> attack boxers with gun
+It doesn't make sense to attack something you're wearing.
+
+> attack gun with boxers
+That's not something you can attack things with.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'ATTACK' -> WORN BY NPC
+> ; ------------------------------------------------------------------------------
+> x manager
+You notice nothing unusual about the manager. The manager is wearing a
+pair of pleated trousers, a pullover and a pair of loafers.
+
+> attack pullover with gun
+Resorting to brute force is not the solution here.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'KICK' -> WORN BY HERO
+> ; ------------------------------------------------------------------------------
+> kick boxers
+It doesn't make sense to kick something you're wearing.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST: 'KICK' -> WORN BY NPC
+> ; ------------------------------------------------------------------------------
+> kick pullover
+Resorting to brute force is not the solution here.
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

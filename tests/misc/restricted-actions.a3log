@@ -3,7 +3,7 @@
 Restricted Actions Tests 
 An adventure to test StdLib 2.1 restricted actions 
 (C) 2018 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1866
+Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880
 .
 Standard Library v2.1 
 Version 1 
@@ -19,11 +19,11 @@ Restriction Level 0
 In this level all actions are allowed.
 
 > ; ==============================================================================
-> ;                               Restricted Level 0                              
+> ;                               Restricted Level 0
 > ; ==============================================================================
 > ; None of the following commands should fail at Level 0:
 > ; ------------------------------------------------------------------------------
-> ; TEST/PASS: Level 0 Actions                             
+> ; TEST/PASS: Level 0 Actions
 > ; ------------------------------------------------------------------------------
 > drop phone
 Dropped.
@@ -32,7 +32,7 @@ Dropped.
 Taken.
 
 > ; ------------------------------------------------------------------------------
-> ; TEST/PASS: Level 1 Actions (communication verbs)                            
+> ; TEST/PASS: Level 1 Actions (communication verbs)
 > ; ------------------------------------------------------------------------------
 > say "hello world"
 Nothing happens.
@@ -44,7 +44,7 @@ Nothing results from your shouting.
 You sing a little tune.
 
 > ; ------------------------------------------------------------------------------
-> ; TEST/PASS: Level 2 Actions (examine, look and sensory)                             
+> ; TEST/PASS: Level 2 Actions (examine, look and sensory)
 > ; ------------------------------------------------------------------------------
 > look
 Restriction Level 0
@@ -54,13 +54,13 @@ In this level all actions are allowed.
 You are carrying a cell phone.
 
 > ; ------------------------------------------------------------------------------
-> ; TEST/PASS: Level 3 Actions (out-of-game actions)                             
+> ; TEST/PASS: Level 3 Actions (out-of-game actions)
 > ; ------------------------------------------------------------------------------
 > score
 You have scored 0 points out of 0.
 
 > ; ==============================================================================
-> ;                               Restricted Level 1                              
+> ;                               Restricted Level 1
 > ; ==============================================================================
 > ; With restriction level 1, all communication verbs should be blocked.
 > east
@@ -70,7 +70,7 @@ In this level communication verbs are restricted.
 > 
 
 > ; ------------------------------------------------------------------------------
-> ; TEST/PASS: Level 0 Actions                             
+> ; TEST/PASS: Level 0 Actions
 > ; ------------------------------------------------------------------------------
 > drop phone
 Dropped.
@@ -79,7 +79,7 @@ Dropped.
 Taken.
 
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> ; TEST/FAIL: Level 1 Actions (communication verbs)                            
+> ; TEST/FAIL: Level 1 Actions (communication verbs)
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > ; THESE ACTIONS SHOULD BE BLOCKED:
 > say "hello world"
@@ -92,7 +92,7 @@ You can't do that.
 You can't do that.
 
 > ; ------------------------------------------------------------------------------
-> ; TEST/PASS: Level 2 Actions (examine, look and sensory)                             
+> ; TEST/PASS: Level 2 Actions (examine, look and sensory)
 > ; ------------------------------------------------------------------------------
 > look
 Restriction Level 1
@@ -102,13 +102,13 @@ In this level communication verbs are restricted.
 You are carrying a cell phone.
 
 > ; ------------------------------------------------------------------------------
-> ; TEST/PASS: Level 3 Actions (out-of-game actions)                             
+> ; TEST/PASS: Level 3 Actions (out-of-game actions)
 > ; ------------------------------------------------------------------------------
 > score
 You have scored 0 points out of 0.
 
 > ; ==============================================================================
-> ;                               Restricted Level 2                              
+> ;                               Restricted Level 2
 > ; ==============================================================================
 > ; With restriction level 2,  only verbs like 'examine', 'look', 'inventory, 'think'
 > ; 'wait' and sensory verbs as well as all out-of-game verbs should work.
@@ -119,7 +119,7 @@ In this level all action and communication verbs are restricted.
 > 
 
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> ; TEST/FAIL: Level 0 Actions                             
+> ; TEST/FAIL: Level 0 Actions
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > drop phone
 You can't do that.
@@ -128,7 +128,7 @@ You can't do that.
 You can't do that.
 
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> ; TEST/FAIL: Level 1 Actions (communication verbs)                            
+> ; TEST/FAIL: Level 1 Actions (communication verbs)
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > ; THESE ACTIONS SHOULD BE BLOCKED:
 > say "hello world"
@@ -141,7 +141,7 @@ You can't do that.
 You can't do that.
 
 > ; ------------------------------------------------------------------------------
-> ; TEST/PASS: Level 2 Actions (examine, look and sensory)                             
+> ; TEST/PASS: Level 2 Actions (examine, look and sensory)
 > ; ------------------------------------------------------------------------------
 > look
 Restriction Level 2
@@ -154,13 +154,13 @@ You are carrying a cell phone.
 You smell nothing unusual.
 
 > ; ------------------------------------------------------------------------------
-> ; TEST/PASS: Level 3 Actions (out-of-game actions)                             
+> ; TEST/PASS: Level 3 Actions (out-of-game actions)
 > ; ------------------------------------------------------------------------------
 > score
 You have scored 0 points out of 0.
 
 > ; ==============================================================================
-> ;                               Restricted Level 3                              
+> ;                               Restricted Level 3
 > ; ==============================================================================
 > ; With restriction level 3, only out-of-game verbs (like 'save', 'quit', etc)
 > ; should work.
@@ -171,7 +171,7 @@ In this level all in-game verbs are restricted.
 > 
 
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> ; TEST/FAIL: Level 0 Actions                             
+> ; TEST/FAIL: Level 0 Actions
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > drop phone
 You can't do that.
@@ -180,7 +180,7 @@ You can't do that.
 You can't do that.
 
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> ; TEST/FAIL: Level 1 Actions (communication verbs)                            
+> ; TEST/FAIL: Level 1 Actions (communication verbs)
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > ; THESE ACTIONS SHOULD BE BLOCKED:
 > say "hello world"
@@ -193,7 +193,7 @@ You can't do that.
 You can't do that.
 
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> ; TEST/FAIL: Level 2 Actions (examine, look and sensory)                             
+> ; TEST/FAIL: Level 2 Actions (examine, look and sensory)
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > look
 You can't do that.
@@ -205,13 +205,13 @@ You can't do that.
 You can't do that.
 
 > ; ------------------------------------------------------------------------------
-> ; TEST/PASS: Level 3 Actions (out-of-game actions)                             
+> ; TEST/PASS: Level 3 Actions (out-of-game actions)
 > ; ------------------------------------------------------------------------------
 > score
 You have scored 0 points out of 0.
 
 > ; ==============================================================================
-> ;                               Restricted Level 4                              
+> ;                               Restricted Level 4
 > ; ==============================================================================
 > ; With restriction level 4 no verbs should work, not even out-of-game actions;
 > ; only exits directions.
@@ -222,7 +222,7 @@ In this level no verbs work, not even out-of-game verbs.
 > 
 
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> ; TEST/FAIL: Level 0 Actions                             
+> ; TEST/FAIL: Level 0 Actions
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > drop phone
 You can't do that.
@@ -231,7 +231,7 @@ You can't do that.
 You can't do that.
 
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> ; TEST/FAIL: Level 1 Actions (communication verbs)                            
+> ; TEST/FAIL: Level 1 Actions (communication verbs)
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > ; THESE ACTIONS SHOULD BE BLOCKED:
 > say "hello world"
@@ -244,7 +244,7 @@ You can't do that.
 You can't do that.
 
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> ; TEST/FAIL: Level 2 Actions (examine, look and sensory)                             
+> ; TEST/FAIL: Level 2 Actions (examine, look and sensory)
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > look
 You can't do that.
@@ -256,7 +256,7 @@ You can't do that.
 You can't do that.
 
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> ; TEST/FAIL: Level 3 Actions (out-of-game actions)                             
+> ; TEST/FAIL: Level 3 Actions (out-of-game actions)
 > ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 > score
 You can't do that.

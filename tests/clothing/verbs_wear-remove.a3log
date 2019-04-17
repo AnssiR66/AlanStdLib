@@ -3,7 +3,7 @@
 Emporium Giorgio Alani 
 An adventure to test clothing. 
 (C) 2018 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1866
+Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880
 .
 Standard Library v2.1 
 Version 1 
@@ -17,26 +17,74 @@ clothing item.
 Outside Emporium Alani
 You're standing in front of the Giorgio Alani Emporium entrance. Two
 large brass doors await northward your entrance into the sanctuary of
-fashion consumism.
+fashion consumism. 
 
 > ; ******************************************************************************
 > ; *                                                                            *
-> ; *                       TEST WEARING/REMOVING CLOTHES                        *
+> ; *                             TEST WEAR & REMOVE                             *
 > ; *                                                                            *
 > ; ******************************************************************************
-> ; This script checks that verbs 'wear' and 'remove' are handling correctly all
-> ; the attributes of 'clothing' instances as well as Hero's 'wearing' set and the
-> ; 'worn' instance.
+> ; General purpose tests for 'wear' and 'remove' verbs. Checks that layered order
+> ; and 'donned' status are being handled correctly.
+> ; ******************************************************************************
+> ; TEST INVALID ACTIONS
+> ; ******************************************************************************
+> ; ==============================================================================
+> ; WEAR -> ALREADY WORN
+> ; ==============================================================================
+> wear sneakers
+You are already wearing your sneakers.
+
+> ; ==============================================================================
+> ; REMOVE -> NOT WORN
+> ; ==============================================================================
+> remove kippah
+You are not wearing your kippah.
+
+> ; ******************************************************************************
+> ; TEST BODY AREAS
+> ; ******************************************************************************
+> ; We need to test how our custom layering system implemented in EGA adventure
+> ; is working out. It's both a demo of the library potential uses as well as
+> ; a test that everything is working as expected.
 > north
 As you move toward the doors they automagically slide open before you.
 
 Emporium Alani Main Hall
 This luxurious hall is the crossroad to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
-fashion temple and back into the world of mortal souls.There is your
+fashion temple and back into the world of mortal souls. There is a 
+trashcan here. Behind a desk stands the emporium manager. There is your
 personal assistant here.
 
+> west
+Womensware Department
+No woman's fashion dreams could be left unfulfilled by the clothes in
+this department. 
+
+The assistant follows you.
+
 > north
+Sportswear Department
+Can't think of any sport that you couldn't find gear for in this room. 
+There is a balaclava, a pair of ski goggles, a ski helmet, a swimsuit, a 
+bikini, a sports watch, a white scarf, a blue wool scarf and a black scarf 
+here. 
+
+The assistant follows you.
+
+> ; Let's collect some clothes:
+> take balaclava
+Taken.
+
+> take helmet
+Taken.
+
+> take goggles
+Taken.
+
+> ; and take them to the dressing room, where we can quickly 'undress'
+> east
 The Dressing Room
 The curtains surrounding this room provide you all the privacy you need
 to disrobe yourself and try on clothing. There is a chair, a basket, a
@@ -44,47 +92,97 @@ pair of dungarees, a skirt, a pair of white pantyhose and a pair of jeans
 here.
 
 > ; ==============================================================================
-> ; TEST 'remove'
+> ; HEAD AND FACE
 > ; ==============================================================================
-> inventory
-You are empty-handed. You are wearing your undershirt, your sneakers, your 
-khakis, your boxers and your socks.
+> ; We have various face and head wearable items here.
+> ; ------------------------------------------------------------------------------
+> ; BALACLAVA
+> ; ------------------------------------------------------------------------------
+> ; The balaclava cover both face and head, occupying the lowest layer (direct
+> ; skin contact) to allow wearing hats and goggles over it...
+> x balaclava
+It's a cotton balaclava for winter sports. Basically, a head hood with
+holes for the eyes and mouth, like the ones used in robberies.
 
-> DBG boxers
-'boxers' VALUES: | botcover: 2 | 
-DONNED: Yes 
-IN WORN: Yes 
-IN WEARING OF: | hero
+> DBG_CLOTHES it
+'balaclava' VALUES: | headcover: 1 | facecover: 1 | 
+WORN: No
 
-> remove khakis
-You take off your khakis.
+> wear it
+You put on the balaclava.
 
-> remove boxers
-You take off your boxers.
+> ; /// VERIFY -> IS DONNED (OK!)
+> DBG_CLOTHES it
+'balaclava' VALUES: | headcover: 1 | facecover: 1 | 
+WORN: Yes (by hero)
 
-> DBG boxers
-'boxers' VALUES: | botcover: 2 | 
-DONNED: No. 
-IN WORN: No. 
-IN WEARING OF:
+> ; ------------------------------------------------------------------------------
+> ; BALACLAVA & GOGGLES
+> ; ------------------------------------------------------------------------------
+> x goggles
+A pair of goggles for skiing, with an elastic band to hold them in place.
+Its front B-shaped single lens has a special coating adaptative to light.
 
-> ; ==============================================================================
-> ; TEST 'wear'
-> ; ==============================================================================
-> DBG jeans
-'jeans' VALUES: | botcover: 16 | 
-DONNED: No. 
-IN WORN: No. 
-IN WEARING OF:
+> DBG_CLOTHES it
+'ski goggles' VALUES: | facecover: 2 | 
+WORN: No
 
-> wear jeans
-You pick up the jeans and put them on.
+> wear it
+You put on the ski goggles.
 
-> DBG jeans
-'jeans' VALUES: | botcover: 16 | 
-DONNED: Yes 
-IN WORN: Yes 
-IN WEARING OF: | hero
+> ; /// VERIFY -> IS DONNED (OK!)
+> DBG_CLOTHES it
+'ski goggles' VALUES: | facecover: 2 | 
+WORN: Yes (by hero)
+
+> ; /// REMOVE -> NO -> BLOCKERS: GOGGLES (OK!) ///
+> remove balaclava
+In order to remove the balaclava you should first take off the ski goggles
+.
+
+> ; ------------------------------------------------------------------------------
+> ; BALACLAVA + SKI HELMET
+> ; ------------------------------------------------------------------------------
+> x helmet
+It's a hard plastic helmet covering head and ears, with soft padding
+inside. A chinstrap allows securing it firmly in place.
+
+> DBG_CLOTHES it
+'ski helmet' VALUES: | headcover: 2 | 
+WORN: No
+
+> wear it
+You put on the ski helmet.
+
+> ; /// REMOVE -> NO -> BLOCKERS: GOGGLES & HELMET (OK!) ///
+> remove balaclava
+In order to remove the balaclava you should first take off the ski goggles 
+and the ski helmet.
+
+> remove goggles
+You take off the ski goggles.
+
+> ; /// REMOVE -> NO -> BLOCKERS: HELMET (OK!) ///
+> remove balaclava
+In order to remove the balaclava you should first take off the ski helmet.
+
+> undress
+You remove all the items you were wearing.
+
+> ; ------------------------------------------------------------------------------
+> ; TEST BALACLAVA OVER GOGGLES & HELMET
+> ; ------------------------------------------------------------------------------
+> ; The balaclava shouldn't be wearable on top of the helmet or the goggles...
+> wear helmet
+You pick up the ski helmet and put it on.
+
+> wear goggles
+You put on the ski goggles.
+
+> ; /// WEAR -> NO -> BLOCKERS: GOGGLES & HELMET (OK!) ///
+> wear balaclava
+You pick up the balaclava. In order to wear the balaclava you should
+first take off the ski goggles and the ski helmet.
 
 > 
 

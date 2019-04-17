@@ -13,11 +13,11 @@
 ; ==============================================================================
 inventory
 examine sneakers
-dbg sneakers
+DBG_CLOTHES sneakers
 examine socks
-dbg socks
+DBG_CLOTHES socks
 examine boxers
-dbg boxers
+DBG_CLOTHES boxers
 examine undershirt
-dbg undershirt
+DBG_CLOTHES undershirt
 

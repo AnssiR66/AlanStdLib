@@ -5,7 +5,7 @@
 ; ******************************************************************************
 ; Liquids inside takable containers can be handled by using either the container
 ; or the liquid itself as the verb object.
-x bottle 
+x bottle
 ; ==============================================================================
 ; TEST HANDLING VIA CONTAINER
 ; ==============================================================================

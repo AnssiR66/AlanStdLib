@@ -1,8 +1,8 @@
 # Alan StdLib Test Suite
 
-> Required **Alan SDK**: [Alan v3.0 beta6 build 1866][SDK]
+> Required **Alan SDK**: [Alan v3.0 beta6 build 1880][SDK]
 
-[SDK]: https://www.alanif.se/download-alan-v3/development-snapshots/development-snapshots/build1866 "Go to the download page of this specific Alan SDK release"
+[SDK]: https://www.alanif.se/download-alan-v3/development-snapshots/development-snapshots/build1880 "Go to the download page of this specific Alan SDK release"
 
 This directory tree contains test adventures and automated game commands scripts for testing the Library verbs, messages and features. The purpose of these tests is to check that all library messages are displayed correctly, to detect unexpected edge cases and to track the global impact of code changes on library messages.
 
@@ -17,6 +17,7 @@ Contributed by [Tristano Ajmone] to the Alan Standard Library.
 <!-- MarkdownTOC autolink="true" bracket="round" autoanchor="false" lowercase="only_ascii" uri_encoding="true" levels="1,2,3" -->
 
 - [Contents](#contents)
+    - [Extra Modules](#extra-modules)
     - [Type1 Tests: Single Adventure, Multiple Tests](#type1-tests-single-adventure-multiple-tests)
         - [Files Naming Convention](#files-naming-convention)
         - [Tests Features](#tests-features)
@@ -52,6 +53,15 @@ Execution of all tests is controlled by a single batch script:
 
 - [`RUNTESTS.bat`][RUNTESTS]
 
+Inside each tests folder there's also a `TEST_FOLDER.bat` script for running all tests therein independently from the other tests folders. Theses scripts are intended only as an aid to speed up development work, and they are not a replacement fro the main `RUNTESTS.bat` script, which should always be used before commiting changes because it provides better errors reports.
+
+## Extra Modules
+
+This folder also contains some extra modules that the test adventures can include for shared functionality:
+
+- [`inc_debug.i`][inc_debug] — some "debugging verbs" and helpers.
+
+For more information, see [`DEBUG_MODULE.md`][DEBUG_MODULE].
 
 ## Type1 Tests: Single Adventure, Multiple Tests
 
@@ -280,7 +290,9 @@ SOFTWARE.
 
 [ISO-8859-1]: https://en.wikipedia.org/wiki/ISO/IEC_8859-1 "Read Wikipedia's page on ISO-8859-1"
 
-<!-- PORJECT FILES -->
+<!-- PROJECT FILES -->
+
+[DEBUG_MODULE]: ./DEBUG_MODULE.md  "Read document"
 
 [RUNTESTS]: ./RUNTESTS.bat  "View the batch file source"
 
@@ -290,6 +302,7 @@ SOFTWARE.
 
 [house.alan]: ./house/house.alan "View adventure source code"
 [ega.alan]:   ./clothing/ega.alan "View adventure source code"
+[inc_debug]: ./inc_debug.i "View module source code"
 
 
 [Unlicense]: ./UNLICENSE    "View the full text of the Unlicense terms"

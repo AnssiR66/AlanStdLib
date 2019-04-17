@@ -1,0 +1,84 @@
+// "_helpers.scss"           v1.0.0 | 2018-10-05 | maintained by Tristano Ajmone
+// *****************************************************************************
+// *                                                                           *
+// *                  Sass/SCSS Mixins and Helpers Collection                  *
+// *                                                                           *
+// *****************************************************************************
+
+// =============================================================================
+//                          Fira Code Ligatures Mixin                           
+// =============================================================================
+// Written by Tristano Ajmone.
+// Enables Fira Code font (with ligatures) for a given language in Highlight
+// code blocks.
+// -----------------------------------------------------------------------------
+@mixin FiraCodeLigatures($language) {
+    .listingblock pre[class=highlight][lang=#{$language}] {
+        &>code {
+            font-family: $FiraCode; // defined in '_fonts.scss'
+        }
+    }
+ }
+// =============================================================================
+//                                Fontface Mixin                                
+// =============================================================================
+// Adapted from "fontface.scss", taken from the Sass Boilerplate project,
+// Copyright (c) 2013 Peter Mescalchin, MIT License:
+// 
+// https://github.com/magnetikonline/sass-boilerplate
+// -----------------------------------------------------------------------------
+@mixin fontFace($family,$src,$style: normal,$weight: normal) {
+    @font-face {
+        font-family: $family;
+        src: url('#{$src}.eot'); // IE9 compat
+        src: url('#{$src}.eot?#iefix') format('embedded-opentype'), // IE8 and below
+             url('#{$src}.woff') format('woff'), // standards
+             url('#{$src}.ttf') format('truetype'), // Safari, Android, iOS
+             url('#{$src}.svg##{$family}') format('svg'); // legacy iOS
+
+        font-style: $style;
+        font-weight: $weight;
+    }
+}
+
+// =============================================================================
+//                              Highlight Markers                               
+// =============================================================================
+// Style for highlighter marker effects via <mark> and <span class="[a_color]">.
+// Creates gradient effect, unless both colors are the same.
+// Mainly used in "ALAN Beginner's Guide" to mark added code in the sources.
+
+// Based on a tutorial by Chris Ferdinandi:
+//     https://gomakethings.com/highlighting-effect-with-css/
+
+// -----------------------------------------------------------------------------
+// YELLOW MARKER -- <mark> tag
+// -----------------------------------------------------------------------------
+@mixin MarkerMark($gradient1, $gradient2) {
+    mark {
+        background-color: $gradient1;
+        @if $gradient1 != $gradient2 {
+            background-image: linear-gradient(to right, $gradient1 0%, $gradient2 100%);
+        } @else {
+            background-image: none;;
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------
+// CUSTOM COLOR MARKERS -- <span class="[color]"> tag
+// -----------------------------------------------------------------------------
+// The $marker_color parameter will be the class name of the span element.
+
+@mixin MarkerSpan($marker_color, $gradient1, $gradient2) {
+    span.#{$marker_color} {
+        background-color: $gradient1;
+        @if $gradient1 != $gradient2 {
+            background-image: linear-gradient(to right, $gradient1 0%, $gradient2 100%);
+        } @else {
+            background-image: none;;
+        }
+    }
+}
+
+// EOF //

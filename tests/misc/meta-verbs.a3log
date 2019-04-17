@@ -3,7 +3,7 @@
 Meta Verbs Tests 
 Testing out-of-game commands (meta verbs). 
 (C) 2018 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1866.
+Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880.
 Standard Library v2.1 
 Version 1 
 All rights reserved.
@@ -283,21 +283,21 @@ You have scored 670 points out of 670.
 > ; REDUNDANT USES OF NOTIFY
 > ; ------------------------
 > ; Let's check the messages when requesting a notify mode already active:
-> notify off 
+> notify off
 Score notification is already disabled.
 
-> notify on 
+> notify on
 Score notification is now enabled. (You can turn it off using the NOTIFY command 
 again.)
 
-> notify on 
+> notify on
 Score notification is already enabled.
 
-> notify off 
+> notify off
 Score notification is now disabled. (You can turn it back on using the NOTIFY
 command again.)
 
-> notify off 
+> notify off
 Score notification is already disabled.
 
 > ; ==============================================================================
@@ -383,7 +383,7 @@ Are you sure (press ENTER to confirm)?
 Meta Verbs Tests 
 Testing out-of-game commands (meta verbs). 
 (C) 2018 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1866.
+Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880.
 Standard Library v2.1 
 Version 1 
 All rights reserved.
@@ -455,7 +455,7 @@ Do you want to RESTART, RESTORE, QUIT or UNDO? restart
 Meta Verbs Tests 
 Testing out-of-game commands (meta verbs). 
 (C) 2018 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1866.
+Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880.
 Standard Library v2.1 
 Version 1 
 All rights reserved.

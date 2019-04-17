@@ -1,0 +1,206 @@
+
+
+Emporium Giorgio Alani 
+An adventure to test clothing. 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880
+.
+Standard Library v2.1 
+Version 1 
+All rights reserved. 
+
+Type EXITS to view the list of exits of a room. 
+Use the DBG command (DGB <ITEM NAME>) to show the coverage values of any
+clothing item.
+
+
+Outside Emporium Alani
+You're standing in front of the Giorgio Alani Emporium entrance. Two
+large brass doors await northward your entrance into the sanctuary of
+fashion consumism. 
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                       TEST LISTING ACTORS INVENTORY                        *
+> ; *                                                                            *
+> ; ******************************************************************************
+> ; This script will test how actors inventory is shown for both Hero and NPCs.
+> ; The verbs 'inventory' and 'examine actor' should produce separate lists for
+> ; carried and worn items, by means of custom loops (not using LIST).
+> ; ******************************************************************************
+> ; LIST HERO/PNG
+> ; ******************************************************************************
+> ; The debug verb 'DG_INV <ACTOR>' will list all objects inside an actor via the
+> ; 'LIST' command, thus allowing a preview of the output of LIST, in case author
+> ; resort to it in their own adventures.
+> DBG_INV me
+You are carrying your undershirt (being worn), your sneakers (being worn), 
+your khakis (being worn), your boxers (being worn) and your socks (being
+worn).
+
+> DBG_INV assistant
+The assistant is carrying a pair of fashion boots (being worn) and a 
+uniform (being worn).
+
+> DBG_INV manager
+The manager is carrying a pair of loafers (being worn), a pullover (being
+worn) and a pair of pleated trousers (being worn).
+
+> ; ******************************************************************************
+> ; HERO -> INVENTORY
+> ; ******************************************************************************
+> ; We must check that the new custom loops are hanndling correctly separators in
+> ; the list: "," after each element up to the second last, and then "and" between
+> ; second last and last, and "." to end the list.
+> ; We must also check that messages for when the hero is not carrying/wearing
+> ; anything are handled correctly.
+> ; ------------------------------------------------------------------------------
+> ; CARRIED: 0 | WORN: 5
+> ; ------------------------------------------------------------------------------
+> ; The verb will report if the Hero is not carrying anything, because the player
+> ; is expliciting asking for inventory.
+> inventory
+You are empty-handed. You are wearing your socks, your boxers, your 
+undershirt, your sneakers and your khakis.
+
+> remove sneakers
+You take off your sneakers.
+
+> ; ------------------------------------------------------------------------------
+> ; CARRIED: 1 | WORN: 4
+> ; ------------------------------------------------------------------------------
+> inventory
+You are carrying your sneakers. You are wearing your socks, your boxers, 
+your undershirt and your khakis.
+
+> remove khakis
+You take off your khakis.
+
+> ; ------------------------------------------------------------------------------
+> ; CARRIED: 2 | WORN: 3
+> ; ------------------------------------------------------------------------------
+> inventory
+You are carrying your sneakers and your khakis. You are wearing your socks
+, your boxers and your undershirt.
+
+> remove undershirt
+You take off your undershirt.
+
+> ; ------------------------------------------------------------------------------
+> ; CARRIED: 3 | WORN: 2
+> ; ------------------------------------------------------------------------------
+> inventory
+You are carrying your undershirt, your sneakers and your khakis. You are
+wearing your socks and your boxers.
+
+> remove socks
+You take off your socks.
+
+> ; ------------------------------------------------------------------------------
+> ; CARRIED: 4 | WORN: 1
+> ; ------------------------------------------------------------------------------
+> inventory
+You are carrying your socks, your undershirt, your sneakers and your 
+khakis. You are wearing your boxers.
+
+> remove boxers
+You take off your boxers.
+
+> ; ------------------------------------------------------------------------------
+> ; CARRIED: 4 | WORN: 0
+> ; ------------------------------------------------------------------------------
+> ; The fact that the Hero is not wearing anything will not be mentioned. It's
+> ; implicit and, beside being verbose, pointing out to the Hero's nakedeness
+> ; would interfere with adventures that don't use clothing at all.
+> inventory
+You are carrying your socks, your boxers, your undershirt, your sneakers 
+and your khakis.
+
+> ; ******************************************************************************
+> ; NPC -> EXAMINE
+> ; ******************************************************************************
+> ; The new system, when examining an actor, doesn't report when it's not carrying
+> ; or wearing anything. It's implicit.
+> north
+As you move toward the doors they automagically slide open before you.
+
+Emporium Alani Main Hall
+This luxurious hall is the crossroad to the various clothing departments
+of the emporium. Two large brass doors lead the way south, out of the
+fashion temple and back into the world of mortal souls.There is a trashcan 
+here. Behind a desk stands the emporium manager. There is your personal
+assistant here.
+
+> ; ------------------------------------------------------------------------------
+> ; CARRIED: 0 | WORN: 2
+> ; ------------------------------------------------------------------------------
+> examine assistant
+She's your personal shopping assistant. The assistant is wearing a uniform 
+and a pair of fashion boots.
+
+> ask assistant for uniform
+The assistant gives the uniform to you.
+
+> ; ------------------------------------------------------------------------------
+> ; CARRIED: 0 | WORN: 1
+> ; ------------------------------------------------------------------------------
+> examine assistant
+She's your personal shopping assistant. The assistant is wearing a pair of 
+fashion boots.
+
+> ask assistant for boots
+The assistant gives the fashion boots to you.
+
+> ; ------------------------------------------------------------------------------
+> ; CARRIED: 0 | WORN: 0
+> ; ------------------------------------------------------------------------------
+> examine assistant
+She's your personal shopping assistant.
+
+> give sneakers to assistant
+You give your sneakers to the assistant.
+
+> ; ------------------------------------------------------------------------------
+> ; CARRIED: 1 | WORN: 0
+> ; ------------------------------------------------------------------------------
+> examine assistant
+She's your personal shopping assistant. The assistant is carrying your 
+sneakers.
+
+> give boxers to assistant
+You give your boxers to the assistant.
+
+> ; ------------------------------------------------------------------------------
+> ; CARRIED: 2 | WORN: 0
+> ; ------------------------------------------------------------------------------
+> examine assistant
+She's your personal shopping assistant. The assistant is carrying your 
+boxers and your sneakers.
+
+> give socks to assistant
+You give your socks to the assistant.
+
+> ; ------------------------------------------------------------------------------
+> ; CARRIED: 3 | WORN: 0
+> ; ------------------------------------------------------------------------------
+> examine assistant
+She's your personal shopping assistant. The assistant is carrying your 
+socks, your boxers and your sneakers.
+
+> ; ******************************************************************************
+> ; LIST HERO/PNG
+> ; ******************************************************************************
+> ; Test LIST again...
+> ;
+> ; ** NOTE ** Some items are still reported as being worn because the `ask` verb
+> ;            hasn't yet been adapated to the new system!
+> DBG_INV me
+You are carrying your undershirt, your khakis, a pair of fashion boots and 
+a uniform.
+
+> DBG_INV assistant
+The assistant is carrying your sneakers, your boxers and your socks.
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

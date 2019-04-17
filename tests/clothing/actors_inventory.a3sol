@@ -1,0 +1,103 @@
+; ******************************************************************************
+; *                                                                            *
+; *                       TEST LISTING ACTORS INVENTORY                        *
+; *                                                                            *
+; ******************************************************************************
+; This script will test how actors inventory is shown for both Hero and NPCs.
+; The verbs 'inventory' and 'examine actor' should produce separate lists for
+; carried and worn items, by means of custom loops (not using LIST).
+; ******************************************************************************
+; LIST HERO/PNG
+; ******************************************************************************
+; The debug verb 'DG_INV <ACTOR>' will list all objects inside an actor via the
+; 'LIST' command, thus allowing a preview of the output of LIST, in case author
+; resort to it in their own adventures.
+DBG_INV me
+DBG_INV assistant
+DBG_INV manager
+; ******************************************************************************
+; HERO -> INVENTORY
+; ******************************************************************************
+; We must check that the new custom loops are hanndling correctly separators in
+; the list: "," after each element up to the second last, and then "and" between
+; second last and last, and "." to end the list.
+; We must also check that messages for when the hero is not carrying/wearing
+; anything are handled correctly.
+; ------------------------------------------------------------------------------
+; CARRIED: 0 | WORN: 5
+; ------------------------------------------------------------------------------
+; The verb will report if the Hero is not carrying anything, because the player
+; is expliciting asking for inventory.
+inventory
+remove sneakers
+; ------------------------------------------------------------------------------
+; CARRIED: 1 | WORN: 4
+; ------------------------------------------------------------------------------
+inventory
+remove khakis
+; ------------------------------------------------------------------------------
+; CARRIED: 2 | WORN: 3
+; ------------------------------------------------------------------------------
+inventory
+remove undershirt
+; ------------------------------------------------------------------------------
+; CARRIED: 3 | WORN: 2
+; ------------------------------------------------------------------------------
+inventory
+remove socks
+; ------------------------------------------------------------------------------
+; CARRIED: 4 | WORN: 1
+; ------------------------------------------------------------------------------
+inventory
+remove boxers
+; ------------------------------------------------------------------------------
+; CARRIED: 4 | WORN: 0
+; ------------------------------------------------------------------------------
+; The fact that the Hero is not wearing anything will not be mentioned. It's
+; implicit and, beside being verbose, pointing out to the Hero's nakedeness
+; would interfere with adventures that don't use clothing at all.
+inventory
+; ******************************************************************************
+; NPC -> EXAMINE
+; ******************************************************************************
+; The new system, when examining an actor, doesn't report when it's not carrying
+; or wearing anything. It's implicit.
+north
+; ------------------------------------------------------------------------------
+; CARRIED: 0 | WORN: 2
+; ------------------------------------------------------------------------------
+examine assistant
+ask assistant for uniform
+; ------------------------------------------------------------------------------
+; CARRIED: 0 | WORN: 1
+; ------------------------------------------------------------------------------
+examine assistant
+ask assistant for boots
+; ------------------------------------------------------------------------------
+; CARRIED: 0 | WORN: 0
+; ------------------------------------------------------------------------------
+examine assistant
+give sneakers to assistant
+; ------------------------------------------------------------------------------
+; CARRIED: 1 | WORN: 0
+; ------------------------------------------------------------------------------
+examine assistant
+give boxers to assistant
+; ------------------------------------------------------------------------------
+; CARRIED: 2 | WORN: 0
+; ------------------------------------------------------------------------------
+examine assistant
+give socks to assistant
+; ------------------------------------------------------------------------------
+; CARRIED: 3 | WORN: 0
+; ------------------------------------------------------------------------------
+examine assistant
+; ******************************************************************************
+; LIST HERO/PNG
+; ******************************************************************************
+; Test LIST again...
+;
+; ** NOTE ** Some items are still reported as being worn because the `ask` verb
+;            hasn't yet been adapated to the new system!
+DBG_INV me
+DBG_INV assistant

@@ -88,7 +88,7 @@ take apple from ground
 ; TEST VERB 'put_against'
 ; ------------------------------------------------------------------------------
 put apple against ground
-; **FAIL** With 'sky', the 'put_under' verb defined on 'site_object' is not 
+; **FAIL** With 'sky', the 'put_under' verb defined on 'site_object' is not
 ;          being executed, and we're getting the response of the main verb instead:
 put apple against sky
 ; ------------------------------------------------------------------------------

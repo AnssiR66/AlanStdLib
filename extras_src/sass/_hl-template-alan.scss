@@ -1,0 +1,163 @@
+// "_hl-template-alan.scss"             v1.0.0 | 2019/03/31 | by Tristano Ajmone
+// *****************************************************************************
+// *                                                                           *
+// *              Highlight Alan Theme Template for Asciidoctor                *
+// *                                                                           *
+// *****************************************************************************
+// A reusable variables-based '@import' template to quickly define Highlight
+// Asciidoctor themes for Alan code. It can create both generic themes as well as
+// themes targetting a specific role/class, via the $HL-Role variable.
+
+// =============================================================================
+// Default Values
+// =============================================================================
+// Let's define some defaults for the template variables, so users don't have to
+// define every single variable.
+
+$HL-Border-radius:  4px !default;
+$HL-Border-width:   1px !default;
+$HL-Font-family: inherit  !default;
+// $HL-Font-family: Consolas, Monaco, "Courier New", Courier, monospace  !default;
+$HL-Font-size:      inherit !default;
+// $HL-Font-size:      1em !default;
+
+// -----------------------------------------------------------------------------
+// Default Scheme: Use Alan scheme defined in "_color-scheme.scss"
+// -----------------------------------------------------------------------------
+$HL-AlanHover:      #a09f93 !default;
+
+$HL-Canvas:         $Alan-background !default;
+$HL-Default:        $Alan-normal !default;
+$HL-LineNum:        $Alan-linenums !default;
+
+$HL-Border-color:   $Alan-background !default;
+$HL-Border-radius:  inherit !default;
+$HL-Border-width:   0px     !default;
+
+$HL-Number:         $Alan-normal !default; // don't show numbers!
+$HL-Escape:         $Alan-escapes !default; // $p $n $i $t $a $l $v $$
+$HL-Interpolation:  $Alan-interpolation !default; // $<n> $+<n> $0<n> $-<n> $!<n> $o
+$HL-String:         $Alan-string !default;
+$HL-Comment:        $Alan-comment !default;
+$HL-Operator:       $HL-Default !default;
+$HL-Keywords1:      $Alan-keyword !default; // Alan keywords
+$HL-Keywords2:      $Alan-predefined !default; // Predefined classes
+$HL-Keywords3:      $Alan-predefined !default; // Predefined instances ('hero')
+
+// -----------------
+// Highlight Markers
+// -----------------
+// Yellow Marker (for <mark> tag):
+$HL-MarkerYellow1: #ccff00 !default; // Gradient left
+$HL-MarkerYellow2: #f5ff87 !default; // Gradient right
+
+// Green Marker (for <span class="green"> tag):
+$HL-MarkerGreen1: #a3ff8a !default; // Gradient left
+$HL-MarkerGreen2: rgba($HL-MarkerGreen1, .5) !default; // Gradient right
+
+// -----------------------------------------------------------------------------
+// Optional Language Settings
+// -----------------------------------------------------------------------------
+// If $HL-Role is set, the output theme will target that language, otherwise it
+// will be a generic theme for Highlight.
+
+$HL-Role:   null    !default;
+$ref_role:  null;
+
+@if $HL-Role != null {
+  $ref_role:  ".#{$HL-Role}"   !global;
+}
+
+// =============================================================================
+// Theme Definition
+// =============================================================================
+
+// Language name shown when hovering:
+.listingblock#{$ref_role} code[data-lang=alan]::before{
+    color: $HL-AlanHover;
+}
+// Highlight Theme:
+.listingblock#{$ref_role} pre[class=highlight][lang=alan] {
+    background-color: $HL-Canvas;
+    &>code {
+        color: $HL-Default;
+        font-family: $HL-Font-family;
+        font-size: $HL-Font-size;
+    }
+    border-radius: $HL-Border-radius;
+    border: $HL-Border-width solid $HL-Border-color;
+    .hl {
+        color: $HL-Default;
+
+        &.num {
+            // Numbers
+            color: $HL-Number;
+        }
+        &.esc {
+            // Escape sequences 
+            // ----------------
+            // In Alan these are: $p, $n, $i, $t, $a, $l, $v and $$.
+            color: $HL-Escape;
+        }
+        &.ipl {
+            // Interpolation sequences 
+            // -----------------------
+            // In Alan these are: $<n>, $+<n>, $0<n>, $-<n>, $!<n> and $o.
+            color: $HL-Interpolation;
+        }
+        &.str {
+            // Strings
+            color: $HL-String;
+        }
+        &.slc {
+            // Single-line comments
+            color: $HL-Comment;
+        }
+        &.lin {
+            // Line numbers 
+            color: $HL-LineNum;
+        }
+        &.opt {
+            // Operators
+            color: $HL-Operator;
+        }
+        // ---------------------
+        //    Keywords Groups
+        // ---------------------
+        &.kwa {
+            // (kw 1) Alan Keywords
+            color: $HL-Keywords1;
+        }
+        &.kwb {
+            // (kw 2) Predefined Alan Classes
+            color: $HL-Keywords2;
+        }
+        &.kwc {
+            // (kw 3) Predefined Instances (i.e. the 'hero')
+            color: $HL-Keywords3;
+        }
+    }
+    // =========================================================================
+    //                            Highlight Markers                             
+    // =========================================================================
+    // Highlighter marker effects to mark code lines or segments.
+    // Mainly used in "ALAN Beginner's Guide" to mark added code in the sources.
+    // 
+    // Two colors are passed to the mixins to create a gradient. If both colors
+    // are identical a plain background will be defined instead.
+
+    // -------------------------------------------------------------------------
+    // Yellow Marker: <mark>
+    // -------------------------------------------------------------------------
+    // Let's add to the <mark> tag a smeared fluorescent marker effect.
+
+    @include MarkerMark($HL-MarkerYellow1, $HL-MarkerYellow2);
+    @include MarkerSpan('green', $HL-MarkerGreen1, $HL-MarkerGreen2);
+
+    // -------------------------------------------------------------------------
+    // Green Marker: <span class="green">
+    // -------------------------------------------------------------------------
+    // Let's add to the <mark> tag a smeared fluorescent marker effect.
+}
+
+// EOF //

@@ -131,10 +131,10 @@ END THE indoor.
 
 
 EVERY room ISA LOCATION AT indoor
-  HAS floor_desc "".    -- if these values are left unchanged,
-  HAS walls_desc "".    -- the descriptions of the walls, floor and
-  HAS ceiling_desc "".    -- ceiling will be the default "You notice nothing unusual
-END EVERY.          -- about the [object]."
+  HAS floor_desc "".    --| If these values are left unchanged, the descriptions
+  HAS walls_desc "".    --| of the walls, floor and ceiling will be the default:
+  HAS ceiling_desc "".  --| "You notice nothing unusual about the [object]."
+END EVERY.
 
 
 EVERY site ISA LOCATION AT outdoor

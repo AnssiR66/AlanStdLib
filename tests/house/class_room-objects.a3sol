@@ -83,7 +83,7 @@ take apple from floor
 ; TEST VERB 'put_against'
 ; ------------------------------------------------------------------------------
 put apple against floor
-; **FAIL** With 'wall', the 'put_under' verb defined on 'room_object' is not 
+; **FAIL** With 'wall', the 'put_under' verb defined on 'room_object' is not
 ;          being executed, and we're getting the response of the main verb instead:
 put apple against wall
 put apple against ceiling

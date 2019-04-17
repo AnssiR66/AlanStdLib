@@ -1,0 +1,43 @@
+
+You're late for work!
+Quickly, take a shower, wear that uniform an leave the flat...
+
+
+Bedroom
+The exit is west. There is a shower stall and a uniform here.
+
+> west
+You can't leave the house naked!
+
+> leave
+You can't leave the house naked!
+
+> take uniform
+Taken.
+
+> leave
+You can't leave the house naked!
+
+> wear uniform
+You put on the uniform.
+
+> leave
+Being late is no excuse for not taking a shower!
+
+> remove uniform and drop it
+You take off the uniform.
+
+Dropped.
+
+> take shower
+You take a quick shower.
+
+> wear uniform
+You pick up the uniform and put it on.
+
+> leave
+You dart out of your flat and make it to the restaurant just in time.
+
+*** You've won! ***
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

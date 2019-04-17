@@ -3,7 +3,7 @@
 Emporium Giorgio Alani 
 An adventure to test clothing. 
 (C) 2018 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1866
+Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880
 .
 Standard Library v2.1 
 Version 1 
@@ -17,7 +17,7 @@ clothing item.
 Outside Emporium Alani
 You're standing in front of the Giorgio Alani Emporium entrance. Two
 large brass doors await northward your entrance into the sanctuary of
-fashion consumism.
+fashion consumism. 
 
 > ; ******************************************************************************
 > ; *                                                                            *
@@ -34,12 +34,13 @@ As you move toward the doors they automagically slide open before you.
 Emporium Alani Main Hall
 This luxurious hall is the crossroad to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
-fashion temple and back into the world of mortal souls.There is your
+fashion temple and back into the world of mortal souls. There is a 
+trashcan here. Behind a desk stands the emporium manager. There is your
 personal assistant here.
 
 > examine assistant
-She's your personal shopping assistant. The assistant is carrying a pair
-of fashion boots (being worn) and a uniform (being worn).
+She's your personal shopping assistant. The assistant is wearing a uniform 
+and a pair of fashion boots.
 
 > ; ==============================================================================
 > ; TEST FOLLOWING
@@ -47,7 +48,7 @@ of fashion boots (being worn) and a uniform (being worn).
 > east
 Mensware Department
 Everything a man would ever dream wearing can be found here. There is a 
-T-shirt here. 
+T-shirt, a black shirt, a red shirt and a men's coat here. 
 
 The assistant follows you.
 
@@ -55,7 +56,8 @@ The assistant follows you.
 Emporium Alani Main Hall
 This luxurious hall is the crossroad to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
-fashion temple and back into the world of mortal souls. 
+fashion temple and back into the world of mortal souls.There is a trashcan 
+here. Behind a desk stands the emporium manager. 
 
 The assistant follows you.
 
@@ -77,13 +79,14 @@ As you move toward the doors they automagically slide open before you.
 Emporium Alani Main Hall
 This luxurious hall is the crossroad to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
-fashion temple and back into the world of mortal souls. There is your
-personal assistant here.
+fashion temple and back into the world of mortal souls.There is a trashcan 
+here. Behind a desk stands the emporium manager. There is your personal
+assistant here.
 
 > east
 Mensware Department
 Everything a man would ever dream wearing can be found here. There is a 
-T-shirt here. 
+T-shirt, a black shirt, a red shirt and a men's coat here. 
 
 The assistant follows you.
 
@@ -102,13 +105,15 @@ here.
 > southeast
 Mensware Department
 Everything a man would ever dream wearing can be found here. There is a 
-T-shirt here. There is your personal assistant here.
+T-shirt, a black shirt, a red shirt and a men's coat here. There is your
+personal assistant here.
 
 > west
 Emporium Alani Main Hall
 This luxurious hall is the crossroad to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
-fashion temple and back into the world of mortal souls.
+fashion temple and back into the world of mortal souls.There is a trashcan 
+here. Behind a desk stands the emporium manager. 
 
 The assistant follows you.
 
@@ -135,15 +140,17 @@ here.
 > southeast
 Mensware Department
 Everything a man would ever dream wearing can be found here. There is a 
-T-shirt here. The assistant comes running into the room, all the way from
-the womensware dept., where you left her.
+T-shirt, a black shirt, a red shirt and a men's coat here. The assistant
+comes running into the room, all the way from the womensware dept., where
+you left her.
 
 > ; And restore following us again...
 > west
 Emporium Alani Main Hall
 This luxurious hall is the crossroad to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
-fashion temple and back into the world of mortal souls.
+fashion temple and back into the world of mortal souls.There is a trashcan 
+here. Behind a desk stands the emporium manager. 
 
 The assistant follows you.
 

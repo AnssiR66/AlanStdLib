@@ -1,0 +1,266 @@
+
+
+Emporium Giorgio Alani 
+An adventure to test clothing. 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880
+.
+Standard Library v2.1 
+Version 1 
+All rights reserved. 
+
+Type EXITS to view the list of exits of a room. 
+Use the DBG command (DGB <ITEM NAME>) to show the coverage values of any
+clothing item.
+
+
+Outside Emporium Alani
+You're standing in front of the Giorgio Alani Emporium entrance. Two
+large brass doors await northward your entrance into the sanctuary of
+fashion consumism.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                            TEST SPECIAL CLOTHES                            *
+> ; *                                                                            *
+> ; *                              (SKIRTS & COATS)                              *
+> ; *                                                                            *
+> ; ******************************************************************************
+> ; This script will test handling of special clothes like skirts and coats in the
+> ; new clothing system, which should allow to implement them like in the old
+> ; system, but with more freedom and added features.
+> ;
+> ; The 'IS NOT blockslegs' attribute allows to create clothing items that don't
+> ; prevent wearing/removing lower garnments that cover only legs (ie. not torso).
+> ; This allows to simulate realistically coats and skirts.
+> ;
+> ; The `IS twopieces` attribute allows creating clothing items which, although
+> ; they do cover both legs and torso, they'll be considered as two-pieces, ie.
+> ; in the wearing/removing checks for 'blockslegs' they'll be treated as if it
+> ; only covered the legs. This allows realistically similuating clohtes like a
+> ; bikini, which is handled as a single item, but being conceptually 2-pieces, it
+> ; should be wearable while wearing a skirt or coat.
+> ; ------------------------------------------------------------------------------
+> ; Let's gather some clothes for the tests...
+> north
+As you move toward the doors they automagically slide open before you.
+
+Emporium Alani Main Hall
+This luxurious hall is the crossroad to the various clothing departments
+of the emporium. Two large brass doors lead the way south, out of the
+fashion temple and back into the world of mortal souls.There is a trashcan 
+here. Behind a desk stands the emporium manager. There is your personal
+assistant here.
+
+> east
+Mensware Department
+Everything a man would ever dream wearing can be found here. There is a 
+T-shirt, a black shirt, a red shirt and a men's coat here. 
+
+The assistant follows you.
+
+> take coat
+Taken.
+
+> take black shirt
+Taken.
+
+> take red shirt
+Taken.
+
+> west
+Emporium Alani Main Hall
+This luxurious hall is the crossroad to the various clothing departments
+of the emporium. Two large brass doors lead the way south, out of the
+fashion temple and back into the world of mortal souls.There is a trashcan 
+here. Behind a desk stands the emporium manager. 
+
+The assistant follows you.
+
+> west
+Womensware Department
+No woman's fashion dreams could be left unfulfilled by the clothes in
+this department. 
+
+The assistant follows you.
+
+> north
+Sportswear Department
+Can't think of any sport that you couldn't find gear for in this room. 
+There is a balaclava, a pair of ski goggles, a ski helmet, a swimsuit, a 
+bikini, a sports watch, a white scarf, a blue wool scarf and a black scarf 
+here. 
+
+The assistant follows you.
+
+> take swimsuit
+Taken.
+
+> take bikini
+Taken.
+
+> east
+The Dressing Room
+The curtains surrounding this room provide you all the privacy you need
+to disrobe yourself and try on clothing. There is a chair, a basket, a
+pair of dungarees, a skirt, a pair of white pantyhose and a pair of jeans 
+here.
+
+> undress
+You remove all the items you were wearing.
+
+> ; ==============================================================================
+> ; TEST SKIRT
+> ; ==============================================================================
+> DBG_CLOTHES skirt
+'skirt' VALUES: | botcover: 32 | NOT blockslegs | 
+WORN: No
+
+> ; ------------------------------------------------------------------------------
+> ; W/ SKIRT -> WEAR/REMOVE-> PANTYHOSE
+> ; ------------------------------------------------------------------------------
+> ; A worn skirt should not prevent wearing pantyhose and other lower legs-only
+> ; garnments which don't cover also the torso in a single piece.
+> DBG_CLOTHES pantyhose
+'white pantyhose' VALUES: | botcover: 8 | 
+WORN: No
+
+> wear skirt
+You pick up the skirt and put it on.
+
+> ; /// WEAR -> YES (OK!) ///
+> wear pantyhose
+You pick up the white pantyhose and put them on.
+
+> ; /// REMOVE -> YES (OK!) ///
+> remove pantyhose
+You take off the white pantyhose.
+
+> ; ------------------------------------------------------------------------------
+> ; W/ SKIRT -> WEAR/REMOVE-> SWIMSUIT
+> ; ------------------------------------------------------------------------------
+> ; A worn skirt should prevent wearing lower-body garnments which cover both legs
+> ; and torso in a single clothing piece, like a one-piece swimsuit or a teddy.
+> DBG_CLOTHES swimsuit
+'swimsuit' VALUES: | topcover: 2 | botcover: 2 | 
+WORN: No
+
+> ; /// WEAR -> NO (OK!) ///
+> wear swimsuit
+In order to wear the swimsuit you should first take off the skirt.
+
+> remove skirt
+You take off the skirt.
+
+> wear swimsuit
+You put on the swimsuit.
+
+> wear skirt
+You put on the skirt.
+
+> ; /// REMOVE -> NO (OK!) ///
+> remove swimsuit
+In order to remove the swimsuit you should first take off the skirt.
+
+> remove skirt
+You take off the skirt.
+
+> remove swimsuit
+You take off the swimsuit.
+
+> ; ------------------------------------------------------------------------------
+> ; W/ SKIRT -> WEAR/REMOVE-> BIKINI
+> ; ------------------------------------------------------------------------------
+> ; A worn skirt should not prevent wearing a bikini because its upper and lower
+> ; piece are disjointed.
+> DBG_CLOTHES bikini
+'bikini' VALUES: | topcover: 2 | botcover: 2 | IS twopieces | 
+WORN: No
+
+> wear skirt
+You put on the skirt.
+
+> ; /// WEAR -> YES (OK!) ///
+> wear bikini
+You put on the bikini.
+
+> ; /// REMOVE -> YES (OK!) ///
+> remove bikini
+You take off the bikini.
+
+> ; ------------------------------------------------------------------------------
+> ; W/ SKIRT + SHIRT -> WEAR/REMOVE-> BIKINI
+> ; ------------------------------------------------------------------------------
+> ; But a bikini shouldn't be wearable if also wearing a torso garnment occupying
+> ; a higher layer (the blocker is not the skirt but the top garnment).
+> DBG_CLOTHES black shirt
+'black shirt' VALUES: | topcover: 8 | 
+WORN: No
+
+> DBG_CLOTHES bikini
+'bikini' VALUES: | topcover: 2 | botcover: 2 | IS twopieces | 
+WORN: No
+
+> wear skirt
+You are already wearing the skirt.
+
+> wear black shirt
+You put on the black shirt.
+
+> ; /// WEAR -> NO -> BLOCKER: SHIRT (OK!) ///
+> wear bikini
+In order to wear the bikini you should first take off the black shirt.
+
+> remove black shirt
+You take off the black shirt.
+
+> wear bikini
+You put on the bikini.
+
+> wear black shirt
+You put on the black shirt.
+
+> ; /// REMOVE -> NO -> BLOCKER: SHIRT (OK!) ///
+> remove bikini
+In order to remove the bikini you should first take off the black shirt.
+
+> ; ==============================================================================
+> ; TEST COAT
+> ; ==============================================================================
+> ; A worn coat should not prevent wearing/removing lower-body only garnments, but
+> ; it will always block a clothing item which also covers the torso.
+> undress
+You remove all the items you were wearing.
+
+> wear coat
+You put on the men's coat.
+
+> ; /// WEAR -> NO (OK!) ///
+> wear bikini
+You pick up the bikini. In order to wear the bikini you should first take
+off the men's coat.
+
+> ; /// WEAR -> YES (OK!) ///
+> wear skirt
+You pick up the skirt and put it on.
+
+> ; /// WEAR -> YES (OK!) ///
+> wear boxers
+You pick up your boxers and put it on.
+
+> ; /// WEAR -> NO (OK!) ///
+> wear undershirt
+You pick up your undershirt. In order to wear your undershirt you should
+first take off the men's coat.
+
+> ; /// REMOVE -> YES (OK!) ///
+> remove boxers
+You take off your boxers.
+
+> ; /// REMOVE -> YES (OK!) ///
+> remove skirt
+You take off the skirt.
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.8">
+<meta name="generator" content="Asciidoctor 2.0.6">
 <meta name="author" content="Tristano Ajmone">
 <title>The Clothing Guide</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
-/* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
-/* Uncomment @import statement below to use as custom stylesheet */
+/* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment @import statement when using as custom stylesheet */
 /*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/
-article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}
 audio,canvas,video{display:inline-block}
 audio:not([controls]){display:none;height:0}
 script{display:none!important}
 html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
-a{background:transparent}
+a{background:none}
 a:focus{outline:thin dotted}
 a:active,a:hover{outline:0}
 h1{font-size:2em;margin:.67em 0}
@@ -70,7 +70,7 @@ select{width:100%}
 div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
 a{color:#2156a5;text-decoration:underline;line-height:inherit}
 a:hover,a:focus{color:#1d4b8f}
-a img{border:none}
+a img{border:0}
 p{font-family:inherit;font-weight:400;font-size:1em;line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
 p aside{font-size:.875em;line-height:1.35;font-style:italic}
 h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
@@ -111,20 +111,23 @@ table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
 table thead,table tfoot{background:#f7f8f7}
 table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
 table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
-table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7}
+table tr.even,table tr.alt{background:#f8f8f7}
 table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
 h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
 h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
 .clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
 .clearfix::after,.float-group::after{clear:both}
-*:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
-*:not(pre)>code.nobreak{word-wrap:normal}
-*:not(pre)>code.nowrap{white-space:nowrap}
-pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;text-rendering:optimizeSpeed}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
+:not(pre)>code.nobreak{word-wrap:normal}
+:not(pre)>code.nowrap{white-space:nowrap}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
 em em{font-style:normal}
 strong strong{font-weight:400}
 .keyseq{color:rgba(51,51,51,.8)}
-kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
 .keyseq kbd:first-child{margin-left:0}
 .keyseq kbd:last-child{margin-right:0}
 .menuseq,.menuref{color:#000}
@@ -165,7 +168,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #toctitle{color:#7a2518;font-size:1.2em}
 @media screen and (min-width:768px){#toctitle{font-size:1.375em}
 body.toc2{padding-left:15em;padding-right:0}
-#toc.toc2{margin-top:0!important;background-color:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
 #toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
 #toc.toc2>ul{font-size:.9em;margin-bottom:0}
 #toc.toc2 ul ul{margin-left:0;padding-left:1em}
@@ -181,7 +184,7 @@ body.toc2.toc-right{padding-left:0;padding-right:20em}}
 #content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
 #content #toc>:first-child{margin-top:0}
 #content #toc>:last-child{margin-bottom:0}
-#footer{max-width:100%;background-color:rgba(0,0,0,.8);padding:1.25em}
+#footer{max-width:100%;background:rgba(0,0,0,.8);padding:1.25em}
 #footer-text{color:rgba(255,255,255,.8);line-height:1.44}
 #content{margin-bottom:.625em}
 .sect1{padding-bottom:.625em}
@@ -194,7 +197,8 @@ body.toc2.toc-right{padding-left:0;padding-right:20em}}
 #content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
 #content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
 #content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
-.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details>summary:first-of-type{cursor:pointer;display:list-item;outline:none;margin-bottom:.75em}
 .admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
 table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .paragraph.lead>p,#preamble>.sectionbody>[class="paragraph"]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
@@ -208,32 +212,35 @@ table.tableblock #preamble>.sectionbody>[class="paragraph"]:first-of-type p{font
 .exampleblock>.content{border-style:solid;border-width:1px;border-color:#e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;-webkit-border-radius:4px;border-radius:4px}
 .exampleblock>.content>:first-child{margin-top:0}
 .exampleblock>.content>:last-child{margin-bottom:0}
-.sidebarblock{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+.sidebarblock{border-style:solid;border-width:1px;border-color:#dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;-webkit-border-radius:4px;border-radius:4px}
 .sidebarblock>:first-child{margin-top:0}
 .sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
 .exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
-.literalblock pre,.listingblock pre:not(.highlight),.listingblock pre[class="highlight"],.listingblock pre[class^="highlight "],.listingblock pre.CodeRay,.listingblock pre.prettyprint{background:#f7f7f8}
-.sidebarblock .literalblock pre,.sidebarblock .listingblock pre:not(.highlight),.sidebarblock .listingblock pre[class="highlight"],.sidebarblock .listingblock pre[class^="highlight "],.sidebarblock .listingblock pre.CodeRay,.sidebarblock .listingblock pre.prettyprint{background:#f2f1f1}
-.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;overflow-x:auto;padding:1em;font-size:.8125em}
-@media screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}
-@media screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}
-.literalblock pre.nowrap,.literalblock pre.nowrap pre,.listingblock pre.nowrap,.listingblock pre.nowrap pre{white-space:pre;word-wrap:normal}
-.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
+.literalblock pre,.listingblock>.content>pre{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class="highlight"],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
 .listingblock pre.highlightjs{padding:0}
 .listingblock pre.highlightjs>code{padding:1em;-webkit-border-radius:4px;border-radius:4px}
 .listingblock pre.prettyprint{border-width:0}
-.listingblock>.content{position:relative}
-.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:#999}
-.listingblock:hover code[data-lang]::before{display:block}
-.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:#999}
-.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
-table.pyhltable{border-collapse:separate;border:0;margin-bottom:0;background:none}
-table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0;line-height:1.45}
-table.pyhltable td.code{padding-left:.75em;padding-right:0}
-pre.pygments .lineno,table.pyhltable td:not(.code){color:#999;padding-left:0;padding-right:.5em;border-right:1px solid #dddddf}
-pre.pygments .lineno{display:inline-block;margin-right:.25em}
-table.pyhltable .linenodiv{background:none!important;padding-right:0!important}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos{border-right:1px solid currentColor;opacity:.35;padding-right:.5em}
+pre.pygments .lineno{border-right:1px solid currentColor;opacity:.35;display:inline-block;margin-right:.75em}
+pre.pygments .lineno::before{content:"";margin-right:-.125em}
 .quoteblock{margin:0 1em 1.25em 1.5em;display:table}
 .quoteblock>.title{margin-left:-1.5em;margin-bottom:.75em}
 .quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
@@ -269,8 +276,7 @@ table.grid-all>tbody>tr:last-child>.tableblock,table.grid-all>thead:last-child>t
 table.frame-all{border-width:1px}
 table.frame-sides{border-width:0 1px}
 table.frame-topbot,table.frame-ends{border-width:1px 0}
-table.stripes-all tr,table.stripes-odd tr:nth-of-type(odd){background:#f8f8f7}
-table.stripes-none tr,table.stripes-odd tr:nth-of-type(even){background:none}
+table.stripes-all tr,table.stripes-odd tr:nth-of-type(odd),table.stripes-even tr:nth-of-type(even),table.stripes-hover tr:hover{background:#f8f8f7}
 th.halign-left,td.halign-left{text-align:left}
 th.halign-right,td.halign-right{text-align:right}
 th.halign-center,td.halign-center{text-align:center}
@@ -282,7 +288,6 @@ tbody tr th{display:table-cell;line-height:1.6;background:#f7f8f7}
 tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
 p.tableblock>code:only-child{background:none;padding:0}
 p.tableblock{font-size:1em}
-td>div.verse{white-space:pre}
 ol{margin-left:1.75em}
 ul li ol{margin-left:1.5em}
 dl dd{margin-left:1.125em}
@@ -341,37 +346,37 @@ div.unbreakable{page-break-inside:avoid}
 .overline{text-decoration:overline}
 .line-through{text-decoration:line-through}
 .aqua{color:#00bfbf}
-.aqua-background{background-color:#00fafa}
+.aqua-background{background:#00fafa}
 .black{color:#000}
-.black-background{background-color:#000}
+.black-background{background:#000}
 .blue{color:#0000bf}
-.blue-background{background-color:#0000fa}
+.blue-background{background:#0000fa}
 .fuchsia{color:#bf00bf}
-.fuchsia-background{background-color:#fa00fa}
+.fuchsia-background{background:#fa00fa}
 .gray{color:#606060}
-.gray-background{background-color:#7d7d7d}
+.gray-background{background:#7d7d7d}
 .green{color:#006000}
-.green-background{background-color:#007d00}
+.green-background{background:#007d00}
 .lime{color:#00bf00}
-.lime-background{background-color:#00fa00}
+.lime-background{background:#00fa00}
 .maroon{color:#600000}
-.maroon-background{background-color:#7d0000}
+.maroon-background{background:#7d0000}
 .navy{color:#000060}
-.navy-background{background-color:#00007d}
+.navy-background{background:#00007d}
 .olive{color:#606000}
-.olive-background{background-color:#7d7d00}
+.olive-background{background:#7d7d00}
 .purple{color:#600060}
-.purple-background{background-color:#7d007d}
+.purple-background{background:#7d007d}
 .red{color:#bf0000}
-.red-background{background-color:#fa0000}
+.red-background{background:#fa0000}
 .silver{color:#909090}
-.silver-background{background-color:#bcbcbc}
+.silver-background{background:#bcbcbc}
 .teal{color:#006060}
-.teal-background{background-color:#007d7d}
+.teal-background{background:#007d7d}
 .white{color:#bfbfbf}
-.white-background{background-color:#fafafa}
+.white-background{background:#fafafa}
 .yellow{color:#bfbf00}
-.yellow-background{background-color:#fafa00}
+.yellow-background{background:#fafa00}
 span.icon>.fa{cursor:default}
 a span.icon>.fa{cursor:inherit}
 .admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
@@ -380,7 +385,7 @@ a span.icon>.fa{cursor:inherit}
 .admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
 .admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
 .admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
-.conum[data-value]{display:inline-block;color:#fff!important;background-color:rgba(0,0,0,.8);-webkit-border-radius:100px;border-radius:100px;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);-webkit-border-radius:100px;border-radius:100px;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
 .conum[data-value] *{color:#fff!important}
 .conum[data-value]+b{display:none}
 .conum[data-value]::after{content:attr(data-value)}
@@ -393,7 +398,7 @@ p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
 p,blockquote,dt,td.content,span.alt{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
-.exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
 .print-only{display:none!important}
 @page{margin:1.25cm .75cm}
 @media print{*{-webkit-box-shadow:none!important;box-shadow:none!important;text-shadow:none!important}
@@ -431,7 +436,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="./_assets/css/styles.css">
+<link rel="stylesheet" href="./css/styles.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -439,8 +444,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Tristano Ajmone</span><br>
 <span id="email" class="email"><a href="mailto:tajmone@gmail.com">tajmone@gmail.com</a></span><br>
-<span id="revnumber">version 1,</span>
-<span id="revdate">2018-12-16</span>
+<span id="revnumber">version 2,</span>
+<span id="revdate">2019-04-09</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -449,9 +454,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_the_clothing_class">The Clothing Class</a>
 <ul class="sectlevel2">
 <li><a href="#_body_coverage_attributes">Body Coverage Attributes</a></li>
-<li><a href="#_the_clothing_table">The Clothing Table</a></li>
 </ul>
 </li>
+<li><a href="#_practical_examples">Practical Examples</a>
+<ul class="sectlevel2">
+<li><a href="#_simple_clothing">Simple Clothing</a></li>
+</ul>
+</li>
+<li><a href="#_clothing_table_example">Clothing Table Example</a></li>
 </ul>
 </div>
 </div>
@@ -469,7 +479,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </td>
 <td class="content">
 <div class="paragraph">
-<p>This document is still work in progress. To be completed soon.</p>
+<p>This document is currently undergoing adaptation from the old clothing system to the new one.
+The text needs to be revised, and since there is no fixed-values <em>Clothing Table</em> in the new system, we need to provide on or more arbitrary examples of layers enumerations so that the reader can refer to them along the tutorial.</p>
 </div>
 </td>
 </tr>
@@ -497,23 +508,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>The library defines the <code>clothing</code> class for clothing items, which adds to its instances some special attributes:</p>
 </div>
-
-<div class="listingblock">
+<div class="listingblock lib">
+<div class="title">Predefined attributes of <code>clothing</code> class&#8201;&#8212;&#8201;defined in <code>lib_classes.i</code></div>
 <div class="content">
-<pre class="highlight" lang="alan"><code data-lang="alan"><span class="hl kwa">EVERY</span> clothing <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span>
-
-  <span class="hl kwa">IS</span> wearable<span class="hl kwa">.</span>
-
-  <span class="hl kwa">IS</span> sex <span class="hl num">0</span><span class="hl kwa">.</span> <span class="hl slc">--&gt; If not zero, restricts wearing to actors with same &apos;sex&apos; value. (optional)</span>
-
-  <span class="hl slc">-- Body coverage layered-values, by area:</span>
-  <span class="hl kwa">IS</span> headcover  <span class="hl num">0</span><span class="hl kwa">.</span> <span class="hl slc">--&gt; Head.</span>
-  <span class="hl kwa">IS</span> handscover <span class="hl num">0</span><span class="hl kwa">.</span> <span class="hl slc">--&gt; Hands.</span>
-  <span class="hl kwa">IS</span> feetcover  <span class="hl num">0</span><span class="hl kwa">.</span> <span class="hl slc">--&gt; Feet.</span>
-  <span class="hl kwa">IS</span> topcover   <span class="hl num">0</span><span class="hl kwa">.</span> <span class="hl slc">--&gt; Chest and arms.</span>
-  <span class="hl kwa">IS</span> botcover   <span class="hl num">0</span><span class="hl kwa">.</span> <span class="hl slc">--&gt; Pelvis and legs.</span>
-
-  <span class="hl kwa">IS NOT</span> donned<span class="hl kwa">.</span>   <span class="hl slc">--&gt; Not in the &apos;wearing&apos; set of any actor. (library internal use)</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">EVERY</span> clothing <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span>&#x000A;&#x000A;  <span class="hl kwa">IS</span> wearable<span class="hl kwa">.</span>&#x000A;&#x000A;  <span class="hl kwa">IS</span> sex <span class="hl num">0</span><span class="hl kwa">.</span> <span class="hl slc">-- If not zero, restricts wearing to actors with same &apos;sex&apos; value.</span>&#x000A;&#x000A;  <span class="hl slc">-- Body coverage layered-values, by area:</span>&#x000A;  <span class="hl kwa">IS</span> headcover  <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Head.</span>&#x000A;  <span class="hl kwa">IS</span> facecover  <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Face.</span>&#x000A;  <span class="hl kwa">IS</span> handscover <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Hands.</span>&#x000A;  <span class="hl kwa">IS</span> feetcover  <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Feet.</span>&#x000A;  <span class="hl kwa">IS</span> topcover   <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Chest and arms.</span>&#x000A;  <span class="hl kwa">IS</span> botcover   <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Pelvis and legs.</span>&#x000A;&#x000A;  <span class="hl slc">-- Attributes for special clothing (skirts, coats, bikinis, etc.):</span>&#x000A;&#x000A;  <span class="hl kwa">IS</span> blockslegs<span class="hl kwa">.</span>&#x000A;  <span class="hl slc">-- i.e. the item prevents wearing/removing legsware from the layers below</span>&#x000A;  <span class="hl slc">-- (skirts and coats are &apos;NOT blockslegs&apos;).</span>&#x000A;&#x000A;  <span class="hl kwa">IS NOT</span> twopieces<span class="hl kwa">.</span>&#x000A;  <span class="hl slc">-- For items covering legs + torso (&apos;topcover&apos; &amp; &apos;botcover&apos; &lt;&gt; 0) that should</span>&#x000A;  <span class="hl slc">-- be treated as a single piece (e.g. a one-piece swimming suite).</span>&#x000A;  <span class="hl slc">-- Items which are &apos;twopieces&apos; (eg. a bikini) can be worn/removed while</span>&#x000A;  <span class="hl slc">-- wearing a skirt for, although handled as a single clothing item, they cover</span>&#x000A;  <span class="hl slc">-- legs and torso via two separate pieces.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Clothing also rely on the <code>worn</code> attribute, which is defined on <code>EVERY THING</code> in <code>lib_definitions.i</code>:</p>
+</div>
+<div class="listingblock lib">
+<div class="title">The <code>worn</code> attribute on <code>THING</code>&#8201;&#8212;&#8201;defined in <code>lib_definitions.i</code></div>
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">ADD TO EVERY</span> <span class="hl kwb">THING</span>&#x000A;  <span class="hl kwa">...</span>&#x000A;  <span class="hl kwa">IS NOT</span> worn<span class="hl kwa">.</span>&#x000A;    <span class="hl slc">-- (for &apos;clothing&apos; instances) it&apos;s not worn by any actor.</span>&#x000A;    <span class="hl slc">-- -------------------------------------------------------------------------</span>&#x000A;    <span class="hl slc">-- NOTE: Authors can also use this attribute to implement wearables other</span>&#x000A;    <span class="hl slc">--       than clothing (eg. devices, like headphones, a VR headset, etc.).</span>&#x000A;    <span class="hl slc">--       The library ensures that any verbs which could remove a thing from</span>&#x000A;    <span class="hl slc">--       an actor also set the thing as &apos;NOT worn&apos;, in case authors are</span>&#x000A;    <span class="hl slc">--       using this attribute outside of the &apos;clothing&apos; class context.</span>&#x000A;    <span class="hl slc">-- -------------------------------------------------------------------------</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -523,7 +530,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h3 id="_body_coverage_attributes"><a class="anchor" href="#_body_coverage_attributes"></a>Body Coverage Attributes</h3>
 <div class="paragraph">
 <p>By default, all new clothing instances will have all body coverage attributes set to zero.
-When you create a new clothing item, you need to set its correct body coverage values according to the <a href="#_the_clothing_table">Clothing Table</a> provided below.</p>
+When you create new clothing items, you need to assign to them some arbitrary body coverage values that are consistent throughout your adventure.</p>
 </div>
 <div class="paragraph">
 <p>The body coverage values of a clothing item indicate:</p>
@@ -541,32 +548,342 @@ When you create a new clothing item, you need to set its correct body coverage v
 <div class="paragraph">
 <p>The body area is indicated by the attribute name, where a value of zero indicates that the clothing item doesn&#8217;t affect that area at all.
 The layer of interest is indicated by the value itself, where higher values indicate higher layers (i.e. further away from the skin).
-Layer values are always exponents of two (2, 4, 8, 16, 32 and 64).</p>
+Layer values are integer numbers, and authors are free to chose arbitrary layers values without constraints&#8201;&#8212;&#8201;i.e. you are not obliged to assign layers in consecutive order, you can for example start from layer 5, and assing to every next layer the value of the previous one plus 3.</p>
+</div>
+<div class="paragraph">
+<p>Leaving gaps between layers is actually a good strategy, for if you later on realize that you need to assign a new layer to accomodate new clothing items in intermediate layers (e.g. a jumper that goes on top of a shirt and below a coat) you can use the unassigned layers for it.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>These must be expanded upon, broken in smaller senteces and provide examples, to make it simpler for the reader.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Some body areas can take multiple layers of clothes, but each body layer can only be wearing one item at the time.
-For example, the hero can be wearing over his chest a vest, a shirt and a sweater, for each one of them occupies a different layer in the <code>topcover</code> area (namely, 2, 8 and 16).
-But he can&#8217;t wear a sweater and a pullover at the same time, for they both occupy the same area and layer (<code>topcover 16</code>).</p>
+For example, the hero can be wearing over his chest a vest, a shirt and a sweater, for each one of them occupies a different layer in the <code>topcover</code> area (e.g. 1, 2 and 3).
+But he can&#8217;t wear a sweater and a pullover at the same time, for they both occupy the same area and layer (<code>topcover 3</code>).</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The paragraph above only made sense in reference to the old <em>Clothing Table</em>, which had fixed values.
+I&#8217;ll need to add an example at the start of the tutorial, to provide references to an arbitrary layer numbering system that the reader can related to.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Although he might put on trousers even if he isn&#8217;t wearing any underpants, he can neither put on nor remove underpants while wearing trousers, because the latter prevent access to the layer occupied by the former.
 In other words, while the library doesn&#8217;t impose wearing clothes on each layer, it will prevent putting on or removing clothing when another item stands in the way.</p>
 </div>
 <div class="paragraph">
-<p>But there are smart exceptions to this rule; for example, skirts and coats.
-Although a skirt occupies a higher layer than tights or panties (<code>botcover 32</code> vs <code>8</code> and <code>2</code>), the library &#8220;knows&#8221; that it&#8217;s a special type of leg-covering clothing that (unlike trousers) doesn&#8217;t prevent its wearer from putting on tights or panties.
-Coats don&#8217;t prevent wearing leg-covering clothing either, including trousers and skirts.</p>
-</div>
-<div class="paragraph">
 <p>As you might have noticed, the library tries to implement a realistic approach to clothing, simulating how common cases are handled in real life.</p>
 </div>
-<div class="paragraph">
-<p>The reference values provided in the <a href="#_the_clothing_table">Clothing Table</a> are the &#8220;secret&#8221; behind the library smart-handling different types of clothing.
-Therefore, when you create a clothing instance you can&#8217;t provide just any arbitrary values, you must instead follow the examples provided in the table&#8201;&#8212;&#8201;and if you don&#8217;t, terrible things will happen to your adventure, and you shall regret not having followed the <a href="#_the_clothing_table">Holy Clothing Table</a> in a faithful and unquestioning manner.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_practical_examples"><a class="anchor" href="#_practical_examples"></a>Practical Examples</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now let&#8217;s dive into some practical examples of how to use clothing, from simple to complex.</p>
 </div>
 <div class="sect2">
-<h3 id="_the_clothing_table"><a class="anchor" href="#_the_clothing_table"></a>The Clothing Table</h3>
+<h3 id="_simple_clothing"><a class="anchor" href="#_simple_clothing"></a>Simple Clothing</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="clothing-01-simple.alan"><code>clothing-01-simple.alan</code></a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll create a very simple adventure where there&#8217;s only a single clothing item, and the Hero can be either naked or dressed.
+Here&#8217;s the adventure outline:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>The Hero is a waiter in his one-bedroom flat who must take a shower, get dressed and rush to work.
+He won&#8217;t be able to take a shower if he&#8217;s wearing or carrying clothes, and he won&#8217;t be allowed to leave the flat unless dressed.
+The adventure ends when he leaves the flat.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>So, we&#8217;ll need to implement:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A bedroom location.</p>
+</li>
+<li>
+<p>A waiter uniform.</p>
+</li>
+<li>
+<p>A shower object with the &#8216;take shower&#8217; verb.</p>
+</li>
+<li>
+<p>An exit leading to the game end.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s start by implementing the bedroom.</p>
+</div>
+<div class="listingblock tutorial">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">Import</span> &apos;library.i&apos;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> my_game <span class="hl kwa">IsA</span> DEFINITION_BLOCK&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> bedroom <span class="hl kwa">IsA</span> room<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Description</span>&#x000A;    <span class="hl str">&quot;The exit is west.&quot;</span>&#x000A;<span class="hl kwa">End the</span> bedroom<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">Start at</span> bedroom<span class="hl kwa">.</span>&#x000A;<span class="hl str">&quot;You&apos;re late for work!</span><span class="hl esc">$n</span><span class="hl str">Quickly, take a shower,</span>&#x000A;<span class="hl str"> wear that uniform an leave the flat...&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next, we need to implement the Hero&#8217;s clothing.
+Since in the whole game he only has his waiter uniform to wear, we don&#8217;t need to worry about clothing layers attributes at all.
+Also, we&#8217;ll treat the uniform as a single clothing item, for the purpose here is to distinguish between the Hero being naked or dressed, so there is no need to implement it as separate items (i.e. trousers, shirt, shoes, jacket, etc.).</p>
+</div>
+<div class="paragraph">
+<p>When the game starts, the Hero will be in his bedroom, naked, so we&#8217;ll just place the uniform lying around in the bedroom.</p>
+</div>
+<div class="listingblock tutorial">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> uniform <span class="hl kwa">IsA</span> clothing <span class="hl kwa">at</span> bedroom<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Has</span> ex <span class="hl str">&quot;It&apos;s your waiter uniform, spotless as usual.&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl slc">-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>&#x000A;  <span class="hl slc">-- No need to worry about layer coverage attributes here.</span>&#x000A;  <span class="hl slc">-- We&apos;ll stick to the default values (all layers = zero).</span>&#x000A;  <span class="hl slc">-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>&#x000A;<span class="hl kwa">End the</span> uniform<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now it&#8217;s time to implement the shower.
+We&#8217;ll create it as an object and add to it the <code>take</code> verb.</p>
+</div>
+<div class="listingblock tutorial">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> shower <span class="hl kwa">IsA</span> <span class="hl kwb">object</span> <span class="hl kwa">at</span> bedroom<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Name</span> shower stall<span class="hl kwa">. Name</span> shower<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Is not</span> taken<span class="hl kwa">.</span> <span class="hl slc">-- i.e. the Hero hasn&apos;t yet taken his shower.</span>&#x000A;&#x000A;  <span class="hl kwa">Verb</span> take&#x000A;    <span class="hl kwa">Check this is not</span> taken&#x000A;      <span class="hl kwa">else</span> <span class="hl str">&quot;There&apos;s no time left for a second shower.&quot;</span>&#x000A;    <span class="hl kwa">And</span> uniform <span class="hl kwa">not in</span> <span class="hl kwc">hero</span>&#x000A;      <span class="hl kwa">else</span> <span class="hl str">&quot;You should&quot;</span>&#x000A;        <span class="hl kwa">If</span> uniform <span class="hl kwa">is</span> worn <span class="hl kwa">then</span>&#x000A;          <span class="hl str">&quot;remove&quot;</span>&#x000A;        <span class="hl kwa">else</span>&#x000A;          <span class="hl str">&quot;drop&quot;</span>&#x000A;        <span class="hl kwa">end if.</span>&#x000A;        <span class="hl str">&quot;your uniform first!&quot;</span>&#x000A;    <span class="hl kwa">Does only</span>&#x000A;      <span class="hl str">&quot;You take a quick shower.&quot;</span>&#x000A;      <span class="hl kwa">Make this</span> taken<span class="hl kwa">.</span> <span class="hl slc">-- the Hero has showered.</span>&#x000A;  <span class="hl kwa">End verb.</span>&#x000A;<span class="hl kwa">End the</span> shower<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Its implementation is quite straightforward, so here we&#8217;ll only comment on the <code>Check</code> that prevents taking a shower while carrying/wearing the uniform:</p>
+</div>
+<div class="listingblock tutorial">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">And</span> uniform <span class="hl kwa">not in</span> <span class="hl kwc">hero</span>&#x000A;  <span class="hl kwa">else</span> <span class="hl str">&quot;You should&quot;</span>&#x000A;    <span class="hl kwa">If</span> uniform <span class="hl kwa">is</span> worn <span class="hl kwa">then</span>&#x000A;      <span class="hl str">&quot;remove&quot;</span>&#x000A;    <span class="hl kwa">else</span>&#x000A;      <span class="hl str">&quot;drop&quot;</span>&#x000A;    <span class="hl kwa">end if.</span>&#x000A;    <span class="hl str">&quot;your uniform first!&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The actual <code>Check</code> only needs to verify that the uniform is <code>not in hero</code>, for the action is to be prevented regarless of wether the clothing item is being carried or worn&#8201;&#8212;&#8201;the whole idea is that it shouldn&#8217;t get wet.
+If the check condition is violated, we then resort to an <code>If</code> statement in order to produce an appropriate response depending on wether the uniform <code>is worn</code> or just carried (<code>else</code>) by the Hero.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s compile our draft adventure to test that it&#8217;s behaving as expected.</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>You&#8217;re late for work!<br>
+Quickly, take a shower, wear that uniform an leave the flat&#8230;&#8203;<br></p>
+</div>
+<div class="paragraph">
+<p>Bedroom<br>
+The exit is west. There is a shower stall and a uniform here.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>examine uniform</em><br>
+It&#8217;s your waiter uniform, spotless as usual.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>wear uniform</em><br>
+You pick up the uniform and put it on.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>take shower</em><br>
+You should remove your uniform first!<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>inventory</em><br>
+You are empty-handed. You are wearing a uniform.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>remove uniform</em><br>
+You take off the uniform.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>inventory</em><br>
+You are carrying a uniform.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>take shower</em><br>
+You should drop your uniform first!<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>drop uniform</em><br>
+Dropped.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>inventory</em><br>
+You are empty-handed.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>take shower</em><br>
+You take a quick shower.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>take shower</em><br>
+There&#8217;s no time left for a second shower.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <br></p>
+</div>
+<div class="paragraph">
+<p>Do you want to RESTART, RESTORE, QUIT or UNDO? <br></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Everything works fine with the shower, so let&#8217;s carry on and implement the bedroom exit.
+Edit the <code>bedroom</code> code as follows:</p>
+</div>
+<div class="listingblock tutorial">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> bedroom <span class="hl kwa">IsA</span> room<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Description</span>&#x000A;    <span class="hl str">&quot;The exit is west.&quot;</span>&#x000A;&#x000A;  <span class="hl kwa">Exit</span> west<span class="hl kwa">,</span> leave <span class="hl kwa">to</span> bedroom <span class="hl slc">-- also allow using &apos;leave&apos; to exit!</span>&#x000A;    <span class="hl kwa">Check</span> uniform <span class="hl kwa">directly in</span> <span class="hl kwc">hero</span> <span class="hl kwa">and</span> uniform <span class="hl kwa">is</span> worn&#x000A;      <span class="hl kwa">else</span> <span class="hl str">&quot;You can&apos;t leave the house naked!&quot;</span>&#x000A;    <span class="hl kwa">And</span> shower <span class="hl kwa">is</span> taken&#x000A;      <span class="hl kwa">else</span> <span class="hl str">&quot;Being late is no excuse for not taking a shower!&quot;</span>&#x000A;    <span class="hl kwa">Does</span>&#x000A;      <span class="hl str">&quot;You dart out of your flat and make it to</span>&#x000A;<span class="hl str">       the restaurant just in time.</span>&#x000A;<span class="hl str"></span>       <span class="hl esc">$p</span><span class="hl str">*** You&apos;ve won! ***&quot;</span> <span class="hl kwa">Quit.</span>&#x000A;  <span class="hl kwa">End exit.</span>&#x000A;<span class="hl kwa">End the</span> bedroom<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here we used <code>Check uniform directly in hero and uniform is worn</code> to make sure the Hero doesn&#8217;t leave the flat without wearing his uniform:</p>
+</div>
+<div class="listingblock tutorial">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">Check</span> uniform <span class="hl kwa">directly in</span> <span class="hl kwc">hero</span> <span class="hl kwa">and</span> uniform <span class="hl kwa">is</span> worn&#x000A;  <span class="hl kwa">else</span> <span class="hl str">&quot;You can&apos;t leave the house naked!&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This being the logical succession for checking if an actor is wearing a specific clothing item:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>We first check that the item is <code>directly in</code> the actor, for he can&#8217;t be possibly wearing:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>something he doesn&#8217;t possess (not <code>IN</code> him), nor</p>
+</li>
+<li>
+<p>something which is <em>indirectly</em> inside him (e.g. inside a bag he&#8217;s carrying).</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Then we check that the item is actually <code>worn</code> (and not just carried).</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In this context we could have omitted <code>directly</code> and use just <code>Check uniform in hero</code> instead, since there are no carriable containers in the game.</p>
+</div>
+<div class="paragraph">
+<p>Acutally, it would have been sufficient to just <code>Check uniform is worn</code>, since there are no other actors in this game it&#8217;s implicit that only the Hero could be wearing it&#8201;&#8212;&#8201;but, hey, this is a tutorial!</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s compile the final adventure to test that everything is working as expected.</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>You&#8217;re late for work!<br>
+Quickly, take a shower, wear that uniform an leave the flat&#8230;&#8203;<br></p>
+</div>
+<div class="paragraph">
+<p>Bedroom<br>
+The exit is west. There is a shower stall and a uniform here.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>west</em><br>
+You can&#8217;t leave the house naked!<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>leave</em><br>
+You can&#8217;t leave the house naked!<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>take uniform</em><br>
+Taken.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>leave</em><br>
+You can&#8217;t leave the house naked!<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>wear uniform</em><br>
+You put on the uniform.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>leave</em><br>
+Being late is no excuse for not taking a shower!<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>remove uniform and drop it</em><br>
+You take off the uniform.<br></p>
+</div>
+<div class="paragraph">
+<p>Dropped.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>take shower</em><br>
+You take a quick shower.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>wear uniform</em><br>
+You pick up the uniform and put it on.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>leave</em><br>
+You dart out of your flat and make it to the restaurant just in time.<br></p>
+</div>
+<div class="paragraph">
+<p>*** You&#8217;ve won! ***<br></p>
+</div>
+<div class="paragraph">
+<p>Do you want to RESTART, RESTORE, QUIT or UNDO? <br></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Here ends our first tutorial on how to implement very simple clothing.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_clothing_table_example"><a class="anchor" href="#_clothing_table_example"></a>Clothing Table Example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Here&#8217;s an example of how common clothing can be mapped to layer values in an adventure.</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. Common Clothes Examples</caption>
 <colgroup>
@@ -710,13 +1027,19 @@ Therefore, when you create a clothing instance you can&#8217;t provide just any 
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>Of course, every adventure is different, so you&#8217;ll need to work out your own layering system to cover the needs of your adventure.
+Some adventure genres might envolve more clothing items (and therefore, layers) than others&#8201;&#8212;&#8201;e.g. in the <em>fantasy</em> genre you might need dedicated layers for armors, cloaks, magic garnments (talismans, etc.).</p>
+</div>
+<div class="paragraph">
+<p>It&#8217;s strongly reccomended that you do layout a clothing table like the above, so you can use it as a lookup reference when creating new clothing items.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1<br>
+Version 2<br>
 </div>
 </div>
 </body>

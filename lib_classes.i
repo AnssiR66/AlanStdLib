@@ -1,16 +1,16 @@
- -- ALAN Standard Library v2.1
+-- ALAN Standard Library v2.1
 -- Classes (file name: 'lib_classes.i')
 
 
 -- This library file defines various object and actor classes.
--- Many of these classes are frequently  used in verb definitions in 'lib_verbs.i'
+-- Many of these classes are frequently used in verb definitions in 'lib_verbs.i'
 -- so they should be edited or removed with caution. However, to ease things up,
 -- it is mentioned at the beginning of every class below if and where the class
 -- is cross-referenced in the other library files.
 
 
 ---- First, we define the default description for scenery objects
-    -- = no description at all
+--   = no description at all
 
 
 ADD TO EVERY OBJECT
@@ -22,118 +22,116 @@ ADD TO EVERY OBJECT
 END ADD.
 
 
-
-
-
-
--- Contents:
-
-
-
-
+--------------------------------------------------------------------------------
+--                                .: CONTENTS :.
+--------------------------------------------------------------------------------
 
 -- 1. OBJECT CLASSES
 -- =================
 
-
-
--- CLOTHING
-  -- Is a piece of clothing that behaves according to Alan Bampton's 'xwear.i' extension.
-     -- The said extension has been fully assimilated to this library.
-     -- This extension prevents clothes from being worn in an illogical order, for example you
-  -- cannot put on a shirt if you are already wearing a jacket, and so forth.
-  -- This only applies to the hero; NPCs cannot be made to wear clothing in layers.
-  -- Also the verbs 'wear', 'remove' and 'undress' are defined here.
-
-
--- DEVICE
-  -- Is a  machine or an electronic device, for example a TV. Can be turned
-  -- (=switched) on and off if it is not broken.
-  -- Attributes: 'on' and NOT 'on', NOT broken.
-      -- Is described by default as being either on or off when examined.
-
-
--- DOOR
-  -- Can be opened, closed, and optionally locked and unlocked.
-  -- Is by default not open, not lockable.
-  -- all default attributes: openable, NOT open, NOT lockable, NOT locked; not takeable.
-  -- Is described by default as being either open or closed when examined.
-
-
--- LIQUID
-  -- Can only be taken if it is in a container. You can fill something with it,
-  -- and you can pour it somewhere.
-  -- A liquid is by default NOT drinkable.
-
-
--- LIGHTSOURCE
-  -- IS natural or NOT natural
-  -- (a natural lightsource is for example a match or a torch).
-  -- Can be turned on and off, lighted and extinguished (= put out) if it
-      -- is not broken. A natural lightsource
-  -- cannot be turned on or off, it can only be lighted and extinguished (= put out).
-  -- When examined, a lightsource is automatically supplied with a description of
-  -- whether it is providing light or not.
-
-
--- LISTED_CONTAINER
-  -- Is a container object. The contents of a listed_container will be listed both after
-  -- 'look' (= in the room description), 'look in' and 'examine' (if the container is open).
-  -- (The contents of a normal container object are not listed after 'examine' by default, but only
-  -- after 'look' (=room description) and 'look in').
-
-
--- SOUND
-  -- Can be listened to but not examined, searched, smelled or manipulated.
-     -- (Can be turned on and off if desirable.)
-
-
--- SUPPORTER
-  -- You can put things on this and you can stand on this. It is declared a container,
-  -- so you can take things from it, as well. When there's something on a supporter,
-      -- a default listing of it will appear in the room description and after 'examine'.
-
-
--- WEAPON
-  -- IS fireable (for example a cannon) or NOT fireable (for example a baseball bat).
-
-
--- WINDOW
-  -- Can be opened, closed, looked through and out of.
-  -- Will be by default described as being either open or closed when examined.
+--+-----------------------------------------------------------------------------
+--| CLOTHING
+--+-----------------------------------------------------------------------------
+--| * Is a piece of clothing that behaves according to Alan Bampton's 'xwear.i'
+--|   extension.
+--| * The said extension has been fully assimilated to this library.
+--| * This extension prevents clothes from being worn in an illogical order,
+--|   for example you cannot put on a shirt if you are already wearing a jacket,
+--|   and so forth.
+--| * This only applies to the hero; NPCs can't wear clothing in layers.
+--| * Also the verbs 'wear', 'remove' and 'undress' are defined here.
+--+-----------------------------------------------------------------------------
+--| DEVICE
+--+-----------------------------------------------------------------------------
+--| * Is a machine or an electronic device, for example a TV. Can be turned
+--|   (= switched) on and off, unless it's broken.
+--| * Attributes: 'on' and 'NOT on', 'NOT broken'.
+--| * Is described by default as being either on or off when examined.
+--+-----------------------------------------------------------------------------
+--| DOOR
+--+-----------------------------------------------------------------------------
+--| * Can be opened, closed, and optionally locked and unlocked.
+--| * Is by default 'NOT open', 'NOT lockable'.
+--| * All default attributes:
+--|   openable, NOT open, NOT lockable, NOT locked; NOT takeable.
+--| * Is described by default as being either open or closed when examined.
+--+-----------------------------------------------------------------------------
+--| LIQUID
+--+-----------------------------------------------------------------------------
+--| * Can only be taken if it's in a container.
+--| * You can fill something with it, and you can pour it somewhere.
+--| * A liquid is by default NOT drinkable.
+--+-----------------------------------------------------------------------------
+--| LIGHTSOURCE
+--+-----------------------------------------------------------------------------
+--| * IS natural or NOT natural
+--|   (a natural lightsource is for example a match or a torch).
+--| * Can be turned on and off, lighted and extinguished (= put out) unless it's
+--|   broken. A natural lightsource cannot be turned on or off, it can only be
+--|   lighted and extinguished (= put out).
+--| * When examined, a lightsource is automatically supplied with a description
+--|   of whether it is providing light or not.
+--+-----------------------------------------------------------------------------
+--| LISTED_CONTAINER
+--+-----------------------------------------------------------------------------
+--| * Is a container object.
+--| * The contents of a listed_container will be listed both after 'look' (= in
+--|   the room description), 'look in' and 'examine' (if the container is open).
+--|   (The contents of a normal container object are not listed after 'examine'
+--|   by default, but only after 'look' (= room description) and 'look in').
+--+-----------------------------------------------------------------------------
+--| SOUND
+--+-----------------------------------------------------------------------------
+--| * Can be listened to but not examined, searched, smelled or manipulated.
+--| * (Can be turned on and off if desirable.)
+--+-----------------------------------------------------------------------------
+--| SUPPORTER
+--+-----------------------------------------------------------------------------
+--| * You can put things on this and you can stand on this.
+--| * It's declared a container, so you can take things from it, as well.
+--| * Contents of a supporter are listed by default in the room description and
+--|   after 'examine'.
+--+-----------------------------------------------------------------------------
+--| WEAPON
+--+-----------------------------------------------------------------------------
+--| * IS fireable (e.g. a cannon) or NOT fireable (e.g. a baseball bat).
+--+-----------------------------------------------------------------------------
+--| WINDOW
+--+-----------------------------------------------------------------------------
+--| * Can be opened, closed, looked through and out of.
+--| * Will be by default described as being either open or closed when examined.
+--+-----------------------------------------------------------------------------
 
 
 
 -- 2. ACTOR CLASSES
 -- ================
 
--- the ACTORS are defined to be NOT inanimate CONTAINERS (so that they can for example
--- receive and carry things.
+-- ACTORS are defined to be NOT inanimate CONTAINERS (so that they can for
+-- example receive and carry things).
 --
--- Actors are usually preceded by an article in-game:
--- for example "You see a man here."
---    "There is nothing special about the dog."
+-- Actors are usually preceded by an article in-game, for example:
+--   | You see a man here.
+--   | There is nothing special about the dog.
 -- unless they are declared as 'named'.
 --
 -- The following classes for actors are defined in this library:
 
-
--- PERSON
-  -- is able to talk (= 'CAN talk').
-
-
--- FEMALE
-  -- a subclass of person (= is able to talk)
-      -- can be referred to with the pronoun 'her'
-
-
--- MALE
-  -- a subclass of person (= is able to talk)
-      -- can be referred to with the pronoun 'him'
-
-
-
-
+--+-----------------------------------------------------------------------------
+--| PERSON
+--+-----------------------------------------------------------------------------
+--| * is able to talk (= 'CAN talk').
+--+-----------------------------------------------------------------------------
+--| FEMALE
+--+-----------------------------------------------------------------------------
+--| * A subclass of person (= is able to talk)-
+--| * Can be referred to with the pronoun 'her'-
+--+-----------------------------------------------------------------------------
+--| MALE
+--+-----------------------------------------------------------------------------
+--| * A subclass of person (= is able to talk)-
+--| * Can be referred to with the pronoun 'him'-
+--+-----------------------------------------------------------------------------
 
 -- The contents end here.
 
@@ -162,11 +160,6 @@ END ADD.
 
 -- ==============================================================
 
-
--- (See the file 'lib_verbs.i', verbs 'inventory' and 'take' where the
--- container 'worn', defined below, is used in the verb definitions.)
-
-
 -- To use this class, see the documentation text right after the
 -- code below.
 
@@ -177,105 +170,79 @@ END ADD.
 
 
 -----------------------------------------------------------------
--- First, we declare the container for clothing.
+-- Define attributes used internally by the library for clothing.
 -----------------------------------------------------------------
 
+ADD TO EVERY definition_block
+  HAS temp_cnt 0.
+  -- Internal counter used by the library when listing clothing items,
+  -- in order to identify the second-last item and use "and" instead of
+  -- the comma separator.
 
--- An entity is present everywhere and thus the hero's clothing is always accessible.
--- This container is only used internally in the library; ignore.
-
-
-THE worn ISA ENTITY
-  CONTAINER TAKING CLOTHING.
-    HEADER SAY hero_worn_header OF my_game.
-    ELSE SAY hero_worn_else OF my_game.
-END THE.
-
-
-
+  HAS temp_clothes { clothing }.
+  -- Temporary set used by the library to track clothes preventing
+  -- wear/remove, in order to list them in the verb response message.
+END ADD TO definition_block.
 
 
 -------------------------------------------------------------------
 -- Now, we define some common attributes for clothing as well as
--- how the verbs 'remove', 'undress' and 'wear' (and their synonyms) behave with this class.
+-- how the verbs 'remove', 'undress' and 'wear' (and their synonyms)
+-- behave with this class.
 -------------------------------------------------------------------
 
+-- NOTE: The 'worn' attribute is defined on the 'thing' class, in module
+--       'lib_definitions.i'. This was done for two reasons:
+--
+-- 1. It allows more flexible syntax and verb checks.
+--
+-- 2. Authors might want to implement non-clothing wearables (e.g. devices like
+--    headphones, VR headsets, etc.), therefore the 'worn' state should not be
+--    exclusive to the clothing class.
 
 EVERY clothing ISA OBJECT
 
   IS wearable.
 
-  IS sex 0.
+  IS sex 0. -- If not zero, restricts wearing to actors with same 'sex' value.
 
-  IS headcover 0.
-  IS handscover 0.
-  IS feetcover 0.
-  IS topcover 0.
-  IS botcover 0.
+  -- Body coverage layered-values, by area:
+  IS headcover  0.  -- Head.
+  IS facecover  0.  -- Face.
+  IS handscover 0.  -- Hands.
+  IS feetcover  0.  -- Feet.
+  IS topcover   0.  -- Chest and arms.
+  IS botcover   0.  -- Pelvis and legs.
 
-  IS NOT donned. -- not in the 'wearing' set of any actor; this attribute
-        -- is used internally in the library; ignore
+  -- Attributes for special clothing (skirts, coats, bikinis, etc.):
 
+  IS blockslegs.
+  -- i.e. the item prevents wearing/removing legsware from the layers below
+  -- (skirts and coats are 'NOT blockslegs').
 
+  IS NOT twopieces.
+  -- For items covering legs + torso ('topcover' & 'botcover' <> 0) that should
+  -- be treated as a single piece (e.g. a one-piece swimming suite).
+  -- Items which are 'twopieces' (eg. a bikini) can be worn/removed while
+  -- wearing a skirt for, although handled as a single clothing item, they cover
+  -- legs and torso via two separate pieces.
+  
   INITIALIZE
 
-
-    -- the set attribute 'IS wearing' is defined to work for both the hero
-    -- and NPCs:
-
-    IF THIS IN worn
-      THEN INCLUDE THIS IN wearing OF hero.
-    END IF.
-
-    FOR EACH ac ISA ACTOR
-      DO
-        IF ac = hero
-          THEN
-            IF THIS IN wearing OF hero AND THIS <> null_clothing
-              THEN
-                IF THIS NOT IN worn
-                  THEN LOCATE THIS IN worn.
-                END IF.
-                MAKE THIS donned.
-            END IF.
-        ELSIF THIS IN wearing OF ac AND THIS <> null_clothing
-            THEN
-              IF THIS NOT IN ac
-                THEN
-                  LOCATE THIS IN ac.
-              END IF.
-              MAKE THIS donned.
-        END IF.
-    END FOR.
-
-
-
-    -- all objects found in a piece of clothing, for example a wallet in a jacket,
-    -- will be allowed back in the piece of clothing once taken from there:
-
+    -- Any objects inside a clothing item (e.g. a wallet in a jacket) will be
+    -- allowed to be put back into its original containing clothing once taken
+    -- out from it:
 
     FOR EACH o ISA OBJECT, DIRECTLY IN THIS
-      DO
-        INCLUDE o IN allowed OF THIS.
+      DO INCLUDE o IN allowed OF THIS.
     END FOR.
-
-
-
-
-    -- all clothing acquired and worn by the hero or an NPC mid-game is checked to
-    -- show correctly when the possessions of an actor are listed:
-
-
-    SCHEDULE worn_clothing_check AFTER 0.
-
 
 
   CONTAINER
-  -- to allow for example a wallet to be put into a jacket
+  -- To allow for example a wallet to be put into a jacket.
 
-  -- If the clothing contains something, for example if a jacket contains a wallet,
+  -- If the clothing item contains something, e.g. a jacket contains a wallet,
   -- the wallet will be mentioned by default when the jacket is examined:
-
 
   VERB examine
     DOES AFTER
@@ -287,308 +254,444 @@ EVERY clothing ISA OBJECT
       END IF.
   END VERB examine.
 
+  -- ===========================================================================
+  -- Block verbs that could dislocate worn clothing items
+  -- ===========================================================================
+
+  -- The following verbs are extended on the 'clothing' class with additional
+  -- CHECKs to prevent displacing worn clothing items from their wearer:
+  --
+  --   * give
+  --   * put_in
+  --   * put_on
+  --   * throw
+  --   * throw_at
+  --   * throw_in
+  --   * throw_to
+  --   * tie_to
+
+  -- +----------------------------------------------------------------------+
+  -- | If you want to prevent NPCs from giving their clothes when asked to, |
+  -- | either uncomment the following code or add it to your adventure:     |
+  -- +----------------------------------------------------------------------+
+  -- VERB ask_for --> ask (act) 'for' (obj)
+  --   WHEN obj
+  --     CHECK obj IS NOT worn
+  --       ELSE
+  --         IF obj IN hero
+  --           THEN SAY my_game:check_obj2_not_in_hero3.
+  --           ELSE
+  --             FOR EACH ac IsA actor DO
+  --               IF THIS IN ac
+  --                 THEN SAY THE ac. "is wearing $+2."
+  --               END IF.
+  --             END FOR.
+  --         END IF.
+  -- END VERB ask_for.
+  -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-    VERB wear
+  VERB give --> 'give' (obj) 'to' (recipient)
+    WHEN obj
+      CHECK obj IS NOT worn
+        ELSE
+          IF obj IN hero
+            THEN SAY my_game:check_obj_not_in_worn3.
+            ELSE
+              IF obj IS NOT plural
+                --       "Currently $+1 [is/are] worn by"
+                THEN SAY my_game:check_obj1_not_worn_by_NPC_sg.
+                ELSE SAY my_game:check_obj1_not_worn_by_NPC_pl.
+              END IF.
+              FOR EACH ac IsA actor DO
+                IF obj IN ac
+                  THEN SAY THE ac. "."
+                END IF.
+              END FOR.
+          END IF.
+  END VERB give.
 
+
+  VERB put_in --> put (obj) 'in' (cont)
+    WHEN obj
+      CHECK obj IS NOT worn
+        ELSE
+          IF obj IN hero
+            THEN SAY my_game:check_obj_not_in_worn3.
+            ELSE
+              IF obj IS NOT plural
+                --       "Currently $+1 [is/are] worn by"
+                THEN SAY my_game:check_obj1_not_worn_by_NPC_sg.
+                ELSE SAY my_game:check_obj1_not_worn_by_NPC_pl.
+              END IF.
+              FOR EACH ac IsA actor DO
+                IF obj IN ac
+                  THEN SAY THE ac. "."
+                END IF.
+              END FOR.
+          END IF.
+  END VERB put_in.
+
+
+  VERB put_on --> put (obj) 'on' (surface)
+    WHEN obj
+      CHECK obj IS NOT worn
+        ELSE
+          IF obj IN hero
+            THEN SAY my_game:check_obj_not_in_worn3.
+            ELSE
+              IF obj IS NOT plural
+                --       "Currently $+1 [is/are] worn by"
+                THEN SAY my_game:check_obj1_not_worn_by_NPC_sg.
+                ELSE SAY my_game:check_obj1_not_worn_by_NPC_pl.
+              END IF.
+              FOR EACH ac IsA actor DO
+                IF obj IN ac
+                  THEN SAY THE ac. "."
+                END IF.
+              END FOR.
+          END IF.
+  END VERB put_on.
+
+
+  VERB throw --> throw (projectile)
+    CHECK projectile IS NOT worn
+      ELSE
+        IF projectile IN hero
+          THEN SAY my_game:check_obj_not_in_worn3.
+          ELSE
+            IF projectile IS NOT plural
+              --       "Currently $+1 [is/are] worn by"
+              THEN SAY my_game:check_obj1_not_worn_by_NPC_sg.
+              ELSE SAY my_game:check_obj1_not_worn_by_NPC_pl.
+            END IF.
+            FOR EACH ac IsA actor DO
+              IF projectile IN ac
+                THEN SAY THE ac. "."
+              END IF.
+            END FOR.
+        END IF.
+  END VERB throw.
+
+
+  VERB throw_at --> throw (projectile) 'at' (target)
+    WHEN projectile
+      CHECK projectile IS NOT worn
+        ELSE
+          IF projectile IN hero
+            THEN SAY my_game:check_obj_not_in_worn3.
+            ELSE
+              IF projectile IS NOT plural
+                --       "Currently $+1 [is/are] worn by"
+                THEN SAY my_game:check_obj1_not_worn_by_NPC_sg.
+                ELSE SAY my_game:check_obj1_not_worn_by_NPC_pl.
+              END IF.
+              FOR EACH ac IsA actor DO
+                IF projectile IN ac
+                  THEN SAY THE ac. "."
+                END IF.
+              END FOR.
+          END IF.
+  END VERB throw_at.
+
+
+  VERB throw_in --> throw (projectile) 'in' (cont)
+    WHEN projectile
+      CHECK projectile IS NOT worn
+        ELSE
+          IF projectile IN hero
+            THEN SAY my_game:check_obj_not_in_worn3.
+            ELSE
+              IF projectile IS NOT plural
+                --       "Currently $+1 [is/are] worn by"
+                THEN SAY my_game:check_obj1_not_worn_by_NPC_sg.
+                ELSE SAY my_game:check_obj1_not_worn_by_NPC_pl.
+              END IF.
+              FOR EACH ac IsA actor DO
+                IF projectile IN ac
+                  THEN SAY THE ac. "."
+                END IF.
+              END FOR.
+          END IF.
+  END VERB throw_in.
+
+
+  VERB throw_to --> throw (projectile) 'to' (recipient)
+    WHEN projectile
+      CHECK projectile IS NOT worn
+        ELSE
+          IF projectile IN hero
+            THEN SAY my_game:check_obj_not_in_worn3.
+            ELSE
+              IF projectile IS NOT plural
+                --       "Currently $+1 [is/are] worn by"
+                THEN SAY my_game:check_obj1_not_worn_by_NPC_sg.
+                ELSE SAY my_game:check_obj1_not_worn_by_NPC_pl.
+              END IF.
+              FOR EACH ac IsA actor DO
+                IF projectile IN ac
+                  THEN SAY THE ac. "."
+                END IF.
+              END FOR.
+          END IF.
+  END VERB throw_to.
+
+
+  VERB tie_to --> tie (obj) 'to' (target)
+    WHEN obj
+      CHECK obj IS NOT worn
+        ELSE
+          IF obj IN hero
+            THEN SAY my_game:check_obj_not_in_worn3.
+            ELSE
+              IF obj IS NOT plural
+                --       "Currently $+1 [is/are] worn by"
+                THEN SAY my_game:check_obj1_not_worn_by_NPC_sg.
+                ELSE SAY my_game:check_obj1_not_worn_by_NPC_pl.
+              END IF.
+              FOR EACH ac IsA actor DO
+                IF obj IN ac
+                  THEN SAY THE ac. "."
+                END IF.
+              END FOR.
+          END IF.
+  END VERB tie_to.
+
+  ------------------------------------------------------------------------------
+  VERB wear
+  ------------------------------------------------------------------------------
     CHECK sex OF THIS = sex OF hero OR sex OF THIS = 0
       ELSE SAY check_clothing_sex OF my_game.
+    AND THIS IS NOT worn
+      ELSE
+        IF THIS IN hero
+          --      "You are already wearing $+1."
+          THEN SAY my_game:check_obj_not_in_worn1.
+          ELSE
+            IF THIS IS NOT plural
+              --      "Currently $+1 [is/are] worn by""
+              THEN SAY my_game:check_obj1_not_worn_by_NPC_sg.
+              ELSE SAY my_game:check_obj1_not_worn_by_NPC_pl.
+            END IF.
+            FOR EACH ac IsA actor DO
+              IF THIS IN ac
+                THEN SAY THE ac. "."
+              END IF.
+            END FOR.
+        END IF.
 
     DOES ONLY
+      --------------------------------------------------------------------
+      -- Clothes which prevent the action are stored in a temporary set in
+      -- order to list all blocking items in the verb failure response.
+      --------------------------------------------------------------------
+      -- Empty the temporary set:
+      -- ------------------------
+      SET my_game:temp_clothes TO {}.
+      -- -----------------------------------------------------------------------
+      -- Check if the item being worn is subjected to ordered layering
+      -- -----------------------------------------------------------------------
+      IF  THIS:headcover
+        + THIS:facecover
+        + THIS:topcover
+        + THIS:botcover
+        + THIS:feetcover
+        + THIS:handscover <> 0
+        THEN
+          -- -------------------------------------------------------------------
+          -- Every worn clothing with a layer value equal or greater than the
+          -- value of the item we're trying to wear is a blocking item which
+          -- prevents the action.
+          -- -------------------------------------------------------------------
+          FOR EACH item IsA clothing, DIRECTLY IN hero, IS worn
+            DO
+              IF THIS:headcover  <> 0 AND THIS:headcover  <= item:headcover
+                THEN INCLUDE item IN my_game:temp_clothes.
+              END IF.
+              IF THIS:facecover  <> 0 AND THIS:facecover  <= item:facecover
+                THEN INCLUDE item IN my_game:temp_clothes.
+              END IF.
+              IF THIS:topcover   <> 0 AND THIS:topcover   <= item:topcover
+                THEN INCLUDE item IN my_game:temp_clothes.
+             END IF.
+              IF THIS:botcover   <> 0 AND THIS:botcover   <= item:botcover
+                THEN
+                  -- -----------------------------------------------------------
+                  -- Carry out special checks for 'NOT blockslegs'
+                  -- -----------------------------------------------------------
+                  -- If the item standing in the way is a leg-blocker, prevent:
+                  IF item:blockslegs
+                    THEN INCLUDE item IN my_game:temp_clothes.
+                  -- Otherwise, it must be a skirt or a coat.
+                  -- Check that the handled item is not a single-piece clothing
+                  -- covering both legs and torso:
+                  ELSIF THIS:topcover <> 0 AND THIS IS NOT twopieces
+                    THEN INCLUDE item IN my_game:temp_clothes.
+                  END IF.
+              END IF.
+              IF THIS:feetcover  <> 0 AND THIS:feetcover  <= item:feetcover
+                THEN INCLUDE item IN my_game:temp_clothes.
+              END IF.
+              IF THIS:handscover <> 0 AND THIS:handscover <= item:handscover
+                THEN INCLUDE item IN my_game:temp_clothes.
+              END IF.
+          END FOR.
+      END IF.
 
+      --========================================================================
+      -- Outcome of the wear action...
+      --========================================================================
 
---------------------------------------------------------------------
--- 'wear_flag' is a multi-purpose flag used for several purposes in
--- this library, here it is reset to 0 before proceeding as a matter
--- of 'housekeeping' for the code.
---------------------------------------------------------------------
+      SET my_game:temp_cnt TO COUNT IsA clothing, IN my_game:temp_clothes.
+      IF my_game:temp_cnt <> 0
+        THEN
+          -- ----------------------------------
+          -- It's not possible to wear the item
+          -- ----------------------------------
+          -- We'll just take it (if not already possessed).
 
-
-    SET wear_flag OF hero TO 0.
-
-
---------------------------------------------------------------------
--- First check to see if the player is carrying the item already, if
--- not, set the 'wear_flag' to 1 to indicate the item was picked up
--- in this turn.
---------------------------------------------------------------------
-
-
-    IF THIS NOT IN hero
-      THEN
-        SET wear_flag OF hero TO 1.
-    END IF.
-
-
---------------------------------------------------------------------
---  Now see if the player can put this item on by testing
---  all of its coverage attributes against the player's state.
---------------------------------------------------------------------
-
-
---------------------------------------------------------------------
--- First check the 'topcover' attributes, if 'obj' fails this test
--- then it means the hero is already wearing clothes that cover the
--- topcover area and those clothes are of the same layer or a layer
--- that belongs on top of the 'obj' item. In either case it would
--- NOT be possible to put on the 'obj'. To 'flag' this condition add
--- 5 to the 'wear_flag' attribute as an indicator this test failed.
---------------------------------------------------------------------
-
-
-    IF topcover OF THIS <> 0 AND topcover OF THIS <= SUM OF topcover DIRECTLY IN worn
-      THEN
-        INCREASE wear_flag OF hero BY 5.
-    END IF.
-
-
---------------------------------------------------------------------
--- Perform a similar test for other attributes.
---------------------------------------------------------------------
-
-
-    IF handscover OF THIS <> 0 AND handscover OF THIS <= SUM OF handscover DIRECTLY IN worn
-      THEN
-        INCREASE wear_flag OF hero BY 5.
-    END IF.
-
-
-    IF feetcover OF THIS <> 0 AND feetcover OF THIS <= SUM OF feetcover DIRECTLY IN worn
-      THEN
-        INCREASE wear_flag OF hero BY 5.
-    END IF.
-
-
-    IF headcover OF THIS <> 0 AND headcover OF THIS <= SUM OF headcover DIRECTLY IN worn
-      THEN
-        INCREASE wear_flag OF hero BY 5.
-    END IF.
-
-
---------------------------------------------------------------------
---  botcover is a special case, adjust the 'tempcovered OF hero'
---  attribute so that the code rejects non sensible options.
---  First of all, discount any coatlike clothes as these never
---  affect ability to put on other lower body only garments.
---------------------------------------------------------------------
-
-
-    SET tempcovered OF hero TO SUM OF botcover DIRECTLY IN worn.
-
-    IF tempcovered OF hero >63 and botcover OF THIS < 33
-      THEN
-        SET tempcovered OF hero TO tempcovered OF hero -64.
-    END IF.
-
-
---------------------------------------------------------------------
--- Now discount any dress/ skirt coverall like clothes as these do
--- not technically affect ability to put on lower body only clothes.
--- Special clause here excludes the full body coverage 'teddy' type
--- garment - as a skirt WOULD prevent that from being removed.
--- ( dress/coat garments automatically prevent this by virtue of
--- having higher 'topcover' settings than the teddy )
---------------------------------------------------------------------
-
-
-    IF tempcovered OF hero >31 AND botcover OF THIS < 16 and botcover OF THIS <> 4
-      THEN
-        SET tempcovered OF hero TO tempcovered OF hero -32.
-    END IF.
-
-
---------------------------------------------------------------------
--- IF tempcovered OF hero is still > 15 then must have trousers
--- type clothing on - therefore disallow wearing dress type clothing
--- because, although technically possible, it is not very sensible.
---------------------------------------------------------------------
-
-
-    IF tempcovered OF hero >15 AND botcover OF THIS > 16
-      THEN
-        SET tempcovered OF hero TO tempcovered OF hero +16.
-    END IF.
-
-
---------------------------------------------------------------------
---  From here down, clothes DO work as they do for other areas.
---------------------------------------------------------------------
-
-
-    IF botcover OF THIS <> 0  AND botcover OF THIS <= tempcovered OF hero
-      THEN
-        INCREASE wear_flag OF hero BY 5.
-    END IF.
-
-
---------------------------------------------------------------------
--- At this point, 'wear_flag' will be 0 if the obj was held by the
--- player and can be put on, or l if he picked it up this turn and
--- it can be put on. Any higher value means one or more of the
--- tests failed and the player cannot put on these clothes.
---------------------------------------------------------------------
-
-
-    IF wear_flag OF hero >1
-      THEN
-        -- -------------------------------
-        -- The clothing item can't be worn
-        -- -------------------------------
-        IF THIS NOT IN hero
-        -- >>> implicit taking: >>>
-          THEN "You pick up" SAY THE THIS. "."
-        END IF.
-        LOCATE THIS IN hero.
-        -- <<< implicit taking. <<<
-
-        LIST worn.
-        "Trying to put" SAY THE THIS. "on isn't very sensible."
-
-      ELSE
-        -- -----------------------------
-        -- The clothing item can be worn
-        -- -----------------------------
-        MAKE THIS donned.
-        LOCATE THIS IN worn.
-        INCLUDE THIS IN wearing OF hero.
-        IF wear_flag OF hero = 1
-          THEN
-            -- --------------------------
-            -- The item is taken and worn
-            -- --------------------------
-            "You pick up" SAY THE THIS.
-            IF THIS IS NOT plural
-              THEN "and put it on."
-              ELSE "and put them on."
-            END IF.
-          ELSE
-            -- -----------------------
-            -- The item is simply worn
-            -- -----------------------
-            "You put on" SAY THE THIS. "."
+          -- >>> implicit take >>>
+          IF THIS NOT IN hero
+            THEN "You pick up $+1."
           END IF.
-    END IF.
+          LOCATE THIS IN hero.
+          -- <<< implicit take <<<
+          -- -------------------------------------
+          -- List worn items preventing the action
+          -- -------------------------------------
+          "In order to wear $+1 you should first take off"
+          FOR EACH blocking_item IsA clothing, IN my_game:temp_clothes
+            DO
+              SAY THE blocking_item.
+              DECREASE my_game:temp_cnt.
+              DEPENDING ON my_game:temp_cnt
+                = 1 THEN "and"
+                = 0 THEN "."
+                ELSE ","
+              END DEPEND.
+          END FOR.
+        ELSE
+          -- ------------------------------
+          -- It's possible to wear the item
+          -- ------------------------------
+          IF THIS NOT IN hero
+            THEN
+              -- ------------------------------
+              -- The item is picked up and worn
+              -- ------------------------------
+            "You pick up $+1 and put"
+            IF THIS IS NOT plural
+              THEN  "it"
+              ELSE  "them"
+            END IF. "on."
+            ELSE
+              -- -----------------------
+              -- The item is simply worn
+              -- -----------------------
+              "You put on $+1."
+          END IF.
+          LOCATE THIS IN hero.
+          MAKE THIS worn.
+      END IF.
+  END VERB wear.
 
-END VERB wear.
+  ------------------------------------------------------------------------------
+  VERB remove
+  ------------------------------------------------------------------------------
+    CHECK THIS DIRECTLY IN hero AND THIS IS worn
+      ELSE SAY my_game:check_obj_in_worn.
+    AND CURRENT LOCATION IS lit
+      ELSE SAY check_current_loc_lit OF my_game.
 
+    DOES ONLY
+      --------------------------------------------------------------------
+      -- Clothes which prevent the action are stored in a temporary set in
+      -- order to list all blocking items in the verb failure response.
+      --------------------------------------------------------------------
+      -- Empty the temporary set:
+      -- ------------------------
+      SET my_game:temp_clothes TO {}.
+      -- -----------------------------------------------------------------------
+      -- Check if the item being removed is subjected to ordered layering
+      -- -----------------------------------------------------------------------
+      IF  THIS:headcover
+        + THIS:facecover
+        + THIS:topcover
+        + THIS:botcover
+        + THIS:feetcover
+        + THIS:handscover <> 0
+        THEN
+          -- -------------------------------------------------------------------
+          -- Every worn clothing with a layer value equal or greater than the
+          -- value of the item we're trying to remove is a blocking item which
+          -- prevents the action.
+          -- -------------------------------------------------------------------
+          FOR EACH item IsA clothing, DIRECTLY IN hero, IS worn
+            DO
+              IF THIS:headcover  <> 0 AND THIS:headcover  < item:headcover
+                THEN INCLUDE item IN my_game:temp_clothes.
+              END IF.
+              IF THIS:facecover  <> 0 AND THIS:facecover  < item:facecover
+                THEN INCLUDE item IN my_game:temp_clothes.
+              END IF.
+              IF THIS:topcover   <> 0 AND THIS:topcover   < item:topcover
+                THEN INCLUDE item IN my_game:temp_clothes.
+             END IF.
+              IF THIS:botcover   <> 0 AND THIS:botcover   < item:botcover
+                THEN
+                  -- -----------------------------------------------------------
+                  -- Carry out special checks for 'NOT blockslegs'
+                  -- -----------------------------------------------------------
+                  -- If the item standing in the way is a leg-blocker, prevent:
+                  IF item:blockslegs
+                    THEN INCLUDE item IN my_game:temp_clothes.
+                  -- Otherwise, it must be a skirt or a coat.
+                  -- Check that the handled item is not a single-piece clothing
+                  -- covering both legs and torso:
+                  ELSIF THIS:topcover <> 0 AND THIS IS NOT twopieces
+                    THEN INCLUDE item IN my_game:temp_clothes.
+                  END IF.
+              END IF.
+              IF THIS:feetcover  <> 0 AND THIS:feetcover  < item:feetcover
+                THEN INCLUDE item IN my_game:temp_clothes.
+              END IF.
+              IF THIS:handscover <> 0 AND THIS:handscover < item:handscover
+                THEN INCLUDE item IN my_game:temp_clothes.
+              END IF.
+          END FOR.
+      END IF.
 
+      --========================================================================
+      -- Outcome of the remove action...
+      --========================================================================
 
-VERB remove
-  CHECK THIS IN worn
-    ELSE SAY check_obj_in_worn OF my_game.
-  AND CURRENT LOCATION IS lit
-    ELSE SAY check_current_loc_lit OF my_game.
-
-  DOES ONLY
-
-  SET wear_flag OF hero TO 0.
-
-
---------------------------------------------------------------------
--- Check the total 'topcover' of items worn. Because of the number
--- sequence used, by dividing the sum of the worn attributes by two
--- and then comparing the result to the individual 'topcover' of the
--- obj in question, ( the former can only ever be greater than the
--- latter if an article of clothing is worn that goes over 'obj' )
--- it's easy to tell if the obj ought to be removable. A temporary
--- attribute is used here because it needs to be manipulated. Once
--- again 'wear_flag' is used to indicate the results.
---------------------------------------------------------------------
-
-
-  SET tempcovered OF hero TO SUM OF topcover DIRECTLY IN worn /2.
-  IF topcover OF THIS <> 0 AND topcover OF THIS < tempcovered OF hero
-    THEN
-    INCREASE wear_flag OF hero BY 1.
-  END IF.
-
-
---------------------------------------------------------------------
--- Perform a similar test for other attributes.
---------------------------------------------------------------------
-
-
-  SET tempcovered OF hero TO SUM OF handscover DIRECTLY IN worn /2.
-  IF handscover OF THIS <> 0 AND handscover OF THIS < tempcovered OF hero
-    THEN
-      INCREASE wear_flag OF hero BY 1.
-  END IF.
-
-
-  SET tempcovered OF hero TO SUM OF feetcover DIRECTLY IN worn /2.
-  IF feetcover OF THIS <> 0 AND feetcover OF THIS < tempcovered OF hero
-    THEN
-      INCREASE wear_flag OF hero BY 1.
-  END IF.
-
-
-  SET tempcovered OF hero TO SUM OF headcover DIRECTLY IN worn /2.
-  IF headcover OF THIS <> 0 AND headcover OF THIS < tempcovered OF hero
-    THEN
-      INCREASE wear_flag OF hero BY 1.
-  END IF.
-
-
---------------------------------------------------------------------
--- botcover is a special case - first discount any coatlike clothes
--- as these do not affect ability to take off other lower garments.
---------------------------------------------------------------------
-
-
-  SET tempcovered OF hero TO SUM OF botcover DIRECTLY IN worn.
-  IF tempcovered OF hero >63
-    THEN
-      SET tempcovered OF hero TO tempcovered OF hero -64.
-  END IF.
-
-
---------------------------------------------------------------------
--- Now discount any dress/ skirt coverall like clothes as these do
--- not affect ability to take off other lower garments. The 'teddy'
--- type garment is expressly NOT included in the exclusion here.
---------------------------------------------------------------------
-
-
-  IF tempcovered OF hero >31 and botcover OF THIS <>4
-    THEN
-      SET tempcovered OF hero TO tempcovered OF hero -32.
-  END IF.
-
-
---------------------------------------------------------------------
--- Now process the manipulated value just as was done for the others
---------------------------------------------------------------------
-
-
-  SET tempcovered OF hero TO tempcovered OF hero /2.
-  IF botcover OF THIS <> 0 AND botcover OF THIS < tempcovered OF hero
-    THEN
-      INCREASE wear_flag OF hero BY 1.
-  END IF.
-
-
---------------------------------------------------------------------
--- Depending on the value of 'wear_flag' print and process the obj
--- as needed. If 'wear_flag' is NOT 0 then the clothes cannot be
--- removed.
---------------------------------------------------------------------
-
-
-  IF wear_flag OF hero > 0
-    THEN
-      LIST worn.
-      "Trying to take" SAY THE THIS. "off isn't very sensible."
-    ELSE
-      LOCATE THIS IN hero.
-      "You take off" SAY THE THIS. "."
-      EXCLUDE THIS FROM wearing OF hero.
-      MAKE THIS NOT donned.
-  END IF.
-END VERB remove.
-
-
+      SET my_game:temp_cnt TO COUNT IsA clothing, IN my_game:temp_clothes.
+      IF my_game:temp_cnt <> 0
+        THEN
+          -- ------------------------------------
+          -- It's not possible to remove the item
+          -- ------------------------------------
+          "In order to remove $+1 you should first take off"
+          FOR EACH blocking_item IsA clothing, IN my_game:temp_clothes
+            DO
+              SAY THE blocking_item.
+              DECREASE my_game:temp_cnt.
+              DEPENDING ON my_game:temp_cnt
+                = 1 THEN "and"
+                = 0 THEN "."
+                ELSE ","
+              END DEPEND.
+          END FOR.
+        ELSE
+          -- --------------------------------
+          -- It's possible to remove the item
+          -- --------------------------------
+          "You take off $+1."
+          LOCATE THIS IN hero.
+          MAKE THIS NOT worn.
+      END IF.
+  END VERB remove.
 END EVERY.
-
 
 
 --------------------------------------------------------------------
@@ -596,171 +699,9 @@ END EVERY.
 --------------------------------------------------------------------
 
 ADD TO EVERY ACTOR
-  IS tempcovered 0.
-  IS wear_flag 0.
   IS sex 0.
 END ADD TO.
 
-
---------------------------------------------------------------------
--- An event checking that clothing acquired and worn by an actor
--- mid-game is recognised to be worn by the actor:
---------------------------------------------------------------------
-
-
-EVENT worn_clothing_check
-  FOR EACH ac ISA ACTOR
-    DO
-      FOR EACH cl ISA CLOTHING, IN wearing OF ac
-        DO
-          IF ac = hero
-            THEN
-              IF cl NOT IN worn
-                THEN LOCATE cl IN worn.
-                  MAKE cl donned.
-              END IF.
-            ELSE
-              IF cl NOT IN ac
-                THEN LOCATE cl IN ac.
-                  MAKE cl donned.
-              END IF.
-          END IF.
-      END FOR.
-   END FOR.
-   SCHEDULE worn_clothing_check AFTER 1.
-END EVENT.
-
-
-
-
---------------------------------------------------------------------
-
------------------------------------------------------------------------
--- INSTRUCTIONS FOR USING THE CLOTHING CLASS
------------------------------------------------------------------------
-
-
--- Here is a quick overview for using the class 'clothing'.
-
--- A piece of clothing in your game code should look
--- something similar to the following four examples:
-
-
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--- THE jacket ISA CLOTHING AT lobby
---  IS topcover 32.
--- END THE.
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
--- use IN to refer to containers:
-
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--- THE jeans ISA CLOTHING IN wardrobe
---  IS botcover 16.
--- END THE.
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
--- IN worn = worn by the player character (hero):
-
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--- THE hat ISA CLOTHING IN hero   -- declaring the initial location is optional
---  IS headcover 2.
--- END THE.
---
--- THE hero ISA ACTOR
---    IS wearing {hat}.
--- END THE hero.
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
--- worn by an NPC called Joe:
-
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--- THE sweater ISA CLOTHING IN joe  -- declaring the initial location is optional!
---   -- Don't declare clothing attributes for NPCs (unless the hero is meant to
---   -- take and wear the NPC's clothing). NPCs cannot wear clothing in layers!
--- END THE.
---
--- THE joe ISA ACTOR AT room1
---   IS wearing {sweater}.
--- END THE joe.
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
--- Note that if the piece of clothing worn by an NPC is not meant to be takeable
--- by the player character, you should declare the the piece of clothing to be
--- NOT takeable.
-
-
--- In defining a piece of clothing, you should
---
---  1) define it ISA CLOTHING (and not: ISA OBJECT)
---
---  2) give it one of five attributes 'headcover', 'topcover', botcover',
---     'footcover' or 'handcover'; sometimes two of these are needed.
---     Which attribute(s) to use depends on the type of clothing; see the clothing
---     table below.
-
---  3) A number 2, 4, 8, 16, 32 or 64 needs to be added after the above attribute.
---     You cannot decide the number yourself; look it up from the clothing table
---     below. If the value of an attribute for a piece of clothing is 0 in the
---     table, don't mention this attribute in connection with your clothing object.
-
--- If the piece of clothing is initially worn by either the hero or another actor,
--- the attribute 'IS wearing', followed by the piece(s) of clothing in curly brackets,
--- is needed at the respective actor instance:
-
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--- THE hero ISA ACTOR
---   IS wearing {jeans, shirt, flipflops}.
--- END THE hero.
---
--- THE jill ISA ACTOR
---   IS wearing {dress}.
--- END THE jill.
--- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
-
--- The above is enough; the rest is then handled automatically by the library.
-
-
--- The quick guide ends here.
-
-
--- The clothing table
------------------------
-
-
--- Here is the chart showing a selection of fairly typical clothing items and the values to
--- set to obtain appropriate behaviour. Should you wish to create an article of clothing not
--- listed, usually a bit of lateral thought as to what it is most like and where it fits into
--- the scheme of things will suggest a workable set of values, but be aware that you MUST use
--- values in this chart, simply adding things with intermediate values is probably going to
--- create nasty bugs:
-
-
---+--------------------------+----------+----------+-----------+------------+
---| Clothing     | Headcover | Topcover | Botcover | Feetcover | Handscover |
---+--------------------------+----------+----------+-----------+------------+
---| hat                    2 |        0 |        0 |         0 |          0 |
---| vest/bra               0 |        2 |        0 |         0 |          0 |
---| undies/panties         0 |        0 |        2 |         0 |          0 |
---| teddy                  0 |        4 |        4 |         0 |          0 |
---| blouse/shirt/T-shirt   0 |        8 |        0 |         0 |          0 |
---| dress/coveralls        0 |        8 |       32 |         0 |          0 |
---| skirt                  0 |        0 |       32 |         0 |          0 |
---| trousers/shorts        0 |        0 |       16 |         0 |          0 |
---| sweater/pullover       0 |       16 |        0 |         0 |          0 |
---| jacket                 0 |       32 |        0 |         0 |          0 |
---| coat                   0 |       64 |       64 |         0 |          0 |
---| socks/stockings        0 |        0 |        0 |         2 |          0 |
---| tights/pantiehose      0 |        0 |        8 |         2 |          0 |
---| shoes/boots            0 |        0 |        0 |         4 |          0 |
---| gloves                 0 |        0 |        0 |         0 |          2 |
---+--------------------------+----------+----------+-----------+------------+
 
 
 
@@ -1439,7 +1380,7 @@ EVERY liquid ISA OBJECT
   VERB give
     WHEN obj
     DOES ONLY
-      -- implicit taking:
+      -- >>> implicit take >>>
       IF THIS NOT IN hero
         THEN
           IF vessel OF THIS = null_vessel OR vessel OF THIS IS NOT takeable
@@ -1448,7 +1389,7 @@ EVERY liquid ISA OBJECT
               "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
           END IF.
       END IF.
-      -- end of implicit taking.
+      -- <<< implicit take <<<
 
       IF THIS IN hero
         -- i.e. if the implicit taking was successful
@@ -1465,7 +1406,7 @@ EVERY liquid ISA OBJECT
 
   VERB pour
     DOES ONLY
-      -- implicit taking:
+      -- >>> implicit take >>>
       IF THIS NOT IN hero
         THEN
           IF vessel OF THIS = null_vessel OR vessel OF THIS IS NOT takeable
@@ -1479,7 +1420,7 @@ EVERY liquid ISA OBJECT
             "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
           END IF.
       END IF.
-      -- end of implicit taking.
+      -- <<< implicit take <<<
 
       IF THIS IN hero
         THEN LOCATE THIS AT hero.
@@ -1497,7 +1438,7 @@ EVERY liquid ISA OBJECT
   VERB pour_in
     WHEN obj
       DOES ONLY
-        -- implicit taking:
+        -- >>> implicit take >>>
         IF THIS NOT IN hero
           THEN
             IF vessel OF THIS = null_vessel
@@ -1508,7 +1449,7 @@ EVERY liquid ISA OBJECT
               "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
             END IF.
         END IF.
-        -- end of implicit taking.
+        -- <<< implicit take <<<
 
         IF THIS IN hero   --i.e. if the implicit taking was successful
           THEN LOCATE THIS IN cont.
@@ -1538,7 +1479,7 @@ EVERY liquid ISA OBJECT
   VERB pour_on
     WHEN obj
       DOES ONLY
-        -- implicit taking:
+        -- >>> implicit take >>>
         IF THIS NOT IN hero
           THEN
             IF vessel OF THIS = null_vessel
@@ -1549,7 +1490,7 @@ EVERY liquid ISA OBJECT
               "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
             END IF.
         END IF.
-        -- end of implicit taking.
+        -- <<< implicit take <<<
 
         IF THIS IN hero
           -- i.e. if the implicit taking was successful
@@ -1576,7 +1517,7 @@ EVERY liquid ISA OBJECT
           ELSE
             IF vessel OF THIS IS takeable
               THEN
-                -- implicit taking:
+                -- >>> implicit take >>>
                 IF THIS NOT IN hero
                   THEN
                     IF vessel OF THIS = null_vessel
@@ -1585,7 +1526,7 @@ EVERY liquid ISA OBJECT
                       "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
                     END IF.
                 END IF.
-                -- end of implicit taking.
+                -- <<< implicit take <<<
 
                 LOCATE vessel OF THIS IN cont.
                     "You put" SAY THE vessel OF THIS. "of" SAY THIS. "into" SAY THE cont. "."
@@ -1620,7 +1561,7 @@ EVERY liquid ISA OBJECT
   VERB put_on
     WHEN obj
       DOES ONLY
-        -- implicit taking:
+        -- >>> implicit take >>>
         IF THIS NOT IN hero
           THEN
             IF vessel OF THIS = null_vessel
@@ -1631,7 +1572,7 @@ EVERY liquid ISA OBJECT
                   "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
             END IF.
         END IF.
-        -- end of implicit taking.
+        -- <<< implicit take <<<
 
         IF THIS IN hero
           -- i.e. if the implicit taking was successful
@@ -2036,10 +1977,7 @@ ADD TO EVERY ACTOR
   IS NOT sitting.
   IS NOT lying_down.
   IS NOT named.
-  -- = the actor's name is not known to the player
-  IS wearing {null_clothing}.
-  -- = the actor's clothing is not specified.
-  -- "null_clothing" is a dummy default that can be ignored.
+  -- = the actor's name is not known to the player.
   IS NOT compliant.
   -- an actor only gives something to the hero if it is in a compliant mood.
   -- In practice, this happens by default when the hero asks the actor for anything.
@@ -2106,12 +2044,6 @@ ADD TO EVERY ACTOR
   MAKE hero compliant.
   -- so that the hero can give, drop, etc. carried objects.
 
-
-  -- excluding the default dummy clothing object from all actors; ignore.
-
-  EXCLUDE null_clothing FROM wearing OF THIS.
-
-
   -- all actors will obey this script from the start of the game:
 
   IF THIS <> hero
@@ -2161,12 +2093,53 @@ ADD TO EVERY ACTOR
     DOES AFTER
       IF THIS <> hero
         THEN
-          LIST THIS.
+          -- ------------------
+          -- List carried items
+          -- ------------------
+          -- Don't say anything if the actor is not carrying anything.
+          SET my_game:temp_cnt TO COUNT IsA object, IS NOT worn, DIRECTLY IN THIS.
+          IF  my_game:temp_cnt <> 0
+            THEN "$+1"
+              IF THIS IS NOT plural
+                THEN "is"
+                ELSE "are"
+              END IF. "carrying"
+              FOR EACH carried_item ISA object, IS NOT worn, DIRECTLY IN THIS
+                DO
+                  SAY AN carried_item.
+                  DECREASE my_game:temp_cnt.
+                  DEPENDING ON my_game:temp_cnt
+                    = 1 THEN "and"
+                    = 0 THEN "."
+                    ELSE ","
+                  END DEPEND.
+              END FOR.
+          END IF.
+          -- ------------------------
+          -- List worn clothing items
+          -- ------------------------
+          -- Don't say anything if the actor is not wearing anything.
+          SET my_game:temp_cnt TO COUNT IsA clothing, DIRECTLY IN THIS, IS worn.
+          IF  my_game:temp_cnt <> 0
+            THEN "$+1"
+              IF THIS IS NOT plural
+                THEN "is"
+                ELSE "are"
+              END IF. "wearing"
+              FOR EACH worn_item IsA clothing, DIRECTLY IN THIS, IS worn
+                DO
+                  SAY AN worn_item.
+                  DECREASE my_game:temp_cnt.
+                  DEPENDING ON my_game:temp_cnt
+                    = 1 THEN "and"
+                    = 0 THEN "."
+                    ELSE ","
+                  END DEPEND.
+              END FOR.
+          END IF.
       END IF.
   END VERB examine.
-
-
-END ADD TO.
+END ADD TO ACTOR.
 
 
 -- the default dummy clothing object; ignore

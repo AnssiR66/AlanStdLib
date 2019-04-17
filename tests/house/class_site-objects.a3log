@@ -3,7 +3,7 @@
 The House 
 A rooms & sites setting for various tests. 
 (C) 2018 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1866
+Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880
 .
 Standard Library v2.1 
 Version 1 
@@ -142,7 +142,7 @@ The apple is not in the ground.
 > put apple against ground
 That's not possible.
 
-> ; **FAIL** With 'sky', the 'put_under' verb defined on 'site_object' is not 
+> ; **FAIL** With 'sky', the 'put_under' verb defined on 'site_object' is not
 > ;          being executed, and we're getting the response of the main verb instead:
 > put apple against sky
 The sky is too far away.

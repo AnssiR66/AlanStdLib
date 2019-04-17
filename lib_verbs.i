@@ -431,6 +431,7 @@ ADD TO EVERY ACTOR
         -- It is only possible to get something from an NPC
         -- if the NPC is 'compliant'.
         LOCATE obj IN hero.
+        MAKE obj NOT worn. -- for non-clothing wearables.
         SAY THE act. "gives" SAY THE obj. "to you."
         -- Now let's restore act to its original state of compliacne:
         IF my_game IS NOT temp_compliant
@@ -491,9 +492,11 @@ ADD TO EVERY THING
     AND target <> hero
       ELSE SAY check_obj_not_hero1 OF my_game.
     AND target NOT IN hero
-      ELSE SAY check_obj_not_in_hero1 OF my_game.
-    AND target NOT IN worn
-      ELSE SAY check_obj_not_in_worn2 OF my_game.
+      ELSE
+        IF target IS NOT worn
+          THEN SAY my_game:check_obj_not_in_hero1.
+          ELSE SAY my_game:check_obj_not_in_worn2.
+        END IF.
     AND CURRENT LOCATION IS lit
       ELSE SAY check_current_loc_lit OF my_game.
     AND target IS reachable AND target IS NOT distant
@@ -570,9 +573,11 @@ ADD TO EVERY THING
       AND target <> hero
         ELSE SAY check_obj_not_hero1 OF my_game.
       AND target NOT IN hero
-        ELSE SAY check_obj_not_in_hero1 OF my_game.
-      AND target NOT IN worn
-        ELSE SAY check_obj_not_in_worn2 OF my_game.
+        ELSE
+          IF target IS NOT worn
+            THEN SAY my_game:check_obj_not_in_hero1.
+            ELSE SAY my_game:check_obj_not_in_worn2.
+          END IF.
       AND CURRENT LOCATION IS lit
         ELSE SAY check_current_loc_lit OF my_game.
       AND target IS reachable AND target IS NOT distant
@@ -658,12 +663,12 @@ ADD TO EVERY OBJECT
       -- This same if-statement is found in numerous other verbs throughout
       -- the library, as well.
 
-      -- implicit taking:
+      -- >>> implicit take >>>
       IF obj NOT DIRECTLY IN hero
         THEN LOCATE obj IN hero.
              SAY implicit_taking_message OF my_game.
       END IF.
-      -- end of implicit taking.
+      -- <<< implicit take <<<
 
       "You take a bite of" SAY THE obj. "$$."
         IF obj IS NOT plural
@@ -1484,7 +1489,7 @@ SYNTAX consult_error = consult (source)
 ADD TO EVERY THING
   VERB consult_error
     DOES
-      "To consult something, please use the formulation CONSULT THING ABOUT 
+      "To consult something, please use the formulation CONSULT THING ABOUT
        PERSON/THING."
   END VERB consult_error.
 END ADD TO.
@@ -1841,7 +1846,7 @@ ADD TO EVERY LIQUID
         ELSE
           -- = if the liquid is in a container:
 
-          -- implicit taking:
+          -- >>> implicit take >>>
           IF vessel OF liq NOT DIRECTLY IN hero
             THEN
               IF vessel OF liq IS NOT takeable
@@ -1852,7 +1857,7 @@ ADD TO EVERY LIQUID
                   "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
               END IF.
           END IF.
-          -- end of implicit taking.
+          -- <<< implicit take <<<
 
           IF liq IN hero
             -- i.e. if the implicit taking was successful
@@ -1966,11 +1971,9 @@ ADD TO EVERY OBJECT
     CHECK my_game CAN drop
       ELSE SAY restricted_response OF my_game.
     AND obj IN hero
-      ELSE
-        IF obj IN worn
-          THEN SAY check_obj_not_in_worn3 OF my_game.
-          ELSE SAY check_obj_in_hero OF my_game.
-            END IF.
+      ELSE SAY check_obj_in_hero OF my_game.
+    AND obj IS NOT worn -- protect non-clothing wearables
+      ELSE SAY check_obj_not_in_worn3 OF my_game.
 
     DOES
       LOCATE obj HERE.
@@ -2033,12 +2036,12 @@ ADD TO EVERY OBJECT
         END IF.
 
     DOES
-      -- implicit taking:
+      -- >>> implicit take >>>
       IF food NOT DIRECTLY IN hero
         THEN LOCATE food IN hero.
-          SAY implicit_taking_message OF my_game.
+             SAY implicit_taking_message OF my_game.
       END IF.
-      -- end of implicit taking.
+      -- <<< implicit take <<<
 
       "You eat all of" SAY THE food. "."
       LOCATE food AT nowhere.
@@ -2126,12 +2129,12 @@ ADD TO EVERY OBJECT
         END IF.
 
     DOES
-      -- implicit taking:
+      -- >>> implicit take >>>
       IF obj NOT DIRECTLY IN hero
         THEN LOCATE obj IN hero.
           SAY implicit_taking_message OF my_game.
       END IF.
-      -- end of implicit taking.
+      -- <<< implicit take <<<
 
       IF COUNT ISA OBJECT, DIRECTLY IN obj = 0
         THEN "There is nothing in" SAY THE obj. "."
@@ -2271,12 +2274,12 @@ ADD TO EVERY OBJECT
           END IF.
 
       DOES
-      -- implicit taking:
+      -- >>> implicit take >>>
       IF obj NOT DIRECTLY IN hero
         THEN LOCATE obj IN hero.
           SAY implicit_taking_message OF my_game.
       END IF.
-      -- end of implicit taking.
+      -- <<< implicit take <<<
 
       IF COUNT ISA OBJECT, DIRECTLY IN obj = 0
         THEN "There is nothing in" SAY THE obj. "."
@@ -2386,12 +2389,12 @@ ADD TO EVERY THING
           END IF.
 
       DOES
-        -- implicit taking:
+        -- >>> implicit take >>>
         IF obj NOT DIRECTLY IN hero
           THEN LOCATE obj IN hero.
             SAY implicit_taking_message OF my_game.
         END IF.
-        -- end of implicit taking.
+        -- <<< implicit take <<<
 
         IF COUNT ISA OBJECT, DIRECTLY IN obj = 0
           THEN "There is nothing in" SAY THE obj. "."
@@ -3248,15 +3251,16 @@ ADD TO EVERY OBJECT
           END IF.
 
       DOES
-        -- implicit taking:
+        -- >>> implicit take >>>
         IF obj NOT DIRECTLY IN hero
           THEN SAY implicit_taking_message OF my_game.
-          LOCATE obj IN hero.
+               LOCATE obj IN hero.
         END IF.
-        -- end of implicit taking.
+        -- <<< implicit take <<<
 
         LOCATE obj IN recipient.
         "You give" SAY THE obj. "to" SAY THE recipient. "."
+        MAKE obj NOT worn. -- for non-clothing wearables.
 
   END VERB give.
 END ADD TO.
@@ -3387,12 +3391,44 @@ VERB i
     ELSE SAY restricted_response OF my_game.
 
   DOES
-    LIST hero.
-
-    IF COUNT DIRECTLY IN worn > 0   -- See the file 'classes.i', subclass 'clothing'.
-      THEN LIST worn.     -- This code will list what the hero is wearing.
+    -- ------------------
+    -- List carried items
+    -- ------------------
+    SET my_game:temp_cnt TO COUNT IsA object, IS NOT worn, DIRECTLY IN hero.
+    IF  my_game:temp_cnt = 0
+      THEN "You are empty-handed."
+      ELSE
+        "You are carrying"
+        FOR EACH carried_item IsA object, IS NOT worn, DIRECTLY IN hero
+          DO
+            SAY AN carried_item.
+            DECREASE my_game:temp_cnt.
+            DEPENDING ON my_game:temp_cnt
+              = 1 THEN "and"
+              = 0 THEN "."
+              ELSE ","
+            END DEPEND.
+        END FOR.
     END IF.
-
+    -- ------------------------
+    -- List worn clothing items
+    -- ------------------------
+    -- Don't say anything if the Hero is not wearing anything.
+    SET my_game:temp_cnt TO COUNT IsA clothing, DIRECTLY IN hero, IS worn.
+    IF  my_game:temp_cnt <> 0
+      THEN
+        SAY my_game:hero_worn_header. --> "You are wearing"
+        FOR EACH worn_item IsA clothing, DIRECTLY IN hero, IS worn
+          DO
+            SAY AN worn_item.
+            DECREASE my_game:temp_cnt.
+            DEPENDING ON my_game:temp_cnt
+              = 1 THEN "and"
+              = 0 THEN "."
+              ELSE ","
+            END DEPEND.
+        END FOR.
+    END IF.
 END VERB i.
 
 
@@ -3560,9 +3596,11 @@ ADD TO EVERY THING
     AND target <> hero
       ELSE SAY check_obj_not_hero1 OF my_game.
     AND target NOT IN hero
-      ELSE SAY check_obj_not_in_hero1 OF my_game.
-    AND target NOT IN worn
-      ELSE SAY check_obj_not_in_worn2 OF my_game.
+      ELSE
+        IF target IS NOT worn
+          THEN SAY my_game:check_obj_not_in_hero1.
+          ELSE SAY my_game:check_obj_not_in_worn2.
+        END IF.
     AND CURRENT LOCATION IS lit
       ELSE SAY check_current_loc_lit OF my_game.
     AND target IS reachable AND target IS NOT distant
@@ -5455,6 +5493,7 @@ ADD TO EVERY OBJECT
           END IF.
 
       DOES
+        MAKE obj NOT worn. -- for non-clothing wearables.
         LOCATE obj IN cont.
         "You put" SAY THE obj. "into" SAY THE cont. "."
 
@@ -5635,12 +5674,12 @@ ADD TO EVERY OBJECT
           END IF.
 
       DOES
-        -- implicit taking:
+        -- >>> implicit take >>>
         IF obj NOT DIRECTLY IN hero
           THEN LOCATE obj IN hero.
                SAY implicit_taking_message OF my_game.
         END IF.
-        -- end of implicit taking.
+        -- <<< implicit take <<<
 
         IF surface = floor OR surface = ground
           THEN LOCATE obj AT hero.
@@ -5648,6 +5687,7 @@ ADD TO EVERY OBJECT
         END IF.
 
         "You put" SAY THE obj. "on" SAY THE surface. "."
+        MAKE obj NOT worn. -- for non-clothing wearables.
 
   END VERB put_on.
 END ADD TO.
@@ -6326,9 +6366,11 @@ ADD TO EVERY THING
     AND CURRENT LOCATION IS lit
       ELSE SAY check_current_loc_lit OF my_game.
     AND target NOT IN hero
-      ELSE SAY check_obj_not_in_hero1 OF my_game.
-    AND target NOT IN worn
-      ELSE SAY check_obj_not_in_worn2 OF my_game.
+      ELSE
+        IF target IS NOT worn
+          THEN SAY my_game:check_obj_not_in_hero1.
+          ELSE SAY my_game:check_obj_not_in_worn2.
+        END IF.
     AND target IS NOT distant
       ELSE
         IF target IS NOT plural
@@ -6407,9 +6449,11 @@ ADD TO EVERY THING
       AND CURRENT LOCATION IS lit
         ELSE SAY check_current_loc_lit OF my_game.
       AND target NOT IN hero
-        ELSE SAY check_obj_not_in_hero1 OF my_game.
-      AND target NOT IN worn
-        ELSE SAY check_obj_not_in_worn2 OF my_game.
+        ELSE
+          IF target IS NOT worn
+            THEN SAY my_game:check_obj_not_in_hero1.
+            ELSE SAY my_game:check_obj_not_in_worn2.
+          END IF.
       AND target IS NOT distant
         ELSE
           IF target IS NOT plural
@@ -6586,7 +6630,7 @@ ADD TO EVERY LIQUID
         -- the action is allowed to succeed.
         THEN "You take a sip of" SAY THE liq. "."
         ELSE
-          -- implicit taking:
+          -- >>> implicit take >>>
           IF vessel OF liq NOT DIRECTLY IN hero
             THEN
               IF vessel OF liq IS NOT takeable
@@ -6596,7 +6640,7 @@ ADD TO EVERY LIQUID
                 "(taking" SAY THE vessel OF liq. "first)$n"
               END IF.
           END IF.
-          -- end of implicit taking.
+          -- <<< implicit take <<<
       END IF.
 
       IF liq IN hero    -- i.e. if the implicit taking was successful
@@ -7174,17 +7218,10 @@ ADD TO EVERY THING
       -- actors are not prohibited from being taken in the checks; this is to
       -- allow for example a dog to be picked up, or a bird to be taken out of
       -- a cage, etc.
-
-      ELSIF obj ISA OBJECT
-        THEN IF obj DIRECTLY IN worn
-            THEN LOCATE obj IN hero.
-              "You take off" SAY THE obj. "and carry it in your hands."
-              IF obj ISA CLOTHING
-                THEN EXCLUDE obj FROM wearing OF hero.
-              END IF.
-            ELSE LOCATE obj IN hero.
-              "Taken."
-          END IF.
+      ELSIF obj IsA OBJECT THEN
+        LOCATE obj IN hero.
+        MAKE obj NOT worn. -- for non-clothing wearables.
+        "Taken."
       END IF.
 
         -- Objects held by NPCs cannot be taken by the hero by default.
@@ -7322,14 +7359,14 @@ ADD TO EVERY THING
         THEN
           IF holder ISA LISTED_CONTAINER AND holder IS NOT open
             THEN "You can't;" SAY THE holder.
-                IF holder IS NOT plural
-                  THEN "is"
-                  ELSE "are"
-                END IF.
+              IF holder IS NOT plural
+                THEN "is"
+                ELSE "are"
+              END IF.
               "closed."
             ELSE
               LOCATE obj IN hero.
-                  "You take" SAY THE obj. "from" SAY THE holder. "."
+              "You take" SAY THE obj. "from" SAY THE holder. "."
           END IF.
       END IF.
 
@@ -7672,12 +7709,12 @@ ADD TO EVERY OBJECT
         END IF.
 
     DOES
-      -- implicit taking:
+      -- >>> implicit take >>>
       IF projectile NOT DIRECTLY IN hero
         THEN LOCATE projectile IN hero.
           SAY implicit_taking_message OF my_game.
       END IF.
-      -- end of implicit taking.
+      -- <<< implicit take <<<
 
       "You can't throw very far;" SAY THE projectile.
 
@@ -7694,6 +7731,7 @@ ADD TO EVERY OBJECT
 
       "nearby."
       LOCATE projectile AT hero.
+      MAKE projectile NOT worn. -- for non-clothing wearables.
 
   END VERB throw.
 END ADD TO.
@@ -7736,7 +7774,11 @@ ADD TO EVERY OBJECT
       AND projectile <> target
         ELSE SAY check_obj_not_obj2_at OF my_game.
       AND target NOT IN hero
-        ELSE SAY check_obj2_not_in_hero1 OF my_game.
+        ELSE
+          IF target IS NOT worn
+            THEN SAY my_game:check_obj_not_in_hero1.
+            ELSE SAY my_game:check_obj_not_in_worn2.
+          END IF.
       AND target <> hero
         ELSE SAY check_obj2_not_hero1 OF my_game.
       AND CURRENT LOCATION IS lit
@@ -7765,12 +7807,13 @@ ADD TO EVERY OBJECT
           END IF.
 
     DOES
-      -- implicit taking:
+      -- >>> implicit take >>>
       IF projectile NOT DIRECTLY IN hero
         THEN LOCATE projectile IN hero.
              SAY implicit_taking_message OF my_game.
       END IF.
-      -- end of implicit taking.
+      -- <<< implicit take <<<
+      MAKE projectile NOT worn. -- for non-clothing wearables.
 
       IF target IS inanimate
         THEN
@@ -7849,8 +7892,6 @@ ADD TO EVERY OBJECT
         ELSE SAY check_obj_suitable_at OF my_game.
       AND projectile <> recipient
         ELSE SAY check_obj_not_obj2_to OF my_game.
-      AND recipient NOT IN hero
-        ELSE SAY check_obj2_not_in_hero1 OF my_game.
       AND recipient <> hero
         ELSE SAY check_obj2_not_hero1 OF my_game.
       AND CURRENT LOCATION IS lit
@@ -7878,13 +7919,6 @@ ADD TO EVERY OBJECT
           END IF.
 
     DOES
-      -- implicit taking:
-      IF projectile NOT DIRECTLY IN hero
-        THEN LOCATE projectile IN hero.
-          SAY implicit_taking_message OF my_game.
-      END IF.
-      -- end of implicit taking.
-
       "It wouldn't accomplish anything trying to throw"
       SAY the projectile. "to" SAY THE recipient. "."
 
@@ -7935,7 +7969,11 @@ ADD TO EVERY OBJECT
       AND cont <> hero
         ELSE SAY check_obj2_not_hero1 OF my_game.
       AND cont NOT IN hero
-        ELSE SAY check_obj2_not_in_hero1 OF my_game.
+        ELSE
+          IF cont IS NOT worn
+            THEN SAY my_game:check_obj_not_in_hero1.
+            ELSE SAY my_game:check_obj_not_in_worn2.
+          END IF.
       AND CURRENT LOCATION IS lit
         ELSE SAY check_current_loc_lit OF my_game.
       AND projectile NOT IN cont
@@ -7979,13 +8017,6 @@ ADD TO EVERY OBJECT
           END IF.
 
     DOES
-      -- implicit taking:
-      IF projectile NOT DIRECTLY IN hero
-        THEN LOCATE projectile IN hero.
-          SAY implicit_taking_message OF my_game.
-      END IF.
-      -- end of implicit taking.
-
       "It wouldn't accomplish anything trying to throw"
       SAY THE projectile. "into" SAY THE cont. "."
 
@@ -8106,13 +8137,6 @@ ADD TO EVERY THING
           END IF.
 
     DOES
-      -- implicit taking:
-      IF obj NOT DIRECTLY IN hero
-        THEN LOCATE obj IN hero.
-          SAY implicit_taking_message OF my_game.
-      END IF.
-      -- end of implicit taking.
-
       "It's not possible to tie" SAY THE obj. "to" SAY THE target. "."
 
   END VERB tie_to.
@@ -8451,14 +8475,23 @@ VERB undress
     ELSE SAY restricted_response OF my_game.
   AND CURRENT LOCATION IS lit
     ELSE SAY check_current_loc_lit OF my_game.
-  DOES "You don't feel like undressing is a good idea right now."
+  
+  DOES
+    "You don't feel like undressing is a good idea right now."
 
-      -- To make it work, use the following lines instead:
-      -- IF COUNT DIRECTLY IN worn, ISA CLOTHING > 0
-      --   THEN EMPTY worn IN hero.
-      --     "You remove all the items you were wearing."
-      --   ELSE "You're not wearing anything you can remove."
-      -- END IF.
+    -- To make it work, use the following lines instead:
+    -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    -- IF COUNT IsA clothing, DIRECTLY IN hero, IS worn > 0
+    --   THEN
+    --     "You remove all the items you were wearing."
+    --     FOR EACH worncl IsA clothing, DIRECTLY IN hero, IS worn
+    --       DO
+    --         MAKE worncl NOT worn.
+    --         LOCATE worncl AT CURRENT LOCATION.
+    --     END FOR.
+    --   ELSE "You're not wearing anything you can remove."
+    -- END IF.
+    -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 END VERB undress.
 
 
@@ -8744,8 +8777,6 @@ ADD TO EVERY OBJECT
   VERB wear
     CHECK my_game CAN wear
       ELSE SAY restricted_response OF my_game.
-    AND obj NOT IN worn
-      ELSE SAY check_obj_not_in_worn1 OF my_game.
     AND obj IS takeable
       ELSE SAY check_obj_takeable OF my_game.
     AND CURRENT LOCATION IS lit

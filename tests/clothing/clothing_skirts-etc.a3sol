@@ -1,0 +1,111 @@
+; ******************************************************************************
+; *                                                                            *
+; *                            TEST SPECIAL CLOTHES                            *
+; *                                                                            *
+; *                              (SKIRTS & COATS)                              *
+; *                                                                            *
+; ******************************************************************************
+; This script will test handling of special clothes like skirts and coats in the
+; new clothing system, which should allow to implement them like in the old
+; system, but with more freedom and added features.
+;
+; The 'IS NOT blockslegs' attribute allows to create clothing items that don't
+; prevent wearing/removing lower garnments that cover only legs (ie. not torso).
+; This allows to simulate realistically coats and skirts.
+;
+; The `IS twopieces` attribute allows creating clothing items which, although
+; they do cover both legs and torso, they'll be considered as two-pieces, ie.
+; in the wearing/removing checks for 'blockslegs' they'll be treated as if it
+; only covered the legs. This allows realistically similuating clohtes like a
+; bikini, which is handled as a single item, but being conceptually 2-pieces, it
+; should be wearable while wearing a skirt or coat.
+; ------------------------------------------------------------------------------
+; Let's gather some clothes for the tests...
+north
+east
+take coat
+take black shirt
+take red shirt
+west
+west
+north
+take swimsuit
+take bikini
+east
+undress
+; ==============================================================================
+; TEST SKIRT
+; ==============================================================================
+DBG_CLOTHES skirt
+; ------------------------------------------------------------------------------
+; W/ SKIRT -> WEAR/REMOVE-> PANTYHOSE
+; ------------------------------------------------------------------------------
+; A worn skirt should not prevent wearing pantyhose and other lower legs-only
+; garnments which don't cover also the torso in a single piece.
+DBG_CLOTHES pantyhose
+wear skirt
+; /// WEAR -> YES (OK!) ///
+wear pantyhose
+; /// REMOVE -> YES (OK!) ///
+remove pantyhose
+; ------------------------------------------------------------------------------
+; W/ SKIRT -> WEAR/REMOVE-> SWIMSUIT
+; ------------------------------------------------------------------------------
+; A worn skirt should prevent wearing lower-body garnments which cover both legs
+; and torso in a single clothing piece, like a one-piece swimsuit or a teddy.
+DBG_CLOTHES swimsuit
+; /// WEAR -> NO (OK!) ///
+wear swimsuit
+remove skirt
+wear swimsuit
+wear skirt
+; /// REMOVE -> NO (OK!) ///
+remove swimsuit
+remove skirt
+remove swimsuit
+; ------------------------------------------------------------------------------
+; W/ SKIRT -> WEAR/REMOVE-> BIKINI
+; ------------------------------------------------------------------------------
+; A worn skirt should not prevent wearing a bikini because its upper and lower
+; piece are disjointed.
+DBG_CLOTHES bikini
+wear skirt
+; /// WEAR -> YES (OK!) ///
+wear bikini
+; /// REMOVE -> YES (OK!) ///
+remove bikini
+; ------------------------------------------------------------------------------
+; W/ SKIRT + SHIRT -> WEAR/REMOVE-> BIKINI
+; ------------------------------------------------------------------------------
+; But a bikini shouldn't be wearable if also wearing a torso garnment occupying
+; a higher layer (the blocker is not the skirt but the top garnment).
+DBG_CLOTHES black shirt
+DBG_CLOTHES bikini
+wear skirt
+wear black shirt
+; /// WEAR -> NO -> BLOCKER: SHIRT (OK!) ///
+wear bikini
+remove black shirt
+wear bikini
+wear black shirt
+; /// REMOVE -> NO -> BLOCKER: SHIRT (OK!) ///
+remove bikini
+; ==============================================================================
+; TEST COAT
+; ==============================================================================
+; A worn coat should not prevent wearing/removing lower-body only garnments, but
+; it will always block a clothing item which also covers the torso.
+undress
+wear coat
+; /// WEAR -> NO (OK!) ///
+wear bikini
+; /// WEAR -> YES (OK!) ///
+wear skirt
+; /// WEAR -> YES (OK!) ///
+wear boxers
+; /// WEAR -> NO (OK!) ///
+wear undershirt
+; /// REMOVE -> YES (OK!) ///
+remove boxers
+; /// REMOVE -> YES (OK!) ///
+remove skirt

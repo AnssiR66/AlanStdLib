@@ -3,7 +3,7 @@
 Actors Compliance Tests 
 An adventure to test actors compliance. 
 (C) 2018 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1866
+Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880
 .
 Standard Library v2.1 
 Version 1 
@@ -26,14 +26,14 @@ There is a woman here. There is a man here.
 You are empty-handed.
 
 > examine woman
-A rather mysterious woman. The woman is carrying a wine bottle and a 
-magic mirror.
+A rather mysterious woman. The woman is carrying a magic mirror and a 
+wine bottle.
 
 > examine man
-A serious lookin man. The man is carrying a beer can and a sword.
+A serious lookin man. The man is carrying a sword and a beer can.
 
 > ; ==============================================================================
-> ; Test compliance before and after 'ask_for'                  
+> ; Test compliance before and after 'ask_for'
 > ; ==============================================================================
 > ; The 'test compliance of' verb debugs the compliance state of an actor.
 > ; (See Issue #18 on the previous 'ask_for' problem).
@@ -65,7 +65,7 @@ The man is not compliant.
 > ; OK! compliance is as before.
 > ;---------------------
 > inventory
-You are carrying a sword and a magic mirror.
+You are carrying a magic mirror and a sword.
 
 > examine woman
 A rather mysterious woman. The woman is carrying a wine bottle.
@@ -95,7 +95,7 @@ The woman is compliant.
 The woman gives the wine bottle of wine to you.
 
 > inventory
-You are carrying a sword, a wine bottle and a magic mirror.
+You are carrying a magic mirror, a wine bottle and a sword.
 
 > test compliance of woman
 The woman is compliant.
@@ -110,7 +110,7 @@ The man is not compliant.
 The man gives the beer can of beer to you.
 
 > inventory
-You are carrying a sword, a beer can, a wine bottle and a magic mirror.
+You are carrying a magic mirror, a wine bottle, a sword and a beer can.
 
 > test compliance of man
 The man is not compliant.

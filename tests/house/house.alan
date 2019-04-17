@@ -11,7 +11,7 @@ THE my_game IsA DEFINITION_BLOCK
   HAS author   "Tristano Ajmone".
   HAS year     2018.
   HAS version  "1".
-  HAS AlanV    "v3.0beta6 build 1866".
+  HAS AlanV    "v3.0beta6 build 1880".
 
 END THE.
 
@@ -195,7 +195,7 @@ THE bottle IsA beverage_vessel IN kitchen_table.
 END THE.
 
 THE wine IsA liquid IN bottle.
-  HAS vessel bottle. 
+  HAS vessel bottle.
   INDEFINITE ARTICLE "some"
 END THE.
 --==============================================================================

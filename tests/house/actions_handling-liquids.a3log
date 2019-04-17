@@ -3,7 +3,7 @@
 The House 
 A rooms & sites setting for various tests. 
 (C) 2018 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1866
+Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880
 .
 Standard Library v2.1 
 Version 1 
@@ -22,7 +22,7 @@ table here. On the table you see a bottle, a chips bag, a jar and a basket
 > ; ******************************************************************************
 > ; Liquids inside takable containers can be handled by using either the container
 > ; or the liquid itself as the verb object.
-> x bottle 
+> x bottle
 The bottle contains some wine.
 
 > ; ==============================================================================

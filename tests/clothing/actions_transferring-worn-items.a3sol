@@ -9,9 +9,8 @@
 north
 north
 ; ------------------------------------------------------------------------------
-; TEST TRYING REMOVE INEXISTINT ITEM
+; TEST TRYING REMOVE INEXISTENT ITEM
 ; ------------------------------------------------------------------------------
-; Later on this command will fail silently, probably due to an Alan bug:
 remove XYZZY
 ; ==============================================================================
 ; TEST FROM ACTORS TO INANIMATE OBJECTS
@@ -25,16 +24,9 @@ examine basket
 ; NOTE: boxers are currently bing worn by hero, underneath trousers (khakis)!
 inventory
 examine boxers
-DBG boxers
+DBG_CLOTHES boxers
 put boxers in basket
-; ** ERROR!!! ** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;                The boxers are worn by Hero, underneath his trousers, so he
-;                shouldn't be able to just put them anywhere before first
-;                REMOVING trousers AND THEN boxers!
-;                This breaks right through the whole logic of layered clothing!
-;                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-DBG boxers
-; ** ERROR!!! ** The boxers are still considered donned and worn by Hero:
+DBG_CLOTHES boxers
 examine basket
 west
 ; ==============================================================================
@@ -43,24 +35,21 @@ west
 ; The Hero can acquire clothes worn by NPCs in different ways (get, ask, etc.),
 ; some of which might require the NPC to be compliant, other not.
 examine assistant
-dbg boots
+DBG_CLOTHES boots
 take assistant boots
 ask assistant for boots
-dbg boots
-; ** ERROR!!! ** The boots are still 'donned' and in 'wearing' of assistant :
+DBG_CLOTHES boots
 wear boots
-; ** ERROR!!! ** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;                Of course, trying to wear the boots now fails because they are
-;                still seen as worn and held by the (non-compliant) assistant!
-;                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 remove sneakers
 wear boots
 ; ------------------------------------------------------------------------------
-; ODD BUG: REMOVING NON EXISTING ITEMS
+; TEST AGAIN REMOVE INEXISTENT ITEM
 ; ------------------------------------------------------------------------------
-; Let's try again removing a non exisiting item, like we did at the beginning:
 remove XYZZY
-; ** ERROR!!! ** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;                Now 'remove' is failing silently, which seems to indicate that
-;                somthing during the tests has messed up Alan memory!
-;                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; ** NOTE ** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;            In the past attempting again to remove a non exisiting item, like
+;            we did at the beginning, used to fail silently, probably indicating
+;            that somehing during the tests had messed up Alan memory. Now the
+;            problem seems fixed, but we'll keep this test in place so we'll
+;            catch the bug if it ever creeps back.
+;            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
