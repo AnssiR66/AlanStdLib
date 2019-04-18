@@ -11,6 +11,8 @@
 *.log
 *.sav
 !tests/misc/meta-verbs_arun-different.sav
+!StdLib/*.a3c
+!StdLib/*.ifid
 
 ## =============
 ## AlanIDE Files
