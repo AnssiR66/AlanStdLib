@@ -1,15 +1,17 @@
 Changelog for ALAN Standard Library v2.x
-
+========================================
 
 All changes made to the library will show here in future versions.
 
 
 
 v2.1 (27 May, 2018)
+===================
 
 - added verb restrictions
 - polished and expanded the manual
 
 v2.0 (15 May, 2016)
+===================
 
 (first version)
