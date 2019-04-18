@@ -1,4 +1,4 @@
-The Alan Standard Library v2.1 is distributed under the Artistic License 2.1 for which the
+The Alan Standard Library v2.1 is distributed under the Artistic License 2.0 for which the
 full text follows. The intent of this licensing is that the Copyright Holder retains some
 control over the development of the library, while still keeping it available as open source
 free of charge.
@@ -11,7 +11,7 @@ In practical terms this means that the licensing is chosen so that it should be 
   done so under a compatible license with appropriate attribution
 
 
-Artistic License 2.1
+Artistic License 2.0
 ====================
 
 Preamble
