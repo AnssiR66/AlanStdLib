@@ -1,4 +1,4 @@
-:: "tests/misc/TEST_FOLDER.bat"         v1.0.0 | 2019/02/26 | by Tristano Ajmone
+:: "tests/misc/TEST_FOLDER.bat"         v1.1.0 | 2019/04/18 | by Tristano Ajmone
 :: -----------------------------------------------------------------------------
 :: MULTIPLE ADVENTURES -- Run all tests in the folder.
 :: -----------------------------------------------------------------------------
@@ -15,7 +15,7 @@ FOR %%i IN (*.alan) DO (
 EXIT /B
 
 :CompileTest
-CALL alan.exe -import ..\..\ %1  > nul 2>&1 ^
+CALL alan.exe -import ..\..\StdLib\ %1  > nul 2>&1 ^
   && (
     FOR %%i IN (%~n1*.a3sol) DO CALL :ExecTest %~n1.a3c %%i
   ) || (

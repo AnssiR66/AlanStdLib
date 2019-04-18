@@ -1,9 +1,9 @@
 #!/bin/bash
-version="v0.0.9" ; revdate="2019/04/09"       # by Tristano Ajmone, MIT License.
+version="v0.1.0" ; revdate="2019/04/18"       # by Tristano Ajmone, MIT License.
 ################################################################################
 #                                   SETTINGS                                   #
 ################################################################################
-AlanOpts="-import ../"  # Alan compiler options (relative to here)
+AlanOpts="-import ../StdLib/"  # Alan compiler options (relative to here)
 
 htmlDir="../extras"     # destination folder of Asciidoctor HTML docs
 alanDir="./alan"        # path of Alan files

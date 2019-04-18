@@ -1,4 +1,4 @@
-:: "tests/house/TEST_FOLDER.bat"        v1.1.0 | 2019/02/26 | by Tristano Ajmone
+:: "tests/house/TEST_FOLDER.bat"        v1.2.0 | 2019/04/18 | by Tristano Ajmone
 :: -----------------------------------------------------------------------------
 :: SINGLE ADVENTURE -- Run all tests in the folder.
 :: -----------------------------------------------------------------------------
@@ -8,7 +8,7 @@ SET ADV=house.alan
 CHCP 28591 > nul
 
 ECHO COMPILE: %ADV%
-CALL alan.exe -import ..\..\ %ADV%  > nul 2>&1 ^
+CALL alan.exe -import ..\..\StdLib\ %ADV%  > nul 2>&1 ^
   && (
     FOR %%i IN (*.a3sol) DO CALL :ExecTest %ADV% %%i
   ) || (

@@ -1,4 +1,4 @@
-:: "RUNTESTS.bat" v3.0.0 (2019/01/30) | by Tristano Ajmone
+:: "RUNTESTS.bat" v3.1.0 (2019/04/18) | by Tristano Ajmone
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                                                                            ::
 ::                      ALAN STANDARD LIBRARY TEST SUITE                      ::
@@ -50,7 +50,7 @@ ECHO.
 :: =======================
 :: Define Script Variables
 :: =======================
-SET   "_COMPILE_OPTS_=-import ..\..\ -debug"
+SET   "_COMPILE_OPTS_=-import ..\..\StdLib\ -debug"
 SET /A _ERR_=0       &:: (counter)  Errors -> Total (for Exit Code)
 SET /A _ADV_COM_=0   &:: (counter)  Adventures -> Compiled
 SET /A _ADV_ERR_=0   &:: (counter)  Adventures -> Compiler Errors
