@@ -82,12 +82,12 @@ The `_shared-docs-funcs.sh` will define some vars to determine the base paths fo
 
 ### Standalone Docs via Embedded CSS
 
-- [ ] To make all tutorials full standalone, inject the CSS directly into the `docinfo.html` file.
+- [x] To make all tutorials full standalone, inject the CSS directly into the `docinfo.html` file.
 - [ ] Add a test document that uses the external CSS file to allow testing live editing of Sass sources.
 
-I have to consider this well, for if on the one hand it makes all docs portable, it also hinders maintainance — for when editing the Sass sources you need to rebuild all the docs, even to just preview changes, which makes using Sass watch functionality pretty useless.
+If on the one hand this makes all docs portable, it also hinders maintainance — for when editing the Sass sources you need to rebuild all the docs, even to just preview changes, which makes using Sass watch functionality pretty useless.
 
-What I could and should do is add a test document that uses the external CSS file, so I can test the Sass tweaks live when editing. 
+Because of this, we need to add in the `sass/` folder a test document that uses the external CSS file, so we can test the Sass tweaks live when editing them. 
 
 ## GitHub Export Rules
 

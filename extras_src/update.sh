@@ -126,8 +126,8 @@ function adoc2html {
     --destination-dir $htmlDir \
     --template-dir $hamlDir \
     --require $adocDir/highlight-treeprocessor_mod.rb \
-     -a docinfodir=$adocDir \
-     -a docinfo=shared-head \
+     -a docinfodir@=$adocDir \
+     -a docinfo@=shared-head \
       $1
 }
 

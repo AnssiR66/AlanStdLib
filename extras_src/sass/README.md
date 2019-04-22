@@ -1,6 +1,9 @@
 # Sass Source Files
 
-This folder contains the Sass sources to build the custom CSS stylesheets for code blocks highligthed with Highlight.
+The Sass sources to build the custom CSS stylesheets for Alan StdLib documentation.
+
+- Output CSS stylesheet: [`./styles.css`][styles.css].
+- Output docinfo file: [`../adoc/docinfo.html`][docinfo file]
 
 
 -----
@@ -10,6 +13,12 @@ This folder contains the Sass sources to build the custom CSS stylesheets for co
 <!-- MarkdownTOC autolink="true" bracket="round" autoanchor="false" lowercase="only_ascii" uri_encoding="true" levels="1,2,3" -->
 
 - [Folder Contents](#folder-contents)
+    - [Sass Sources](#sass-sources)
+    - [Build Scripts](#build-scripts)
+- [Output Files](#output-files)
+- [Usage Instructions](#usage-instructions)
+    - [Production Work](#production-work)
+    - [Sass Editing Work](#sass-editing-work)
 - [System Requirements](#system-requirements)
     - [Installing Dart Sass](#installing-dart-sass)
 - [Credits](#credits)
@@ -23,7 +32,9 @@ This folder contains the Sass sources to build the custom CSS stylesheets for co
 
 # Folder Contents
 
-Sass sources:
+- [`styles.css`][styles.css] — compiled stylesheet.
+
+## Sass Sources
 
 - [`styles.scss`][styles]
     + [`_base16-eighties.scss`][b16 80s]
@@ -39,12 +50,43 @@ Sass sources:
     + [`_hl-theme_alan-lib.scss`][hl alan lib]
     + [`_hl-theme_alan-tutorial.scss`][hl alan tut]
 
-Scripts:
+## Build Scripts
 
-- [`BUILD_SASS.bat`][BUILD] 
-- [`WATCH_SASS.bat`][WATCH] 
+- [`_shared-settings.sh`][_shared-settings.sh] — defines env-vars common to all scripts.
+- [`css-build.sh`][css-build.sh] — Builds the CSS stylesheet.
+- [`docinfo-inject.sh`][docinfo-inject.sh] — Builds the CSS stylesheet and injects it into the [docinfo file].
+- [`watch-sass.sh`][watch-sass.sh] — Watch and build Sass sources.
 
-Builds to [`../css/styles.css`][styles.css].
+# Output Files
+
+- [`./styles.css`][styles.css] — compiled stylesheet form SCSS sources.
+- [`../adoc/docinfo.html`][docinfo file] — docinfo file with CSS injected into  `<head>` section.
+
+# Usage Instructions
+
+These are the Sass/SCSS sources for building the custom CSS stylesheets used in the Alan StdLib documentation, providing the required styles for code blocks highligthed with Highlight, as well as custom styles for game transcripts, and other custom elements.
+
+The generated CSS file ([`./styles.css`][styles.css]) is injected into the docinfo file ([`../adoc/docinfo.html`][docinfo file]) so that every HTML document will be fully standalone.
+
+This also means that updating the CSS and docinfo files won't affect the appearance of the HTML documents until they are converted again, for they no longer rely on an external stylesheet — the custom CSS is now in the document `<head>` section. 
+
+## Production Work
+
+To update the CSS stylesheets and propagate changes into the HTML documentation:
+
+1. Execute [`docinfo-inject.sh`][docinfo-inject.sh].
+2. Execute the scripts to rebuild the whole documentation.
+
+## Sass Editing Work
+
+To work on the Sass/SCSS sources and test the results, use either:
+
+- [`css-build.sh`][css-build.sh]
+- [`watch-sass.sh`][watch-sass.sh]
+
+And to preview the resulting CSS changes, use the local test document (which relies on the external [`./styles.css`][styles.css] file).
+
+> __TDB!__ — Currently there isn't a test document to test the CSS with. Will be added soon.
 
 # System Requirements
 
@@ -150,13 +192,17 @@ The `fontFace` Mixin was adapted from Sass Boilerplate project's "[`fontface.scs
                                REFERENCE LINKS                                
 ------------------------------------------------------------------------------>
 
-[BUILD]: ./BUILD_SASS.bat
-[WATCH]: ./WATCH_SASS.bat
+[_shared-settings.sh]: ./_shared-settings.sh "View script source"
+[css-build.sh]: ./css-build.sh "View script source"
+[docinfo-inject.sh]: ./docinfo-inject.sh "View script source"
+[watch-sass.sh]: ./watch-sass.sh "View script source"
+
+[docinfo file]: ../adoc/docinfo.html "View the target docinfo file"
 
 <!-- SCSS/CSS files -->
 
 [styles]: ./styles.scss "View SCSS source"
-[styles.css]: ../css/styles.css "View source file"
+[styles.css]: ./styles.css "View source file"
 
 [b16 80s]: ./_base16-eighties.scss "View SCSS source"
 [b16 Google]: ./_base16-google-dark.scss "View SCSS source"

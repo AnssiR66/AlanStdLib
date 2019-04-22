@@ -1,1 +1,275 @@
-<link rel="stylesheet" href="./css/styles.css">
+<style>
+/* Custom styles for Alan StdLib */
+/* FiraCode font (with ligatures) */
+@font-face {
+  font-family: "Fira Code";
+  src: url("https://unpkg.com/firacode/distr/eot/FiraCode-Regular.eot");
+  src: url("https://unpkg.com/firacode/distr/eot/FiraCode-Regular.eot") format("embedded-opentype"), url("https://unpkg.com/firacode/distr/woff2/FiraCode-Regular.woff2") format("woff2"), url("https://unpkg.com/firacode/distr/woff/FiraCode-Regular.woff") format("woff"), url("https://unpkg.com/firacode/distr/ttf/FiraCode-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+/* Shell/CMD */
+div.literalblock.shell pre {
+  background-color: #0C0C0C;
+  color: #F2F2F2;
+}
+div.literalblock.shell pre .conum {
+  background: #FFF945 !important;
+  color: #0C0C0C !important;
+}
+
+/* Game Transcripts */
+.exampleblock.gametranscript > .content {
+  background: #F7FDFF;
+  color: #0089B6;
+  border-color: #CCF2FF;
+}
+.exampleblock.gametranscript > .content span.comment {
+  color: #bcbcbc;
+}
+.exampleblock.gametranscript > .content em {
+  color: #d90000;
+}
+
+/* Highlight Default Theme: Base16 Eighties */
+.listingblock code[data-lang]::before {
+  color: #a09f93;
+}
+
+.listingblock pre[class=highlight][lang] {
+  background-color: #2d2d2d;
+  border-radius: 4px;
+  border: 1px solid #a09f93;
+}
+.listingblock pre[class=highlight][lang] > code {
+  color: #d3d0c8;
+  font-family: Consolas, Monaco, "Courier New", Courier, monospace;
+  font-size: 1em;
+}
+.listingblock pre[class=highlight][lang] .hl {
+  color: #d3d0c8;
+}
+.listingblock pre[class=highlight][lang] .hl.num {
+  color: #f99157;
+}
+.listingblock pre[class=highlight][lang] .hl.esc {
+  color: #f99157;
+}
+.listingblock pre[class=highlight][lang] .hl.ipl {
+  color: #d27b53;
+}
+.listingblock pre[class=highlight][lang] .hl.str {
+  color: #99cc99;
+}
+.listingblock pre[class=highlight][lang] .hl.ppc {
+  color: #cc99cc;
+}
+.listingblock pre[class=highlight][lang] .hl.pps {
+  color: #66cccc;
+}
+.listingblock pre[class=highlight][lang] .hl.com {
+  color: #a09f93;
+  font-style: italic;
+}
+.listingblock pre[class=highlight][lang] .hl.slc {
+  color: #a09f93;
+  font-style: italic;
+}
+.listingblock pre[class=highlight][lang] .hl.lin {
+  color: #747369;
+}
+.listingblock pre[class=highlight][lang] .hl.opt {
+  color: #d3d0c8;
+}
+.listingblock pre[class=highlight][lang] .hl.kwa {
+  color: #f2777a;
+}
+.listingblock pre[class=highlight][lang] .hl.kwb {
+  color: #ffcc66;
+}
+.listingblock pre[class=highlight][lang] .hl.kwc {
+  color: #6699cc;
+}
+.listingblock pre[class=highlight][lang] .hl.kwd {
+  color: #cc99cc;
+}
+.listingblock pre[class=highlight][lang] .hl.kwde {
+  color: #66cccc;
+}
+.listingblock pre[class=highlight][lang] .hl.kwf {
+  color: #d27b53;
+}
+
+/* Highlight Theme for Alan -- based on "github.com style" for highlight.js, by Vasily Polovnyov */
+.listingblock code[data-lang=alan]::before {
+  color: #a09f93;
+}
+
+.listingblock pre[class=highlight][lang=alan] {
+  background-color: #F8F8F8;
+  border-radius: 4px;
+  border: 1px solid #F8F8F8;
+}
+.listingblock pre[class=highlight][lang=alan] > code {
+  color: #333;
+  font-family: "Fira Code", Monaco, "Courier New", Courier, monospace;
+  font-size: inherit;
+}
+.listingblock pre[class=highlight][lang=alan] .hl {
+  color: #333;
+}
+.listingblock pre[class=highlight][lang=alan] .hl.num {
+  color: #333;
+}
+.listingblock pre[class=highlight][lang=alan] .hl.esc {
+  color: #ff980b;
+}
+.listingblock pre[class=highlight][lang=alan] .hl.ipl {
+  color: #d572f1;
+}
+.listingblock pre[class=highlight][lang=alan] .hl.str {
+  color: #008080;
+}
+.listingblock pre[class=highlight][lang=alan] .hl.slc {
+  color: #998;
+}
+.listingblock pre[class=highlight][lang=alan] .hl.lin {
+  color: #998;
+}
+.listingblock pre[class=highlight][lang=alan] .hl.opt {
+  color: #333;
+}
+.listingblock pre[class=highlight][lang=alan] .hl.kwa {
+  color: #990000;
+}
+.listingblock pre[class=highlight][lang=alan] .hl.kwb {
+  color: #000080;
+}
+.listingblock pre[class=highlight][lang=alan] .hl.kwc {
+  color: #000080;
+}
+.listingblock pre[class=highlight][lang=alan] mark {
+  background-color: #ccff00;
+  background-image: linear-gradient(to right, #ccff00 0%, #f5ff87 100%);
+}
+.listingblock pre[class=highlight][lang=alan] span.green {
+  background-color: #a3ff8a;
+  background-image: linear-gradient(to right, #a3ff8a 0%, rgba(163, 255, 138, 0.5) 100%);
+}
+
+/* Highlight Theme for Alan Library -- Base16 Eighties, by Chris Kempson */
+.listingblock.lib code[data-lang=alan]::before {
+  color: #a09f93;
+}
+
+.listingblock.lib pre[class=highlight][lang=alan] {
+  background-color: #2d2d2d;
+  border-radius: 4px;
+  border: 1px solid #a09f93;
+}
+.listingblock.lib pre[class=highlight][lang=alan] > code {
+  color: #d3d0c8;
+  font-family: "Fira Code", Monaco, "Courier New", Courier, monospace;
+  font-size: inherit;
+}
+.listingblock.lib pre[class=highlight][lang=alan] .hl {
+  color: #d3d0c8;
+}
+.listingblock.lib pre[class=highlight][lang=alan] .hl.num {
+  color: #f99157;
+}
+.listingblock.lib pre[class=highlight][lang=alan] .hl.esc {
+  color: #f99157;
+}
+.listingblock.lib pre[class=highlight][lang=alan] .hl.ipl {
+  color: #d27b53;
+}
+.listingblock.lib pre[class=highlight][lang=alan] .hl.str {
+  color: #99cc99;
+}
+.listingblock.lib pre[class=highlight][lang=alan] .hl.slc {
+  color: #a09f93;
+}
+.listingblock.lib pre[class=highlight][lang=alan] .hl.lin {
+  color: #747369;
+}
+.listingblock.lib pre[class=highlight][lang=alan] .hl.opt {
+  color: #d3d0c8;
+}
+.listingblock.lib pre[class=highlight][lang=alan] .hl.kwa {
+  color: #f2777a;
+}
+.listingblock.lib pre[class=highlight][lang=alan] .hl.kwb {
+  color: #ffcc66;
+}
+.listingblock.lib pre[class=highlight][lang=alan] .hl.kwc {
+  color: #6699cc;
+}
+.listingblock.lib pre[class=highlight][lang=alan] mark {
+  background-color: #ccff00;
+  background-image: linear-gradient(to right, #ccff00 0%, #f5ff87 100%);
+}
+.listingblock.lib pre[class=highlight][lang=alan] span.green {
+  background-color: #a3ff8a;
+  background-image: linear-gradient(to right, #a3ff8a 0%, rgba(163, 255, 138, 0.5) 100%);
+}
+
+/* Highlight Theme for Alan tutorial -- Base16 Google, by  Seth Wright */
+.listingblock.tutorial code[data-lang=alan]::before {
+  color: #a09f93;
+}
+
+.listingblock.tutorial pre[class=highlight][lang=alan] {
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+}
+.listingblock.tutorial pre[class=highlight][lang=alan] > code {
+  color: #373b41;
+  font-family: "Fira Code", Monaco, "Courier New", Courier, monospace;
+  font-size: inherit;
+}
+.listingblock.tutorial pre[class=highlight][lang=alan] .hl {
+  color: #373b41;
+}
+.listingblock.tutorial pre[class=highlight][lang=alan] .hl.num {
+  color: #373b41;
+}
+.listingblock.tutorial pre[class=highlight][lang=alan] .hl.esc {
+  color: #F96A38;
+}
+.listingblock.tutorial pre[class=highlight][lang=alan] .hl.ipl {
+  color: #3971ED;
+}
+.listingblock.tutorial pre[class=highlight][lang=alan] .hl.str {
+  color: #198844;
+}
+.listingblock.tutorial pre[class=highlight][lang=alan] .hl.slc {
+  color: #969896;
+}
+.listingblock.tutorial pre[class=highlight][lang=alan] .hl.lin {
+  color: #c5c8c6;
+}
+.listingblock.tutorial pre[class=highlight][lang=alan] .hl.opt {
+  color: #373b41;
+}
+.listingblock.tutorial pre[class=highlight][lang=alan] .hl.kwa {
+  color: #CC342B;
+}
+.listingblock.tutorial pre[class=highlight][lang=alan] .hl.kwb {
+  color: #FBA922;
+}
+.listingblock.tutorial pre[class=highlight][lang=alan] .hl.kwc {
+  color: #3971ED;
+}
+.listingblock.tutorial pre[class=highlight][lang=alan] mark {
+  background-color: #f5ff87;
+  background-image: none;
+}
+.listingblock.tutorial pre[class=highlight][lang=alan] span.green {
+  background-color: #dbf8e6;
+  background-image: none;
+}
+
+/*# sourceMappingURL=styles.css.map */
+</style>
