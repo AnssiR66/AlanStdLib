@@ -129,6 +129,30 @@ UNLICENSE    text
 *.webp  binary
 
 # ==============================================================================
+#                             Git Archive Exclusions                            
+# ==============================================================================
+# Define patterns to selectively exclude maintainers' files and folders from the
+# Zip archives downloadable from GitHub (releases and download button).
+# End users only interested in the actual Library will get just the needed files.
+
+## Git files/folders
+####################
+/.git/          export-ignore
+.gitattributes  export-ignore
+.gitconfig      export-ignore
+.gitignore      export-ignore
+.gitmodules     export-ignore
+
+## Dev folders
+##############
+/extras_src/    export-ignore
+/tests/         export-ignore
+
+## Specific dev files
+#####################
+/StdLib/UPDATE.bat   export-ignore
+
+# ==============================================================================
 #                                GitHub Linguist                                
 # ==============================================================================
 #  -- https://github.com/github/linguist
