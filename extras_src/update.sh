@@ -1,15 +1,24 @@
 #!/bin/bash
-version="v0.1.0" ; revdate="2019/04/18"       # by Tristano Ajmone, MIT License.
+version="v1.0.0" ; revdate="2019/04/22"       # by Tristano Ajmone, MIT License.
 ################################################################################
 #                                   SETTINGS                                   #
 ################################################################################
-AlanOpts="-import ../StdLib/"  # Alan compiler options (relative to here)
+# NOTE: All paths are relative to the folder of this script.
 
+shopt -s nullglob # Set nullglob to avoid patterns matching null files
+
+# Alan compiler options:
+AlanOpts="-import ../StdLib/"
+
+# Asciidoctor options:
+adocDir="./adoc"
+hamlDir="$adocDir/haml"
+
+# Source & Destination folders:
 htmlDir="../extras"     # destination folder of Asciidoctor HTML docs
 alanDir="./alan"        # path of Alan files
 utf8Dir="./alan/utf8"   # path of UTF-8 converted Alan files
 
-shopt -s nullglob # Set nullglob to avoid patterns matching null files
 ################################################################################
 #                            FUNCTIONS DEFINITIONS                             #
 ################################################################################
@@ -115,8 +124,9 @@ function adoc2html {
     --verbose \
     --safe-mode unsafe \
     --destination-dir $htmlDir \
-    --template-dir ./haml \
-    --require ./highlight-treeprocessor_mod.rb \
+    --template-dir $hamlDir \
+    --require $adocDir/highlight-treeprocessor_mod.rb \
+     -a docinfodir=$adocDir \
      -a docinfo=shared-head \
       $1
 }

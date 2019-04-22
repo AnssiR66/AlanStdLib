@@ -9,21 +9,29 @@ This folder ("`extras_src/`") contains the source files and assets required to b
 
 <!-- MarkdownTOC autolink="true" bracket="round" autoanchor="false" lowercase="only_ascii" uri_encoding="true" levels="1,2,3" -->
 
+- [Directory Contents](#directory-contents)
 - [Introduction](#introduction)
     - [About the Toolchain](#about-the-toolchain)
     - [Automation Benefits](#automation-benefits)
-- [Folder Contents](#folder-contents)
 - [System Requirements](#system-requirements)
     - [Installing Ruby on Windows](#installing-ruby-on-windows)
     - [Installing Asciidoctor](#installing-asciidoctor)
-- [Credits](#credits)
-    - [Highlight Extension](#highlight-extension)
-    - [Haml Templates](#haml-templates)
 
 <!-- /MarkdownTOC -->
 
 -----
 
+
+# Directory Contents
+
+- [`/alan/`][alan] — Alan source adventures and command scripts.
+    + [`/utf8/`][utf8] (_ignored folder_) — UTF-8 converted Alan files (`*.alan`, `*.a3sol`, `*.a3log`).
+- [`/adoc/`][adoc] — Asciidoctor assets:
+    + [`/haml/`][haml] — customized Haml templates.
+    + [`docinfo.html`][docinfo] — commonly shared docinfo file.
+    + [`highlight-treeprocessor_mod.rb`][rb] — extension for Highlight integration.
+- [`/sass/`][sass] — Sass/SCSS stylesheets source files.
+- [`update.sh`](update.sh) — the script to update contents of "`../extras/`".
 
 # Introduction
 
@@ -60,16 +68,6 @@ The automation toolchain help maintaining always up to date the code and transcr
 So, even if the Library code changes, these changes will always be reflected into the documentation, without manual efforts. This is definitely worth the effort of setting up a slightly complex toolchain.
 
 
-# Folder Contents
-
-- [`/alan/`][alan] — Alan source adventures and command scripts.
-    + [`/utf8/`][utf8] (_ignored folder_) — UTF-8 converted Alan files (`*.alan`, `*.a3sol`, `*.a3log`).
-- [`/haml/`][haml] — customized Haml templates.
-- [`/sass/`][sass] — Sass/SCSS stylesheets source files.
-- [`docinfo.html`][docinfo] — document docinfo file.
-- [`highlight-treeprocessor_mod.rb`][rb] — extension for Highlight integration.
-- [`update.sh`](update.sh) — the script to update contents of "`../extras/`".
-
 # System Requirements
 
 To build the document from AsciiDoc to HTML you'll need to install the following tools:
@@ -89,77 +87,23 @@ Once Ruby is installed on your system, open a shell and type:
     gem install asciidoctor
 
 
-# Credits
-
-## Highlight Extension
-
-The [`highlight-treeprocessor_mod.rb`][rb] file was adapted by Tristano Ajmone from the original file [`highlight-treeprocessor.rb`][rb upstream] taken from the [Asciidoctor Extensions Lab] (commit 18bdf62), Copyright (C) 2014-2016
-The Asciidoctor Project, released under MIT License:
-
-    The MIT License
-
-    Copyright (C) 2018 Tristano Ajmone.
-    Copyright (C) 2014-2016 The Asciidoctor Project
-
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in
-    all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-    THE SOFTWARE.
-
-## Haml Templates
-
-The files inside the [`/haml/`][haml] folder were adapted by Tristano Ajmone from the original [Haml HTML5 templates] taken from the
-[Asciidoctor Backends] project, Copyright (C) 2012-2016 Dan Allen and the Asciidoctor Project, released under MIT License:
-
-    The MIT License
-    
-    Copyright (C) 2018 Tristano Ajmone.
-    Copyright (C) 2012-2016 Dan Allen and the Asciidoctor Project
-
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in
-    all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-    THE SOFTWARE.
-
 
 <!-----------------------------------------------------------------------------
                                REFERENCE LINKS                                
 ------------------------------------------------------------------------------>
 
-<!-- proj files -->
+<!-- proj folders -->
 
-[haml]: ./haml "Navigate to folder"
+[adoc]: ./adoc "Navigate to the Asciidoctor assets folder"
+[haml]: ./adoc/haml "Navigate to folder"
 [alan]: ./alan/ "Navigate to folder"
 [utf8]: ./alan/utf8/ "Navigate to folder"
 [sass]: ./sass/ "Navigate to folder"
-[docinfo]: ./docinfo.html
-[rb]: ./highlight-treeprocessor_mod.rb
+
+<!-- proj files -->
+
+[docinfo]: ./adoc/docinfo.html
+[rb]: ./adoc/highlight-treeprocessor_mod.rb
 
 
 <!-- dependencies -->
@@ -174,13 +118,5 @@ The files inside the [`/haml/`][haml] folder were adapted by Tristano Ajmone fro
 [Asciidoctor]: https://github.com/asciidoctor/asciidoctor#installation
 [Highlight]: http://www.andre-simon.de/zip/download.php
 
-
-<!-- third party -->
-
-[rb upstream]: https://github.com/asciidoctor/asciidoctor-extensions-lab/blob/18bdf62/lib/highlight-treeprocessor.rb
-[Asciidoctor Extensions Lab]: https://github.com/asciidoctor/asciidoctor-extensions-lab/ "Visit the Asciidoctor Extensions Lab project"
-
-[Asciidoctor Backends]: https://github.com/asciidoctor/asciidoctor-backends "Visit the Asciidoctor Backends project"
-[Haml HTML5 templates]: https://github.com/asciidoctor/asciidoctor-backends/tree/master/haml/html5
 
 <!-- EOF -->
