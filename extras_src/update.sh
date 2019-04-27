@@ -1,5 +1,16 @@
 #!/bin/bash
-version="v1.0.1" ; revdate="2019/04/27"       # by Tristano Ajmone, MIT License.
+
+# _update.sh              v1.0.2 | 2019/04/27 | by Tristano Ajmone, MIT License.
+################################################################################
+#                                                                              #
+#                          BUILD STDLIB EXTRAS FOLDER                          #
+#                                                                              #
+################################################################################
+# Build and deploy the contents of "/extras/" folder:
+# 
+#  -- HTML documents
+#  -- Alan example adventures
+
 ################################################################################
 #                                   SETTINGS                                   #
 ################################################################################
@@ -25,37 +36,7 @@ utf8Dir="./alan/utf8"   # path of UTF-8 converted Alan files
 
 # Ornamental print functions
 # --------------------------
-
-function Heading1 {
-  # ============================================================================
-  # Print a yellow frame around centered blue text of $1. Width 78.
-  # ----------------------------------------------------------------------------
-  # Parameters:
-  # - $1: the heading string (title).
-  # ============================================================================
-  echo -e "\e[93m******************************************************************************"
-  printf  "\e[94m%*s\n" $(((${#1}+78)/2)) "$1"
-  echo -e "\e[93m******************************************************************************\e[97m"
-}
-
-function Heading2 {
-  # ============================================================================
-  # Print a blue frame around yellow text of $1.
-  # ----------------------------------------------------------------------------
-  # Parameters:
-  # - $1: the heading string (title).
-  # ============================================================================
-  echo -e "\e[94m=============================================================================="
-  echo -e "\e[95m$1"
-  echo -e "\e[94m==============================================================================\e[97m" 
-}
-
-function separator {
-  # ============================================================================
-  # Print a dark grey horizontal ruler. Width 78.
-  # ============================================================================
-  echo -e "\e[90m------------------------------------------------------------------------------\e[97m"
-}
+source _print-funcs.sh
 
 # Task functions
 # --------------
@@ -81,7 +62,7 @@ function compile {
   # - $1: the source adventure to compile.
   # - $AlanOpts: compiler options.
   # ============================================================================
-  separator
+  printSeparator
   echo -e "\e[90mCOMPILING: \e[93m$1"
   alan $AlanOpts $1 > /dev/null 2>&1 || (
     echo -e "\n\e[91m*** COMPILER ERROR!!! ********************************************************"
@@ -102,7 +83,7 @@ function runCommandsScripts {
   # - $1: the target Alan adventure (".a3c").
   # ============================================================================
   scriptsPattern="${1%.*}*.a3sol"
-  separator
+  printSeparator
   echo -e "\e[90mADVENTURE: \e[93m$1"
   for script in $scriptsPattern ; do
     transcript="${script%.*}.a3log"
@@ -124,7 +105,7 @@ function alan2utf8 {
   # - $utf8Dir: path to the base folder for all UTF-8 converted files.
   # ============================================================================
   outfile="$utf8Dir/$(basename $1)"
-  separator
+  printSeparator
   echo -e "\e[90mSOURCE FILE: \e[93m$1"
   echo -e "\e[90mDESTINATION: \e[34m$outfile"
   iconv -f ISO-8859-1 -t UTF-8 $1 > $outfile
@@ -141,7 +122,7 @@ function a3logSanitize {
   # - ./sanitize_a3log.sed
   # ============================================================================
   outfile="${1%.*}.a3ADocLog"
-  separator
+  printSeparator
   echo -e "\e[90mSOURCE FILE: \e[93m$1"
   echo -e "\e[90mDESTINATION: \e[34m$outfile"
   sed -E --file=sanitize_a3log.sed $1 > $outfile
@@ -159,7 +140,7 @@ function adoc2html {
   # - $hamlDir: path to Haml templates.
   # - $adocDir: path to Asciidoctor custom extensions.
   # ============================================================================
-  separator
+  printSeparator
   echo -e "\e[90mCONVERTING: \e[93m$1"
   asciidoctor \
     --verbose \
@@ -182,55 +163,35 @@ function deployAlan {
   # - $htmlDir: path of output directory.
   # ============================================================================
   outfile="$htmlDir/$(basename $1)"
-  separator
+  printSeparator
   echo -e "\e[90mSOURCE FILE: \e[93m$1"
   echo -e "\e[90mDESTINATION: \e[94m$outfile"
   sed -r '/^ *-- *(tag|end)::\w+\[/ d' $1 > $outfile
   normalizeEOL $outfile
 }
   
-function aborting {
-  # ============================================================================
-  # Print red message for aborting script failure.
-  # ============================================================================
-  separator
-  echo -e "\n\e[91m/// Aborting ... ///\e[0m"
-}
-
-function finshed {
-  # ============================================================================
-  # Print green message for successful end of script.
-  # ============================================================================
-  echo -e "\e[92m/// Finished ///\e[0m"
-}
-
 ################################################################################
 #                                  MAIN CODE                                   #
 ################################################################################
 
-echo -e "\e[94m******************************************************************************"
-echo -e "*                                                                            *"
-echo -e "*\e[93m                         Build StdLib Extras Folder\e[94m                         *"
-echo -e "*                                                                            *"
-echo -e "******************************************************************************"
-echo -e "\e[97mby Tristano Ajmone, MIT License.                           $version | $revdate"
+printBanner "Build StdLib Extras Folder"
 
 # ==============================================================================
-Heading1 "Process Alan Adventures"
+printHeading1 "Process Alan Adventures"
 # ==============================================================================
 
 # ------------------------------------------------------------------------------
-Heading2 "Compile Adventures"
+printHeading2 "Compile Adventures"
 # ------------------------------------------------------------------------------
 for sourcefile in $alanDir/*.alan ; do
   compile $sourcefile
   if [ $? -ne 0 ] ; then
-    aborting ; exit 1
+    printAborting ; exit 1
   fi
 done
 
 # ------------------------------------------------------------------------------
-Heading2 "Run Commands Scripts"
+printHeading2 "Run Commands Scripts"
 # ------------------------------------------------------------------------------
 
 for adventure in $alanDir/*.a3c ; do
@@ -238,7 +199,7 @@ for adventure in $alanDir/*.a3c ; do
 done
 
 # ------------------------------------------------------------------------------
-Heading2 "Deploy Alan Source Files"
+printHeading2 "Deploy Alan Source Files"
 # ------------------------------------------------------------------------------
 echo -e "Copy to '$htmlDir/' every Alan source from '$alanDir/', but stripped of all the"
 echo -e "lines containing AsciiDoc region-tag comments."
@@ -248,11 +209,11 @@ for file in $alanDir/*.alan ; do
 done
 
 # ==============================================================================
-Heading1 "Build AsciiDoc Documentation"
+printHeading1 "Build AsciiDoc Documentation"
 # ==============================================================================
 
 # ------------------------------------------------------------------------------
-Heading2 "Create UTF-8 Version of Alan Sources and Transcripts"
+printHeading2 "Create UTF-8 Version of Alan Sources and Transcripts"
 # ------------------------------------------------------------------------------
 
 echo -e "Because Asciidoctor can't handle inclusion of external files in ISO-8859-1"
@@ -263,12 +224,12 @@ mkdir  $utf8Dir
 for sourcefile in $alanDir/*.{alan,i,a3log} ; do
   alan2utf8 $sourcefile
   if [ $? -ne 0 ] ; then
-    aborting ; exit 1
+    printAborting ; exit 1
   fi
 done
 
 # ------------------------------------------------------------------------------
-Heading2 "Sanitize Game Transcripts"
+printHeading2 "Sanitize Game Transcripts"
 # ------------------------------------------------------------------------------
 
 echo -e "Reformat game transcripts from verbatim to AsciiDoc example blocks."
@@ -276,23 +237,23 @@ echo -e "Reformat game transcripts from verbatim to AsciiDoc example blocks."
 for transcript in $utf8Dir/*.a3log ; do
   a3logSanitize $transcript
   if [ $? -ne 0 ] ; then
-    aborting ; exit 1
+    printAborting ; exit 1
   fi
 done
 
 # ------------------------------------------------------------------------------
-Heading2 "Convert Docs to HTML"
+printHeading2 "Convert Docs to HTML"
 # ------------------------------------------------------------------------------
 for sourcefile in *.asciidoc ; do
   adoc2html $sourcefile
   if [ $? -ne 0 ] ; then
-    aborting ; exit 1
+    printAborting ; exit 1
   fi
 done
 
 # ------------------------------------------------------------------------------
 
-finshed
+printFinished
 exit
 
 # ------------------------------------------------------------------------------
