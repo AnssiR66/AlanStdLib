@@ -1,5 +1,5 @@
 #!/bin/bash
-version="v1.0.0" ; revdate="2019/04/22"       # by Tristano Ajmone, MIT License.
+version="v1.0.1" ; revdate="2019/04/27"       # by Tristano Ajmone, MIT License.
 ################################################################################
 #                                   SETTINGS                                   #
 ################################################################################
@@ -27,25 +27,33 @@ utf8Dir="./alan/utf8"   # path of UTF-8 converted Alan files
 # --------------------------
 
 function Heading1 {
+  # ============================================================================
+  # Print a yellow frame around centered blue text of $1. Width 78.
   # ----------------------------------------------------------------------------
-  # Print a yellow frame around text of $1, and center it.
-  # ----------------------------------------------------------------------------
+  # Parameters:
+  # - $1: the heading string (title).
+  # ============================================================================
   echo -e "\e[93m******************************************************************************"
   printf  "\e[94m%*s\n" $(((${#1}+78)/2)) "$1"
   echo -e "\e[93m******************************************************************************\e[97m"
 }
 
 function Heading2 {
+  # ============================================================================
+  # Print a blue frame around yellow text of $1.
   # ----------------------------------------------------------------------------
-  # Print a blue frame around text of $1.
-  # ----------------------------------------------------------------------------
+  # Parameters:
+  # - $1: the heading string (title).
+  # ============================================================================
   echo -e "\e[94m=============================================================================="
   echo -e "\e[95m$1"
   echo -e "\e[94m==============================================================================\e[97m" 
 }
 
 function separator {
-  # Print a dark grey horizontal ruler.
+  # ============================================================================
+  # Print a dark grey horizontal ruler. Width 78.
+  # ============================================================================
   echo -e "\e[90m------------------------------------------------------------------------------\e[97m"
 }
 
@@ -53,9 +61,12 @@ function separator {
 # --------------
 
 function normalizeEOL {
-  # ------------------------------------------------------------
+  # ============================================================================
   # if OS is Windows normalize EOL to CRLF (because sed uses LF)
-  # ------------------------------------------------------------
+  # ----------------------------------------------------------------------------
+  # Parameters:
+  # - $1: the file to normalize.
+  # ============================================================================
   if [[ $(uname -s) == MINGW* ]];then
     echo -e "\e[90mUNIX2DOS: \e[94m$1"
     unix2dos -q $1
@@ -63,9 +74,13 @@ function normalizeEOL {
 }
 
 function compile {
-  # ----------------------------------------------------------------------------
+  # ============================================================================
   # Compile an Alan adventure
   # ----------------------------------------------------------------------------
+  # Parameters and Env Vars:
+  # - $1: the source adventure to compile.
+  # - $AlanOpts: compiler options.
+  # ============================================================================
   separator
   echo -e "\e[90mCOMPILING: \e[93m$1"
   alan $AlanOpts $1 > /dev/null 2>&1 || (
@@ -78,6 +93,14 @@ function compile {
 }
 
 function runCommandsScripts {
+  # ============================================================================
+  # Given a target Alan adventure "<advname>.a3c", execute it against every
+  # command script in the folder with a filename matching "<advname>*.a3sol" and
+  # save the game transcript to "<advname>*.a3log".
+  # ----------------------------------------------------------------------------
+  # Parameters:
+  # - $1: the target Alan adventure (".a3c").
+  # ============================================================================
   scriptsPattern="${1%.*}*.a3sol"
   separator
   echo -e "\e[90mADVENTURE: \e[93m$1"
@@ -89,11 +112,17 @@ function runCommandsScripts {
 }
   
 function alan2utf8 {
+  # ============================================================================
+  # Create an UTF-8 coverted copy of an ISO-8859-1 Alan file (adventure,
+  # commands script or transcript) inside $utf8Dir, to allow its inclusion in
+  # AsciiDoc documents, because Asciidoctor won't handle ISO-8859-1 files. See:
+  #
+  #  https://github.com/asciidoctor/asciidoctor/issues/3248
   # ----------------------------------------------------------------------------
-  # Create UTF-8 versions of Alan source files to allow inclusion in AsciiDoc
-  # documents, because Asciidoctor won't handle ISO-8859-1 files. See:
-  #   https://github.com/asciidoctor/asciidoctor/issues/3248
-  # ----------------------------------------------------------------------------
+  # Parameters and Env Vars:
+  # - $1: the input ISO-8859-1 file to convert.
+  # - $utf8Dir: path to the base folder for all UTF-8 converted files.
+  # ============================================================================
   outfile="$utf8Dir/$(basename $1)"
   separator
   echo -e "\e[90mSOURCE FILE: \e[93m$1"
@@ -102,10 +131,15 @@ function alan2utf8 {
 }
 
 function a3logSanitize {
-  # ----------------------------------------------------------------------------
+  # ============================================================================
   # Takes a game transcript input file $1 "<filename>.a3log" and converts it to
   # "<filename>.a3ADocLog", a well formatted AsciiDoc example block.
   # ----------------------------------------------------------------------------
+  # Parameters:
+  # - $1: the input transcript file.
+  # Required scripts:
+  # - ./sanitize_a3log.sed
+  # ============================================================================
   outfile="${1%.*}.a3ADocLog"
   separator
   echo -e "\e[90mSOURCE FILE: \e[93m$1"
@@ -115,9 +149,16 @@ function a3logSanitize {
 }
 
 function adoc2html {
+  # ============================================================================
+  # Convert file $1 from AsciiDoc to HTML via Asciidoctor. Requires Highlight
+  # for syntax highlighting code. Custom CSS via docinfo file.
   # ----------------------------------------------------------------------------
-  # Convert file $1 from AsciiDoc to HTML via Asciidoctor
-  # ----------------------------------------------------------------------------
+  # Parameters and Env Vars:
+  # - $1: the input AsciiDOc file to convert.
+  # - $htmlDir: path of output directory.
+  # - $hamlDir: path to Haml templates.
+  # - $adocDir: path to Asciidoctor custom extensions.
+  # ============================================================================
   separator
   echo -e "\e[90mCONVERTING: \e[93m$1"
   asciidoctor \
@@ -132,9 +173,14 @@ function adoc2html {
 }
 
 function deployAlan {
+  # ============================================================================
+  # Takes the Alan source file of $1, and creates in $htmlDir a copy stripped of
+  # all region-tag comment lines.
   # ----------------------------------------------------------------------------
-  # Copy of an Alan source to $htmlDir, stripped of all region-tag comment lines.
-  # ----------------------------------------------------------------------------
+  # Parameters and Env Vars:
+  # - $1: the input Alan source adventure file to deploy.
+  # - $htmlDir: path of output directory.
+  # ============================================================================
   outfile="$htmlDir/$(basename $1)"
   separator
   echo -e "\e[90mSOURCE FILE: \e[93m$1"
@@ -144,7 +190,18 @@ function deployAlan {
 }
   
 function aborting {
+  # ============================================================================
+  # Print red message for aborting script failure.
+  # ============================================================================
+  separator
   echo -e "\n\e[91m/// Aborting ... ///\e[0m"
+}
+
+function finshed {
+  # ============================================================================
+  # Print green message for successful end of script.
+  # ============================================================================
+  echo -e "\e[92m/// Finished ///\e[0m"
 }
 
 ################################################################################
@@ -233,11 +290,9 @@ for sourcefile in *.asciidoc ; do
   fi
 done
 
-
 # ------------------------------------------------------------------------------
 
-echo -e "\e[90m------------------------------------------------------------------------------"
-echo -e "\e[92m/// Finished ///\e[0m"
+finshed
 exit
 
 # ------------------------------------------------------------------------------
