@@ -33,7 +33,10 @@ This folder ("`extras_src/`") contains the source files and assets required to b
     + [`highlight-treeprocessor_mod.rb`][rb] — extension for Highlight integration.
 - [`/sass/`][sass] — Sass/SCSS stylesheets source files.
 - [`/tutorials/`][tutorials] — Sources of [`../extras/tutorials/`][extras tutorials] (_The Clothing Guide_).
-- [`update.sh`](update.sh) — the script to update contents of "`../extras/`".
+- [`update.sh`](update.sh) — build script to update contents of "`../extras/`". Depends on:
+    + [`_build-funcs.sh`](./_build-funcs.sh)
+    + [`_print-funcs.sh`](./_print-funcs.sh)
+    + [`sanitize_a3log.sed`](./sanitize_a3log.sed)
 
 # Introduction
 
@@ -47,13 +50,15 @@ The Asciidoctor toolchain to build the HTML documents is a bit complex, so we ne
 
 ## Folders Organization
 
-The build process ultimate goal is to work with multiple documentation folders in a symmetrical manner where each source folder in `extras_src/` is mirrored by a destination folder in `extras/`:
+The build process supports multiple documentation folders in a symmetrical manner where each source folder in `extras_src/` is mirrored by a same-named destination folder in `extras/`:
 
 |            source folder             |               build folder              |                     description                      |
 |--------------------------------------|-----------------------------------------|------------------------------------------------------|
 | [`extras_src/tutorials/`][tutorials] | [`extras/tutorials/`][extras tutorials] | _The Clothing Guide_ and other standalone tutorials. |
 
-When the _Standard Library Manual_ and the _Alan Cookbook_ will be added to the project, they will be allocated each one in its own source and destination folder. Working with symmetrical source/destination folder greatly simplifies reusability of build scripts.
+Currently there's only the `tutorials/` folder, but when the _Standard Library Manual_ and the _Alan Cookbook_ will be added to the project, they will be allocated each one in its own source and destination folder.
+
+Working with symmetrical source/destination folders greatly simplifies reusability of build scripts.
 
 ## Toolchain Details
 
