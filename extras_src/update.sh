@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# _update.sh              v1.0.2 | 2019/04/27 | by Tristano Ajmone, MIT License.
+# _update.sh              v1.1.0 | 2019/05/05 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                          BUILD STDLIB EXTRAS FOLDER                          #
 #                                                                              #
 ################################################################################
-# Build and deploy the contents of "/extras/" folder:
+# Build and deploy the contents of "/extras/tutorials/" folder:
 # 
 #  -- HTML documents
 #  -- Alan example adventures
@@ -25,10 +25,18 @@ AlanOpts="-import ../StdLib/"
 adocDir="./adoc"
 hamlDir="$adocDir/haml"
 
+# Target Documentation Folder:
+dirName="tutorials"
+
+# Base Paths for Source & Destination
+srcBasePath="."
+outBasePath="../extras"
+utfBasePath="./utf8"
+
 # Source & Destination folders:
-htmlDir="../extras"     # destination folder of Asciidoctor HTML docs
-alanDir="./alan"        # path of Alan files
-utf8Dir="./alan/utf8"   # path of UTF-8 converted Alan files
+outDir="$outBasePath/$dirName"   # destination folder for HTML docs and examples
+srcDir="$srcBasePath/$dirName"   # path of AsciiDoc sources and Alan examples
+utfDir="$utfBasePath/$dirName"   # path of UTF-8 converted Alan files
 
 ################################################################################
 #                            FUNCTIONS DEFINITIONS                             #
@@ -95,16 +103,16 @@ function runCommandsScripts {
 function alan2utf8 {
   # ============================================================================
   # Create an UTF-8 coverted copy of an ISO-8859-1 Alan file (adventure,
-  # commands script or transcript) inside $utf8Dir, to allow its inclusion in
+  # commands script or transcript) inside $utfDir, to allow its inclusion in
   # AsciiDoc documents, because Asciidoctor won't handle ISO-8859-1 files. See:
   #
   #  https://github.com/asciidoctor/asciidoctor/issues/3248
   # ----------------------------------------------------------------------------
   # Parameters and Env Vars:
   # - $1: the input ISO-8859-1 file to convert.
-  # - $utf8Dir: path to the base folder for all UTF-8 converted files.
+  # - $utfDir: path to the base folder for all UTF-8 converted files.
   # ============================================================================
-  outfile="$utf8Dir/$(basename $1)"
+  outfile="$utfDir/$(basename $1)"
   printSeparator
   echo -e "\e[90mSOURCE FILE: \e[93m$1"
   echo -e "\e[90mDESTINATION: \e[34m$outfile"
@@ -136,7 +144,7 @@ function adoc2html {
   # ----------------------------------------------------------------------------
   # Parameters and Env Vars:
   # - $1: the input AsciiDOc file to convert.
-  # - $htmlDir: path of output directory.
+  # - $outDir: path of output directory.
   # - $hamlDir: path to Haml templates.
   # - $adocDir: path to Asciidoctor custom extensions.
   # ============================================================================
@@ -145,24 +153,26 @@ function adoc2html {
   asciidoctor \
     --verbose \
     --safe-mode unsafe \
-    --destination-dir $htmlDir \
+    --base-dir ./ \
+    --destination-dir $outDir \
     --template-dir $hamlDir \
     --require $adocDir/highlight-treeprocessor_mod.rb \
      -a docinfodir@=$adocDir \
      -a docinfo@=shared-head \
+     -a utf8dir=$utfDir \
       $1
 }
 
 function deployAlan {
   # ============================================================================
-  # Takes the Alan source file of $1, and creates in $htmlDir a copy stripped of
+  # Takes the Alan source file of $1, and creates in $outDir a copy stripped of
   # all region-tag comment lines.
   # ----------------------------------------------------------------------------
   # Parameters and Env Vars:
   # - $1: the input Alan source adventure file to deploy.
-  # - $htmlDir: path of output directory.
+  # - $outDir: path of output directory.
   # ============================================================================
-  outfile="$htmlDir/$(basename $1)"
+  outfile="$outDir/$(basename $1)"
   printSeparator
   echo -e "\e[90mSOURCE FILE: \e[93m$1"
   echo -e "\e[90mDESTINATION: \e[94m$outfile"
@@ -183,7 +193,7 @@ printHeading1 "Process Alan Adventures"
 # ------------------------------------------------------------------------------
 printHeading2 "Compile Adventures"
 # ------------------------------------------------------------------------------
-for sourcefile in $alanDir/*.alan ; do
+for sourcefile in $srcDir/*.alan ; do
   compile $sourcefile
   if [ $? -ne 0 ] ; then
     printAborting ; exit 1
@@ -194,17 +204,17 @@ done
 printHeading2 "Run Commands Scripts"
 # ------------------------------------------------------------------------------
 
-for adventure in $alanDir/*.a3c ; do
+for adventure in $srcDir/*.a3c ; do
   runCommandsScripts $adventure
 done
 
 # ------------------------------------------------------------------------------
 printHeading2 "Deploy Alan Source Files"
 # ------------------------------------------------------------------------------
-echo -e "Copy to '$htmlDir/' every Alan source from '$alanDir/', but stripped of all the"
-echo -e "lines containing AsciiDoc region-tag comments."
+echo -e "Copy to target folder every Alan source, but stripped of all lines containing"
+echo -e "AsciiDoc region-tag comments."
 
-for file in $alanDir/*.alan ; do
+for file in $srcDir/*.alan ; do
   deployAlan $file
 done
 
@@ -219,9 +229,12 @@ printHeading2 "Create UTF-8 Version of Alan Sources and Transcripts"
 echo -e "Because Asciidoctor can't handle inclusion of external files in ISO-8859-1"
 echo -e "econding, we need to create UTF-8 versions of them."
 
-rm -rf $utf8Dir
-mkdir  $utf8Dir
-for sourcefile in $alanDir/*.{alan,i,a3log} ; do
+# rm -r $utfDir/*.{alan,a3log,a3ADocLog}
+rm -rf $utfDir
+mkdir  $utfDir
+touch  $utfDir/.gitkeep
+
+for sourcefile in $srcDir/*.{alan,i,a3log} ; do
   alan2utf8 $sourcefile
   if [ $? -ne 0 ] ; then
     printAborting ; exit 1
@@ -234,7 +247,7 @@ printHeading2 "Sanitize Game Transcripts"
 
 echo -e "Reformat game transcripts from verbatim to AsciiDoc example blocks."
 
-for transcript in $utf8Dir/*.a3log ; do
+for transcript in $utfDir/*.a3log ; do
   a3logSanitize $transcript
   if [ $? -ne 0 ] ; then
     printAborting ; exit 1
@@ -244,7 +257,7 @@ done
 # ------------------------------------------------------------------------------
 printHeading2 "Convert Docs to HTML"
 # ------------------------------------------------------------------------------
-for sourcefile in *.asciidoc ; do
+for sourcefile in $srcDir/*.asciidoc ; do
   adoc2html $sourcefile
   if [ $? -ne 0 ] ; then
     printAborting ; exit 1

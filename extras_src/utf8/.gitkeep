@@ -1,0 +1,19 @@
+
+ /"\/\_..---------------------------------------------------------------._/\/"\
+(     _||              ~~~~{ TEMPORARY UTF-8 FILES }~~~~               ||_     )
+ \_/\/ || ------------------------------------------------------------ || \/\_/
+       ||                                                              ||
+       || This folder contains UTF-8 versions of Alan adventures       ||
+       || sources, game trascripts and commands scripts, so that they  ||
+       || might be included in AsciiDoc documents, because Asciidoctor ||
+       || doesn't support inclusion of ISO-88859-1 files.              ||
+       ||                                                              ||
+       || This is a temporary solution for in the future Asciidoctor   ||
+       || will introduce an option to specify encoding for the include ||
+       || directive:                                                   ||
+       ||                                                              ||
+       ||    https://github.com/asciidoctor/asciidoctor/issues/3248    ||
+ /"\/\_|----------------------------------------------------------------|_/\/"\
+(     _|                                                                |_     )
+ \_/\/ `----------------------------------------------------------------' \/\_/
+

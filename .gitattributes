@@ -92,7 +92,8 @@ UNLICENSE    text
 .gitattributes text
 .gitconfig     text
 .gitignore     text
-.gitmodules    text
+.gitkeep       text
+.gitmodules    text eol=lf
 
 ## ========
 ## ARCHIVES

@@ -1,6 +1,6 @@
 = The Clothing Guide
 Tristano Ajmone <tajmone@gmail.com>
-v2, 2019-04-09
+v2, 2019-05-05
 :lang: en
 // TOC Settings:
 :toc: left
@@ -34,9 +34,13 @@ help the reader distinguish which code belongs to what:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ////
 
+:utf8dir: ../utf8/tutorials
 // The {utf8dir} attribute points to a folder containing UTF8 versions of Alan
-// sources and transcripts, to allow including them in this doc:
-:utf8dir: ./alan/utf8
+// sources and transcripts, to allow including them in this doc.
+// The path defined above is used for local previews conversion only; the build
+// script defines it via CLI and overrides it, so the above definition is not
+// relevant for the actual build toolchain.
+
 // *****************************************************************************
 // *                                                                           *
 // *                            Document Preamble                              *
