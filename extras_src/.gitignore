@@ -9,4 +9,9 @@ utf8/**/*.a3log
 utf8/**/*.a3ADocLog
 utf8/**/*.alan
 
+## Exclude HTML files for local preview 
+#######################################
+manual/*.html
+tutorials/*.html
+
 # EOF #
