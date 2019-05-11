@@ -1,0 +1,51 @@
+:StdLibVer: 2.1
+:doctitle: Alan Standard Library v{StdLibVer} User's Manual
+:author: Anssi Räisänen
+:revnumber: {StdLibVer}
+:revdate: 2018-04-12
+:lang: en
+// TOC Settings:
+:toc: left
+:toclevels: 5
+// Sections Numbering:
+:sectnums:
+:sectnumlevels: 2
+// Cross References:
+:xrefstyle: short
+:section-refsig: Sect.
+// Misc Settings:
+:experimental: true
+:icons: font
+:linkattrs: true
+:reproducible: true
+:sectanchors:
+
+
+// *****************************************************************************
+// *                                                                           *
+// *                            Document Preamble                              *
+// *                                                                           *
+// *****************************************************************************
+
+
+
+// ---
+// title:      Alan Standard Library v2.1
+// subtitle:   User's Manual
+// author:     Anssi Räisänen
+// date:       April 12, 2018
+// ...
+
+
+include::StdLibMan_01.adoc[]
+include::StdLibMan_02.adoc[]
+include::StdLibMan_03.adoc[]
+include::StdLibMan_04.adoc[]
+include::StdLibMan_05.adoc[]
+include::StdLibMan_06.adoc[]
+
+
+
+
+
+// EOF //

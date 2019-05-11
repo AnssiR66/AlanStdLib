@@ -1,0 +1,127 @@
+////
+********************************************************************************
+*                                                                              *
+*                     ALAN Standard Library User's Manual                      *
+*                                                                              *
+*                                  Chapter 4                                   *
+*                                                                              *
+********************************************************************************
+////
+
+
+== Things
+
+Things in ALAN are the comprehensive term for actors and objects.
+Many verbs are defined to work with both actors and objects on the library level.
+For example examine works with both.
+Then, there are a number of verbs that work with only one.
+For example take works with objects only (actors cannot be inside a container, not even in the hero container, so they cannot be taken).
+Thus, if you want the hero to be able to take a cat or a bird, you should define them to be objects instead.
+Here is a list of transitive verbs work with actors only:
+
+// @FIXME: Improve formatting of verbs list:
+ask, ask_for, follow, give, kill, kill_with, say_to, talk, tell, show,
+
+while these verbs work with objects only:
+
+// @FIXME: Improve formatting of verbs list:
+bite, break,break_with, burn, burn_with, buy, clean, climb, climb_on, climb_through, close,close_with, consult, cut, cut_with, dig, dive_in, drink, drive, drop, eat, empty, empty_in, empty_on, examine, exit, extinguish, fill, fill_with, fire, fire_at, fix, get_off, go_to, jump_in, jump_on, knock, lie_in, lie_on, lift, light, lock, lock_with, look_in, look_out_of, look_through, open, open_with, play, pour, pour_in, pour_on, pry, pry_with, put, put_in, put_on, read, remove, remove_from, take, throw,tie
+
+The following verbs work with both but have slightly different outcomes:
+
+// @FIXME: Improve formatting of verbs list:
+kiss, listen, pull, push, push_with, rub, scratch, touch
+
+Lastly, there are some verbs that won't work with either.
+
+// @FIXME: Improve formatting of verbs list:
+answer, say, write
+
+as these verbs only can be used with quoted text:
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _answer "green"_ +
+&gt; _say "hello"_ +
+&gt; _write "The butler looks guilty" in notepad_
+================================================================================
+
+
+Note that verbs don't take locations as their direct objects.
+Thus, the following won't work:
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _examine bedroom_
+================================================================================
+
+To have something like the above work, you should define a separate bedroom object, present in the bedroom location, that can then be examined or manipulated in some other ways if needed:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE bedroom_object ISA OBJECT AT bedroom
+  NAME bedroom
+  DESCRIPTION "" -- an empty description so that the bedroom_object is
+                 -- not visible in the bedroom
+  VERB examine
+    DOES ONLY DESCRIBE bedroom. -- = show the description of the
+                                --   bedroom location
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+
+
+
+=== The two methods for examining things
+
+The library provides two ways for examining things.
+The first one is the traditional "VERB examine DOES (ONLY)...":
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE ball ISA OBJECT AT garden
+  VERB examine
+  DOES ONLY "It's a small red ball."
+  END VERB.
+END THE ball.
+--------------------------------------------------------------------------------
+
+
+which will yield
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _x ball_ +
+It's a small red ball.
+================================================================================
+
+
+Above, you would have to use DOES ONLY, because if you use only DOES, the library-defined response for all things would show first: "You notice nothing unusual about the ball. It's a small red ball."
+
+Another way for examining things is to use the `ex` attribute.
+`Ex` is here short for "examine":
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE ball ISA OBJECT AT garden.
+  HAS ex "It's a small red ball."
+END THE.
+--------------------------------------------------------------------------------
+
+
+which will yield the same response as the first method:
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _x ball_ +
+It's a small red ball.
+================================================================================
+
+
+but you notice how the needed formulation is shorter.
+Which of the two methods to use is completely voluntary and up to the game author.
+
+
+// EOF //
+

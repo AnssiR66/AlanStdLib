@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# _update.sh              v1.2.0 | 2019/05/05 | by Tristano Ajmone, MIT License.
+# update.sh               v1.3.0 | 2019/05/05 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                          BUILD STDLIB EXTRAS FOLDER                          #
@@ -8,7 +8,7 @@
 ################################################################################
 # Build and deploy the contents of the following "/extras/" subfolders:
 
-foldersList="tutorials"
+foldersList="manual tutorials"
 
 # The script will build, compile, convert and/or process the following type of
 # contents in the source folders "extras_src/<foldername>/":

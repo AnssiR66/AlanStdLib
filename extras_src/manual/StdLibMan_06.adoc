@@ -1,0 +1,674 @@
+////
+********************************************************************************
+*                                                                              *
+*                     ALAN Standard Library User's Manual                      *
+*                                                                              *
+*                                  Chapter 6                                   *
+*                                                                              *
+********************************************************************************
+////
+
+
+== Objects
+
+
+=== Pre-defined object classes in the library
+
+* `CLOTHING`
+* `DEVICE`
+* `DOOR`
+* `LIQUID`
+* `LISTED_CONTAINER`
+* `SOUND`
+* `SUPPORTER`
+* `WEAPON`
+* `WINDOW`
+
+[NOTE]
+================================================================================
+The BACKGROUND and SCENERY classes introduced in v1.0 have been removed.
+For backgrounds, use the distant or NOT reachable attributes.
+For scenery objects, use the attribute scenery.
+================================================================================
+
+// @ADDED:
+==== CLOTHING
+
+
+CLOTHING is a piece of clothing the hero or an NPC wears. As far as the hero is concerned, clothes are prevented from being worn in an illogical order, for example you cannot put on a shirt if you are already wearing a jacket, and so forth. For this, clothing objects have a number of numerical attributes that need to be used. Note that NPCs cannot wear clothing in layers.
+
+Thanks to Alan Bampton from whose 'xwear' extension the code for this class has been adopted.
+
+A piece of clothing in your game code should look something similar to the following four examples.
+Explanations are given after the examples.
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE jacket ISA CLOTHING AT lobby
+  IS topcover 32.
+END THE.
+--------------------------------------------------------------------------------
+
+
+Use `IN` to refer to containers:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE jeans ISA CLOTHING IN wardrobe
+  IS botcover 16.
+END THE.
+--------------------------------------------------------------------------------
+
+
+Worn by the player character (hero):
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE hat ISA CLOTHING
+  IS headcover 2.
+END THE.
+
+The hero ISA ACTOR
+  IS wearing {hat}.
+END THE hero.
+--------------------------------------------------------------------------------
+
+
+Worn by an NPC called Joe:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE sweater ISA CLOTHING
+  IS NOT takeable.
+  -- if the hero is not meant to take the NPCs clothing, it is important
+  -- to declare the piece of clothing to be NOT takeable.
+  -- it's not necessary to state a topcover attribute here,
+  -- as NPCs cannot wear clothing in layers.
+END THE.
+
+THE joe ISA ACTOR AT room1
+  IS wearing {sweater}.
+END THE joe.
+--------------------------------------------------------------------------------
+
+
+
+If you need the hero, or another ACTOR, to just carry a piece of clothing in their hands but not wear it, declare
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE hat ISA CLOTHING IN hero
+  IS headcover 2.
+END THE.
+
+THE jacket ISA CLOTHING IN man
+  IS topcover 32.
+END THE.
+--------------------------------------------------------------------------------
+
+
+Note above that you must list the CLOTHING worn by an actor in a set named IS wearing.
+
+Note that if the piece of CLOTHING worn by an NPC is not meant to be takeable by the player character, you should declare the piece of clothing to be NOT takeable.
+
+To recap: in defining a piece of CLOTHING, you should:
+
+1. define it ISA CLOTHING (and not ISA OBJECT)
+
+2. give it one of five attributes headcover, topcover, botcover, footcover or handcover; sometimes two of these are needed. Which attribute(s) to use depends on the type of CLOTHING; see the clothing table below.
+
+3. A number 2, 4, 8, 16, 32 or 64 needs to be added after the above attribute. You cannot decide the number yourself; look it up from the clothing table below. If the value of an attribute for a piece of CLOTHING is 0 in the table, don't mention this attribute in connection with your CLOTHING object.
+
+4. If the piece of CLOTHING is worn by any ACTOR – the hero or somebody else – be sure to include the piece of CLOTHING in the ACTOR's wearing attribute.
+
+-- The above is enough; the rest is then handled automatically by the library.
+
+
+
+
+===== The clothing table
+
+Here is the chart showing a selection of fairly typical clothing items and the values to set to obtain appropriate behaviour. Should you wish to create an article of CLOTHING not listed, usually a bit of lateral thought as to what it is most like and where it fits into the scheme of things will suggest a workable set of values, but be aware that you MUST use values in this chart, simply adding things with intermediate values is probably going to create nasty bugs:
+
+[cols="<25d,5*^15m",options="header"]
+|=========================================================================
+| Clothing       | headcover | topcover | botcover | footcover | handcover
+
+| hat                  |   2 |        0 |        0 |         0 |         0
+| vest/bra             |   0 |        2 |        0 |         0 |         0
+| undies/panties       |   0 |        0 |        2 |         0 |         0
+| teddy                |   0 |        4 |        4 |         0 |         0
+| blouse/shirt/T-shirt |   0 |        8 |        0 |         0 |         0
+| dress/coveralls      |   0 |        8 |       32 |         0 |         0
+| skirt                |   0 |        0 |       32 |         0 |         0
+| trousers/shorts      |   0 |        0 |       16 |         0 |         0
+| sweater/pullover     |   0 |       16 |        0 |         0 |         0
+| jacket               |   0 |       32 |        0 |         0 |         0
+| coat                 |   0 |       64 |       64 |         0 |         0
+| socks/stockings      |   0 |        0 |        0 |         2 |         0
+| tights/pantiehose    |   0 |        0 |        8 |         2 |         0
+| shoes/boots          |   0 |        0 |        0 |         4 |         0
+| gloves               |   0 |        0 |        0 |         0 |         2
+|=========================================================================
+
+
+
+The library, as it stands, also prevents wearing of duplicate clothes, or things that are logically mutually exclusive -- for example the player can wear a dress or a skirt, but not both.
+
+The hero's CLOTHING is described when the player types >inventory in-game.
+If you want the listing of the hero's clothing to appear also when the player types >x me, add "LIST worn." to the response of the examine verb of the hero:
+
+// @TODO: Highlight "LIST Worn":
+[source,alan]
+--------------------------------------------------------------------------------
+THE hero ISA ACTOR
+  VERB examine
+    DOES ONLY "You're the prime minister of Pospia."
+              LIST worn.
+  END VERB.
+END THE hero.
+--------------------------------------------------------------------------------
+
+
+
+_Example_.
+The implementation of the hero and his friend both wearing tuxedos at a wedding reception:
+
+// @TODO: Import external adventure instead (file: "example_OBJECTS_01.alan"):
+[source,alan]
+--------------------------------------------------------------------------------
+IMPORT 'library.i'.
+
+THE my_game ISA DEFINITION_BLOCK
+END THE.
+
+
+THE hero ISA ACTOR
+  IS wearing {tuxedo}.
+END THE.
+
+THE your_tuxedo ISA CLOTHING
+  NAME your tuxedo
+  INDEFINITE ARTICLE ""
+  DEFINITE ARTICLE ""
+  IS topcover 32.
+  IS botcover 16.
+END THE.
+
+THE restaurant ISA ROOM
+  DESCRIPTION
+    "All the wedding guests follow keenly as the newly-wedded
+     couple is slicing the cake together. Many are taking
+     photographs."
+END THE.
+
+THE people ISA PERSON AT restaurant
+  NAME guests NAME wedding folk NAME people
+  MENTIONED "the wedding folk"
+  DESCRIPTION ""
+
+  VERB examine
+    DOES ONLY "Everybody's smiling and laughing."
+  END VERB.
+END THE.
+
+THE couple ISA PERSON AT restaurant
+  NAME couple NAME bride NAME groom
+  DESCRIPTION ""
+
+  VERB examine
+    DOES "They look very happy."
+  END VERB.
+END THE.
+
+THE cake ISA OBJECT AT restaurant
+  IS edible.
+  DESCRIPTION ""
+
+  VERB examine
+    DOES ONLY "A big, delicious-looking cream cake."
+  END VERB.
+
+  VERB take
+    DOES ONLY "Hands off! Wait until the couple has got their slice."
+  END VERB.
+
+  VERB eat
+    DOES ONLY "Hands off! Wait until the couple has got their slice."
+  END VERB.
+END THE.
+
+THE sam ISA MALE AT restaurant
+  IS named.
+  IS wearing {sams_tuxedo}.
+
+  VERB examine
+    DOES ONLY "He's your friend since childhood." LIST sam.
+  END VERB.
+END THE sam.
+
+THE sams_tuxedo ISA CLOTHING
+  NAME his tuxedo NAME 'sam''s' tuxedo
+  IS NOT takeable.
+  INDEFINITE ARTICLE ""
+  DEFINITE ARTICLE ""
+END THE.
+
+START AT restaurant.
+--------------------------------------------------------------------------------
+
+
+
+// @ADDED:
+==== DEVICE
+
+DEVICE is a machine or an electronic device, for example a TV. It can be turned (=switched) on and off if it is not broken. Default attributes: NOT on, NOT broken. A DEVICE is by default described as being either on or off when examined.
+
+
+For example:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE thingummyjig ISA DEVICE AT lab
+END THE.
+--------------------------------------------------------------------------------
+
+
+yields by default
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _x thingummyjig_ +
+You notice nothing unusual about the thingummyjig. It is currently off.
+================================================================================
+
+
+
+Using the ex attribute, you can define a bit more personal response than "You notice nothing unusual..":
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE thingummyjig ISA DEVICE AT lab
+  HAS ex "It's full of knobs and buttons.".
+END THE.
+--------------------------------------------------------------------------------
+
+
+yields
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _x thingummyjig_ +
+It's full of knobs and buttons. It is currently off.
+================================================================================
+
+
+with the mention of its being on or off being displayed automatically.
+
+If you don't use the ex attribute but define the examine response to a DEVICE using "VERB examine DOES ONLY", the mention of its being on or off is not automatically displayed.
+You have to add it manually:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE thingummyjig ISA DEVICE AT lab
+  VERB examine
+    DOES "It's full of knobs and buttons."
+      IF THIS IS NOT 'on'
+        THEN "It is currently off."
+        ELSE "It is currently on."
+      END IF.
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+
+
+// @ADDED:
+==== DOOR
+
+
+DOOR can be opened, closed, locked and unlocked. It is by default closed (= NOT open) and NOT locked. Attributes: openable, NOT open, NOT lockable, NOT locked, HAS otherside door.
+A DOOR is described by default as being either open or closed when examined.
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE front_door ISA DOOR AT garden
+  NAME front door
+  DESCRIPTION ""
+END THE front_door.
+--------------------------------------------------------------------------------
+
+
+would yield by default:
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _x front door_ +
+You notice nothing unusual about the front door. It is currently closed.
+================================================================================
+
+
+Adding an ex attribute for the front door, you can change the default. Adding
+
+[source,alan]
+--------------------------------------------------------------------------------
+  HAS ex "It's a white wooden door leading into the house."
+--------------------------------------------------------------------------------
+
+
+will yield
+
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _x front door_ +
+It's a white wooden door leading into the house. It is currently closed.
+================================================================================
+
+
+If you add a response of your own to the examine verb of a DOOR, the default description of it being either open or closed won't show automatically.
+You should add the description manually, like this:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE front_door ISA DOOR AT garden
+  NAME front door
+  DESCRIPTION ""
+
+  VERB examine
+    DOES ONLY
+      "It's a white wooden door leading into the house."
+      IF front_door IS NOT open
+        THEN "It is currently closed."
+        ELSE "It is currently open."
+      END IF.
+  END VERB.
+END THE front_door.
+--------------------------------------------------------------------------------
+
+
+
+and then, the following will happen:
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _x door_ +
+It's a white wooden door leading into the house. It is currently closed.
+================================================================================
+
+
+
+===== Locked doors and keys
+
+To unlock a locked DOOR, it has to have a `matching_key` object attributed to it.
+Only this object can unlock the DOOR.
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE wooden_door ISA DOOR AT cellar
+  NAME wooden door
+  IS lockable. IS locked.
+  HAS matching_key iron_key.
+END THE wooden_door.
+
+THE iron_key ISA OBJECT IN bedroom_drawer
+END THE iron_key.
+--------------------------------------------------------------------------------
+
+
+By default, it will possible to unlock the DOOR both with "`>unlock door`" and "`>open door`" (if the player character is carrying the correct key at the time) as well as with the longer formulations "`>unlock door with key`" and "`>open door with key`".
+
+However, it is not possible to make this automatic by using compass directions only.
+For example, if the DOOR was to the east of the hero, the command "`>e`" cannot recognize on the library level whether the hero is carrying the key or not.
+The author must implement this manually, for example:
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE livingroom ISA ROOM
+  EXIT east TO kitchen
+    CHECK kitchen_door IS NOT locked
+      ELSE
+      IF copper_key IN hero
+        THEN "You unlock the door, open it and enter the kitchen."
+          LOCATE hero AT kitchen.
+          MAKE kitchen_door NOT locked.
+          MAKE kitchen_door open.
+        ELSE "You cannot go through the locked door."
+      END IF.
+  END EXIT.
+END THE.
+--------------------------------------------------------------------------------
+
+Every DOOR between two rooms needs an `otherside` attribute in order for the other side of the DOOR to behave correctly when the DOOR is opened, closed, unlocked and locked.
+
+The otherside of a DOOR need not have its other side defined any longer, as the library makes the deduction that if a DOOR has an `otherside`, this other side will have the original DOOR as its otherside in turn.
+Also, the `lockable`/`locked`/`NOT locked`/`openable`/`open`/`NOT open` attributes of a DOOR instance will be automatically assumed to be the same for its otherside counterpart at the start of a game.
+The same applies also to the `matching_key` attribute.
+That's why it is much shorter to implement the otherside instance of a DOOR:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE wooden_door1 ISA DOOR AT room1
+  NAME wooden door
+  IS lockable. IS locked.
+  HAS matching_key iron_key.
+  HAS otherside wooden_door2.
+END THE locked_door.
+
+THE wooden_door2 ISA DOOR AT room2
+  NAME wooden door
+END THE.
+--------------------------------------------------------------------------------
+
+Above, the `wooden_door2` is also lockable and locked at the start of the game, has `wooden_door1` as its `otherside` and can be opened with `iron_key`.
+(It wouldn't mess things up even if you did declare all of these attributes under `wooden_door2`, to be sure, but it is not necessary.)
+
+See also chapter Short examples, example 5.
+
+
+
+==== LIQUID
+
+LIQUID can be taken only if it is in a container.
+You can fill something with it, and you can pour it somewhere.
+A LIQUID is by default `NOT drinkable`.
+
+
+If you have some LIQUID in a container in your game, you should declare it this way:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE juice ISA LIQUID
+  IN bottle
+END THE juice.
+--------------------------------------------------------------------------------
+
+Then, taking and pouring LIQUIDs work smoothly.
+
+The verb `pour`, as defined in this library, also works for the container of a LIQUID; i.e. if there is some juice in a bottle, "`>pour bottle`" and "`>pour juice`" will work equally well.
+Note, however, that the verb `empty` is not a synonym for `pour`; `empty` only works for container objects.
+Consequently, "`>empty bottle`" will work but "`>empty juice`" won't.
+
+
+==== LIGHTSOURCE
+
+LIGHTSOURCE is `natural` or `NOT natural` (a natural LIGHTSOURCE is for example a match or a torch).
+It can be turned on and off, lighted and extinguished (= put out) if it is not broken.
+A natural LIGHTSOURCE cannot be turned on or off, it can only be lighted and extinguished (= put out).
+When examined, a LIGHTSOURCE is by default supplied with a description of whether it is providing light or not.
+The default attributes for a LIGHTSOURCE object are: `natural`, `NOT lit`.
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE torch ISA LIGHTSOURCE AT cave
+  IS lit.
+END THE.
+
+THE lamp ISA LIGHTSOURCE AT bedroom
+  IS NOT natural.
+END THE.
+--------------------------------------------------------------------------------
+
+
+Examining for example these instances in-game would yield
+
+[example,role="gametranscript"]
+================================================================================
+&gt;_x torch_
+
+You notice nothing unusual about the torch. It is currently lit.
+================================================================================
+
+and
+
+[example,role="gametranscript"]
+================================================================================
+&gt;_x lamp_
+
+You notice nothing unusual about the lamp. It is currently off.
+================================================================================
+
+
+(The opposites of the above messages would be "It is currently not lit." and "It is currently on.", respectively.)
+
+If you add a specific examine response for either, you can use the `ex` attribute for the lightsource object to describe it, and after your description there will be an automatic description of its being lit or not lit:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE lamp ISA LIGHTSOURCE AT bedroom
+  IS NOT natural.
+  HAS ex "It is an elegant table lamp with a blue lampshade."
+END THE.
+--------------------------------------------------------------------------------
+
+which yields
+
+[example,role="gametranscript"]
+================================================================================
+&gt;_x lamp_
+
+It is an elegant table lamp with a blue lampshade. It is currently off.
+================================================================================
+
+
+Using `VERB examine DOES ONLY…` you'll have to add manually the mention about the instance being on or off, for example:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE lamp ISA LIGHTSOURCE AT bedroom
+  IS NOT natural.
+  VERB examine
+    DOES ONLY "It is an elegant table lamp with a blue
+               lampshade."
+      IF THIS IS NOT lit
+        THEN "It is currently off."
+        ELSE "It is currently on."
+      END IF.
+  END VERB.
+END THE lamp.
+--------------------------------------------------------------------------------
+
+or
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE torch ISA LIGHTSOURCE AT cave
+  IS lit.
+  VERB examine
+    DOES ONLY "It is a crude wooden torch."
+      IF THIS IS NOT lit
+        THEN "It is currently not lit."
+        ELSE "It is currently lit."
+      END IF.
+  END VERB.
+END THE torch.
+--------------------------------------------------------------------------------
+
+
+==== LISTED_CONTAINER
+
+LISTED_CONTAINER is an object which has the container property.
+The contents of a LISTED_CONTAINER will be listed both after "`>look`" (= in the room description), "`>look in`" and "`>examine`", if it is open.
+(The contents of a normal container object, as working by default in Alan 3, are not automatically listed after "`>examine`" but only after "`>look`" (=room description) and "`>look in`").
+
+To implement a LISTED_CONTAINER do for example like this:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE box ISA LISTED_CONTAINER AT room1
+END THE box.
+--------------------------------------------------------------------------------
+
+The contents of a LISTED_CONTAINER are also listed when it is opened.
+This doesn't happen with normal containers (= OBJECTs that you give the container property).
+For the command "`>inventory`" to list the contents of a LISTED_CONTAINER object the hero is carrying, redefine the verb `inventory` under the `my_game` instance in your source file for example this way:
+
+[source,alan]
+--------------------------------------------------------------------------------
+VERB i
+  DOES
+    IF bag IN hero
+      THEN LIST bag.
+    END IF.
+
+    IF box IN hero
+      THEN LIST box.
+    END IF.
+END VERB.
+--------------------------------------------------------------------------------
+
+
+
+If you don't do this, the bag and the box will be listed after the command "`>inventory`" in the following way:
+
+[example,role="gametranscript"]
+================================================================================
+You are carrying a bag and a box.
+================================================================================
+
+
+only.
+But with the above additions, the outcome is for example
+
+[example,role="gametranscript"]
+================================================================================
+You are carrying a bag and a box.
+The bag contains a loaf of bread.
+The box is empty.
+================================================================================
+
+To declare a LISTED_CONTAINER the contents of which should not be listed after "`>look`" or "`>examine`", declare it an `opaque container` in the following way:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE box ISA LISTED_CONTAINER
+  OPAQUE CONTAINER
+END THE.
+--------------------------------------------------------------------------------
+
+Things in an opaque container cannot be seen or manipulated.
+To change this, declare for example
+
+[source,alan]
+--------------------------------------------------------------------------------
+MAKE box NOT OPAQUE.
+--------------------------------------------------------------------------------
+
+(This is handled automatically by the library when a container is opened or closed.)
+
+
+
+
+[WARNING]
+================================================================================
+ADAPTED UP TO HERE. TO BE CONTINUTED...
+================================================================================
+
+
+
+// WAITING TO BE CLEANED UP
+
+
+// EOF //
+

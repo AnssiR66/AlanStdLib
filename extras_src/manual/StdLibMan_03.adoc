@@ -1,0 +1,690 @@
+////
+********************************************************************************
+*                                                                              *
+*                     ALAN Standard Library User's Manual                      *
+*                                                                              *
+*                                  Chapter 3                                   *
+*                                                                              *
+********************************************************************************
+////
+
+
+
+== Locations
+
+Location classes pre-defined in the library:
+
+* `ROOM`
+* `SITE`
+* `DARK_LOCATION`
+
+
+Default location attributes pre-defined in the library:
+
+* `IS lit.`
+* `IS visited 0.`
+* `IS described 0.`
+
+(For specific attributes for ROOMs, SITEs and DARK_LOCATIONs, see below.)
+
+Using the standard library, basic locations are implemented just like advised in the ALAN Manual, for example:
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE bedroom ISA LOCATION
+  DESCRIPTION "This is your bedroom. Your bathroom is to the north."
+  EXIT north TO bathroom.
+END THE.
+
+THE bathroom ISA LOCATION
+  DESCRIPTION "This is the bathroom. Your bedroom is back to the south."
+  EXIT south TO bedroom.
+END THE.
+--------------------------------------------------------------------------------
+
+=== ROOM
+
+If you want to implement an indoor location, you can declare it ISA ROOM:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE kitchen ISA ROOM
+  DESCRIPTION "..."
+  ...
+END THE kitchen.
+--------------------------------------------------------------------------------
+
+All ROOMs will automatically have walls, a floor and a ceiling.
+
+There are three attributes for describing the walls, the floor and the ceiling in any ROOM:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS floor_desc "".
+HAS walls_desc "".
+HAS ceiling_desc "".
+--------------------------------------------------------------------------------
+
+If the author doesn't change these default values, the default description, at will be "You notice nothing unusual about the \[object\]." (Naturally, these commands won't work in outdoor locations.)
+
+
+To have a more varied effect, you can change the descriptions this way:
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE livingroom ISA ROOM
+  HAS floor_desc "There is an exquisite white carpet on the floor.".
+  HAS walls_desc "The wallpaper has a nice flower pattern.".
+  HAS ceiling_desc "A huge chandelier is hanging from the ceiling.".
+END THE livingroom.
+
+THE kitchen ISA ROOM
+  HAS walls_desc "The walls are lined with shelves.".
+  -- here, examining the floor and the ceiling would show the default
+  -- description, as they are not especially defined
+END THE kitchen.
+--------------------------------------------------------------------------------
+
+
+You can change the description of a room's floor, walls or ceiling mid-game at any time:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE carpet ISA OBJECT AT livingroom
+  VERB move
+    CHECK trapdoor NOT IN livingroom
+      ELSE "There is no need to move the carpet any longer."
+    DOES ONLY
+      "You move the carpet, revealing a trapdoor!"
+      LOCATE trapdoor IN livingroom.
+      SET floor_desc OF livingroom TO "A trapdoor has been revealed when you
+                                      moved the carpet. It leads down to
+                                      darkness.".
+  END VERB.
+END THE carpet.
+
+THE trapdoor ISA DOOR
+END THE trapdoor.
+--------------------------------------------------------------------------------
+
+=== SITE
+
+If you want to implement an outdoor location, you can declare it ISA SITE:
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE meadow ISA SITE
+  DESCRIPTION "..."
+  ...
+END THE meadow.
+--------------------------------------------------------------------------------
+
+All SITEs will automatically have a ground and a sky.
+
+There are two attributes for describing the ground and the sky in any SITE:
+
+
+* `HAS ground_desc "".`
+* `HAS sky_desc "".`
+
+If the author doesn't change these default values, the default description, at "You notice nothing unusual about the \[object\]." (Naturally, these commands won't work in indoor locations.)
+
+
+Again, you can change these messages at any point mid-game:
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE meadow ISA SITE
+  DESCRIPTION "Green grass, tall trees and the big sky above you. What could
+              be more pleasant?"
+  HAS sky_desc "The sky is blue."
+END THE.
+
+EVENT evening_falls
+  "It's getting late. The sun starts to go down and the sky changes colour."
+  SET sky_desc OF meadow TO "The sky is red.".
+END EVENT.
+
+START AT meadow.
+SCHEDULE evening_falls AT meadow AFTER 20.
+--------------------------------------------------------------------------------
+
+
+[NOTE]
+================================================================================
+__NOTE 1__: To manipulate the floor, the walls and the ceiling (in indoor locations) and the ground and the sky (in outdoor locations), see the following example. Here, the hero digs the ground on the meadow:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE meadow ISA SITE
+  DESCRIPTION "Green grass, tall trees and the big sky above you. What could
+              be more pleasant?"
+  HAS sky_desc "The sky is blue."
+  VERB dig
+    DOES ONLY
+    IF obj = ground
+      THEN "You dig the ground with your shovel and find a chest!"
+        -- Here, you could change the description of the ground if you wish:
+        --   SET ground_desc OF meadow TO "There's a hole in the ground, left
+        --                                there by your digging efforts.".
+      ELSE "That doesn't work."
+    END IF.
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+
+Notice the bit `IF obj = ground` above. The library-defined indoor and outdoor objects, besides the `ground`, are `sky`, `floor`, `walls` and `ceiling`. You can refer to them in your coding in the way illustrated above when you need to manipulate them in any way.
+================================================================================
+
+
+[NOTE]
+================================================================================
+__NOTE 2__: Besides using the `floor_desc`, `walls_desc` etc attributes for the indoor and outdoor location objects, you can also do like in the following example.
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE my_game ISA DEFINITION_BLOCK
+  VERB examine
+    DOES ONLY
+    CHECK obj <> walls
+      ELSE
+        IF hero AT kitchen
+         THEN "The walls are lined with shelves."
+        ELSIF hero AT livingroom
+          THEN "The wallpaper has a nice flower pattern."
+        ELSIF hero AT ...
+        END IF.
+    AND obj <> floor
+      THEN ...
+      ...
+  END VERB.
+END THE my_game.
+--------------------------------------------------------------------------------
+
+================================================================================
+
+=== DARK_LOCATION and the lit attribute
+
+
+In dark locations, actions requiring seeing are automatically disabled by the library. All dark locations have the attribute `NOT lit`. The locations belonging to the subclass DARK_LOCATION need a lit LIGHTSOURCE object to be present to be lit. To implement a DARK_LOCATION, it is enough to implement it for example in the following way:
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE basement ISA DARK_LOCATION
+  EXIT up TO hall.
+END THE.
+--------------------------------------------------------------------------------
+
+The description of a dark location will be by default "It is pitch black. You can't see anything at all." This default can be changed by editing the `dark_loc_desc` attribute of the `my_game` instance (see p. 78).
+
+If you add a description of your own to a `DARK_LOCATION`, this description will be shown only if the location is lit up by any means:
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE basement ISA DARK_LOCATION
+  DESCRIPTION "Only useless junk can be seen lying around."
+  EXIT up TO hall.
+END THE.
+--------------------------------------------------------------------------------
+
+
+In order that a DARK_LOCATION is lighted, a LIGHTSOURCE object (a lantern, a match, a ceiling lamp, any other kind of light object) should be present.
+
+In darkness, you are not able to manipulate things other than turn on a LIGHTSOURCE and drop items you're carrying (these checks are found in `lib_verbs.i`). You can exit normally and use verbs that don't require seeing, such as smell, listen and think. If you are in a DARK_LOCATION with an NPC (= a non-player character), you are able to communicate with them by asking and telling, but not by showing and giving. If you wish to change these restrictions, see the respective verbs in `lib_verbs.i` and modify their checks.
+
+Note that you cannot change the name of a location mid-game. Thus, if you define a dark location called for example 'Darkness' and wish to make it lit at some point in the game, the name will still be 'Darkness' even if the location description can be changed to describe the illuminated location. To show a change in the location name, you must locate the hero in another location when the dark location is lit. For example,
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE lantern ISA LIGHTSOURCE
+  VERB turn_on
+    DOES
+    IF hero AT darkness
+      THEN LOCATE hero AT treasure_chamber.
+    END IF.
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+Alternatively, you can also use a rule, for example
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+WHEN lantern IS lit
+  AND hero AT darkness
+THEN LOCATE hero AT treasure_chamber.
+--------------------------------------------------------------------------------
+
+Note that you won't always need to define a dark location to be a member of the subclass DARK_LOCATION. This applies in cases when you don't wish to implement LIGHTSOURCE objects to make locations lit or not lit. (All location instances have by default the attribute lit and they can be made NOT lit when needed.) For example, suppose you want all dark locations in the game to become lighted simultaneously. It can be done for example like this:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE main_power_switch ISA DEVICE AT lobby
+  VERB switch_on
+    DOES ONLY
+      FOR EACH dl ISA LOCATION, IS NOT lit
+        DO
+        MAKE dl lit.
+      END EACH.
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+If we had used the DARK_LOCATION class above, all locations to be lighted should have had a LIGHTSOURCE object present in them, and all these LIGHTSOURCE objects would have needed to be changed to lit, which would have meant extra programming.
+
+
+Even normal locations, when not lit, will have the description "It is pitch black. You can't see anything at all.", so you can use the above method with no worries. The only reason for a specific DARK_LOCATION subclass to exist is to make it automatic for them to be lit or NOT lit when the hero is carrying around and/or turning on and off LIGHTSOURCES so that the game author won't constantly need to remember to change the attribute of the location to lit or NOT lit in all imaginable cases.
+
+Also consider the following case: suppose the hero can make a basement (a location belonging to the class DARK_LOCATION) lighted by turning on a light switch that is at the top of the stairs leading to the basement (a different location from the basement itself). We program the light switch object so that when the hero turns it on, the basement will be lit. All ok so far. However, when the hero enters the actual basement, it will be dark. Why? Because there is no LIGHTSOURCE present in the basement; we just changed the attribute of the basement location to lit, but this is not enough. A check at entering any DARK_LOCATION will make the location dark if no lit LIGHTSOURCE is present. You should program a lamp, a LIGHTSOURCE object, to be present in the basement, and this lamp should be made lit at the same time when the hero turns on the switch at the top of the stairs. But again, this is more than is necessary to reach the wanted effect. Here, like above, you could just make the basement a normal location and not a DARK_LOCATION (and make sure it is NOT lit to start with), and just change the attribute to lit when the hero turns on the light switch:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE top_of_stairs ISA ROOM
+  NAME 'At the top of the stairs'
+  EXIT down TO basement.
+  END THE.
+
+THE light_switch ISA OBJECT AT top_of_stairs
+  IS NOT 'on'.
+  VERB turn_on
+    DOES ONLY
+      IF light_switch IS NOT 'on'
+        THEN MAKE light_switch 'on'.
+          MAKE basement lit.
+          "You switch on the basement light."
+        ELSE "The light is already switched on."
+      END IF.
+  END VERB.
+
+  VERB turn_off
+    DOES ONLY
+      IF light_switch IS 'on'
+        THEN MAKE light_switch NOT'on'.
+          MAKE basement NOT lit.
+          "You switch off the basement light."
+        ELSE "The light is already switched off."
+      END IF.
+  END VERB.
+END THE.
+
+THE basement ISA ROOM
+  -- and not a DARK_LOCATION
+  IS NOT lit.
+END THE basement.
+--------------------------------------------------------------------------------
+
+
+To recap: use the DARK_LOCATION class when a LIGHTSOURCE object determines whether a location is lit or dark; swap between the lit/NOT lit attributes, inherent to all locations, when you don't want to refer to any light sources affecting whether a location is lit or dark.
+
+
+=== The visited and described attributes
+
+
+// @ADDED SUB-HEADING:
+==== visited
+
+[source,alan]
+--------------------------------------------------------------------------------
+IS visited 0.
+--------------------------------------------------------------------------------
+
+A location not visited at all has the `visited` value 0.
+When the hero enters it the first time, the `visited` value will change to 1.
+On the second visit the value will be 2, etc.
+
+Now, in your source code you can define something like the following:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE kitchen ISA LOCATION
+  DESCRIPTION
+    "You are in the kitchen."
+  IF visited OF THIS = 1
+    THEN "This is your first time here."
+    ELSE "You remember you've been here before."
+  END IF.
+END THE.
+--------------------------------------------------------------------------------
+
+You can also check whether the hero has been in a LOCATION if needed:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE king ISA PERSON
+  VERB ask
+    WHEN act
+    IF topic = treasure_chamber
+      THEN
+        IF visited OF treasure_chamber = 0
+          THEN "You are not supposed to know anything
+                about the treasure chamber - you
+                haven't found it yet."
+          ELSE """Just take what you want from the
+                chamber"", the king smiles."
+        END IF.
+    END IF.
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+
+// @ADDED SUB-HEADING:
+==== described
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+IS described 0.
+--------------------------------------------------------------------------------
+
+Suppose you want the location description to be different after the first time the description is shown, even if you are in the LOCATION still for the first time.
+Then, you can use the `described` attribute. A LOCATION not described at all has the described value 0.
+When the player reads the location description for the first time, the value is 1, the next time the value will be 2, etc:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE library ISA ROOM
+  DESCRIPTION
+    IF described OF THIS = 1
+      THEN "There is an old man reading at a desk in one of the
+            corners."
+      ELSE "The old man keeps on reading at his desk."
+    END IF.
+END THE.
+--------------------------------------------------------------------------------
+
+or:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE meadow ISA SITE
+  DESCRIPTION
+    "Flies and other insects buzz around you"
+    IF described OF meadow > 5
+      THEN ", which starts to annoy you little by little"
+    END IF.
+    "."
+END THE.
+--------------------------------------------------------------------------------
+
+
+
+
+=== Changing the verb outcome in a certain location
+
+Sometimes you might wish to have a verb behave differently in a certain location or locations.
+You can do it like this:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE basement ISA LOCATION
+  DESCRIPTION "This is the basement of your house. Stairs lead up."
+  EXIT up TO livingroom.
+  VERB jump
+    DOES ONLY "The ceiling is too low here."
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+or
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE exhibition_hall ISA ROOM
+  DESCRIPTION "You are in the main exhibition of the museum. There is
+               exquisite art all around you."
+  VERB take
+    DOES ONLY "Trying to take anything here just like that would
+               set the alarm off immediately."
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+
+In the first example, the response to the jump verb has been changed to fit the low basement better.
+Notice in the second example that the verb
+`take` doesn't apply to the location exhibition_hall even if it is listed within it ( = `>take hall` won't be a successful action), but sooner to the objects found in that location.
+Thus, if there was an exquisite vase in the exhibition hall and the hero tried to take it, the above message would be shown.
+Verbs cannot refer to locations, they usually apply to things or numerals.
+Thus, the above coding will result in:
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _take vase_ +
+Trying to take anything here just like that would set the alarm off +
+immediately.
+================================================================================
+
+
+At times, you might wish to have the location-specific verb restriction lifted in certain situations.
+Then, you can use a check in the verb within the location.
+In the following example, the hero will be able to take the vase, or anything else, in the exhibition hall on the condition that an alarm device is turned off:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE exhibition_hall ISA ROOM
+  DESCRIPTION "You are in the main exhibition of the museum. There is
+               exquisite art all around you."
+  VERB take
+    CHECK alarm IS NOT 'on'
+      ELSE "Trying to take anything here just like that would
+            set the alarm off immediately."
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+
+Notice that there is no `DOES` section in the take verb above.
+If the alarm is turned off, the take action would be successful, as defined by default in the library.
+You would naturally need to define an alarm object here, for example:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE alarm ISA DEVICE
+  IS 'on'.
+  VERB examine
+    DOES ONLY "The main alarm switch is a small metal lever."
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+
+
+=== Nested locations
+
+Nesting locations is straightforward, as described in the ALAN Manual:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE house ISA LOCATION
+END THE house.
+
+THE kitchen ISA LOCATION AT house
+END THE kitchen.
+
+THE bedroom ISA LOCATION AT house
+END THE bedroom.
+
+THE livingroom ISA LOCATION AT house
+END THE livingroom.
+--------------------------------------------------------------------------------
+
+
+
+This is handy when you want for example a certain OBJECT to be found in many similar LOCATIONs but don't want to implement the OBJECT in each of them separately:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE ceiling_lamp ISA OBJECT AT house
+END THE.
+--------------------------------------------------------------------------------
+
+The `ceiling_lamp` would now be found in the kitchen, bedroom and living-room.
+Remember, however, that if you implement a takeable OBJECT this way, the OBJECT will disappear from the other LOCATIONs when the hero takes it, and if the OBJECT will be affected in some way, for example broken, it will be broken in all of the LOCATIONs it is found in.
+Also, the ceiling lamp in the above example, if implemented as a LIGHTSOURCE, would be lit/unlit in all of the three locations simultaneously.
+
+
+NOTE: An OBJECT implemented this way won't show automatically in the nested LOCATIONs. You have to add a mention of it in the individual location descriptions manually.
+
+If you want a certain object to be present in all indoor or in all outdoor locations of your game, you can define
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE sun ISA OBJECT
+  IS distant.
+END THE sun.
+--------------------------------------------------------------------------------
+
+or
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE carpet ISA OBJECT
+  IS scenery.
+END THE.
+--------------------------------------------------------------------------------
+
+(Indoor and outdoor are library-defined locations.
+All ROOMs are nested in indoor and all SITEs are nested in outdoor.
+Also, the objects wall, floor and ceiling are located in indoor, and the ground and the sky are in outdoor.
+That's why the wall, floor and ceiling objects are found in every ROOM, and the ground and sky objects are found in every SITE.)
+
+
+If you want a certain object to present in absolutely every location of your game, you should define for example
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE sea ISA OBJECT AT my_game
+END THE sea.
+--------------------------------------------------------------------------------
+
+[NOTE]
+================================================================================
+For SITEs and ROOMs to work correctly when nested, the mother location should be of the same kind as the nested locations.
+For example, in the example above, if you declare the kitchen, the bedroom and the living-room to be ROOMs, the house instance should also be declared a ROOM.
+Sometimes this can bring problems: say you have a driveway location, with a nested location where you are inside your car.
+The driveway would naturally be a SITE (outdoor location), while the inside of your car is more naturally a ROOM.
+The best way to solve this is to make both of these locations just LOCATIONs and implement your own floor, walls and ceiling objects for the inside of the car, and your own ground and sky objects for the driveway.
+In fact, you really don't need the walls instance for the car interior, as one would normally refer to the car doors, not to any walls:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE driveway ISA LOCATION
+END THE driveway.
+
+THE driveway_ground ISA OBJECT AT driveway
+  NAME ground
+END THE.
+
+THE driveway_sky ISA OBJECT AT driveway
+  NAME sky
+END THE.
+
+THE inside_car ISA LOCATION AT driveway
+END THE inside_car.
+
+THE car_floor ISA OBJECT AT inside_car
+  NAME floor
+END THE.
+
+THE car_ceiling ISA OBJECT AT inside_car
+  NAME ceiling
+END THE.
+--------------------------------------------------------------------------------
+================================================================================
+
+// @FIXME: Change XREf to page number:
+
+Using nested locations, you can also make selected locations behave in a similar way.
+Going back to the house example on p. 20, you could define
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE house ISA LOCATION
+  VERB jump
+    DOES ONLY "It's better to jump outdoors."
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+and this message would display for `>jump` if the hero tried that action in the bedroom, in the kitchen or in the living-room.
+
+You can also check if the hero is in a certain area, or group of locations:
+
+[source,alan]
+--------------------------------------------------------------------------------
+IF location OF hero AT house
+  THEN...
+--------------------------------------------------------------------------------
+
+or
+
+[source,alan]
+--------------------------------------------------------------------------------
+CHECK location OF hero AT house
+  ELSE...
+--------------------------------------------------------------------------------
+
+
+Thus, we could have for example
+
+[source,alan]
+--------------------------------------------------------------------------------
+SCHEDULE explosion AT hero AFTER 5.
+
+EVENT explosion
+  IF location OF hero AT house -- (house is the "area" where the hero
+                               -- is located)
+    THEN "From an open window, you hear an explosion out in the street."
+  ELSIF hero AT garden
+    THEN "You hear an explosion nearby."
+  END IF.
+END EVENT.
+--------------------------------------------------------------------------------
+
+The locations nested in a certain mother location don't have to be adjacent (= connected by exits with each other).
+Bearing this in mind, you can group even very different and distant locations together, as long as you want a certain object to be found, a certain verb outcome to happen, or even a certain event to take place only in those locations and not anywhere else in the game:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE thief_area ISA ROOM
+END THE.
+
+THE round_cave ISA ROOM AT thief_area
+END THE.
+
+THE inn ISA ROOM AT thief_area
+END THE.
+
+THE train_carriage2 ISA ROOM AT thief_area
+END THE.
+
+EVENT thief_appears
+  IF location OF hero AT thief_area
+    THEN "A thief appears suddenly from nowhere and snatches something
+          from you!"
+          LOCATE RANDOM IN hero IN thief.
+          -- (This line would locate a random object from the hero's
+          -- inventory in the possession of the thief.)
+    END IF.
+  SCHEDULE thief_appears AT hero AFTER RANDOM 10 TO 20.
+END EVENT.
+--------------------------------------------------------------------------------
+
+
+Note that the event is scheduled to trigger "AT hero".
+If you defined "SCHEDULE thief_appears AT thief_area AFTER 10 TO 20." above, the event would trigger only in the mother location thief_area which the hero never actually visits (it's just the name of the "area" where the actual locations where the thief appears are nested) and thus the event would be invisible to the player.
+Events are not in scope in "mother locations" of nested locations.
+
+
+
+// EOF //
+

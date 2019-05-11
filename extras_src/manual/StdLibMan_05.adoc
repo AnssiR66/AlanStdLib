@@ -1,0 +1,610 @@
+////
+********************************************************************************
+*                                                                              *
+*                     ALAN Standard Library User's Manual                      *
+*                                                                              *
+*                                  Chapter 5                                   *
+*                                                                              *
+********************************************************************************
+////
+
+
+== Actors
+
+=== Pre-defined actor classes in the library
+
+* `PERSON`
+* `MALE`
+* `FEMALE`
+
+There are two points where a PERSON differs from an ordinary ACTOR.
+Firstly, a PERSON has the ability to talk, in other words the verbs ask, ask_for, say_to, talk_to and tell work with PERSONs only (or with ACTORs that have the attribute CAN talk).
+Secondly, ACTORs and PERSONs are described differently when their inventory is empty.
+PERSONs are described as for example "The man is empty-handed." while other ACTORs are described as for example "The dog is not carrying anything."
+
+Based on the above, the following codes are interchangeable (except as to how the empty inventory is described):
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE bob ISA ACTOR
+  CAN talk.
+END THE bob.
+
+THE bob ISA PERSON
+END THE bob.
+--------------------------------------------------------------------------------
+
+
+MALE and FEMALE are subclasses of PERSON, so they have the ability to talk.
+Using MALE and FEMALE, you don't have to worry about the pronouns 'he' and 'she' and their various forms showing correctly; the library will take care of all default cases.
+If you just use PERSON or ACTOR instead of MALE or FEMALE, you should remember to include the PRONOUN statement to ensure that the pronouns referring to a person show correctly.
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE bob ISA ACTOR
+  CAN talk.
+  PRONOUN him.
+END THE.
+--------------------------------------------------------------------------------
+
+which would be a lot shorter if coded as
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE bob ISA MALE
+END THE.
+--------------------------------------------------------------------------------
+
+
+If you need to implement a male or female animal, do like this:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE dog ISA MALE
+  CAN NOT talk.
+END THE dog.
+--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+=== Pre-defined actor attributes in the library
+
+[source,alan]
+--------------------------------------------------------------------------------
+IS NOT inanimate.
+IS NOT following.
+IS NOT sitting.
+IS NOT lying_down.
+IS NOT named.
+IS wearing {clothing}.
+IS NOT compliant.
+--------------------------------------------------------------------------------
+
+
+They are described in more detail below:
+
+// @ADDED:
+==== inanimate
+
+[source,alan]
+--------------------------------------------------------------------------------
+IS NOT inanimate.
+--------------------------------------------------------------------------------
+
+Verbs push, push_with, rub, scratch, search, touch and touch_with won't have successful outcomes with animate objects (= ACTORS).
+To ensure this, the (NOT) inanimate attribute is used. All things other than ACTORs are inanimate.
+
+// @ADDED:
+==== following
+
+[source,alan]
+--------------------------------------------------------------------------------
+IS NOT following.
+--------------------------------------------------------------------------------
+
+By default, NPCs won't follow the hero around the game map.
+To make any ACTOR follow the hero, give that actor the following attribute, for example:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE bear ISA ACTOR
+  VERB feed
+    DOES "You give the steak to the bear. It seems to like it."
+         MAKE bear following.
+  END VERB.
+END THE bob.
+--------------------------------------------------------------------------------
+
+
+
+If you wish to have an ACTOR follow the hero right from the start of the game, you can naturally just declare
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE servant ISA MALE
+  IS following.
+END THE.
+--------------------------------------------------------------------------------
+
+To stop an ACTOR from following the hero, just make the ACTOR NOT following.
+
+[source,alan]
+--------------------------------------------------------------------------------
+MAKE bear NOT following.
+MAKE servant NOT following.
+--------------------------------------------------------------------------------
+
+// @ADDED:
+==== sitting and lying_down
+
+[source,alan]
+--------------------------------------------------------------------------------
+IS NOT sitting.
+IS NOT lying_down.
+--------------------------------------------------------------------------------
+
+
+
+These two attributes exist to allow the author to make the hero, or another ACTOR, sitting or lying down.
+The outcomes for the commands >sit and >lie down are not successful by default, however, and must be manually implemented by the author:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE my_game ISA DEFINITION_BLOCK
+  VERB sit
+    DOES ONLY "You sit down on the floor."
+              MAKE hero sitting.
+  END VERB.
+
+  VERB lie_down
+    DOES ONLY "You lie down on the floor."
+              MAKE hero lying_down.
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+// @FIXME: Add XRef:
+Similarly, it is possible for the hero to sit or lie down on a SUPPORTER object (>lie on bed, >sit on chair), but the action is not successful by default and must be manually implemented by the author. Refer to: Objects => Supporters.
+
+// @ADDED:
+==== named
+
+[source,alan]
+--------------------------------------------------------------------------------
+IS NOT named.
+--------------------------------------------------------------------------------
+
+If you don't need an article in front of an ACTOR name (for example 'Jim', as opposed to for example 'a/the man'), declare the instance as named.
+By default, all ACTORs are NOT named.
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE jim ISA ACTOR AT room1
+  IS named.
+END THE.
+--------------------------------------------------------------------------------
+
+If you have in your game an ACTOR that starts off as unnamed (such as 'a man'), and the player learns his name later on (say, 'Jim'), you should define the ACTOR in for example the following way to make the player able to refer to him with both 'man' and 'Jim':
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE jim ISA PERSON AT room1
+  NAME man
+  NAME Jim
+
+  PRONOUN him
+
+  MENTIONED
+    IF jim IS NOT named
+    THEN "man"
+    ELSE "Jim"
+    END IF.
+
+  VERB ask
+    WHEN act
+      IF topic = name
+        THEN """My name is Jim"", he replies."
+             MAKE jim named.
+      END IF.
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+The library takes care of the indefinite/definite article showing before man when the actor (here Jim) is not named yet.
+
+// @ADDED:
+==== wearing
+
+[source,alan]
+--------------------------------------------------------------------------------
+IS wearing {clothing}.
+--------------------------------------------------------------------------------
+
+By default, the hero character, or any other ACTOR for that matter, isn't described as wearing any particular clothing.
+If the author implements any clothing for the hero, this will show up by default in the inventory verb, for example:
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _inventory +_
+You're empty-handed. You're wearing a T-shirt and shorts.
+================================================================================
+
+To implement CLOTHING for the hero, first implement the piece of clothing:
+
+// @CHECK: I think that dashes are now usable, after a recent bug fix in Alan.
+//       Need to check that (the EGA test adventure defines T-Shirts).
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE tshirt ISA CLOTHING
+  NAME shirt -- you cannot use a dash in-game, so you cannot
+             -- name the object "t-shirt" here
+  IS topcover 8.
+  DESCRIPTION ""
+END THE.
+--------------------------------------------------------------------------------
+
+
+// @FIXE: XRef pointing to page:
+(See the table on Clothing (p.39) for assigning values to the various pieces of clothing.)
+
+Above, we have created the piece of clothing (in this example, a shirt).
+Now, if we wish to make the hero wear it, we must define the hero:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE hero ISA ACTOR
+  IS wearing {tshirt}.
+END THE hero.
+--------------------------------------------------------------------------------
+
+
+This would produce by default
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _inventory +_
+You are empty-handed. You are wearing a shirt.
+================================================================================
+
+The IS wearing attribute is needed when any actor, not just the hero, is described as wearing something.
+Remember to place CLOTHING items inside curly brackets.
+If there are more than one item in the set wearing, separate the items with a comma:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE bob ISA ACTOR AT livingroom
+  IS wearing {suit, tie, bowlerhat}.
+END THE.
+--------------------------------------------------------------------------------
+
+
+or
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE boy ISA ACTOR AT street
+  IS wearing {bike_helmet}.
+END THE.
+--------------------------------------------------------------------------------
+
+
+NOTE: the older way to define clothing for the hero is to use the `worn` container:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE shirt ISA CLOTHING IN worn
+  IS topcover 8.
+END THE shirt.
+--------------------------------------------------------------------------------
+
+
+This is still possible in the current version of the library and works without any problems.
+
+Pieces of CLOTHING can be put on or taken off by the hero by default, for example
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _wear shirt_ +
+You put on the shirt.
+
+&gt; _take off shirt_ +
+You take off the shirt.
+================================================================================
+
+
+This is handled automatically by the library.
+
+
+The wear verb, defined in the library, automatically includes the piece of CLOTHING in the wearing set of the actor.
+The alternative syntaxes for wear are put 'on' (obj) and put (obj) 'on'.
+If you wish to use any verb or situation of your own to make the hero wear a piece of CLOTHING mid-game, you have two alternatives:
+
+1. `INCLUDE shirt IN wearing OF hero.`
+2. `LOCATE shirt IN worn.`
+
+The take_off verb automatically excludes the applicable piece of CLOTHING from the wearing set.
+If you wish to have a piece of CLOTHING doffed by an actor any circumstances, do like below:
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+EVENT blow
+  "There is a strong gust of wind which blows the hat off your head!"
+  LOCATE hat IN ditch.
+END EVENT.
+--------------------------------------------------------------------------------
+
+
+// @FIXME: XRef:
+Refer also to: Objects => Clothing.
+
+// @ADDED:
+==== compliant
+
+[source,alan]
+--------------------------------------------------------------------------------
+IS NOT compliant.
+--------------------------------------------------------------------------------
+
+
+An ACTOR only gives something to the hero if it is in a compliant mood.
+In practice, this happens by default only when the hero asks the ACTOR for something.
+For example, take_from is not successful by default with ACTORs.
+
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _take apple from man_ +
+That seems to belong to the man.
+================================================================================
+
+
+Implicit taking of OBJECTs is not successful, either, if the OBJECT happens to be held by an NPC who is not compliant, and the following happens:
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _eat apple_ +
+That seems to belong to the man.
+================================================================================
+
+
+The verb ask_for works by default, whether the NPC is compliant or not:
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _ask man for apple_ +
+The man gives you the apple.
+================================================================================
+
+
+If we declare:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE man ISA MALE AT room1
+  IS compliant.
+END THE.
+--------------------------------------------------------------------------------
+
+then, the outcome for taking and implicit taking would be successful:
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _take apple_ +
+Taken.
+================================================================================
+
+
+or
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _eat apple_ +
+(taking the apple first) +
+You eat all of the apple.
+================================================================================
+
+
+To disable even the verb ask_for, so that the NPC won't give you something even if you ask for it, use DOES ONLY at the ACTOR instance:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE man ISA MALE AT room1
+  ...
+  VERB ask_for
+    WHEN act
+      DOES ONLY "He doesn't seem to be willing to fulfill your wish."
+  END VERB.
+END THE man.
+--------------------------------------------------------------------------------
+
+
+
+=== The hero
+
+The hero instance is left out of the library altogether and can be defined from scratch by the game author.
+You won't need to define the hero in your game at all if you're happy with the response "You notice nothing unusual about yourself." when the player types >x me (= examine myself) and if no attributes are needed for the hero (such as IS (NOT) hungry, HAS strength 20, etc.).
+There are also numerous other verb outcomes (than for examine) for the hero defined by default in the library:
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _kick me_ +
+It doesn't make sense to kick yourself.
+================================================================================
+
+and so on. However, if you need to define attributes or verb responses for the hero, or if the hero is described as wearing any kind of CLOTHING, you need to implement the hero in your own game source file:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE hero ISA ACTOR
+  HAS strength 20.
+  IS NOT hungry.
+  IS wearing {old_jacket}.
+
+  VERB examine
+    DOES ONLY "You're John Smith, proud of your unusual name."
+  END VERB.
+END THE hero.
+--------------------------------------------------------------------------------
+
+
+
+The command >x me would then produce
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _x me_ +
+You're John Smith, proud of your unusual name.
+================================================================================
+
+
+By default, any clothing worn by the hero will be described when the player types `>inventory` (or `>i`):
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _inventory_ +
+You're empty-handed. You're wearing an old jacket.
+================================================================================
+
+
+If you wish to have the pieces of clothing worn by the hero listed at other verbs, like for example `> x me`, you should use the formulation LIST worn.:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE hero ISA ACTOR
+  ...
+  VERB examine
+    DOES ONLY "You're John Smith..."
+              LIST worn.
+  END VERB.
+END THE hero.
+--------------------------------------------------------------------------------
+
+
+which will result in
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _x me_ +
+You're John Smith, proud of your unusual name. You are wearing an old jacket.
+================================================================================
+
+
+If you wish to define any object to be in the hero's inventory, define the object to be "IN hero":
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE notebook ISA OBJECT IN hero.
+END THE notebook.
+--------------------------------------------------------------------------------
+
+
+Pieces of clothing, in addition to the above, need to defined as follows:
+
+// @FIXME: XRef to page:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE old_jacket ISA CLOTHING
+  NAME old jacket
+  MENTIONED "old jacket"
+  IS topcover 64. -- (see further p. 39)
+END THE.
+--------------------------------------------------------------------------------
+
+The coding LIST hero will list what the hero is carrying, LIST worn will list what the hero is wearing.
+The hero is by default a container actor (so that it can pick up and carry things) and you never need to declare the hero a container separately.
+
+
+
+
+=== Describing NPCs
+
+When the player types 'examine \[actor\]', the response will be the default "You notice nothing unusual about \[the actor\].", unless some other description is defined for the ACTOR in the DOES ONLY part of the actor instance:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE boy ISA ACTOR AT STREET
+  VERB examine
+    DOES ONLY "A boy about twelve years old."
+  END VERB.
+END THE boy.
+--------------------------------------------------------------------------------
+
+
+If you wish to have an ACTOR's possessions and worn clothing listed after examine, you should add "LIST [actor]." manually to the appropriate verb (typically examine) of the ACTOR instance:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE boy ISA PERSON AT street
+  IS wearing {baseball_cap}.
+
+  VERB examine
+    DOES ONLY "A boy about twelve years old."
+  END VERB.
+END THE boy.
+
+THE coin ISA OBJECT IN boy
+END THE.
+
+THE baseball_cap ISA CLOTHING IN boy
+  NAME baseball cap
+END THE.
+--------------------------------------------------------------------------------
+
+
+will result in:
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _examine boy_ +
+A boy about twelve years old. The boy is carrying a coin and a baseball cap (being worn).
+================================================================================
+
+
+
+
+=== Conversing with NPCs
+
+To engage an NPC in conversation, the library has the pre-defined verbs ask about, tell_about, and talk to.
+(You can also say something but that doesn't require an NPC to be present; for example you can say a magic word to open a door. An answer verb is also defined in the library, but this one doesn't need an NPC to be present, either. You can for example answer a phone or a door, or you can answer a riddle written on a piece of paper, etc.)
+
+
+Program an NPC to reply to various topics the hero might ask them, in the following way:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE man ISA PERSON AT street
+  ...
+  VERB ask_about
+    WHEN act
+      -- the syntax 'ask (act) about (topic)'
+      -- has two parameters, 'act' and 'topic'.
+      -- "WHEN act" singles out the cases when the man
+      -- is asked about something, and rules out the
+      -- the cases when the man is a topic
+      DOES ONLY
+        IF topic = explosion
+          THEN """I think it was at the factory,"" the
+                man comtemplates. ""I wonder what happened
+                there."""
+          ELSIF topic = mysterious_letter
+            THEN "You show the letter to the man but he doesn't
+                  have any clue about it."
+          ELSIF topic = ...
+          ELSE "The man doesn't know much about that."
+        END IF.
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+
+// EOF //
+
