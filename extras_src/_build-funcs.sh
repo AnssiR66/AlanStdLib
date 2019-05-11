@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# _build-funcs.sh         v1.0.0 | 2019/05/05 | by Tristano Ajmone, MIT License.
+# _build-funcs.sh         v1.1.0 | 2019/05/11 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                        DOCUMENTATION BUILD FUNCTIONS                         #
@@ -163,13 +163,14 @@ function adoc2html {
   asciidoctor \
     --verbose \
     --safe-mode unsafe \
-    --base-dir ./ \
     --destination-dir $outDir \
     --template-dir $hamlDir \
     --require $adocDir/highlight-treeprocessor_mod.rb \
-     -a docinfodir@=$adocDir \
+     -a source-highlighter=highlight \
+     -a docinfodir@=../$adocDir \
      -a docinfo@=shared-head \
-     -a utf8dir=$utfDir \
+     -a utf8dir=../$utfDir \
+     -a data-uri \
       $1
 }
 
