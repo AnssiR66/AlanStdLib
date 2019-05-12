@@ -35,6 +35,14 @@
 ## =============
 .project   text
 
+## ===========
+## Asciidoctor
+## ===========
+*.adoc      text
+*.asciidoc  text
+*.csv       text
+*.dsv       text
+
 ## =============
 ## SHELL SCRIPTS
 ## =============

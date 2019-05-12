@@ -45,6 +45,7 @@ include::StdLibMan_04.adoc[]
 include::StdLibMan_05.adoc[]
 include::StdLibMan_06.adoc[]
 include::StdLibMan_07.adoc[]
+include::StdLibMan_08.adoc[]
 
 ////
 include::StdLibMan_07.adoc[]

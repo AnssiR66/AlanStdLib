@@ -1,0 +1,172 @@
+VERB          : SYNONYMS                               : SYNTAX
+about         : (+ help, info)                         : about
+again         : (+ g)                                  : again
+answer        : (+ reply)                              : answer (topic)
+ask           : (+ enquire, inquire, interrogate)      : ask (act) about (topic)
+ask_for       :                                        : ask (act) for (obj)
+attack        : (+ beat, fight, hit, punch)            : attack (target)
+attack_with   :                                        : attack (target) with (weapon)
+bite          : (+ chew)                               : bite (obj)
+break         : (+ destroy)                            : break (obj)
+break_with    :                                        : break (obj) with (instr)
+brief         :                                        : brief
+burn          :                                        : burn (obj)
+burn_with     :                                        : burn (obj) with (instr)
+buy           : (+ purchase)                           : buy (item)
+catch         :                                        : catch (obj)
+clean         : (+ polish, wipe)                       : clean (obj)
+climb         :                                        : climb (obj)
+climb_on      :                                        : climb on (surface)
+climb_through :                                        : climb through (obj)
+close         : (+ shut)                               : close (obj)
+close_with    :                                        : close (obj) with (instr)
+consult       :                                        : consult (source) about (topic)
+credits       : (+ acknowledgments, author, copyright) : credits
+cut           :                                        : cut (obj)
+cut_with      :                                        : cut (obj) with (instr)
+dance         :                                        : dance
+dig           :                                        : dig (obj)
+dive          :                                        : dive
+dive_in       :                                        : dive in (liq)
+drink         :                                        : drink (liq)
+drive         :                                        : drive (vehicle)
+drop          : (+ discard, dump, reject)              : drop (obj)
+eat           :                                        : eat (food)
+empty         :                                        : empty (obj)
+empty_in      :                                        : empty (obj) in (cont)
+empty_on      :                                        : empty (obj) on (surface)
+enter         :                                        : enter (obj)
+examine       : (+ check, inspect, observe, x)         : examine (obj)
+exit          :                                        : exit (obj)
+extinguish    : (+ put out, quench)                    : extinguish (obj)
+fill          :                                        : fill (cont)
+fill_with     :                                        : fill (cont) with (substance)
+find          : (+ locate)                             : find (obj)
+fire          :                                        : fire (weapon)
+fire_at       :                                        : fire (weapon) at (target)
+fix           : (+ mend, repair)                       : fix (obj)
+follow        :                                        : follow (act)
+free          : (+ release)                            : free (obj)
+get_up        :                                        : get up
+get_off       :                                        : get off (obj)
+give          :                                        : give (obj) to (recipient)
+go_to         :                                        : go to (dest)
+hint          : (+ hints)                              : hint
+i             : (+ inv, inventory)                     : inventory
+jump          :                                        : jump
+jump_in       :                                        : jump in (cont)
+jump_on       :                                        : jump on (surface)
+kick          :                                        : kick (target)
+kill          : (+ murder)                             : kill (victim)
+kill_with     :                                        : kill (victim) with (weapon)
+kiss          : (+ hug, embrace)                       : kiss (obj)
+knock         : (on)                                   : knock on (obj)
+lie_down      :                                        : lie down
+lie_in        :                                        : lie in (cont)
+lie_on        :                                        : lie on (surface)
+lift          :                                        : lift (obj)
+light         : (+ lit)                                : light (obj)
+listen0       :                                        : listen
+listen        :                                        : listen to (obj)
+lock          :                                        : lock (obj)
+lock_with     :                                        : lock (obj) with (key)
+look          : (+ gaze, peek)                         : look
+look_behind   :                                        : look behind (bulk)
+look_in       :                                        : look in (cont)
+look_out_of   :                                        : look out of (obj)
+look_through  :                                        : look through (bulk)
+look_under    :                                        : look under (bulk)
+look_up       :                                        : look up
+no            :                                        : no
+notify        : (on, off)                              : notify.  notify on.  notify off
+open          :                                        : open (obj)
+open_with     :                                        : open (obj) with (instr)
+play          :                                        : play (obj)
+play_with     :                                        : play with (obj)
+pour          : (= defined at the verb 'empty')        : pour (obj)
+pour_in       : (= defined at the verb 'emtpy_in')     : pour (obj) in (cont)
+pour_on       : (= defined at the verb 'empty_on')     : pour (obj) on (surface)
+pray          :                                        : pray
+pry           :                                        : pry (obj)
+pry_with      :                                        : pry (obj) with (instr)
+pull          :                                        : pull (obj)
+push          :                                        : push (obj)
+push_with     :                                        : push (obj) with (instr)
+put           : (+ lay, place)                         : put (obj)
+put_against   :                                        : put (obj) against (bulk))
+put_behind    :                                        : put (obj) behind (bulk)
+put_down      : (= defined at the verb 'drop')         : put down (obj)
+put_in        : (+ insert)                             : put (obj) in (cont)
+put_near      :                                        : put (obj) near (bulk)
+put_on        :                                        : put (obj) on (surface)
+put_under     :                                        : put (obj) under (bulk)
+quit          : (+ q)                                  : quit
+read          :                                        : read (obj)
+remove        :                                        : remove (obj)
+restart       :                                        : restart
+restore       :                                        : restore
+rub           :                                        : rub (obj)
+save          :                                        : save
+say           :                                        : say (topic)
+say_to        :                                        : say (topic) to (act)
+score         :                                        : score
+scratch       :                                        : scratch (obj)
+script        :                                        : script.  script on.  script off.
+search        :                                        : search (obj)
+sell          :                                        : sell (item)
+shake         :                                        : shake (obj)
+shoot         : (at)                                   : shoot at (target)
+shoot_with    :                                        : shoot (target) with (weapon)
+shout         : (+ scream, yell)                       : shout
+show          : (+ reveal)                             : show (obj) to (act)
+sing          :                                        : sing
+sip           :                                        : sip (liq)
+sit           : (down)                                 : sit.  sit down.
+sit_on        :                                        : sit on (surface)
+sleep         : (+ rest)                               : sleep
+smell0        :                                        : smell
+smell         :                                        : smell (odour)
+squeeze       :                                        : squeeze (obj)
+stand         : (up)                                   : stand.  stand up.
+stand_on      :                                        : stand on (surface)
+swim          :                                        : swim
+swim_in       :                                        : swim in (liq)
+switch        :                                        : switch (obj)
+switch_on     : (= defined at the verb 'turn_on')      : switch on (app)
+switch_off    : (= defined at the verb 'turn_off')     : switch off (app)
+take          : (+ carry, get, grab, hold, obtain)     : take (obj)
+take_from     : (+ remove from)                        : take (obj) from (holder)
+talk          :                                        : talk
+talk_to       : (+ speak)                              : talk to (act)
+taste         : (+ lick)                               : taste (obj)
+tear          : (+ rip)                                : tear (obj)
+tell          : (+ enlighten, inform)                  : tell (act) about (topic)
+think         :                                        : think
+think_about   :                                        : think about (topic)
+throw         :                                        : throw (projectile)
+throw_at      :                                        : throw (projectile) at (target)
+throw_in      :                                        : throw (projectile) in (cont)
+throw_to      :                                        : throw (projectile) to (recipient)
+tie           :                                        : tie (obj)
+tie_to        :                                        : tie (obj) to (target)
+touch         : (+ feel)                               : touch (obj)
+touch_with    : (+ feel)                               : touch (ogg) 'with' (strum)
+turn          : (+ rotate)                             : turn (obj)
+turn_on       :                                        : turn on (app)
+turn_off      :                                        : turn off (app)
+undress       :                                        : undress
+unlock        :                                        : unlock (obj)
+unlock_with   :                                        : unlock (obj) with (key)
+use           :                                        : use (obj)
+use_with      :                                        : use (obj) with (instr)
+verbose       :                                        : verbose
+wait          : (+ z)                                  : wait
+wear          :                                        : wear (obj)
+what_am_i     :                                        : what am i
+what_is       :                                        : what is (obj)
+where_am_i    :                                        : where am i
+where_is      :                                        : where is (obj)
+who_am_i      :                                        : who am i
+who_is        :                                        : who is (act)
+write         :                                        : write (txt) on (obj)
+yes           :                                        : yes
