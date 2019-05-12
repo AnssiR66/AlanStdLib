@@ -1,0 +1,269 @@
+////
+********************************************************************************
+*                                                                              *
+*                     ALAN Standard Library User's Manual                      *
+*                                                                              *
+*                                 Chapter 13                                   *
+*                                                                              *
+********************************************************************************
+////
+
+
+== Default attributes used in the standard library
+
+The attributes in the following list are pre-defined in the library. When you coin your own attributes for your game, please be aware that these attributes already exist. Using any of the attributes listed below for your own purposes doesn't necessarily cause any problems, but if problems arise, it's likely because of their being used in the library.
+
+This attribute is added to every ENTITY:
+
+[source,alan]
+--------------------------------------------------------------------------------
+NOT plural.
+--------------------------------------------------------------------------------
+
+These attributes are added to every THING:
+
+[source,alan]
+--------------------------------------------------------------------------------
+IS examinable.
+
+inanimate.
+
+movable.
+
+open.
+
+reachable.
+
+-- See also 'distant' below
+
+takeable.
+
+HAS allowed {null_object}.
+
+-- You can only put an object in a container if the object
+
+-- is in the 'allowed' set of the container.
+
+HAS ex "".
+
+-- an alternative to using "VERB examine DOES..."
+
+HAS matching_key null_key.
+
+-- All lockable objects need a matching key to lock/unlock them.
+
+-- "null_key" is a default dummy that can be ignored.
+
+HAS text "".
+
+HAS weight 0.
+
+-- Actors and objects will have different weight values, see below
+
+NOT broken.
+
+NOT distant.
+
+-- Usage: you can for example talk to a "not reachable" actor but
+
+-- not to a "distant" one.
+
+-- You can also throw things in, to or at a not reachable target
+
+-- but not to a distant one.
+
+-- The other verbs where the action succeeds if the object is
+
+-- not reachable are: dive_in, fire_at, kill_with, read, and
+
+// PAGE 103 //
+
+
+
+-- shoot
+
+-- Default response for not reachable things: "The \[thing\] is out
+
+-- of your reach."
+
+-- Default response for distant things: "The \[thing\] is too far
+
+-- away."
+
+NOT drinkable.
+
+NOT edible.
+
+NOT fireable.
+
+-- can (not) be used as a firearm
+
+NOT lockable.
+
+NOT locked.
+
+NOT 'on'.
+
+NOT openable.
+
+NOT readable.
+
+NOT scenery.
+
+-- has special responses for 'ask_for', 'examine', 'take' and
+
+-- 'take_from', behaves like a normal object otherwise.
+
+NOT wearable.
+
+NOT writeable.
+
+CAN NOT talk.
+--------------------------------------------------------------------------------
+
+These attributes are added to every ACTOR:
+
+[source,alan]
+--------------------------------------------------------------------------------
+IS wearing {null_clothing}.
+
+-- By default, actors are not described as wearing any specific
+
+-- clothing. null_clothing is a default dummy value that can be
+
+-- ignored.
+
+HAS weight 50.
+
+-- If something has the weight value of 50 or more, it cannot
+
+-- be lifted or taken.
+
+NOT following.
+
+-- not following the hero character by default
+
+NOT inanimate.
+
+NOT named.
+
+NOT compliant.
+
+NOT sitting.
+
+NOT lying_down.
+--------------------------------------------------------------------------------
+
+The code for CLOTHING objects adds these attributes, used only internally in the library, to every actor:
+
+[source,alan]
+--------------------------------------------------------------------------------
+IS tempcovered 0.
+
+IS wear_flag 0.
+
+IS sex 0.
+--------------------------------------------------------------------------------
+
+// PAGE 104 //
+
+
+
+These attributes are added to every OBJECT:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS weight 5.
+
+-- This is the default weight of every object, whether takeable
+
+-- or NOT takeable. However, the library by itself
+
+-- doesn't define any limit for containers. If the game author
+
+-- wants to have a limit to how many objects a container can hold,
+
+-- the author must set this limit by themselves.
+--------------------------------------------------------------------------------
+
+=== Attributes added to specific classes of objects:
+
+These attributes are added to every CLOTHING object:
+
+[source,alan]
+--------------------------------------------------------------------------------
+IS wearable.
+
+IS NOT donned.
+
+-- = not worn by an NPC
+
+IS sex 0.
+
+IS headcover 0.
+
+IS handscover 0.
+
+IS feetcover 0.
+
+IS topcover 0.
+
+IS botcover 0.
+--------------------------------------------------------------------------------
+
+The following attribute is defined for every DOOR object:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS otherside door.
+--------------------------------------------------------------------------------
+
+The following attributes are added to every LIGHTSOURCE object:
+
+[source,alan]
+--------------------------------------------------------------------------------
+IS natural.
+
+IS NOT lit.
+--------------------------------------------------------------------------------
+
+The following attribute is added to every WEAPON:
+
+[source,alan]
+--------------------------------------------------------------------------------
+IS NOT fireable.
+--------------------------------------------------------------------------------
+
+The following attributes are added to every LOCATION:
+
+[source,alan]
+--------------------------------------------------------------------------------
+IS lit.
+
+HAS visited 0.
+
+HAS described 0.
+
+HAS nested {nowhere}.
+--------------------------------------------------------------------------------
+
+// PAGE 105 //
+
+
+
+The score notification coding uses the following attributes:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS oldscore 0.
+
+IS notify_on.
+
+IS NOT seen_notify.
+--------------------------------------------------------------------------------
+
+// @FIXME: XRef to specific page.
+Finally, for restricted actions, there is an attribute defined to correspond to every library verb. (See the list on p. 61-.)
+
+// EOF //
+

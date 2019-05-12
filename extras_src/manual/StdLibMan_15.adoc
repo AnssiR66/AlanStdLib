@@ -1,0 +1,351 @@
+////
+********************************************************************************
+*                                                                              *
+*                     ALAN Standard Library User's Manual                      *
+*                                                                              *
+*                                 Chapter 15                                   *
+*                                                                              *
+********************************************************************************
+////
+
+
+== Short examples
+
+1. A very short complete game using minimal obligatory imports and coding. Here, the hero must go from room1 north to room2 and eat an apple to win the game.
++
+[source,alan]
+--------------------------------------------------------------------------------
+IMPORT 'library.i'.
+
+THE my_game ISA DEFINITION_BLOCK
+
+END THE.
+
+THE room1 ISA LOCATION
+
+DESCRIPTION "North to room2."
+
+EXIT north TO room2.
+
+END THE.
+
+THE room2 ISA LOCATION
+
+DESCRIPTION "South to room1."
+
+EXIT south TO room1.
+
+END THE.
+
+THE apple ISA OBJECT AT room2
+
+IS edible.
+
+VERB eat
+
+DOES "Congratulations!" QUIT.
+
+END VERB.
+
+END THE.
+
+START AT room1.
+
+DESCRIBE banner.
+--------------------------------------------------------------------------------
++
+(This game wouldn't actually need the library at all; it would be even shorter to code:)
++
+[source,alan]
+--------------------------------------------------------------------------------
+THE room1 ISA LOCATION
+
+DESCRIPTION "North to room2."
+
+EXIT north TO room2.
+
+END THE.
+
+THE room2 ISA LOCATION
+
+DESCRIPTION "South to room1."
+
+EXIT south TO room1.
+
+END THE.
+
+THE apple ISA OBJECT AT room2
+
+VERB eat
+
+DOES "Congratulations!" QUIT.
+
+END VERB.
+
+END THE.
+
+START AT room1.
+--------------------------------------------------------------------------------
++
+In this latter case, though, the player wouldn't for example be able to examine him-/herself, trying to go any other direction, take inventory, try various things with the apple, quit properly, etc.
+
+2. Here, the player must get a candy from the kitchen and give it to a crying child in the nursery to win the game.
++
+[source,alan]
+--------------------------------------------------------------------------------
+IMPORT 'library.i'.
+
+THE my_game ISA DEFINITION_BLOCK
+
+END THE.
+
+THE nursery ISA ROOM
+
+DESCRIPTION "The kitchen is to the east."
+
+EXIT east to kitchen.
+
+END THE.
+
+THE child ISA PERSON AT nursery
+
+DESCRIPTION "There is a crying child here."
+
+VERB give
+
+WHEN recipient
+
+DOES ONLY
+
+IF obj = candy
+
+THEN "You give the candy to the child who stops
+
+crying and starts licking it happily."
+
+QUIT.
+
+END IF.
+
+END VERB.
+
+END THE.
+
+THE kitchen ISA ROOM
+
+DESCRIPTION "You can go west, back to the nursery."
+
+EXIT west TO nursery.
+
+END THE.
+
+THE table ISA SUPPORTER AT kitchen
+
+IS NOT takeable.
+
+END THE.
+
+THE candy ISA OBJECT IN table
+
+IS edible.
+
+END THE.
+
+START AT nursery.
+--------------------------------------------------------------------------------
++
+Examples 3-4 below show mainly different variations of the my_game instance and not complete games:
+
+3. In this example of defining the my_game instance, the author has changed the default verb responses for `eat`, `climb` and `take_from`. In addition, the author has added a check and a response of his/her own to `take_from`:
++
+[source,alan]
+--------------------------------------------------------------------------------
+THE my_game ISA DEFINITION_BLOCK
+
+VERB eat
+
+DOES ONLY "You don't feel like eating anything in this game."
+
+END VERB.
+
+VERB climb
+
+DOES ONLY "Let's just stay on the ground, shall we?"
+
+END VERB.
+
+VERB take_from
+
+WHEN obj
+
+CHECK COUNT ISA ACTOR, AT hero = 1
+
+-- ( = the hero himself)
+
+ELSE "You don't want to take anything while somebody
+
+might be looking."
+
+DOES "Triumphantly, you fish" SAY THE obj. "out of"
+
+SAY THE holder. "."
+
+END VERB.
+
+END THE.
+--------------------------------------------------------------------------------
+
+4. Here, the author uses the automatic formulation for the game title, author, and other information:
++
+[source,alan]
+--------------------------------------------------------------------------------
+THE my_game ISA DEFINITION_BLOCK
+
+HAS title "The Lost Treasure".
+
+HAS subtitle "An interactive treasure hunt".
+
+HAS author "Sam".
+
+HAS year 2019.
+
+HAS version "1".
+
+END THE.
+
+THE garden ISA LOCATION
+
+DESCRIPTION "..."
+
+END THE.
+
+START AT garden.
+
+DESCRIBE banner.
+--------------------------------------------------------------------------------
+
+5. Here, the game author has added a check of his own to the library-defined drink verb and changed an illegal parameter message for the verbs look_behind, look_in, and look_under:
++
+[source,alan]
+--------------------------------------------------------------------------------
+THE my_game ISA DEFINITION_BLOCK
+
+VERB drink
+
+CHECK hero IS thirsty
+
+ELSE "You don't feel like drinking anything right now."
+
+END VERB.
+
+HAS illegal_parameter_there "You can't \$v there.".
+
+END THE.
+--------------------------------------------------------------------------------
+
+6. A complete example game with locked doors and keys. This code reintroduces the situation used in example 1, with a locked door and two keys added.
++
+[source,alan]
+--------------------------------------------------------------------------------
+IMPORT 'lib_classes.i'.
+
+IMPORT 'lib_definitions.i'.
+
+IMPORT 'lib_locations.i'.
+
+IMPORT 'lib_messages.i'.
+
+IMPORT 'lib_verbs.i'.
+
+THE my_game ISA DEFINITION_BLOCK
+
+END THE.
+
+// PAGE 110 //
+
+
+
+THE room1 ISA LOCATION
+
+DESCRIPTION "North to room2."
+
+EXIT north TO room2
+
+CHECK locked_door_1 IS open
+
+ELSE "The door to the north is on the way."
+
+END EXIT.
+
+END THE.
+
+THE locked_door_1 ISA DOOR AT room1
+
+DESCRIPTION ""
+
+NAME door
+
+HAS otherside locked_door_2.
+
+IS lockable. IS locked.
+
+HAS matching_key silver_key.
+
+END THE.
+
+THE silver_key ISA OBJECT AT room1
+
+NAME silver key
+
+END THE.
+
+THE brass_key ISA OBJECT AT room1
+
+NAME brass key
+
+END THE.
+
+THE room2 ISA LOCATION
+
+DESCRIPTION "South to room1."
+
+EXIT south TO room1
+
+CHECK locked_door_2 IS open
+
+ELSE "The door to the south is on the way."
+
+END EXIT.
+
+END THE.
+
+THE locked_door_2 ISA DOOR AT room2
+
+DESCRIPTION ""
+
+NAME door
+
+END THE.
+
+THE apple ISA OBJECT AT room2
+
+IS edible.
+
+VERB eat
+
+DOES "Congratulations!" QUIT.
+
+END VERB.
+
+END THE.
+
+START AT room1.
+
+DESCRIBE banner.
+--------------------------------------------------------------------------------
+
+// PAGE 111 //
+
+
+// EOF //
+

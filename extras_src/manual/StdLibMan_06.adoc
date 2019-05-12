@@ -119,7 +119,7 @@ To recap: in defining a piece of CLOTHING, you should:
 
 3. A number 2, 4, 8, 16, 32 or 64 needs to be added after the above attribute. You cannot decide the number yourself; look it up from the clothing table below. If the value of an attribute for a piece of CLOTHING is 0 in the table, don't mention this attribute in connection with your CLOTHING object.
 
-4. If the piece of CLOTHING is worn by any ACTOR – the hero or somebody else – be sure to include the piece of CLOTHING in the ACTOR's wearing attribute.
+4. If the piece of CLOTHING is worn by any ACTOR - the hero or somebody else - be sure to include the piece of CLOTHING in the ACTOR's wearing attribute.
 
 -- The above is enough; the rest is then handled automatically by the library.
 

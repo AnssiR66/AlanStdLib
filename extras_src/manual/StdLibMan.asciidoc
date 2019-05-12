@@ -48,20 +48,15 @@ include::StdLibMan_07.adoc[]
 include::StdLibMan_08.adoc[]
 include::StdLibMan_09.adoc[]
 include::StdLibMan_10.adoc[]
-
-////
 include::StdLibMan_11.adoc[]
 include::StdLibMan_12.adoc[]
 include::StdLibMan_13.adoc[]
 include::StdLibMan_14.adoc[]
 include::StdLibMan_15.adoc[]
-////
 
 
-[WARNING]
-================================================================================
-CONTENTS FROM ORIGINAL PDF ADDED UP TO HERE. TO BE CONTINUTED...
-================================================================================
+'''
+{asterisk} {asterisk} {asterisk} The End {asterisk} {asterisk} {asterisk}
 
 
 // EOF //

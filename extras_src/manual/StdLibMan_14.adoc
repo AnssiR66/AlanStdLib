@@ -1,0 +1,62 @@
+////
+********************************************************************************
+*                                                                              *
+*                     ALAN Standard Library User's Manual                      *
+*                                                                              *
+*                                 Chapter 14                                   *
+*                                                                              *
+********************************************************************************
+////
+
+
+== Translating to other languages
+
+To translate the ALAN system and library to other languages, you should
+
+1. translate all the messages in the file `lib_definitions.i`:
+
+** the two messages for the hero
+** the two messages for dark locations
+** all illegal parameter messages
+** all verb check messages
+** the message for implicit taking
+** the message lines for the banner instance where applicable
+
+2. translate all the `CAN [verb]` attributes in the file `lib_definitions.i`.
+
+3. translate the verb syntaxes in `lib_verbs.i` (not parameters and the ELSE parts).
++
+For example for the verb attack when translated into French:
++
+[source,alan]
+--------------------------------------------------------------------------------
+SYNTAX attaquer = attaquer (target)
+
+WHERE target ISA THING
+
+ELSE
+
+IF target IS NOT plural
+
+THEN SAY illegal_parameter_sg OF my_game.
+
+ELSE SAY illegal_parameter_pl OF my_game.
+
+END IF.
+--------------------------------------------------------------------------------
++
+Also, translate the verb names, for example `VERB attack DOES ...` becomes, translating into French, `VERB attaquer DOES ...` etc.), and the verb outcomes (what happens after DOES).
+
+
+4. translate the verb outcomes for class objects (what happens after DOES or DOES ONLY) in `lib_classes.i`.
+
+5. translate the direction names, their synonyms and the few marginal verb outcomes for indoor and outdoor objects in `lib_locations.i`
+
+6. translate the runtime messages in `lib_messages.i`.
+
+Now, every possible response and message in the game is shown in the target language, and it is possible for the player to issue commands in the target language.
+
+It's up to the translator to decide whether to translate any of the library-defined default attributes.
+
+// EOF //
+

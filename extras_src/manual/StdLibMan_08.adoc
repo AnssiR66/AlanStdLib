@@ -78,7 +78,7 @@ END THE car.
 
 === The philosophy used in deciding successful and unsuccessful outcomes for action in the library verbs
 
-If you try the various actions in-game, with the library imported, you will notice that some actions are successful and result in what the player commanded, while other actions do nothing (= the action is unsuccessful). For example the response to > drop [object] will be "Dropped.", the carried object being rejected from the hero's inventory and ending up in the location, while the response to >attack [thing] is "Resorting to brute force is not the solution here.". Which actions are allowed to succeed and which are not is based on what is the most reasonable and expected outcome for the action – the outcome that the game author most unlikely needs to edit except for special circumstances. Please experiment with different verbs in-game to see whether the default outcome of a particular action is suitable for your game – otherwise redefine the outcome of the verb in the my_game instance. How this is done is described in more detail further below.
+If you try the various actions in-game, with the library imported, you will notice that some actions are successful and result in what the player commanded, while other actions do nothing (= the action is unsuccessful). For example the response to > drop [object] will be "Dropped.", the carried object being rejected from the hero's inventory and ending up in the location, while the response to >attack [thing] is "Resorting to brute force is not the solution here.". Which actions are allowed to succeed and which are not is based on what is the most reasonable and expected outcome for the action - the outcome that the game author most unlikely needs to edit except for special circumstances. Please experiment with different verbs in-game to see whether the default outcome of a particular action is suitable for your game - otherwise redefine the outcome of the verb in the my_game instance. How this is done is described in more detail further below.
 
 // PAGE 65 //
 
@@ -164,7 +164,7 @@ SYNONYMS t = talk.
 // @FIXME:  In the original PDF the following is an ordered list element starting
 //          from (b), but there wasn't any ongoing list here!
 
-b. Accessing the library:
+a. Accessing the library:
 +
 Find the verb in the library file 'lib_verbs.i' and make the desired changes to the syntax.
 (If you add or change a parameter, make sure that the verb checks function properly.)

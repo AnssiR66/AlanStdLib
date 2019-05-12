@@ -1,0 +1,128 @@
+////
+********************************************************************************
+*                                                                              *
+*                     ALAN Standard Library User's Manual                      *
+*                                                                              *
+*                                 Chapter 12                                   *
+*                                                                              *
+********************************************************************************
+////
+
+
+
+== Runtime messages
+
+Many of the runtime messages built into ALAN have been altered in the library from their default wording as stated in the ALAN manual.
+This is to ensure that plural is handled correctly and that there are no clashes between first and second person.
+The first person of some default wordings (for example "`I don't know the word $1`") is changed to a more passive or impersonal formulation.
+To edit these for your game, open `lib_messages.i` and edit the wanted message(s) there.
+
+[source,alan]
+--------------------------------------------------------------------------------
+MESSAGE
+  AFTER_BUT: "You must give at least one object after '$1'."
+  AGAIN: ""
+  BUT_ALL: "You can only use '$1' AFTER '$2'."
+  CAN_NOT_CONTAIN: "$+1 can not contain $+2."
+  CANT0: "You can't do that." -- note that the fifth token in CANT0
+                              -- is a zero, not an 'o'.
+  CARRIES:
+    IF parameter1 = hero
+      THEN "You are carrying"
+      ELSE
+        IF parameter1 IS NOT plural
+          THEN "$+1 carries"
+          ELSE "$+1 carry"
+        END IF.
+    END IF.
+
+  CONTAINMENT_LOOP:
+  "Putting $+1 in"
+  IF parameter1 IS NOT plural
+  THEN "itself"
+  ELSE "themselves"
+  END IF.
+  "is impossible."
+
+  CONTAINMENT_LOOP2:
+    "Putting $+1 in $+2 is impossible since $+2 already"
+    IF parameter2 IS NOT plural
+      THEN "is"
+      ELSE "are"
+    END IF.
+    "inside $+1."
+
+  'CONTAINS':
+    IF parameter1 IS NOT plural
+      THEN "$+1 contains"
+      ELSE "$+1 contain"
+    END IF.
+
+  CONTAINS_COMMA: "$01,"
+  CONTAINS_AND: "$01 and"
+  CONTAINS_END: "$01."
+
+  EMPTY_HANDED:
+    IF parameter1 = hero
+      THEN "You are empty-handed."
+      ELSE
+        IF parameter1 IS NOT plural
+          THEN "$+1 is empty-handed."
+          ELSE "$+1 are empty-handed."
+        END IF.
+    END IF.
+
+  HAVE_SCORED: "You have scored $1 points out of $2."
+
+  IMPOSSIBLE_WITH: "That's impossible with $+1."
+
+  IS_EMPTY:
+    IF parameter1 IS NOT plural
+      THEN "$+1 is empty."
+      ELSE "$+1 are empty."
+    END IF.
+
+  MORE: "<More>"
+  MULTIPLE: "You can't refer to multiple objects with '$v'."
+  NO_SUCH: "You can't see any $1 here."
+  NO_WAY: "You can't go that way."
+  NOT_MUCH: "That doesn't leave much to $v!"
+  NOUN: "You must supply a noun."
+  NOT_A_SAVEFILE: "That file does not seem to be an Alan game save file."
+  QUIT_ACTION: "Do you want to RESTART, RESTORE, QUIT or UNDO? "
+                -- these four alternatives are hardwired to the
+                -- interpreter and cannot be changed.
+  REALLY: "Are you sure (press ENTER to confirm)?"
+  RESTORE_FROM: "Enter file name to restore from"
+  SAVE_FAILED: "Sorry, save failed."
+  SAVE_MISSING: "Sorry, could not open the save file."
+  SAVE_NAME: "Sorry, the save file did not contain
+              a save for this adventure."
+  SAVE_OVERWRITE: "That file already exists, overwrite (y)?"
+  SAVE_VERSION: "Sorry, the save file was created
+                 by a different version."
+  SAVE_WHERE: "Enter file name to save in"
+
+  SEE_START:
+    IF parameter1 IS NOT plural
+      THEN "There is $01"
+      ELSE "There are $01"
+    END IF.
+
+  SEE_COMMA: ", $01"
+  SEE_AND: "and $01"
+  SEE_END: "here."
+  NO_UNDO: "No further undo available."
+  UNDONE: "'$1' undone."
+  UNKNOWN_WORD: "The word '$1' is not understood."
+  WHAT: "That was not understood."
+  WHAT_WORD: "It is not clear what you mean by '$1'."
+  WHICH_PRONOUN_START: "It is not clear if you by '$1'"
+  WHICH_PRONOUN_FIRST: "mean $+1"
+  WHICH_START: "It is not clear if you mean $+1"
+  WHICH_COMMA: ", $+1"
+  WHICH_OR: "or $+1."
+--------------------------------------------------------------------------------
+
+// EOF //
+

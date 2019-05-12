@@ -20,11 +20,7 @@ Porting the _Alan Standard Library v2.1 User's Manual_ from PDF to AsciiDoc, and
 
 # Folder Contents
 
-This file contains the unprocessed text from the automatically converted document:
-
-- [`_unprocessed.adoc`](./_unprocessed.adoc)
- 
-One section at the time, its contents are added to the ported document and roughly restructured in order to obtain a working document:
+The entire original PDF was roughly ported to AsciiDoc, split into one file per chapter, and restructured just in order to obtain a working document:
 
 - [`StdLibMan.asciidoc`](./StdLibMan.asciidoc) — main document that imports all the chapters of the Manual:
     + [`StdLibMan_01.adoc`](./StdLibMan_01.adoc) — 1. _Introduction_
@@ -37,12 +33,18 @@ One section at the time, its contents are added to the ported document and rough
     + [`StdLibMan_08.adoc`](./StdLibMan_08.adoc) — 8. _Using verbs and commands_
     + [`StdLibMan_09.adoc`](./StdLibMan_09.adoc) — 9. _Adding synonyms for existing library words (verbs, object and actor classes)_
     + [`StdLibMan_10.adoc`](./StdLibMan_10.adoc) — 10. _The `my_game` instance and its attributes_
+    + [`StdLibMan_11.adoc`](./StdLibMan_11.adoc) — 11. _Have the game banner show at the start_
+    + [`StdLibMan_12.adoc`](./StdLibMan_12.adoc) — 12. _Runtime messages_
+    + [`StdLibMan_13.adoc`](./StdLibMan_13.adoc) — 13. _Default attributes used in the standard library_
+    + [`StdLibMan_14.adoc`](./StdLibMan_14.adoc) — 14. _Translating to other languages_
+    + [`StdLibMan_15.adoc`](./StdLibMan_15.adoc) — 15. _Short examples_
+
 
 # Document Status
 
-Currently the document is WIP draft, the original PDF document was converted to AsciiDoc but most paragraphs are broken, some text was lost during conversion, and all styles were lost in the process.
+Currently the document is WIP draft, the original PDF document was converted to AsciiDoc but all styles were lost in the process, and paragraphs and code need to be reformatted properly.
 
-It must be manually fixed, paragraph by paragraph, using the original PDF as a reference to copying-&-paste broken paragraphs and visually inspect missing styles.
+It must be manually fixed, element by element, using the original PDF as a visual reference for missing styles.
 
 | ch. |                                     title                                      |  status |
 |-----|--------------------------------------------------------------------------------|---------|

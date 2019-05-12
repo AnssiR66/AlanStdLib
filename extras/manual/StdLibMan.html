@@ -821,6 +821,47 @@ div.literalblock.shell pre .conum {
 <li><a href="#_restricted_actions">8.8. Restricted actions</a></li>
 </ul>
 </li>
+<li><a href="#_adding_synonyms_for_existing_library_words_verbs_object_and_actor_classes">9. Adding synonyms for existing library words (verbs, object and actor classes)</a></li>
+<li><a href="#_the_my_game_instance_and_its_attributes">10. The my_game instance and its attributes</a>
+<ul class="sectlevel2">
+<li><a href="#_1_attributes_for_the_start_section">10.1. 1. Attributes for the start section</a></li>
+<li><a href="#_2_attributes_for_the_hero">10.2. 2. Attributes for the hero</a></li>
+<li><a href="#_3_attributes_for_locations">10.3. 3. Attributes for locations</a></li>
+<li><a href="#_4_attributes_for_restricted_actions">10.4. 4. Attributes for restricted actions</a></li>
+<li><a href="#_5_illegal_parameter_messages">10.5. 5. Illegal parameter messages</a>
+<ul class="sectlevel3">
+<li><a href="#_other_illegal_parameter_messages">10.5.1. Other illegal parameter messages</a></li>
+<li><a href="#_changing_the_illegal_parameter_message_of_a_single_verb">10.5.2. Changing the illegal parameter message of a single verb:</a></li>
+</ul>
+</li>
+<li><a href="#_6_default_verb_check_messages">10.6. 6. Default verb check messages</a></li>
+<li><a href="#_checks_for_open_closed_and_locked_objects">10.7. Checks for open, closed and locked objects</a></li>
+<li><a href="#_checks_for_not_reachable_and_distant_objects">10.8. Checks for "not reachable" and "distant" objects</a></li>
+<li><a href="#_checks_for_the_hero_sitting_or_lying_down">10.9. Checks for the hero sitting or lying_down</a></li>
+<li><a href="#_other_attribute_checks">10.10. Other attribute checks</a></li>
+<li><a href="#_b_location_and_containment_checks_for_actors_and_objects">10.11. b. location and containment checks for actors and objects</a>
+<ul class="sectlevel3">
+<li><a href="#_location_and_containment_checks_for_the_hero">10.11.1. Location and containment checks for the hero</a></li>
+<li><a href="#_checking_whether_an_object_is_in_a_container_or_not">10.11.2. Checking whether an object is in a container or not</a></li>
+<li><a href="#_checking_whether_an_object_is_worn_by_the_hero_or_not">10.11.3. Checking whether an object is worn by the hero or not</a></li>
+</ul>
+</li>
+<li><a href="#_c_checking_location_states">10.12. c. checking location states</a></li>
+<li><a href="#_d_logical_checks">10.13. d. logical checks</a></li>
+<li><a href="#_2_prohibiting_the_action_in_ditransitive_verbs_where_both_the_first_and_the_second_parameter_refer_to_the_same_instance">10.14. 2. prohibiting the action in ditransitive verbs where both the first and the second parameter refer to the same instance:</a></li>
+<li><a href="#_e_additional_checks_for_classes">10.15. e. additional checks for classes</a></li>
+<li><a href="#_7_implicit_taking_message">10.16. 7. Implicit taking message</a></li>
+</ul>
+</li>
+<li><a href="#_have_the_game_banner_show_at_the_start">11. Have the game banner show at the start</a></li>
+<li><a href="#_runtime_messages">12. Runtime messages</a></li>
+<li><a href="#_default_attributes_used_in_the_standard_library">13. Default attributes used in the standard library</a>
+<ul class="sectlevel2">
+<li><a href="#_attributes_added_to_specific_classes_of_objects">13.1. Attributes added to specific classes of objects:</a></li>
+</ul>
+</li>
+<li><a href="#_translating_to_other_languages">14. Translating to other languages</a></li>
+<li><a href="#_short_examples">15. Short examples</a></li>
 </ul>
 </div>
 </div>
@@ -2491,7 +2532,7 @@ Explanations are given after the examples.</p>
 <p>A number 2, 4, 8, 16, 32 or 64 needs to be added after the above attribute. You cannot decide the number yourself; look it up from the clothing table below. If the value of an attribute for a piece of CLOTHING is 0 in the table, don&#8217;t mention this attribute in connection with your CLOTHING object.</p>
 </li>
 <li>
-<p>If the piece of CLOTHING is worn by any ACTOR – the hero or somebody else – be sure to include the piece of CLOTHING in the ACTOR&#8217;s wearing attribute.</p>
+<p>If the piece of CLOTHING is worn by any ACTOR - the hero or somebody else - be sure to include the piece of CLOTHING in the ACTOR&#8217;s wearing attribute.</p>
 </li>
 </ol>
 </div>
@@ -4367,7 +4408,7 @@ In other words, simulate entering and exiting by locating the hero in between lo
 <div class="sect2">
 <h3 id="_the_philosophy_used_in_deciding_successful_and_unsuccessful_outcomes_for_action_in_the_library_verbs"><a class="anchor" href="#_the_philosophy_used_in_deciding_successful_and_unsuccessful_outcomes_for_action_in_the_library_verbs"></a>8.2. The philosophy used in deciding successful and unsuccessful outcomes for action in the library verbs</h3>
 <div class="paragraph">
-<p>If you try the various actions in-game, with the library imported, you will notice that some actions are successful and result in what the player commanded, while other actions do nothing (= the action is unsuccessful). For example the response to &gt; drop [object] will be "Dropped.", the carried object being rejected from the hero&#8217;s inventory and ending up in the location, while the response to &gt;attack [thing] is "Resorting to brute force is not the solution here.". Which actions are allowed to succeed and which are not is based on what is the most reasonable and expected outcome for the action – the outcome that the game author most unlikely needs to edit except for special circumstances. Please experiment with different verbs in-game to see whether the default outcome of a particular action is suitable for your game – otherwise redefine the outcome of the verb in the my_game instance. How this is done is described in more detail further below.</p>
+<p>If you try the various actions in-game, with the library imported, you will notice that some actions are successful and result in what the player commanded, while other actions do nothing (= the action is unsuccessful). For example the response to &gt; drop [object] will be "Dropped.", the carried object being rejected from the hero&#8217;s inventory and ending up in the location, while the response to &gt;attack [thing] is "Resorting to brute force is not the solution here.". Which actions are allowed to succeed and which are not is based on what is the most reasonable and expected outcome for the action - the outcome that the game author most unlikely needs to edit except for special circumstances. Please experiment with different verbs in-game to see whether the default outcome of a particular action is suitable for your game - otherwise redefine the outcome of the verb in the my_game instance. How this is done is described in more detail further below.</p>
 </div>
 </div>
 <div class="sect2">
@@ -4800,20 +4841,1690 @@ If you conjure up any verbs of your own and wish to disable them at some point i
 </li>
 </ol>
 </div>
-<div class="admonitionblock warning">
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_adding_synonyms_for_existing_library_words_verbs_object_and_actor_classes"><a class="anchor" href="#_adding_synonyms_for_existing_library_words_verbs_object_and_actor_classes"></a>9. Adding synonyms for existing library words (verbs, object and actor classes)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Declare the synonym in your own game source file, outside any instance declarations, and outside the <code>my_game</code> instance, like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">SYNONYMS</span> peruse <span class="hl opt">=</span> read<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">SYNONYMS</span> bike <span class="hl opt">=</span> bicycle<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The first word (before the equal sign) should be the new word, the second word (after the equal sign) should be the existing one (defined elsewhere in the code).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_my_game_instance_and_its_attributes"><a class="anchor" href="#_the_my_game_instance_and_its_attributes"></a>10. The my_game instance and its attributes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>My_game</code> is a so called meta-instance that obligatorily has to be included by the author in the game source. Without it, the game won&#8217;t compile successfully. At its shortest, the needed formulation is</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is called a meta-instance because everything the author defines inside it affects the whole game. The purpose of this instance is to make it less necessary for the author to access the library files to make changes to common game responses and messages needed in the game. That&#8217;s why the instance is named my_game --the author can override library responses and replace them with default responses that better suit the particular work in progress. The things that the author can define within this instance are</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha">
+<li>
+<p>default verb responses<br>
+for example "There is nothing special about the key."</p>
+</li>
+<li>
+<p>check responses<br>
+for example "You don&#8217;t have the key."</p>
+</li>
+<li>
+<p>illegal parameter messages<br>
+for example "That&#8217;s not something you can eat."</p>
+</li>
+<li>
+<p>the implicit taking message<br>
+for example "(taking the key first)"</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>In addition, the author can let the game formulate automatically the game title, subtitle, author, year, and game version at game start. This is done through attributes of the <code>my_game</code> instance.</p>
+</div>
+<div class="paragraph">
+<p>It is also possible to for the author to implement their own custom global attributes within this instance, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION BLOCK&#x000A;  <span class="hl kwa">HAS</span> tasks_left <span class="hl num">10</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> treasures_found <span class="hl num">0</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">...</span>&#x000A;<span class="hl kwa">END THE</span> my_game<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and then check their state later, as in</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">WHEN</span> treasures_found <span class="hl kwa">OF</span> my_game <span class="hl opt">=</span> <span class="hl num">10</span>&#x000A;&#x000A;<span class="hl kwa">THEN</span> <span class="hl str">&quot;Hurrah! You made it!&quot;</span> <span class="hl kwa">QUIT.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A typical <code>my_game</code> instance would look something like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION BLOCK&#x000A;  <span class="hl kwa">HAS</span> title <span class="hl str">&quot;The House In The Fog&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> subtitle <span class="hl str">&quot;An interactive ghost hunt&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> author <span class="hl str">&quot;Xavier Y. Zamborsky&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> year <span class="hl num">2018</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> version <span class="hl str">&quot;1&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> enemies_defeated <span class="hl num">0</span><span class="hl kwa">.</span>&#x000A;&#x000A;  <span class="hl kwa">VERB</span> examine&#x000A;    <span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;Nothing special.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;&#x000A;  <span class="hl kwa">VERB</span> eat&#x000A;    <span class="hl kwa">CHECK</span> <span class="hl kwc">hero</span> <span class="hl kwa">IS</span> hungry&#x000A;      <span class="hl kwa">ELSE</span> <span class="hl str">&quot;You&apos;re not hungry.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;&#x000A;  <span class="hl kwa">HAS</span> check_obj_not_scenery_sg  <span class="hl str">&quot;That&apos;s just scenery.&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> check_obj_not_scenery_pl  <span class="hl str">&quot;Those are just scenery.&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> illegal_parameter_talk_sg <span class="hl str">&quot;You can&apos;t possibly talk to that.&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> illegal_parameter_talk_pl <span class="hl str">&quot;You can&apos;t possibly talk to those.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE</span> my_game<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the following, all the various attributes of the <code>my_game</code> instance are listed.</p>
+</div>
+<div class="sect2">
+<h3 id="_1_attributes_for_the_start_section"><a class="anchor" href="#_1_attributes_for_the_start_section"></a>10.1. 1. Attributes for the start section</h3>
+<div class="paragraph">
+<p>The following five attributes have been declared for the game start:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> title <span class="hl str">&quot;My New Game&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> subtitle <span class="hl str">&quot;&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> author <span class="hl str">&quot;An ALAN Author&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> year <span class="hl num">0000</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> version <span class="hl str">&quot;1&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you set the version value to "0" (zero), the version line won&#8217;t be shown at all in the game banner. Note also that the version number is in quotes. This enables any kind of textual input to describe the current version, for example version "beta0.1", and so on.</p>
+</div>
+<div class="paragraph">
+<p>If the subtitle line remains an empty quote (""), like above, it won&#8217;t show in the banner.</p>
+</div>
+<div class="paragraph">
+<p>Now, you can modify the default attributes for example in a following way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> title <span class="hl str">&quot;The House In The Fog&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> subtitle <span class="hl str">&quot;An interactive ghost hunt&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> author <span class="hl str">&quot;Xavier Y. Zamborsky&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> year <span class="hl num">2018</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> version <span class="hl str">&quot;1&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>CONTENTS FROM ORIGINAL PDF ADDED UP TO HERE. TO BE CONTINUTED&#8230;&#8203;</p>
+<p>In order for the banner to show up correctly, the line</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">DESCRIBE</span> banner<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>needs to be added after the START AT declaration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">START AT</span> bedroom<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl str">&quot;You knew that this evening would be different from usual</span>&#x000A;<span class="hl str"> when you found the mysterious note pushed under your front door.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">DESCRIBE</span> banner<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will yield, for example:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>You knew that this evening would be different from usual when you found the mysterious note pushed under your front door.</p>
+</div>
+<div class="paragraph">
+<p>The House In The Fog<br>
+An interactive ghost hunt<br>
+(c) 2017 by Xavier Y. Zamborsky<br>
+Version 1</p>
+</div>
+<div class="paragraph">
+<p><strong>Bedroom</strong><br>
+&gt;</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>See also example (3) at the end of this manual.</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_2_attributes_for_the_hero"><a class="anchor" href="#_2_attributes_for_the_hero"></a>10.2. 2. Attributes for the hero</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> hero_worn_header <span class="hl str">&quot;You are wearing&quot;</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> hero_worn_else <span class="hl str">&quot;You are not wearing anything.&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Change these to alter the way the hero is described as far clothing is concerned. If no specific CLOTHING is defined for the hero in the game, these messages won&#8217;t show at any time. By default, these messages show at &#8220;&gt;inventory&#8221;. If the author wishes to have the CLOTHING objects worn by the hero described after &#8220;&gt;examine&#8221; me, the examine verb for the hero should be defined this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> <span class="hl kwc">hero</span> <span class="hl kwa">ISA</span> <span class="hl kwb">ACTOR</span>&#x000A;&#x000A;<span class="hl kwa">...</span>&#x000A;&#x000A;<span class="hl kwa">VERB</span> examine&#x000A;&#x000A;<span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;Blah blah...&quot;</span>&#x000A;&#x000A;<span class="hl kwa">LIST</span> worn<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">END THE</span> <span class="hl kwc">hero</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_attributes_for_locations"><a class="anchor" href="#_3_attributes_for_locations"></a>10.3. 3. Attributes for locations</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> dark_loc_desc <span class="hl str">&quot;It is pitch black. You can&apos;t see anything at all.&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is the default location description for dark locations. It is shown every time the hero enters a dark location or types "LOOK" while there. Edit this to change the default description of dark locations. If/when a dark location is lighted, this description won&#8217;t be shown any longer.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> light_goes_off <span class="hl str">&quot;It is now pitch black.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This message is shown when a light goes off and the location becomes dark.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_attributes_for_restricted_actions"><a class="anchor" href="#_4_attributes_for_restricted_actions"></a>10.4. 4. Attributes for restricted actions</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> restricted_response <span class="hl str">&quot;You can&apos;t do that.&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the game author restricts the outcome of any verbs in the game, this message will show instead of the usual message.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> restricted_level <span class="hl num">0</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default, all verbs work normally, without restrictions. See further the chapter Restricted actions (p. 69-).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_5_illegal_parameter_messages"><a class="anchor" href="#_5_illegal_parameter_messages"></a>10.5. 5. Illegal parameter messages</h3>
+<div class="paragraph">
+<p>In this section, all illegal parameter messages used by the library are listed. If you wish to change any of these, you can declare them again in the my_game instance.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you need to change a great number, or all, of these messages, for example if you&#8217;re writing in another language or you need to change the person or the tense of these messages to better suit your narrative, it is highly recommended that you edit the file 'mygame_import.i' in the library distribution package, find the list of these messages there, edit them, and import the 'mygame_import.i' file to your game source (together with the library). 'mygame_import.i' is a file that lists all the pre-defined attributes of the my_game instance for easy modification. It is included in the library distribution package but is not necessarily needed to run a game. It makes sense to re-declare these messages within the my_game instance in your own source file ONLY if you need to change a small number that you are not satisfied with. Looking through the list of these parameter messages in 'mygame_import.i' will give you a much better overview of them and make it easier to edit them in a uniform way to suit your purposes.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>NOTE ALSO that changing illegal parameter messages is usually not the first priority of a game author and in many cases they are left as is, as defined by the library. It is much more common to modify the standard verb outcomes or add checks of your own to existing library checks, for example. If changing illegal parameter messages is not a high priority for you, you might wish to skip directly to the next section.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The illegal parameter messages, as also the verb check messages and implicit taking messages further below, use the <code>$</code> parameter naming approach.</p>
+</div>
+<div class="paragraph">
+<p>Key to the parameter symbols used in ALAN:</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<code>$v</code>  
+</td>
+<td class="hdlist2">
+<p>the verb the player used</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>$1</code>  
+</td>
+<td class="hdlist2">
+<p>the first parameter the player used (for example the noun after the first verb used), without any articles, for example "key" in the command "examine key")</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>$+1</code> 
+</td>
+<td class="hdlist2">
+<p>the definite form of the first parameter the player used (for example "the key")</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>$-1</code> 
+</td>
+<td class="hdlist2">
+<p>the negative form of the first parameter the player used (for example "no key") (not used in the library)</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>$01</code> 
+</td>
+<td class="hdlist2">
+<p>the indefinite form of the first parameter the player used (for example "a key")</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>$2</code>  
+</td>
+<td class="hdlist2">
+<p>etc. would be the second parameter the player used, ( for example the word "key" in "unlock door with key")</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The general message for when a parameter is not suitable with the verb (for example "That&#8217;s not something you can attack"):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_sg <span class="hl str">&quot;That&apos;s not something you can</span> <span class="hl esc">$v</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The library accounts for singular and plural cases; that&#8217;s why many messages have both a singular (sg) and a plural (pl) formulation.
+In the following there are variations of the above message when a preposition is required after the verb (for example "That&#8217;s not something you can ask about." or "That&#8217;s not something you can cut things with."):</p>
+</div>
+<div class="paragraph">
+<p>For verbs requiring about (the library verbs ask_about, tell_about and think_about):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_about_sg <span class="hl str">&quot;That&apos;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">about.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_about_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">about.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There are two ditransitive verbs requiring at in the library, fire_at (e.g"fire rifle at bear") and throw_at (for example "throw remote control at TV"):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_at <span class="hl str">&quot;You can&apos;t</span> <span class="hl esc">$v</span> <span class="hl str">anything at</span> <span class="hl ipl">$2</span><span class="hl str">.&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following is needed for the verb ask_for (for example "ask servant for tea"):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_for_sg <span class="hl str">&quot;That&apos;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">for.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_for_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">for.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The verb take_from needs the following formulations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_from_sg <span class="hl str">&quot;That&apos;s not something you can take things from.</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">HAS illegal_parameter_from_pl &quot;</span>Those <span class="hl kwa">are not</span> something you <span class="hl kwa">can</span> take things&#x000A;&#x000A;<span class="hl kwa">from.</span><span class="hl str">&quot;.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The verbs dive_in, jump_in, lie_in and swim_in use the following parameter messages:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_in_sg <span class="hl str">&quot;That&apos;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">in.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_in_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">in.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Climb_on, jump_on, knock, lie_on, sit_on, stand_on, switch_on, turn_on, for their part, use the following messages:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_on_sg <span class="hl str">&quot;That&apos;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">on.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_on_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">on.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For get_off, switch_off and turn_of f, the following parameter messages are used:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_off_sg <span class="hl str">&quot;That&apos;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">off.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_off_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">off.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The preposition to is needed in the verbs listen_to and talk_to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_to_sg <span class="hl str">&quot;That&apos;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">to.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_to_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">to.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A slightly different message is needed for give, show, tell, tie_to, throw_to which are ditransitive verbs with the second parameter preceded by to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter2_to_sg <span class="hl str">&quot;That&apos;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">things to.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter2_to_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">things to.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For with, we have two separate messages. The verbs kill_with, shoot_with and play_with use the following formulation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_with_sg <span class="hl str">&quot;That&apos;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">with.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_with_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">with.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>while a somewhat bigger group of verbs - attack_with, break_with, burn_with, close_with, cut_with, fill_with, lock_with, open_with, pry_with, push_with, unlock_with - are accompanied with a message one word longer: the word 'things' is added, for no other reason than that it sounds better than if left out, as far as these verbs are concerned:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter2_with_sg <span class="hl str">&quot;That&apos;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">things with.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter2_with_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">things</span>&#x000A;<span class="hl str">with.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The communication verbs ask, ask_for, say_to, talk_to and tell use a message of their own:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_talk_sg <span class="hl str">&quot;That&apos;s not something you can talk to.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_talk_pl <span class="hl str">&quot;Those are not something you can talk to.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We have a separate individual default parameter message for a handful of verbs.</p>
+</div>
+<div class="paragraph">
+<p>For consult, we have the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_consult_sg <span class="hl str">&quot;That&apos;s not something you can find</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">information about.&quot;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_consult_pl <span class="hl str">&quot;Those are not something you can find</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">information about.&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll find this message at examine :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_examine_sg <span class="hl str">&quot;That&apos;s not something you can examine.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_examine_pl <span class="hl str">&quot;Those are not something you can examine.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The reason why examine doesn&#8217;t use the general default message (scroll above) is that when the player types for example &#8220;&gt;x 34&#8221; the response would be "That&#8217;s not something you can x." which isn&#8217;t such pretty-looking as when the verb is printed in full.</p>
+</div>
+<div class="paragraph">
+<p>The verbs look_out_of and look_through use prepositions other verbs don&#8217;t, and that&#8217;s why they need their own messages:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_look_out_sg <span class="hl str">&quot;That&apos;s not something you can look out of.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_look_out_pl <span class="hl str">&quot;Those are not something you can look out</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">of.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_look_through <span class="hl str">&quot;You can&apos;t look through</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_other_illegal_parameter_messages"><a class="anchor" href="#_other_illegal_parameter_messages"></a>10.5.1. Other illegal parameter messages</h4>
+<div class="paragraph">
+<p>The above are the default messages and their variations. There are, however, other illegal parameter messages needed at places. They are described below.</p>
+</div>
+<div class="paragraph">
+<p>The following message is displayed when the player tries to for example put something into an actor instance. The verbs in which this message is found are <code>empty_in</code>, <code>pour_in</code>, <code>put_in</code>, and <code>throw_in</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_act <span class="hl str">&quot;That doesn&apos;t make sense.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following message is displayed when the player tries to use the verbs give, put, put_in, put_on, put_against, put_near, put_behind, put_under, throw_at, throw_in, throw_to, use and use_with with actors as direct objects:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_obj <span class="hl str">&quot;You can only</span> <span class="hl esc">$v</span> <span class="hl str">objects.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The verbs answer, say, say_to and write require that what we wish to answer, say or write is put into a string ( = surrounded by quotes).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_string <span class="hl str">&quot;Please state inside double quotes (&quot;</span><span class="hl str">&quot;&quot;</span><span class="hl str">&quot;) what</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">you want to</span> <span class="hl esc">$v</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The verbs look_behind, look_in and look_under have the following message when the player tries to look somewhere that is not suitable object for these verbs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_there <span class="hl str">&quot;It&apos;s not possible to</span> <span class="hl esc">$v</span> <span class="hl str">there.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The verb go_to has its own message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_go <span class="hl str">&quot;It&apos;s not possible to go there.&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following is a variation of the above and is used when the second parameter of a ditransitive verb is not suitable.</p>
+</div>
+<div class="paragraph">
+<p>The verbs empty_in, empty_on, pour_in, pour_on, put_in, put_on, put_against, put_behind, put_near, put_under, throw_in, throw_to, tie_to and write use this message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter2_there <span class="hl str">&quot;It&apos;s not possible to</span> <span class="hl esc">$v</span> <span class="hl str">anything there.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, there are some messages for the information "verbs" what_is, where_is and who_is. (The first two messages below also apply to where_is besides what_is.)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_what_sg <span class="hl str">&quot;That&apos;s not something I know about.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_what_pl <span class="hl str">&quot;Those are not something I know about.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_who_sg <span class="hl str">&quot;That&apos;s not somebody I know about.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_who_pl <span class="hl str">&quot;Those are not somebody I know about.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_changing_the_illegal_parameter_message_of_a_single_verb"><a class="anchor" href="#_changing_the_illegal_parameter_message_of_a_single_verb"></a>10.5.2. Changing the illegal parameter message of a single verb:</h4>
+<div class="paragraph">
+<p>The way the illegal parameter messages have been defined in the library, it is not usually possible to affect just one verb at a time. Most often, changing a default message will alter the outcome of at least a handful of verbs, because one default message is shared by many verbs. There are some default parameter messages that only affect one verb; you should check the list of parameter messages (above) for details. Anyway, the quickest way to accomplish this task would be to open 'lib_verbs.i', find the verb, then modify the appropriate parameter message in its syntax statement.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_6_default_verb_check_messages"><a class="anchor" href="#_6_default_verb_check_messages"></a>10.6. 6. Default verb check messages</h3>
+<div class="paragraph">
+<p>All these check messages can be individually changed by listing them under the my_game instance in your game source file. They are also listed in the file 'mygame_import.i' in the library distribution package, for easy modification. These check messages are used in verb definitions, mainly in 'lib_verbs.i'. Changing one check message will affect all verbs where that particular check is found. Again, as with parameter messages, edit these messages directly in 'mygame_import.i' if you need to change a great number of them, otherwise redefine them within the my_game instance in your own source file. You&#8217;ll quickly notice that the list is quite long, and listing any number greater than just a few under the my_game instance would be a rather frustrating task.</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha">
+<li>
+<p>attribute checks</p>
+<div class="paragraph">
+<p>The general check message for when an instance cannot be used with the verb :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_suitable_sg <span class="hl str">&quot;That&apos;s not something you can</span> <span class="hl esc">$v</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Thus, if the player tries to for example eat something that is not edible,</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>eat book</em><br>
+That&#8217;s not something you can eat.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>the check message will be displayed.</p>
+</div>
+<div class="paragraph">
+<p>Note that the illegal parameter messages (above) mostly report cases where the player tried to use a wrong kind of instance with a verb:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>take 5</em><br>
+That&#8217;s not something you can take.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The verb take only works with objects, not with any other instances. Thus, if you try to take something else than an object (for example a numerical value in the above case), an illegal parameter message is shown. This restriction is defined in the syntax of the verb. Checks, on the other hand, are used to ensure that an instance has the proper attribute needed with the verb, for example edible, takeable, NOT open, and so forth.</p>
+</div>
+<div class="paragraph">
+<p>Variations of the above message, needed for example when a preposition is required after the verb, are listed below:</p>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><code>fire_at</code>, <code>throw_at</code>, <code>throw_to</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_suitable_at <span class="hl str">&quot;You can&apos;t</span> <span class="hl esc">$v</span> <span class="hl str">anything at</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>ask_for</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_suitable_for_sg <span class="hl str">&quot;That&apos;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">for.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj2_suitable_for_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">for.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>turn_off</code>, <code>switch_off</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_suitable_off_sg <span class="hl str">&quot;That&apos;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">off.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_off_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">off.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>knock</code>, <code>switch_on</code>, <code>turn_on</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_suitable_on_sg <span class="hl str">&quot;That&apos;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">on.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_on_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">on.&quot;</span> <span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>play_with</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_suitable_with_sg <span class="hl str">&quot;That&apos;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">with.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_with_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">with.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>break_with</code>, <code>burn_with</code>, <code>close_with</code>, <code>cut_with</code>, <code>fill_with</code>, <code>lock_with</code>, <code>open_with</code>, <code>pry_with</code>, <code>push_with</code>, <code>touch_with</code>, <code>unlock_with</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_suitable_with_sg <span class="hl str">&quot;That&apos;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">things</span>&#x000A;<span class="hl str">with.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj2_suitable_with_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">things</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">with.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Again, we have a separate message for examine, look_out_of and look_through:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_suitable_examine_sg <span class="hl str">&quot;That&apos;s not something you can examine.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_examine_pl <span class="hl str">&quot;Those are not something you can examine.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_look_out_sg <span class="hl str">&quot;That&apos;s not something you can look out of.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_look_out_pl <span class="hl str">&quot;Those are not something you can look out of.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_look_through <span class="hl str">&quot;You can&apos;t look through</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_checks_for_open_closed_and_locked_objects"><a class="anchor" href="#_checks_for_open_closed_and_locked_objects"></a>10.7. Checks for open, closed and locked objects</h3>
+<div class="paragraph">
+<p>open, open_with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_open_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already open.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_not_open_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already open.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>close, close_with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_open1_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already closed.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_open1_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already closed.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>empty, empty (in/on), look_in, pour (in/on):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_open2_sg <span class="hl str">&quot;You can&apos;t, since</span> <span class="hl ipl">$+1</span> <span class="hl str">is closed.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_open2_pl <span class="hl str">&quot;You can&apos;t, since</span> <span class="hl ipl">$+1</span> <span class="hl str">are closed.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>empty_in, pour_in, put_in, throw_in:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_open_sg <span class="hl str">&quot;You can&apos;t, since</span> <span class="hl ipl">$+2</span> <span class="hl str">is closed.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj2_open_pl <span class="hl str">&quot;You can&apos;t, since</span> <span class="hl ipl">$+2</span> <span class="hl str">are closed.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>unlock, unlock_with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_locked_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already unlocked.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_locked_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already unlocked.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>lock, lock_with</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_locked_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already locked.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_not_locked_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already locked.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_checks_for_not_reachable_and_distant_objects"><a class="anchor" href="#_checks_for_not_reachable_and_distant_objects"></a>10.8. Checks for "not reachable" and "distant" objects</h3>
+<div class="paragraph">
+<p>A large number of verbs have the following checks:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_reachable_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is out of your reach.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_reachable_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are out of your reach.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_not_distant_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is too far away.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_not_distant_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are too far away.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In addition, the verbs empty_in, fill_with, pour_in, put_in, take_from and tie_to have the following check for the reachability of the second parameter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_reachable_sg <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">is out of your reach.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj2_reachable_pl <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">are out of your reach.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and the verb ask_for has the following check:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_reachable_ask <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">wouldn&apos;t be able to reach</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>which is triggered when the hero asks an NPC for something that the NPC cannot reach. (This happens when the object in question has the attribute 'NOT reachable'.)</p>
+</div>
+<div class="paragraph">
+<p>The verbs throw_at, throw_in, throw_to allow the action to succeed if the second parameter is reachable, but not if the second parameter is distant:. Thus, the way things are defined in the library, it is possible to e,g, throw something in a container if that container is otherwise NOT reachable. But if the container is distant, the action will fail.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_not_distant_sg <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">is too far away.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj2_not_distant_pl <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">are too far away.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_checks_for_the_hero_sitting_or_lying_down"><a class="anchor" href="#_checks_for_the_hero_sitting_or_lying_down"></a>10.9. Checks for the hero sitting or lying_down</h3>
+<div class="paragraph">
+<p>Numerous verbs in the library have one of the following checks for sitting:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_hero_not_sitting1 <span class="hl str">&quot;It is difficult to</span> <span class="hl esc">$v</span> <span class="hl str">while sitting down.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_hero_not_sitting2 <span class="hl str">&quot;It is difficult to</span> <span class="hl esc">$v</span> <span class="hl str">anything while sitting</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">down.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_hero_not_sitting3 <span class="hl str">&quot;It is difficult to</span> <span class="hl esc">$v</span> <span class="hl str">anywhere while sitting</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">down.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and for lying down:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_hero_not_lying_down1 <span class="hl str">&quot;It is difficult to</span> <span class="hl esc">$v</span> <span class="hl str">while lying down.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_hero_not_lying_down2 <span class="hl str">&quot;It is difficult to</span> <span class="hl esc">$v</span> <span class="hl str">anything while lying</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">down.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_hero_not_lying_down3 <span class="hl str">&quot;It is difficult to</span> <span class="hl esc">$v</span> <span class="hl str">anywhere while lying</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">down.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the player uses the verbs sit or sit_on, and the hero is already sitting, the following check message is displayed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_hero_not_lying_down4 <span class="hl str">&quot;You&apos;re lying down already.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_other_attribute_checks"><a class="anchor" href="#_other_attribute_checks"></a>10.10. Other attribute checks</h3>
+<div class="paragraph">
+<p>Checking that the object of the action has the ability to talk; verbs ask, ask_for, say_to, tell:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_act_can_talk_sg <span class="hl str">&quot;That&apos;s not something you can talk to.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_act_can_talk_pl <span class="hl str">&quot;Those are not something you can talk to.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Checking that the object is allowed to be emptied/poured/put/thrown in the container (empty_in, pour_in, put_in, throw_in):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_allowed_in_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">doesn&apos;t belong in</span> <span class="hl ipl">$+2</span><span class="hl str">&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_allowed_in_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">don&apos;t belong in</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Checking that something is broken; the verb fix:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_broken_sg <span class="hl str">&quot;That doesn&apos;t need fixing.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_broken_pl <span class="hl str">&quot;Those don&apos;t need fixing.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Checking that the object of the action is inanimate, because normally the action would be considered improper if done to a person: pull, push, push_with, scratch, search</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_inanimate1 <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">wouldn&apos;t probably appreciate that.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With some verbs, the above message is slightly altered; rub, touch, touch_with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_inanimate2 <span class="hl str">&quot;You are not sure whether</span> <span class="hl ipl">$+1</span> <span class="hl str">would appreciate</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">that.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Checking if something is movable; the verbs lift, pull, push, push_with, shake, take, take_from:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_movable <span class="hl str">&quot;It&apos;s not possible to</span> <span class="hl esc">$v</span> <span class="hl str"></span><span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Checking whether something is scenery; the verbs examine, take, take_from:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_scenery_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is not important.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_not_scenery_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are not important.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the verbs ask_for and take_from there is also a check for whether the second parameter in the command happens to be a scenery object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_not_scenery_sg <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">is not important.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj2_not_scenery_pl <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">are not important.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For some verbs, the target of looking is checked with the following message: look_behind, look_under:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_suitable_there <span class="hl str">&quot;It&apos;s not possible to</span> <span class="hl esc">$v</span> <span class="hl str">there.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The verbs throw_in and tie_to has a slightly different formulation from the above:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_suitable_there <span class="hl str">&quot;It&apos;s not possible to</span> <span class="hl esc">$v</span> <span class="hl str">anything there.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following check is found in verbs in which implicit taking is possible but the present instance is NOT takeable:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_takeable <span class="hl str">&quot;You don&apos;t have</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>fill_with has the following check:fill_with</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_takeable1 <span class="hl str">&quot;You don&apos;t have</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>while ask_for has:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_takeable2 <span class="hl str">&quot;You can&apos;t have</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Checking that an object is not too heavy (lift, take, take_from):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_weight_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is too heavy to</span> <span class="hl esc">$v</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_weight_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are too heavy to</span> <span class="hl esc">$v</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Checking that an object can be written in/on:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_writeable <span class="hl str">&quot;Nothing can be written there.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_b_location_and_containment_checks_for_actors_and_objects"><a class="anchor" href="#_b_location_and_containment_checks_for_actors_and_objects"></a>10.11. b. location and containment checks for actors and objects</h3>
+<div class="paragraph">
+<p>Location and containment checks for actors other than the hero (checks for the hero are listed separately below):</p>
+</div>
+<div class="paragraph">
+<p>For the verb follow to work successfully, the actor to be followed should be in an adjacent location to the hero. The following check will verify this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_act_near_hero <span class="hl str">&quot;You don&apos;t quite know where</span> <span class="hl ipl">$+1</span> <span class="hl str">went.</span>&#x000A;<span class="hl str">You should state direction where you want to go.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the hero tries to take something from an NPC and the NPC doesn&#8217;t have the stated object, the following check is triggered (take_from):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_in_act_sg <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">doesn&apos;t have</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_in_act_pl <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">don&apos;t have</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Similarly, if the player types &gt;give object to actor, and the actor already has that object, the following check message is displayed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_in_act_pl <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">already have</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_not_in_act_sg <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">already has</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_location_and_containment_checks_for_the_hero"><a class="anchor" href="#_location_and_containment_checks_for_the_hero"></a>10.11.1. Location and containment checks for the hero</h4>
+<div class="paragraph">
+<p>The following checks deal with where the hero is or what (s)he is carrying.</p>
+</div>
+<div class="paragraph">
+<p>The verb shoot has the following check:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_count_weapon_in_hero <span class="hl str">&quot;You are not carrying any firearms.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>find, follow, go_to, where_is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_at_hero_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is right here.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_not_at_hero_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are right here.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>drop, fire, fire_at, put, show:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_in_hero <span class="hl str">&quot;You don&apos;t have the</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following check is used in many verbs, typically ditransitive ones such as break_with, cut_with etc:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_in_hero <span class="hl str">&quot;You don&apos;t have the</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the following, the action tried out by the player is targeted at something the hero is holding, and the action would not make sense (verbs attack, attack_with, kick, lift, shoot and shoot_with):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_in_hero1 <span class="hl str">&quot;It doesn&apos;t make sense to $v something you&apos;re</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following check ensures that the hero is not trying to get something (s)he already has (the verbs take, take_from):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_in_hero2 <span class="hl str">&quot;You already have</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The throwing verbs (throw_at, throw_in throw_to)have this check to prohibit the hero from throwing something at, to or into something that (s)he is holding:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_not_in_hero1 <span class="hl str">&quot;You are carrying</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For "putting" verbs other than put_in and put_on, the following check ensures that the hero cannot succeed in putting something against, behind, near, on or under something else when (s)he carries the object referenced by second parameter (the verbs put_against, put_behind, put_near, put_under):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_not_in_hero2 <span class="hl str">&quot;That would be futile.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Thus, if the hero is for example carrying a book, the command</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>put apple near book</em></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>wouldn&#8217;t be successful.</p>
+</div>
+<div class="paragraph">
+<p>If the hero already is carrying an object that (s)he asks for, the following check message is displayed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_not_in_hero3 <span class="hl str">&quot;You already have</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_checking_whether_an_object_is_in_a_container_or_not"><a class="anchor" href="#_checking_whether_an_object_is_in_a_container_or_not"></a>10.11.2. Checking whether an object is in a container or not</h4>
+<div class="paragraph">
+<p>When the following check fires, the hero tried to empty the contents of an object into a container that already was contained by the object (for example if there is a bottle in a box, and the player types "empty box in bottle"). This applies to the verbs empty_in and pour_in:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_cont_not_in_obj <span class="hl str">&quot;That doesn&apos;t make sense.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the hero tries to take something from a container and that something is not there to begin with, the following check message is displayed (take_from):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_in_cont_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is not in</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_in_cont_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are not in</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the hero tries to put or throw something into a container but the object is already in the container, the following message is displayed (put_in, throw_in):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_in_cont_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is in</span> <span class="hl ipl">$+2</span> <span class="hl str">already.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_not_in_cont_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are in</span> <span class="hl ipl">$+2</span> <span class="hl str">already.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following check message is displayed when the hero tries to fill a container with something that the container already is full of (fill_with):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_in_cont2_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already full of</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_not_in_cont2_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already full of</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Checking whether an OBJECT is on a SUPPORTER or not (take_from):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_on_surface_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is not on</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_on_surface_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are not on</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Putting something on a SUPPORTER (put_on):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_on_surface_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already on</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_not_on_surface_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already on</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_checking_whether_an_object_is_worn_by_the_hero_or_not"><a class="anchor" href="#_checking_whether_an_object_is_worn_by_the_hero_or_not"></a>10.11.3. Checking whether an object is worn by the hero or not</h4>
+<div class="paragraph">
+<p>You can&#8217;t take off something you&#8217;re not wearing (remove, take_off):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_in_worn <span class="hl str">&quot;You are not wearing</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following check is for cases when the hero tries to put on something (s)he is already wearing (put_on, wear):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_in_worn1 <span class="hl str">&quot;You are already wearing</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, the action is stopped if the hero tries to attack, kick or shoot something (s)he&#8217;s wearing (attack, attack_with, kick, shoot, shoot_with):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_in_worn2 <span class="hl str">&quot;It doesn&apos;t make sense to $v something you&apos;re</span>&#x000A;<span class="hl str">wearing.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Lastly, it&#8217;s not possible to drop a piece of CLOTHING if it is worn. It will have to be removed first (drop):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_in_worn3<span class="hl kwa">:</span> <span class="hl str">&quot;You&apos;ll have to take off</span> <span class="hl ipl">$+1</span> <span class="hl str">first.&quot;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_c_checking_location_states"><a class="anchor" href="#_c_checking_location_states"></a>10.12. c. checking location states</h3>
+<div class="paragraph">
+<p>The following check is found in numerous verbs. It prohibits actions requiring seeing when the LOCATION is not lit:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_current_loc_lit <span class="hl str">&quot;It is too dark to see.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_d_logical_checks"><a class="anchor" href="#_d_logical_checks"></a>10.13. d. logical checks</h3>
+<div class="paragraph">
+<p>The checks in this group a) prohibit the action from being directed at the hero, and 2) prohibit the action in ditransitive verbs where both the first and the second parameter refer to the same instance.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>prohibiting the action from being directed at the hero:</p>
+<div class="paragraph">
+<p>The following check is triggered when the player tries something like &gt;attack me (ask, ask_for, attack, attack_with, catch, follow, kick, listen, pull, push, push_with, take, take_from, tell):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_hero1 <span class="hl str">&quot;It doesn&apos;t make sense to</span> <span class="hl esc">$v</span> <span class="hl str">yourself.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For the verbs fire_at, kill, kill_with, shoot, shoot_with there is a specific message when the target of the action is the hero:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_hero2 <span class="hl str">&quot;There is no need to be that desperate.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For a couple of actions where the hero is the target, the action might make sense but it is anyway not deemed fruitful.</p>
+</div>
+<div class="paragraph">
+<p>This applies to the verbs scratch and touch:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_hero3 <span class="hl str">&quot;That wouldn&apos;t accomplish anything.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The verbs find and go_to have the following check triggered when the player types &gt;find me or &gt;go to me:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_hero4 <span class="hl str">&quot;You&apos;re right here.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the player tries &gt;free me, the following check message is displayed (free):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_hero5 <span class="hl str">&quot;You don&apos;t have to be freed.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The verbs kiss, play_with and rub have the following check:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_hero6 <span class="hl str">&quot;There&apos;s no time for that now.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The verb look_behind has the following check for cases when the hero looks behind him-/herself :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_hero7 <span class="hl str">&quot;Turning your head, you notice nothing unusual behind</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">yourself.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>while look_under has the following one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_hero8 <span class="hl str">&quot;You notice nothing unusual under yourself.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Many ditransitive verbs have the following check when the hero tries to perform these actions to her-/himself (say_to, show, take_from, touch_with, throw_at, throw_in, throw_to):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_not_hero1 <span class="hl str">&quot;That doesn&apos;t make sense.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Lastly, some other cases:</p>
+</div>
+<div class="paragraph">
+<p>put_against, put_behind, put_near, put_under:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_not_hero2 <span class="hl str">&quot;That would be futile.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>give, tie_to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_not_hero3 <span class="hl str">&quot;You can&apos;t</span> <span class="hl esc">$v</span> <span class="hl str">things to yourself.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_prohibiting_the_action_in_ditransitive_verbs_where_both_the_first_and_the_second_parameter_refer_to_the_same_instance"><a class="anchor" href="#_2_prohibiting_the_action_in_ditransitive_verbs_where_both_the_first_and_the_second_parameter_refer_to_the_same_instance"></a>10.14. 2. prohibiting the action in ditransitive verbs where both the first and the second parameter refer to the same instance:</h3>
+<div class="paragraph">
+<p>The following checks prohibit actions like &gt;cut rope with rope, &gt;throw stone at stone and &gt;put bottle in bottle:</p>
+</div>
+<div class="paragraph">
+<p>fire_at, throw_at:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_obj2_at <span class="hl str">&quot;It doesn&apos;t make sense to</span> <span class="hl esc">$v</span> <span class="hl str">something at itself.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>take_from:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_obj2_from <span class="hl str">&quot;It doesn&apos;t make sense to</span> <span class="hl esc">$v</span> <span class="hl str">something from</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>itself.".</p>
+</div>
+<div class="paragraph">
+<p>empty_in, pour_in, put_in, throw_in:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_obj2_in <span class="hl str">&quot;It doesn&apos;t make sense to</span> <span class="hl esc">$v</span> <span class="hl str">something into</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>itself.".</p>
+</div>
+<div class="paragraph">
+<p>empty_on, pour_on, put_on:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_obj2_on <span class="hl str">&quot;It doesn&apos;t make sense to</span> <span class="hl esc">$v</span> <span class="hl str">something onto</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>itself.".</p>
+</div>
+<div class="paragraph">
+<p>give, show, throw_to, tie_to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_obj2_to <span class="hl str">&quot;It doesn&apos;t make sense to</span> <span class="hl esc">$v</span> <span class="hl str">something to itself.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>attack_with, break_with, burn_with, close_with, cut_with, fill_with , lock_with, open_with, pry_with, push_with, shoot_with, touch_with, unlock_with, use_with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_obj2_with <span class="hl str">&quot;It doesn&apos;t make sense to</span> <span class="hl esc">$v</span> <span class="hl str">something with</span>&#x000A;<span class="hl str">itself.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>put_against, put_behind, put_near, put_under:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_obj2_put <span class="hl str">&quot;That doesn&apos;t make sense.&quot;</span> <span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_e_additional_checks_for_classes"><a class="anchor" href="#_e_additional_checks_for_classes"></a>10.15. e. additional checks for classes</h3>
+<div class="paragraph">
+<p>Lastly, there are some checks that apply only to a specific class. Most of these are found in 'lib_classes.i'.</p>
+</div>
+<div class="paragraph">
+<p>The first one checks that a MALE character doesn&#8217;t put on women&#8217;s CLOTHING by default, and vice versa:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_clothing_sex <span class="hl str">&quot;On second thoughts you decide</span> <span class="hl ipl">$+1</span> <span class="hl str">won&apos;t really suit</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">you.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following check ensures that it won&#8217;t be possible to put something inside a SUPPORTER object by default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_cont_not_supporter <span class="hl str">&quot;You can&apos;t put</span> <span class="hl ipl">$+1</span> <span class="hl str">inside</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the player tries to turn off a DEVICE that is already off, the following check is triggered (turn_off, switch_off):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_device_on_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already off.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_device_on_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already off.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following message is triggered if the player tries to turn on a DEVICE which is already on (device: turn_on,
+switch_on)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_device_not_on_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already on.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_device_not_on_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already on.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the player tries to unlock or lock a door with something that is not the matching_key of the DOOR in question (lock_with, unlock_with):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_door_matching_key <span class="hl str">&quot;You can&apos;t use</span> <span class="hl ipl">$+2</span> <span class="hl str">to</span> <span class="hl esc">$v</span> <span class="hl str"></span><span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following message is for situations where the hero tries to turn off or extinguish a LIGHTSOURCE that is NOT lit (lightsource: extinguish, turn_off):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_lightsource_lit_sg <span class="hl str">&quot;But</span> <span class="hl ipl">$+1</span> <span class="hl str">is not lit.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_lightsource_lit_pl <span class="hl str">&quot;But</span> <span class="hl ipl">$+1</span> <span class="hl str">are not lit.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>while the following is for the opposite case (lightsource: light, turn_on):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_lightsource_not_lit_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already lit.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_lightsource_not_lit_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already lit.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Checking that the verb switch won&#8217;t work with a natural LIGHTSOURCE (lightsource: switch):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_lightsource_switchable_sg <span class="hl str">&quot;That&apos;s not something you can switch on</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">and off.&quot;</span> <span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_lightsource_switchable_pl <span class="hl str">&quot;Those are not something you can switch on</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">and off.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When there is some LIQUID in a container, for example some juice in a bottle, and the player types &gt;take juice from bottle, the following check is triggered (liquid: take_from):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_liquid_vessel_not_cont <span class="hl str">&quot;You can&apos;t carry</span> <span class="hl ipl">$+1</span> <span class="hl str">around in your bare</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">hands.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the player tries to turn on a DEVICE or light a LIGHTSOURCE which is broken, the following check message is displayed (device, lightsource: light, turn_on):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_broken <span class="hl str">&quot;Nothing happens.&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_7_implicit_taking_message"><a class="anchor" href="#_7_implicit_taking_message"></a>10.16. 7. Implicit taking message</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> implicit_taking_message <span class="hl str">&quot;(taking</span> <span class="hl ipl">$+1</span> <span class="hl str">first)</span><span class="hl esc">$n</span><span class="hl str">&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following verbs use implicit taking:</p>
+</div>
+<div class="paragraph">
+<p>bite, drink, eat, empty, empty_in, empty_on, give, pour, pour_in, pour_on, put_in, put_on, throw, throw_at, throw_in, throw_to, tie_to.</p>
+</div>
+<div class="paragraph">
+<p>(If you wish to disable automatic implicit taking for any of these verbs, you should open the library file 'lib_verbs.i', locate the needed verbs in that file, go to their DOES sections and delete the implicit taking code. Moreover, you should add the following check to each affected verb:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">AND</span> obj <span class="hl kwa">IN</span> <span class="hl kwc">hero</span>&#x000A;&#x000A;<span class="hl kwa">ELSE</span> <span class="hl str">&quot;You don&apos;t have&quot;</span> <span class="hl kwa">SAY the</span> obj<span class="hl kwa">.</span> <span class="hl str">&quot;.&quot;</span> <span class="hl opt">)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_have_the_game_banner_show_at_the_start"><a class="anchor" href="#_have_the_game_banner_show_at_the_start"></a>11. Have the game banner show at the start</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To show the game banner at the start, after an optional intro text, you must add the text <code>DESCRIBE banner.</code> after the <code>START AT</code> clause, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">START AT</span> room1<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">DESCRIBE</span> banner<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">START AT</span> room1<span class="hl kwa">.</span>&#x000A;<span class="hl str">&quot;This is the (optional) intro text at the start of the game,</span>&#x000A;<span class="hl str"> before the first location description.&quot;</span>&#x000A;<span class="hl kwa">DESCRIBE</span> banner<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following attributes should be added to the my_game instance, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> title <span class="hl str">&quot;The Baffling Case Of Mrs Wells&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> subtitle <span class="hl str">&quot;An interactive mystery&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> author <span class="hl str">&quot;Sam&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> year <span class="hl num">2017</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> version <span class="hl str">&quot;1&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Leaving the <code>subtitle</code> line out and setting the <code>version</code> number to <code>0</code> will omit these lines from the banner.
+As it stands now, these attributes would produce the following kind of banner text:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>The Baffling Case Of Mrs Wells<br>
+An interactive mystery<br>
+(c) 2017 by Sam<br>
+Programmed with the ALAN Interactive Fiction Language v3.0<br>
+Version 1<br>
+All rights reserved</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_runtime_messages"><a class="anchor" href="#_runtime_messages"></a>12. Runtime messages</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Many of the runtime messages built into ALAN have been altered in the library from their default wording as stated in the ALAN manual.
+This is to ensure that plural is handled correctly and that there are no clashes between first and second person.
+The first person of some default wordings (for example &#8220;I don&#8217;t know the word $1&#8221;) is changed to a more passive or impersonal formulation.
+To edit these for your game, open <code>lib_messages.i</code> and edit the wanted message(s) there.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">MESSAGE</span>&#x000A;  AFTER_BUT<span class="hl kwa">:</span> <span class="hl str">&quot;You must give at least one object after &apos;$1&apos;.&quot;</span>&#x000A;  AGAIN<span class="hl kwa">:</span> <span class="hl str">&quot;&quot;</span>&#x000A;  BUT_ALL<span class="hl kwa">:</span> <span class="hl str">&quot;You can only use &apos;$1&apos; AFTER &apos;$2&apos;.&quot;</span>&#x000A;  CAN_NOT_CONTAIN<span class="hl kwa">:</span> <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">can not contain</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span>&#x000A;  CANT0<span class="hl kwa">:</span> <span class="hl str">&quot;You can&apos;t do that.&quot;</span> <span class="hl slc">-- note that the fifth token in CANT0</span>&#x000A;                              <span class="hl slc">-- is a zero, not an &apos;o&apos;.</span>&#x000A;  CARRIES<span class="hl kwa">:</span>&#x000A;    <span class="hl kwa">IF</span> parameter1 <span class="hl opt">=</span> <span class="hl kwc">hero</span>&#x000A;      <span class="hl kwa">THEN</span> <span class="hl str">&quot;You are carrying&quot;</span>&#x000A;      <span class="hl kwa">ELSE</span>&#x000A;        <span class="hl kwa">IF</span> parameter1 <span class="hl kwa">IS NOT</span> plural&#x000A;          <span class="hl kwa">THEN</span> <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">carries&quot;</span>&#x000A;          <span class="hl kwa">ELSE</span> <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">carry&quot;</span>&#x000A;        <span class="hl kwa">END IF.</span>&#x000A;    <span class="hl kwa">END IF.</span>&#x000A;&#x000A;  CONTAINMENT_LOOP<span class="hl kwa">:</span>&#x000A;  <span class="hl str">&quot;Putting</span> <span class="hl ipl">$+1</span> <span class="hl str">in&quot;</span>&#x000A;  <span class="hl kwa">IF</span> parameter1 <span class="hl kwa">IS NOT</span> plural&#x000A;  <span class="hl kwa">THEN</span> <span class="hl str">&quot;itself&quot;</span>&#x000A;  <span class="hl kwa">ELSE</span> <span class="hl str">&quot;themselves&quot;</span>&#x000A;  <span class="hl kwa">END IF.</span>&#x000A;  <span class="hl str">&quot;is impossible.&quot;</span>&#x000A;&#x000A;  CONTAINMENT_LOOP2<span class="hl kwa">:</span>&#x000A;    <span class="hl str">&quot;Putting</span> <span class="hl ipl">$+1</span> <span class="hl str">in</span> <span class="hl ipl">$+2</span> <span class="hl str">is impossible since</span> <span class="hl ipl">$+2</span> <span class="hl str">already&quot;</span>&#x000A;    <span class="hl kwa">IF</span> parameter2 <span class="hl kwa">IS NOT</span> plural&#x000A;      <span class="hl kwa">THEN</span> <span class="hl str">&quot;is&quot;</span>&#x000A;      <span class="hl kwa">ELSE</span> <span class="hl str">&quot;are&quot;</span>&#x000A;    <span class="hl kwa">END IF.</span>&#x000A;    <span class="hl str">&quot;inside</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span>&#x000A;&#x000A;  &apos;CONTAINS&apos;<span class="hl kwa">:</span>&#x000A;    <span class="hl kwa">IF</span> parameter1 <span class="hl kwa">IS NOT</span> plural&#x000A;      <span class="hl kwa">THEN</span> <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">contains&quot;</span>&#x000A;      <span class="hl kwa">ELSE</span> <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">contain&quot;</span>&#x000A;    <span class="hl kwa">END IF.</span>&#x000A;&#x000A;  CONTAINS_COMMA<span class="hl kwa">:</span> <span class="hl str">&quot;</span><span class="hl ipl">$01</span><span class="hl str">,&quot;</span>&#x000A;  CONTAINS_AND<span class="hl kwa">:</span> <span class="hl str">&quot;</span><span class="hl ipl">$01</span> <span class="hl str">and&quot;</span>&#x000A;  CONTAINS_END<span class="hl kwa">:</span> <span class="hl str">&quot;</span><span class="hl ipl">$01</span><span class="hl str">.&quot;</span>&#x000A;&#x000A;  EMPTY_HANDED<span class="hl kwa">:</span>&#x000A;    <span class="hl kwa">IF</span> parameter1 <span class="hl opt">=</span> <span class="hl kwc">hero</span>&#x000A;      <span class="hl kwa">THEN</span> <span class="hl str">&quot;You are empty-handed.&quot;</span>&#x000A;      <span class="hl kwa">ELSE</span>&#x000A;        <span class="hl kwa">IF</span> parameter1 <span class="hl kwa">IS NOT</span> plural&#x000A;          <span class="hl kwa">THEN</span> <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is empty-handed.&quot;</span>&#x000A;          <span class="hl kwa">ELSE</span> <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are empty-handed.&quot;</span>&#x000A;        <span class="hl kwa">END IF.</span>&#x000A;    <span class="hl kwa">END IF.</span>&#x000A;&#x000A;  HAVE_SCORED<span class="hl kwa">:</span> <span class="hl str">&quot;You have scored</span> <span class="hl ipl">$1</span> <span class="hl str">points out of</span> <span class="hl ipl">$2</span><span class="hl str">.&quot;</span>&#x000A;&#x000A;  IMPOSSIBLE_WITH<span class="hl kwa">:</span> <span class="hl str">&quot;That&apos;s impossible with</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span>&#x000A;&#x000A;  IS_EMPTY<span class="hl kwa">:</span>&#x000A;    <span class="hl kwa">IF</span> parameter1 <span class="hl kwa">IS NOT</span> plural&#x000A;      <span class="hl kwa">THEN</span> <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is empty.&quot;</span>&#x000A;      <span class="hl kwa">ELSE</span> <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are empty.&quot;</span>&#x000A;    <span class="hl kwa">END IF.</span>&#x000A;&#x000A;  MORE<span class="hl kwa">:</span> <span class="hl str">&quot;&lt;More&gt;&quot;</span>&#x000A;  MULTIPLE<span class="hl kwa">:</span> <span class="hl str">&quot;You can&apos;t refer to multiple objects with &apos;</span><span class="hl esc">$v</span><span class="hl str">&apos;.&quot;</span>&#x000A;  NO_SUCH<span class="hl kwa">:</span> <span class="hl str">&quot;You can&apos;t see any</span> <span class="hl ipl">$1</span> <span class="hl str">here.&quot;</span>&#x000A;  NO_WAY<span class="hl kwa">:</span> <span class="hl str">&quot;You can&apos;t go that way.&quot;</span>&#x000A;  NOT_MUCH<span class="hl kwa">:</span> <span class="hl str">&quot;That doesn&apos;t leave much to</span> <span class="hl esc">$v</span><span class="hl str">!&quot;</span>&#x000A;  NOUN<span class="hl kwa">:</span> <span class="hl str">&quot;You must supply a noun.&quot;</span>&#x000A;  NOT_A_SAVEFILE<span class="hl kwa">:</span> <span class="hl str">&quot;That file does not seem to be an Alan game save file.&quot;</span>&#x000A;  QUIT_ACTION<span class="hl kwa">:</span> <span class="hl str">&quot;Do you want to RESTART, RESTORE, QUIT or UNDO? &quot;</span>&#x000A;                <span class="hl slc">-- these four alternatives are hardwired to the</span>&#x000A;                <span class="hl slc">-- interpreter and cannot be changed.</span>&#x000A;  REALLY<span class="hl kwa">:</span> <span class="hl str">&quot;Are you sure (press ENTER to confirm)?&quot;</span>&#x000A;  RESTORE_FROM<span class="hl kwa">:</span> <span class="hl str">&quot;Enter file name to restore from&quot;</span>&#x000A;  SAVE_FAILED<span class="hl kwa">:</span> <span class="hl str">&quot;Sorry, save failed.&quot;</span>&#x000A;  SAVE_MISSING<span class="hl kwa">:</span> <span class="hl str">&quot;Sorry, could not open the save file.&quot;</span>&#x000A;  SAVE_NAME<span class="hl kwa">:</span> <span class="hl str">&quot;Sorry, the save file did not contain</span>&#x000A;<span class="hl str">              a save for this adventure.&quot;</span>&#x000A;  SAVE_OVERWRITE<span class="hl kwa">:</span> <span class="hl str">&quot;That file already exists, overwrite (y)?&quot;</span>&#x000A;  SAVE_VERSION<span class="hl kwa">:</span> <span class="hl str">&quot;Sorry, the save file was created</span>&#x000A;<span class="hl str">                 by a different version.&quot;</span>&#x000A;  SAVE_WHERE<span class="hl kwa">:</span> <span class="hl str">&quot;Enter file name to save in&quot;</span>&#x000A;&#x000A;  SEE_START<span class="hl kwa">:</span>&#x000A;    <span class="hl kwa">IF</span> parameter1 <span class="hl kwa">IS NOT</span> plural&#x000A;      <span class="hl kwa">THEN</span> <span class="hl str">&quot;There is</span> <span class="hl ipl">$01</span><span class="hl str">&quot;</span>&#x000A;      <span class="hl kwa">ELSE</span> <span class="hl str">&quot;There are</span> <span class="hl ipl">$01</span><span class="hl str">&quot;</span>&#x000A;    <span class="hl kwa">END IF.</span>&#x000A;&#x000A;  SEE_COMMA<span class="hl kwa">:</span> <span class="hl str">&quot;,</span> <span class="hl ipl">$01</span><span class="hl str">&quot;</span>&#x000A;  SEE_AND<span class="hl kwa">:</span> <span class="hl str">&quot;and</span> <span class="hl ipl">$01</span><span class="hl str">&quot;</span>&#x000A;  SEE_END<span class="hl kwa">:</span> <span class="hl str">&quot;here.&quot;</span>&#x000A;  NO_UNDO<span class="hl kwa">:</span> <span class="hl str">&quot;No further undo available.&quot;</span>&#x000A;  UNDONE<span class="hl kwa">:</span> <span class="hl str">&quot;&apos;$1&apos; undone.&quot;</span>&#x000A;  UNKNOWN_WORD<span class="hl kwa">:</span> <span class="hl str">&quot;The word &apos;$1&apos; is not understood.&quot;</span>&#x000A;  WHAT<span class="hl kwa">:</span> <span class="hl str">&quot;That was not understood.&quot;</span>&#x000A;  WHAT_WORD<span class="hl kwa">:</span> <span class="hl str">&quot;It is not clear what you mean by &apos;$1&apos;.&quot;</span>&#x000A;  WHICH_PRONOUN_START<span class="hl kwa">:</span> <span class="hl str">&quot;It is not clear if you by &apos;$1&apos;&quot;</span>&#x000A;  WHICH_PRONOUN_FIRST<span class="hl kwa">:</span> <span class="hl str">&quot;mean</span> <span class="hl ipl">$+1</span><span class="hl str">&quot;</span>&#x000A;  WHICH_START<span class="hl kwa">:</span> <span class="hl str">&quot;It is not clear if you mean</span> <span class="hl ipl">$+1</span><span class="hl str">&quot;</span>&#x000A;  WHICH_COMMA<span class="hl kwa">:</span> <span class="hl str">&quot;,</span> <span class="hl ipl">$+1</span><span class="hl str">&quot;</span>&#x000A;  WHICH_OR<span class="hl kwa">:</span> <span class="hl str">&quot;or</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_default_attributes_used_in_the_standard_library"><a class="anchor" href="#_default_attributes_used_in_the_standard_library"></a>13. Default attributes used in the standard library</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The attributes in the following list are pre-defined in the library. When you coin your own attributes for your game, please be aware that these attributes already exist. Using any of the attributes listed below for your own purposes doesn&#8217;t necessarily cause any problems, but if problems arise, it&#8217;s likely because of their being used in the library.</p>
+</div>
+<div class="paragraph">
+<p>This attribute is added to every ENTITY:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">NOT</span> plural<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These attributes are added to every THING:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS</span> examinable<span class="hl kwa">.</span>&#x000A;&#x000A;inanimate<span class="hl kwa">.</span>&#x000A;&#x000A;movable<span class="hl kwa">.</span>&#x000A;&#x000A;open<span class="hl kwa">.</span>&#x000A;&#x000A;reachable<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl slc">-- See also &apos;distant&apos; below</span>&#x000A;&#x000A;takeable<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> allowed <span class="hl opt">{</span>null_object<span class="hl opt">}</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl slc">-- You can only put an object in a container if the object</span>&#x000A;&#x000A;<span class="hl slc">-- is in the &apos;allowed&apos; set of the container.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> ex <span class="hl str">&quot;&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl slc">-- an alternative to using &quot;VERB examine DOES...&quot;</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> matching_key null_key<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl slc">-- All lockable objects need a matching key to lock/unlock them.</span>&#x000A;&#x000A;<span class="hl slc">-- &quot;null_key&quot; is a default dummy that can be ignored.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> text <span class="hl str">&quot;&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> weight <span class="hl num">0</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl slc">-- Actors and objects will have different weight values, see below</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> broken<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> distant<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl slc">-- Usage: you can for example talk to a &quot;not reachable&quot; actor but</span>&#x000A;&#x000A;<span class="hl slc">-- not to a &quot;distant&quot; one.</span>&#x000A;&#x000A;<span class="hl slc">-- You can also throw things in, to or at a not reachable target</span>&#x000A;&#x000A;<span class="hl slc">-- but not to a distant one.</span>&#x000A;&#x000A;<span class="hl slc">-- The other verbs where the action succeeds if the object is</span>&#x000A;&#x000A;<span class="hl slc">-- not reachable are: dive_in, fire_at, kill_with, read, and</span>&#x000A;&#x000A;<span class="hl opt">//</span> PAGE <span class="hl num">103</span> <span class="hl opt">//</span>&#x000A;&#x000A;&#x000A;&#x000A;<span class="hl slc">-- shoot</span>&#x000A;&#x000A;<span class="hl slc">-- Default response for not reachable things: &quot;The \[thing\] is out</span>&#x000A;&#x000A;<span class="hl slc">-- of your reach.&quot;</span>&#x000A;&#x000A;<span class="hl slc">-- Default response for distant things: &quot;The \[thing\] is too far</span>&#x000A;&#x000A;<span class="hl slc">-- away.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> drinkable<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> edible<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> fireable<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl slc">-- can (not) be used as a firearm</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> lockable<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> locked<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> &apos;on&apos;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> openable<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> readable<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> scenery<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl slc">-- has special responses for &apos;ask_for&apos;, &apos;examine&apos;, &apos;take&apos; and</span>&#x000A;&#x000A;<span class="hl slc">-- &apos;take_from&apos;, behaves like a normal object otherwise.</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> wearable<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> writeable<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">CAN NOT</span> talk<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These attributes are added to every ACTOR:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS</span> wearing <span class="hl opt">{</span>null_clothing<span class="hl opt">}</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl slc">-- By default, actors are not described as wearing any specific</span>&#x000A;&#x000A;<span class="hl slc">-- clothing. null_clothing is a default dummy value that can be</span>&#x000A;&#x000A;<span class="hl slc">-- ignored.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> weight <span class="hl num">50</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl slc">-- If something has the weight value of 50 or more, it cannot</span>&#x000A;&#x000A;<span class="hl slc">-- be lifted or taken.</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> following<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl slc">-- not following the hero character by default</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> inanimate<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> named<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> compliant<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> sitting<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">NOT</span> lying_down<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The code for CLOTHING objects adds these attributes, used only internally in the library, to every actor:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS</span> tempcovered <span class="hl num">0</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">IS</span> wear_flag <span class="hl num">0</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">IS</span> sex <span class="hl num">0</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These attributes are added to every OBJECT:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> weight <span class="hl num">5</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl slc">-- This is the default weight of every object, whether takeable</span>&#x000A;&#x000A;<span class="hl slc">-- or NOT takeable. However, the library by itself</span>&#x000A;&#x000A;<span class="hl slc">-- doesn&apos;t define any limit for containers. If the game author</span>&#x000A;&#x000A;<span class="hl slc">-- wants to have a limit to how many objects a container can hold,</span>&#x000A;&#x000A;<span class="hl slc">-- the author must set this limit by themselves.</span></code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_attributes_added_to_specific_classes_of_objects"><a class="anchor" href="#_attributes_added_to_specific_classes_of_objects"></a>13.1. Attributes added to specific classes of objects:</h3>
+<div class="paragraph">
+<p>These attributes are added to every CLOTHING object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS</span> wearable<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">IS NOT</span> donned<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl slc">-- = not worn by an NPC</span>&#x000A;&#x000A;<span class="hl kwa">IS</span> sex <span class="hl num">0</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">IS</span> headcover <span class="hl num">0</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">IS</span> handscover <span class="hl num">0</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">IS</span> feetcover <span class="hl num">0</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">IS</span> topcover <span class="hl num">0</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">IS</span> botcover <span class="hl num">0</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following attribute is defined for every DOOR object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> otherside door<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following attributes are added to every LIGHTSOURCE object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS</span> natural<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">IS NOT</span> lit<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following attribute is added to every WEAPON:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS NOT</span> fireable<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following attributes are added to every LOCATION:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS</span> lit<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> visited <span class="hl num">0</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> described <span class="hl num">0</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> nested <span class="hl opt">{</span>nowhere<span class="hl opt">}</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The score notification coding uses the following attributes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> oldscore <span class="hl num">0</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">IS</span> notify_on<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">IS NOT</span> seen_notify<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, for restricted actions, there is an attribute defined to correspond to every library verb. (See the list on p. 61-.)</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_translating_to_other_languages"><a class="anchor" href="#_translating_to_other_languages"></a>14. Translating to other languages</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To translate the ALAN system and library to other languages, you should</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>translate all the messages in the file <code>lib_definitions.i</code>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>the two messages for the hero</p>
+</li>
+<li>
+<p>the two messages for dark locations</p>
+</li>
+<li>
+<p>all illegal parameter messages</p>
+</li>
+<li>
+<p>all verb check messages</p>
+</li>
+<li>
+<p>the message for implicit taking</p>
+</li>
+<li>
+<p>the message lines for the banner instance where applicable</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>translate all the <code>CAN [verb]</code> attributes in the file <code>lib_definitions.i</code>.</p>
+</li>
+<li>
+<p>translate the verb syntaxes in <code>lib_verbs.i</code> (not parameters and the ELSE parts).</p>
+<div class="paragraph">
+<p>For example for the verb attack when translated into French:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">SYNTAX</span> attaquer <span class="hl opt">=</span> attaquer <span class="hl opt">(</span>target<span class="hl opt">)</span>&#x000A;&#x000A;<span class="hl kwa">WHERE</span> target <span class="hl kwa">ISA</span> <span class="hl kwb">THING</span>&#x000A;&#x000A;<span class="hl kwa">ELSE</span>&#x000A;&#x000A;<span class="hl kwa">IF</span> target <span class="hl kwa">IS NOT</span> plural&#x000A;&#x000A;<span class="hl kwa">THEN SAY</span> illegal_parameter_sg <span class="hl kwa">OF</span> my_game<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">ELSE SAY</span> illegal_parameter_pl <span class="hl kwa">OF</span> my_game<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END IF.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Also, translate the verb names, for example <code>VERB attack DOES &#8230;&#8203;</code> becomes, translating into French, <code>VERB attaquer DOES &#8230;&#8203;</code> etc.), and the verb outcomes (what happens after DOES).</p>
+</div>
+</li>
+<li>
+<p>translate the verb outcomes for class objects (what happens after DOES or DOES ONLY) in <code>lib_classes.i</code>.</p>
+</li>
+<li>
+<p>translate the direction names, their synonyms and the few marginal verb outcomes for indoor and outdoor objects in <code>lib_locations.i</code></p>
+</li>
+<li>
+<p>translate the runtime messages in <code>lib_messages.i</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Now, every possible response and message in the game is shown in the target language, and it is possible for the player to issue commands in the target language.</p>
+</div>
+<div class="paragraph">
+<p>It&#8217;s up to the translator to decide whether to translate any of the library-defined default attributes.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_short_examples"><a class="anchor" href="#_short_examples"></a>15. Short examples</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>A very short complete game using minimal obligatory imports and coding. Here, the hero must go from room1 north to room2 and eat an apple to win the game.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IMPORT</span> &apos;library.i&apos;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> room1 <span class="hl kwa">ISA</span> <span class="hl kwb">LOCATION</span>&#x000A;&#x000A;<span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;North to room2.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">EXIT</span> north <span class="hl kwa">TO</span> room2<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> room2 <span class="hl kwa">ISA</span> <span class="hl kwb">LOCATION</span>&#x000A;&#x000A;<span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;South to room1.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">EXIT</span> south <span class="hl kwa">TO</span> room1<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> apple <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> room2&#x000A;&#x000A;<span class="hl kwa">IS</span> edible<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">VERB</span> eat&#x000A;&#x000A;<span class="hl kwa">DOES</span> <span class="hl str">&quot;Congratulations!&quot;</span> <span class="hl kwa">QUIT.</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">START AT</span> room1<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">DESCRIBE</span> banner<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>(This game wouldn&#8217;t actually need the library at all; it would be even shorter to code:)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> room1 <span class="hl kwa">ISA</span> <span class="hl kwb">LOCATION</span>&#x000A;&#x000A;<span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;North to room2.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">EXIT</span> north <span class="hl kwa">TO</span> room2<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> room2 <span class="hl kwa">ISA</span> <span class="hl kwb">LOCATION</span>&#x000A;&#x000A;<span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;South to room1.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">EXIT</span> south <span class="hl kwa">TO</span> room1<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> apple <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> room2&#x000A;&#x000A;<span class="hl kwa">VERB</span> eat&#x000A;&#x000A;<span class="hl kwa">DOES</span> <span class="hl str">&quot;Congratulations!&quot;</span> <span class="hl kwa">QUIT.</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">START AT</span> room1<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this latter case, though, the player wouldn&#8217;t for example be able to examine him-/herself, trying to go any other direction, take inventory, try various things with the apple, quit properly, etc.</p>
+</div>
+</li>
+<li>
+<p>Here, the player must get a candy from the kitchen and give it to a crying child in the nursery to win the game.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IMPORT</span> &apos;library.i&apos;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> nursery <span class="hl kwa">ISA</span> ROOM&#x000A;&#x000A;<span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;The kitchen is to the east.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">EXIT</span> east <span class="hl kwa">to</span> kitchen<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> child <span class="hl kwa">ISA</span> PERSON <span class="hl kwa">AT</span> nursery&#x000A;&#x000A;<span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;There is a crying child here.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">VERB</span> give&#x000A;&#x000A;<span class="hl kwa">WHEN</span> recipient&#x000A;&#x000A;<span class="hl kwa">DOES ONLY</span>&#x000A;&#x000A;<span class="hl kwa">IF</span> obj <span class="hl opt">=</span> candy&#x000A;&#x000A;<span class="hl kwa">THEN</span> <span class="hl str">&quot;You give the candy to the child who stops</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">crying and starts licking it happily.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">QUIT.</span>&#x000A;&#x000A;<span class="hl kwa">END IF.</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> kitchen <span class="hl kwa">ISA</span> ROOM&#x000A;&#x000A;<span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;You can go west, back to the nursery.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">EXIT</span> west <span class="hl kwa">TO</span> nursery<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> table <span class="hl kwa">ISA</span> SUPPORTER <span class="hl kwa">AT</span> kitchen&#x000A;&#x000A;<span class="hl kwa">IS NOT</span> takeable<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> candy <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">IN</span> table&#x000A;&#x000A;<span class="hl kwa">IS</span> edible<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">START AT</span> nursery<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples 3-4 below show mainly different variations of the my_game instance and not complete games:</p>
+</div>
+</li>
+<li>
+<p>In this example of defining the my_game instance, the author has changed the default verb responses for <code>eat</code>, <code>climb</code> and <code>take_from</code>. In addition, the author has added a check and a response of his/her own to <code>take_from</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;&#x000A;<span class="hl kwa">VERB</span> eat&#x000A;&#x000A;<span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;You don&apos;t feel like eating anything in this game.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">VERB</span> climb&#x000A;&#x000A;<span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;Let&apos;s just stay on the ground, shall we?&quot;</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">VERB</span> take_from&#x000A;&#x000A;<span class="hl kwa">WHEN</span> obj&#x000A;&#x000A;<span class="hl kwa">CHECK COUNT ISA</span> <span class="hl kwb">ACTOR</span><span class="hl kwa">, AT</span> <span class="hl kwc">hero</span> <span class="hl opt">=</span> <span class="hl num">1</span>&#x000A;&#x000A;<span class="hl slc">-- ( = the hero himself)</span>&#x000A;&#x000A;<span class="hl kwa">ELSE</span> <span class="hl str">&quot;You don&apos;t want to take anything while somebody</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">might be looking.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">DOES</span> <span class="hl str">&quot;Triumphantly, you fish&quot;</span> <span class="hl kwa">SAY THE</span> obj<span class="hl kwa">.</span> <span class="hl str">&quot;out of&quot;</span>&#x000A;&#x000A;<span class="hl kwa">SAY THE</span> holder<span class="hl kwa">.</span> <span class="hl str">&quot;.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Here, the author uses the automatic formulation for the game title, author, and other information:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;&#x000A;<span class="hl kwa">HAS</span> title <span class="hl str">&quot;The Lost Treasure&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> subtitle <span class="hl str">&quot;An interactive treasure hunt&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> author <span class="hl str">&quot;Sam&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> year <span class="hl num">2019</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> version <span class="hl str">&quot;1&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> garden <span class="hl kwa">ISA</span> <span class="hl kwb">LOCATION</span>&#x000A;&#x000A;<span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;...&quot;</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">START AT</span> garden<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">DESCRIBE</span> banner<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Here, the game author has added a check of his own to the library-defined drink verb and changed an illegal parameter message for the verbs look_behind, look_in, and look_under:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;&#x000A;<span class="hl kwa">VERB</span> drink&#x000A;&#x000A;<span class="hl kwa">CHECK</span> <span class="hl kwc">hero</span> <span class="hl kwa">IS</span> thirsty&#x000A;&#x000A;<span class="hl kwa">ELSE</span> <span class="hl str">&quot;You don&apos;t feel like drinking anything right now.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_there <span class="hl str">&quot;You can&apos;t \</span><span class="hl esc">$v</span> <span class="hl str">there.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>A complete example game with locked doors and keys. This code reintroduces the situation used in example 1, with a locked door and two keys added.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IMPORT</span> &apos;lib_classes.i&apos;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">IMPORT</span> &apos;lib_definitions.i&apos;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">IMPORT</span> &apos;lib_locations.i&apos;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">IMPORT</span> &apos;lib_messages.i&apos;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">IMPORT</span> &apos;lib_verbs.i&apos;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl opt">//</span> PAGE <span class="hl num">110</span> <span class="hl opt">//</span>&#x000A;&#x000A;&#x000A;&#x000A;<span class="hl kwa">THE</span> room1 <span class="hl kwa">ISA</span> <span class="hl kwb">LOCATION</span>&#x000A;&#x000A;<span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;North to room2.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">EXIT</span> north <span class="hl kwa">TO</span> room2&#x000A;&#x000A;<span class="hl kwa">CHECK</span> locked_door_1 <span class="hl kwa">IS</span> open&#x000A;&#x000A;<span class="hl kwa">ELSE</span> <span class="hl str">&quot;The door to the north is on the way.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">END EXIT.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> locked_door_1 <span class="hl kwa">ISA</span> DOOR <span class="hl kwa">AT</span> room1&#x000A;&#x000A;<span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;&quot;</span>&#x000A;&#x000A;<span class="hl kwa">NAME</span> door&#x000A;&#x000A;<span class="hl kwa">HAS</span> otherside locked_door_2<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">IS</span> lockable<span class="hl kwa">. IS</span> locked<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> matching_key silver_key<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> silver_key <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> room1&#x000A;&#x000A;<span class="hl kwa">NAME</span> silver key&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> brass_key <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> room1&#x000A;&#x000A;<span class="hl kwa">NAME</span> brass key&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> room2 <span class="hl kwa">ISA</span> <span class="hl kwb">LOCATION</span>&#x000A;&#x000A;<span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;South to room1.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">EXIT</span> south <span class="hl kwa">TO</span> room1&#x000A;&#x000A;<span class="hl kwa">CHECK</span> locked_door_2 <span class="hl kwa">IS</span> open&#x000A;&#x000A;<span class="hl kwa">ELSE</span> <span class="hl str">&quot;The door to the south is on the way.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">END EXIT.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> locked_door_2 <span class="hl kwa">ISA</span> DOOR <span class="hl kwa">AT</span> room2&#x000A;&#x000A;<span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;&quot;</span>&#x000A;&#x000A;<span class="hl kwa">NAME</span> door&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> apple <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> room2&#x000A;&#x000A;<span class="hl kwa">IS</span> edible<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">VERB</span> eat&#x000A;&#x000A;<span class="hl kwa">DOES</span> <span class="hl str">&quot;Congratulations!&quot;</span> <span class="hl kwa">QUIT.</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">START AT</span> room1<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">DESCRIBE</span> banner<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<hr>
+<div class="paragraph">
+<p>* * * The End * * *</p>
 </div>
 </div>
 </div>

@@ -1,0 +1,61 @@
+////
+********************************************************************************
+*                                                                              *
+*                     ALAN Standard Library User's Manual                      *
+*                                                                              *
+*                                 Chapter 11                                   *
+*                                                                              *
+********************************************************************************
+////
+
+
+
+== Have the game banner show at the start
+
+To show the game banner at the start, after an optional intro text, you must add the text `DESCRIBE banner.` after the `START AT` clause, for example:
+
+[source,alan]
+--------------------------------------------------------------------------------
+START AT room1.
+DESCRIBE banner.
+--------------------------------------------------------------------------------
+
+or:
+
+[source,alan]
+--------------------------------------------------------------------------------
+START AT room1.
+"This is the (optional) intro text at the start of the game,
+ before the first location description."
+DESCRIBE banner.
+--------------------------------------------------------------------------------
+
+The following attributes should be added to the my_game instance, for example:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS title "The Baffling Case Of Mrs Wells".
+HAS subtitle "An interactive mystery".
+HAS author "Sam".
+HAS year 2017.
+HAS version "1".
+--------------------------------------------------------------------------------
+
+Leaving the `subtitle` line out and setting the `version` number to `0` will omit these lines from the banner.
+As it stands now, these attributes would produce the following kind of banner text:
+
+[example,role="gametranscript"]
+================================================================================
+The Baffling Case Of Mrs Wells +
+An interactive mystery +
+(c) 2017 by Sam +
+Programmed with the ALAN Interactive Fiction Language v3.0 +
+Version 1 +
+All rights reserved
+================================================================================
+
+// PAGE 100 //
+
+
+// EOF //
+
