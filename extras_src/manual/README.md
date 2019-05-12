@@ -35,6 +35,8 @@ One section at the time, its contents are added to the ported document and rough
     + [`StdLibMan_06.adoc`](./StdLibMan_06.adoc) — 6. _Objects_
     + [`StdLibMan_07.adoc`](./StdLibMan_07.adoc) — 7. _Additional attributes for THINGs: (NOT) distant, (NOT) reachable, scenery_
     + [`StdLibMan_08.adoc`](./StdLibMan_08.adoc) — 8. _Using verbs and commands_
+    + [`StdLibMan_09.adoc`](./StdLibMan_09.adoc) — 9. _Adding synonyms for existing library words (verbs, object and actor classes)_
+    + [`StdLibMan_10.adoc`](./StdLibMan_10.adoc) — 10. _The `my_game` instance and its attributes_
 
 # Document Status
 

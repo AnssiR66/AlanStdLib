@@ -1,0 +1,1435 @@
+////
+********************************************************************************
+*                                                                              *
+*                     ALAN Standard Library User's Manual                      *
+*                                                                              *
+*                                 Chapter 10                                   *
+*                                                                              *
+********************************************************************************
+////
+
+
+
+
+== The my_game instance and its attributes
+
+`My_game` is a so called meta-instance that obligatorily has to be included by the author in the game source. Without it, the game won't compile successfully. At its shortest, the needed formulation is
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE my_game ISA DEFINITION_BLOCK
+END THE.
+--------------------------------------------------------------------------------
+
+It is called a meta-instance because everything the author defines inside it affects the whole game. The purpose of this instance is to make it less necessary for the author to access the library files to make changes to common game responses and messages needed in the game. That's why the instance is named my_game – the author can override library responses and replace them with default responses that better suit the particular work in progress. The things that the author can define within this instance are
+
+a. default verb responses +
+for example "There is nothing special about the key."
+
+b. check responses +
+for example "You don't have the key."
+
+c. illegal parameter messages +
+for example "That's not something you can eat."
+
+d. the implicit taking message +
+for example "(taking the key first)"
+
+In addition, the author can let the game formulate automatically the game title, subtitle, author, year, and game version at game start. This is done through attributes of the `my_game` instance.
+
+It is also possible to for the author to implement their own custom global attributes within this instance, for example:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE my_game ISA DEFINITION BLOCK
+
+HAS tasks_left 10.
+
+HAS treasures_found 0.
+
+...
+
+END THE my_game.
+--------------------------------------------------------------------------------
+
+and then check their state later, as in
+
+[source,alan]
+--------------------------------------------------------------------------------
+WHEN treasures_found OF my_game = 10
+
+THEN "Hurrah! You made it!" QUIT.
+--------------------------------------------------------------------------------
+
+// PAGE 78 //
+
+
+A typical my_game instance would look something like this:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE my_game ISA DEFINITION BLOCK
+
+HAS title "The House In The Fog".
+
+HAS subtitle "An interactive ghost hunt".
+
+HAS author "Xavier Y. Zamborsky".
+
+HAS year 2018.
+
+HAS version ″1″.
+
+HAS enemies_defeated 0.
+
+VERB examine
+
+DOES ONLY "Nothing special."
+
+END VERB.
+
+VERB eat
+
+CHECK hero IS hungry
+
+ELSE "You're not hungry."
+
+END VERB.
+
+HAS check_obj_not_scenery_sg "That's just scenery.".
+
+HAS check_obj_not_scenery_pl "Those are just scenery.".
+
+HAS illegal_parameter_talk_sg "You can't possibly talk to that.".
+
+HAS illegal_parameter_talk_pl "You can't possibly talk to those.".
+
+END THE my_game.
+--------------------------------------------------------------------------------
+
+In the following, all the various attributes of the my_game instance are listed.
+
+
+// @FIXME: This heading should retain it's number even when all other section
+//         numbers are removed!
+=== 1. Attributes for the start section
+
+The following five attributes have been declared for the game start:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS title "My New Game".
+
+HAS subtitle "".
+
+HAS author "An ALAN Author".
+
+HAS year 0000.
+
+HAS version "1".
+--------------------------------------------------------------------------------
+
+If you set the version value to "0" (zero), the version line won't be shown at all in the game banner. Note also that the version number is in quotes. This enables any kind of textual input to describe the current version, for example version "beta0.1", and so on.
+
+
+// PAGE 79 //
+
+
+If the subtitle line remains an empty quote (""), like above, it won't show in the banner.
+
+Now, you can modify the default attributes for example in a following way:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS title "The House In The Fog".
+
+HAS subtitle "An interactive ghost hunt".
+
+HAS author "Xavier Y. Zamborsky".
+
+HAS year 2018.
+
+HAS version "1".
+--------------------------------------------------------------------------------
+
+[NOTE]
+================================================================================
+In order for the banner to show up correctly, the line
+
+[source,alan]
+----------------
+DESCRIBE banner.
+----------------
+
+needs to be added after the START AT declaration:
+
+[source,alan]
+------------------------------------------------------------------
+START AT bedroom.
+
+"You knew that this evening would be different from usual
+ when you found the mysterious note pushed under your front door."
+
+DESCRIBE banner.
+------------------------------------------------------------------
+
+This will yield, for example:
+
+[example,role="gametranscript"]
+===============================
+You knew that this evening would be different from usual when you found the mysterious note pushed under your front door.
+
+The House In The Fog +
+An interactive ghost hunt +
+(c) 2017 by Xavier Y. Zamborsky +
+Version 1
+
+*Bedroom* +
+&gt;
+===============================
+
+See also example (3) at the end of this manual.
+================================================================================
+
+// PAGE 80 //
+
+
+
+// @FIXME: This heading should retain it's number even when all other section
+//         numbers are removed!
+=== 2. Attributes for the hero
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS hero_worn_header "You are wearing"
+
+HAS hero_worn_else "You are not wearing anything."
+--------------------------------------------------------------------------------
+
+Change these to alter the way the hero is described as far clothing is concerned. If no specific CLOTHING is defined for the hero in the game, these messages won't show at any time. By default, these messages show at >inventory. If the author wishes to have the CLOTHING objects worn by the hero described after >examine me, the examine verb for the hero should be defined this way:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE hero ISA ACTOR
+
+...
+
+VERB examine
+
+DOES ONLY "Blah blah..."
+
+LIST worn.
+
+END VERB.
+
+END THE hero.
+--------------------------------------------------------------------------------
+
+// @FIXME: This heading should retain it's number even when all other section
+//         numbers are removed!
+=== 3. Attributes for locations
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS dark_loc_desc "It is pitch black. You can't see anything at all."
+--------------------------------------------------------------------------------
+
+This is the default location description for dark locations. It is shown every time the hero enters a dark location or types "LOOK" while there. Edit this to change the default description of dark locations. If/when a dark location is lighted, this description won't be shown any longer.
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS light_goes_off "It is now pitch black.".
+--------------------------------------------------------------------------------
+
+This message is shown when a light goes off and the location becomes dark.
+
+// @FIXME: This heading should retain it's number even when all other section
+//         numbers are removed!
+=== 4. Attributes for restricted actions
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS restricted_response "You can't do that."
+--------------------------------------------------------------------------------
+
+If the game author restricts the outcome of any verbs in the game, this message will show instead of the usual message.
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS restricted_level 0.
+--------------------------------------------------------------------------------
+
+// @FIXME: XRef to PDF page...
+By default, all verbs work normally, without restrictions. See further the chapter Restricted actions (p. 69-).
+
+// PAGE 81 //
+
+
+
+// @FIXME: This heading should retain it's number even when all other section
+//         numbers are removed!
+=== 5. Illegal parameter messages
+
+In this section, all illegal parameter messages used by the library are listed. If you wish to change any of these, you can declare them again in the my_game instance.
+
+[NOTE]
+================================================================================
+If you need to change a great number, or all, of these messages, for example if you're writing in another language or you need to change the person or the tense of these messages to better suit your narrative, it is highly recommended that you edit the file 'mygame_import.i' in the library distribution package, find the list of these messages there, edit them, and import the 'mygame_import.i' file to your game source (together with the library). 'mygame_import.i' is a file that lists all the pre-defined attributes of the my_game instance for easy modification. It is included in the library distribution package but is not necessarily needed to run a game. It makes sense to re-declare these messages within the my_game instance in your own source file ONLY if you need to change a small number that you are not satisfied with. Looking through the list of these parameter messages in 'mygame_import.i' will give you a much better overview of them and make it easier to edit them in a uniform way to suit your purposes.
+================================================================================
+
+[NOTE]
+================================================================================
+NOTE ALSO that changing illegal parameter messages is usually not the first priority of a game author and in many cases they are left as is, as defined by the library. It is much more common to modify the standard verb outcomes or add checks of your own to existing library checks, for example. If changing illegal parameter messages is not a high priority for you, you might wish to skip directly to the next section.
+================================================================================
+
+The illegal parameter messages, as also the verb check messages and implicit taking messages further below, use the `$` parameter naming approach.
+
+Key to the parameter symbols used in ALAN:
+
+[horizontal]
+`$v`  :: the verb the player used
+`$1`  :: the first parameter the player used (for example the noun after the first verb used), without any articles, for example "key" in the command "examine key")
+`$+1` :: the definite form of the first parameter the player used (for example "the key")
+`$-1` :: the negative form of the first parameter the player used (for example "no key") (not used in the library)
+`$01` :: the indefinite form of the first parameter the player used (for example "a key")
+`$2`  :: etc. would be the second parameter the player used, ( for example the word "key" in "unlock door with key")
+
+The general message for when a parameter is not suitable with the verb (for example "That's not something you can attack"):
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_sg "That's not something you can \$v.".
+
+HAS illegal_parameter_pl "Those are not something you can \$v.".
+--------------------------------------------------------------------------------
+
+The library accounts for singular and plural cases; that's why many messages have both a singular (sg) and a plural (pl) formulation.
+In the following there are variations of the above message when a preposition is required after the verb (for example "That's not something you can ask about." or "That's not something you can cut things with."):
+
+For verbs requiring about (the library verbs ask_about, tell_about and think_about):
+
+// PAGE 82 //
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_about_sg "That's not something you can \$v about.".
+
+HAS illegal_parameter_about_pl "Those are not something you can \$v about.".
+--------------------------------------------------------------------------------
+
+There are two ditransitive verbs requiring at in the library, fire_at (e.g"fire rifle at bear") and throw_at (for example "throw remote control at TV"):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_at "You can't \$v anything at \$2."
+--------------------------------------------------------------------------------
+
+The following is needed for the verb ask_for (for example "ask servant for tea"):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_for_sg "That's not something you can \$v for.".
+
+HAS illegal_parameter_for_pl "Those are not something you can \$v for.".
+--------------------------------------------------------------------------------
+
+The verb take_from needs the following formulations:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_from_sg "That's not something you can take things from.
+
+HAS illegal_parameter_from_pl "Those are not something you can take things
+
+from.".
+--------------------------------------------------------------------------------
+
+The verbs dive_in, jump_in, lie_in and swim_in use the following parameter messages:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_in_sg "That's not something you can \$v in.".
+
+HAS illegal_parameter_in_pl "Those are not something you can \$v in.".
+--------------------------------------------------------------------------------
+
+Climb_on, jump_on, knock, lie_on, sit_on, stand_on, switch_on, turn_on, for their part, use the following messages:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_on_sg "That's not something you can \$v on.".
+
+HAS illegal_parameter_on_pl "Those are not something you can \$v on.".
+--------------------------------------------------------------------------------
+
+For get_off, switch_off and turn_of f, the following parameter messages are used:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_off_sg "That's not something you can \$v off.".
+
+HAS illegal_parameter_off_pl "Those are not something you can \$v off.".
+--------------------------------------------------------------------------------
+
+The preposition to is needed in the verbs listen_to and talk_to:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_to_sg "That's not something you can \$v to.".
+
+HAS illegal_parameter_to_pl "Those are not something you can \$v to.".
+--------------------------------------------------------------------------------
+
+A slightly different message is needed for give, show, tell, tie_to, throw_to which are ditransitive verbs with the second parameter preceded by to:
+
+// PAGE 83 //
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter2_to_sg "That's not something you can \$v things to.".
+
+HAS illegal_parameter2_to_pl "Those are not something you can \$v things to.".
+--------------------------------------------------------------------------------
+
+For with, we have two separate messages. The verbs kill_with, shoot_with and play_with use the following formulation:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_with_sg "That's not something you can \$v with.".
+
+HAS illegal_parameter_with_pl "Those are not something you can \$v with.".
+--------------------------------------------------------------------------------
+
+while a somewhat bigger group of verbs - attack_with, break_with, burn_with, close_with, cut_with, fill_with, lock_with, open_with, pry_with, push_with, unlock_with - are accompanied with a message one word longer: the word 'things' is added, for no other reason than that it sounds better than if left out, as far as these verbs are concerned:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter2_with_sg "That's not something you can \$v things with.".
+
+HAS illegal_parameter2_with_pl "Those are not something you can \$v things
+with.".
+--------------------------------------------------------------------------------
+
+
+The communication verbs ask, ask_for, say_to, talk_to and tell use a message of their own:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_talk_sg "That's not something you can talk to.".
+
+HAS illegal_parameter_talk_pl "Those are not something you can talk to.".
+--------------------------------------------------------------------------------
+
+We have a separate individual default parameter message for a handful of verbs.
+
+For consult, we have the following:
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_consult_sg "That's not something you can find
+
+information about."
+--------------------------------------------------------------------------------
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_consult_pl "Those are not something you can find
+
+information about."
+--------------------------------------------------------------------------------
+
+You'll find this message at examine :
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_examine_sg "That's not something you can examine.".
+
+HAS illegal_parameter_examine_pl "Those are not something you can examine.".
+--------------------------------------------------------------------------------
+
+The reason why examine doesn't use the general default message (scroll above) is that when the player types for example >x 34 the response would be "That's not something you can x." which isn't such pretty-looking as when the verb is printed in full.
+
+The verbs look_out_of and look_through use prepositions other verbs don't, and that's why they need their own messages:
+
+// PAGE 84 //
+
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_look_out_sg "That's not something you can look out of.".
+
+HAS illegal_parameter_look_out_pl "Those are not something you can look out
+
+of.".
+
+HAS illegal_parameter_look_through "You can't look through \$+1.".
+--------------------------------------------------------------------------------
+
+==== Other illegal parameter messages
+
+The above are the default messages and their variations. There are, however, other illegal parameter messages needed at places. They are described below.
+
+The following message is displayed when the player tries to for example put something into an actor instance. The verbs in which this message is found are empty_in, pour_in, put_in, and throw_in.:
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_act "That doesn't make sense.".
+--------------------------------------------------------------------------------
+
+The following message is displayed when the player tries to use the verbs give, put, put_in, put_on, put_against, put_near, put_behind, put_under, throw_at, throw_in, throw_to, use and use_with with actors as direct objects:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_obj "You can only \$v objects.".
+--------------------------------------------------------------------------------
+
+The verbs answer, say, say_to and write require that what we wish to answer, say or write is put into a string ( = surrounded by quotes).
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_string "Please state inside double quotes ("""") what
+
+you want to \$v.".
+--------------------------------------------------------------------------------
+
+The verbs look_behind, look_in and look_under have the following message when the player tries to look somewhere that is not suitable object for these verbs:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_there "It's not possible to \$v there.".
+--------------------------------------------------------------------------------
+
+The verb go_to has its own message:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_go "It's not possible to go there."
+--------------------------------------------------------------------------------
+
+The following is a variation of the above and is used when the second parameter of a ditransitive verb is not suitable.
+
+The verbs empty_in, empty_on, pour_in, pour_on, put_in, put_on, put_against, put_behind, put_near, put_under, throw_in, throw_to, tie_to and write use this message:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter2_there "It's not possible to \$v anything there.".
+--------------------------------------------------------------------------------
+
+// PAGE 85 //
+
+
+
+Finally, there are some messages for the information "verbs" what_is, where_is and who_is. (The first two messages below also apply to where_is besides what_is.)
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS illegal_parameter_what_sg "That's not something I know about.".
+
+HAS illegal_parameter_what_pl "Those are not something I know about.".
+
+HAS illegal_parameter_who_sg "That's not somebody I know about.".
+
+HAS illegal_parameter_who_pl "Those are not somebody I know about.".
+--------------------------------------------------------------------------------
+
+==== Changing the illegal parameter message of a single verb:
+
+The way the illegal parameter messages have been defined in the library, it is not usually possible to affect just one verb at a time. Most often, changing a default message will alter the outcome of at least a handful of verbs, because one default message is shared by many verbs. There are some default parameter messages that only affect one verb; you should check the list of parameter messages (above) for details. Anyway, the quickest way to accomplish this task would be to open 'lib_verbs.i', find the verb, then modify the appropriate parameter message in its syntax statement.
+
+// @FIXME: This heading should retain it's number even when all other section
+//         numbers are removed!
+=== 6. Default verb check messages
+
+All these check messages can be individually changed by listing them under the my_game instance in your game source file. They are also listed in the file 'mygame_import.i' in the library distribution package, for easy modification. These check messages are used in verb definitions, mainly in 'lib_verbs.i'. Changing one check message will affect all verbs where that particular check is found. Again, as with parameter messages, edit these messages directly in 'mygame_import.i' if you need to change a great number of them, otherwise redefine them within the my_game instance in your own source file. You'll quickly notice that the list is quite long, and listing any number greater than just a few under the my_game instance would be a rather frustrating task.
+
+////
+@FIXME: This list is a nightmare! Even in the original PDF it's unclear where
+        a list ends and another one starts, which styles denote sub-headings or
+        list entries. Must fix this somehow, for it's unmanageable.
+////
+
+a. attribute checks
++
+The general check message for when an instance cannot be used with the verb :
++
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_suitable_sg "That's not something you can \$v.".
+
+HAS check_obj_suitable_pl "Those are not something you can \$v.".
+--------------------------------------------------------------------------------
++
+Thus, if the player tries to for example eat something that is not edible,
++
+[example,role="gametranscript"]
+================================================================================
+&gt; _eat book_ +
+That's not something you can eat.
+================================================================================
++
+the check message will be displayed.
++
+Note that the illegal parameter messages (above) mostly report cases where the player tried to use a wrong kind of instance with a verb:
++
+[example,role="gametranscript"]
+================================================================================
+&gt; _take 5_ +
+That's not something you can take.
+================================================================================
++
+The verb take only works with objects, not with any other instances. Thus, if you try to take something else than an object (for example a numerical value in the above case), an illegal parameter message is shown. This restriction is defined in the syntax of the verb. Checks, on the other hand, are used to ensure that an instance has the proper attribute needed with the verb, for example edible, takeable, NOT open, and so forth.
++
+Variations of the above message, needed for example when a preposition is required after the verb, are listed below:
++
+--
+** `fire_at`, `throw_at`, `throw_to`:
++
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_suitable_at "You can't \$v anything at \$+2."
+--------------------------------------------------------------------------------
+
+** `ask_for`:
++
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj2_suitable_for_sg "That's not something you can \$v for.".
+
+HAS check_obj2_suitable_for_pl "Those are not something you can \$v for.".
+--------------------------------------------------------------------------------
+
+** `turn_off`, `switch_off`:
++
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_suitable_off_sg "That's not something you can \$v off."
+
+HAS check_obj_suitable_off_pl "Those are not something you can \$v off.".
+--------------------------------------------------------------------------------
+
+** `knock`, `switch_on`, `turn_on`:
++
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_suitable_on_sg "That's not something you can \$v on.".
+
+HAS check_obj_suitable_on_pl "Those are not something you can \$v on." .
+--------------------------------------------------------------------------------
+
+** `play_with`:
++
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_suitable_with_sg "That's not something you can \$v with.".
+
+HAS check_obj_suitable_with_pl "Those are not something you can \$v with.".
+--------------------------------------------------------------------------------
+
+** `break_with`, `burn_with`, `close_with`, `cut_with`, `fill_with`, `lock_with`, `open_with`, `pry_with`, `push_with`, `touch_with`, `unlock_with`:
++
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj2_suitable_with_sg "That's not something you can \$v things
+with.".
+
+
+HAS check_obj2_suitable_with_pl "Those are not something you can \$v things
+
+with.".
+--------------------------------------------------------------------------------
+--
++
+Again, we have a separate message for examine, look_out_of and look_through:
++
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_suitable_examine_sg "That's not something you can examine.".
+
+HAS check_obj_suitable_examine_pl "Those are not something you can examine.".
+
+HAS check_obj_suitable_look_out_sg "That's not something you can look out
+
+of.".
+
+HAS check_obj_suitable_look_out_pl "Those are not something you can look out
+
+of.".
+
+HAS check_obj_suitable_look_through "You can't look through \$+1.".
+--------------------------------------------------------------------------------
+
+=== Checks for open, closed and locked objects
+
+open, open_with:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_open_sg "\$+1 is already open.".
+
+HAS check_obj_not_open_pl "\$+1 are already open.".
+--------------------------------------------------------------------------------
+
+close, close_with:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_open1_sg "\$+1 is already closed.".
+
+HAS check_obj_open1_pl "\$+1 are already closed.".
+--------------------------------------------------------------------------------
+
+empty, empty (in/on), look_in, pour (in/on):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_open2_sg "You can't, since \$+1 is closed.".
+
+HAS check_obj_open2_pl "You can't, since \$+1 are closed.".
+--------------------------------------------------------------------------------
+
+empty_in, pour_in, put_in, throw_in:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj2_open_sg "You can't, since \$+2 is closed.".
+
+HAS check_obj2_open_pl "You can't, since \$+2 are closed.".
+--------------------------------------------------------------------------------
+
+unlock, unlock_with:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_locked_sg "\$+1 is already unlocked.".
+
+HAS check_obj_locked_pl "\$+1 are already unlocked.".
+--------------------------------------------------------------------------------
+
+lock, lock_with
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_locked_sg "\$+1 is already locked.".
+
+HAS check_obj_not_locked_pl "\$+1 are already locked.".
+--------------------------------------------------------------------------------
+
+// PAGE 88 //
+
+
+
+=== Checks for "not reachable" and "distant" objects
+
+A large number of verbs have the following checks:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_reachable_sg "\$+1 is out of your reach.".
+
+HAS check_obj_reachable_pl "\$+1 are out of your reach.".
+
+HAS check_obj_not_distant_sg "\$+1 is too far away.".
+
+HAS check_obj_not_distant_pl "\$+1 are too far away.".
+--------------------------------------------------------------------------------
+
+In addition, the verbs empty_in, fill_with, pour_in, put_in, take_from and tie_to have the following check for the reachability of the second parameter:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj2_reachable_sg "\$+2 is out of your reach.".
+
+HAS check_obj2_reachable_pl "\$+2 are out of your reach.".
+--------------------------------------------------------------------------------
+
+and the verb ask_for has the following check:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_reachable_ask "\$+1 wouldn't be able to reach \$+2.".
+--------------------------------------------------------------------------------
+
+which is triggered when the hero asks an NPC for something that the NPC cannot reach. (This happens when the object in question has the attribute 'NOT reachable'.)
+
+The verbs throw_at, throw_in, throw_to allow the action to succeed if the second parameter is reachable, but not if the second parameter is distant:. Thus, the way things are defined in the library, it is possible to e,g, throw something in a container if that container is otherwise NOT reachable. But if the container is distant, the action will fail.
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj2_not_distant_sg "\$+2 is too far away.".
+
+HAS check_obj2_not_distant_pl "\$+2 are too far away.".
+--------------------------------------------------------------------------------
+
+=== Checks for the hero sitting or lying_down
+
+Numerous verbs in the library have one of the following checks for sitting:
+
+[source,alan]
+--------------------------------------------------------------------------------
+
+HAS check_hero_not_sitting1 "It is difficult to \$v while sitting down.".
+
+HAS check_hero_not_sitting2 "It is difficult to \$v anything while sitting
+
+down.".
+
+HAS check_hero_not_sitting3 "It is difficult to \$v anywhere while sitting
+
+down.".
+--------------------------------------------------------------------------------
+
+and for lying down:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_hero_not_lying_down1 "It is difficult to \$v while lying down.".
+
+HAS check_hero_not_lying_down2 "It is difficult to \$v anything while lying
+
+down.".
+
+HAS check_hero_not_lying_down3 "It is difficult to \$v anywhere while lying
+
+down.".
+--------------------------------------------------------------------------------
+
+If the player uses the verbs sit or sit_on, and the hero is already sitting, the following check message is displayed:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_hero_not_lying_down4 "You're lying down already.".
+--------------------------------------------------------------------------------
+
+=== Other attribute checks
+
+Checking that the object of the action has the ability to talk; verbs ask, ask_for, say_to, tell:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_act_can_talk_sg "That's not something you can talk to.".
+
+HAS check_act_can_talk_pl "Those are not something you can talk to.".
+--------------------------------------------------------------------------------
+
+Checking that the object is allowed to be emptied/poured/put/thrown in the container (empty_in, pour_in, put_in, throw_in):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_allowed_in_sg "\$+1 doesn't belong in \$+2".
+
+HAS check_obj_allowed_in_pl "\$+1 don't belong in \$+2."
+--------------------------------------------------------------------------------
+
+Checking that something is broken; the verb fix:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_broken_sg "That doesn't need fixing.".
+
+HAS check_obj_broken_pl "Those don't need fixing.".
+--------------------------------------------------------------------------------
+
+Checking that the object of the action is inanimate, because normally the action would be considered improper if done to a person: pull, push, push_with, scratch, search
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_inanimate1 "\$+1 wouldn't probably appreciate that.".
+--------------------------------------------------------------------------------
+
+With some verbs, the above message is slightly altered; rub, touch, touch_with:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_inanimate2 "You are not sure whether \$+1 would appreciate
+
+that.".
+--------------------------------------------------------------------------------
+
+// PAGE 90 //
+
+Checking if something is movable; the verbs lift, pull, push, push_with, shake, take, take_from:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_movable "It's not possible to \$v \$+1.".
+--------------------------------------------------------------------------------
+
+Checking whether something is scenery; the verbs examine, take, take_from:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_scenery_sg "\$+1 is not important.".
+
+HAS check_obj_not_scenery_pl "\$+1 are not important.".
+--------------------------------------------------------------------------------
+
+In the verbs ask_for and take_from there is also a check for whether the second parameter in the command happens to be a scenery object:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj2_not_scenery_sg "\$+2 is not important.".
+
+HAS check_obj2_not_scenery_pl "\$+2 are not important.".
+--------------------------------------------------------------------------------
+
+For some verbs, the target of looking is checked with the following message: look_behind, look_under:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_suitable_there "It's not possible to \$v there.".
+--------------------------------------------------------------------------------
+
+The verbs throw_in and tie_to has a slightly different formulation from the above:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj2_suitable_there "It's not possible to \$v anything there.".
+--------------------------------------------------------------------------------
+
+The following check is found in verbs in which implicit taking is possible but the present instance is NOT takeable:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_takeable "You don't have \$+1.".
+--------------------------------------------------------------------------------
+
+fill_with has the following check:fill_with
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj2_takeable1 "You don't have \$+2.".
+--------------------------------------------------------------------------------
+
+while ask_for has:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj2_takeable2 "You can't have \$+2.".
+--------------------------------------------------------------------------------
+
+Checking that an object is not too heavy (lift, take, take_from):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_weight_sg "\$+1 is too heavy to \$v.".
+
+HAS check_obj_weight_pl "\$+1 are too heavy to \$v.".
+--------------------------------------------------------------------------------
+
+Checking that an object can be written in/on:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_writeable "Nothing can be written there.".
+--------------------------------------------------------------------------------
+
+// PAGE 91 //
+
+
+
+// @FIXME: Note sure where this "b)" list odering came from!
+
+=== b. location and containment checks for actors and objects
+
+Location and containment checks for actors other than the hero (checks for the hero are listed separately below):
+
+For the verb follow to work successfully, the actor to be followed should be in an adjacent location to the hero. The following check will verify this:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_act_near_hero "You don't quite know where $+1 went.
+You should state direction where you want to go.".
+--------------------------------------------------------------------------------
+
+If the hero tries to take something from an NPC and the NPC doesn't have the stated object, the following check is triggered (take_from):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_in_act_sg "\$+2 doesn't have \$+1.".
+
+HAS check_obj_in_act_pl "\$+2 don't have \$+1.".
+--------------------------------------------------------------------------------
+
+Similarly, if the player types >give object to actor, and the actor already has that object, the following check message is displayed:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_in_act_pl "\$+2 already have \$+1.".
+HAS check_obj_not_in_act_sg "\$+2 already has \$+1.".
+--------------------------------------------------------------------------------
+
+==== Location and containment checks for the hero
+
+The following checks deal with where the hero is or what (s)he is carrying.
+
+The verb shoot has the following check:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_count_weapon_in_hero "You are not carrying any firearms.".
+--------------------------------------------------------------------------------
+
+find, follow, go_to, where_is:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_at_hero_sg "\$+1 is right here.".
+
+HAS check_obj_not_at_hero_pl "\$+1 are right here.".
+--------------------------------------------------------------------------------
+
+drop, fire, fire_at, put, show:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_in_hero "You don't have the \$+1.".
+--------------------------------------------------------------------------------
+
+// PAGE 92 //
+
+
+
+The following check is used in many verbs, typically ditransitive ones such as break_with, cut_with etc:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj2_in_hero "You don't have the \$+2.".
+--------------------------------------------------------------------------------
+
+In the following, the action tried out by the player is targeted at something the hero is holding, and the action would not make sense (verbs attack, attack_with, kick, lift, shoot and shoot_with):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_in_hero1 "It doesn't make sense to \$v something you're
+--------------------------------------------------------------------------------
+
+The following check ensures that the hero is not trying to get something (s)he already has (the verbs take, take_from):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_in_hero2 "You already have \$+1.".
+--------------------------------------------------------------------------------
+
+The throwing verbs (throw_at, throw_in throw_to)have this check to prohibit the hero from throwing something at, to or into something that (s)he is holding:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj2_not_in_hero1 "You are carrying \$+2.".
+--------------------------------------------------------------------------------
+
+For "putting" verbs other than put_in and put_on, the following check ensures that the hero cannot succeed in putting something against, behind, near, on or under something else when (s)he carries the object referenced by second parameter (the verbs put_against, put_behind, put_near, put_under):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj2_not_in_hero2 "That would be futile.".
+--------------------------------------------------------------------------------
+
+Thus, if the hero is for example carrying a book, the command
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _put apple near book_
+================================================================================
+
+
+wouldn't be successful.
+
+If the hero already is carrying an object that (s)he asks for, the following check message is displayed:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj2_not_in_hero3 "You already have \$+2.".
+--------------------------------------------------------------------------------
+
+// PAGE 93 //
+
+
+// @FIXME: Lost track of heading levels!
+==== Checking whether an object is in a container or not
+
+When the following check fires, the hero tried to empty the contents of an object into a container that already was contained by the object (for example if there is a bottle in a box, and the player types "empty box in bottle"). This applies to the verbs empty_in and pour_in:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_cont_not_in_obj "That doesn't make sense.".
+--------------------------------------------------------------------------------
+
+If the hero tries to take something from a container and that something is not there to begin with, the following check message is displayed (take_from):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_in_cont_sg "\$+1 is not in \$+2.".
+
+HAS check_obj_in_cont_pl "\$+1 are not in \$+2.".
+--------------------------------------------------------------------------------
+
+If the hero tries to put or throw something into a container but the object is already in the container, the following message is displayed (put_in, throw_in):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_in_cont_sg "\$+1 is in \$+2 already.".
+
+HAS check_obj_not_in_cont_pl "\$+1 are in \$+2 already.".
+--------------------------------------------------------------------------------
+
+The following check message is displayed when the hero tries to fill a container with something that the container already is full of (fill_with):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_in_cont2_sg "\$+1 is already full of \$+2.".
+
+HAS check_obj_not_in_cont2_pl "\$+1 is already full of \$+2.".
+--------------------------------------------------------------------------------
+
+Checking whether an OBJECT is on a SUPPORTER or not (take_from):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_on_surface_sg "\$+1 is not on \$+2.".
+
+HAS check_obj_on_surface_pl "\$+1 are not on \$+2.".
+--------------------------------------------------------------------------------
+
+Putting something on a SUPPORTER (put_on):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_on_surface_sg "\$+1 is already on \$+2.".
+
+HAS check_obj_not_on_surface_pl "\$+1 are already on \$+2.".
+--------------------------------------------------------------------------------
+
+// @FIXME: Lost track of heading levels!
+==== Checking whether an object is worn by the hero or not
+
+You can't take off something you're not wearing (remove, take_off):
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_in_worn "You are not wearing \$+1.".
+--------------------------------------------------------------------------------
+
+// PAGE 94 //
+
+
+The following check is for cases when the hero tries to put on something (s)he is already wearing (put_on, wear):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_in_worn1 "You are already wearing \$+1.".
+--------------------------------------------------------------------------------
+
+Here, the action is stopped if the hero tries to attack, kick or shoot something (s)he's wearing (attack, attack_with, kick, shoot, shoot_with):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_in_worn2 "It doesn't make sense to \$v something you're
+wearing.".
+--------------------------------------------------------------------------------
+
+Lastly, it's not possible to drop a piece of CLOTHING if it is worn. It will have to be removed first (drop):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_in_worn3: "You'll have to take off \$+1 first."
+--------------------------------------------------------------------------------
+
+=== c. checking location states
+
+The following check is found in numerous verbs. It prohibits actions requiring seeing when the LOCATION is not lit:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_current_loc_lit "It is too dark to see.".
+--------------------------------------------------------------------------------
+
+=== d. logical checks
+
+The checks in this group a) prohibit the action from being directed at the hero, and 2) prohibit the action in ditransitive verbs where both the first and the second parameter refer to the same instance.
+
+1. prohibiting the action from being directed at the hero:
++
+The following check is triggered when the player tries something like >attack me (ask, ask_for, attack, attack_with, catch, follow, kick, listen, pull, push, push_with, take, take_from, tell):
++
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_hero1 "It doesn't make sense to \$v yourself.".
+--------------------------------------------------------------------------------
++
+For the verbs fire_at, kill, kill_with, shoot, shoot_with there is a specific message when the target of the action is the hero:
++
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_hero2 "There is no need to be that desperate.".
+--------------------------------------------------------------------------------
++
+For a couple of actions where the hero is the target, the action might make sense but it is anyway not deemed fruitful.
++
+This applies to the verbs scratch and touch:
++
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_hero3 "That wouldn't accomplish anything.".
+--------------------------------------------------------------------------------
++
+The verbs find and go_to have the following check triggered when the player types >find me or >go to me:
++
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_hero4 "You're right here.".
+--------------------------------------------------------------------------------
++
+If the player tries >free me, the following check message is displayed (free):
++
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_hero5 "You don't have to be freed.".
+--------------------------------------------------------------------------------
+
+The verbs kiss, play_with and rub have the following check:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_hero6 "There's no time for that now.".
+--------------------------------------------------------------------------------
+
+The verb look_behind has the following check for cases when the hero looks behind him-/herself :
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_hero7 "Turning your head, you notice nothing unusual behind
+
+yourself.".
+--------------------------------------------------------------------------------
+
+while look_under has the following one:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_hero8 "You notice nothing unusual under yourself.".
+--------------------------------------------------------------------------------
+
+Many ditransitive verbs have the following check when the hero tries to perform these actions to her-/himself (say_to, show, take_from, touch_with, throw_at, throw_in, throw_to):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj2_not_hero1 "That doesn't make sense.".
+--------------------------------------------------------------------------------
+
+Lastly, some other cases:
+
+put_against, put_behind, put_near, put_under:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj2_not_hero2 "That would be futile.".
+--------------------------------------------------------------------------------
+
+give, tie_to:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj2_not_hero3 "You can't \$v things to yourself.".
+--------------------------------------------------------------------------------
+
+// PAGE 96 //
+
+
+
+// @FIXME: This heading should retain it's number even when all other section
+//         numbers are removed!
+=== 2. prohibiting the action in ditransitive verbs where both the first and the second parameter refer to the same instance:
+
+The following checks prohibit actions like >cut rope with rope, >throw stone at stone and >put bottle in bottle:
+
+fire_at, throw_at:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_obj2_at "It doesn't make sense to \$v something at itself.".
+--------------------------------------------------------------------------------
+
+take_from:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_obj2_from "It doesn't make sense to \$v something from
+--------------------------------------------------------------------------------
+
+itself.".
+
+empty_in, pour_in, put_in, throw_in:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_obj2_in "It doesn't make sense to \$v something into
+--------------------------------------------------------------------------------
+
+itself.".
+
+empty_on, pour_on, put_on:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_obj2_on "It doesn't make sense to \$v something onto
+--------------------------------------------------------------------------------
+
+itself.".
+
+give, show, throw_to, tie_to:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_obj2_to "It doesn't make sense to \$v something to itself.".
+--------------------------------------------------------------------------------
+
+attack_with, break_with, burn_with, close_with, cut_with, fill_with , lock_with, open_with, pry_with, push_with, shoot_with, touch_with, unlock_with, use_with:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_obj2_with "It doesn't make sense to \$v something with
+itself.".
+--------------------------------------------------------------------------------
+
+
+put_against, put_behind, put_near, put_under:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_obj2_put "That doesn't make sense." .
+--------------------------------------------------------------------------------
+
+// PAGE 97 //
+
+
+
+=== e. additional checks for classes
+
+Lastly, there are some checks that apply only to a specific class. Most of these are found in 'lib_classes.i'.
+
+The first one checks that a MALE character doesn't put on women's CLOTHING by default, and vice versa:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_clothing_sex "On second thoughts you decide \$+1 won't really suit
+
+you.".
+--------------------------------------------------------------------------------
+
+The following check ensures that it won't be possible to put something inside a SUPPORTER object by default:
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_cont_not_supporter "You can't put \$+1 inside \$+2.".
+--------------------------------------------------------------------------------
+
+If the player tries to turn off a DEVICE that is already off, the following check is triggered (turn_off, switch_off):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_device_on_sg "\$+1 is already off.".
+
+HAS check_device_on_pl "\$+1 are already off.".
+--------------------------------------------------------------------------------
+
+The following message is triggered if the player tries to turn on a DEVICE which is already on (device: turn_on,
+switch_on)
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_device_not_on_sg "\$+1 is already on.".
+
+HAS check_device_not_on_pl "\$+1 are already on.".
+--------------------------------------------------------------------------------
+
+If the player tries to unlock or lock a door with something that is not the matching_key of the DOOR in question (lock_with, unlock_with):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_door_matching_key "You can't use \$+2 to \$v \$+1.".
+--------------------------------------------------------------------------------
+
+The following message is for situations where the hero tries to turn off or extinguish a LIGHTSOURCE that is NOT lit (lightsource: extinguish, turn_off):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_lightsource_lit_sg "But \$+1 is not lit.".
+
+HAS check_lightsource_lit_pl "But \$+1 are not lit.".
+--------------------------------------------------------------------------------
+
+while the following is for the opposite case (lightsource: light, turn_on):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_lightsource_not_lit_sg "\$+1 is already lit.".
+
+HAS check_lightsource_not_lit_pl "\$+1 are already lit.".
+--------------------------------------------------------------------------------
+
+// PAGE 98 //
+
+
+
+Checking that the verb switch won't work with a natural LIGHTSOURCE (lightsource: switch):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_lightsource_switchable_sg "That's not something you can switch on
+
+and off." .
+
+HAS check_lightsource_switchable_pl "Those are not something you can switch on
+
+and off.".
+--------------------------------------------------------------------------------
+
+When there is some LIQUID in a container, for example some juice in a bottle, and the player types >take juice from bottle, the following check is triggered (liquid: take_from):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_liquid_vessel_not_cont "You can't carry \$+1 around in your bare
+
+hands.".
+--------------------------------------------------------------------------------
+
+When the player tries to turn on a DEVICE or light a LIGHTSOURCE which is broken, the following check message is displayed (device, lightsource: light, turn_on):
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS check_obj_not_broken "Nothing happens.".
+--------------------------------------------------------------------------------
+
+// @FIXME: This heading should retain it's number even when all other section
+//         numbers are removed!
+=== 7. Implicit taking message
+
+[source,alan]
+--------------------------------------------------------------------------------
+HAS implicit_taking_message "(taking \$+1 first)\$n".
+--------------------------------------------------------------------------------
+
+The following verbs use implicit taking:
+
+bite, drink, eat, empty, empty_in, empty_on, give, pour, pour_in, pour_on, put_in, put_on, throw, throw_at, throw_in, throw_to, tie_to.
+
+(If you wish to disable automatic implicit taking for any of these verbs, you should open the library file 'lib_verbs.i', locate the needed verbs in that file, go to their DOES sections and delete the implicit taking code. Moreover, you should add the following check to each affected verb:
+
+[source,alan]
+--------------------------------------------------------------------------------
+AND obj IN hero
+
+ELSE "You don't have" SAY the obj. "." )
+--------------------------------------------------------------------------------
+
+// PAGE 99 //
+
+
+
+// EOF //
+

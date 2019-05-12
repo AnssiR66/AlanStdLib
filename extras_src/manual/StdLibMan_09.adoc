@@ -1,0 +1,27 @@
+////
+********************************************************************************
+*                                                                              *
+*                     ALAN Standard Library User's Manual                      *
+*                                                                              *
+*                                  Chapter 9                                   *
+*                                                                              *
+********************************************************************************
+////
+
+// PAGE 77 //
+
+== Adding synonyms for existing library words (verbs, object and actor classes)
+
+Declare the synonym in your own game source file, outside any instance declarations, and outside the `my_game` instance, like this:
+
+[source,alan]
+--------------------------------------------------------------------------------
+SYNONYMS peruse = read.
+SYNONYMS bike = bicycle.
+--------------------------------------------------------------------------------
+
+The first word (before the equal sign) should be the new word, the second word (after the equal sign) should be the existing one (defined elsewhere in the code).
+
+
+// EOF //
+
