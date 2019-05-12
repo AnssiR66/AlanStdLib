@@ -9,7 +9,7 @@
 :toclevels: 5
 // Sections Numbering:
 :sectnums:
-:sectnumlevels: 2
+:sectnumlevels: 5
 // Cross References:
 :xrefstyle: short
 :section-refsig: Sect.
@@ -27,14 +27,15 @@
 // *                                                                           *
 // *****************************************************************************
 
+[WARNING]
+================================================================================
+WIP! Chapters are still being ported from the original PDF, with some basic adjustments of the contents just to ensure the document can be coverted.
 
+All chapters still need to be cleaned up, they are just drafts.
 
-// ---
-// title:      Alan Standard Library v2.1
-// subtitle:   User's Manual
-// author:     Anssi Räisänen
-// date:       April 12, 2018
-// ...
+Section numbering and max-depth of TOC level are temporarily kept to simplify annotating references to sections that need to be fixed, but these settings will be changed in the final document.
+================================================================================
+
 
 
 include::StdLibMan_01.adoc[]
@@ -43,9 +44,25 @@ include::StdLibMan_03.adoc[]
 include::StdLibMan_04.adoc[]
 include::StdLibMan_05.adoc[]
 include::StdLibMan_06.adoc[]
+include::StdLibMan_07.adoc[]
+
+////
+include::StdLibMan_07.adoc[]
+include::StdLibMan_08.adoc[]
+include::StdLibMan_09.adoc[]
+include::StdLibMan_10.adoc[]
+include::StdLibMan_11.adoc[]
+include::StdLibMan_12.adoc[]
+include::StdLibMan_13.adoc[]
+include::StdLibMan_14.adoc[]
+include::StdLibMan_15.adoc[]
+////
 
 
-
+[WARNING]
+================================================================================
+CONTENTS FROM ORIGINAL PDF ADDED UP TO HERE. TO BE CONTINUTED...
+================================================================================
 
 
 // EOF //

@@ -33,6 +33,7 @@ One section at the time, its contents are added to the ported document and rough
     + [`StdLibMan_04.adoc`](./StdLibMan_04.adoc) — 4. _Things_
     + [`StdLibMan_05.adoc`](./StdLibMan_05.adoc) — 5. _Actors_
     + [`StdLibMan_06.adoc`](./StdLibMan_06.adoc) — 6. _Objects_
+    + [`StdLibMan_07.adoc`](./StdLibMan_07.adoc) — 7. _Additional attributes for THINGs: (NOT) distant, (NOT) reachable, scenery_
 
 # Document Status
 

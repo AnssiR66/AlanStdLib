@@ -515,7 +515,7 @@ Examining for example these instances in-game would yield
 
 [example,role="gametranscript"]
 ================================================================================
-&gt;_x torch_
+&gt; _x torch_
 
 You notice nothing unusual about the torch. It is currently lit.
 ================================================================================
@@ -524,7 +524,7 @@ and
 
 [example,role="gametranscript"]
 ================================================================================
-&gt;_x lamp_
+&gt; _x lamp_
 
 You notice nothing unusual about the lamp. It is currently off.
 ================================================================================
@@ -546,7 +546,7 @@ which yields
 
 [example,role="gametranscript"]
 ================================================================================
-&gt;_x lamp_
+&gt; _x lamp_
 
 It is an elegant table lamp with a blue lampshade. It is currently off.
 ================================================================================
@@ -658,16 +658,339 @@ MAKE box NOT OPAQUE.
 (This is handled automatically by the library when a container is opened or closed.)
 
 
+==== Putting things in containers
+
+It is only possible to put something into a container if this something is included in the object.
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE drawer ISA LISTED_CONTAINER IN nightstand
+  HAS allowed {diary, keys}.
+  ...
+END THE drawer.
+--------------------------------------------------------------------------------
+
+In the example above, it wouldn't be possible to put anything else in the drawer, for example a chair or a coffee cup.
+The response would be for example "`The coffee cup doesn't belong in the drawer.`", etc.
+
+This applies not only to the verb `put_in` but also to `empty_in`, `pour_in` and `throw_in`.
+
+Everything programmed to be in a container by the author at the start of the game will be automatically included in the `allowed` set of the container.
+Thus, for example if the author implements an apple in a bowl and the `hero` character takes it, it will be possible for the hero to put the apple back into the bowl, without the author having to implement any separate `allowed` attributes for this to happen.
+But note if you have for example a ticket dispenser in your game and the `hero` takes a ticket from it, it would be possible to put the ticket back into the dispenser, the way things work by default.
+This is not what is wanted in this case.
+That's why in that case you should do either:
+
+// PAGE 49 //
 
 
-[WARNING]
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE ticket_dispenser ISA LISTED_CONTAINER AT lobby
+  ...
+  VERB put_in
+    WHEN cont
+      DOES "That's not possible."
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+or, alternatively:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE ticket ISA OBJECT IN ticket_dispenser
+  INITIALIZE
+    EXCLUDE THIS FROM allowed OF ticket_dispenser.
+END THE ticket.
+--------------------------------------------------------------------------------
+
+Alternatively, you could just have the ticket available in the location in general, not having to locate it in the dispenser at all.
+This would make the above coding unnecessary but would make the `take` verb a bit lengthier:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE ticket ISA OBJECT AT lobby
+  IS in_the_dispenser.
+  VERB take
+    CHECK ticket IS in_the_dispenser
+      ELSE "You already took a ticket."
+    DOES ONLY "You take a ticket from the dispenser."
+      MAKE ticket NOT in_the_dispenser.
+      LOCATE ticket IN hero.
+  END VERB.
+END THE.
+
+THE ticket_dispenser ISA LISTED_CONTAINER AT lobby
+END THE.
+--------------------------------------------------------------------------------
+
+==== SOUND
+
+SOUND can be listened to but not examined, searched, smelled or manipulated.
+It cannot initially be turned on or off, this has to be implemented manually by giving the sound the `switchable` attribute.
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE siren ISA SOUND AT bedroom
+  DESCRIPTION "The sound of a siren can be heard outside in the street."
+END THE.
+
+THE alarm_clock_sound ISA SOUND AT bedroom
+  NAME alarm clock sound NAME alarm clock
+  IS switchable.
+  IS 'on'.
+END THE.
+--------------------------------------------------------------------------------
+
+
+==== SUPPORTER
+
+SUPPORTER: You can put things on a SUPPORTER and you can stand, sit down or lie on it.
+
+A SUPPORTER is declared to be a container, so that you can take things from it, as well.
+When there's something on a SUPPORTER, a listing of it will appear in the room description and after "`>examine`", by default:
+
+[example,role="gametranscript"]
 ================================================================================
-ADAPTED UP TO HERE. TO BE CONTINUTED...
+&gt; _look_
+
+Bedroom
+
+There is a nightstand here. On the nightstand you see a diary.
 ================================================================================
 
 
+To implement OBJECTs on a SUPPORTER, define the SUPPORTER first; for example
 
-// WAITING TO BE CLEANED UP
+[source,alan]
+--------------------------------------------------------------------------------
+THE tray ISA SUPPORTER
+END THE.
+--------------------------------------------------------------------------------
+
+Then, implement the OBJECTs on the supporter like this:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE apple ISA OBJECT
+  IN tray
+END THE.
+--------------------------------------------------------------------------------
+
+WARNING: @FIXME: this sentence in incomplete -- "even if ... What?"
+
+Note the IN above, even if the `apple` will be described as being _on_ the tray [???].
+Similarly, to implement a book on a table:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE table ISA SUPPORTER AT livingroom
+END THE table.
+
+THE book ISA OBJECT
+  IN table
+END THE.
+--------------------------------------------------------------------------------
+
+// PAGE 51 //
+
+
+
+Note that the "`>examine`" command will list what is on the surface of a SUPPORTER, not what, if anything, is inside the SUPPORTER.
+For example, if you have a SUPPORTER called `table` in your game with two drawers in it, DON'T do this:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE drawer1 ISA OBJECT
+  NAME bottom drawer
+  CONTAINER
+    IN table.
+END THE.
+--------------------------------------------------------------------------------
+
+or this:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE drawer2 ISA LISTED_CONTAINER
+  NAME top drawer
+  IN table.
+END THE.
+--------------------------------------------------------------------------------
+
+This would result in something like "`There's a table here. On the table you see a book, a bottom drawer and a top drawer.`"
+
+Instead, do the following:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE table ISA SUPPORTER
+  AT bedroom
+  HAS components {drawer1, drawer2}. -- 'components' is not a pre-defined
+                                     -- attribute in the library, it is just used
+                                     -- in this example. You could name this
+                                     -- attribute in any other way, too.
+  VERB examine
+    DOES
+      FOR EACH c IN components OF THIS DO
+        SAY "The table has" SAY AN c. "."
+        IF c IS open
+          THEN LIST c.
+          ELSE SAY THE c. "is closed."
+        END IF.
+      END FOR.
+  END VERB.
+END THE.
+
+THE drawer1 ISA LISTED_CONTAINER
+  OPAQUE CONTAINER
+  DESCRIPTION ""
+  NAME bottom drawer
+  AT bedroom
+  IS NOT open.
+END THE.
+
+THE drawer2 ISA LISTED_CONTAINER
+  OPAQUE CONTAINER
+  DESCRIPTION ""
+  NAME top drawer
+  AT bedroom
+  IS open.
+END THE.
+
+THE book ISA OBJECT IN table
+END THE book.
+
+THE diary ISA OBJECT IN drawer2
+END THE diary.
+--------------------------------------------------------------------------------
+
+In other words, declare the drawers components of the table, in the manner described above.
+The result will then be for example something like this:
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _l_
+
+There is a table here. On the table you see a book.
+
+&gt; _x table_
+
+You notice nothing unusual about the table. On the table you see a book.
+The table has a bottom drawer. The bottom drawer is closed.
+The table has a top drawer. The top drawer contains a diary.
+================================================================================
+
+If you want to get rid of the default "`You see nothing unusual...`" message above, edit the response to the `examine` verb for example this way:
+
+// PAGE 53 //
+
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE table ISA SUPPORTER
+  AT bedroom
+  HAS components {drawer1, drawer2}.
+  VERB examine
+    DOES ONLY
+      "It's an antique oak table."
+      LIST table.
+      FOR EACH c IN components OF THIS DO
+        SAY "The table has" SAY AN c. "."
+        IF c IS open
+          THEN LIST c.
+          ELSE SAY THE c. "is closed."
+        END IF.
+      END FOR.
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+The code `LIST [supporter].` will list what the supporter has on its surface.
+
+Standing, sitting or lying down on a SUPPORTER is not allowed by default, however, but must be manually implemented by the author:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE bed ISA SUPPORTER AT bedroom
+  VERB lie_on
+    DOES ONLY
+      "You lie down on the bed."
+      MAKE hero lying_down.
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+Remember that it is not possible to locate an ACTOR inside an OBJECT, for example in a bed container.
+Using the `sitting` or `lying_down` attributes should be enough to account for these situations and to create the impression that the `hero` is located on a SUPPORTER object.
+When the hero is made `sitting` or `lying_down`, certain actions are disabled by the library (for example `attack`, `jump` etc.).
+It is the author's responsibility to make certain objects in the location `NOT reachable` as needed, while the hero is lying down or sitting, and also to prohibit movement or at least implement a clarifying message of the hero standing up, before going in any direction.
+
+// PAGE 54 //
+
+
+
+
+==== WEAPON
+
+WEAPON is `fireable` (for example a cannon) or `NOT fireable` (for example a baseball bat), the latter being the default.
+The verbs `attack_with` and `kill_with` won't have successful outcomes if the second parameter in them is not a WEAPON.
+(Even when the second parameter is a WEAPON, the outcome of the action is not successful by default.
+
+You must implement a successful outcome manually at the instance level.)
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE pistol ISA weapon IN room1
+  IS fireable.
+END THE.
+--------------------------------------------------------------------------------
+
+
+==== WINDOW
+
+WINDOW can be opened, closed, looked through and out of.
+It will be described as being either open or closed when examined, by default.
+It is by default `NOT open`.
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE bedroom_window ISA WINDOW AT bedroom
+  NAME bedroom window
+  IS open.
+END THE.
+--------------------------------------------------------------------------------
+
+yields
+
+[example,role="gametranscript"]
+================================================================================
+&gt;  _x bedroom window_
+
+You notice nothing unusual about the bedroom window. It is currently closed.
+================================================================================
+
+If you add a specific `examine` response for a WINDOW instance, you have to add manually the mention about the instance being open or closed, for example:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE bedroom_window ISA WINDOW AT bedroom
+  NAME bedroom window
+  IS open.
+  VERB examine
+    DOES ONLY "It's a big window facing east to the garden."
+      IF THIS IS NOT open
+        THEN "It is currently closed."
+        ELSE "It is currently open."
+      END IF.
+  END VERB.
+END THE bedroom_window.
+--------------------------------------------------------------------------------
+
+// PAGE 55 //
 
 
 // EOF //

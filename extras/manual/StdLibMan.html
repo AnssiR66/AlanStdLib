@@ -742,8 +742,8 @@ div.literalblock.shell pre .conum {
 <li><a href="#_dark_location_and_the_lit_attribute">3.3. DARK_LOCATION and the lit attribute</a></li>
 <li><a href="#_the_visited_and_described_attributes">3.4. The visited and described attributes</a>
 <ul class="sectlevel3">
-<li><a href="#_visited">visited</a></li>
-<li><a href="#_described">described</a></li>
+<li><a href="#_visited">3.4.1. visited</a></li>
+<li><a href="#_described">3.4.2. described</a></li>
 </ul>
 </li>
 <li><a href="#_changing_the_verb_outcome_in_a_certain_location">3.5. Changing the verb outcome in a certain location</a></li>
@@ -760,12 +760,12 @@ div.literalblock.shell pre .conum {
 <li><a href="#_pre_defined_actor_classes_in_the_library">5.1. Pre-defined actor classes in the library</a></li>
 <li><a href="#_pre_defined_actor_attributes_in_the_library">5.2. Pre-defined actor attributes in the library</a>
 <ul class="sectlevel3">
-<li><a href="#_inanimate">inanimate</a></li>
-<li><a href="#_following">following</a></li>
-<li><a href="#_sitting_and_lying_down">sitting and lying_down</a></li>
-<li><a href="#_named">named</a></li>
-<li><a href="#_wearing">wearing</a></li>
-<li><a href="#_compliant">compliant</a></li>
+<li><a href="#_inanimate">5.2.1. inanimate</a></li>
+<li><a href="#_following">5.2.2. following</a></li>
+<li><a href="#_sitting_and_lying_down">5.2.3. sitting and lying_down</a></li>
+<li><a href="#_named">5.2.4. named</a></li>
+<li><a href="#_wearing">5.2.5. wearing</a></li>
+<li><a href="#_compliant">5.2.6. compliant</a></li>
 </ul>
 </li>
 <li><a href="#_the_hero">5.3. The hero</a></li>
@@ -777,20 +777,34 @@ div.literalblock.shell pre .conum {
 <ul class="sectlevel2">
 <li><a href="#_pre_defined_object_classes_in_the_library">6.1. Pre-defined object classes in the library</a>
 <ul class="sectlevel3">
-<li><a href="#_clothing">CLOTHING</a>
+<li><a href="#_clothing">6.1.1. CLOTHING</a>
 <ul class="sectlevel4">
-<li><a href="#_the_clothing_table">The clothing table</a></li>
+<li><a href="#_the_clothing_table">6.1.1.1. The clothing table</a></li>
 </ul>
 </li>
-<li><a href="#_device">DEVICE</a></li>
-<li><a href="#_door">DOOR</a>
+<li><a href="#_device">6.1.2. DEVICE</a></li>
+<li><a href="#_door">6.1.3. DOOR</a>
 <ul class="sectlevel4">
-<li><a href="#_locked_doors_and_keys">Locked doors and keys</a></li>
+<li><a href="#_locked_doors_and_keys">6.1.3.1. Locked doors and keys</a></li>
 </ul>
 </li>
-<li><a href="#_liquid">LIQUID</a></li>
-<li><a href="#_lightsource">LIGHTSOURCE</a></li>
-<li><a href="#_listed_container">LISTED_CONTAINER</a></li>
+<li><a href="#_liquid">6.1.4. LIQUID</a></li>
+<li><a href="#_lightsource">6.1.5. LIGHTSOURCE</a></li>
+<li><a href="#_listed_container">6.1.6. LISTED_CONTAINER</a></li>
+<li><a href="#_putting_things_in_containers">6.1.7. Putting things in containers</a></li>
+<li><a href="#_sound">6.1.8. SOUND</a></li>
+<li><a href="#_supporter">6.1.9. SUPPORTER</a></li>
+<li><a href="#_weapon">6.1.10. WEAPON</a></li>
+<li><a href="#_window">6.1.11. WINDOW</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_additional_attributes_for_things_not_distant_not_reachable_scenery">7. Additional attributes for THINGs: (NOT) distant, (NOT) reachable, scenery</a>
+<ul class="sectlevel2">
+<li><a href="#_classes_usage">7.1. Classes: usage</a>
+<ul class="sectlevel3">
+<li><a href="#_overriding_library_responses_for_classes">7.1.1. Overriding library responses for classes</a></li>
 </ul>
 </li>
 </ul>
@@ -799,6 +813,30 @@ div.literalblock.shell pre .conum {
 </div>
 </div>
 <div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>WIP! Chapters are still being ported from the original PDF, with some basic adjustments of the contents just to ensure the document can be coverted.</p>
+</div>
+<div class="paragraph">
+<p>All chapters still need to be cleaned up, they are just drafts.</p>
+</div>
+<div class="paragraph">
+<p>Section numbering and max-depth of TOC level are temporarily kept to simplify annotating references to sections that need to be fixed, but these settings will be changed in the final document.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_introduction"><a class="anchor" href="#_introduction"></a>1. Introduction</h2>
 <div class="sectionbody">
@@ -1438,7 +1476,7 @@ package:</p>
 <div class="sect2">
 <h3 id="_the_visited_and_described_attributes"><a class="anchor" href="#_the_visited_and_described_attributes"></a>3.4. The visited and described attributes</h3>
 <div class="sect3">
-<h4 id="_visited"><a class="anchor" href="#_visited"></a>visited</h4>
+<h4 id="_visited"><a class="anchor" href="#_visited"></a>3.4.1. visited</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS</span> visited <span class="hl num">0</span><span class="hl kwa">.</span></code></pre>
@@ -1467,7 +1505,7 @@ On the second visit the value will be 2, etc.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_described"><a class="anchor" href="#_described"></a>described</h4>
+<h4 id="_described"><a class="anchor" href="#_described"></a>3.4.2. described</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS</span> described <span class="hl num">0</span><span class="hl kwa">.</span></code></pre>
@@ -1878,7 +1916,7 @@ If you just use PERSON or ACTOR instead of MALE or FEMALE, you should remember t
 <p>They are described in more detail below:</p>
 </div>
 <div class="sect3">
-<h4 id="_inanimate"><a class="anchor" href="#_inanimate"></a>inanimate</h4>
+<h4 id="_inanimate"><a class="anchor" href="#_inanimate"></a>5.2.1. inanimate</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS NOT</span> inanimate<span class="hl kwa">.</span></code></pre>
@@ -1890,7 +1928,7 @@ To ensure this, the (NOT) inanimate attribute is used. All things other than ACT
 </div>
 </div>
 <div class="sect3">
-<h4 id="_following"><a class="anchor" href="#_following"></a>following</h4>
+<h4 id="_following"><a class="anchor" href="#_following"></a>5.2.2. following</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS NOT</span> following<span class="hl kwa">.</span></code></pre>
@@ -1923,7 +1961,7 @@ To make any ACTOR follow the hero, give that actor the following attribute, for 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_sitting_and_lying_down"><a class="anchor" href="#_sitting_and_lying_down"></a>sitting and lying_down</h4>
+<h4 id="_sitting_and_lying_down"><a class="anchor" href="#_sitting_and_lying_down"></a>5.2.3. sitting and lying_down</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS NOT</span> sitting<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">IS NOT</span> lying_down<span class="hl kwa">.</span></code></pre>
@@ -1943,7 +1981,7 @@ The outcomes for the commands &gt;sit and &gt;lie down are not successful by def
 </div>
 </div>
 <div class="sect3">
-<h4 id="_named"><a class="anchor" href="#_named"></a>named</h4>
+<h4 id="_named"><a class="anchor" href="#_named"></a>5.2.4. named</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS NOT</span> named<span class="hl kwa">.</span></code></pre>
@@ -1971,7 +2009,7 @@ By default, all ACTORs are NOT named.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_wearing"><a class="anchor" href="#_wearing"></a>wearing</h4>
+<h4 id="_wearing"><a class="anchor" href="#_wearing"></a>5.2.5. wearing</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS</span> wearing <span class="hl opt">{</span>clothing<span class="hl opt">}</span><span class="hl kwa">.</span></code></pre>
@@ -2105,7 +2143,7 @@ If you wish to have a piece of CLOTHING doffed by an actor any circumstances, do
 </div>
 </div>
 <div class="sect3">
-<h4 id="_compliant"><a class="anchor" href="#_compliant"></a>compliant</h4>
+<h4 id="_compliant"><a class="anchor" href="#_compliant"></a>5.2.6. compliant</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS NOT</span> compliant<span class="hl kwa">.</span></code></pre>
@@ -2372,7 +2410,7 @@ For scenery objects, use the attribute scenery.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_clothing"><a class="anchor" href="#_clothing"></a>CLOTHING</h4>
+<h4 id="_clothing"><a class="anchor" href="#_clothing"></a>6.1.1. CLOTHING</h4>
 <div class="paragraph">
 <p>CLOTHING is a piece of clothing the hero or an NPC wears. As far as the hero is concerned, clothes are prevented from being worn in an illogical order, for example you cannot put on a shirt if you are already wearing a jacket, and so forth. For this, clothing objects have a number of numerical attributes that need to be used. Note that NPCs cannot wear clothing in layers.</p>
 </div>
@@ -2449,7 +2487,7 @@ Explanations are given after the examples.</p>
 <p>&#8201;&#8212;&#8201;The above is enough; the rest is then handled automatically by the library.</p>
 </div>
 <div class="sect4">
-<h5 id="_the_clothing_table"><a class="anchor" href="#_the_clothing_table"></a>The clothing table</h5>
+<h5 id="_the_clothing_table"><a class="anchor" href="#_the_clothing_table"></a>6.1.1.1. The clothing table</h5>
 <div class="paragraph">
 <p>Here is the chart showing a selection of fairly typical clothing items and the values to set to obtain appropriate behaviour. Should you wish to create an article of CLOTHING not listed, usually a bit of lateral thought as to what it is most like and where it fits into the scheme of things will suggest a workable set of values, but be aware that you MUST use values in this chart, simply adding things with intermediate values is probably going to create nasty bugs:</p>
 </div>
@@ -2619,7 +2657,7 @@ The implementation of the hero and his friend both wearing tuxedos at a wedding 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_device"><a class="anchor" href="#_device"></a>DEVICE</h4>
+<h4 id="_device"><a class="anchor" href="#_device"></a>6.1.2. DEVICE</h4>
 <div class="paragraph">
 <p>DEVICE is a machine or an electronic device, for example a TV. It can be turned (=switched) on and off if it is not broken. Default attributes: NOT on, NOT broken. A DEVICE is by default described as being either on or off when examined.</p>
 </div>
@@ -2675,7 +2713,7 @@ You have to add it manually:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_door"><a class="anchor" href="#_door"></a>DOOR</h4>
+<h4 id="_door"><a class="anchor" href="#_door"></a>6.1.3. DOOR</h4>
 <div class="paragraph">
 <p>DOOR can be opened, closed, locked and unlocked. It is by default closed (= NOT open) and NOT locked. Attributes: openable, NOT open, NOT lockable, NOT locked, HAS otherside door.
 A DOOR is described by default as being either open or closed when examined.</p>
@@ -2736,7 +2774,7 @@ It&#8217;s a white wooden door leading into the house. It is currently closed.</
 </div>
 </div>
 <div class="sect4">
-<h5 id="_locked_doors_and_keys"><a class="anchor" href="#_locked_doors_and_keys"></a>Locked doors and keys</h5>
+<h5 id="_locked_doors_and_keys"><a class="anchor" href="#_locked_doors_and_keys"></a>6.1.3.1. Locked doors and keys</h5>
 <div class="paragraph">
 <p>To unlock a locked DOOR, it has to have a <code>matching_key</code> object attributed to it.
 Only this object can unlock the DOOR.</p>
@@ -2783,7 +2821,7 @@ That&#8217;s why it is much shorter to implement the otherside instance of a DOO
 </div>
 </div>
 <div class="sect3">
-<h4 id="_liquid"><a class="anchor" href="#_liquid"></a>LIQUID</h4>
+<h4 id="_liquid"><a class="anchor" href="#_liquid"></a>6.1.4. LIQUID</h4>
 <div class="paragraph">
 <p>LIQUID can be taken only if it is in a container.
 You can fill something with it, and you can pour it somewhere.
@@ -2807,7 +2845,7 @@ Consequently, &#8220;&gt;empty bottle&#8221; will work but &#8220;&gt;empty juic
 </div>
 </div>
 <div class="sect3">
-<h4 id="_lightsource"><a class="anchor" href="#_lightsource"></a>LIGHTSOURCE</h4>
+<h4 id="_lightsource"><a class="anchor" href="#_lightsource"></a>6.1.5. LIGHTSOURCE</h4>
 <div class="paragraph">
 <p>LIGHTSOURCE is <code>natural</code> or <code>NOT natural</code> (a natural LIGHTSOURCE is for example a match or a torch).
 It can be turned on and off, lighted and extinguished (= put out) if it is not broken.
@@ -2826,7 +2864,7 @@ The default attributes for a LIGHTSOURCE object are: <code>natural</code>, <code
 <div class="exampleblock gametranscript">
 <div class="content">
 <div class="paragraph">
-<p>&gt;_x torch_</p>
+<p>&gt; <em>x torch</em></p>
 </div>
 <div class="paragraph">
 <p>You notice nothing unusual about the torch. It is currently lit.</p>
@@ -2839,7 +2877,7 @@ The default attributes for a LIGHTSOURCE object are: <code>natural</code>, <code
 <div class="exampleblock gametranscript">
 <div class="content">
 <div class="paragraph">
-<p>&gt;_x lamp_</p>
+<p>&gt; <em>x lamp</em></p>
 </div>
 <div class="paragraph">
 <p>You notice nothing unusual about the lamp. It is currently off.</p>
@@ -2863,7 +2901,7 @@ The default attributes for a LIGHTSOURCE object are: <code>natural</code>, <code
 <div class="exampleblock gametranscript">
 <div class="content">
 <div class="paragraph">
-<p>&gt;_x lamp_</p>
+<p>&gt; <em>x lamp</em></p>
 </div>
 <div class="paragraph">
 <p>It is an elegant table lamp with a blue lampshade. It is currently off.</p>
@@ -2888,7 +2926,7 @@ The default attributes for a LIGHTSOURCE object are: <code>natural</code>, <code
 </div>
 </div>
 <div class="sect3">
-<h4 id="_listed_container"><a class="anchor" href="#_listed_container"></a>LISTED_CONTAINER</h4>
+<h4 id="_listed_container"><a class="anchor" href="#_listed_container"></a>6.1.6. LISTED_CONTAINER</h4>
 <div class="paragraph">
 <p>LISTED_CONTAINER is an object which has the container property.
 The contents of a LISTED_CONTAINER will be listed both after &#8220;&gt;look&#8221; (= in the room description), &#8220;&gt;look in&#8221; and &#8220;&gt;examine&#8221;, if it is open.
@@ -2955,6 +2993,452 @@ To change this, declare for example</p>
 <div class="paragraph">
 <p>(This is handled automatically by the library when a container is opened or closed.)</p>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_putting_things_in_containers"><a class="anchor" href="#_putting_things_in_containers"></a>6.1.7. Putting things in containers</h4>
+<div class="paragraph">
+<p>It is only possible to put something into a container if this something is included in the object.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> drawer <span class="hl kwa">ISA</span> LISTED_CONTAINER <span class="hl kwa">IN</span> nightstand&#x000A;  <span class="hl kwa">HAS</span> allowed <span class="hl opt">{</span>diary<span class="hl kwa">,</span> keys<span class="hl opt">}</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">...</span>&#x000A;<span class="hl kwa">END THE</span> drawer<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the example above, it wouldn&#8217;t be possible to put anything else in the drawer, for example a chair or a coffee cup.
+The response would be for example &#8220;The coffee cup doesn&#8217;t belong in the drawer.&#8221;, etc.</p>
+</div>
+<div class="paragraph">
+<p>This applies not only to the verb <code>put_in</code> but also to <code>empty_in</code>, <code>pour_in</code> and <code>throw_in</code>.</p>
+</div>
+<div class="paragraph">
+<p>Everything programmed to be in a container by the author at the start of the game will be automatically included in the <code>allowed</code> set of the container.
+Thus, for example if the author implements an apple in a bowl and the <code>hero</code> character takes it, it will be possible for the hero to put the apple back into the bowl, without the author having to implement any separate <code>allowed</code> attributes for this to happen.
+But note if you have for example a ticket dispenser in your game and the <code>hero</code> takes a ticket from it, it would be possible to put the ticket back into the dispenser, the way things work by default.
+This is not what is wanted in this case.
+That&#8217;s why in that case you should do either:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> ticket_dispenser <span class="hl kwa">ISA</span> LISTED_CONTAINER <span class="hl kwa">AT</span> lobby&#x000A;  <span class="hl kwa">...</span>&#x000A;  <span class="hl kwa">VERB</span> put_in&#x000A;    <span class="hl kwa">WHEN</span> cont&#x000A;      <span class="hl kwa">DOES</span> <span class="hl str">&quot;That&apos;s not possible.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or, alternatively:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> ticket <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">IN</span> ticket_dispenser&#x000A;  <span class="hl kwa">INITIALIZE</span>&#x000A;    <span class="hl kwa">EXCLUDE THIS FROM</span> allowed <span class="hl kwa">OF</span> ticket_dispenser<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE</span> ticket<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, you could just have the ticket available in the location in general, not having to locate it in the dispenser at all.
+This would make the above coding unnecessary but would make the <code>take</code> verb a bit lengthier:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> ticket <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> lobby&#x000A;  <span class="hl kwa">IS</span> in_the_dispenser<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">VERB</span> take&#x000A;    <span class="hl kwa">CHECK</span> ticket <span class="hl kwa">IS</span> in_the_dispenser&#x000A;      <span class="hl kwa">ELSE</span> <span class="hl str">&quot;You already took a ticket.&quot;</span>&#x000A;    <span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;You take a ticket from the dispenser.&quot;</span>&#x000A;      <span class="hl kwa">MAKE</span> ticket <span class="hl kwa">NOT</span> in_the_dispenser<span class="hl kwa">.</span>&#x000A;      <span class="hl kwa">LOCATE</span> ticket <span class="hl kwa">IN</span> <span class="hl kwc">hero</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> ticket_dispenser <span class="hl kwa">ISA</span> LISTED_CONTAINER <span class="hl kwa">AT</span> lobby&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sound"><a class="anchor" href="#_sound"></a>6.1.8. SOUND</h4>
+<div class="paragraph">
+<p>SOUND can be listened to but not examined, searched, smelled or manipulated.
+It cannot initially be turned on or off, this has to be implemented manually by giving the sound the <code>switchable</code> attribute.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> siren <span class="hl kwa">ISA</span> SOUND <span class="hl kwa">AT</span> bedroom&#x000A;  <span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;The sound of a siren can be heard outside in the street.&quot;</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> alarm_clock_sound <span class="hl kwa">ISA</span> SOUND <span class="hl kwa">AT</span> bedroom&#x000A;  <span class="hl kwa">NAME</span> alarm clock sound <span class="hl kwa">NAME</span> alarm clock&#x000A;  <span class="hl kwa">IS</span> switchable<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">IS</span> &apos;on&apos;<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_supporter"><a class="anchor" href="#_supporter"></a>6.1.9. SUPPORTER</h4>
+<div class="paragraph">
+<p>SUPPORTER: You can put things on a SUPPORTER and you can stand, sit down or lie on it.</p>
+</div>
+<div class="paragraph">
+<p>A SUPPORTER is declared to be a container, so that you can take things from it, as well.
+When there&#8217;s something on a SUPPORTER, a listing of it will appear in the room description and after &#8220;&gt;examine&#8221;, by default:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>look</em></p>
+</div>
+<div class="paragraph">
+<p>Bedroom</p>
+</div>
+<div class="paragraph">
+<p>There is a nightstand here. On the nightstand you see a diary.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>To implement OBJECTs on a SUPPORTER, define the SUPPORTER first; for example</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> tray <span class="hl kwa">ISA</span> SUPPORTER&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, implement the OBJECTs on the supporter like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> apple <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span>&#x000A;  <span class="hl kwa">IN</span> tray&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+@FIXME: this sentence in incomplete&#8201;&#8212;&#8201;"even if &#8230;&#8203; What?"
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Note the IN above, even if the <code>apple</code> will be described as being <em>on</em> the tray [???].
+Similarly, to implement a book on a table:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> table <span class="hl kwa">ISA</span> SUPPORTER <span class="hl kwa">AT</span> livingroom&#x000A;<span class="hl kwa">END THE</span> table<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> book <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span>&#x000A;  <span class="hl kwa">IN</span> table&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that the &#8220;&gt;examine&#8221; command will list what is on the surface of a SUPPORTER, not what, if anything, is inside the SUPPORTER.
+For example, if you have a SUPPORTER called <code>table</code> in your game with two drawers in it, DON&#8217;T do this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> drawer1 <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span>&#x000A;  <span class="hl kwa">NAME</span> bottom drawer&#x000A;  <span class="hl kwa">CONTAINER</span>&#x000A;    <span class="hl kwa">IN</span> table<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> drawer2 <span class="hl kwa">ISA</span> LISTED_CONTAINER&#x000A;  <span class="hl kwa">NAME</span> top drawer&#x000A;  <span class="hl kwa">IN</span> table<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This would result in something like &#8220;There&#8217;s a table here. On the table you see a book, a bottom drawer and a top drawer.&#8221;</p>
+</div>
+<div class="paragraph">
+<p>Instead, do the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> table <span class="hl kwa">ISA</span> SUPPORTER&#x000A;  <span class="hl kwa">AT</span> bedroom&#x000A;  <span class="hl kwa">HAS</span> components <span class="hl opt">{</span>drawer1<span class="hl kwa">,</span> drawer2<span class="hl opt">}</span><span class="hl kwa">.</span> <span class="hl slc">-- &apos;components&apos; is not a pre-defined</span>&#x000A;                                     <span class="hl slc">-- attribute in the library, it is just used</span>&#x000A;                                     <span class="hl slc">-- in this example. You could name this</span>&#x000A;                                     <span class="hl slc">-- attribute in any other way, too.</span>&#x000A;  <span class="hl kwa">VERB</span> examine&#x000A;    <span class="hl kwa">DOES</span>&#x000A;      <span class="hl kwa">FOR EACH</span> c <span class="hl kwa">IN</span> components <span class="hl kwa">OF THIS DO</span>&#x000A;        <span class="hl kwa">SAY</span> <span class="hl str">&quot;The table has&quot;</span> <span class="hl kwa">SAY AN</span> c<span class="hl kwa">.</span> <span class="hl str">&quot;.&quot;</span>&#x000A;        <span class="hl kwa">IF</span> c <span class="hl kwa">IS</span> open&#x000A;          <span class="hl kwa">THEN LIST</span> c<span class="hl kwa">.</span>&#x000A;          <span class="hl kwa">ELSE SAY THE</span> c<span class="hl kwa">.</span> <span class="hl str">&quot;is closed.&quot;</span>&#x000A;        <span class="hl kwa">END IF.</span>&#x000A;      <span class="hl kwa">END FOR.</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> drawer1 <span class="hl kwa">ISA</span> LISTED_CONTAINER&#x000A;  <span class="hl kwa">OPAQUE CONTAINER</span>&#x000A;  <span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;&quot;</span>&#x000A;  <span class="hl kwa">NAME</span> bottom drawer&#x000A;  <span class="hl kwa">AT</span> bedroom&#x000A;  <span class="hl kwa">IS NOT</span> open<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> drawer2 <span class="hl kwa">ISA</span> LISTED_CONTAINER&#x000A;  <span class="hl kwa">OPAQUE CONTAINER</span>&#x000A;  <span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;&quot;</span>&#x000A;  <span class="hl kwa">NAME</span> top drawer&#x000A;  <span class="hl kwa">AT</span> bedroom&#x000A;  <span class="hl kwa">IS</span> open<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> book <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">IN</span> table&#x000A;<span class="hl kwa">END THE</span> book<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> diary <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">IN</span> drawer2&#x000A;<span class="hl kwa">END THE</span> diary<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In other words, declare the drawers components of the table, in the manner described above.
+The result will then be for example something like this:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>l</em></p>
+</div>
+<div class="paragraph">
+<p>There is a table here. On the table you see a book.</p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>x table</em></p>
+</div>
+<div class="paragraph">
+<p>You notice nothing unusual about the table. On the table you see a book.
+The table has a bottom drawer. The bottom drawer is closed.
+The table has a top drawer. The top drawer contains a diary.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to get rid of the default &#8220;You see nothing unusual&#8230;&#8203;&#8221; message above, edit the response to the <code>examine</code> verb for example this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> table <span class="hl kwa">ISA</span> SUPPORTER&#x000A;  <span class="hl kwa">AT</span> bedroom&#x000A;  <span class="hl kwa">HAS</span> components <span class="hl opt">{</span>drawer1<span class="hl kwa">,</span> drawer2<span class="hl opt">}</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">VERB</span> examine&#x000A;    <span class="hl kwa">DOES ONLY</span>&#x000A;      <span class="hl str">&quot;It&apos;s an antique oak table.&quot;</span>&#x000A;      <span class="hl kwa">LIST</span> table<span class="hl kwa">.</span>&#x000A;      <span class="hl kwa">FOR EACH</span> c <span class="hl kwa">IN</span> components <span class="hl kwa">OF THIS DO</span>&#x000A;        <span class="hl kwa">SAY</span> <span class="hl str">&quot;The table has&quot;</span> <span class="hl kwa">SAY AN</span> c<span class="hl kwa">.</span> <span class="hl str">&quot;.&quot;</span>&#x000A;        <span class="hl kwa">IF</span> c <span class="hl kwa">IS</span> open&#x000A;          <span class="hl kwa">THEN LIST</span> c<span class="hl kwa">.</span>&#x000A;          <span class="hl kwa">ELSE SAY THE</span> c<span class="hl kwa">.</span> <span class="hl str">&quot;is closed.&quot;</span>&#x000A;        <span class="hl kwa">END IF.</span>&#x000A;      <span class="hl kwa">END FOR.</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The code <code>LIST [supporter].</code> will list what the supporter has on its surface.</p>
+</div>
+<div class="paragraph">
+<p>Standing, sitting or lying down on a SUPPORTER is not allowed by default, however, but must be manually implemented by the author:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> bed <span class="hl kwa">ISA</span> SUPPORTER <span class="hl kwa">AT</span> bedroom&#x000A;  <span class="hl kwa">VERB</span> lie_on&#x000A;    <span class="hl kwa">DOES ONLY</span>&#x000A;      <span class="hl str">&quot;You lie down on the bed.&quot;</span>&#x000A;      <span class="hl kwa">MAKE</span> <span class="hl kwc">hero</span> lying_down<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Remember that it is not possible to locate an ACTOR inside an OBJECT, for example in a bed container.
+Using the <code>sitting</code> or <code>lying_down</code> attributes should be enough to account for these situations and to create the impression that the <code>hero</code> is located on a SUPPORTER object.
+When the hero is made <code>sitting</code> or <code>lying_down</code>, certain actions are disabled by the library (for example <code>attack</code>, <code>jump</code> etc.).
+It is the author&#8217;s responsibility to make certain objects in the location <code>NOT reachable</code> as needed, while the hero is lying down or sitting, and also to prohibit movement or at least implement a clarifying message of the hero standing up, before going in any direction.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_weapon"><a class="anchor" href="#_weapon"></a>6.1.10. WEAPON</h4>
+<div class="paragraph">
+<p>WEAPON is <code>fireable</code> (for example a cannon) or <code>NOT fireable</code> (for example a baseball bat), the latter being the default.
+The verbs <code>attack_with</code> and <code>kill_with</code> won&#8217;t have successful outcomes if the second parameter in them is not a WEAPON.
+(Even when the second parameter is a WEAPON, the outcome of the action is not successful by default.</p>
+</div>
+<div class="paragraph">
+<p>You must implement a successful outcome manually at the instance level.)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> pistol <span class="hl kwa">ISA</span> weapon <span class="hl kwa">IN</span> room1&#x000A;  <span class="hl kwa">IS</span> fireable<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_window"><a class="anchor" href="#_window"></a>6.1.11. WINDOW</h4>
+<div class="paragraph">
+<p>WINDOW can be opened, closed, looked through and out of.
+It will be described as being either open or closed when examined, by default.
+It is by default <code>NOT open</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> bedroom_window <span class="hl kwa">ISA</span> WINDOW <span class="hl kwa">AT</span> bedroom&#x000A;  <span class="hl kwa">NAME</span> bedroom window&#x000A;  <span class="hl kwa">IS</span> open<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>yields</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt;  <em>x bedroom window</em></p>
+</div>
+<div class="paragraph">
+<p>You notice nothing unusual about the bedroom window. It is currently closed.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>If you add a specific <code>examine</code> response for a WINDOW instance, you have to add manually the mention about the instance being open or closed, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> bedroom_window <span class="hl kwa">ISA</span> WINDOW <span class="hl kwa">AT</span> bedroom&#x000A;  <span class="hl kwa">NAME</span> bedroom window&#x000A;  <span class="hl kwa">IS</span> open<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">VERB</span> examine&#x000A;    <span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;It&apos;s a big window facing east to the garden.&quot;</span>&#x000A;      <span class="hl kwa">IF THIS IS NOT</span> open&#x000A;        <span class="hl kwa">THEN</span> <span class="hl str">&quot;It is currently closed.&quot;</span>&#x000A;        <span class="hl kwa">ELSE</span> <span class="hl str">&quot;It is currently open.&quot;</span>&#x000A;      <span class="hl kwa">END IF.</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE</span> bedroom_window<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_attributes_for_things_not_distant_not_reachable_scenery"><a class="anchor" href="#_additional_attributes_for_things_not_distant_not_reachable_scenery"></a>7. Additional attributes for THINGs: (NOT) distant, (NOT) reachable, scenery</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Distant/NOT distant is a new attribute in v2.0 and later versions of the library.
+It has been added to be used alongside with the existing reachable/NOT reachable attributes.
+This has proved to be a handy distinction to have at hand.
+It is possible for the hero for example to talk with an NPC (non-player character) that is NOT reachable (for example if the hero is lying down on a bed), but not with one that is distant.
+Similarly, you can throw something at, to or into a NOT reachable instance (for example a basketball into a basket), but not at, to or into a distant one. There are also some other individual cases where you can manipulate NOT reachable objects as opposed to distant ones. The default responses for NOT reachable and distant objects are a bit different: a NOT reachable object is described to be "out of your reach" but a distant one is "too far away". For example the library-defined ceiling object for indoor rooms is NOT reachable ("The ceiling is out of your reach") while the library-defined sky object is distant ("The sky is too far away").</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> sun <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> outdoor&#x000A;  <span class="hl kwa">IS</span> distant<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>(Here, the sun would be present in all outdoor locations in the game.)</p>
+</div>
+<div class="paragraph">
+<p>In the following, some objects in the location become not reachable when the hero sits down:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> bedroom <span class="hl kwa">ISA</span> ROOM&#x000A;  <span class="hl kwa">VERB</span> sit&#x000A;    <span class="hl kwa">DOES ONLY</span>&#x000A;      <span class="hl str">&quot;You sit down on the chair.&quot;</span>&#x000A;      <span class="hl kwa">MAKE</span> <span class="hl kwc">hero</span> sitting<span class="hl kwa">.</span>&#x000A;      <span class="hl kwa">MAKE</span> desk <span class="hl kwa">NOT</span> reachable<span class="hl kwa">.</span>&#x000A;      <span class="hl kwa">MAKE</span> wardrobe <span class="hl kwa">NOT</span> reachable<span class="hl kwa">.</span>&#x000A;      <span class="hl kwa">MAKE</span> bedroom_window <span class="hl kwa">NOT</span> reachable<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE</span> bedroom<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also implement on a more general level:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">VERB</span> sit&#x000A;    <span class="hl kwa">DOES</span>&#x000A;      <span class="hl kwa">FOR EACH</span> o <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span><span class="hl kwa">, IS</span> takeable<span class="hl kwa">, AT</span> <span class="hl kwc">hero</span>&#x000A;        <span class="hl kwa">DO</span>&#x000A;          <span class="hl kwa">MAKE</span> o <span class="hl kwa">NOT</span> reachable<span class="hl kwa">.</span>&#x000A;      <span class="hl kwa">END FOR.</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Scenery objects cannot be taken or manipulated.
+The default response for examining or attempting to take them is "The [object] is not important".
+Asking another person for scenery objects won&#8217;t have a successful result, neither does taking something from a scenery object, even if this something is not scenery.
+Normal objects in scenery objects are not even mentioned by default.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> livingroom <span class="hl kwa">ISA</span> ROOM&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> flowerpot <span class="hl kwa">ISA</span> LISTED_CONTAINER <span class="hl kwa">AT</span> livingroom&#x000A;  <span class="hl kwa">IS</span> scenery<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> ring <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">IN</span> flowerpot&#x000A;<span class="hl kwa">END THE</span> ring<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>x flowerpot</em><br>
+The flowerpot is not important.</p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>take it</em><br>
+The flowerpot is not important.</p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>ask mrs reeves for flowerpot</em><br>
+The flowerpot is not important.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The ring, implemented above, is not mentioned at all, and if you, knowing about its existence only through having implemented it in the code yourself, try to take it, only the simple take verb works; take_from won&#8217;t:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>take ring from flowerpot</em><br>
+The flowerpot is not important.</p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>take ring</em><br>
+Taken.</p>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Note this! If you want the player to have the ring, don&#8217;t declare the flowerpot scenery.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Scenery objects are not mentioned or described by default in connection with location descriptions.</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>look</em><br>
+Livingroom</p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>x flowerpot</em><br>
+The flowerpot is not important.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>You have to mention any scenery objects in the location description yourself, so that the player is aware of the existence such things in the location:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> livingroom <span class="hl kwa">ISA</span> ROOM&#x000A;  <span class="hl kwa">DESCRIPTION</span>&#x000A;    <span class="hl str">&quot;You&apos;re in a big, cozy living-room. A dinner table</span>&#x000A;<span class="hl str">     stands in the middle, surrounded by six wooden chairs.</span>&#x000A;<span class="hl str">     A lonely flowerpot stands in one of the corners.&quot;</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The ring object in the above example won&#8217;t get mentioned at all if it is not in the location description:</p>
+</div>
+<div class="paragraph">
+<p>Note that actors can be scenery, as well. Such actors are not mentioned in the location description by default, and examining them yields the default message "The [actor] is not important.".</p>
+</div>
+<div class="sect2">
+<h3 id="_classes_usage"><a class="anchor" href="#_classes_usage"></a>7.1. Classes: usage</h3>
+<div class="paragraph">
+<p>As we have already seen, it is possible to use classes and subclasses in various contexts in ALAN.
+The library defines a large number of subclasses for actors and objects and locations, as seen in the previous chapters.</p>
+</div>
+<div class="paragraph">
+<p>You can define or edit a class-specific attribute in three ways.</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha">
+<li>
+<p>You can give an attribute to a class of your own:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">EVERY</span> jewelry <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span>&#x000A;  <span class="hl kwa">IS</span> expensive<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END EVERY.</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>You can add an attribute of your own to a predefined class:</p>
+<div class="paragraph">
+<p>Use the ADD TO command to add new attributes for predefined classes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">ADD TO EVERY</span> WINDOW&#x000A;  <span class="hl kwa">IS NOT</span> cleaned<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END ADD.</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Changing the attribute of a predefined class.</p>
+<div class="paragraph">
+<p>Use INITIALIZE in the <code>my_game</code> instance.
+Here, the game author wants (for some reason) to make all CLOTHING objects not wearable:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">INITIALIZE</span>&#x000A;    <span class="hl kwa">FOR EACH</span> c <span class="hl kwa">ISA</span> CLOTHING <span class="hl kwa">DO</span>&#x000A;      <span class="hl kwa">MAKE</span> c <span class="hl kwa">NOT</span> wearable<span class="hl kwa">.</span>&#x000A;    <span class="hl kwa">END FOR.</span>&#x000A;<span class="hl kwa">END THE</span> my_game<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, you wouldn&#8217;t be able to use <code>ADD TO</code>, as you cannot add an attribute that has been already defined for a class, even if you change it to its opposite (for example <code>wearable &lt;&gt; NOT wearable</code>).</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="_overriding_library_responses_for_classes"><a class="anchor" href="#_overriding_library_responses_for_classes"></a>7.1.1. Overriding library responses for classes</h4>
+<div class="paragraph">
+<p>If you wish to override the library response to a verb within a specific class, use DOES ONLY with the verb:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">EVERY</span> cat <span class="hl kwa">ISA</span> <span class="hl kwb">ACTOR</span>&#x000A;  <span class="hl kwa">VERB</span> examine&#x000A;    <span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;It&apos;s just an ordinary cat.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END EVERY.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will override the default library message for examine for all CATs in the game.</p>
+</div>
+<div class="paragraph">
+<p>However, if you wish to change the verb outcome for a class predefined in the library, you should do like below. Here, the verb outcome for examine has been modified for all WINDOWs in the game:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">VERB</span> examine&#x000A;    <span class="hl kwa">CHECK</span> obj <span class="hl opt">&lt;&gt;</span> window&#x000A;     <span class="hl kwa">ELSE</span> <span class="hl str">&quot;It&apos;s rectangular and transparent, like a window usually is.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you wish to add a verb check for a specific class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">ADD TO EVERY</span> cat&#x000A;  <span class="hl kwa">VERB</span> catch&#x000A;    <span class="hl kwa">CHECK</span> nails <span class="hl kwa">OF THIS ARE</span> cut&#x000A;      <span class="hl kwa">ELSE</span> <span class="hl str">&quot;You might just get scratched.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END ADD.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that there is no DOES/DOES ONLY section here; the check is performed on the cat class only, and if the check is passed, the library outcome of the take verb will be carried out.</p>
+</div>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -2963,7 +3447,7 @@ To change this, declare for example</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>ADAPTED UP TO HERE. TO BE CONTINUTED&#8230;&#8203;</p>
+<p>CONTENTS FROM ORIGINAL PDF ADDED UP TO HERE. TO BE CONTINUTED&#8230;&#8203;</p>
 </div>
 </td>
 </tr>

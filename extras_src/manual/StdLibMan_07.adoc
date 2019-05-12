@@ -1,0 +1,244 @@
+////
+********************************************************************************
+*                                                                              *
+*                     ALAN Standard Library User's Manual                      *
+*                                                                              *
+*                                  Chapter 7                                   *
+*                                                                              *
+********************************************************************************
+////
+
+
+
+== Additional attributes for THINGs: (NOT) distant, (NOT) reachable, scenery
+
+Distant/NOT distant is a new attribute in v2.0 and later versions of the library.
+It has been added to be used alongside with the existing reachable/NOT reachable attributes.
+This has proved to be a handy distinction to have at hand.
+It is possible for the hero for example to talk with an NPC (non-player character) that is NOT reachable (for example if the hero is lying down on a bed), but not with one that is distant.
+Similarly, you can throw something at, to or into a NOT reachable instance (for example a basketball into a basket), but not at, to or into a distant one. There are also some other individual cases where you can manipulate NOT reachable objects as opposed to distant ones. The default responses for NOT reachable and distant objects are a bit different: a NOT reachable object is described to be "out of your reach" but a distant one is "too far away". For example the library-defined ceiling object for indoor rooms is NOT reachable ("The ceiling is out of your reach") while the library-defined sky object is distant ("The sky is too far away").
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE sun ISA OBJECT AT outdoor
+  IS distant.
+END THE.
+--------------------------------------------------------------------------------
+
+(Here, the sun would be present in all outdoor locations in the game.)
+
+In the following, some objects in the location become not reachable when the hero sits down:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE bedroom ISA ROOM
+  VERB sit
+    DOES ONLY
+      "You sit down on the chair."
+      MAKE hero sitting.
+      MAKE desk NOT reachable.
+      MAKE wardrobe NOT reachable.
+      MAKE bedroom_window NOT reachable.
+  END VERB.
+END THE bedroom.
+--------------------------------------------------------------------------------
+
+You can also implement on a more general level:
+
+// PAGE 56 //
+
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE my_game ISA DEFINITION_BLOCK
+  VERB sit
+    DOES
+      FOR EACH o ISA OBJECT, IS takeable, AT hero
+        DO
+          MAKE o NOT reachable.
+      END FOR.
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+Scenery objects cannot be taken or manipulated.
+The default response for examining or attempting to take them is "The [object] is not important".
+Asking another person for scenery objects won't have a successful result, neither does taking something from a scenery object, even if this something is not scenery.
+Normal objects in scenery objects are not even mentioned by default.
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE livingroom ISA ROOM
+END THE.
+
+THE flowerpot ISA LISTED_CONTAINER AT livingroom
+  IS scenery.
+END THE.
+
+THE ring ISA OBJECT IN flowerpot
+END THE ring.
+--------------------------------------------------------------------------------
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _x flowerpot_ +
+The flowerpot is not important.
+
+&gt; _take it_ +
+The flowerpot is not important.
+
+&gt; _ask mrs reeves for flowerpot_ +
+The flowerpot is not important.
+================================================================================
+
+The ring, implemented above, is not mentioned at all, and if you, knowing about its existence only through having implemented it in the code yourself, try to take it, only the simple take verb works; take_from won't:
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _take ring from flowerpot_ +
+The flowerpot is not important.
+
+&gt; _take ring_ +
+Taken.
+================================================================================
+
+// @CHANGED: this not was originally inside the trascript, on the right margin;
+//           but it's to complex to handle formatting it.
+
+[NOTE]
+================================================================================
+Note this! If you want the player to have the ring, don't declare the flowerpot scenery.
+================================================================================
+
+
+// PAGE 57 //
+
+Scenery objects are not mentioned or described by default in connection with location descriptions.
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _look_ +
+Livingroom
+
+&gt; _x flowerpot_ +
+The flowerpot is not important.
+================================================================================
+
+
+You have to mention any scenery objects in the location description yourself, so that the player is aware of the existence such things in the location:
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE livingroom ISA ROOM
+  DESCRIPTION
+    "You're in a big, cozy living-room. A dinner table
+     stands in the middle, surrounded by six wooden chairs.
+     A lonely flowerpot stands in one of the corners."
+END THE.
+--------------------------------------------------------------------------------
+
+The ring object in the above example won't get mentioned at all if it is not in the location description:
+
+// @FIXME: Looks like part of the text was lost in the original PDF!
+
+Note that actors can be scenery, as well. Such actors are not mentioned in the location description by default, and examining them yields the default message "The [actor] is not important.".
+
+
+=== Classes: usage
+
+As we have already seen, it is possible to use classes and subclasses in various contexts in ALAN.
+The library defines a large number of subclasses for actors and objects and locations, as seen in the previous chapters.
+
+You can define or edit a class-specific attribute in three ways.
+
+a. You can give an attribute to a class of your own:
++
+[source,alan]
+------------------------
+EVERY jewelry ISA OBJECT
+  IS expensive.
+END EVERY.
+------------------------
+
+b. You can add an attribute of your own to a predefined class:
++
+Use the ADD TO command to add new attributes for predefined classes.
++
+[source,alan]
+-------------------
+ADD TO EVERY WINDOW
+  IS NOT cleaned.
+END ADD.
+-------------------
+
+c. Changing the attribute of a predefined class.
++
+Use INITIALIZE in the `my_game` instance.
+Here, the game author wants (for some reason) to make all CLOTHING objects not wearable:
++
+[source,alan]
+--------------------------------------------------------------------------------
+THE my_game ISA DEFINITION_BLOCK
+  INITIALIZE
+    FOR EACH c ISA CLOTHING DO
+      MAKE c NOT wearable.
+    END FOR.
+END THE my_game.
+--------------------------------------------------------------------------------
++
+Here, you wouldn't be able to use `ADD TO`, as you cannot add an attribute that has been already defined for a class, even if you change it to its opposite (for example `wearable <> NOT wearable`).
+
+==== Overriding library responses for classes
+
+If you wish to override the library response to a verb within a specific class, use DOES ONLY with the verb:
+
+[source,alan]
+--------------------------------------------------------------------------------
+EVERY cat ISA ACTOR
+  VERB examine
+    DOES ONLY "It's just an ordinary cat."
+  END VERB.
+END EVERY.
+--------------------------------------------------------------------------------
+
+// PAGE 59 //
+
+
+
+This will override the default library message for examine for all CATs in the game.
+
+However, if you wish to change the verb outcome for a class predefined in the library, you should do like below. Here, the verb outcome for examine has been modified for all WINDOWs in the game:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE my_game ISA DEFINITION_BLOCK
+  VERB examine
+    CHECK obj <> window
+     ELSE "It's rectangular and transparent, like a window usually is."
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+If you wish to add a verb check for a specific class:
+
+[source,alan]
+--------------------------------------------------------------------------------
+ADD TO EVERY cat
+  VERB catch
+    CHECK nails OF THIS ARE cut
+      ELSE "You might just get scratched."
+  END VERB.
+END ADD.
+--------------------------------------------------------------------------------
+
+Note that there is no DOES/DOES ONLY section here; the check is performed on the cat class only, and if the check is passed, the library outcome of the take verb will be carried out.
+
+
+// PAGE 60 //
+
+
+
+// EOF //
+
