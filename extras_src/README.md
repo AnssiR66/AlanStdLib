@@ -55,8 +55,9 @@ The build process supports multiple documentation folders in a symmetrical manne
 |            source folder             |               build folder              |                     description                      |
 |--------------------------------------|-----------------------------------------|------------------------------------------------------|
 | [`extras_src/tutorials/`][tutorials] | [`extras/tutorials/`][extras tutorials] | _The Clothing Guide_ and other standalone tutorials. |
+| [`extras_src/manual/`][manual]       | [`extras/manual/`][extras manual]       | _Alan Standard Library User's Manual_.               |
 
-Currently there's only the `tutorials/` folder, but when the _Standard Library Manual_ and the _Alan Cookbook_ will be added to the project, they will be allocated each one in its own source and destination folder.
+Soon, the _Alan Cookbook_ will also be added to the project.
 
 Working with symmetrical source/destination folders greatly simplifies reusability of build scripts.
 
@@ -74,7 +75,8 @@ The `update.sh` script carries out quite a number of tasks. For every source doc
     - Style comments in player input (`;`) via `#[comment]`..`#`.
     - Hyde region tags in player input via ADoc comments.
 5. __Build HTML Docs__ — Convert every `*.asciidoc` document inside the source folder into a standalone HTML file in the destination folder "`../extras/<foldername>/`".
-6. __Sanitize Alan Sources__ — Create in the destination folder a copy of every Alan source in the source folder, but stripped of all [AsciiDoc region-tag comment lines].
+6. __Sanitize Alan Sources__ — Take every Alan source adventure whose name doesn't start with underscore (i.e. "`$srcDir/[^_]*.alan`"), strip away all [AsciiDoc region-tag comment lines], and copy it to the destination folder. In other words, underscored adventures are for internal documentation use only, while the others are (also) real examples for end users.
+
 
 [Asciidoctor doesn't support ISO-8859-1 files]: https://github.com/asciidoctor/asciidoctor/issues/3248 "Read Issue #3248 for more info on this"
 [AsciiDoc region-tag comment lines]: https://asciidoctor.org/docs/user-manual/#by-tagged-regions "Read about tagged regions in Asciidoctor documentation"
@@ -121,6 +123,9 @@ Once Ruby is installed on your system, open a shell and type:
 
 [tutorials]: ./tutorials/ "Navigate to folder"
 [extras tutorials]: ../extras/tutorials/ "Navigate to folder"
+
+[manual]: ./manual/ "Navigate to folder"
+[extras manual]: ../extras/manual/ "Navigate to folder"
 
 <!-- proj files -->
 

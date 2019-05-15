@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# update.sh               v1.3.0 | 2019/05/05 | by Tristano Ajmone, MIT License.
+# update.sh               v1.4.0 | 2019/05/15 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                          BUILD STDLIB EXTRAS FOLDER                          #
@@ -90,10 +90,10 @@ for dirName in $foldersList; do
   # ----------------------------------------------------------------------------
   printHeading3 "Deploy Alan Source Files"
   # ----------------------------------------------------------------------------
-  echo -e "Copy to target folder every Alan source, but stripped of all lines containing"
-  echo -e "AsciiDoc region-tag comments."
+  echo -e "Take every \".alan\" source file whose name doesn't start with an underscore,"
+  echo -e "strip away AsciiDoc region-tag comments, and copy it to the destination folder."
 
-  for file in $srcDir/*.alan ; do
+  for file in $srcDir/[^_]*.alan ; do
     deployAlan $file
   done
 
