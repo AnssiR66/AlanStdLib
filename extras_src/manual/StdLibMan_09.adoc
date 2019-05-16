@@ -10,6 +10,7 @@
 
 // PAGE 77 //
 
+[[ch9]]
 == Adding synonyms for existing library words (verbs, object and actor classes)
 
 Declare the synonym in your own game source file, outside any instance declarations, and outside the `my_game` instance, like this:

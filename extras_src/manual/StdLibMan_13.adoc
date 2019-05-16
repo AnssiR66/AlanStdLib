@@ -9,6 +9,7 @@
 ////
 
 
+[[ch13]]
 == Default attributes used in the standard library
 
 The attributes in the following list are pre-defined in the library. When you coin your own attributes for your game, please be aware that these attributes already exist. Using any of the attributes listed below for your own purposes doesn't necessarily cause any problems, but if problems arise, it's likely because of their being used in the library.

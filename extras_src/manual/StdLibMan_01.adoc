@@ -8,12 +8,17 @@
 ********************************************************************************
 ////
 
+[[ch1]]
 == Introduction
 
-This is the manual for the ALAN Standard Library v2.1. This manual describes how to use the library together with the ALAN Interactive Fiction Language system v3.0 and subsequent versions, to create works of interactive fiction, or text adventures. The library defines responses for verbs and commands commonly used in gameplay, such as take takeable PERSON), together with illegal parameter messages (for example
+This is the manual for the ALAN Standard Library v2.1.
+This manual describes how to use the library together with the ALAN Interactive Fiction Language system v3.0 and subsequent versions, to create works of interactive fiction, or text adventures.
+The library defines responses for verbs and commands commonly used in gameplay, such as _examine_, _take_, _drop_ and _attack_, together with numerous other ones.
+The library also defines various global attributes (for example `takeable`, `NOT openable`), as well as object and actor attributes and classes (for example `CLOTHING`, `WEAPON`, `PERSON`), together with illegal parameter messages (for example "`That's not something you can examine`").
 
-
-The first official version (v1.0) of the ALAN Standard Library was published in 2010. Before that, versions 0.x, written by Steve Griffiths, were available for use. The writer of the current version is Anssi Räisänen.
+The first official version (v1.0) of the ALAN Standard Library was published in 2010.
+Before that, versions 0.x, written by Steve Griffiths, were available for use.
+The writer of the current version is Anssi Räisänen.
 
 
 The ALAN Standard Library v2.1 consists of the following five primary library files:
@@ -24,18 +29,23 @@ The ALAN Standard Library v2.1 consists of the following five primary library fi
 * `lib_messages.i`
 * `lib_verbs.i`
 
-In addition, the following files, none of which are necessary for using the library, can be found in the library distribution
-package:
+In addition, the following files, none of which are necessary for using the library, can be found in the library distribution package:
 
+// @TODO: FIX LIST OF EXTRA LIB FILES!
+// [ ] Some of these files have been renamed or have different extensions now.
+// [ ] Add links to these files?
 
 
 [horizontal]
 `changelog.txt`   :: A text file listing the changes made to the library after version v2.0.
 `copying.txt`     :: A text file clarifying some copyright issues.
-`library.i`       :: A file that imports all library files. Just use the line `IMPORT 'library.i'.` in your source file to import the standard library to your game.
-`mygame_import.i` :: An auxiliary, not obligatory, definition file for the library. If you need to edit a great number of default library messages (for verb outcomes, verb check messages etc.), you can edit this file and import it to your game project.
-`newgame.a3c`     :: A compiled game of the source code included in 'newgame.alan' (below)
-`newgame.alan`    :: A barebones game source file defining some necessary coding when starting to write a new game. You can use this as a starting point for a new project.
+`library.i`       :: A file that imports all library files.
+Just use the line `IMPORT 'library.i'.` in your source file to import the standard library to your game.
+`mygame_import.i` :: An auxiliary, not obligatory, definition file for the library.
+If you need to edit a great number of default library messages (for verb outcomes, verb check messages etc.), you can edit this file and import it to your game project.
+`newgame.a3c`     :: A compiled game of the source code included in `newgame.alan` (below).
+`newgame.alan`    :: A barebones game source file defining some necessary coding when starting to write a new game.
+You can use this as a starting point for a new project.
 `quickref.text`   :: A quick summary of the library features and how to use them.
 `quickstart.pdf`  :: A quick summary for starting to use the library.
 `testgame.a3c`    :: The compiled test game, ready to run and play, to test the features of the library.
@@ -49,22 +59,26 @@ And naturally many thanks to Thomas Nilsson for the ALAN Interactive Fiction Lan
 
 === What to read if you're a complete newbie
 
-It would be advisable to start with the ALAN Manual (available on the ALAN website at of how the language works in general. The ALAN manual contains all the features of the language; this library manual only describes what is pre-defined in the standard library. After reading the ALAN manual, read this manual thoroughly, with the following exceptions:
+It would be advisable to start with the ALAN Manual (available on the ALAN website at {AlanWWW}) to get an idea of how the language works in general.
+The ALAN manual contains all the features of the language; this library manual only describes what is pre-defined in the standard library.
+After reading the ALAN manual, read this manual thoroughly, with the following exceptions:
 
-* The chapter library, but it might be useful if you want to have a quick preview of some features the library is capable of.
+* The chapter <<ch2>> is not that necessary to read if you haven't used the previous version of the library, but it might be useful if you want to have a quick preview of some features the library is capable of.
+* Read only the early part (p. 78-) of the chapter <<ch10>> to get an idea of how that meta-instance is to be used in the game source.
+The later passages in that chapter, listing all possible illegal parameter message attributes and verb check attributes of the `my_game` meta-instance, are meant to serve as a searchable index sooner than to be read systematically.
 
-
-* Read only the early part (p. 78-) of the chapter meta-instance is to be used in the game source. The later passages in that chapter, listing all possible illegal parameter message attributes and verb check attributes of the sooner than to be read systematically.
-
+// @PROOFREAD UP TO HERE!
 
 === What to read if you're familiar with ALAN but haven't used the standard library v1.0
 
-Read through the whole of this library manual carefully, with the exception of the chapter its attributes meta-instance in the game source. The latter part of that chapter, where the illegal parameter messages and other messages are listed, is meant to be read only cursorily and to be used as a searchable index when needed.
+Read through the whole of this library manual carefully, with the exception of the chapter its attributes meta-instance in the game source.
+The latter part of that chapter, where the illegal parameter messages and other messages are listed, is meant to be read only cursorily and to be used as a searchable index when needed.
 
 
 === What to read if you have been using the v1.0 of the standard library
 
-V2.0 and 2.1 work in many places quite differently from v1.0, so read first the chapter an idea of what has changed since the previous version. Read cursorily through the chapters on Objects The my_game instance and its attributes The latter part of that chapter, where the illegal parameter messages and other messages are listed, is meant to be read only cursorily, to be used as a searchable index when needed.
+V2.0 and 2.1 work in many places quite differently from v1.0, so read first the chapter an idea of what has changed since the previous version.
+Read cursorily through the chapters on Objects The my_game instance and its attributes The latter part of that chapter, where the illegal parameter messages and other messages are listed, is meant to be read only cursorily, to be used as a searchable index when needed.
 
 
 === A note on the coding style used in this manual
@@ -89,7 +103,8 @@ THE cat ISA ACTOR AT street
 END THE cat.
 --------------------------------------------------------------------------------
 
-This is to facilitate spotting the ALAN keywords. Newcomers to ALAN should, however, bear in mind that the ALAN language is not case-sensitive, and one could as well write the above as
+This is to facilitate spotting the ALAN keywords.
+Newcomers to ALAN should, however, bear in mind that the ALAN language is not case-sensitive, and one could as well write the above as
 
 
 [source,alan]

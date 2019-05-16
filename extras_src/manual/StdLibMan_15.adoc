@@ -9,6 +9,7 @@
 ////
 
 
+[[ch15]]
 == Short examples
 
 1. A very short complete game using minimal obligatory imports and coding. Here, the hero must go from room1 north to room2 and eat an apple to win the game.

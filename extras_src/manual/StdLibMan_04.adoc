@@ -9,6 +9,7 @@
 ////
 
 
+[[ch4]]
 == Things
 
 Things in ALAN are the comprehensive term for actors and objects.

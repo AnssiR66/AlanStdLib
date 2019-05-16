@@ -10,6 +10,7 @@
 
 
 
+[[ch7]]
 == Additional attributes for THINGs: (NOT) distant, (NOT) reachable, scenery
 
 Distant/NOT distant is a new attribute in v2.0 and later versions of the library.

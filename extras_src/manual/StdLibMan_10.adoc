@@ -10,7 +10,7 @@
 
 
 
-
+[[ch10]]
 == The my_game instance and its attributes
 
 `My_game` is a so called meta-instance that obligatorily has to be included by the author in the game source. Without it, the game won't compile successfully. At its shortest, the needed formulation is

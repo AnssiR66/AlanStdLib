@@ -9,7 +9,7 @@
 ////
 
 
-
+[[ch8]]
 == Using verbs and commands
 
 The library defines numerous verbs that can be readily used in-game with any objects or actors.

@@ -11,7 +11,7 @@
 :sectnums:
 :sectnumlevels: 5
 // Cross References:
-:xrefstyle: short
+:xrefstyle: basic
 :section-refsig: Sect.
 // Misc Settings:
 :experimental: true
@@ -20,6 +20,10 @@
 :reproducible: true
 :sectanchors:
 
+// =============================================================================
+//                              CUSTOM ATTRIBUTES
+// =============================================================================
+:AlanWWW: link:https://www.alanif.se/[www.alanif.se^,title="Visit Alan website"]
 
 // *****************************************************************************
 // *                                                                           *
