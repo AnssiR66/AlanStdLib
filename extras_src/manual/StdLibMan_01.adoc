@@ -67,18 +67,22 @@ After reading the ALAN manual, read this manual thoroughly, with the following e
 * Read only the early part (p. 78-) of the chapter <<ch10>> to get an idea of how that meta-instance is to be used in the game source.
 The later passages in that chapter, listing all possible illegal parameter message attributes and verb check attributes of the `my_game` meta-instance, are meant to serve as a searchable index sooner than to be read systematically.
 
-// @PROOFREAD UP TO HERE!
 
 === What to read if you're familiar with ALAN but haven't used the standard library v1.0
 
-Read through the whole of this library manual carefully, with the exception of the chapter its attributes meta-instance in the game source.
-The latter part of that chapter, where the illegal parameter messages and other messages are listed, is meant to be read only cursorily and to be used as a searchable index when needed.
+// @TODO: ADD XREF
 
+Read through the whole of this library manual carefully, with the exception of the chapter The my_game instance and its attributes, of which you should read only the early part (p. 78-) to understand the significance of using the `my_game` meta-instance in the game source.
+The latter part of that chapter, where the illegal parameter messages and other messages are listed, is meant to be read only cursorily and to be used as a searchable index when needed.
 
 === What to read if you have been using the v1.0 of the standard library
 
-V2.0 and 2.1 work in many places quite differently from v1.0, so read first the chapter an idea of what has changed since the previous version.
-Read cursorily through the chapters on Objects The my_game instance and its attributes The latter part of that chapter, where the illegal parameter messages and other messages are listed, is meant to be read only cursorily, to be used as a searchable index when needed.
+// @TODO: ADD XREF
+
+V2.0 and 2.1 work in many places quite differently from v1.0, so read first the chapter What is different in v2.x to get an idea of what has changed since the previous version.
+Read cursorily through the chapters on Locations, Actors and Objects to learn about new features such as certain attributes.
+Read carefully the first part (p. 78-) of the chapter on The my_game instance and its attributes to understand the significance of using that meta-instance in the game source.
+The latter part of that chapter, where the illegal parameter messages and other messages are listed, is meant to be read only cursorily, to be used as a searchable index when needed.
 
 
 === A note on the coding style used in this manual

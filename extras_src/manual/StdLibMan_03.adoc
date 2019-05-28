@@ -156,7 +156,8 @@ SCHEDULE evening_falls AT meadow AFTER 20.
 
 [NOTE]
 ================================================================================
-__NOTE 1__: To manipulate the floor, the walls and the ceiling (in indoor locations) and the ground and the sky (in outdoor locations), see the following example. Here, the hero digs the ground on the meadow:
+__NOTE 1__: To manipulate the floor, the walls and the ceiling (in indoor locations) and the ground and the sky (in outdoor locations), see the following example.
+Here, the hero digs the ground on the meadow:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -178,7 +179,9 @@ END THE.
 --------------------------------------------------------------------------------
 
 
-Notice the bit `IF obj = ground` above. The library-defined indoor and outdoor objects, besides the `ground`, are `sky`, `floor`, `walls` and `ceiling`. You can refer to them in your coding in the way illustrated above when you need to manipulate them in any way.
+Notice the bit `IF obj = ground` above.
+The library-defined indoor and outdoor objects, besides the `ground`, are `sky`, `floor`, `walls` and `ceiling`.
+You can refer to them in your coding in the way illustrated above when you need to manipulate them in any way.
 ================================================================================
 
 
@@ -211,7 +214,10 @@ END THE my_game.
 === DARK_LOCATION and the lit attribute
 
 
-In dark locations, actions requiring seeing are automatically disabled by the library. All dark locations have the attribute `NOT lit`. The locations belonging to the subclass DARK_LOCATION need a lit LIGHTSOURCE object to be present to be lit. To implement a DARK_LOCATION, it is enough to implement it for example in the following way:
+In dark locations, actions requiring seeing are automatically disabled by the library.
+All dark locations have the attribute `NOT lit`.
+The locations belonging to the subclass DARK_LOCATION need a lit LIGHTSOURCE object to be present to be lit.
+To implement a DARK_LOCATION, it is enough to implement it for example in the following way:
 
 
 [source,alan]
@@ -221,7 +227,8 @@ THE basement ISA DARK_LOCATION
 END THE.
 --------------------------------------------------------------------------------
 
-The description of a dark location will be by default "It is pitch black. You can't see anything at all." This default can be changed by editing the `dark_loc_desc` attribute of the `my_game` instance (see p. 78).
+The description of a dark location will be by default "It is pitch black.
+You can't see anything at all." This default can be changed by editing the `dark_loc_desc` attribute of the `my_game` instance (see p. 78).
 
 If you add a description of your own to a `DARK_LOCATION`, this description will be shown only if the location is lit up by any means:
 
@@ -237,9 +244,15 @@ END THE.
 
 In order that a DARK_LOCATION is lighted, a LIGHTSOURCE object (a lantern, a match, a ceiling lamp, any other kind of light object) should be present.
 
-In darkness, you are not able to manipulate things other than turn on a LIGHTSOURCE and drop items you're carrying (these checks are found in `lib_verbs.i`). You can exit normally and use verbs that don't require seeing, such as smell, listen and think. If you are in a DARK_LOCATION with an NPC (= a non-player character), you are able to communicate with them by asking and telling, but not by showing and giving. If you wish to change these restrictions, see the respective verbs in `lib_verbs.i` and modify their checks.
+In darkness, you are not able to manipulate things other than turn on a LIGHTSOURCE and drop items you're carrying (these checks are found in `lib_verbs.i`).
+You can exit normally and use verbs that don't require seeing, such as smell, listen and think.
+If you are in a DARK_LOCATION with an NPC (= a non-player character), you are able to communicate with them by asking and telling, but not by showing and giving.
+If you wish to change these restrictions, see the respective verbs in `lib_verbs.i` and modify their checks.
 
-Note that you cannot change the name of a location mid-game. Thus, if you define a dark location called for example 'Darkness' and wish to make it lit at some point in the game, the name will still be 'Darkness' even if the location description can be changed to describe the illuminated location. To show a change in the location name, you must locate the hero in another location when the dark location is lit. For example,
+Note that you cannot change the name of a location mid-game.
+Thus, if you define a dark location called for example 'Darkness' and wish to make it lit at some point in the game, the name will still be 'Darkness' even if the location description can be changed to describe the illuminated location.
+To show a change in the location name, you must locate the hero in another location when the dark location is lit.
+For example,
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -263,7 +276,9 @@ WHEN lantern IS lit
 THEN LOCATE hero AT treasure_chamber.
 --------------------------------------------------------------------------------
 
-Note that you won't always need to define a dark location to be a member of the subclass DARK_LOCATION. This applies in cases when you don't wish to implement LIGHTSOURCE objects to make locations lit or not lit. (All location instances have by default the attribute lit and they can be made NOT lit when needed.) For example, suppose you want all dark locations in the game to become lighted simultaneously. It can be done for example like this:
+Note that you won't always need to define a dark location to be a member of the subclass DARK_LOCATION.
+This applies in cases when you don't wish to implement LIGHTSOURCE objects to make locations lit or not lit. (All location instances have by default the attribute lit and they can be made NOT lit when needed.) For example, suppose you want all dark locations in the game to become lighted simultaneously.
+It can be done for example like this:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -281,9 +296,20 @@ END THE.
 If we had used the DARK_LOCATION class above, all locations to be lighted should have had a LIGHTSOURCE object present in them, and all these LIGHTSOURCE objects would have needed to be changed to lit, which would have meant extra programming.
 
 
-Even normal locations, when not lit, will have the description "It is pitch black. You can't see anything at all.", so you can use the above method with no worries. The only reason for a specific DARK_LOCATION subclass to exist is to make it automatic for them to be lit or NOT lit when the hero is carrying around and/or turning on and off LIGHTSOURCES so that the game author won't constantly need to remember to change the attribute of the location to lit or NOT lit in all imaginable cases.
+Even normal locations, when not lit, will have the description "It is pitch black.
+You can't see anything at all.", so you can use the above method with no worries.
+The only reason for a specific DARK_LOCATION subclass to exist is to make it automatic for them to be lit or NOT lit when the hero is carrying around and/or turning on and off LIGHTSOURCES so that the game author won't constantly need to remember to change the attribute of the location to lit or NOT lit in all imaginable cases.
 
-Also consider the following case: suppose the hero can make a basement (a location belonging to the class DARK_LOCATION) lighted by turning on a light switch that is at the top of the stairs leading to the basement (a different location from the basement itself). We program the light switch object so that when the hero turns it on, the basement will be lit. All ok so far. However, when the hero enters the actual basement, it will be dark. Why? Because there is no LIGHTSOURCE present in the basement; we just changed the attribute of the basement location to lit, but this is not enough. A check at entering any DARK_LOCATION will make the location dark if no lit LIGHTSOURCE is present. You should program a lamp, a LIGHTSOURCE object, to be present in the basement, and this lamp should be made lit at the same time when the hero turns on the switch at the top of the stairs. But again, this is more than is necessary to reach the wanted effect. Here, like above, you could just make the basement a normal location and not a DARK_LOCATION (and make sure it is NOT lit to start with), and just change the attribute to lit when the hero turns on the light switch:
+Also consider the following case: suppose the hero can make a basement (a location belonging to the class DARK_LOCATION) lighted by turning on a light switch that is at the top of the stairs leading to the basement (a different location from the basement itself).
+We program the light switch object so that when the hero turns it on, the basement will be lit.
+All ok so far.
+However, when the hero enters the actual basement, it will be dark.
+Why?
+Because there is no LIGHTSOURCE present in the basement; we just changed the attribute of the basement location to lit, but this is not enough.
+A check at entering any DARK_LOCATION will make the location dark if no lit LIGHTSOURCE is present.
+You should program a lamp, a LIGHTSOURCE object, to be present in the basement, and this lamp should be made lit at the same time when the hero turns on the switch at the top of the stairs.
+But again, this is more than is necessary to reach the wanted effect.
+Here, like above, you could just make the basement a normal location and not a DARK_LOCATION (and make sure it is NOT lit to start with), and just change the attribute to lit when the hero turns on the light switch:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -386,7 +412,8 @@ IS described 0.
 --------------------------------------------------------------------------------
 
 Suppose you want the location description to be different after the first time the description is shown, even if you are in the LOCATION still for the first time.
-Then, you can use the `described` attribute. A LOCATION not described at all has the described value 0.
+Then, you can use the `described` attribute.
+A LOCATION not described at all has the described value 0.
 When the player reads the location description for the first time, the value is 1, the next time the value will be 2, etc:
 
 [source,alan]
@@ -532,7 +559,8 @@ Remember, however, that if you implement a takeable OBJECT this way, the OBJECT 
 Also, the ceiling lamp in the above example, if implemented as a LIGHTSOURCE, would be lit/unlit in all of the three locations simultaneously.
 
 
-NOTE: An OBJECT implemented this way won't show automatically in the nested LOCATIONs. You have to add a mention of it in the individual location descriptions manually.
+NOTE: An OBJECT implemented this way won't show automatically in the nested LOCATIONs.
+You have to add a mention of it in the individual location descriptions manually.
 
 If you want a certain object to be present in all indoor or in all outdoor locations of your game, you can define
 
