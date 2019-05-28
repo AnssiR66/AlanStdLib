@@ -36,10 +36,9 @@ Inside this instance, it is possible for example to override default messages pr
 --------------------------------------------------------------------------------
 THE my_game ISA DEFINITION_BLOCK
   VERB examine
-DOES ONLY "Nothing special."  -- your own default message for
-                              -- examining objects, instead of
-  END VERB.                   -- the default provided by the
-                              -- library
+    DOES ONLY "Nothing special."  -- your own default message for examining
+                                  -- objects, instead of the default provided
+  END VERB.                       -- by the library
 END THE.
 --------------------------------------------------------------------------------
 +
@@ -66,7 +65,7 @@ THE drawer ISA LISTED_CONTAINER IN nightstand
 END THE drawer.
 --------------------------------------------------------------------------------
 +
-This will effectively prohibit unwanted successful outcomes for player commands such as >put coffee cup in drawer or >put suitcase in drawer.
+This will effectively prohibit unwanted successful outcomes for player commands such as [.play]#&gt; _put coffee cup in drawer_# or [.play]#&gt; _put suitcase in drawer_#.
 Besides `put_in`, this attribute also applies to the verbs `empty_in`, `pour_in` and `throw_in`.
 
 ** `distant`/`NOT distant`, in addition to the existing `reachable`/`NOT reachable`.
@@ -82,7 +81,7 @@ For example the library-defined ceiling object for indoor rooms is NOT reachable
 By default, they are NOT compliant.
 This attribute is needed when we try to get something from an NPC (a non-player character).
 For example, the verb `take_from` doesn't work with ACTORS by default; the only way to make an ACTOR give you something in their possession by default is to ask for it.
-Also implicit taking doesn't work with ACTORS, i.e. if an NPC is carrying an apple and you type >eat apple, the outcome will be "`That seems to belong to the [NPC].`"; the apple won't be automatically taken by the hero like it would if it was not carried by anyone.
+Also implicit taking doesn't work with ACTORS, i.e. if an NPC is carrying an apple and you type [.play]#&gt; _eat apple_#, the outcome will be [.play]#That seems to belong to the [NPC].#; the apple won't be automatically taken by the hero like it would if it was not carried by anyone.
 
 ** every DOOR now has an `otherside` attribute which can be used if the game author wants to ensure that a DOOR will be correctly opened, closed, locked and unlocked from both sides.
 When the open/closed status of a DOOR instance changes, the status of its otherside counterpart (in the next room) is changed accordingly by the library.
@@ -106,7 +105,7 @@ END THE.
 Above, the `livingroom_door` will also be lockable, locked, have `otherside kitchen_door` and can be opened by the `small_key`, even if none of these attributes were explicitly declared in the livingroom_door code.
 
 ** every lockable DOOR has a `matching_key` attribute (see the above example) which should be declared at the DOOR instance if it's meant to be locked/unlocked.
-If the hero carries the matching key of a locked DOOR, unlocking will be possible through just >unlock door or even >open door and not necessarily using the longer formulation >unlock door with key.
+If the hero carries the matching key of a locked DOOR, unlocking will be possible through just [.play]#&gt; _unlock door_# or even [.play]#&gt; _open door_# and not necessarily using the longer formulation [.play]#&gt; _unlock door with key_#.
 This attribute also eases up the coding required for locked DOORs.
 
 ** the closed and closeable attributes have been changed to open and openable which is more intuitive.

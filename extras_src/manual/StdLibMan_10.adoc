@@ -197,8 +197,8 @@ HAS hero_worn_else "You are not wearing anything."
 
 Change these to alter the way the hero is described as far clothing is concerned.
 If no specific CLOTHING is defined for the hero in the game, these messages won't show at any time.
-By default, these messages show at "`>inventory`".
-If the author wishes to have the CLOTHING objects worn by the hero described after "`>examine`" me, the examine verb for the hero should be defined this way:
+By default, these messages show at [.play]#&gt; _inventory_#.
+If the author wishes to have the CLOTHING objects worn by the hero described after [.play]#&gt; _examine me_#, the examine verb for the hero should be defined this way:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -454,7 +454,7 @@ HAS illegal_parameter_examine_sg "That's not something you can examine.".
 HAS illegal_parameter_examine_pl "Those are not something you can examine.".
 --------------------------------------------------------------------------------
 
-The reason why examine doesn't use the general default message (scroll above) is that when the player types for example "`>x 34`" the response would be "That's not something you can x." which isn't such pretty-looking as when the verb is printed in full.
+The reason why examine doesn't use the general default message (scroll above) is that when the player types for example [.play]#&gt; _x 34_# the response would be [.play]#That's not something you can x.# which isn't such pretty-looking as when the verb is printed in full.
 
 The verbs look_out_of and look_through use prepositions other verbs don't, and that's why they need their own messages:
 
@@ -972,7 +972,7 @@ HAS check_obj_in_act_sg "$+2 doesn't have $+1.".
 HAS check_obj_in_act_pl "$+2 don't have $+1.".
 --------------------------------------------------------------------------------
 
-Similarly, if the player types >give object to actor, and the actor already has that object, the following check message is displayed:
+Similarly, if the player types [.play]#&gt; _give object to actor_#, and the actor already has that object, the following check message is displayed:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1173,7 +1173,7 @@ The checks in this group a) prohibit the action from being directed at the hero,
 
 1. prohibiting the action from being directed at the hero:
 +
-The following check is triggered when the player tries something like >attack me (ask, ask_for, attack, attack_with, catch, follow, kick, listen, pull, push, push_with, take, take_from, tell):
+The following check is triggered when the player tries something like [.play]#&gt; _attack me_# (ask, ask_for, attack, attack_with, catch, follow, kick, listen, pull, push, push_with, take, take_from, tell):
 +
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1196,14 +1196,14 @@ This applies to the verbs scratch and touch:
 HAS check_obj_not_hero3 "That wouldn't accomplish anything.".
 --------------------------------------------------------------------------------
 +
-The verbs find and go_to have the following check triggered when the player types >find me or >go to me:
+The verbs find and go_to have the following check triggered when the player types [.play]#&gt; _find me_# or [.play]#&gt; _go to me_#:
 +
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj_not_hero4 "You're right here.".
 --------------------------------------------------------------------------------
 +
-If the player tries >free me, the following check message is displayed (free):
+If the player tries [.play]#&gt; _free me_#, the following check message is displayed (free):
 +
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1263,7 +1263,7 @@ HAS check_obj2_not_hero3 "You can't $v things to yourself.".
 //         numbers are removed!
 === 2. prohibiting the action in ditransitive verbs where both the first and the second parameter refer to the same instance:
 
-The following checks prohibit actions like >cut rope with rope, >throw stone at stone and >put bottle in bottle:
+The following checks prohibit actions like [.play]#&gt; _cut rope with rope_#, [.play]#&gt; _throw stone at stone_# and [.play]#&gt; _put bottle in bottle_#:
 
 fire_at, throw_at:
 
@@ -1409,7 +1409,7 @@ HAS check_lightsource_switchable_pl "Those are not something you can switch on
 and off.".
 --------------------------------------------------------------------------------
 
-When there is some LIQUID in a container, for example some juice in a bottle, and the player types >take juice from bottle, the following check is triggered (liquid: take_from):
+When there is some LIQUID in a container, for example some juice in a bottle, and the player types [.play]#&gt; _take juice from bottle_#, the following check is triggered (liquid: take_from):
 
 [source,alan]
 --------------------------------------------------------------------------------

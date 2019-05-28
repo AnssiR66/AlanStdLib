@@ -19,6 +19,10 @@
 :linkattrs: true
 :reproducible: true
 :sectanchors:
+// TEMP:
+:docinfodir: ../adoc
+:docinfo: shared-head
+
 
 // =============================================================================
 //                              CUSTOM ATTRIBUTES

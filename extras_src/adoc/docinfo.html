@@ -18,15 +18,30 @@ div.literalblock.shell pre .conum {
   color: #0C0C0C !important;
 }
 
-/* Game Transcripts */
+/* Game Transcripts & Player input and output */
+span.play {
+  display: inline-block;
+  font-size: 0.9375em;
+  font-style: normal !important;
+  padding: 0.1em 0.5ex;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  line-height: 1.45;
+  text-rendering: optimizeSpeed;
+  word-wrap: break-word;
+}
+
+span.play,
 .exampleblock.gametranscript > .content {
   background: #F7FDFF;
   color: #0089B6;
   border-color: #CCF2FF;
 }
+span.play span.comment,
 .exampleblock.gametranscript > .content span.comment {
   color: #bcbcbc;
 }
+span.play em,
 .exampleblock.gametranscript > .content em {
   color: #d90000;
 }

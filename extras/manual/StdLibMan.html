@@ -455,15 +455,30 @@ div.literalblock.shell pre .conum {
   color: #0C0C0C !important;
 }
 
-/* Game Transcripts */
+/* Game Transcripts & Player input and output */
+span.play {
+  display: inline-block;
+  font-size: 0.9375em;
+  font-style: normal !important;
+  padding: 0.1em 0.5ex;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  line-height: 1.45;
+  text-rendering: optimizeSpeed;
+  word-wrap: break-word;
+}
+
+span.play,
 .exampleblock.gametranscript > .content {
   background: #F7FDFF;
   color: #0089B6;
   border-color: #CCF2FF;
 }
+span.play span.comment,
 .exampleblock.gametranscript > .content span.comment {
   color: #bcbcbc;
 }
+span.play em,
 .exampleblock.gametranscript > .content em {
   color: #d90000;
 }
@@ -1142,7 +1157,7 @@ Inside this instance, it is possible for example to override default messages pr
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">VERB</span> examine&#x000A;<span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;Nothing special.&quot;</span>  <span class="hl slc">-- your own default message for</span>&#x000A;                              <span class="hl slc">-- examining objects, instead of</span>&#x000A;  <span class="hl kwa">END VERB.</span>                   <span class="hl slc">-- the default provided by the</span>&#x000A;                              <span class="hl slc">-- library</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">VERB</span> examine&#x000A;    <span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;Nothing special.&quot;</span>  <span class="hl slc">-- your own default message for examining</span>&#x000A;                                  <span class="hl slc">-- objects, instead of the default provided</span>&#x000A;  <span class="hl kwa">END VERB.</span>                       <span class="hl slc">-- by the library</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1171,7 +1186,7 @@ For example, you don&#8217;t have edit the same check for every verb separately 
 </div>
 </div>
 <div class="paragraph">
-<p>This will effectively prohibit unwanted successful outcomes for player commands such as &gt;put coffee cup in drawer or &gt;put suitcase in drawer.
+<p>This will effectively prohibit unwanted successful outcomes for player commands such as <span class="play">&gt; <em>put coffee cup in drawer</em></span> or <span class="play">&gt; <em>put suitcase in drawer</em></span>.
 Besides <code>put_in</code>, this attribute also applies to the verbs <code>empty_in</code>, <code>pour_in</code> and <code>throw_in</code>.</p>
 </div>
 </li>
@@ -1189,7 +1204,7 @@ For example the library-defined ceiling object for indoor rooms is NOT reachable
 By default, they are NOT compliant.
 This attribute is needed when we try to get something from an NPC (a non-player character).
 For example, the verb <code>take_from</code> doesn&#8217;t work with ACTORS by default; the only way to make an ACTOR give you something in their possession by default is to ask for it.
-Also implicit taking doesn&#8217;t work with ACTORS, i.e. if an NPC is carrying an apple and you type &gt;eat apple, the outcome will be &#8220;That seems to belong to the [NPC].&#8221;; the apple won&#8217;t be automatically taken by the hero like it would if it was not carried by anyone.</p>
+Also implicit taking doesn&#8217;t work with ACTORS, i.e. if an NPC is carrying an apple and you type <span class="play">&gt; <em>eat apple</em></span>, the outcome will be <span class="play">That seems to belong to the [NPC].</span>; the apple won&#8217;t be automatically taken by the hero like it would if it was not carried by anyone.</p>
 </li>
 <li>
 <p>every DOOR now has an <code>otherside</code> attribute which can be used if the game author wants to ensure that a DOOR will be correctly opened, closed, locked and unlocked from both sides.
@@ -1206,7 +1221,7 @@ When the open/closed status of a DOOR instance changes, the status of its others
 </li>
 <li>
 <p>every lockable DOOR has a <code>matching_key</code> attribute (see the above example) which should be declared at the DOOR instance if it&#8217;s meant to be locked/unlocked.
-If the hero carries the matching key of a locked DOOR, unlocking will be possible through just &gt;unlock door or even &gt;open door and not necessarily using the longer formulation &gt;unlock door with key.
+If the hero carries the matching key of a locked DOOR, unlocking will be possible through just <span class="play">&gt; <em>unlock door</em></span> or even <span class="play">&gt; <em>open door</em></span> and not necessarily using the longer formulation <span class="play">&gt; <em>unlock door with key</em></span>.
 This attribute also eases up the coding required for locked DOORs.</p>
 </li>
 <li>
@@ -1690,7 +1705,7 @@ You can do it like this:</p>
 <div class="paragraph">
 <p>In the first example, the response to the jump verb has been changed to fit the low basement better.
 Notice in the second example that the verb
-<code>take</code> doesn&#8217;t apply to the location exhibition_hall even if it is listed within it ( = <code>&gt;take hall</code> won&#8217;t be a successful action), but sooner to the objects found in that location.
+<code>take</code> doesn&#8217;t apply to the location <code>exhibition_hall</code> even if it is listed within it ( = <span class="play">&gt; <em>take hall</em></span> won&#8217;t be a successful action), but sooner to the objects found in that location.
 Thus, if there was an exquisite vase in the exhibition hall and the hero tried to take it, the above message would be shown.
 Verbs cannot refer to locations, they usually apply to things or numerals.
 Thus, the above coding will result in:</p>
@@ -1825,7 +1840,7 @@ Going back to the house example on p. 20, you could define</p>
 </div>
 </div>
 <div class="paragraph">
-<p>and this message would display for <code>&gt;jump</code> if the hero tried that action in the bedroom, in the kitchen or in the living-room.</p>
+<p>and this message would display for <span class="play">&gt; <em>jump</em></span> if the hero tried that action in the bedroom, in the kitchen or in the living-room.</p>
 </div>
 <div class="paragraph">
 <p>You can also check if the hero is in a certain area, or group of locations:</p>
@@ -2108,7 +2123,7 @@ To make any ACTOR follow the hero, give that actor the following attribute, for 
 </div>
 <div class="paragraph">
 <p>These two attributes exist to allow the author to make the hero, or another ACTOR, sitting or lying down.
-The outcomes for the commands &gt;sit and &gt;lie down are not successful by default, however, and must be manually implemented by the author:</p>
+The outcomes for the commands <span class="play">&gt; <em>sit</em></span> and <span class="play">&gt; <em>lie down</em></span> are not successful by default, however, and must be manually implemented by the author:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2116,7 +2131,7 @@ The outcomes for the commands &gt;sit and &gt;lie down are not successful by def
 </div>
 </div>
 <div class="paragraph">
-<p>Similarly, it is possible for the hero to sit or lie down on a SUPPORTER object (&gt;lie on bed, &gt;sit on chair), but the action is not successful by default and must be manually implemented by the author.
+<p>Similarly, it is possible for the hero to sit or lie down on a SUPPORTER object (<span class="play">&gt; <em>lie on bed</em></span>, <span class="play">&gt; <em>sit on chair</em></span>), but the action is not successful by default and must be manually implemented by the author.
 Refer to: Objects &#8658; Supporters.</p>
 </div>
 </div>
@@ -2371,7 +2386,7 @@ You eat all of the apple.</p>
 <h3 id="_the_hero"><a class="anchor" href="#_the_hero"></a>5.3. The hero</h3>
 <div class="paragraph">
 <p>The hero instance is left out of the library altogether and can be defined from scratch by the game author.
-You won&#8217;t need to define the hero in your game at all if you&#8217;re happy with the response "You notice nothing unusual about yourself." when the player types &gt;x me (= examine myself) and if no attributes are needed for the hero (such as IS (NOT) hungry, HAS strength 20, etc.).
+You won&#8217;t need to define the hero in your game at all if you&#8217;re happy with the response "You notice nothing unusual about yourself." when the player types <span class="play">&gt; <em>x me</em></span> (= examine myself) and if no attributes are needed for the hero (such as IS (NOT) hungry, HAS strength 20, etc.).
 There are also numerous other verb outcomes (than for examine) for the hero defined by default in the library:</p>
 </div>
 <div class="exampleblock gametranscript">
@@ -2392,7 +2407,7 @@ However, if you need to define attributes or verb responses for the hero, or if 
 </div>
 </div>
 <div class="paragraph">
-<p>The command &gt;x me would then produce</p>
+<p>The command <span class="play">&gt; <em>x me</em></span> would then produce</p>
 </div>
 <div class="exampleblock gametranscript">
 <div class="content">
@@ -2403,7 +2418,7 @@ You&#8217;re John Smith, proud of your unusual name.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>By default, any clothing worn by the hero will be described when the player types <code>&gt;inventory</code> (or <code>&gt;i</code>):</p>
+<p>By default, any clothing worn by the hero will be described when the player types <span class="play">&gt; <em>inventory</em></span> (or <span class="play">&gt; <em>i</em></span>):</p>
 </div>
 <div class="exampleblock gametranscript">
 <div class="content">
@@ -2415,7 +2430,7 @@ You&#8217;re wearing an old jacket.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If you wish to have the pieces of clothing worn by the hero listed at other verbs, like for example <code>&gt; x me</code>, you should use the formulation LIST worn.:</p>
+<p>If you wish to have the pieces of clothing worn by the hero listed at other verbs, like for example <span class="play">&gt; _ x me_</span>, you should use the formulation LIST worn.:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2792,8 +2807,8 @@ Should you wish to create an article of CLOTHING not listed, usually a bit of la
 <p>The library, as it stands, also prevents wearing of duplicate clothes, or things that are logically mutually exclusive&#8201;&#8212;&#8201;for example the player can wear a dress or a skirt, but not both.</p>
 </div>
 <div class="paragraph">
-<p>The hero&#8217;s CLOTHING is described when the player types &gt;inventory in-game.
-If you want the listing of the hero&#8217;s clothing to appear also when the player types &gt;x me, add "LIST worn." to the response of the examine verb of the hero:</p>
+<p>The hero&#8217;s CLOTHING is described when the player types <span class="play">&gt; <em>inventory</em></span> in-game.
+If you want the listing of the hero&#8217;s clothing to appear also when the player types <span class="play">&gt; <em>x me</em></span>, add "LIST worn." to the response of the examine verb of the hero:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2951,11 +2966,11 @@ Only this object can unlock the DOOR.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>By default, it will possible to unlock the DOOR both with &#8220;&gt;unlock door&#8221; and &#8220;&gt;open door&#8221; (if the player character is carrying the correct key at the time) as well as with the longer formulations &#8220;&gt;unlock door with key&#8221; and &#8220;&gt;open door with key&#8221;.</p>
+<p>By default, it will possible to unlock the DOOR both with <span class="play">&gt; <em>unlock door</em></span> and <span class="play">&gt; <em>open door</em></span> (if the player character is carrying the correct key at the time) as well as with the longer formulations <span class="play">&gt; <em>unlock door with key</em></span> and <span class="play">&gt; <em>open door with key</em></span>.</p>
 </div>
 <div class="paragraph">
 <p>However, it is not possible to make this automatic by using compass directions only.
-For example, if the DOOR was to the east of the hero, the command &#8220;&gt;e&#8221; cannot recognize on the library level whether the hero is carrying the key or not.
+For example, if the DOOR was to the east of the hero, the command <span class="play">&gt; <em>e</em></span> cannot recognize on the library level whether the hero is carrying the key or not.
 The author must implement this manually, for example:</p>
 </div>
 <div class="listingblock">
@@ -3005,9 +3020,9 @@ A LIQUID is by default <code>NOT drinkable</code>.</p>
 <p>Then, taking and pouring LIQUIDs work smoothly.</p>
 </div>
 <div class="paragraph">
-<p>The verb <code>pour</code>, as defined in this library, also works for the container of a LIQUID; i.e. if there is some juice in a bottle, &#8220;&gt;pour bottle&#8221; and &#8220;&gt;pour juice&#8221; will work equally well.
+<p>The verb <code>pour</code>, as defined in this library, also works for the container of a LIQUID; i.e. if there is some juice in a bottle, <span class="play">&gt; <em>pour bottle</em></span> and <span class="play">&gt; <em>pour juice</em></span> will work equally well.
 Note, however, that the verb <code>empty</code> is not a synonym for <code>pour</code>; <code>empty</code> only works for container objects.
-Consequently, &#8220;&gt;empty bottle&#8221; will work but &#8220;&gt;empty juice&#8221; won&#8217;t.</p>
+Consequently, <span class="play">&gt; <em>empty bottle</em></span> will work but <span class="play">&gt; <em>empty juice</em></span> won&#8217;t.</p>
 </div>
 </div>
 <div class="sect3">
@@ -3098,8 +3113,8 @@ It is currently off.</p>
 <h4 id="_listed_container"><a class="anchor" href="#_listed_container"></a>6.1.6. LISTED_CONTAINER</h4>
 <div class="paragraph">
 <p>LISTED_CONTAINER is an object which has the container property.
-The contents of a LISTED_CONTAINER will be listed both after &#8220;&gt;look&#8221; (= in the room description), &#8220;&gt;look in&#8221; and &#8220;&gt;examine&#8221;, if it is open.
-(The contents of a normal container object, as working by default in Alan 3, are not automatically listed after &#8220;&gt;examine&#8221; but only after &#8220;&gt;look&#8221; (=room description) and &#8220;&gt;look in&#8221;).</p>
+The contents of a LISTED_CONTAINER will be listed both after <span class="play">&gt; <em>look</em></span> (= in the room description), <span class="play">&gt; <em>look in</em></span> and <span class="play">&gt; <em>examine</em></span>, if it is open.
+(The contents of a normal container object, as working by default in Alan 3, are not automatically listed after <span class="play">&gt; <em>examine</em></span> but only after <span class="play">&gt; <em>look</em></span> (=room description) and <span class="play">&gt; <em>look in</em></span>).</p>
 </div>
 <div class="paragraph">
 <p>To implement a LISTED_CONTAINER do for example like this:</p>
@@ -3112,7 +3127,7 @@ The contents of a LISTED_CONTAINER will be listed both after &#8220;&gt;look&#82
 <div class="paragraph">
 <p>The contents of a LISTED_CONTAINER are also listed when it is opened.
 This doesn&#8217;t happen with normal containers (= OBJECTs that you give the container property).
-For the command &#8220;&gt;inventory&#8221; to list the contents of a LISTED_CONTAINER object the hero is carrying, redefine the verb <code>inventory</code> under the <code>my_game</code> instance in your source file for example this way:</p>
+For the command <span class="play">&gt; <em>inventory</em></span> to list the contents of a LISTED_CONTAINER object the hero is carrying, redefine the verb <code>inventory</code> under the <code>my_game</code> instance in your source file for example this way:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3120,7 +3135,7 @@ For the command &#8220;&gt;inventory&#8221; to list the contents of a LISTED_CON
 </div>
 </div>
 <div class="paragraph">
-<p>If you don&#8217;t do this, the bag and the box will be listed after the command &#8220;&gt;inventory&#8221; in the following way:</p>
+<p>If you don&#8217;t do this, the bag and the box will be listed after the command <span class="play">&gt; <em>inventory</em></span> in the following way:</p>
 </div>
 <div class="exampleblock gametranscript">
 <div class="content">
@@ -3143,7 +3158,7 @@ The box is empty.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>To declare a LISTED_CONTAINER the contents of which should not be listed after &#8220;&gt;look&#8221; or &#8220;&gt;examine&#8221;, declare it an <code>opaque container</code> in the following way:</p>
+<p>To declare a LISTED_CONTAINER the contents of which should not be listed after <span class="play">&gt; <em>look</em></span> or <span class="play">&gt; <em>examine</em></span>, declare it an <code>opaque container</code> in the following way:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3229,7 +3244,7 @@ It cannot initially be turned on or off, this has to be implemented manually by 
 </div>
 <div class="paragraph">
 <p>A SUPPORTER is declared to be a container, so that you can take things from it, as well.
-When there&#8217;s something on a SUPPORTER, a listing of it will appear in the room description and after &#8220;&gt;examine&#8221;, by default:</p>
+When there&#8217;s something on a SUPPORTER, a listing of it will appear in the room description and after <span class="play">&gt; <em>examine</em></span>, by default:</p>
 </div>
 <div class="exampleblock gametranscript">
 <div class="content">
@@ -3283,7 +3298,7 @@ Similarly, to implement a book on a table:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Note that the &#8220;&gt;examine&#8221; command will list what is on the surface of a SUPPORTER, not what, if anything, is inside the SUPPORTER.
+<p>Note that the <span class="play">&gt; <em>examine</em></span> command will list what is on the surface of a SUPPORTER, not what, if anything, is inside the SUPPORTER.
 For example, if you have a SUPPORTER called <code>table</code> in your game with two drawers in it, DON&#8217;T do this:</p>
 </div>
 <div class="listingblock">
@@ -3632,7 +3647,7 @@ For example, if you implement</p>
 </div>
 </div>
 <div class="paragraph">
-<p>the library enables you to &#8220;&gt;examine ball&#8221;, &#8220;&gt;take ball&#8221;, &#8220;&gt;throw ball&#8221;, &#8220;&gt;kick ball&#8221;, etc.
+<p>the library enables you to <span class="play">&gt; <em>examine ball</em></span>, <span class="play">&gt; <em>take ball</em></span>, <span class="play">&gt; <em>throw ball</em></span>, <span class="play">&gt; <em>kick ball</em></span>, etc.
 (with more or less successful default outcomes, depending on the verb) without your having to code anything specific to make this possible.</p>
 </div>
 <div class="sect2">
@@ -4519,7 +4534,7 @@ The syntaxes of these verbs are defined in the library file <code>lib_verbs.i</c
 </div>
 <div class="paragraph">
 <p>Note that the <code>exit</code> and enter <code>verbs</code> won&#8217;t have successful outcomes by default; after all, it is impossible to place an ACTOR (like the hero) inside a container, at least in the current version of ALAN.
-To make for example the command &#8220;&gt;enter car&#8221; work, you should make the car a separate LOCATION and then locate the hero there at the DOES ONLY part of the enter verb in the car instance.
+To make for example the command <span class="play">&gt; <em>enter car</em></span> work, you should make the car a separate LOCATION and then locate the hero there at the DOES ONLY part of the enter verb in the car instance.
 In other words, simulate entering and exiting by locating the hero in between locations:</p>
 </div>
 <div class="listingblock">
@@ -4532,9 +4547,9 @@ In other words, simulate entering and exiting by locating the hero in between lo
 <h3 id="_the_philosophy_used_in_deciding_successful_and_unsuccessful_outcomes_for_action_in_the_library_verbs"><a class="anchor" href="#_the_philosophy_used_in_deciding_successful_and_unsuccessful_outcomes_for_action_in_the_library_verbs"></a>8.2. The philosophy used in deciding successful and unsuccessful outcomes for action in the library verbs</h3>
 <div class="paragraph">
 <p>If you try the various actions in-game, with the library imported, you will notice that some actions are successful and result in what the player commanded, while other actions do nothing (= the action is unsuccessful).
-For example the response to &gt; drop [object] will be "Dropped.", the carried object being rejected from the hero&#8217;s inventory and ending up in the location, while the response to &gt;attack [thing] is "Resorting to brute force is not the solution here.".
+For example the response to <span class="play">&gt; <em>drop [object]</em></span> will be <span class="play">Dropped.</span>, the carried object being rejected from the hero&#8217;s inventory and ending up in the location, while the response to <span class="play">&gt; <em>attack [thing]</em></span> is <span class="play">Resorting to brute force is not the solution here.</span>.
 Which actions are allowed to succeed and which are not is based on what is the most reasonable and expected outcome for the action - the outcome that the game author most unlikely needs to edit except for special circumstances.
-Please experiment with different verbs in-game to see whether the default outcome of a particular action is suitable for your game - otherwise redefine the outcome of the verb in the my_game instance.
+Please experiment with different verbs in-game to see whether the default outcome of a particular action is suitable for your game&#8201;&#8212;&#8201;otherwise redefine the outcome of the verb in the my_game instance.
 How this is done is described in more detail further below.</p>
 </div>
 </div>
@@ -4592,7 +4607,7 @@ The easiest way to allow this is just to add an additional syntax for 'talk_to' 
 </div>
 <div class="paragraph">
 <p>This syntax declaration should be outside the <code>my_game</code> instance, in your own game file.
-This syntax declaration won&#8217;t cancel the original syntax for 'talk_to' defined in the library; it would still be possible for the player to type &gt;talk to man, as well.</p>
+This syntax declaration won&#8217;t cancel the original syntax for 'talk_to' defined in the library; it would still be possible for the player to type <span class="play">&gt; <em>talk to man</em></span>, as well.</p>
 </div>
 <div class="paragraph">
 <p>If you wish to cancel the original syntax altogether, do like this in your own game file:</p>
@@ -4830,7 +4845,7 @@ Sensory verbs and "passive" action verbs like look, examine, smell, listen, thin
 </div>
 </div>
 <div class="paragraph">
-<p>Then, you can for example examine, look, listen, wait etc. but also &gt;rub the strings together to make them loosen and open.</p>
+<p>Then, you can for example examine, look, listen, wait etc. but also <span class="play">&gt; <em>rub the strings together</em></span> to make them loosen and open.</p>
 </div>
 <div class="paragraph">
 <p>If you wish to enable communication verbs while you&#8217;re tied up, you&#8217;ll have to enable them individually with the "CAN [verb]" method.</p>
@@ -5173,8 +5188,8 @@ Version 1</p>
 <div class="paragraph">
 <p>Change these to alter the way the hero is described as far clothing is concerned.
 If no specific CLOTHING is defined for the hero in the game, these messages won&#8217;t show at any time.
-By default, these messages show at &#8220;&gt;inventory&#8221;.
-If the author wishes to have the CLOTHING objects worn by the hero described after &#8220;&gt;examine&#8221; me, the examine verb for the hero should be defined this way:</p>
+By default, these messages show at <span class="play">&gt; <em>inventory</em></span>.
+If the author wishes to have the CLOTHING objects worn by the hero described after <span class="play">&gt; <em>examine me</em></span>, the examine verb for the hero should be defined this way:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5455,7 +5470,7 @@ The verbs kill_with, shoot_with and play_with use the following formulation:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The reason why examine doesn&#8217;t use the general default message (scroll above) is that when the player types for example &#8220;&gt;x 34&#8221; the response would be "That&#8217;s not something you can x." which isn&#8217;t such pretty-looking as when the verb is printed in full.</p>
+<p>The reason why examine doesn&#8217;t use the general default message (scroll above) is that when the player types for example <span class="play">&gt; <em>x 34</em></span> the response would be <span class="play">That&#8217;s not something you can x.</span> which isn&#8217;t such pretty-looking as when the verb is printed in full.</p>
 </div>
 <div class="paragraph">
 <p>The verbs look_out_of and look_through use prepositions other verbs don&#8217;t, and that&#8217;s why they need their own messages:</p>
@@ -5931,7 +5946,7 @@ The following check will verify this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Similarly, if the player types &gt;give object to actor, and the actor already has that object, the following check message is displayed:</p>
+<p>Similarly, if the player types <span class="play">&gt; <em>give object to actor</em></span>, and the actor already has that object, the following check message is displayed:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6140,7 +6155,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 <li>
 <p>prohibiting the action from being directed at the hero:</p>
 <div class="paragraph">
-<p>The following check is triggered when the player tries something like &gt;attack me (ask, ask_for, attack, attack_with, catch, follow, kick, listen, pull, push, push_with, take, take_from, tell):</p>
+<p>The following check is triggered when the player tries something like <span class="play">&gt; <em>attack me</em></span> (ask, ask_for, attack, attack_with, catch, follow, kick, listen, pull, push, push_with, take, take_from, tell):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6167,7 +6182,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The verbs find and go_to have the following check triggered when the player types &gt;find me or &gt;go to me:</p>
+<p>The verbs find and go_to have the following check triggered when the player types <span class="play">&gt; <em>find me</em></span> or <span class="play">&gt; <em>go to me</em></span>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6175,7 +6190,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If the player tries &gt;free me, the following check message is displayed (free):</p>
+<p>If the player tries <span class="play">&gt; <em>free me</em></span>, the following check message is displayed (free):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6240,7 +6255,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 <div class="sect2">
 <h3 id="_2_prohibiting_the_action_in_ditransitive_verbs_where_both_the_first_and_the_second_parameter_refer_to_the_same_instance"><a class="anchor" href="#_2_prohibiting_the_action_in_ditransitive_verbs_where_both_the_first_and_the_second_parameter_refer_to_the_same_instance"></a>10.14. 2. prohibiting the action in ditransitive verbs where both the first and the second parameter refer to the same instance:</h3>
 <div class="paragraph">
-<p>The following checks prohibit actions like &gt;cut rope with rope, &gt;throw stone at stone and &gt;put bottle in bottle:</p>
+<p>The following checks prohibit actions like <span class="play">&gt; <em>cut rope with rope</em></span>, <span class="play">&gt; <em>throw stone at stone</em></span> and <span class="play">&gt; <em>put bottle in bottle</em></span>:</p>
 </div>
 <div class="paragraph">
 <p>fire_at, throw_at:</p>
@@ -6380,7 +6395,7 @@ switch_on)</p>
 </div>
 </div>
 <div class="paragraph">
-<p>When there is some LIQUID in a container, for example some juice in a bottle, and the player types &gt;take juice from bottle, the following check is triggered (liquid: take_from):</p>
+<p>When there is some LIQUID in a container, for example some juice in a bottle, and the player types <span class="play">&gt; <em>take juice from bottle</em></span>, the following check is triggered (liquid: take_from):</p>
 </div>
 <div class="listingblock">
 <div class="content">

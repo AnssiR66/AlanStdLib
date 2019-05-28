@@ -478,7 +478,7 @@ END THE.
 
 In the first example, the response to the jump verb has been changed to fit the low basement better.
 Notice in the second example that the verb
-`take` doesn't apply to the location exhibition_hall even if it is listed within it ( = `>take hall` won't be a successful action), but sooner to the objects found in that location.
+`take` doesn't apply to the location `exhibition_hall` even if it is listed within it ( = [.play]#&gt; _take hall_# won't be a successful action), but sooner to the objects found in that location.
 Thus, if there was an exquisite vase in the exhibition hall and the hero tried to take it, the above message would be shown.
 Verbs cannot refer to locations, they usually apply to things or numerals.
 Thus, the above coding will result in:
@@ -643,7 +643,7 @@ THE house ISA LOCATION
 END THE.
 --------------------------------------------------------------------------------
 
-and this message would display for `>jump` if the hero tried that action in the bedroom, in the kitchen or in the living-room.
+and this message would display for [.play]#&gt; _jump_# if the hero tried that action in the bedroom, in the kitchen or in the living-room.
 
 You can also check if the hero is in a certain area, or group of locations:
 

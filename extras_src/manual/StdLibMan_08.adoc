@@ -21,7 +21,7 @@ THE ball ISA OBJECT AT garden
 END THE ball.
 --------------------------------------------------------------------------------
 
-the library enables you to "`>examine ball`", "`>take ball`", "`>throw ball`", "`>kick ball`", etc.
+the library enables you to [.play]#&gt; _examine ball_#, [.play]#&gt; _take ball_#, [.play]#&gt; _throw ball_#, [.play]#&gt; _kick ball_#, etc.
 (with more or less successful default outcomes, depending on the verb) without your having to code anything specific to make this possible.
 
 === Verb syntaxes used in the standard library
@@ -51,7 +51,7 @@ To see the outcomes for these verbs and commands, check either the file `lib_ver
 The syntaxes of these verbs are defined in the library file `lib_verbs.i`.
 
 Note that the `exit` and enter `verbs` won't have successful outcomes by default; after all, it is impossible to place an ACTOR (like the hero) inside a container, at least in the current version of ALAN.
-To make for example the command "`>enter car`" work, you should make the car a separate LOCATION and then locate the hero there at the DOES ONLY part of the enter verb in the car instance.
+To make for example the command [.play]#&gt; _enter car_# work, you should make the car a separate LOCATION and then locate the hero there at the DOES ONLY part of the enter verb in the car instance.
 In other words, simulate entering and exiting by locating the hero in between locations:
 
 [source,alan]
@@ -79,9 +79,9 @@ END THE car.
 === The philosophy used in deciding successful and unsuccessful outcomes for action in the library verbs
 
 If you try the various actions in-game, with the library imported, you will notice that some actions are successful and result in what the player commanded, while other actions do nothing (= the action is unsuccessful).
-For example the response to > drop [object] will be "Dropped.", the carried object being rejected from the hero's inventory and ending up in the location, while the response to >attack [thing] is "Resorting to brute force is not the solution here.".
+For example the response to [.play]#&gt; _drop [object]_# will be [.play]#Dropped.#, the carried object being rejected from the hero's inventory and ending up in the location, while the response to [.play]#&gt; _attack [thing]_# is [.play]#Resorting to brute force is not the solution here.#.
 Which actions are allowed to succeed and which are not is based on what is the most reasonable and expected outcome for the action - the outcome that the game author most unlikely needs to edit except for special circumstances.
-Please experiment with different verbs in-game to see whether the default outcome of a particular action is suitable for your game - otherwise redefine the outcome of the verb in the my_game instance.
+Please experiment with different verbs in-game to see whether the default outcome of a particular action is suitable for your game -- otherwise redefine the outcome of the verb in the my_game instance.
 How this is done is described in more detail further below.
 
 // PAGE 65 //
@@ -133,7 +133,7 @@ SYNTAX  talk_to = talk (act).
 --------------------------------------------------------------------------------
 
 This syntax declaration should be outside the `my_game` instance, in your own game file.
-This syntax declaration won't cancel the original syntax for 'talk_to' defined in the library; it would still be possible for the player to type >talk to man, as well.
+This syntax declaration won't cancel the original syntax for 'talk_to' defined in the library; it would still be possible for the player to type [.play]#&gt; _talk to man_#, as well.
 
 If you wish to cancel the original syntax altogether, do like this in your own game file:
 
@@ -524,7 +524,7 @@ MAKE my_game rub.
 END EVENT.
 --------------------------------------------------------------------------------
 +
-Then, you can for example examine, look, listen, wait etc. but also >rub the strings together to make them loosen and open.
+Then, you can for example examine, look, listen, wait etc. but also [.play]#&gt; _rub the strings together_# to make them loosen and open.
 +
 If you wish to enable communication verbs while you're tied up, you'll have to enable them individually with the "CAN [verb]" method.
 

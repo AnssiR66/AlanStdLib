@@ -163,8 +163,8 @@ Should you wish to create an article of CLOTHING not listed, usually a bit of la
 
 The library, as it stands, also prevents wearing of duplicate clothes, or things that are logically mutually exclusive -- for example the player can wear a dress or a skirt, but not both.
 
-The hero's CLOTHING is described when the player types >inventory in-game.
-If you want the listing of the hero's clothing to appear also when the player types >x me, add "LIST worn." to the response of the examine verb of the hero:
+The hero's CLOTHING is described when the player types [.play]#&gt; _inventory_# in-game.
+If you want the listing of the hero's clothing to appear also when the player types [.play]#&gt; _x me_#, add "LIST worn." to the response of the examine verb of the hero:
 
 // @TODO: Highlight "LIST Worn":
 [source,alan]
@@ -435,10 +435,10 @@ END THE iron_key.
 --------------------------------------------------------------------------------
 
 
-By default, it will possible to unlock the DOOR both with "`>unlock door`" and "`>open door`" (if the player character is carrying the correct key at the time) as well as with the longer formulations "`>unlock door with key`" and "`>open door with key`".
+By default, it will possible to unlock the DOOR both with [.play]#&gt; _unlock door_# and [.play]#&gt; _open door_# (if the player character is carrying the correct key at the time) as well as with the longer formulations [.play]#&gt; _unlock door with key_# and [.play]#&gt; _open door with key_#.
 
 However, it is not possible to make this automatic by using compass directions only.
-For example, if the DOOR was to the east of the hero, the command "`>e`" cannot recognize on the library level whether the hero is carrying the key or not.
+For example, if the DOOR was to the east of the hero, the command [.play]#&gt; _e_# cannot recognize on the library level whether the hero is carrying the key or not.
 The author must implement this manually, for example:
 
 
@@ -505,9 +505,9 @@ END THE juice.
 
 Then, taking and pouring LIQUIDs work smoothly.
 
-The verb `pour`, as defined in this library, also works for the container of a LIQUID; i.e. if there is some juice in a bottle, "`>pour bottle`" and "`>pour juice`" will work equally well.
+The verb `pour`, as defined in this library, also works for the container of a LIQUID; i.e. if there is some juice in a bottle, [.play]#&gt; _pour bottle_# and [.play]#&gt; _pour juice_# will work equally well.
 Note, however, that the verb `empty` is not a synonym for `pour`; `empty` only works for container objects.
-Consequently, "`>empty bottle`" will work but "`>empty juice`" won't.
+Consequently, [.play]#&gt; _empty bottle_# will work but [.play]#&gt; _empty juice_# won't.
 
 
 ==== LIGHTSOURCE
@@ -611,8 +611,8 @@ END THE torch.
 ==== LISTED_CONTAINER
 
 LISTED_CONTAINER is an object which has the container property.
-The contents of a LISTED_CONTAINER will be listed both after "`>look`" (= in the room description), "`>look in`" and "`>examine`", if it is open.
-(The contents of a normal container object, as working by default in Alan 3, are not automatically listed after "`>examine`" but only after "`>look`" (=room description) and "`>look in`").
+The contents of a LISTED_CONTAINER will be listed both after [.play]#&gt; _look_# (= in the room description), [.play]#&gt; _look in_# and [.play]#&gt; _examine_#, if it is open.
+(The contents of a normal container object, as working by default in Alan 3, are not automatically listed after [.play]#&gt; _examine_# but only after [.play]#&gt; _look_# (=room description) and [.play]#&gt; _look in_#).
 
 To implement a LISTED_CONTAINER do for example like this:
 
@@ -624,7 +624,7 @@ END THE box.
 
 The contents of a LISTED_CONTAINER are also listed when it is opened.
 This doesn't happen with normal containers (= OBJECTs that you give the container property).
-For the command "`>inventory`" to list the contents of a LISTED_CONTAINER object the hero is carrying, redefine the verb `inventory` under the `my_game` instance in your source file for example this way:
+For the command [.play]#&gt; _inventory_# to list the contents of a LISTED_CONTAINER object the hero is carrying, redefine the verb `inventory` under the `my_game` instance in your source file for example this way:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -642,7 +642,7 @@ END VERB.
 
 
 
-If you don't do this, the bag and the box will be listed after the command "`>inventory`" in the following way:
+If you don't do this, the bag and the box will be listed after the command [.play]#&gt; _inventory_# in the following way:
 
 [example,role="gametranscript"]
 ================================================================================
@@ -660,7 +660,7 @@ The bag contains a loaf of bread.
 The box is empty.
 ================================================================================
 
-To declare a LISTED_CONTAINER the contents of which should not be listed after "`>look`" or "`>examine`", declare it an `opaque container` in the following way:
+To declare a LISTED_CONTAINER the contents of which should not be listed after [.play]#&gt; _look_# or [.play]#&gt; _examine_#, declare it an `opaque container` in the following way:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -772,7 +772,7 @@ END THE.
 SUPPORTER: You can put things on a SUPPORTER and you can stand, sit down or lie on it.
 
 A SUPPORTER is declared to be a container, so that you can take things from it, as well.
-When there's something on a SUPPORTER, a listing of it will appear in the room description and after "`>examine`", by default:
+When there's something on a SUPPORTER, a listing of it will appear in the room description and after [.play]#&gt; _examine_#, by default:
 
 [example,role="gametranscript"]
 ================================================================================
@@ -821,7 +821,7 @@ END THE.
 
 
 
-Note that the "`>examine`" command will list what is on the surface of a SUPPORTER, not what, if anything, is inside the SUPPORTER.
+Note that the [.play]#&gt; _examine_# command will list what is on the surface of a SUPPORTER, not what, if anything, is inside the SUPPORTER.
 For example, if you have a SUPPORTER called `table` in your game with two drawers in it, DON'T do this:
 
 [source,alan]

@@ -152,7 +152,7 @@ IS NOT lying_down.
 
 
 These two attributes exist to allow the author to make the hero, or another ACTOR, sitting or lying down.
-The outcomes for the commands >sit and >lie down are not successful by default, however, and must be manually implemented by the author:
+The outcomes for the commands [.play]#&gt; _sit_# and [.play]#&gt; _lie down_# are not successful by default, however, and must be manually implemented by the author:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -170,7 +170,7 @@ END THE.
 --------------------------------------------------------------------------------
 
 // @FIXME: Add XRef:
-Similarly, it is possible for the hero to sit or lie down on a SUPPORTER object (>lie on bed, >sit on chair), but the action is not successful by default and must be manually implemented by the author.
+Similarly, it is possible for the hero to sit or lie down on a SUPPORTER object ([.play]#&gt; _lie on bed_#, [.play]#&gt; _sit on chair_#), but the action is not successful by default and must be manually implemented by the author.
 Refer to: Objects => Supporters.
 
 // @ADDED:
@@ -435,7 +435,7 @@ END THE man.
 === The hero
 
 The hero instance is left out of the library altogether and can be defined from scratch by the game author.
-You won't need to define the hero in your game at all if you're happy with the response "You notice nothing unusual about yourself." when the player types >x me (= examine myself) and if no attributes are needed for the hero (such as IS (NOT) hungry, HAS strength 20, etc.).
+You won't need to define the hero in your game at all if you're happy with the response "You notice nothing unusual about yourself." when the player types [.play]#&gt; _x me_# (= examine myself) and if no attributes are needed for the hero (such as IS (NOT) hungry, HAS strength 20, etc.).
 There are also numerous other verb outcomes (than for examine) for the hero defined by default in the library:
 
 [example,role="gametranscript"]
@@ -462,7 +462,7 @@ END THE hero.
 
 
 
-The command >x me would then produce
+The command [.play]#&gt; _x me_# would then produce
 
 [example,role="gametranscript"]
 ================================================================================
@@ -471,7 +471,7 @@ You're John Smith, proud of your unusual name.
 ================================================================================
 
 
-By default, any clothing worn by the hero will be described when the player types `>inventory` (or `>i`):
+By default, any clothing worn by the hero will be described when the player types [.play]#&gt; _inventory_# (or [.play]#&gt; _i_#):
 
 [example,role="gametranscript"]
 ================================================================================
@@ -481,7 +481,7 @@ You're wearing an old jacket.
 ================================================================================
 
 
-If you wish to have the pieces of clothing worn by the hero listed at other verbs, like for example `> x me`, you should use the formulation LIST worn.:
+If you wish to have the pieces of clothing worn by the hero listed at other verbs, like for example [.play]#&gt; _ x me_#, you should use the formulation LIST worn.:
 
 [source,alan]
 --------------------------------------------------------------------------------

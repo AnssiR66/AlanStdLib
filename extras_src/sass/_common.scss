@@ -31,11 +31,37 @@ div.literalblock.shell pre {
     }
 }
 // -----------------------------------------------------------------------------
-/* Game Transcripts */
+/* Game Transcripts & Player input and output */
 // -----------------------------------------------------------------------------
-// This isn't a syntax highlighted block, it's just an example block with custom
-// colors.
 
+// .play is an inline-block style for player input commands and parser responses
+// that occur in the flow of text.
+
+span.play {
+    display: inline-block;
+    font-size: .9375em;
+    font-style: normal!important;
+    // letter-spacing: 0;
+    padding: .1em .5ex;
+    // word-spacing: -.15em;
+    // background: #f7f7f8;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    line-height: 1.45;
+    text-rendering: optimizeSpeed;
+    word-wrap: break-word;
+    // background: $Transcript-background;
+    // color: $Transcript-normal;
+    // border-color: $Transcript-border;
+    // em {
+    //     color: $Transcript-comment;
+    // }
+}
+
+// .gametranscript isn't a syntax highlighted block, it's just an example block
+// with custom colors.
+
+span.play,
 .exampleblock.gametranscript>.content {
     background: $Transcript-background;
     color: $Transcript-normal;
