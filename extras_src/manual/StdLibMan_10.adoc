@@ -13,7 +13,9 @@
 [[ch10]]
 == The my_game instance and its attributes
 
-`My_game` is a so called meta-instance that obligatorily has to be included by the author in the game source. Without it, the game won't compile successfully. At its shortest, the needed formulation is
+`My_game` is a so called meta-instance that obligatorily has to be included by the author in the game source.
+Without it, the game won't compile successfully.
+At its shortest, the needed formulation is
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -21,7 +23,10 @@ THE my_game ISA DEFINITION_BLOCK
 END THE.
 --------------------------------------------------------------------------------
 
-It is called a meta-instance because everything the author defines inside it affects the whole game. The purpose of this instance is to make it less necessary for the author to access the library files to make changes to common game responses and messages needed in the game. That's why the instance is named my_game --the author can override library responses and replace them with default responses that better suit the particular work in progress. The things that the author can define within this instance are
+It is called a meta-instance because everything the author defines inside it affects the whole game.
+The purpose of this instance is to make it less necessary for the author to access the library files to make changes to common game responses and messages needed in the game.
+That's why the instance is named my_game --the author can override library responses and replace them with default responses that better suit the particular work in progress.
+The things that the author can define within this instance are
 
 a. default verb responses +
 for example "There is nothing special about the key."
@@ -35,7 +40,8 @@ for example "That's not something you can eat."
 d. the implicit taking message +
 for example "(taking the key first)"
 
-In addition, the author can let the game formulate automatically the game title, subtitle, author, year, and game version at game start. This is done through attributes of the `my_game` instance.
+In addition, the author can let the game formulate automatically the game title, subtitle, author, year, and game version at game start.
+This is done through attributes of the `my_game` instance.
 
 It is also possible to for the author to implement their own custom global attributes within this instance, for example:
 
@@ -109,7 +115,9 @@ HAS year 0000.
 HAS version "1".
 --------------------------------------------------------------------------------
 
-If you set the version value to "0" (zero), the version line won't be shown at all in the game banner. Note also that the version number is in quotes. This enables any kind of textual input to describe the current version, for example version "beta0.1", and so on.
+If you set the version value to "0" (zero), the version line won't be shown at all in the game banner.
+Note also that the version number is in quotes.
+This enables any kind of textual input to describe the current version, for example version "beta0.1", and so on.
 
 
 // PAGE 79 //
@@ -187,7 +195,10 @@ HAS hero_worn_header "You are wearing"
 HAS hero_worn_else "You are not wearing anything."
 --------------------------------------------------------------------------------
 
-Change these to alter the way the hero is described as far clothing is concerned. If no specific CLOTHING is defined for the hero in the game, these messages won't show at any time. By default, these messages show at "`>inventory`". If the author wishes to have the CLOTHING objects worn by the hero described after "`>examine`" me, the examine verb for the hero should be defined this way:
+Change these to alter the way the hero is described as far clothing is concerned.
+If no specific CLOTHING is defined for the hero in the game, these messages won't show at any time.
+By default, these messages show at "`>inventory`".
+If the author wishes to have the CLOTHING objects worn by the hero described after "`>examine`" me, the examine verb for the hero should be defined this way:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -215,7 +226,10 @@ END THE hero.
 HAS dark_loc_desc "It is pitch black. You can't see anything at all."
 --------------------------------------------------------------------------------
 
-This is the default location description for dark locations. It is shown every time the hero enters a dark location or types "LOOK" while there. Edit this to change the default description of dark locations. If/when a dark location is lighted, this description won't be shown any longer.
+This is the default location description for dark locations.
+It is shown every time the hero enters a dark location or types "LOOK" while there.
+Edit this to change the default description of dark locations.
+If/when a dark location is lighted, this description won't be shown any longer.
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -241,7 +255,8 @@ HAS restricted_level 0.
 --------------------------------------------------------------------------------
 
 // @FIXME: XRef to PDF page...
-By default, all verbs work normally, without restrictions. See further the chapter Restricted actions (p. 69-).
+By default, all verbs work normally, without restrictions.
+See further the chapter Restricted actions (p. 69-).
 
 // PAGE 81 //
 
@@ -251,16 +266,22 @@ By default, all verbs work normally, without restrictions. See further the chapt
 //         numbers are removed!
 === 5. Illegal parameter messages
 
-In this section, all illegal parameter messages used by the library are listed. If you wish to change any of these, you can declare them again in the my_game instance.
+In this section, all illegal parameter messages used by the library are listed.
+If you wish to change any of these, you can declare them again in the my_game instance.
 
 [NOTE]
 ================================================================================
-If you need to change a great number, or all, of these messages, for example if you're writing in another language or you need to change the person or the tense of these messages to better suit your narrative, it is highly recommended that you edit the file 'mygame_import.i' in the library distribution package, find the list of these messages there, edit them, and import the 'mygame_import.i' file to your game source (together with the library). 'mygame_import.i' is a file that lists all the pre-defined attributes of the my_game instance for easy modification. It is included in the library distribution package but is not necessarily needed to run a game. It makes sense to re-declare these messages within the my_game instance in your own source file ONLY if you need to change a small number that you are not satisfied with. Looking through the list of these parameter messages in 'mygame_import.i' will give you a much better overview of them and make it easier to edit them in a uniform way to suit your purposes.
+If you need to change a great number, or all, of these messages, for example if you're writing in another language or you need to change the person or the tense of these messages to better suit your narrative, it is highly recommended that you edit the file 'mygame_import.i' in the library distribution package, find the list of these messages there, edit them, and import the 'mygame_import.i' file to your game source (together with the library). 'mygame_import.i' is a file that lists all the pre-defined attributes of the my_game instance for easy modification.
+It is included in the library distribution package but is not necessarily needed to run a game.
+It makes sense to re-declare these messages within the my_game instance in your own source file ONLY if you need to change a small number that you are not satisfied with.
+Looking through the list of these parameter messages in 'mygame_import.i' will give you a much better overview of them and make it easier to edit them in a uniform way to suit your purposes.
 ================================================================================
 
 [NOTE]
 ================================================================================
-NOTE ALSO that changing illegal parameter messages is usually not the first priority of a game author and in many cases they are left as is, as defined by the library. It is much more common to modify the standard verb outcomes or add checks of your own to existing library checks, for example. If changing illegal parameter messages is not a high priority for you, you might wish to skip directly to the next section.
+NOTE ALSO that changing illegal parameter messages is usually not the first priority of a game author and in many cases they are left as is, as defined by the library.
+It is much more common to modify the standard verb outcomes or add checks of your own to existing library checks, for example.
+If changing illegal parameter messages is not a high priority for you, you might wish to skip directly to the next section.
 ================================================================================
 
 The illegal parameter messages, as also the verb check messages and implicit taking messages further below, use the `$` parameter naming approach.
@@ -375,7 +396,8 @@ HAS illegal_parameter2_to_sg "That's not something you can $v things to.".
 HAS illegal_parameter2_to_pl "Those are not something you can $v things to.".
 --------------------------------------------------------------------------------
 
-For with, we have two separate messages. The verbs kill_with, shoot_with and play_with use the following formulation:
+For with, we have two separate messages.
+The verbs kill_with, shoot_with and play_with use the following formulation:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -453,9 +475,12 @@ HAS illegal_parameter_look_through "You can't look through $+1.".
 
 ==== Other illegal parameter messages
 
-The above are the default messages and their variations. There are, however, other illegal parameter messages needed at places. They are described below.
+The above are the default messages and their variations.
+There are, however, other illegal parameter messages needed at places.
+They are described below.
 
-The following message is displayed when the player tries to for example put something into an actor instance. The verbs in which this message is found are `empty_in`, `pour_in`, `put_in`, and `throw_in`:
+The following message is displayed when the player tries to for example put something into an actor instance.
+The verbs in which this message is found are `empty_in`, `pour_in`, `put_in`, and `throw_in`:
 
 
 [source,alan]
@@ -521,13 +546,21 @@ HAS illegal_parameter_who_pl "Those are not somebody I know about.".
 
 ==== Changing the illegal parameter message of a single verb:
 
-The way the illegal parameter messages have been defined in the library, it is not usually possible to affect just one verb at a time. Most often, changing a default message will alter the outcome of at least a handful of verbs, because one default message is shared by many verbs. There are some default parameter messages that only affect one verb; you should check the list of parameter messages (above) for details. Anyway, the quickest way to accomplish this task would be to open 'lib_verbs.i', find the verb, then modify the appropriate parameter message in its syntax statement.
+The way the illegal parameter messages have been defined in the library, it is not usually possible to affect just one verb at a time.
+Most often, changing a default message will alter the outcome of at least a handful of verbs, because one default message is shared by many verbs.
+There are some default parameter messages that only affect one verb; you should check the list of parameter messages (above) for details.
+Anyway, the quickest way to accomplish this task would be to open 'lib_verbs.i', find the verb, then modify the appropriate parameter message in its syntax statement.
 
 // @FIXME: This heading should retain it's number even when all other section
 //         numbers are removed!
 === 6. Default verb check messages
 
-All these check messages can be individually changed by listing them under the my_game instance in your game source file. They are also listed in the file 'mygame_import.i' in the library distribution package, for easy modification. These check messages are used in verb definitions, mainly in 'lib_verbs.i'. Changing one check message will affect all verbs where that particular check is found. Again, as with parameter messages, edit these messages directly in 'mygame_import.i' if you need to change a great number of them, otherwise redefine them within the my_game instance in your own source file. You'll quickly notice that the list is quite long, and listing any number greater than just a few under the my_game instance would be a rather frustrating task.
+All these check messages can be individually changed by listing them under the my_game instance in your game source file.
+They are also listed in the file 'mygame_import.i' in the library distribution package, for easy modification.
+These check messages are used in verb definitions, mainly in 'lib_verbs.i'.
+Changing one check message will affect all verbs where that particular check is found.
+Again, as with parameter messages, edit these messages directly in 'mygame_import.i' if you need to change a great number of them, otherwise redefine them within the my_game instance in your own source file.
+You'll quickly notice that the list is quite long, and listing any number greater than just a few under the my_game instance would be a rather frustrating task.
 
 ////
 @FIXME: This list is a nightmare! Even in the original PDF it's unclear where
@@ -564,7 +597,10 @@ Note that the illegal parameter messages (above) mostly report cases where the p
 That's not something you can take.
 ================================================================================
 +
-The verb take only works with objects, not with any other instances. Thus, if you try to take something else than an object (for example a numerical value in the above case), an illegal parameter message is shown. This restriction is defined in the syntax of the verb. Checks, on the other hand, are used to ensure that an instance has the proper attribute needed with the verb, for example edible, takeable, NOT open, and so forth.
+The verb take only works with objects, not with any other instances.
+Thus, if you try to take something else than an object (for example a numerical value in the above case), an illegal parameter message is shown.
+This restriction is defined in the syntax of the verb.
+Checks, on the other hand, are used to ensure that an instance has the proper attribute needed with the verb, for example edible, takeable, NOT open, and so forth.
 +
 Variations of the above message, needed for example when a preposition is required after the verb, are listed below:
 +
@@ -734,7 +770,9 @@ HAS check_obj_reachable_ask "$+1 wouldn't be able to reach $+2.".
 
 which is triggered when the hero asks an NPC for something that the NPC cannot reach. (This happens when the object in question has the attribute 'NOT reachable'.)
 
-The verbs throw_at, throw_in, throw_to allow the action to succeed if the second parameter is reachable, but not if the second parameter is distant:. Thus, the way things are defined in the library, it is possible to e,g, throw something in a container if that container is otherwise NOT reachable. But if the container is distant, the action will fail.
+The verbs throw_at, throw_in, throw_to allow the action to succeed if the second parameter is reachable, but not if the second parameter is distant:.
+Thus, the way things are defined in the library, it is possible to e,g, throw something in a container if that container is otherwise NOT reachable.
+But if the container is distant, the action will fail.
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -916,7 +954,8 @@ HAS check_obj_writeable "Nothing can be written there.".
 
 Location and containment checks for actors other than the hero (checks for the hero are listed separately below):
 
-For the verb follow to work successfully, the actor to be followed should be in an adjacent location to the hero. The following check will verify this:
+For the verb follow to work successfully, the actor to be followed should be in an adjacent location to the hero.
+The following check will verify this:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1030,7 +1069,8 @@ HAS check_obj2_not_in_hero3 "You already have $+2.".
 // @FIXME: Lost track of heading levels!
 ==== Checking whether an object is in a container or not
 
-When the following check fires, the hero tried to empty the contents of an object into a container that already was contained by the object (for example if there is a bottle in a box, and the player types "empty box in bottle"). This applies to the verbs empty_in and pour_in:
+When the following check fires, the hero tried to empty the contents of an object into a container that already was contained by the object (for example if there is a bottle in a box, and the player types "empty box in bottle").
+This applies to the verbs empty_in and pour_in:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1109,7 +1149,8 @@ HAS check_obj_not_in_worn2 "It doesn't make sense to $v something you're
 wearing.".
 --------------------------------------------------------------------------------
 
-Lastly, it's not possible to drop a piece of CLOTHING if it is worn. It will have to be removed first (drop):
+Lastly, it's not possible to drop a piece of CLOTHING if it is worn.
+It will have to be removed first (drop):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1118,7 +1159,8 @@ HAS check_obj_not_in_worn3: "You'll have to take off $+1 first."
 
 === c. checking location states
 
-The following check is found in numerous verbs. It prohibits actions requiring seeing when the LOCATION is not lit:
+The following check is found in numerous verbs.
+It prohibits actions requiring seeing when the LOCATION is not lit:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1286,7 +1328,8 @@ HAS check_obj_not_obj2_put "That doesn't make sense." .
 
 === e. additional checks for classes
 
-Lastly, there are some checks that apply only to a specific class. Most of these are found in 'lib_classes.i'.
+Lastly, there are some checks that apply only to a specific class.
+Most of these are found in 'lib_classes.i'.
 
 The first one checks that a MALE character doesn't put on women's CLOTHING by default, and vice versa:
 
@@ -1395,7 +1438,8 @@ The following verbs use implicit taking:
 
 bite, drink, eat, empty, empty_in, empty_on, give, pour, pour_in, pour_on, put_in, put_on, throw, throw_at, throw_in, throw_to, tie_to.
 
-(If you wish to disable automatic implicit taking for any of these verbs, you should open the library file 'lib_verbs.i', locate the needed verbs in that file, go to their DOES sections and delete the implicit taking code. Moreover, you should add the following check to each affected verb:
+(If you wish to disable automatic implicit taking for any of these verbs, you should open the library file 'lib_verbs.i', locate the needed verbs in that file, go to their DOES sections and delete the implicit taking code.
+Moreover, you should add the following check to each affected verb:
 
 [source,alan]
 --------------------------------------------------------------------------------

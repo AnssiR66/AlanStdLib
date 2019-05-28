@@ -36,7 +36,10 @@ For scenery objects, use the attribute scenery.
 ==== CLOTHING
 
 
-CLOTHING is a piece of clothing the hero or an NPC wears. As far as the hero is concerned, clothes are prevented from being worn in an illogical order, for example you cannot put on a shirt if you are already wearing a jacket, and so forth. For this, clothing objects have a number of numerical attributes that need to be used. Note that NPCs cannot wear clothing in layers.
+CLOTHING is a piece of clothing the hero or an NPC wears.
+As far as the hero is concerned, clothes are prevented from being worn in an illogical order, for example you cannot put on a shirt if you are already wearing a jacket, and so forth.
+For this, clothing objects have a number of numerical attributes that need to be used.
+Note that NPCs cannot wear clothing in layers.
 
 Thanks to Alan Bampton from whose 'xwear' extension the code for this class has been adopted.
 
@@ -116,9 +119,12 @@ To recap: in defining a piece of CLOTHING, you should:
 
 1. define it ISA CLOTHING (and not ISA OBJECT)
 
-2. give it one of five attributes headcover, topcover, botcover, footcover or handcover; sometimes two of these are needed. Which attribute(s) to use depends on the type of CLOTHING; see the clothing table below.
+2. give it one of five attributes headcover, topcover, botcover, footcover or handcover; sometimes two of these are needed.
+Which attribute(s) to use depends on the type of CLOTHING; see the clothing table below.
 
-3. A number 2, 4, 8, 16, 32 or 64 needs to be added after the above attribute. You cannot decide the number yourself; look it up from the clothing table below. If the value of an attribute for a piece of CLOTHING is 0 in the table, don't mention this attribute in connection with your CLOTHING object.
+3. A number 2, 4, 8, 16, 32 or 64 needs to be added after the above attribute.
+You cannot decide the number yourself; look it up from the clothing table below.
+If the value of an attribute for a piece of CLOTHING is 0 in the table, don't mention this attribute in connection with your CLOTHING object.
 
 4. If the piece of CLOTHING is worn by any ACTOR - the hero or somebody else - be sure to include the piece of CLOTHING in the ACTOR's wearing attribute.
 
@@ -129,7 +135,8 @@ To recap: in defining a piece of CLOTHING, you should:
 
 ===== The clothing table
 
-Here is the chart showing a selection of fairly typical clothing items and the values to set to obtain appropriate behaviour. Should you wish to create an article of CLOTHING not listed, usually a bit of lateral thought as to what it is most like and where it fits into the scheme of things will suggest a workable set of values, but be aware that you MUST use values in this chart, simply adding things with intermediate values is probably going to create nasty bugs:
+Here is the chart showing a selection of fairly typical clothing items and the values to set to obtain appropriate behaviour.
+Should you wish to create an article of CLOTHING not listed, usually a bit of lateral thought as to what it is most like and where it fits into the scheme of things will suggest a workable set of values, but be aware that you MUST use values in this chart, simply adding things with intermediate values is probably going to create nasty bugs:
 
 [cols="<25d,5*^15m",options="header"]
 |=========================================================================
@@ -263,7 +270,10 @@ START AT restaurant.
 // @ADDED:
 ==== DEVICE
 
-DEVICE is a machine or an electronic device, for example a TV. It can be turned (=switched) on and off if it is not broken. Default attributes: NOT on, NOT broken. A DEVICE is by default described as being either on or off when examined.
+DEVICE is a machine or an electronic device, for example a TV.
+It can be turned (=switched) on and off if it is not broken.
+Default attributes: NOT on, NOT broken.
+A DEVICE is by default described as being either on or off when examined.
 
 
 For example:
@@ -280,7 +290,8 @@ yields by default
 [example,role="gametranscript"]
 ================================================================================
 &gt; _x thingummyjig_ +
-You notice nothing unusual about the thingummyjig. It is currently off.
+You notice nothing unusual about the thingummyjig.
+It is currently off.
 ================================================================================
 
 
@@ -300,7 +311,8 @@ yields
 [example,role="gametranscript"]
 ================================================================================
 &gt; _x thingummyjig_ +
-It's full of knobs and buttons. It is currently off.
+It's full of knobs and buttons.
+It is currently off.
 ================================================================================
 
 
@@ -328,7 +340,9 @@ END THE.
 ==== DOOR
 
 
-DOOR can be opened, closed, locked and unlocked. It is by default closed (= NOT open) and NOT locked. Attributes: openable, NOT open, NOT lockable, NOT locked, HAS otherside door.
+DOOR can be opened, closed, locked and unlocked.
+It is by default closed (= NOT open) and NOT locked.
+Attributes: openable, NOT open, NOT lockable, NOT locked, HAS otherside door.
 A DOOR is described by default as being either open or closed when examined.
 
 [source,alan]
@@ -345,11 +359,13 @@ would yield by default:
 [example,role="gametranscript"]
 ================================================================================
 &gt; _x front door_ +
-You notice nothing unusual about the front door. It is currently closed.
+You notice nothing unusual about the front door.
+It is currently closed.
 ================================================================================
 
 
-Adding an ex attribute for the front door, you can change the default. Adding
+Adding an ex attribute for the front door, you can change the default.
+Adding
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -363,7 +379,8 @@ will yield
 [example,role="gametranscript"]
 ================================================================================
 &gt; _x front door_ +
-It's a white wooden door leading into the house. It is currently closed.
+It's a white wooden door leading into the house.
+It is currently closed.
 ================================================================================
 
 
@@ -394,7 +411,8 @@ and then, the following will happen:
 [example,role="gametranscript"]
 ================================================================================
 &gt; _x door_ +
-It's a white wooden door leading into the house. It is currently closed.
+It's a white wooden door leading into the house.
+It is currently closed.
 ================================================================================
 
 
@@ -518,7 +536,8 @@ Examining for example these instances in-game would yield
 ================================================================================
 &gt; _x torch_
 
-You notice nothing unusual about the torch. It is currently lit.
+You notice nothing unusual about the torch.
+It is currently lit.
 ================================================================================
 
 and
@@ -527,7 +546,8 @@ and
 ================================================================================
 &gt; _x lamp_
 
-You notice nothing unusual about the lamp. It is currently off.
+You notice nothing unusual about the lamp.
+It is currently off.
 ================================================================================
 
 
@@ -549,7 +569,8 @@ which yields
 ================================================================================
 &gt; _x lamp_
 
-It is an elegant table lamp with a blue lampshade. It is currently off.
+It is an elegant table lamp with a blue lampshade.
+It is currently off.
 ================================================================================
 
 
@@ -759,7 +780,8 @@ When there's something on a SUPPORTER, a listing of it will appear in the room d
 
 Bedroom
 
-There is a nightstand here. On the nightstand you see a diary.
+There is a nightstand here.
+On the nightstand you see a diary.
 ================================================================================
 
 

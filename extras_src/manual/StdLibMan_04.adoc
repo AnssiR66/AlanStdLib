@@ -83,7 +83,7 @@ The first one is the traditional "VERB examine DOES (ONLY)...":
 --------------------------------------------------------------------------------
 THE ball ISA OBJECT AT garden
   VERB examine
-  DOES ONLY "It's a small red ball."
+    DOES ONLY "It's a small red ball."
   END VERB.
 END THE ball.
 --------------------------------------------------------------------------------

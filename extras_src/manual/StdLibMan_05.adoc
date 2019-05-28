@@ -97,7 +97,8 @@ IS NOT inanimate.
 --------------------------------------------------------------------------------
 
 Verbs push, push_with, rub, scratch, search, touch and touch_with won't have successful outcomes with animate objects (= ACTORS).
-To ensure this, the (NOT) inanimate attribute is used. All things other than ACTORs are inanimate.
+To ensure this, the (NOT) inanimate attribute is used.
+All things other than ACTORs are inanimate.
 
 // @ADDED:
 ==== following
@@ -169,7 +170,8 @@ END THE.
 --------------------------------------------------------------------------------
 
 // @FIXME: Add XRef:
-Similarly, it is possible for the hero to sit or lie down on a SUPPORTER object (>lie on bed, >sit on chair), but the action is not successful by default and must be manually implemented by the author. Refer to: Objects => Supporters.
+Similarly, it is possible for the hero to sit or lie down on a SUPPORTER object (>lie on bed, >sit on chair), but the action is not successful by default and must be manually implemented by the author.
+Refer to: Objects => Supporters.
 
 // @ADDED:
 ==== named
@@ -232,8 +234,9 @@ If the author implements any clothing for the hero, this will show up by default
 
 [example,role="gametranscript"]
 ================================================================================
-&gt; _inventory +_
-You're empty-handed. You're wearing a T-shirt and shorts.
+&gt; _inventory_ +
+You're empty-handed.
+You're wearing a T-shirt and shorts.
 ================================================================================
 
 To implement CLOTHING for the hero, first implement the piece of clothing:
@@ -270,8 +273,9 @@ This would produce by default
 
 [example,role="gametranscript"]
 ================================================================================
-&gt; _inventory +_
-You are empty-handed. You are wearing a shirt.
+&gt; _inventory_ +
+You are empty-handed.
+You are wearing a shirt.
 ================================================================================
 
 The IS wearing attribute is needed when any actor, not just the hero, is described as wearing something.
@@ -440,7 +444,8 @@ There are also numerous other verb outcomes (than for examine) for the hero defi
 It doesn't make sense to kick yourself.
 ================================================================================
 
-and so on. However, if you need to define attributes or verb responses for the hero, or if the hero is described as wearing any kind of CLOTHING, you need to implement the hero in your own game source file:
+and so on.
+However, if you need to define attributes or verb responses for the hero, or if the hero is described as wearing any kind of CLOTHING, you need to implement the hero in your own game source file:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -471,7 +476,8 @@ By default, any clothing worn by the hero will be described when the player type
 [example,role="gametranscript"]
 ================================================================================
 &gt; _inventory_ +
-You're empty-handed. You're wearing an old jacket.
+You're empty-handed.
+You're wearing an old jacket.
 ================================================================================
 
 
@@ -494,7 +500,8 @@ which will result in
 [example,role="gametranscript"]
 ================================================================================
 &gt; _x me_ +
-You're John Smith, proud of your unusual name. You are wearing an old jacket.
+You're John Smith, proud of your unusual name.
+You are wearing an old jacket.
 ================================================================================
 
 
@@ -566,7 +573,8 @@ will result in:
 [example,role="gametranscript"]
 ================================================================================
 &gt; _examine boy_ +
-A boy about twelve years old. The boy is carrying a coin and a baseball cap (being worn).
+A boy about twelve years old.
+The boy is carrying a coin and a baseball cap (being worn).
 ================================================================================
 
 
@@ -575,7 +583,9 @@ A boy about twelve years old. The boy is carrying a coin and a baseball cap (bei
 === Conversing with NPCs
 
 To engage an NPC in conversation, the library has the pre-defined verbs ask about, tell_about, and talk to.
-(You can also say something but that doesn't require an NPC to be present; for example you can say a magic word to open a door. An answer verb is also defined in the library, but this one doesn't need an NPC to be present, either. You can for example answer a phone or a door, or you can answer a riddle written on a piece of paper, etc.)
+(You can also say something but that doesn't require an NPC to be present; for example you can say a magic word to open a door.
+An answer verb is also defined in the library, but this one doesn't need an NPC to be present, either.
+You can for example answer a phone or a door, or you can answer a riddle written on a piece of paper, etc.)
 
 
 Program an NPC to reply to various topics the hero might ask them, in the following way:

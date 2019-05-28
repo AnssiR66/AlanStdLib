@@ -17,7 +17,10 @@ Distant/NOT distant is a new attribute in v2.0 and later versions of the library
 It has been added to be used alongside with the existing reachable/NOT reachable attributes.
 This has proved to be a handy distinction to have at hand.
 It is possible for the hero for example to talk with an NPC (non-player character) that is NOT reachable (for example if the hero is lying down on a bed), but not with one that is distant.
-Similarly, you can throw something at, to or into a NOT reachable instance (for example a basketball into a basket), but not at, to or into a distant one. There are also some other individual cases where you can manipulate NOT reachable objects as opposed to distant ones. The default responses for NOT reachable and distant objects are a bit different: a NOT reachable object is described to be "out of your reach" but a distant one is "too far away". For example the library-defined ceiling object for indoor rooms is NOT reachable ("The ceiling is out of your reach") while the library-defined sky object is distant ("The sky is too far away").
+Similarly, you can throw something at, to or into a NOT reachable instance (for example a basketball into a basket), but not at, to or into a distant one.
+There are also some other individual cases where you can manipulate NOT reachable objects as opposed to distant ones.
+The default responses for NOT reachable and distant objects are a bit different: a NOT reachable object is described to be "out of your reach" but a distant one is "too far away".
+For example the library-defined ceiling object for indoor rooms is NOT reachable ("The ceiling is out of your reach") while the library-defined sky object is distant ("The sky is too far away").
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -109,7 +112,8 @@ Taken.
 
 [NOTE]
 ================================================================================
-Note this! If you want the player to have the ring, don't declare the flowerpot scenery.
+Note this!
+If you want the player to have the ring, don't declare the flowerpot scenery.
 ================================================================================
 
 
@@ -144,7 +148,8 @@ The ring object in the above example won't get mentioned at all if it is not in 
 
 // @FIXME: Looks like part of the text was lost in the original PDF!
 
-Note that actors can be scenery, as well. Such actors are not mentioned in the location description by default, and examining them yields the default message "The [actor] is not important.".
+Note that actors can be scenery, as well.
+Such actors are not mentioned in the location description by default, and examining them yields the default message "The [actor] is not important.".
 
 
 === Classes: usage
@@ -210,7 +215,8 @@ END EVERY.
 
 This will override the default library message for examine for all CATs in the game.
 
-However, if you wish to change the verb outcome for a class predefined in the library, you should do like below. Here, the verb outcome for examine has been modified for all WINDOWs in the game:
+However, if you wish to change the verb outcome for a class predefined in the library, you should do like below.
+Here, the verb outcome for examine has been modified for all WINDOWs in the game:
 
 [source,alan]
 --------------------------------------------------------------------------------

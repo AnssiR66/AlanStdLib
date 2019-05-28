@@ -12,7 +12,8 @@
 [[ch15]]
 == Short examples
 
-1. A very short complete game using minimal obligatory imports and coding. Here, the hero must go from room1 north to room2 and eat an apple to win the game.
+1. A very short complete game using minimal obligatory imports and coding.
+Here, the hero must go from room1 north to room2 and eat an apple to win the game.
 +
 [source,alan]
 --------------------------------------------------------------------------------
@@ -157,7 +158,8 @@ START AT nursery.
 +
 Examples 3-4 below show mainly different variations of the my_game instance and not complete games:
 
-3. In this example of defining the my_game instance, the author has changed the default verb responses for `eat`, `climb` and `take_from`. In addition, the author has added a check and a response of his/her own to `take_from`:
+3. In this example of defining the my_game instance, the author has changed the default verb responses for `eat`, `climb` and `take_from`.
+In addition, the author has added a check and a response of his/her own to `take_from`:
 +
 [source,alan]
 --------------------------------------------------------------------------------
@@ -244,7 +246,8 @@ HAS illegal_parameter_there "You can't \$v there.".
 END THE.
 --------------------------------------------------------------------------------
 
-6. A complete example game with locked doors and keys. This code reintroduces the situation used in example 1, with a locked door and two keys added.
+6. A complete example game with locked doors and keys.
+This code reintroduces the situation used in example 1, with a locked door and two keys added.
 +
 [source,alan]
 --------------------------------------------------------------------------------
