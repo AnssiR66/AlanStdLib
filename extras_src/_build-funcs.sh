@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# _build-funcs.sh         v1.1.0 | 2019/05/11 | by Tristano Ajmone, MIT License.
+# _build-funcs.sh         v1.2.0 | 2019/05/29 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                        DOCUMENTATION BUILD FUNCTIONS                         #
@@ -28,7 +28,7 @@
 shopt -s nullglob # Set nullglob to avoid patterns matching null files
 
 # Alan compiler options:
-AlanOpts="-import ../StdLib/"
+AlanOpts="-import ../../StdLib/"
 
 # Asciidoctor options:
 adocDir="./adoc"
@@ -73,7 +73,7 @@ function compile {
   # - $AlanOpts: compiler options.
   # ============================================================================
   printSeparator
-  echo -e "\e[90mCOMPILING: \e[93m$1"
+  echo -e "\e[90mCOMPILING: \e[93m$srcDir/$1"
   alan $AlanOpts $1 > /dev/null 2>&1 || (
     echo -e "\n\e[91m*** COMPILER ERROR!!! ********************************************************"
     alan $AlanOpts $1

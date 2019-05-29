@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# update.sh               v1.4.0 | 2019/05/15 | by Tristano Ajmone, MIT License.
+# update.sh               v1.5.0 | 2019/05/29 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                          BUILD STDLIB EXTRAS FOLDER                          #
@@ -72,12 +72,15 @@ for dirName in $foldersList; do
   # ----------------------------------------------------------------------------
   printHeading3 "Compile Adventures"
   # ----------------------------------------------------------------------------
-  for sourcefile in $srcDir/*.alan ; do
+  pushd "$srcDir" > /dev/null
+  rm -f *.a3c *.a3log
+  for sourcefile in *.alan ; do
     compile $sourcefile
     if [ $? -ne 0 ] ; then
       printAborting ; exit 1
     fi
   done
+  popd > /dev/null
 
   # ----------------------------------------------------------------------------
   printHeading3 "Run Commands Scripts"
@@ -108,7 +111,6 @@ for dirName in $foldersList; do
   echo -e "Because Asciidoctor can't handle inclusion of external files in ISO-8859-1"
   echo -e "econding, we need to create UTF-8 versions of them."
 
-  # rm -r $utfDir/*.{alan,a3log,a3ADocLog}
   rm -rf $utfDir
   mkdir  $utfDir
   touch  $utfDir/.gitkeep
