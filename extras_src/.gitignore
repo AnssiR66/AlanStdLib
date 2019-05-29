@@ -2,6 +2,7 @@
 ###################################
 
 # Game transcripts:
+manual/*.a3log
 tutorials/*.a3log
 
 # UTF-8 converted Alan files (for Asciidoctor inclusion):

@@ -130,7 +130,7 @@ There are two attributes for describing the ground and the sky in any SITE:
 * `HAS ground_desc "".`
 * `HAS sky_desc "".`
 
-If the author doesn't change these default values, the default description, at "You notice nothing unusual about the \[object\]." (Naturally, these commands won't work in indoor locations.)
+If the author doesn't change these default values, the default description, at [.play]#&gt; _x floor_#, [.play]#&gt; _x walls_# or [.play]#&gt; _x ceiling_# will be [.play]#You notice nothing unusual about the [object].# (Naturally, these commands won't work in indoor locations.)
 
 
 Again, you can change these messages at any point mid-game:

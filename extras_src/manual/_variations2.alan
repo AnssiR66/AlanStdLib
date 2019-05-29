@@ -1,0 +1,29 @@
+--==============================================================================
+-- StdLib Manual Snippets: Variation 2
+--------------------------------------------------------------------------------
+-- This file contains examples of the second way to achive something, when the
+-- Manual provides multiple ways to do the same thing.
+--==============================================================================
+Import 'library.i'.
+The my_game IsA DEFINITION_BLOCK
+End the.
+-- =============================================================================
+
+-- The Garden
+
+-- =============================================================================
+-- This site location is used in the following examples:
+--    * §4.1. The two methods for examining things
+The garden IsA site.
+End the garden.
+
+--------------------------------------------------------------------------------
+-- §4.1. The two methods for examining things
+--------------------------------------------------------------------------------
+-- tag::ball_garden[]
+THE ball IsA OBJECT AT garden
+  HAS ex "It's a small red ball.".
+END THE ball.
+-- end::ball_garden[]
+--------------------------------------------------------------------------------
+Start at garden.

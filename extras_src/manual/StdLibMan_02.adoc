@@ -243,7 +243,9 @@ IMPORT 'lib_messages.i'.
 IMPORT 'lib_verbs.i'.
 --------------------------------------------------------------------------------
 
-My_game is an obligatory instance that you have to include in your game source file when using the library.
+// @FIXME: XREF TO PAGE
+
+`my_game` is an obligatory instance that you have to include in your game source file when using the library.
 It will be described in more detail on p.78.
 
 Here is a screenshot of what a typical ALAN project folder might look like:
@@ -252,11 +254,11 @@ image::img_folders.jpg[]
 
 Notes to the above image:
 
-Notice the five obligatory library files (all starting with 'lib_...'), together with the file 'library.i' that imports them to a game project.
+Notice the five obligatory library files (all starting with `lib_...`), together with the file `library.i` that imports them to a game project.
 In addition, there are two DLL files that are automatically installed to where you install the ALAN interpreter.
 If you copy the interpreter program to another folder, you should also copy these two DLL files.
 The compiler and the interpreter in this example are the Windows executables winalan.exe and winarun.exe, respectively.
-In this example, an author has started writing a new game called Treasure Hunt, and 'treasurehunt.alan' is the source file (a normal text file containing the ALAN code) while 'treasurehunt.a3c' is the compiled game.
+In this example, an author has started writing a new game called Treasure Hunt, and `treasurehunt.alan` is the source file (a normal text file containing the ALAN code) while `treasurehunt.a3c` is the compiled game.
 An IFID file is created automatically when you compile an ALAN game.
 IFID stands for Interactive Fiction IDentifier.
 An IFID is a serial number that's assigned to each work of Interactive Fiction.

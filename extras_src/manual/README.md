@@ -11,6 +11,7 @@ Porting the _Alan Standard Library v2.1 User's Manual_ from PDF to AsciiDoc, and
 <!-- MarkdownTOC autolink="true" bracket="round" autoanchor="false" lowercase="only_ascii" uri_encoding="true" levels="1,2,3" -->
 
 - [Folder Contents](#folder-contents)
+    - [Examples and Transcripts](#examples-and-transcripts)
 - [Document Status](#document-status)
 
 <!-- /MarkdownTOC -->
@@ -20,7 +21,7 @@ Porting the _Alan Standard Library v2.1 User's Manual_ from PDF to AsciiDoc, and
 
 # Folder Contents
 
-The entire original PDF was roughly ported to AsciiDoc, split into one file per chapter, and restructured just in order to obtain a working document:
+The entire original PDF was ported to AsciiDoc and split into one file per chapter:
 
 - [`StdLibMan.asciidoc`](./StdLibMan.asciidoc) — main document that imports all the chapters of the Manual:
     + [`StdLibMan_01.adoc`](./StdLibMan_01.adoc) — 1. _Introduction_
@@ -39,6 +40,29 @@ The entire original PDF was roughly ported to AsciiDoc, split into one file per 
     + [`StdLibMan_14.adoc`](./StdLibMan_14.adoc) — 14. _Translating to other languages_
     + [`StdLibMan_15.adoc`](./StdLibMan_15.adoc) — 15. _Short examples_
 
+## Examples and Transcripts
+
+In order to ensure that the code and transcript examples in the Manual always represent the current state of the library, real source adventures and game transcripts are employed — which the toolchain compiles and runs against solution files (i.e. commands scripts).
+
+Adventures sources (`*.alan`, `*.i`), solution files (`*.a3sol`) and transcripts  (`*.a3log`) starting with underscore will not be deployed (copied) to the output folder, but only used internally for building the documentation.
+
+We try to keep the number of source adventures and transcripts down to the minimum, by packing together as many examples as possible into the same adventure — by creating multiple locations, and making a smart use of Asciidoctor tagged regions in both Alan sources and transcripts.
+
+Because the Manual often illustrates multiple ways to do the same thing, separate files are required to host these variations (otherwise the Alan compiler will complain about instances being defined multiple times).
+
+Examples showing one way to implement something:
+
+- [`_variations1.alan`](./_variations1.alan)
+- [`_variations1.a3sol`](./_variations1.a3sol)
+- [`_variations1.a3log`](./_variations1.a3log) (ignored by Git)
+
+Examples showing another way to implement the same thing:
+
+- [`_variations2.alan`](./_variations2.alan)
+- [`_variations2.a3sol`](./_variations2.a3sol)
+- [`_variations2.a3log`](./_variations2.a3log) (ignored by Git)
+
+
 
 # Document Status
 
@@ -46,23 +70,23 @@ Currently the document is WIP draft, the original PDF document was converted to 
 
 It must be manually fixed, element by element, using the original PDF as a visual reference for missing styles.
 
-| ch. |                                     title                                      |  status |
-|-----|--------------------------------------------------------------------------------|---------|
-|   1 | _Introduction_                                                                 | DRAFT   |
-|   2 | _What is different in v2.x?_                                                   | DRAFT   |
-|   3 | _Locations_                                                                    | DRAFT   |
-|   4 | _Things_                                                                       | DRAFT   |
-|   5 | _Actors_                                                                       | DRAFT   |
-|   6 | _Objects_                                                                      | DRAFT   |
-|   7 | _Additional attributes for THINGs: (NOT) distant, (NOT) reachable, scenery_    | pending |
-|   8 | _Using verbs and commands_                                                     | pending |
-|   9 | _Adding synonyms for existing library words (verbs, object and actor classes)_ | pending |
-|  10 | _The `my_game` instance and its attributes_                                    | pending |
-|  11 | _Have the game banner show at the start_                                       | pending |
-|  12 | _Runtime messages_                                                             | pending |
-|  13 | _Default attributes used in the standard library_                              | pending |
-|  14 | _Translating to other languages_                                               | pending |
-|  15 | _Short examples_                                                               | pending |
+| ch. |                                     title                                      | status |
+|-----|--------------------------------------------------------------------------------|--------|
+|   1 | _Introduction_                                                                 | DRAFT  |
+|   2 | _What is different in v2.x?_                                                   | DRAFT  |
+|   3 | _Locations_                                                                    | DRAFT  |
+|   4 | _Things_                                                                       | DRAFT  |
+|   5 | _Actors_                                                                       | DRAFT  |
+|   6 | _Objects_                                                                      | DRAFT  |
+|   7 | _Additional attributes for THINGs: (NOT) distant, (NOT) reachable, scenery_    | DRAFT  |
+|   8 | _Using verbs and commands_                                                     | DRAFT  |
+|   9 | _Adding synonyms for existing library words (verbs, object and actor classes)_ | DRAFT  |
+|  10 | _The `my_game` instance and its attributes_                                    | DRAFT  |
+|  11 | _Have the game banner show at the start_                                       | DRAFT  |
+|  12 | _Runtime messages_                                                             | DRAFT  |
+|  13 | _Default attributes used in the standard library_                              | DRAFT  |
+|  14 | _Translating to other languages_                                               | DRAFT  |
+|  15 | _Short examples_                                                               | DRAFT  |
 
 
 <!-----------------------------------------------------------------------------

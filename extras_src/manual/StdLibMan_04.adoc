@@ -72,8 +72,6 @@ END THE.
 --------------------------------------------------------------------------------
 
 
-
-
 === The two methods for examining things
 
 The library provides two ways for examining things.
@@ -81,21 +79,32 @@ The first one is the traditional "VERB examine DOES (ONLY)...":
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE ball ISA OBJECT AT garden
-  VERB examine
-    DOES ONLY "It's a small red ball."
-  END VERB.
-END THE ball.
+include::{utf8dir}/_variations1.alan[tag=ball_garden]
 --------------------------------------------------------------------------------
+
+// [source,alan]
+// --------------------------------------------------------------------------------
+// THE ball ISA OBJECT AT garden
+//   VERB examine
+//     DOES ONLY "It's a small red ball."
+//   END VERB.
+// END THE ball.
+// --------------------------------------------------------------------------------
 
 
 which will yield
 
 [example,role="gametranscript"]
 ================================================================================
-&gt; _x ball_ +
-It's a small red ball.
+include::{utf8dir}/_variations1.a3ADocLog[tag=ball_garden]
 ================================================================================
+
+
+// [example,role="gametranscript"]
+// ================================================================================
+// &gt; _x ball_ +
+// It's a small red ball.
+// ================================================================================
 
 
 Above, you would have to use DOES ONLY, because if you use only DOES, the library-defined response for all things would show first: "You notice nothing unusual about the ball. It's a small red ball."
@@ -105,19 +114,29 @@ Another way for examining things is to use the `ex` attribute.
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE ball ISA OBJECT AT garden.
-  HAS ex "It's a small red ball."
-END THE.
+include::{utf8dir}/_variations2.alan[tag=ball_garden]
 --------------------------------------------------------------------------------
+
+// [source,alan]
+// --------------------------------------------------------------------------------
+// THE ball ISA OBJECT AT garden.
+//   HAS ex "It's a small red ball."
+// END THE.
+// --------------------------------------------------------------------------------
 
 
 which will yield the same response as the first method:
 
 [example,role="gametranscript"]
 ================================================================================
-&gt; _x ball_ +
-It's a small red ball.
+include::{utf8dir}/_variations2.a3ADocLog[tag=ball_garden]
 ================================================================================
+
+// [example,role="gametranscript"]
+// ================================================================================
+// &gt; _x ball_ +
+// It's a small red ball.
+// ================================================================================
 
 
 but you notice how the needed formulation is shorter.

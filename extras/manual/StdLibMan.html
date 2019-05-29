@@ -1333,7 +1333,7 @@ The five obligatory library files mentioned on p.1, together with the file 'libr
 </div>
 </div>
 <div class="paragraph">
-<p>My_game is an obligatory instance that you have to include in your game source file when using the library.
+<p><code>my_game</code> is an obligatory instance that you have to include in your game source file when using the library.
 It will be described in more detail on p.78.</p>
 </div>
 <div class="paragraph">
@@ -1348,11 +1348,11 @@ It will be described in more detail on p.78.</p>
 <p>Notes to the above image:</p>
 </div>
 <div class="paragraph">
-<p>Notice the five obligatory library files (all starting with 'lib_&#8230;&#8203;'), together with the file 'library.i' that imports them to a game project.
+<p>Notice the five obligatory library files (all starting with <code>lib_&#8230;&#8203;</code>), together with the file <code>library.i</code> that imports them to a game project.
 In addition, there are two DLL files that are automatically installed to where you install the ALAN interpreter.
 If you copy the interpreter program to another folder, you should also copy these two DLL files.
 The compiler and the interpreter in this example are the Windows executables winalan.exe and winarun.exe, respectively.
-In this example, an author has started writing a new game called Treasure Hunt, and 'treasurehunt.alan' is the source file (a normal text file containing the ALAN code) while 'treasurehunt.a3c' is the compiled game.
+In this example, an author has started writing a new game called Treasure Hunt, and <code>treasurehunt.alan</code> is the source file (a normal text file containing the ALAN code) while <code>treasurehunt.a3c</code> is the compiled game.
 An IFID file is created automatically when you compile an ALAN game.
 IFID stands for Interactive Fiction IDentifier.
 An IFID is a serial number that&#8217;s assigned to each work of Interactive Fiction.
@@ -1477,7 +1477,7 @@ The IFID system is defined by the Treaty of Babel which was created in 2006.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>If the author doesn&#8217;t change these default values, the default description, at "You notice nothing unusual about the \[object\]." (Naturally, these commands won&#8217;t work in indoor locations.)</p>
+<p>If the author doesn&#8217;t change these default values, the default description, at <span class="play">&gt; <em>x floor</em></span>, <span class="play">&gt; <em>x walls</em></span> or <span class="play">&gt; <em>x ceiling</em></span> will be <span class="play">You notice nothing unusual about the [object].</span> (Naturally, these commands won&#8217;t work in indoor locations.)</p>
 </div>
 <div class="paragraph">
 <p>Again, you can change these messages at any point mid-game:</p>
@@ -1955,7 +1955,7 @@ The first one is the traditional "VERB examine DOES (ONLY)&#8230;&#8203;":</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> ball <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> garden&#x000A;  <span class="hl kwa">VERB</span> examine&#x000A;    <span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;It&#39;s a small red ball.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE</span> ball<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> ball <span class="hl kwa">IsA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> garden&#x000A;  <span class="hl kwa">VERB</span> examine&#x000A;    <span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;It&#39;s a small red ball.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE</span> ball<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1965,7 +1965,7 @@ The first one is the traditional "VERB examine DOES (ONLY)&#8230;&#8203;":</p>
 <div class="content">
 <div class="paragraph">
 <p>&gt; <em>x ball</em><br>
-It&#8217;s a small red ball.</p>
+It&#8217;s a small red ball.<br></p>
 </div>
 </div>
 </div>
@@ -1978,7 +1978,7 @@ It&#8217;s a small red ball.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> ball <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> garden<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> ex <span class="hl str">&quot;It&#39;s a small red ball.&quot;</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> ball <span class="hl kwa">IsA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> garden&#x000A;  <span class="hl kwa">HAS</span> ex <span class="hl str">&quot;It&#39;s a small red ball.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE</span> ball<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1988,7 +1988,7 @@ It&#8217;s a small red ball.</p>
 <div class="content">
 <div class="paragraph">
 <p>&gt; <em>x ball</em><br>
-It&#8217;s a small red ball.</p>
+It&#8217;s a small red ball.<br></p>
 </div>
 </div>
 </div>
