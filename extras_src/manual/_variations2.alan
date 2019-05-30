@@ -15,6 +15,7 @@ End the.
 -- This site location is used in the following examples:
 --    * §4.1. The two methods for examining things
 The garden IsA site.
+  EXIT north TO lab.
 End the garden.
 
 --------------------------------------------------------------------------------
@@ -25,5 +26,22 @@ THE ball IsA OBJECT AT garden
   HAS ex "It's a small red ball.".
 END THE ball.
 -- end::ball_garden[]
+-- =============================================================================
+
+-- The Lab
+
+-- =============================================================================
+-- This room location is IMPLICITLY used in the following examples:
+--    * §6.1.2. DEVICE
+THE lab IsA room.
+END THE lab.
+--------------------------------------------------------------------------------
+-- §6.1.2. DEVICE
+--------------------------------------------------------------------------------
+-- tag::thingummyjig[]
+THE thingummyjig ISA DEVICE AT lab
+  HAS ex "It's full of knobs and buttons.".
+END THE.
+-- end::thingummyjig[]
 --------------------------------------------------------------------------------
 Start at garden.

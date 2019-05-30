@@ -3,6 +3,11 @@
 --------------------------------------------------------------------------------
 -- This file contains examples of the first way to achive something, when the
 -- Manual provides multiple ways to do the same thing.
+
+-- IMPLICIT LOCATIONS here means that their definition is not shown in the book,
+-- only things located there are. This means we can freely add exits and other
+-- attributes to these locations for they won't show up in the book.
+
 --==============================================================================
 Import 'library.i'.
 The my_game IsA DEFINITION_BLOCK
@@ -12,9 +17,10 @@ End the.
 -- The Garden
 
 -- =============================================================================
--- This site location is used in the following examples:
+-- This site location is IMPLICITLY used in the following examples:
 --    * §4.1. The two methods for examining things
 The garden IsA site.
+  EXIT north TO lab.
 End the garden.
 --------------------------------------------------------------------------------
 -- §4.1. The two methods for examining things
@@ -26,5 +32,21 @@ THE ball IsA OBJECT AT garden
   END VERB.
 END THE ball.
 -- end::ball_garden[]
+-- =============================================================================
+
+-- The Lab
+
+-- =============================================================================
+-- This room location is IMPLICITLY used in the following examples:
+--    * §6.1.2. DEVICE
+THE lab IsA room.
+END THE lab.
+--------------------------------------------------------------------------------
+-- §6.1.2. DEVICE
+--------------------------------------------------------------------------------
+-- tag::thingummyjig[]
+THE thingummyjig ISA DEVICE AT lab
+END THE.
+-- end::thingummyjig[]
 --------------------------------------------------------------------------------
 Start at garden.

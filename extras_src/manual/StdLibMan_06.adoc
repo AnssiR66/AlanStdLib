@@ -280,40 +280,60 @@ For example:
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE thingummyjig ISA DEVICE AT lab
-END THE.
+include::{utf8dir}/_variations1.alan[tag=thingummyjig]
 --------------------------------------------------------------------------------
+
+
+// [source,alan]
+// --------------------------------------------------------------------------------
+// THE thingummyjig ISA DEVICE AT lab
+// END THE.
+// --------------------------------------------------------------------------------
 
 
 yields by default
 
 [example,role="gametranscript"]
 ================================================================================
-&gt; _x thingummyjig_ +
-You notice nothing unusual about the thingummyjig.
-It is currently off.
+include::{utf8dir}/_variations1.a3ADocLog[tag=thingummyjig]
 ================================================================================
 
+// [example,role="gametranscript"]
+// ================================================================================
+// &gt; _x thingummyjig_ +
+// You notice nothing unusual about the thingummyjig.
+// It is currently off.
+// ================================================================================
 
 
 Using the `ex` attribute, you can define a bit more personal response than [.play]#You notice nothing unusual...#:
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE thingummyjig ISA DEVICE AT lab
-  HAS ex "It's full of knobs and buttons.".
-END THE.
+include::{utf8dir}/_variations2.alan[tag=thingummyjig]
 --------------------------------------------------------------------------------
+
+// [source,alan]
+// --------------------------------------------------------------------------------
+// THE thingummyjig ISA DEVICE AT lab
+//   HAS ex "It's full of knobs and buttons.".
+// END THE.
+// --------------------------------------------------------------------------------
 
 
 yields
 
 [example,role="gametranscript"]
 ================================================================================
-&gt; _x thingummyjig_ +
-It's full of knobs and buttons.
-It is currently off.
+include::{utf8dir}/_variations2.a3ADocLog[tag=thingummyjig]
 ================================================================================
+
+// [example,role="gametranscript"]
+// ================================================================================
+// &gt; _x thingummyjig_ +
+// It's full of knobs and buttons.
+// It is currently off.
+// ================================================================================
 
 
 // @FIXME: Rephrase next 2 paragraphs:
