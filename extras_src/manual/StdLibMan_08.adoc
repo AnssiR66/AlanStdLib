@@ -80,7 +80,7 @@ END THE car.
 
 If you try the various actions in-game, with the library imported, you will notice that some actions are successful and result in what the player commanded, while other actions do nothing (= the action is unsuccessful).
 For example the response to [.play]#&gt; _drop [object]_# will be [.play]#Dropped.#, the carried object being rejected from the hero's inventory and ending up in the location, while the response to [.play]#&gt; _attack [thing]_# is [.play]#Resorting to brute force is not the solution here.#.
-Which actions are allowed to succeed and which are not is based on what is the most reasonable and expected outcome for the action - the outcome that the game author most unlikely needs to edit except for special circumstances.
+Which actions are allowed to succeed and which are not is based on what is the most reasonable and expected outcome for the action -- the outcome that the game author most unlikely needs to edit except for special circumstances.
 Please experiment with different verbs in-game to see whether the default outcome of a particular action is suitable for your game -- otherwise redefine the outcome of the verb in the my_game instance.
 How this is done is described in more detail further below.
 
@@ -320,12 +320,14 @@ END THE basement.
 
 (The DOES ONLY here prevents the default message for jump, "You jump on the spot, to no avail." from being shown.)
 
+// @FIXME: XREF TO PAGE
+
 However, there are certain situations where you might wish to restrict the outcome for several verbs at once.
 Let's imagine the hero is tied into a chair and cannot move his arms or legs.
 Then, actions like examine, listen or think might still work, but actions like attack, eat and take should not be allowed to work.
 For these situations, the library offers a way to restrict several verbs at once.
 Look at the list of all library-defined verbs on p. 61-.
-Now, there is a library-defined attribute for each and every verb - CAN [verb].
+Now, there is a library-defined attribute for each and every verb -- CAN [verb].
 
 If you want to disable any action or actions from the start of a game, you can declare for example
 

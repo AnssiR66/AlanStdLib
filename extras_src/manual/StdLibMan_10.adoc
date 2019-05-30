@@ -406,7 +406,7 @@ HAS illegal_parameter_with_sg "That's not something you can $v with.".
 HAS illegal_parameter_with_pl "Those are not something you can $v with.".
 --------------------------------------------------------------------------------
 
-while a somewhat bigger group of verbs - attack_with, break_with, burn_with, close_with, cut_with, fill_with, lock_with, open_with, pry_with, push_with, unlock_with - are accompanied with a message one word longer: the word 'things' is added, for no other reason than that it sounds better than if left out, as far as these verbs are concerned:
+while a somewhat bigger group of verbs -- attack_with, break_with, burn_with, close_with, cut_with, fill_with, lock_with, open_with, pry_with, push_with, unlock_with -- are accompanied with a message one word longer: the word 'things' is added, for no other reason than that it sounds better than if left out, as far as these verbs are concerned:
 
 [source,alan]
 --------------------------------------------------------------------------------

@@ -435,7 +435,7 @@ END THE man.
 === The hero
 
 The hero instance is left out of the library altogether and can be defined from scratch by the game author.
-You won't need to define the hero in your game at all if you're happy with the response "You notice nothing unusual about yourself." when the player types [.play]#&gt; _x me_# (= examine myself) and if no attributes are needed for the hero (such as IS (NOT) hungry, HAS strength 20, etc.).
+You won't need to define the hero in your game at all if you're happy with the response [.play]#You notice nothing unusual about yourself.# when the player types [.play]#&gt; _x me_# (= examine myself) and if no attributes are needed for the hero (such as IS (NOT) hungry, HAS strength 20, etc.).
 There are also numerous other verb outcomes (than for examine) for the hero defined by default in the library:
 
 [example,role="gametranscript"]
@@ -461,7 +461,6 @@ END THE hero.
 --------------------------------------------------------------------------------
 
 
-
 The command [.play]#&gt; _x me_# would then produce
 
 [example,role="gametranscript"]
@@ -481,7 +480,7 @@ You're wearing an old jacket.
 ================================================================================
 
 
-If you wish to have the pieces of clothing worn by the hero listed at other verbs, like for example [.play]#&gt; _ x me_#, you should use the formulation LIST worn.:
+If you wish to have the pieces of clothing worn by the hero listed at other verbs, like for example [.play]#&gt; _x me_#, you should use the formulation LIST worn.:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -516,7 +515,7 @@ END THE notebook.
 
 Pieces of clothing, in addition to the above, need to defined as follows:
 
-// @FIXME: XRef to page:
+// @FIXME: XRef to page (in code):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -535,7 +534,7 @@ The hero is by default a container actor (so that it can pick up and carry thing
 
 === Describing NPCs
 
-When the player types 'examine \[actor\]', the response will be the default "You notice nothing unusual about \[the actor\].", unless some other description is defined for the ACTOR in the DOES ONLY part of the actor instance:
+When the player types [.play]#&gt; _examine [actor]_#, the response will be the default [.play]#You notice nothing unusual about [the actor].#, unless some other description is defined for the ACTOR in the DOES ONLY part of the actor instance:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -547,7 +546,7 @@ END THE boy.
 --------------------------------------------------------------------------------
 
 
-If you wish to have an ACTOR's possessions and worn clothing listed after examine, you should add "LIST [actor]." manually to the appropriate verb (typically examine) of the ACTOR instance:
+If you wish to have an ACTOR's possessions and worn clothing listed after examine, you should add `LIST [actor].` manually to the appropriate verb (typically examine) of the ACTOR instance:
 
 [source,alan]
 --------------------------------------------------------------------------------

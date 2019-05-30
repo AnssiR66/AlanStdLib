@@ -27,9 +27,9 @@
 
 [NOTE]
 ================================================================================
-The BACKGROUND and SCENERY classes introduced in v1.0 have been removed.
-For backgrounds, use the distant or NOT reachable attributes.
-For scenery objects, use the attribute scenery.
+The `BACKGROUND` and `SCENERY` classes introduced in v1.0 have been removed.
+For backgrounds, use the `distant` or `NOT reachable` attributes.
+For scenery objects, use the attribute `scenery`.
 ================================================================================
 
 // @ADDED:
@@ -41,7 +41,7 @@ As far as the hero is concerned, clothes are prevented from being worn in an ill
 For this, clothing objects have a number of numerical attributes that need to be used.
 Note that NPCs cannot wear clothing in layers.
 
-Thanks to Alan Bampton from whose 'xwear' extension the code for this class has been adopted.
+Thanks to Alan Bampton from whose '`xwear`' extension the code for this class has been adopted.
 
 A piece of clothing in your game code should look something similar to the following four examples.
 Explanations are given after the examples.
@@ -126,7 +126,7 @@ Which attribute(s) to use depends on the type of CLOTHING; see the clothing tabl
 You cannot decide the number yourself; look it up from the clothing table below.
 If the value of an attribute for a piece of CLOTHING is 0 in the table, don't mention this attribute in connection with your CLOTHING object.
 
-4. If the piece of CLOTHING is worn by any ACTOR - the hero or somebody else - be sure to include the piece of CLOTHING in the ACTOR's wearing attribute.
+4. If the piece of CLOTHING is worn by any ACTOR -- the hero or somebody else -- be sure to include the piece of CLOTHING in the ACTOR's wearing attribute.
 
 -- The above is enough; the rest is then handled automatically by the library.
 
@@ -296,7 +296,7 @@ It is currently off.
 
 
 
-Using the ex attribute, you can define a bit more personal response than "You notice nothing unusual..":
+Using the `ex` attribute, you can define a bit more personal response than [.play]#You notice nothing unusual...#:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -316,9 +316,13 @@ It is currently off.
 ================================================================================
 
 
+// @FIXME: Rephrase next 2 paragraphs:
+//  -- "with the mention of its being on or off ..."
+//  -- "the mention of its being on or off is not..."
+
 with the mention of its being on or off being displayed automatically.
 
-If you don't use the ex attribute but define the examine response to a DEVICE using "VERB examine DOES ONLY", the mention of its being on or off is not automatically displayed.
+If you don't use the `ex` attribute but define the examine response to a DEVICE using `VERB examine DOES ONLY`, the mention of its being on or off is not automatically displayed.
 You have to add it manually:
 
 [source,alan]

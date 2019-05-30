@@ -2386,7 +2386,7 @@ You eat all of the apple.</p>
 <h3 id="_the_hero"><a class="anchor" href="#_the_hero"></a>5.3. The hero</h3>
 <div class="paragraph">
 <p>The hero instance is left out of the library altogether and can be defined from scratch by the game author.
-You won&#8217;t need to define the hero in your game at all if you&#8217;re happy with the response "You notice nothing unusual about yourself." when the player types <span class="play">&gt; <em>x me</em></span> (= examine myself) and if no attributes are needed for the hero (such as IS (NOT) hungry, HAS strength 20, etc.).
+You won&#8217;t need to define the hero in your game at all if you&#8217;re happy with the response <span class="play">You notice nothing unusual about yourself.</span> when the player types <span class="play">&gt; <em>x me</em></span> (= examine myself) and if no attributes are needed for the hero (such as IS (NOT) hungry, HAS strength 20, etc.).
 There are also numerous other verb outcomes (than for examine) for the hero defined by default in the library:</p>
 </div>
 <div class="exampleblock gametranscript">
@@ -2430,7 +2430,7 @@ You&#8217;re wearing an old jacket.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If you wish to have the pieces of clothing worn by the hero listed at other verbs, like for example <span class="play">&gt; _ x me_</span>, you should use the formulation LIST worn.:</p>
+<p>If you wish to have the pieces of clothing worn by the hero listed at other verbs, like for example <span class="play">&gt; <em>x me</em></span>, you should use the formulation LIST worn.:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2473,7 +2473,7 @@ The hero is by default a container actor (so that it can pick up and carry thing
 <div class="sect2">
 <h3 id="_describing_npcs"><a class="anchor" href="#_describing_npcs"></a>5.4. Describing NPCs</h3>
 <div class="paragraph">
-<p>When the player types 'examine \[actor\]', the response will be the default "You notice nothing unusual about \[the actor\].", unless some other description is defined for the ACTOR in the DOES ONLY part of the actor instance:</p>
+<p>When the player types <span class="play">&gt; <em>examine [actor]</em></span>, the response will be the default <span class="play">You notice nothing unusual about [the actor].</span>, unless some other description is defined for the ACTOR in the DOES ONLY part of the actor instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2481,7 +2481,7 @@ The hero is by default a container actor (so that it can pick up and carry thing
 </div>
 </div>
 <div class="paragraph">
-<p>If you wish to have an ACTOR&#8217;s possessions and worn clothing listed after examine, you should add "LIST [actor]." manually to the appropriate verb (typically examine) of the ACTOR instance:</p>
+<p>If you wish to have an ACTOR&#8217;s possessions and worn clothing listed after examine, you should add <code>LIST [actor].</code> manually to the appropriate verb (typically examine) of the ACTOR instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2564,9 +2564,9 @@ You can for example answer a phone or a door, or you can answer a riddle written
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The BACKGROUND and SCENERY classes introduced in v1.0 have been removed.
-For backgrounds, use the distant or NOT reachable attributes.
-For scenery objects, use the attribute scenery.</p>
+<p>The <code>BACKGROUND</code> and <code>SCENERY</code> classes introduced in v1.0 have been removed.
+For backgrounds, use the <code>distant</code> or <code>NOT reachable</code> attributes.
+For scenery objects, use the attribute <code>scenery</code>.</p>
 </div>
 </td>
 </tr>
@@ -2581,7 +2581,7 @@ For this, clothing objects have a number of numerical attributes that need to be
 Note that NPCs cannot wear clothing in layers.</p>
 </div>
 <div class="paragraph">
-<p>Thanks to Alan Bampton from whose 'xwear' extension the code for this class has been adopted.</p>
+<p>Thanks to Alan Bampton from whose &#8216;xwear&#8217; extension the code for this class has been adopted.</p>
 </div>
 <div class="paragraph">
 <p>A piece of clothing in your game code should look something similar to the following four examples.
@@ -2648,7 +2648,7 @@ You cannot decide the number yourself; look it up from the clothing table below.
 If the value of an attribute for a piece of CLOTHING is 0 in the table, don&#8217;t mention this attribute in connection with your CLOTHING object.</p>
 </li>
 <li>
-<p>If the piece of CLOTHING is worn by any ACTOR - the hero or somebody else - be sure to include the piece of CLOTHING in the ACTOR&#8217;s wearing attribute.</p>
+<p>If the piece of CLOTHING is worn by any ACTOR&#8201;&#8212;&#8201;the hero or somebody else&#8201;&#8212;&#8201;be sure to include the piece of CLOTHING in the ACTOR&#8217;s wearing attribute.</p>
 </li>
 </ol>
 </div>
@@ -2855,7 +2855,7 @@ It is currently off.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Using the ex attribute, you can define a bit more personal response than "You notice nothing unusual..":</p>
+<p>Using the <code>ex</code> attribute, you can define a bit more personal response than <span class="play">You notice nothing unusual&#8230;&#8203;</span>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2878,7 +2878,7 @@ It is currently off.</p>
 <p>with the mention of its being on or off being displayed automatically.</p>
 </div>
 <div class="paragraph">
-<p>If you don&#8217;t use the ex attribute but define the examine response to a DEVICE using "VERB examine DOES ONLY", the mention of its being on or off is not automatically displayed.
+<p>If you don&#8217;t use the <code>ex</code> attribute but define the examine response to a DEVICE using <code>VERB examine DOES ONLY</code>, the mention of its being on or off is not automatically displayed.
 You have to add it manually:</p>
 </div>
 <div class="listingblock">
@@ -4548,7 +4548,7 @@ In other words, simulate entering and exiting by locating the hero in between lo
 <div class="paragraph">
 <p>If you try the various actions in-game, with the library imported, you will notice that some actions are successful and result in what the player commanded, while other actions do nothing (= the action is unsuccessful).
 For example the response to <span class="play">&gt; <em>drop [object]</em></span> will be <span class="play">Dropped.</span>, the carried object being rejected from the hero&#8217;s inventory and ending up in the location, while the response to <span class="play">&gt; <em>attack [thing]</em></span> is <span class="play">Resorting to brute force is not the solution here.</span>.
-Which actions are allowed to succeed and which are not is based on what is the most reasonable and expected outcome for the action - the outcome that the game author most unlikely needs to edit except for special circumstances.
+Which actions are allowed to succeed and which are not is based on what is the most reasonable and expected outcome for the action&#8201;&#8212;&#8201;the outcome that the game author most unlikely needs to edit except for special circumstances.
 Please experiment with different verbs in-game to see whether the default outcome of a particular action is suitable for your game&#8201;&#8212;&#8201;otherwise redefine the outcome of the verb in the my_game instance.
 How this is done is described in more detail further below.</p>
 </div>
@@ -4723,7 +4723,7 @@ Let&#8217;s imagine the hero is tied into a chair and cannot move his arms or le
 Then, actions like examine, listen or think might still work, but actions like attack, eat and take should not be allowed to work.
 For these situations, the library offers a way to restrict several verbs at once.
 Look at the list of all library-defined verbs on p. 61-.
-Now, there is a library-defined attribute for each and every verb - CAN [verb].</p>
+Now, there is a library-defined attribute for each and every verb&#8201;&#8212;&#8201;CAN [verb].</p>
 </div>
 <div class="paragraph">
 <p>If you want to disable any action or actions from the start of a game, you can declare for example</p>
@@ -5430,7 +5430,7 @@ The verbs kill_with, shoot_with and play_with use the following formulation:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>while a somewhat bigger group of verbs - attack_with, break_with, burn_with, close_with, cut_with, fill_with, lock_with, open_with, pry_with, push_with, unlock_with - are accompanied with a message one word longer: the word 'things' is added, for no other reason than that it sounds better than if left out, as far as these verbs are concerned:</p>
+<p>while a somewhat bigger group of verbs&#8201;&#8212;&#8201;attack_with, break_with, burn_with, close_with, cut_with, fill_with, lock_with, open_with, pry_with, push_with, unlock_with&#8201;&#8212;&#8201;are accompanied with a message one word longer: the word 'things' is added, for no other reason than that it sounds better than if left out, as far as these verbs are concerned:</p>
 </div>
 <div class="listingblock">
 <div class="content">
