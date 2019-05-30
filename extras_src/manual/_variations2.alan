@@ -3,6 +3,8 @@
 --------------------------------------------------------------------------------
 -- This file contains examples of the second way to achive something, when the
 -- Manual provides multiple ways to do the same thing.
+
+-- For more info, see NOTES in "_variations1.alan".
 --==============================================================================
 Import 'library.i'.
 The my_game IsA DEFINITION_BLOCK

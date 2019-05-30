@@ -4,9 +4,19 @@
 -- This file contains examples of the first way to achive something, when the
 -- Manual provides multiple ways to do the same thing.
 
--- IMPLICIT LOCATIONS here means that their definition is not shown in the book,
--- only things located there are. This means we can freely add exits and other
--- attributes to these locations for they won't show up in the book.
+-- NOTE 1: Unless an example requires defining specific EXITs, every location
+--         shall be north of the previous one, to keep the .a3sol file simple
+--         and linear. The order of the rooms doesn't matter because the Manual
+--         will import selected tagged regions from the final transcript. So we
+--         can just keep building the world one location after the other, but
+--         we'll try to keep the order of appearance of locations in the code as
+--         close as possible to their order of appearance in the Manual, so that
+--         it's easier to find examples in the source.
+
+-- NOTE 2: IMPLICIT LOCATIONS here means that their definition is not shown in
+--         the book, only things located there are. This means we can freely add
+--         exits and other attributes to these locations for they won't show up
+--         in the book.
 
 --==============================================================================
 Import 'library.i'.
