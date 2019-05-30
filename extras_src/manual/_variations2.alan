@@ -47,6 +47,7 @@ END THE front_door.
 -- This room location is IMPLICITLY used in the following examples:
 --    * §6.1.2. DEVICE
 THE lab IsA room.
+  EXIT north TO bedroom.
 END THE lab.
 --------------------------------------------------------------------------------
 -- §6.1.2. DEVICE
@@ -56,5 +57,23 @@ THE thingummyjig ISA DEVICE AT lab
   HAS ex "It's full of knobs and buttons.".
 END THE.
 -- end::thingummyjig[]
+--==============================================================================
+
+-- The Bedroom
+
+--==============================================================================
+-- This room location is IMPLICITLY used in the following examples:
+--    * §6.1.5. LIGHTSOURCE
+THE bedroom IsA room.
+END THE.
+--------------------------------------------------------------------------------
+-- §6.1.5. LIGHTSOURCE
+--------------------------------------------------------------------------------
+-- tag::lightsource[]
+THE lamp ISA LIGHTSOURCE AT bedroom
+  IS NOT natural.
+  HAS ex "It is an elegant table lamp with a blue lampshade.".
+END THE.
+-- end::lightsource[]
 --------------------------------------------------------------------------------
 Start at garden.

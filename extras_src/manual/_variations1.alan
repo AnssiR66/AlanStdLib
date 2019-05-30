@@ -32,7 +32,7 @@ End the.
 --    * §6.1.3. DOOR
 The garden IsA site.
   EXIT north TO lab.
-End the garden.
+End the.
 --------------------------------------------------------------------------------
 -- §4.1. The two methods for examining things
 --------------------------------------------------------------------------------
@@ -60,7 +60,8 @@ END THE front_door.
 -- This room location is IMPLICITLY used in the following examples:
 --    * §6.1.2. DEVICE
 THE lab IsA room.
-END THE lab.
+  EXIT north TO cave.
+END THE.
 --------------------------------------------------------------------------------
 -- §6.1.2. DEVICE
 --------------------------------------------------------------------------------
@@ -68,5 +69,36 @@ END THE lab.
 THE thingummyjig ISA DEVICE AT lab
 END THE.
 -- end::thingummyjig[]
+--==============================================================================
+
+-- The Cave
+
+--==============================================================================
+-- This room location is IMPLICITLY used in the following examples:
+--    * §6.1.5. LIGHTSOURCE
+THE cave IsA room.
+  EXIT north TO bedroom.
+END THE.
+--==============================================================================
+
+-- The Bedroom
+
+--==============================================================================
+-- This room location is IMPLICITLY used in the following examples:
+--    * §6.1.5. LIGHTSOURCE
+THE bedroom IsA room.
+END THE.
+--------------------------------------------------------------------------------
+-- §6.1.5. LIGHTSOURCE
+--------------------------------------------------------------------------------
+-- tag::lightsource[]
+THE torch ISA LIGHTSOURCE AT cave
+  IS lit.
+END THE.
+
+THE lamp ISA LIGHTSOURCE AT bedroom
+  IS NOT natural.
+END THE.
+-- end::lightsource[]
 --------------------------------------------------------------------------------
 Start at garden.

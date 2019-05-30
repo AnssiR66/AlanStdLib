@@ -14,3 +14,11 @@ NORTH
 ; tag::thingummyjig[]
 x thingummyjig
 ; end::thingummyjig[]
+; ------------------------------------------------------------------------------
+; §6.1.5. LIGHTSOURCE
+; ------------------------------------------------------------------------------
+; NOTE: Unlike "varation1", there's no 'cave' location here!
+NORTH ; GO TO BEDROOM
+; tag::lightsource_lamp[]
+x lamp
+; end::lightsource_lamp[]

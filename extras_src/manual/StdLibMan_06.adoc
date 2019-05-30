@@ -568,58 +568,83 @@ The default attributes for a LIGHTSOURCE object are: `natural`, `NOT lit`.
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE torch ISA LIGHTSOURCE AT cave
-  IS lit.
-END THE.
-
-THE lamp ISA LIGHTSOURCE AT bedroom
-  IS NOT natural.
-END THE.
+include::{utf8dir}/_variations1.alan[tag=lightsource]
 --------------------------------------------------------------------------------
+
+// [source,alan]
+// --------------------------------------------------------------------------------
+// THE torch ISA LIGHTSOURCE AT cave
+//   IS lit.
+// END THE.
+
+// THE lamp ISA LIGHTSOURCE AT bedroom
+//   IS NOT natural.
+// END THE.
+// --------------------------------------------------------------------------------
 
 
 Examining for example these instances in-game would yield
 
 [example,role="gametranscript"]
 ================================================================================
-&gt; _x torch_
-
-You notice nothing unusual about the torch.
-It is currently lit.
+include::{utf8dir}/_variations1.a3ADocLog[tag=lightsource_torch]
 ================================================================================
+
+// [example,role="gametranscript"]
+// ================================================================================
+// &gt; _x torch_
+
+// You notice nothing unusual about the torch.
+// It is currently lit.
+// ================================================================================
 
 and
 
 [example,role="gametranscript"]
 ================================================================================
-&gt; _x lamp_
-
-You notice nothing unusual about the lamp.
-It is currently off.
+include::{utf8dir}/_variations1.a3ADocLog[tag=lightsource_lamp]
 ================================================================================
 
+// [example,role="gametranscript"]
+// ================================================================================
+// &gt; _x lamp_
 
-(The opposites of the above messages would be "It is currently not lit." and "It is currently on.", respectively.)
+// You notice nothing unusual about the lamp.
+// It is currently off.
+// ================================================================================
+
+
+(The opposites of the above messages would be [.play]#It is currently not lit.# and [.play]#It is currently on.#, respectively.)
 
 If you add a specific examine response for either, you can use the `ex` attribute for the lightsource object to describe it, and after your description there will be an automatic description of its being lit or not lit:
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE lamp ISA LIGHTSOURCE AT bedroom
-  IS NOT natural.
-  HAS ex "It is an elegant table lamp with a blue lampshade."
-END THE.
+include::{utf8dir}/_variations2.alan[tag=lightsource]
 --------------------------------------------------------------------------------
+
+// [source,alan]
+// --------------------------------------------------------------------------------
+// THE lamp ISA LIGHTSOURCE AT bedroom
+//   IS NOT natural.
+//   HAS ex "It is an elegant table lamp with a blue lampshade."
+// END THE.
+// --------------------------------------------------------------------------------
 
 which yields
 
 [example,role="gametranscript"]
 ================================================================================
-&gt; _x lamp_
-
-It is an elegant table lamp with a blue lampshade.
-It is currently off.
+include::{utf8dir}/_variations2.a3ADocLog[tag=lightsource_lamp]
 ================================================================================
+
+// [example,role="gametranscript"]
+// ================================================================================
+// &gt; _x lamp_
+
+// It is an elegant table lamp with a blue lampshade.
+// It is currently off.
+// ================================================================================
 
 
 Using `VERB examine DOES ONLY…` you'll have to add manually the mention about the instance being on or off, for example:
