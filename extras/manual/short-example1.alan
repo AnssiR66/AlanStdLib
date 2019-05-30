@@ -1,0 +1,30 @@
+--------------------------------------------------------------------------------
+-- A very short complete game using minimal obligatory imports and coding.
+-- To win the game, the hero must go from room1 north to room2 and eat an apple.
+--------------------------------------------------------------------------------
+
+IMPORT 'library.i'.
+
+THE my_game ISA DEFINITION_BLOCK
+END THE.
+
+THE room1 ISA LOCATION
+  DESCRIPTION "North to room2."
+  EXIT north TO room2.
+END THE.
+
+THE room2 ISA LOCATION
+  DESCRIPTION "South to room1."
+  EXIT south TO room1.
+END THE.
+
+THE apple ISA OBJECT AT room2
+  IS edible.
+  
+  VERB eat
+    DOES "Congratulations!" QUIT.
+  END VERB.
+END THE.
+
+START AT room1.
+DESCRIBE banner.

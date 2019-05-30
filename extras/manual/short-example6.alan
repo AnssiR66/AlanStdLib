@@ -1,0 +1,63 @@
+--------------------------------------------------------------------------------
+-- A complete example game with locked doors and keys.
+
+-- This code reintroduces the situation used in example 1, with a locked door
+-- and two keys added.
+--------------------------------------------------------------------------------
+
+IMPORT 'lib_classes.i'.
+IMPORT 'lib_definitions.i'.
+IMPORT 'lib_locations.i'.
+IMPORT 'lib_messages.i'.
+IMPORT 'lib_verbs.i'.
+
+THE my_game ISA DEFINITION_BLOCK
+END THE.
+
+THE room1 ISA LOCATION
+  DESCRIPTION "North to room2."
+  EXIT north TO room2
+    CHECK locked_door_1 IS open
+      ELSE "The door to the north is on the way."
+  END EXIT.
+END THE.
+
+THE locked_door_1 ISA DOOR AT room1
+  DESCRIPTION ""
+  NAME door
+  HAS otherside locked_door_2.
+  IS lockable. IS locked.
+  HAS matching_key silver_key.
+END THE.
+
+THE silver_key ISA OBJECT AT room1
+  NAME silver key
+END THE.
+
+THE brass_key ISA OBJECT AT room1
+  NAME brass key
+END THE.
+
+THE room2 ISA LOCATION
+  DESCRIPTION "South to room1."
+  EXIT south TO room1
+    CHECK locked_door_2 IS open
+      ELSE "The door to the south is on the way."
+  END EXIT.
+END THE.
+
+THE locked_door_2 ISA DOOR AT room2
+  DESCRIPTION ""
+  NAME door
+END THE.
+
+THE apple ISA OBJECT AT room2
+  IS edible.
+  
+  VERB eat
+    DOES "Congratulations!" QUIT.
+  END VERB.
+END THE.
+
+START AT room1.
+DESCRIBE banner.

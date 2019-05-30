@@ -1,0 +1,42 @@
+
+-- EXAMPLE FILE NOT DEPLOYED IN "/extras/manual/" FOLDER!!!
+--------------------------------------------------------------------------------
+
+-- In this example of defining the `my_game` instance, the author has changed
+-- the default verb responses for `eat`, `climb` and `take_from`.
+
+-- In addition, the author has added a check and a response of his/her own to
+-- `take_from`:
+
+--------------------------------------------------------------------------------
+IMPORT 'library.i'.
+
+-- tag::shown[]
+THE my_game ISA DEFINITION_BLOCK
+  VERB eat
+    DOES ONLY
+      "You don't feel like eating anything in this game."
+  END VERB.
+
+  VERB climb
+    DOES ONLY
+      "Let's just stay on the ground, shall we?"
+  END VERB.
+
+  VERB take_from
+    WHEN obj
+      CHECK COUNT ISA ACTOR, AT hero = 1
+      -- ( = the hero himself)
+        ELSE "You don't want to take anything
+              while somebody might be looking."
+      DOES
+        "Triumphantly, you fish" SAY THE obj.
+        "out of"SAY THE holder. "."
+  END VERB.
+END THE.
+-- end::shown[]
+
+THE startlocation IsA site.
+END THE startlocation.
+
+START AT startlocation.

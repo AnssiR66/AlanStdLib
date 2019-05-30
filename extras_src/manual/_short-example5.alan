@@ -1,0 +1,30 @@
+
+-- EXAMPLE FILE NOT DEPLOYED IN "/extras/manual/" FOLDER!!!
+--------------------------------------------------------------------------------
+
+-- Here, the game author has added a check of his own to the library-defined
+-- drink verb and changed an illegal parameter message for the verbs
+-- look_behind, look_in, and look_under:
+
+--------------------------------------------------------------------------------
+IMPORT 'library.i'.
+
+THE HERO IsA ACTOR.
+  IS NOT thirsty.
+END THE HERO.
+
+-- tag::shown[]
+THE my_game ISA DEFINITION_BLOCK
+  VERB drink
+    CHECK hero IS thirsty
+      ELSE "You don't feel like drinking anything right now."
+    END VERB.
+
+  HAS illegal_parameter_there "You can't $v there.".
+END THE.
+-- end::shown[]
+
+THE startlocation IsA site.
+END THE startlocation.
+
+START AT startlocation.

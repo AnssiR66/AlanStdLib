@@ -1,0 +1,43 @@
+--------------------------------------------------------------------------------
+-- To win the game, the player must get a candy from the kitchen and give it to
+-- a crying child in the nursery.
+--------------------------------------------------------------------------------
+
+IMPORT 'library.i'.
+
+THE my_game ISA DEFINITION_BLOCK
+END THE.
+
+THE nursery ISA ROOM
+  DESCRIPTION "The kitchen is to the east."
+  EXIT east to kitchen.
+END THE.
+
+THE child ISA PERSON AT nursery
+  DESCRIPTION "There is a crying child here."
+  
+  VERB give
+    WHEN recipient
+      DOES ONLY
+        IF obj = candy
+          THEN "You give the candy to the child who stops
+                crying and starts licking it happily."
+          QUIT.
+        END IF.
+  END VERB.
+END THE.
+
+THE kitchen ISA ROOM
+  DESCRIPTION "You can go west, back to the nursery."
+  EXIT west TO nursery.
+END THE.
+
+THE table ISA SUPPORTER AT kitchen
+  IS NOT takeable.
+END THE.
+
+THE candy ISA OBJECT IN table
+  IS edible.
+END THE.
+
+START AT nursery.

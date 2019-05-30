@@ -1,0 +1,27 @@
+
+-- EXAMPLE FILE NOT DEPLOYED IN "/extras/manual/" FOLDER!!!
+--------------------------------------------------------------------------------
+
+-- Here, the author uses the automatic formulation for the game title, author,
+-- and other information:
+
+--------------------------------------------------------------------------------
+
+IMPORT 'library.i'.
+
+-- tag::shown[]
+THE my_game ISA DEFINITION_BLOCK
+  HAS title "The Lost Treasure".
+  HAS subtitle "An interactive treasure hunt".
+  HAS author "Sam".
+  HAS year 2019.
+  HAS version "1".
+END THE.
+
+THE garden ISA LOCATION
+  DESCRIPTION "..."
+END THE.
+
+START AT garden.
+DESCRIBE banner.
+-- end::shown[]
