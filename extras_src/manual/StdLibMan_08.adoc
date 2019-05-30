@@ -188,19 +188,13 @@ Add the check to the verb under the `my_game` instance and not in the library fi
 [source,alan]
 --------------------------------------------------------------------------------
 THE soup ISA OBJECT AT kitchen
+  IS edible.
+  IS NOT hot.
 
-IS edible.
-
-IS NOT hot.
-
-VERB eat
-
-CHECK soup IS hot
-
-ELSE "You must warm the soup first."
-
-END VERB.
-
+  VERB eat
+    CHECK soup IS hot
+      ELSE "You must warm the soup first."
+  END VERB.
 END THE soup.
 --------------------------------------------------------------------------------
 
@@ -214,7 +208,7 @@ The default outcome for the verb take would be carried out if the check was pass
 === Removing checks from library verbs
 
 This requires accessing the library.
-Go to 'lib_verbs.i', find the verb you wish to remove a check from and remove the check. (Make sure the behavior of things in your game remains sensible; the library verb checks, after all, are there to ensure that everything functions in a reasonable and rational way.)
+Go to `lib_verbs.i`, find the verb you wish to remove a check from and remove the check. (Make sure the behavior of things in your game remains sensible; the library verb checks, after all, are there to ensure that everything functions in a reasonable and rational way.)
 
 
 === Overriding default responses for library verbs
@@ -224,13 +218,9 @@ Define the verb outcome with a DOES ONLY section within the my_game instance:
 [source,alan]
 --------------------------------------------------------------------------------
 THE my_game ISA DEFINITION_BLOCK
-
-VERB examine
-
-DOES ONLY "Nothing special."
-
-END VERB.
-
+  VERB examine
+    DOES ONLY "Nothing special."
+  END VERB.
 END THE.
 --------------------------------------------------------------------------------
 
@@ -246,9 +236,7 @@ To create a verb that works globally and doesn't apply to any objects or actors:
 SYNTAX test = test.
 
 VERB test
-
-DOES "Test successful."
-
+  DOES "Test successful."
 END VERB.
 --------------------------------------------------------------------------------
 
@@ -261,19 +249,13 @@ Here is an example of creating a verb that applies to all objects in the game:
 [source,alan]
 --------------------------------------------------------------------------------
 SYNTAX test = test (obj)
-
-WHERE obj ISA OBJECT
-
-ELSE "That's not something you can test."
+  WHERE obj ISA OBJECT
+    ELSE "That's not something you can test."
 
 ADD TO EVERY OBJECT
-
-VERB test
-
-DOES "You test" SAY THE obj. "successfully."
-
-END VERB.
-
+  VERB test
+    DOES "You test" SAY THE obj. "successfully."
+  END VERB.
 END ADD.
 --------------------------------------------------------------------------------
 
@@ -285,15 +267,11 @@ Usually, when you need to restrict a verb from doing what it usually does (= whe
 [source,alan]
 --------------------------------------------------------------------------------
 THE book ISA OBJECT IN table
+  DESCRIPTION ""
 
-DESCRIPTION ""
-
-VERB examine
-
-DOES ONLY "It's a thick, heavy book with leather covers."
-
-END VERB.
-
+  VERB examine
+    DOES ONLY "It's a thick, heavy book with leather covers."
+  END VERB.
 END THE book.
 --------------------------------------------------------------------------------
 
@@ -304,15 +282,11 @@ or
 [source,alan]
 --------------------------------------------------------------------------------
 THE basement ISA ROOM
+  DESCRIPTION "..."
 
-DESCRIPTION "..."
-
-VERB jump
-
-DOES ONLY "The ceiling is too low here."
-
-END VERB.
-
+  VERB jump
+    DOES ONLY "The ceiling is too low here."
+  END VERB.
 END THE basement.
 --------------------------------------------------------------------------------
 
@@ -333,14 +307,10 @@ If you want to disable any action or actions from the start of a game, you can d
 
 [source,alan]
 --------------------------------------------------------------------------------
-HE my_game ISA DEFINITION_BLOCK
-
-CAN NOT jump.
-
-CAN NOT dance.
-
-CAN NOT sing.
-
+THE my_game ISA DEFINITION_BLOCK
+  CAN NOT jump.
+  CAN NOT dance.
+  CAN NOT sing.
 END THE my_game.
 --------------------------------------------------------------------------------
 
@@ -350,44 +320,31 @@ The above is a shorter way to disable verbs than
 [source,alan]
 --------------------------------------------------------------------------------
 THE my_game ISA DEFINITION_BLOCK
+  VERB jump
+    DOES ONLY "You can't do that."
+  END VERB.
 
-VERB jump
+  VERB dance
+    DOES ONLY "You can't do that."
+  END VERB.
 
-DOES ONLY "You can't do that."
-
-END VERB.
-
-VERB dance
-
-DOES ONLY "You can't do that."
-
-END VERB.
-
-VERB sing
-
-DOES ONLY "You can't do that."
-
-END VERB.
-
+  VERB sing
+    DOES ONLY "You can't do that."
+  END VERB.
 END THE my_game.
 --------------------------------------------------------------------------------
 
 A list of all such attributes, corresponding to all implemented library verbs and commands, would start like this:
 
+// @TODO: Check why 'again' is stropped? shouldn't need to be!
+
 [source,alan]
 --------------------------------------------------------------------------------
 CAN about.
-
-...
-
 CAN 'again'.
-
 CAN answer.
-
 CAN ask.
-
 CAN ask_for.
-
 CAN attack.
 --------------------------------------------------------------------------------
 
@@ -403,9 +360,7 @@ The default message is "You can't do that." but it can be easily edited:
 [source,alan]
 --------------------------------------------------------------------------------
 THE my_game ISA DEFINITION_BLOCK
-
-HAS restricted_response "That's not possible presently.".
-
+  HAS restricted_response "That's not possible presently.".
 END THE my_game.
 --------------------------------------------------------------------------------
 
@@ -414,9 +369,7 @@ or
 [source,alan]
 --------------------------------------------------------------------------------
 THE my_game ISA DEFINITION_BLOCK
-
-HAS restricted_response "But you're tied up!".
-
+  HAS restricted_response "But you're tied up!".
 END THE my_game.
 --------------------------------------------------------------------------------
 
@@ -429,27 +382,16 @@ One could do it like this:
 [source,alan]
 --------------------------------------------------------------------------------
 EVENT tied_up
-
-"Suddenly you're interrupted. A couple of crooks enter the room, grab hold of
-
-you, push you into a chair, gag you and tie you into it tightly. You cannot move
-
-your arms or legs."
-
-MAKE my_game NOT attack.
-
-MAKE my_game NOT attack_with.
-
-MAKE my_game NOT bite.
-
-MAKE my_game NOT break.
-
-MAKE my_game NOT burn.
-
-MAKE my_game NOT burn_with.
-
-...
-
+  "Suddenly you're interrupted. A couple of crooks enter the room,
+   grab hold of you, push you into a chair, gag you and tie you
+   into it tightly. You cannot move your arms or legs."
+  MAKE my_game NOT attack.
+  MAKE my_game NOT attack_with.
+  MAKE my_game NOT bite.
+  MAKE my_game NOT break.
+  MAKE my_game NOT burn.
+  MAKE my_game NOT burn_with.
+  ...
 END EVENT.
 --------------------------------------------------------------------------------
 
@@ -464,9 +406,7 @@ Thus the following coding would actually be unnecessary, but it is included here
 [source,alan]
 --------------------------------------------------------------------------------
 THE my_game ISA DEFINITION_BLOCK
-
-HAS restricted_level 0.
-
+  HAS restricted_level 0.
 END THE my_game.
 --------------------------------------------------------------------------------
 
@@ -508,21 +448,12 @@ If you anyway want an individual action verb to work additionally, you can for e
 [source,alan]
 --------------------------------------------------------------------------------
 EVENT tied_up
-
-"Suddenly your investigations are interrupted. A couple of crooks enter the
-
-room, grab hold of you, push you sitting on a chair and tie you into it tightly.
-
-You cannot move your arms or legs."
-
-SET restricted_level OF my_game TO 2.
-
--- all action verbs will be disabled
-
-MAKE my_game rub.
-
--- but 'rub' will work
-
+  "Suddenly your investigations are interrupted.
+   A couple of crooks enter the room, grab hold of you, push
+   you sitting on a chair and tie you into it tightly.
+   You cannot move your arms or legs."
+  SET restricted_level OF my_game TO 2. -- all action verbs will be disabled
+  MAKE my_game rub.                     -- but 'rub' will work
 END EVENT.
 --------------------------------------------------------------------------------
 +
@@ -547,17 +478,11 @@ Then, you should code
 [source,alan]
 --------------------------------------------------------------------------------
 THE my_game ISA DEFINITION_BLOCK
-
-HAS restricted_level 3.
-
-CAN 'look'.
-
-CAN examine.
-
-CAN 'use'.
-
-CAN use_with.
-
+  HAS restricted_level 3.
+  CAN 'look'.
+  CAN examine.
+  CAN 'use'.
+  CAN use_with.
 END THE.
 --------------------------------------------------------------------------------
 
@@ -634,13 +559,9 @@ You can achieve this by implementing
 [source,alan]
 --------------------------------------------------------------------------------
 THE loud_room ISA ROOM
-
-ENTERED
-
-SET restricted_level OF my_game TO 4.
-
-SET restricted_message OF my_game TO "\$v \$v...".
-
+  ENTERED
+    SET restricted_level OF my_game TO 4.
+    SET restricted_message OF my_game TO "\$v \$v...".
 END THE.
 --------------------------------------------------------------------------------
 +
@@ -651,17 +572,11 @@ You must edit the exit messages manually for each situation or location where yo
 [source,alan]
 --------------------------------------------------------------------------------
 THE loud_room ISA ROOM
-
-IS loud.
-
-EXIT east TO corridor
-
-CHECK loud_room IS NOT loud
-
-ELSE "east east..."
-
-END EXIT.
-
+  IS loud.
+  EXIT east TO corridor
+    CHECK loud_room IS NOT loud
+      ELSE "east east..."
+  END EXIT.
 END THE.
 --------------------------------------------------------------------------------
 +
@@ -671,13 +586,9 @@ For example, to achieve the Loud Room effect above:
 [source,alan]
 --------------------------------------------------------------------------------
 MESSAGE NO_SUCH:
-
-IF restricted_level OF my_game = 3
-
-THEN "\$v \$v..."
-
-ELSE "You can't see any such thing."
-
+  IF restricted_level OF my_game = 3
+    THEN "\$v \$v..."
+    ELSE "You can't see any such thing."
 END IF.
 --------------------------------------------------------------------------------
 +
@@ -689,23 +600,14 @@ Here is an example with the verb 'drive' which is not included in the library by
 [source,alan]
 --------------------------------------------------------------------------------
 THE my_game ISA DEFINITION_BLOCK
-
-CAN drive.
-
+  CAN drive.
 END THE.
 
 EVENT tied_up
-
-"One of the thugs ties you tightly into a chair, and you cannot
-
-move your arms or legs at all."
-
-SET restricted_level OF my_game TO 2.
-
-MAKE my_game NOT drive.
-
-* 'drive' being a verb you have defined
-
+  "One of the thugs ties you tightly into a chair,
+   and you cannot move your arms or legs at all."
+  SET restricted_level OF my_game TO 2.
+  MAKE my_game NOT drive. -- 'drive' being a verb you have defined
 END EVENT.
 --------------------------------------------------------------------------------
 +
@@ -718,15 +620,10 @@ First, declare the "CAN [verb]" attributes for your own verbs:
 [source,alan]
 --------------------------------------------------------------------------------
 THE my_game ISA DEFINITION_BLOCK
-
-CAN drive.
-
-CAN recall.
-
-CAN ride.
-
-CAN type.
-
+  CAN drive.
+  CAN recall.
+  CAN ride.
+  CAN type.
 END THE.
 --------------------------------------------------------------------------------
 +
@@ -735,30 +632,19 @@ Then, define when they will be restricted:
 [source,alan]
 --------------------------------------------------------------------------------
 WHEN restricted_level OF my_game > 1
-
--- three of the above are action verbs, so we restrict them
-
--- when the restricted_level is 2 or higher
-
-THEN
-
-MAKE my_game NOT drive.
-
-MAKE my_game NOT ride.
-
-MAKE my_game NOT type.
+  -- three of the above are action verbs, so we restrict them
+  -- when the restricted_level is 2 or higher
+  THEN
+    MAKE my_game NOT drive.
+    MAKE my_game NOT ride.
+    MAKE my_game NOT type.
 
 WHEN restricted_level OF my_game > 2
-
-THEN
-
-MAKE my_game NOT recall.
-
---
-
--- so we'll cancel it together with those verbs
-
-only (level 3 and higher)
+  THEN
+    MAKE my_game NOT recall.
+    -- recall is similar to examine, think, listen, etc.
+    -- so we'll cancel it together with those verbs
+    -- only (level 3 and higher)
 --------------------------------------------------------------------------------
 +
 To make these verbs work again, define:
@@ -766,11 +652,8 @@ To make these verbs work again, define:
 [source,alan]
 --------------------------------------------------------------------------------
 MAKE my_game drive.
-
 MAKE my_game recall.
-
 MAKE my_game ride.
-
 MAKE my_game type.
 --------------------------------------------------------------------------------
 +

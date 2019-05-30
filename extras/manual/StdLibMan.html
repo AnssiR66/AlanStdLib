@@ -3099,12 +3099,12 @@ It is an elegant table lamp with a blue lampshade. It is currently off.<br></p>
 <div class="sect3">
 <h4 id="_listed_container"><a class="anchor" href="#_listed_container"></a>6.1.6. LISTED_CONTAINER</h4>
 <div class="paragraph">
-<p>LISTED_CONTAINER is an object which has the container property.
-The contents of a LISTED_CONTAINER will be listed both after <span class="play">&gt; <em>look</em></span> (= in the room description), <span class="play">&gt; <em>look in</em></span> and <span class="play">&gt; <em>examine</em></span>, if it is open.
+<p><code>LISTED_CONTAINER</code> is an object which has the <code>container</code> property.
+The contents of a <code>LISTED_CONTAINER</code> will be listed both after <span class="play">&gt; <em>look</em></span> (= in the room description), <span class="play">&gt; <em>look in</em></span> and <span class="play">&gt; <em>examine</em></span>, if it is open.
 (The contents of a normal container object, as working by default in Alan 3, are not automatically listed after <span class="play">&gt; <em>examine</em></span> but only after <span class="play">&gt; <em>look</em></span> (=room description) and <span class="play">&gt; <em>look in</em></span>).</p>
 </div>
 <div class="paragraph">
-<p>To implement a LISTED_CONTAINER do for example like this:</p>
+<p>To implement a <code>LISTED_CONTAINER</code> do for example like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3112,9 +3112,9 @@ The contents of a LISTED_CONTAINER will be listed both after <span class="play">
 </div>
 </div>
 <div class="paragraph">
-<p>The contents of a LISTED_CONTAINER are also listed when it is opened.
-This doesn&#8217;t happen with normal containers (= OBJECTs that you give the container property).
-For the command <span class="play">&gt; <em>inventory</em></span> to list the contents of a LISTED_CONTAINER object the hero is carrying, redefine the verb <code>inventory</code> under the <code>my_game</code> instance in your source file for example this way:</p>
+<p>The contents of a <code>LISTED_CONTAINER</code> are also listed when it is opened.
+This doesn&#8217;t happen with normal containers (= OBJECTs that you give the <code>container</code> property).
+For the command <span class="play">&gt; <em>inventory</em></span> to list the contents of a <code>LISTED_CONTAINER</code> object the hero is carrying, redefine the verb <code>inventory</code> under the <code>my_game</code> instance in your source file for example this way:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3177,7 +3177,7 @@ To change this, declare for example</p>
 </div>
 <div class="paragraph">
 <p>In the example above, it wouldn&#8217;t be possible to put anything else in the drawer, for example a chair or a coffee cup.
-The response would be for example &#8220;The coffee cup doesn&#8217;t belong in the drawer.&#8221;, etc.</p>
+The response would be for example <span class="play">The coffee cup doesn&#8217;t belong in the drawer.</span>, etc.</p>
 </div>
 <div class="paragraph">
 <p>This applies not only to the verb <code>put_in</code> but also to <code>empty_in</code>, <code>pour_in</code> and <code>throw_in</code>.</p>
@@ -3215,7 +3215,7 @@ This would make the above coding unnecessary but would make the <code>take</code
 <div class="sect3">
 <h4 id="_sound"><a class="anchor" href="#_sound"></a>6.1.8. SOUND</h4>
 <div class="paragraph">
-<p>SOUND can be listened to but not examined, searched, smelled or manipulated.
+<p><code>SOUND</code> can be listened to but not examined, searched, smelled or manipulated.
 It cannot initially be turned on or off, this has to be implemented manually by giving the sound the <code>switchable</code> attribute.</p>
 </div>
 <div class="listingblock">
@@ -3227,7 +3227,7 @@ It cannot initially be turned on or off, this has to be implemented manually by 
 <div class="sect3">
 <h4 id="_supporter"><a class="anchor" href="#_supporter"></a>6.1.9. SUPPORTER</h4>
 <div class="paragraph">
-<p>SUPPORTER: You can put things on a SUPPORTER and you can stand, sit down or lie on it.</p>
+<p><code>SUPPORTER</code>: You can put things on a SUPPORTER and you can stand, sit down or lie on it.</p>
 </div>
 <div class="paragraph">
 <p>A SUPPORTER is declared to be a container, so that you can take things from it, as well.
@@ -4632,7 +4632,7 @@ Add the check to the verb under the <code>my_game</code> instance and not in the
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> soup <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> kitchen&#x000A;&#x000A;<span class="hl kwa">IS</span> edible<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">IS NOT</span> hot<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">VERB</span> eat&#x000A;&#x000A;<span class="hl kwa">CHECK</span> soup <span class="hl kwa">IS</span> hot&#x000A;&#x000A;<span class="hl kwa">ELSE</span> <span class="hl str">&quot;You must warm the soup first.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">END THE</span> soup<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> soup <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> kitchen&#x000A;  <span class="hl kwa">IS</span> edible<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">IS NOT</span> hot<span class="hl kwa">.</span>&#x000A;&#x000A;  <span class="hl kwa">VERB</span> eat&#x000A;    <span class="hl kwa">CHECK</span> soup <span class="hl kwa">IS</span> hot&#x000A;      <span class="hl kwa">ELSE</span> <span class="hl str">&quot;You must warm the soup first.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE</span> soup<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4644,7 +4644,7 @@ The default outcome for the verb take would be carried out if the check was pass
 <h3 id="_removing_checks_from_library_verbs"><a class="anchor" href="#_removing_checks_from_library_verbs"></a>8.5. Removing checks from library verbs</h3>
 <div class="paragraph">
 <p>This requires accessing the library.
-Go to 'lib_verbs.i', find the verb you wish to remove a check from and remove the check. (Make sure the behavior of things in your game remains sensible; the library verb checks, after all, are there to ensure that everything functions in a reasonable and rational way.)</p>
+Go to <code>lib_verbs.i</code>, find the verb you wish to remove a check from and remove the check. (Make sure the behavior of things in your game remains sensible; the library verb checks, after all, are there to ensure that everything functions in a reasonable and rational way.)</p>
 </div>
 </div>
 <div class="sect2">
@@ -4654,7 +4654,7 @@ Go to 'lib_verbs.i', find the verb you wish to remove a check from and remove th
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;&#x000A;<span class="hl kwa">VERB</span> examine&#x000A;&#x000A;<span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;Nothing special.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">VERB</span> examine&#x000A;    <span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;Nothing special.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
 </div>
 </div>
 </div>
@@ -4668,7 +4668,7 @@ Go to 'lib_verbs.i', find the verb you wish to remove a check from and remove th
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">SYNTAX</span> test <span class="hl opt">=</span> test<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">VERB</span> test&#x000A;&#x000A;<span class="hl kwa">DOES</span> <span class="hl str">&quot;Test successful.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">SYNTAX</span> test <span class="hl opt">=</span> test<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">VERB</span> test&#x000A;  <span class="hl kwa">DOES</span> <span class="hl str">&quot;Test successful.&quot;</span>&#x000A;<span class="hl kwa">END VERB.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4676,7 +4676,7 @@ Go to 'lib_verbs.i', find the verb you wish to remove a check from and remove th
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">SYNTAX</span> test <span class="hl opt">=</span> test <span class="hl opt">(</span>obj<span class="hl opt">)</span>&#x000A;&#x000A;<span class="hl kwa">WHERE</span> obj <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span>&#x000A;&#x000A;<span class="hl kwa">ELSE</span> <span class="hl str">&quot;That&#39;s not something you can test.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">ADD TO EVERY</span> <span class="hl kwb">OBJECT</span>&#x000A;&#x000A;<span class="hl kwa">VERB</span> test&#x000A;&#x000A;<span class="hl kwa">DOES</span> <span class="hl str">&quot;You test&quot;</span> <span class="hl kwa">SAY THE</span> obj<span class="hl kwa">.</span> <span class="hl str">&quot;successfully.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">END ADD.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">SYNTAX</span> test <span class="hl opt">=</span> test <span class="hl opt">(</span>obj<span class="hl opt">)</span>&#x000A;  <span class="hl kwa">WHERE</span> obj <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span>&#x000A;    <span class="hl kwa">ELSE</span> <span class="hl str">&quot;That&#39;s not something you can test.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">ADD TO EVERY</span> <span class="hl kwb">OBJECT</span>&#x000A;  <span class="hl kwa">VERB</span> test&#x000A;    <span class="hl kwa">DOES</span> <span class="hl str">&quot;You test&quot;</span> <span class="hl kwa">SAY THE</span> obj<span class="hl kwa">.</span> <span class="hl str">&quot;successfully.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END ADD.</span></code></pre>
 </div>
 </div>
 </div>
@@ -4687,7 +4687,7 @@ Go to 'lib_verbs.i', find the verb you wish to remove a check from and remove th
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> book <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">IN</span> table&#x000A;&#x000A;<span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;&quot;</span>&#x000A;&#x000A;<span class="hl kwa">VERB</span> examine&#x000A;&#x000A;<span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;It&#39;s a thick, heavy book with leather covers.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">END THE</span> book<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> book <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">IN</span> table&#x000A;  <span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;&quot;</span>&#x000A;&#x000A;  <span class="hl kwa">VERB</span> examine&#x000A;    <span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;It&#39;s a thick, heavy book with leather covers.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE</span> book<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4698,7 +4698,7 @@ Go to 'lib_verbs.i', find the verb you wish to remove a check from and remove th
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> basement <span class="hl kwa">ISA</span> ROOM&#x000A;&#x000A;<span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;...&quot;</span>&#x000A;&#x000A;<span class="hl kwa">VERB</span> jump&#x000A;&#x000A;<span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;The ceiling is too low here.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">END THE</span> basement<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> basement <span class="hl kwa">ISA</span> ROOM&#x000A;  <span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;...&quot;</span>&#x000A;&#x000A;  <span class="hl kwa">VERB</span> jump&#x000A;    <span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;The ceiling is too low here.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE</span> basement<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4717,7 +4717,7 @@ Now, there is a library-defined attribute for each and every verb&#8201;&#8212;&
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan">HE my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;&#x000A;<span class="hl kwa">CAN NOT</span> jump<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">CAN NOT</span> dance<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">CAN NOT</span> sing<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE</span> my_game<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">CAN NOT</span> jump<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">CAN NOT</span> dance<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">CAN NOT</span> sing<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE</span> my_game<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4726,7 +4726,7 @@ The above is a shorter way to disable verbs than</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;&#x000A;<span class="hl kwa">VERB</span> jump&#x000A;&#x000A;<span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;You can&#39;t do that.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">VERB</span> dance&#x000A;&#x000A;<span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;You can&#39;t do that.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">VERB</span> sing&#x000A;&#x000A;<span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;You can&#39;t do that.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">END THE</span> my_game<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">VERB</span> jump&#x000A;    <span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;You can&#39;t do that.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;&#x000A;  <span class="hl kwa">VERB</span> dance&#x000A;    <span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;You can&#39;t do that.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;&#x000A;  <span class="hl kwa">VERB</span> sing&#x000A;    <span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;You can&#39;t do that.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE</span> my_game<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4734,7 +4734,7 @@ The above is a shorter way to disable verbs than</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">CAN</span> about<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">...</span>&#x000A;&#x000A;<span class="hl kwa">CAN</span> &#39;again&#39;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">CAN</span> answer<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">CAN</span> ask<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">CAN</span> ask_for<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">CAN</span> attack<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">CAN</span> about<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">CAN</span> &#39;again&#39;<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">CAN</span> answer<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">CAN</span> ask<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">CAN</span> ask_for<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">CAN</span> attack<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4746,7 +4746,7 @@ The default message is "You can&#8217;t do that." but it can be easily edited:</
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;&#x000A;<span class="hl kwa">HAS</span> restricted_response <span class="hl str">&quot;That&#39;s not possible presently.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE</span> my_game<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">HAS</span> restricted_response <span class="hl str">&quot;That&#39;s not possible presently.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE</span> my_game<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4754,7 +4754,7 @@ The default message is "You can&#8217;t do that." but it can be easily edited:</
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;&#x000A;<span class="hl kwa">HAS</span> restricted_response <span class="hl str">&quot;But you&#39;re tied up!&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE</span> my_game<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">HAS</span> restricted_response <span class="hl str">&quot;But you&#39;re tied up!&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE</span> my_game<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4765,7 +4765,7 @@ One could do it like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">EVENT</span> tied_up&#x000A;&#x000A;<span class="hl str">&quot;Suddenly you&#39;re interrupted. A couple of crooks enter the room, grab hold of</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">you, push you into a chair, gag you and tie you into it tightly. You cannot move</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">your arms or legs.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> attack<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> attack_with<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> bite<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> break<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> burn<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> burn_with<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">...</span>&#x000A;&#x000A;<span class="hl kwa">END EVENT.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">EVENT</span> tied_up&#x000A;  <span class="hl str">&quot;Suddenly you&#39;re interrupted. A couple of crooks enter the room,</span>&#x000A;<span class="hl str">   grab hold of you, push you into a chair, gag you and tie you</span>&#x000A;<span class="hl str">   into it tightly. You cannot move your arms or legs.&quot;</span>&#x000A;  <span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> attack<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> attack_with<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> bite<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> break<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> burn<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> burn_with<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">...</span>&#x000A;<span class="hl kwa">END EVENT.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4775,7 +4775,7 @@ Thus the following coding would actually be unnecessary, but it is included here
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;&#x000A;<span class="hl kwa">HAS</span> restricted_level <span class="hl num">0</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE</span> my_game<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">HAS</span> restricted_level <span class="hl num">0</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE</span> my_game<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4828,7 +4828,7 @@ Sensory verbs and "passive" action verbs like look, examine, smell, listen, thin
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">EVENT</span> tied_up&#x000A;&#x000A;<span class="hl str">&quot;Suddenly your investigations are interrupted. A couple of crooks enter the</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">room, grab hold of you, push you sitting on a chair and tie you into it tightly.</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">You cannot move your arms or legs.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">SET</span> restricted_level <span class="hl kwa">OF</span> my_game <span class="hl kwa">TO</span> <span class="hl num">2</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl slc">-- all action verbs will be disabled</span>&#x000A;&#x000A;<span class="hl kwa">MAKE</span> my_game rub<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl slc">-- but &#39;rub&#39; will work</span>&#x000A;&#x000A;<span class="hl kwa">END EVENT.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">EVENT</span> tied_up&#x000A;  <span class="hl str">&quot;Suddenly your investigations are interrupted.</span>&#x000A;<span class="hl str">   A couple of crooks enter the room, grab hold of you, push</span>&#x000A;<span class="hl str">   you sitting on a chair and tie you into it tightly.</span>&#x000A;<span class="hl str">   You cannot move your arms or legs.&quot;</span>&#x000A;  <span class="hl kwa">SET</span> restricted_level <span class="hl kwa">OF</span> my_game <span class="hl kwa">TO</span> <span class="hl num">2</span><span class="hl kwa">.</span> <span class="hl slc">-- all action verbs will be disabled</span>&#x000A;  <span class="hl kwa">MAKE</span> my_game rub<span class="hl kwa">.</span>                     <span class="hl slc">-- but &#39;rub&#39; will work</span>&#x000A;<span class="hl kwa">END EVENT.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4858,7 +4858,7 @@ Only meta verbs like save, quit, restore and about work.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;&#x000A;<span class="hl kwa">HAS</span> restricted_level <span class="hl num">3</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">CAN</span> &#39;look&#39;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">CAN</span> examine<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">CAN</span> &#39;use&#39;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">CAN</span> use_with<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">HAS</span> restricted_level <span class="hl num">3</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">CAN</span> &#39;look&#39;<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">CAN</span> examine<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">CAN</span> &#39;use&#39;<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">CAN</span> use_with<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
 </div>
 </div>
 </li>
@@ -4920,7 +4920,7 @@ quit quit&#8230;&#8203;</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> loud_room <span class="hl kwa">ISA</span> ROOM&#x000A;&#x000A;<span class="hl kwa">ENTERED</span>&#x000A;&#x000A;<span class="hl kwa">SET</span> restricted_level <span class="hl kwa">OF</span> my_game <span class="hl kwa">TO</span> <span class="hl num">4</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">SET</span> restricted_message <span class="hl kwa">OF</span> my_game <span class="hl kwa">TO</span> <span class="hl str">&quot;\</span><span class="hl esc">$v</span> <span class="hl str">\</span><span class="hl esc">$v</span><span class="hl str">...&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> loud_room <span class="hl kwa">ISA</span> ROOM&#x000A;  <span class="hl kwa">ENTERED</span>&#x000A;    <span class="hl kwa">SET</span> restricted_level <span class="hl kwa">OF</span> my_game <span class="hl kwa">TO</span> <span class="hl num">4</span><span class="hl kwa">.</span>&#x000A;    <span class="hl kwa">SET</span> restricted_message <span class="hl kwa">OF</span> my_game <span class="hl kwa">TO</span> <span class="hl str">&quot;\</span><span class="hl esc">$v</span> <span class="hl str">\</span><span class="hl esc">$v</span><span class="hl str">...&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4930,7 +4930,7 @@ You must edit the exit messages manually for each situation or location where yo
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> loud_room <span class="hl kwa">ISA</span> ROOM&#x000A;&#x000A;<span class="hl kwa">IS</span> loud<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">EXIT</span> east <span class="hl kwa">TO</span> corridor&#x000A;&#x000A;<span class="hl kwa">CHECK</span> loud_room <span class="hl kwa">IS NOT</span> loud&#x000A;&#x000A;<span class="hl kwa">ELSE</span> <span class="hl str">&quot;east east...&quot;</span>&#x000A;&#x000A;<span class="hl kwa">END EXIT.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> loud_room <span class="hl kwa">ISA</span> ROOM&#x000A;  <span class="hl kwa">IS</span> loud<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">EXIT</span> east <span class="hl kwa">TO</span> corridor&#x000A;    <span class="hl kwa">CHECK</span> loud_room <span class="hl kwa">IS NOT</span> loud&#x000A;      <span class="hl kwa">ELSE</span> <span class="hl str">&quot;east east...&quot;</span>&#x000A;  <span class="hl kwa">END EXIT.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4939,7 +4939,7 @@ For example, to achieve the Loud Room effect above:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">MESSAGE</span> NO_SUCH<span class="hl kwa">:</span>&#x000A;&#x000A;<span class="hl kwa">IF</span> restricted_level <span class="hl kwa">OF</span> my_game <span class="hl opt">=</span> <span class="hl num">3</span>&#x000A;&#x000A;<span class="hl kwa">THEN</span> <span class="hl str">&quot;\</span><span class="hl esc">$v</span> <span class="hl str">\</span><span class="hl esc">$v</span><span class="hl str">...&quot;</span>&#x000A;&#x000A;<span class="hl kwa">ELSE</span> <span class="hl str">&quot;You can&#39;t see any such thing.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">END IF.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">MESSAGE</span> NO_SUCH<span class="hl kwa">:</span>&#x000A;  <span class="hl kwa">IF</span> restricted_level <span class="hl kwa">OF</span> my_game <span class="hl opt">=</span> <span class="hl num">3</span>&#x000A;    <span class="hl kwa">THEN</span> <span class="hl str">&quot;\</span><span class="hl esc">$v</span> <span class="hl str">\</span><span class="hl esc">$v</span><span class="hl str">...&quot;</span>&#x000A;    <span class="hl kwa">ELSE</span> <span class="hl str">&quot;You can&#39;t see any such thing.&quot;</span>&#x000A;<span class="hl kwa">END IF.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4960,7 +4960,7 @@ Here is an example with the verb 'drive' which is not included in the library by
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;&#x000A;<span class="hl kwa">CAN</span> drive<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">EVENT</span> tied_up&#x000A;&#x000A;<span class="hl str">&quot;One of the thugs ties you tightly into a chair, and you cannot</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">move your arms or legs at all.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">SET</span> restricted_level <span class="hl kwa">OF</span> my_game <span class="hl kwa">TO</span> <span class="hl num">2</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> drive<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl opt">*</span> &#39;drive&#39; being a <span class="hl kwa">verb</span> you have defined&#x000A;&#x000A;<span class="hl kwa">END EVENT.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">CAN</span> drive<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">EVENT</span> tied_up&#x000A;  <span class="hl str">&quot;One of the thugs ties you tightly into a chair,</span>&#x000A;<span class="hl str">   and you cannot move your arms or legs at all.&quot;</span>&#x000A;  <span class="hl kwa">SET</span> restricted_level <span class="hl kwa">OF</span> my_game <span class="hl kwa">TO</span> <span class="hl num">2</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> drive<span class="hl kwa">.</span> <span class="hl slc">-- &#39;drive&#39; being a verb you have defined</span>&#x000A;<span class="hl kwa">END EVENT.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4974,7 +4974,7 @@ Here is an example with the verb 'drive' which is not included in the library by
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;&#x000A;<span class="hl kwa">CAN</span> drive<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">CAN</span> recall<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">CAN</span> ride<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">CAN</span> type<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">CAN</span> drive<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">CAN</span> recall<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">CAN</span> ride<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">CAN</span> type<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4982,7 +4982,7 @@ Here is an example with the verb 'drive' which is not included in the library by
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">WHEN</span> restricted_level <span class="hl kwa">OF</span> my_game <span class="hl opt">&gt;</span> <span class="hl num">1</span>&#x000A;&#x000A;<span class="hl slc">-- three of the above are action verbs, so we restrict them</span>&#x000A;&#x000A;<span class="hl slc">-- when the restricted_level is 2 or higher</span>&#x000A;&#x000A;<span class="hl kwa">THEN</span>&#x000A;&#x000A;<span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> drive<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> ride<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> type<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">WHEN</span> restricted_level <span class="hl kwa">OF</span> my_game <span class="hl opt">&gt;</span> <span class="hl num">2</span>&#x000A;&#x000A;<span class="hl kwa">THEN</span>&#x000A;&#x000A;<span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> recall<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl slc">--</span>&#x000A;&#x000A;<span class="hl slc">-- so we&#39;ll cancel it together with those verbs</span>&#x000A;&#x000A;<span class="hl kwa">only</span> <span class="hl opt">(</span>level <span class="hl num">3</span> <span class="hl kwa">and</span> higher<span class="hl opt">)</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">WHEN</span> restricted_level <span class="hl kwa">OF</span> my_game <span class="hl opt">&gt;</span> <span class="hl num">1</span>&#x000A;  <span class="hl slc">-- three of the above are action verbs, so we restrict them</span>&#x000A;  <span class="hl slc">-- when the restricted_level is 2 or higher</span>&#x000A;  <span class="hl kwa">THEN</span>&#x000A;    <span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> drive<span class="hl kwa">.</span>&#x000A;    <span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> ride<span class="hl kwa">.</span>&#x000A;    <span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> type<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">WHEN</span> restricted_level <span class="hl kwa">OF</span> my_game <span class="hl opt">&gt;</span> <span class="hl num">2</span>&#x000A;  <span class="hl kwa">THEN</span>&#x000A;    <span class="hl kwa">MAKE</span> my_game <span class="hl kwa">NOT</span> recall<span class="hl kwa">.</span>&#x000A;    <span class="hl slc">-- recall is similar to examine, think, listen, etc.</span>&#x000A;    <span class="hl slc">-- so we&#39;ll cancel it together with those verbs</span>&#x000A;    <span class="hl slc">-- only (level 3 and higher)</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4990,7 +4990,7 @@ Here is an example with the verb 'drive' which is not included in the library by
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">MAKE</span> my_game drive<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">MAKE</span> my_game recall<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">MAKE</span> my_game ride<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">MAKE</span> my_game type<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">MAKE</span> my_game drive<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">MAKE</span> my_game recall<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">MAKE</span> my_game ride<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">MAKE</span> my_game type<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5074,7 +5074,7 @@ This is done through attributes of the <code>my_game</code> instance.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">WHEN</span> treasures_found <span class="hl kwa">OF</span> my_game <span class="hl opt">=</span> <span class="hl num">10</span>&#x000A;&#x000A;<span class="hl kwa">THEN</span> <span class="hl str">&quot;Hurrah! You made it!&quot;</span> <span class="hl kwa">QUIT.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">WHEN</span> treasures_found <span class="hl kwa">OF</span> my_game <span class="hl opt">=</span> <span class="hl num">10</span>&#x000A;  <span class="hl kwa">THEN</span> <span class="hl str">&quot;Hurrah! You made it!&quot;</span> <span class="hl kwa">QUIT.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5095,7 +5095,7 @@ This is done through attributes of the <code>my_game</code> instance.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> title <span class="hl str">&quot;My New Game&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> subtitle <span class="hl str">&quot;&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> author <span class="hl str">&quot;An ALAN Author&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> year <span class="hl num">0000</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> version <span class="hl str">&quot;1&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> title <span class="hl str">&quot;My New Game&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> subtitle <span class="hl str">&quot;&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> author <span class="hl str">&quot;An ALAN Author&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> year <span class="hl num">0000</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> version <span class="hl str">&quot;1&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5111,7 +5111,7 @@ This enables any kind of textual input to describe the current version, for exam
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> title <span class="hl str">&quot;The House In The Fog&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> subtitle <span class="hl str">&quot;An interactive ghost hunt&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> author <span class="hl str">&quot;Xavier Y. Zamborsky&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> year <span class="hl num">2018</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> version <span class="hl str">&quot;1&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> title <span class="hl str">&quot;The House In The Fog&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> subtitle <span class="hl str">&quot;An interactive ghost hunt&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> author <span class="hl str">&quot;Xavier Y. Zamborsky&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> year <span class="hl num">2018</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> version <span class="hl str">&quot;1&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -5169,7 +5169,7 @@ Version 1</p>
 <h3 id="_2_attributes_for_the_hero"><a class="anchor" href="#_2_attributes_for_the_hero"></a>10.2. 2. Attributes for the hero</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> hero_worn_header <span class="hl str">&quot;You are wearing&quot;</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> hero_worn_else <span class="hl str">&quot;You are not wearing anything.&quot;</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> hero_worn_header <span class="hl str">&quot;You are wearing&quot;</span>&#x000A;<span class="hl kwa">HAS</span> hero_worn_else   <span class="hl str">&quot;You are not wearing anything.&quot;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5180,7 +5180,7 @@ If the author wishes to have the CLOTHING objects worn by the hero described aft
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> <span class="hl kwc">hero</span> <span class="hl kwa">ISA</span> <span class="hl kwb">ACTOR</span>&#x000A;&#x000A;<span class="hl kwa">...</span>&#x000A;&#x000A;<span class="hl kwa">VERB</span> examine&#x000A;&#x000A;<span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;Blah blah...&quot;</span>&#x000A;&#x000A;<span class="hl kwa">LIST</span> worn<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">END THE</span> <span class="hl kwc">hero</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> <span class="hl kwc">hero</span> <span class="hl kwa">ISA</span> <span class="hl kwb">ACTOR</span>&#x000A;  <span class="hl kwa">...</span>&#x000A;  <span class="hl kwa">VERB</span> examine&#x000A;    <span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;Blah blah...&quot;</span>&#x000A;    <span class="hl kwa">LIST</span> worn<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE</span> <span class="hl kwc">hero</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 </div>
@@ -5340,7 +5340,7 @@ In the following there are variations of the above message when a preposition is
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_about_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">about.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_about_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">about.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_about_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">about.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_about_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">about.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5356,7 +5356,7 @@ In the following there are variations of the above message when a preposition is
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_for_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">for.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_for_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">for.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_for_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">for.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_for_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">for.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5364,7 +5364,7 @@ In the following there are variations of the above message when a preposition is
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_from_sg <span class="hl str">&quot;That&#39;s not something you can take things from.</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">HAS illegal_parameter_from_pl &quot;</span>Those <span class="hl kwa">are not</span> something you <span class="hl kwa">can</span> take things&#x000A;&#x000A;<span class="hl kwa">from.</span><span class="hl str">&quot;.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_from_sg <span class="hl str">&quot;That&#39;s not something you can take things from.</span>&#x000A;<span class="hl str">HAS illegal_parameter_from_pl &quot;</span>Those <span class="hl kwa">are not</span> something you <span class="hl kwa">can</span> take things <span class="hl kwa">from.</span><span class="hl str">&quot;.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5372,7 +5372,7 @@ In the following there are variations of the above message when a preposition is
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_in_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">in.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_in_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">in.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_in_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">in.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_in_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">in.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5380,7 +5380,7 @@ In the following there are variations of the above message when a preposition is
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_on_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">on.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_on_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">on.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_on_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">on.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_on_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">on.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5388,7 +5388,7 @@ In the following there are variations of the above message when a preposition is
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_off_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">off.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_off_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">off.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_off_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">off.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_off_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">off.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5396,7 +5396,7 @@ In the following there are variations of the above message when a preposition is
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_to_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">to.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_to_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">to.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_to_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">to.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_to_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">to.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5404,7 +5404,7 @@ In the following there are variations of the above message when a preposition is
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter2_to_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">things to.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter2_to_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">things to.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter2_to_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">things to.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> illegal_parameter2_to_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">things to.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5413,7 +5413,7 @@ The verbs kill_with, shoot_with and play_with use the following formulation:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_with_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">with.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_with_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">with.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_with_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">with.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_with_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">with.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5421,7 +5421,7 @@ The verbs kill_with, shoot_with and play_with use the following formulation:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter2_with_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">things with.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter2_with_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">things</span>&#x000A;<span class="hl str">with.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter2_with_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">things with.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> illegal_parameter2_with_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">things</span>&#x000A;<span class="hl str">with.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5429,7 +5429,7 @@ The verbs kill_with, shoot_with and play_with use the following formulation:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_talk_sg <span class="hl str">&quot;That&#39;s not something you can talk to.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_talk_pl <span class="hl str">&quot;Those are not something you can talk to.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_talk_sg <span class="hl str">&quot;That&#39;s not something you can talk to.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_talk_pl <span class="hl str">&quot;Those are not something you can talk to.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5440,12 +5440,7 @@ The verbs kill_with, shoot_with and play_with use the following formulation:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_consult_sg <span class="hl str">&quot;That&#39;s not something you can find</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">information about.&quot;</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_consult_pl <span class="hl str">&quot;Those are not something you can find</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">information about.&quot;</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_consult_sg <span class="hl str">&quot;That&#39;s not something you can find</span>&#x000A;<span class="hl str">                                  information about.&quot;</span>&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_consult_pl <span class="hl str">&quot;Those are not something you can find</span>&#x000A;<span class="hl str">                                  information about.&quot;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5453,7 +5448,7 @@ The verbs kill_with, shoot_with and play_with use the following formulation:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_examine_sg <span class="hl str">&quot;That&#39;s not something you can examine.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_examine_pl <span class="hl str">&quot;Those are not something you can examine.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_examine_sg <span class="hl str">&quot;That&#39;s not something you can examine.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_examine_pl <span class="hl str">&quot;Those are not something you can examine.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5464,7 +5459,7 @@ The verbs kill_with, shoot_with and play_with use the following formulation:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_look_out_sg <span class="hl str">&quot;That&#39;s not something you can look out of.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_look_out_pl <span class="hl str">&quot;Those are not something you can look out</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">of.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_look_through <span class="hl str">&quot;You can&#39;t look through</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_look_out_sg  <span class="hl str">&quot;That&#39;s not something you can look out of.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_look_out_pl  <span class="hl str">&quot;Those are not something you can look out of.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_look_through <span class="hl str">&quot;You can&#39;t look through</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="sect3">
@@ -5496,7 +5491,7 @@ The verbs in which this message is found are <code>empty_in</code>, <code>pour_i
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_string <span class="hl str">&quot;Please state inside double quotes (&quot;</span><span class="hl str">&quot;&quot;</span><span class="hl str">&quot;) what</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">you want to</span> <span class="hl esc">$v</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_string <span class="hl str">&quot;Please state inside double quotes (&quot;</span><span class="hl str">&quot;&quot;</span><span class="hl str">&quot;) what</span>&#x000A;<span class="hl str">                              you want to</span> <span class="hl esc">$v</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5531,7 +5526,7 @@ The verbs in which this message is found are <code>empty_in</code>, <code>pour_i
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_what_sg <span class="hl str">&quot;That&#39;s not something I know about.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_what_pl <span class="hl str">&quot;Those are not something I know about.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_who_sg <span class="hl str">&quot;That&#39;s not somebody I know about.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_who_pl <span class="hl str">&quot;Those are not somebody I know about.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> illegal_parameter_what_sg <span class="hl str">&quot;That&#39;s not something I know about.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_what_pl <span class="hl str">&quot;Those are not something I know about.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_who_sg  <span class="hl str">&quot;That&#39;s not somebody I know about.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> illegal_parameter_who_pl  <span class="hl str">&quot;Those are not somebody I know about.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 </div>
@@ -5564,7 +5559,7 @@ You&#8217;ll quickly notice that the list is quite long, and listing any number 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_suitable_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_suitable_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5617,7 +5612,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 <p><code>ask_for</code>:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_suitable_for_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">for.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj2_suitable_for_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">for.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_suitable_for_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">for.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj2_suitable_for_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">for.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 </li>
@@ -5625,7 +5620,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 <p><code>turn_off</code>, <code>switch_off</code>:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_suitable_off_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">off.&quot;</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_off_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">off.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_suitable_off_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">off.&quot;</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_off_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">off.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 </li>
@@ -5633,7 +5628,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 <p><code>knock</code>, <code>switch_on</code>, <code>turn_on</code>:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_suitable_on_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">on.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_on_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">on.&quot;</span> <span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_suitable_on_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">on.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_on_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">on.&quot;</span> <span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 </li>
@@ -5641,7 +5636,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 <p><code>play_with</code>:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_suitable_with_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">with.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_with_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">with.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_suitable_with_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">with.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_with_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">with.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 </li>
@@ -5649,7 +5644,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 <p><code>break_with</code>, <code>burn_with</code>, <code>close_with</code>, <code>cut_with</code>, <code>fill_with</code>, <code>lock_with</code>, <code>open_with</code>, <code>pry_with</code>, <code>push_with</code>, <code>touch_with</code>, <code>unlock_with</code>:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_suitable_with_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">things</span>&#x000A;<span class="hl str">with.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj2_suitable_with_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">things</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">with.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_suitable_with_sg <span class="hl str">&quot;That&#39;s not something you can</span> <span class="hl esc">$v</span> <span class="hl str">things with.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj2_suitable_with_pl <span class="hl str">&quot;Those are not something you can</span> <span class="hl esc">$v</span> <span class="hl str">things with.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 </li>
@@ -5662,7 +5657,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_suitable_examine_sg <span class="hl str">&quot;That&#39;s not something you can examine.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_examine_pl <span class="hl str">&quot;Those are not something you can examine.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_look_out_sg <span class="hl str">&quot;That&#39;s not something you can look out of.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_look_out_pl <span class="hl str">&quot;Those are not something you can look out of.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_look_through <span class="hl str">&quot;You can&#39;t look through</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_suitable_examine_sg   <span class="hl str">&quot;That&#39;s not something you can examine.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_examine_pl   <span class="hl str">&quot;Those are not something you can examine.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_look_out_sg  <span class="hl str">&quot;That&#39;s not something you can look out of.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_look_out_pl  <span class="hl str">&quot;Those are not something you can look out of.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_suitable_look_through <span class="hl str">&quot;You can&#39;t look through</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 </li>
@@ -5676,7 +5671,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_open_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already open.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_not_open_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already open.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_open_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already open.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_not_open_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already open.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5684,7 +5679,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_open1_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already closed.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_open1_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already closed.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_open1_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already closed.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_open1_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already closed.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5692,7 +5687,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_open2_sg <span class="hl str">&quot;You can&#39;t, since</span> <span class="hl ipl">$+1</span> <span class="hl str">is closed.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_open2_pl <span class="hl str">&quot;You can&#39;t, since</span> <span class="hl ipl">$+1</span> <span class="hl str">are closed.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_open2_sg <span class="hl str">&quot;You can&#39;t, since</span> <span class="hl ipl">$+1</span> <span class="hl str">is closed.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_open2_pl <span class="hl str">&quot;You can&#39;t, since</span> <span class="hl ipl">$+1</span> <span class="hl str">are closed.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5700,7 +5695,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_open_sg <span class="hl str">&quot;You can&#39;t, since</span> <span class="hl ipl">$+2</span> <span class="hl str">is closed.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj2_open_pl <span class="hl str">&quot;You can&#39;t, since</span> <span class="hl ipl">$+2</span> <span class="hl str">are closed.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_open_sg <span class="hl str">&quot;You can&#39;t, since</span> <span class="hl ipl">$+2</span> <span class="hl str">is closed.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj2_open_pl <span class="hl str">&quot;You can&#39;t, since</span> <span class="hl ipl">$+2</span> <span class="hl str">are closed.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5708,7 +5703,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_locked_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already unlocked.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_locked_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already unlocked.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_locked_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already unlocked.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_locked_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already unlocked.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5716,7 +5711,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_locked_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already locked.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_not_locked_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already locked.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_locked_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already locked.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_not_locked_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already locked.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 </div>
@@ -5727,7 +5722,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_reachable_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is out of your reach.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_reachable_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are out of your reach.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_not_distant_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is too far away.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_not_distant_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are too far away.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_reachable_sg   <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is out of your reach.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_reachable_pl   <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are out of your reach.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_not_distant_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is too far away.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_not_distant_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are too far away.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5735,7 +5730,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_reachable_sg <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">is out of your reach.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj2_reachable_pl <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">are out of your reach.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_reachable_sg <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">is out of your reach.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj2_reachable_pl <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">are out of your reach.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5767,7 +5762,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_hero_not_sitting1 <span class="hl str">&quot;It is difficult to</span> <span class="hl esc">$v</span> <span class="hl str">while sitting down.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_hero_not_sitting2 <span class="hl str">&quot;It is difficult to</span> <span class="hl esc">$v</span> <span class="hl str">anything while sitting</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">down.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_hero_not_sitting3 <span class="hl str">&quot;It is difficult to</span> <span class="hl esc">$v</span> <span class="hl str">anywhere while sitting</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">down.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_hero_not_sitting1 <span class="hl str">&quot;It is difficult to</span> <span class="hl esc">$v</span> <span class="hl str">while sitting down.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_hero_not_sitting2 <span class="hl str">&quot;It is difficult to</span> <span class="hl esc">$v</span> <span class="hl str">anything while sitting down.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_hero_not_sitting3 <span class="hl str">&quot;It is difficult to</span> <span class="hl esc">$v</span> <span class="hl str">anywhere while sitting down.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5775,7 +5770,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_hero_not_lying_down1 <span class="hl str">&quot;It is difficult to</span> <span class="hl esc">$v</span> <span class="hl str">while lying down.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_hero_not_lying_down2 <span class="hl str">&quot;It is difficult to</span> <span class="hl esc">$v</span> <span class="hl str">anything while lying</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">down.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_hero_not_lying_down3 <span class="hl str">&quot;It is difficult to</span> <span class="hl esc">$v</span> <span class="hl str">anywhere while lying</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">down.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_hero_not_lying_down1 <span class="hl str">&quot;It is difficult to</span> <span class="hl esc">$v</span> <span class="hl str">while lying down.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_hero_not_lying_down2 <span class="hl str">&quot;It is difficult to</span> <span class="hl esc">$v</span> <span class="hl str">anything while lying down.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_hero_not_lying_down3 <span class="hl str">&quot;It is difficult to</span> <span class="hl esc">$v</span> <span class="hl str">anywhere while lying down.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5794,7 +5789,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_act_can_talk_sg <span class="hl str">&quot;That&#39;s not something you can talk to.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_act_can_talk_pl <span class="hl str">&quot;Those are not something you can talk to.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_act_can_talk_sg <span class="hl str">&quot;That&#39;s not something you can talk to.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_act_can_talk_pl <span class="hl str">&quot;Those are not something you can talk to.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5802,7 +5797,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_allowed_in_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">doesn&#39;t belong in</span> <span class="hl ipl">$+2</span><span class="hl str">&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_allowed_in_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">don&#39;t belong in</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_allowed_in_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">doesn&#39;t belong in</span> <span class="hl ipl">$+2</span><span class="hl str">&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_allowed_in_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">don&#39;t belong in</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5810,7 +5805,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_broken_sg <span class="hl str">&quot;That doesn&#39;t need fixing.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_broken_pl <span class="hl str">&quot;Those don&#39;t need fixing.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_broken_sg <span class="hl str">&quot;That doesn&#39;t need fixing.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_broken_pl <span class="hl str">&quot;Those don&#39;t need fixing.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5826,7 +5821,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_inanimate2 <span class="hl str">&quot;You are not sure whether</span> <span class="hl ipl">$+1</span> <span class="hl str">would appreciate</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">that.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_inanimate2 <span class="hl str">&quot;You are not sure whether</span> <span class="hl ipl">$+1</span> <span class="hl str">would appreciate that.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5842,7 +5837,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_scenery_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is not important.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_not_scenery_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are not important.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_scenery_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is not important.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_not_scenery_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are not important.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5850,7 +5845,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_not_scenery_sg <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">is not important.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj2_not_scenery_pl <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">are not important.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj2_not_scenery_sg <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">is not important.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj2_not_scenery_pl <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">are not important.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5898,7 +5893,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_weight_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is too heavy to</span> <span class="hl esc">$v</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_weight_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are too heavy to</span> <span class="hl esc">$v</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_weight_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is too heavy to</span> <span class="hl esc">$v</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_weight_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are too heavy to</span> <span class="hl esc">$v</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5929,7 +5924,7 @@ The following check will verify this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_in_act_sg <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">doesn&#39;t have</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_in_act_pl <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">don&#39;t have</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_in_act_sg <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">doesn&#39;t have</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_in_act_pl <span class="hl str">&quot;</span><span class="hl ipl">$+2</span> <span class="hl str">don&#39;t have</span> <span class="hl ipl">$+1</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5958,7 +5953,7 @@ The following check will verify this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_at_hero_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is right here.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_not_at_hero_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are right here.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_at_hero_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is right here.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_not_at_hero_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are right here.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6047,7 +6042,7 @@ This applies to the verbs empty_in and pour_in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_in_cont_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is not in</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_in_cont_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are not in</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_in_cont_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is not in</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_in_cont_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are not in</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6055,7 +6050,7 @@ This applies to the verbs empty_in and pour_in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_in_cont_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is in</span> <span class="hl ipl">$+2</span> <span class="hl str">already.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_not_in_cont_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are in</span> <span class="hl ipl">$+2</span> <span class="hl str">already.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_in_cont_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is in</span> <span class="hl ipl">$+2</span> <span class="hl str">already.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_not_in_cont_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are in</span> <span class="hl ipl">$+2</span> <span class="hl str">already.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6063,7 +6058,7 @@ This applies to the verbs empty_in and pour_in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_in_cont2_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already full of</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_not_in_cont2_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already full of</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_in_cont2_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already full of</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_not_in_cont2_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already full of</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6071,7 +6066,7 @@ This applies to the verbs empty_in and pour_in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_on_surface_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is not on</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_on_surface_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are not on</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_on_surface_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is not on</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_on_surface_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are not on</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6079,7 +6074,7 @@ This applies to the verbs empty_in and pour_in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_on_surface_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already on</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_obj_not_on_surface_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already on</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_on_surface_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already on</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_obj_not_on_surface_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already on</span> <span class="hl ipl">$+2</span><span class="hl str">.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 </div>
@@ -6106,7 +6101,7 @@ This applies to the verbs empty_in and pour_in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_in_worn2 <span class="hl str">&quot;It doesn&#39;t make sense to $v something you&#39;re</span>&#x000A;<span class="hl str">wearing.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_in_worn2 <span class="hl str">&quot;It doesn&#39;t make sense to $v something you&#39;re</span>&#x000A;<span class="hl str">                            wearing.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6200,7 +6195,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_hero7 <span class="hl str">&quot;Turning your head, you notice nothing unusual behind</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">yourself.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_hero7 <span class="hl str">&quot;Turning your head, you notice nothing unusual behind</span>&#x000A;<span class="hl str">                         yourself.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6298,7 +6293,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_obj2_with <span class="hl str">&quot;It doesn&#39;t make sense to</span> <span class="hl esc">$v</span> <span class="hl str">something with</span>&#x000A;<span class="hl str">itself.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_obj2_with <span class="hl str">&quot;It doesn&#39;t make sense to</span> <span class="hl esc">$v</span> <span class="hl str">something with itself.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6321,7 +6316,7 @@ Most of these are found in 'lib_classes.i'.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_clothing_sex <span class="hl str">&quot;On second thoughts you decide</span> <span class="hl ipl">$+1</span> <span class="hl str">won&#39;t really suit</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">you.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_clothing_sex <span class="hl str">&quot;On second thoughts you decide</span> <span class="hl ipl">$+1</span> <span class="hl str">won&#39;t really suit you.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6337,7 +6332,7 @@ Most of these are found in 'lib_classes.i'.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_device_on_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already off.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_device_on_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already off.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_device_on_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already off.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_device_on_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already off.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6346,7 +6341,7 @@ switch_on)</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_device_not_on_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already on.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_device_not_on_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already on.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_device_not_on_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already on.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_device_not_on_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already on.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6362,7 +6357,7 @@ switch_on)</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_lightsource_lit_sg <span class="hl str">&quot;But</span> <span class="hl ipl">$+1</span> <span class="hl str">is not lit.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_lightsource_lit_pl <span class="hl str">&quot;But</span> <span class="hl ipl">$+1</span> <span class="hl str">are not lit.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_lightsource_lit_sg <span class="hl str">&quot;But</span> <span class="hl ipl">$+1</span> <span class="hl str">is not lit.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_lightsource_lit_pl <span class="hl str">&quot;But</span> <span class="hl ipl">$+1</span> <span class="hl str">are not lit.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6370,7 +6365,7 @@ switch_on)</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_lightsource_not_lit_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already lit.&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_lightsource_not_lit_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already lit.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_lightsource_not_lit_sg <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">is already lit.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_lightsource_not_lit_pl <span class="hl str">&quot;</span><span class="hl ipl">$+1</span> <span class="hl str">are already lit.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6378,7 +6373,7 @@ switch_on)</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_lightsource_switchable_sg <span class="hl str">&quot;That&#39;s not something you can switch on</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">and off.&quot;</span> <span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">HAS</span> check_lightsource_switchable_pl <span class="hl str">&quot;Those are not something you can switch on</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">and off.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_lightsource_switchable_sg <span class="hl str">&quot;That&#39;s not something you can switch on and off.&quot;</span> <span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> check_lightsource_switchable_pl <span class="hl str">&quot;Those are not something you can switch on and off.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6386,7 +6381,7 @@ switch_on)</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_liquid_vessel_not_cont <span class="hl str">&quot;You can&#39;t carry</span> <span class="hl ipl">$+1</span> <span class="hl str">around in your bare</span>&#x000A;<span class="hl str"></span>&#x000A;<span class="hl str">hands.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_liquid_vessel_not_cont <span class="hl str">&quot;You can&#39;t carry</span> <span class="hl ipl">$+1</span> <span class="hl str">around in your bare hands.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6417,7 +6412,7 @@ Moreover, you should add the following check to each affected verb:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">AND</span> obj <span class="hl kwa">IN</span> <span class="hl kwc">hero</span>&#x000A;&#x000A;<span class="hl kwa">ELSE</span> <span class="hl str">&quot;You don&#39;t have&quot;</span> <span class="hl kwa">SAY the</span> obj<span class="hl kwa">.</span> <span class="hl str">&quot;.&quot;</span> <span class="hl opt">)</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">AND</span> obj <span class="hl kwa">IN</span> <span class="hl kwc">hero</span>&#x000A;  <span class="hl kwa">ELSE</span> <span class="hl str">&quot;You don&#39;t have&quot;</span> <span class="hl kwa">SAY the</span> obj<span class="hl kwa">.</span> <span class="hl str">&quot;.&quot;</span> <span class="hl opt">)</span></code></pre>
 </div>
 </div>
 </div>

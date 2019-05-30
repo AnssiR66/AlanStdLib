@@ -683,11 +683,11 @@ END THE torch.
 
 ==== LISTED_CONTAINER
 
-LISTED_CONTAINER is an object which has the container property.
-The contents of a LISTED_CONTAINER will be listed both after [.play]#&gt; _look_# (= in the room description), [.play]#&gt; _look in_# and [.play]#&gt; _examine_#, if it is open.
+`LISTED_CONTAINER` is an object which has the `container` property.
+The contents of a `LISTED_CONTAINER` will be listed both after [.play]#&gt; _look_# (= in the room description), [.play]#&gt; _look in_# and [.play]#&gt; _examine_#, if it is open.
 (The contents of a normal container object, as working by default in Alan 3, are not automatically listed after [.play]#&gt; _examine_# but only after [.play]#&gt; _look_# (=room description) and [.play]#&gt; _look in_#).
 
-To implement a LISTED_CONTAINER do for example like this:
+To implement a `LISTED_CONTAINER` do for example like this:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -695,9 +695,9 @@ THE box ISA LISTED_CONTAINER AT room1
 END THE box.
 --------------------------------------------------------------------------------
 
-The contents of a LISTED_CONTAINER are also listed when it is opened.
-This doesn't happen with normal containers (= OBJECTs that you give the container property).
-For the command [.play]#&gt; _inventory_# to list the contents of a LISTED_CONTAINER object the hero is carrying, redefine the verb `inventory` under the `my_game` instance in your source file for example this way:
+The contents of a `LISTED_CONTAINER` are also listed when it is opened.
+This doesn't happen with normal containers (= OBJECTs that you give the `container` property).
+For the command [.play]#&gt; _inventory_# to list the contents of a `LISTED_CONTAINER` object the hero is carrying, redefine the verb `inventory` under the `my_game` instance in your source file for example this way:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -766,7 +766,7 @@ END THE drawer.
 --------------------------------------------------------------------------------
 
 In the example above, it wouldn't be possible to put anything else in the drawer, for example a chair or a coffee cup.
-The response would be for example "`The coffee cup doesn't belong in the drawer.`", etc.
+The response would be for example [.play]#The coffee cup doesn't belong in the drawer.#, etc.
 
 This applies not only to the verb `put_in` but also to `empty_in`, `pour_in` and `throw_in`.
 
@@ -823,7 +823,7 @@ END THE.
 
 ==== SOUND
 
-SOUND can be listened to but not examined, searched, smelled or manipulated.
+`SOUND` can be listened to but not examined, searched, smelled or manipulated.
 It cannot initially be turned on or off, this has to be implemented manually by giving the sound the `switchable` attribute.
 
 [source,alan]
@@ -842,7 +842,7 @@ END THE.
 
 ==== SUPPORTER
 
-SUPPORTER: You can put things on a SUPPORTER and you can stand, sit down or lie on it.
+`SUPPORTER`: You can put things on a SUPPORTER and you can stand, sit down or lie on it.
 
 A SUPPORTER is declared to be a container, so that you can take things from it, as well.
 When there's something on a SUPPORTER, a listing of it will appear in the room description and after [.play]#&gt; _examine_#, by default:
