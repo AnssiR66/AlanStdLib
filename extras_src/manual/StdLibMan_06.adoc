@@ -371,21 +371,32 @@ A DOOR is described by default as being either open or closed when examined.
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE front_door ISA DOOR AT garden
-  NAME front door
-  DESCRIPTION ""
-END THE front_door.
+include::{utf8dir}/_variations1.alan[tag=front_door]
 --------------------------------------------------------------------------------
+
+
+// [source,alan]
+// --------------------------------------------------------------------------------
+// THE front_door ISA DOOR AT garden
+//   NAME front door
+//   DESCRIPTION ""
+// END THE front_door.
+// --------------------------------------------------------------------------------
 
 
 would yield by default:
 
 [example,role="gametranscript"]
 ================================================================================
-&gt; _x front door_ +
-You notice nothing unusual about the front door.
-It is currently closed.
+include::{utf8dir}/_variations1.a3ADocLog[tag=front_door]
 ================================================================================
+
+// [example,role="gametranscript"]
+// ================================================================================
+// &gt; _x front door_ +
+// You notice nothing unusual about the front door.
+// It is currently closed.
+// ================================================================================
 
 
 Adding an ex attribute for the front door, you can change the default.
@@ -393,8 +404,13 @@ Adding
 
 [source,alan]
 --------------------------------------------------------------------------------
-  HAS ex "It's a white wooden door leading into the house."
+include::{utf8dir}/_variations2.alan[tag=front_door]
 --------------------------------------------------------------------------------
+
+// [source,alan]
+// --------------------------------------------------------------------------------
+//   HAS ex "It's a white wooden door leading into the house."
+// --------------------------------------------------------------------------------
 
 
 will yield
@@ -402,10 +418,15 @@ will yield
 
 [example,role="gametranscript"]
 ================================================================================
-&gt; _x front door_ +
-It's a white wooden door leading into the house.
-It is currently closed.
+include::{utf8dir}/_variations2.a3ADocLog[tag=front_door]
 ================================================================================
+
+// [example,role="gametranscript"]
+// ================================================================================
+// &gt; _x front door_ +
+// It's a white wooden door leading into the house.
+// It is currently closed.
+// ================================================================================
 
 
 If you add a response of your own to the examine verb of a DOOR, the default description of it being either open or closed won't show automatically.
@@ -428,7 +449,10 @@ THE front_door ISA DOOR AT garden
 END THE front_door.
 --------------------------------------------------------------------------------
 
-
+// @NOTE: Is the transcript below *really* needed? The result is identical, so
+//        we could just delete what follows and add above "to achieve the same
+//        result by adding a response...". The problem with the sentence below
+//        is that it gives the false impression that something different happens!
 
 and then, the following will happen:
 

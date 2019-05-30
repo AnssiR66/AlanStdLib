@@ -19,6 +19,7 @@ End the.
 -- =============================================================================
 -- This site location is IMPLICITLY used in the following examples:
 --    * §4.1. The two methods for examining things
+--    * §6.1.3. DOOR
 The garden IsA site.
   EXIT north TO lab.
 End the garden.
@@ -32,6 +33,15 @@ THE ball IsA OBJECT AT garden
   END VERB.
 END THE ball.
 -- end::ball_garden[]
+--------------------------------------------------------------------------------
+-- §6.1.3. DOOR
+--------------------------------------------------------------------------------
+-- tag::front_door[]
+THE front_door ISA DOOR AT garden
+  NAME front door
+  DESCRIPTION ""
+END THE front_door.
+-- end::front_door[]
 -- =============================================================================
 
 -- The Lab
