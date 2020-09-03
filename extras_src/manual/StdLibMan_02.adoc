@@ -11,17 +11,20 @@
 [[ch2]]
 = What is different in v2.x?
 
-* the author doesn't necessarily need to access the library files any longer when writing a game. It is possible to write a game just importing the library and define everything in your own game source file(s). It is still possible to edit the library files directly if this is preferred. There are also some cases when the library needs to be accessed, for example when changing standard runtime messages.
+* The author doesn't necessarily have to edit the library files any longer when writing a game.
+It's now possible to write a game just importing the library and define everything in your own game source file(s).
+It's still possible to edit the library files directly, if this is preferred.
+There are some cases in which the library needs to be edited, for example to change the predefined runtime messages.
 
-* there are five library files in v2.x (instead of four in v1.x): `lib_classes.i`, `lib_definitions.i`, `lib_locations.i`, `lib_messages.i` and `lib_verbs.i`.
+* There are five library modules in v2.x (instead of the four that were in v1.x): `lib_classes.i`, `lib_definitions.i`, `lib_locations.i`, `lib_messages.i` and `lib_verbs.i`.
 
-* the `hero` instance is left out of the library.
+* The `hero` instance is left out of the library.
 It can be now defined from scratch by the game author.
 (There are still checks for the hero within various verbs, and these work whether the author defines the hero or not.
 There are also numerous default verb responses and other messages that take the hero into account, just like in the previous version of the library, but these can be easily overridden.)
 
-* an obligatory meta instance, `my_game`, needs to be coded by the author to each new game.
-Its shortest possible formulation is
+* An obligatory meta instance, `my_game`, needs to be coded by the author to each new game.
+Its shortest possible formulation is:
 +
 [source,alan]
 --------------------------------------------------------------------------------
@@ -36,24 +39,25 @@ Inside this instance, it is possible for example to override default messages pr
 --------------------------------------------------------------------------------
 THE my_game ISA DEFINITION_BLOCK
   VERB examine
-    DOES ONLY "Nothing special."  -- your own default message for examining
+    DOES ONLY "Nothing special."  -- Your own default message for examining
                                   -- objects, instead of the default provided
   END VERB.                       -- by the library
 END THE.
 --------------------------------------------------------------------------------
 +
 (The default library message for examining various things is "`You notice nothing unusual about [the object].`"
-Above, the author has replaced this default message with a shorter phrasing.)+
-In the my_game instance, you can also define global attributes, verb check messages, illegal parameter messages and many other things.
-See further p. 78.
-
-* check messages and illegal parameter messages can be edited much more smoothly.
-For example, you don't have edit the same check for every verb separately (or cut and paste); you can now change the wording in one place and it will affect all the places where that same check is found, throughout the library.
+Above, the author has replaced this default message with a shorter phrasing.) +
+In the `my_game` instance, you can also define global attributes, verb check messages, illegal parameter messages and many other things.
+For more details, see <<ch10>>.
 
 
-* the `LISTABLE_CONTAINER` class of version 1.0 has been renamed `LISTED_CONTAINER` which sounds slightly better.
+* Check messages and illegal parameter messages can be edited much more smoothly.
+For example, you don't have to edit the same check for every verb separately (or cut and paste); you can now change the wording in one place and it will affect all the places where that same check is found, throughout the library.
 
-* there are some new attributes:
+
+* The `LISTABLE_CONTAINER` class of version 1.0 has been renamed `LISTED_CONTAINER`, which sounds slightly better.
+
+* There are some new attributes:
 
 ** `allowed` is needed for container objects to indicate which objects they can take:
 +
@@ -81,9 +85,9 @@ For example the library-defined ceiling object for indoor rooms is NOT reachable
 By default, they are NOT compliant.
 This attribute is needed when we try to get something from an NPC (a non-player character).
 For example, the verb `take_from` doesn't work with ACTORS by default; the only way to make an ACTOR give you something in their possession by default is to ask for it.
-Also implicit taking doesn't work with ACTORS, i.e. if an NPC is carrying an apple and you type [.play]#&gt; _eat apple_#, the outcome will be [.play]#That seems to belong to the [NPC].#; the apple won't be automatically taken by the hero like it would if it was not carried by anyone.
+Also implicit taking doesn't work with ACTORS, i.e. if an NPC is carrying an apple and you type [.play]#&gt; _eat apple_#, the outcome will be [.play]#That seems to belong to the [NPC].#; the apple won't be automatically taken by the hero, as it would if it was not carried by anyone.
 
-** every DOOR now has an `otherside` attribute which can be used if the game author wants to ensure that a DOOR will be correctly opened, closed, locked and unlocked from both sides.
+** Every DOOR now has an `otherside` attribute which can be used if the game author wants to ensure that a DOOR will be correctly opened, closed, locked and unlocked from both sides.
 When the open/closed status of a DOOR instance changes, the status of its otherside counterpart (in the next room) is changed accordingly by the library.
 (If the author declares no otherside attribute for a DOOR, then this doesn't happen automatically.)
 +
@@ -102,22 +106,22 @@ THE small_key ISA OBJECT IN drawer
 END THE.
 --------------------------------------------------------------------------------
 +
-Above, the `livingroom_door` will also be lockable, locked, have `otherside kitchen_door` and can be opened by the `small_key`, even if none of these attributes were explicitly declared in the livingroom_door code.
+Above, the `livingroom_door` will also be lockable, locked, have `otherside kitchen_door` and can be opened by the `small_key`, even if none of these attributes were explicitly declared in the `livingroom_door` code.
 
-** every lockable DOOR has a `matching_key` attribute (see the above example) which should be declared at the DOOR instance if it's meant to be locked/unlocked.
-If the hero carries the matching key of a locked DOOR, unlocking will be possible through just [.play]#&gt; _unlock door_# or even [.play]#&gt; _open door_# and not necessarily using the longer formulation [.play]#&gt; _unlock door with key_#.
+** Every lockable DOOR has a `matching_key` attribute (see the above example) which should be declared at the DOOR instance if it's meant to be locked/unlocked.
+If the hero carries the matching key of a locked DOOR, unlocking it will be possible bu just typing [.play]#&gt; _unlock door_# or even [.play]#&gt; _open door_# and not necessarily using the longer formulation [.play]#&gt; _unlock door with key_#.
 This attribute also eases up the coding required for locked DOORs.
 
-** the closed and closeable attributes have been changed to open and openable which is more intuitive.
+** The `closed` and `closeable` attributes have been changed to `open` and `openable`, which are more intuitive.
 
-** the `SCENERY` class has been removed.
-Instead, `scenery` is declared as an attribute.
+** The `SCENERY` class has been removed.
+Instead, `scenery` is now declared as an attribute.
 
-** similarly, the `BACKGROUND` class has been removed.
-Use the (NOT) `reachable`/`distant` attributes instead where applicable.
+** Similarly, the `BACKGROUND` class has been removed.
+Use the (NOT) `reachable`/`distant` attributes instead, where applicable.
 
-* some object classes are made to work in a simpler way from v1.0.
-For example, an object in the subclass `LIQUID` won't have to be declared to have a vessel attribute any longer (if the liquid is carried in a vessel of any kind).
+* Some object classes are made to work in a simpler way from v1.0.
+For example, an object in the subclass `LIQUID` won't have to be declared to have a `vessel` attribute any longer (if the liquid is carried in a vessel of any kind).
 +
 [source,alan]
 --------------------------------------------------------------------------------
@@ -127,8 +131,11 @@ END THE juice.
 THE bottle ISA LISTED_CONTAINER
 END THE bottle.
 --------------------------------------------------------------------------------
+// @CHECKME: The above example needs to be checked if it still works with current StdLib!
 
-* similarly, `CLOTHING` objects worn by the hero and any NPCs can now be implemented more smoothly:
+
+// @CHECKME: The example below also needs to be checked if it still works!
+* Similarly, `CLOTHING` objects worn by the hero and any NPCs can now be implemented more smoothly:
 +
 [source,alan]
 --------------------------------------------------------------------------------
@@ -157,15 +164,16 @@ THE dress ISA CLOTHING
 END THE dress.
 --------------------------------------------------------------------------------
 
-* formatting the game title, author, year and version at the start of the game is made easier.
+// @FIXME: "automatic formulation" ???!!!
+* Formatting the game title, author, year and version at the start of the game is now easier.
 There is an automatic formulation which can be easily included if desired.
 
-
-* some default verb responses have been changed from v1.0.
+// @FIXME: "the response for simplified." ???!!!
+* Some default verb responses have been changed from v1.0.
 For example, the response for simplified.
 
 
-* it is possible to make any group of verbs to work similarly at once, handy when you for example need to restrict certain verbs from working in the usual way, for example if the hero is tied into a chair, hiding etc.
+* It is possible to make any group of verbs to work similarly at once, handy when you for example need to restrict certain verbs from working in the usual way, for example if the hero is tied to a chair, hiding etc.
 +
 [source,alan]
 --------------------------------------------------------------------------------
@@ -176,7 +184,7 @@ EVENT tied_up
 END EVENT.
 --------------------------------------------------------------------------------
 +
-(For the various levels of restriction, see p.69-)
+(For the various levels of restriction, see <<sec.restricted-actions>>)
 +
 You can also block any individual verb(s) from functioning in the game:
 +
@@ -194,7 +202,7 @@ END THE my_game.
 
 To write an ALAN game, you won't necessarily need the standard library at all.
 It is perfectly possible to define everything in your game by yourself.
-At its bare-bones minimum, an ALAN game needs one location and a "START AT" instruction:
+At its bare-bones minimum, an ALAN game needs one location and a `START AT` instruction:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -204,8 +212,10 @@ END THE meadow.
 START AT meadow.
 --------------------------------------------------------------------------------
 
+
+// @FIXME: "not even prompt will be understood." ???!!!
 This code compiles successfully and doesn't use the library at all.
-When you try to play this game, you will find yourself at a location called 'Meadow' but you can't do anything, not even prompt will be understood.
+When you try to play this game, you will find yourself at a location called 'Meadow' but you won't be able to do anything, not even prompt will be understood.
 You should go on implementing everything by yourself.
 
 
@@ -231,7 +241,7 @@ The IMPORT statement imports the library files into the game code.
 The five obligatory library files mentioned on p.1, together with the file 'library.i' that imports them, should be in the same folder as your source code file.
 
 
-If you don't have 'library.i' in the same folder as the obligatory library files, you should import the obligatory library files in the following way (which is somewhat lengthier):
+If you don't have `library.i` in the same folder as the obligatory library files, you should import the obligatory library files in the following way (which is somewhat lengthier):
 
 
 [source,alan]

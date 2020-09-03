@@ -27,13 +27,22 @@ Before that, versions 0.x, written by Steve Griffiths, were available for use.
 The writer of the current version is Anssi Räisänen.
 
 
-The ALAN Standard Library v{StdLibVer} consists of the following five primary library files:
+The ALAN Standard Library v{StdLibVer} consists of the following source files:
 
-* `lib_classes.i`
-* `lib_definitions.i`
-* `lib_locations.i`
-* `lib_messages.i`
-* `lib_verbs.i`
+* `library.i` -- the main library file that imports all the others:
+** `lib_classes.i`
+** `lib_definitions.i`
+** `lib_locations.i`
+** `lib_messages.i`
+** `lib_verbs.i`
+
+
+To import the standard library to your game, just add the following line to your adventure source file:
+
+[source,alan]
+--------------------------------------------------------------------------------
+IMPORT 'library.i'.
+--------------------------------------------------------------------------------
 
 In addition, the following files, none of which are necessary for using the library, can be found in the library distribution package:
 
@@ -45,8 +54,6 @@ In addition, the following files, none of which are necessary for using the libr
 [horizontal]
 `changelog.txt`   :: A text file listing the changes made to the library after version v2.0.
 `copying.txt`     :: A text file clarifying some copyright issues.
-`library.i`       :: A file that imports all library files.
-Just use the line `IMPORT 'library.i'.` in your source file to import the standard library to your game.
 `mygame_import.i` :: An auxiliary, not obligatory, definition file for the library.
 If you need to edit a great number of default library messages (for verb outcomes, verb check messages etc.), you can edit this file and import it to your game project.
 `newgame.a3c`     :: A compiled game of the source code included in `newgame.alan` (below).
@@ -60,7 +67,7 @@ You can use this as a starting point for a new project.
 
 Thank you to Steve Griffiths for the score notification code snippet and for the early versions of the library, and to Alan Bampton for the code used for clothing objects (layered clothing).
 
-And naturally many thanks to Thomas Nilsson for the ALAN Interactive Fiction Language.
+And naturally many thanks to Thomas Nilefalk and Göran Forslund for the ALAN Interactive Fiction Language.
 
 
 == What to read if you're a complete newbie
@@ -94,7 +101,7 @@ The latter part of that chapter, where the illegal parameter messages and other 
 
 == A note on the coding style used in this manual
 
-The ALAN example code used in this manual follows the principle that all reserved words in the ALAN language are written with all caps:
+The ALAN example code used in this manual follows the principle that all reserved words in the ALAN language are written in all caps:
 
 
 [source,alan]

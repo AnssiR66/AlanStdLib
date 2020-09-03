@@ -931,8 +931,12 @@ Before that, versions 0.x, written by Steve Griffiths, were available for use.
 The writer of the current version is Anssi Räisänen.</p>
 </div>
 <div class="paragraph">
-<p>The ALAN Standard Library v2.2 consists of the following five primary library files:</p>
+<p>The ALAN Standard Library v2.2 consists of the following source files:</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>library.i</code>&#8201;&#8212;&#8201;the main library file that imports all the others:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -951,6 +955,17 @@ The writer of the current version is Anssi Räisänen.</p>
 <p><code>lib_verbs.i</code></p>
 </li>
 </ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To import the standard library to your game, just add the following line to your adventure source file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IMPORT</span> &#39;library.i&#39;<span class="hl kwa">.</span></code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>In addition, the following files, none of which are necessary for using the library, can be found in the library distribution package:</p>
@@ -971,15 +986,6 @@ The writer of the current version is Anssi Räisänen.</p>
 </td>
 <td class="hdlist2">
 <p>A text file clarifying some copyright issues.</p>
-</td>
-</tr>
-<tr>
-<td class="hdlist1">
-<code>library.i</code>       
-</td>
-<td class="hdlist2">
-<p>A file that imports all library files.
-Just use the line <code>IMPORT 'library.i'.</code> in your source file to import the standard library to your game.</p>
 </td>
 </tr>
 <tr>
@@ -1054,7 +1060,7 @@ You can use this as a starting point for a new project.</p>
 <p>Thank you to Steve Griffiths for the score notification code snippet and for the early versions of the library, and to Alan Bampton for the code used for clothing objects (layered clothing).</p>
 </div>
 <div class="paragraph">
-<p>And naturally many thanks to Thomas Nilsson for the ALAN Interactive Fiction Language.</p>
+<p>And naturally many thanks to Thomas Nilefalk and Göran Forslund for the ALAN Interactive Fiction Language.</p>
 </div>
 <div class="sect2">
 <h3 id="_what_to_read_if_youre_a_complete_newbie"><a class="anchor" href="#_what_to_read_if_youre_a_complete_newbie"></a>1.1. What to read if you&#8217;re a complete newbie</h3>
@@ -1094,7 +1100,7 @@ The latter part of that chapter, where the illegal parameter messages and other 
 <div class="sect2">
 <h3 id="_a_note_on_the_coding_style_used_in_this_manual"><a class="anchor" href="#_a_note_on_the_coding_style_used_in_this_manual"></a>1.4. A note on the coding style used in this manual</h3>
 <div class="paragraph">
-<p>The ALAN example code used in this manual follows the principle that all reserved words in the ALAN language are written with all caps:</p>
+<p>The ALAN example code used in this manual follows the principle that all reserved words in the ALAN language are written in all caps:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1143,20 +1149,23 @@ Newcomers to ALAN should, however, bear in mind that the ALAN language is not ca
 <div class="ulist">
 <ul>
 <li>
-<p>the author doesn&#8217;t necessarily need to access the library files any longer when writing a game. It is possible to write a game just importing the library and define everything in your own game source file(s). It is still possible to edit the library files directly if this is preferred. There are also some cases when the library needs to be accessed, for example when changing standard runtime messages.</p>
+<p>The author doesn&#8217;t necessarily have to edit the library files any longer when writing a game.
+It&#8217;s now possible to write a game just importing the library and define everything in your own game source file(s).
+It&#8217;s still possible to edit the library files directly, if this is preferred.
+There are some cases in which the library needs to be edited, for example to change the predefined runtime messages.</p>
 </li>
 <li>
-<p>there are five library files in v2.x (instead of four in v1.x): <code>lib_classes.i</code>, <code>lib_definitions.i</code>, <code>lib_locations.i</code>, <code>lib_messages.i</code> and <code>lib_verbs.i</code>.</p>
+<p>There are five library modules in v2.x (instead of the four that were in v1.x): <code>lib_classes.i</code>, <code>lib_definitions.i</code>, <code>lib_locations.i</code>, <code>lib_messages.i</code> and <code>lib_verbs.i</code>.</p>
 </li>
 <li>
-<p>the <code>hero</code> instance is left out of the library.
+<p>The <code>hero</code> instance is left out of the library.
 It can be now defined from scratch by the game author.
 (There are still checks for the hero within various verbs, and these work whether the author defines the hero or not.
 There are also numerous default verb responses and other messages that take the hero into account, just like in the previous version of the library, but these can be easily overridden.)</p>
 </li>
 <li>
-<p>an obligatory meta instance, <code>my_game</code>, needs to be coded by the author to each new game.
-Its shortest possible formulation is</p>
+<p>An obligatory meta instance, <code>my_game</code>, needs to be coded by the author to each new game.
+Its shortest possible formulation is:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;<span class="hl kwa">END THE.</span></code></pre>
@@ -1168,25 +1177,25 @@ Inside this instance, it is possible for example to override default messages pr
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">VERB</span> examine&#x000A;    <span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;Nothing special.&quot;</span>  <span class="hl slc">-- your own default message for examining</span>&#x000A;                                  <span class="hl slc">-- objects, instead of the default provided</span>&#x000A;  <span class="hl kwa">END VERB.</span>                       <span class="hl slc">-- by the library</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">VERB</span> examine&#x000A;    <span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;Nothing special.&quot;</span>  <span class="hl slc">-- Your own default message for examining</span>&#x000A;                                  <span class="hl slc">-- objects, instead of the default provided</span>&#x000A;  <span class="hl kwa">END VERB.</span>                       <span class="hl slc">-- by the library</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>(The default library message for examining various things is &#8220;You notice nothing unusual about [the object].&#8221;
-Above, the author has replaced this default message with a shorter phrasing.)+
-In the my_game instance, you can also define global attributes, verb check messages, illegal parameter messages and many other things.
-See further p. 78.</p>
+Above, the author has replaced this default message with a shorter phrasing.)<br>
+In the <code>my_game</code> instance, you can also define global attributes, verb check messages, illegal parameter messages and many other things.
+For more details, see <a href="#ch10">Ch. 10, <em>The my_game instance and its attributes</em></a>.</p>
 </div>
 </li>
 <li>
-<p>check messages and illegal parameter messages can be edited much more smoothly.
-For example, you don&#8217;t have edit the same check for every verb separately (or cut and paste); you can now change the wording in one place and it will affect all the places where that same check is found, throughout the library.</p>
+<p>Check messages and illegal parameter messages can be edited much more smoothly.
+For example, you don&#8217;t have to edit the same check for every verb separately (or cut and paste); you can now change the wording in one place and it will affect all the places where that same check is found, throughout the library.</p>
 </li>
 <li>
-<p>the <code>LISTABLE_CONTAINER</code> class of version 1.0 has been renamed <code>LISTED_CONTAINER</code> which sounds slightly better.</p>
+<p>The <code>LISTABLE_CONTAINER</code> class of version 1.0 has been renamed <code>LISTED_CONTAINER</code>, which sounds slightly better.</p>
 </li>
 <li>
-<p>there are some new attributes:</p>
+<p>There are some new attributes:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1215,10 +1224,10 @@ For example the library-defined ceiling object for indoor rooms is NOT reachable
 By default, they are NOT compliant.
 This attribute is needed when we try to get something from an NPC (a non-player character).
 For example, the verb <code>take_from</code> doesn&#8217;t work with ACTORS by default; the only way to make an ACTOR give you something in their possession by default is to ask for it.
-Also implicit taking doesn&#8217;t work with ACTORS, i.e. if an NPC is carrying an apple and you type <span class="play">&gt; <em>eat apple</em></span>, the outcome will be <span class="play">That seems to belong to the [NPC].</span>; the apple won&#8217;t be automatically taken by the hero like it would if it was not carried by anyone.</p>
+Also implicit taking doesn&#8217;t work with ACTORS, i.e. if an NPC is carrying an apple and you type <span class="play">&gt; <em>eat apple</em></span>, the outcome will be <span class="play">That seems to belong to the [NPC].</span>; the apple won&#8217;t be automatically taken by the hero, as it would if it was not carried by anyone.</p>
 </li>
 <li>
-<p>every DOOR now has an <code>otherside</code> attribute which can be used if the game author wants to ensure that a DOOR will be correctly opened, closed, locked and unlocked from both sides.
+<p>Every DOOR now has an <code>otherside</code> attribute which can be used if the game author wants to ensure that a DOOR will be correctly opened, closed, locked and unlocked from both sides.
 When the open/closed status of a DOOR instance changes, the status of its otherside counterpart (in the next room) is changed accordingly by the library.
 (If the author declares no otherside attribute for a DOOR, then this doesn&#8217;t happen automatically.)</p>
 <div class="listingblock">
@@ -1227,39 +1236,43 @@ When the open/closed status of a DOOR instance changes, the status of its others
 </div>
 </div>
 <div class="paragraph">
-<p>Above, the <code>livingroom_door</code> will also be lockable, locked, have <code>otherside kitchen_door</code> and can be opened by the <code>small_key</code>, even if none of these attributes were explicitly declared in the livingroom_door code.</p>
+<p>Above, the <code>livingroom_door</code> will also be lockable, locked, have <code>otherside kitchen_door</code> and can be opened by the <code>small_key</code>, even if none of these attributes were explicitly declared in the <code>livingroom_door</code> code.</p>
 </div>
 </li>
 <li>
-<p>every lockable DOOR has a <code>matching_key</code> attribute (see the above example) which should be declared at the DOOR instance if it&#8217;s meant to be locked/unlocked.
-If the hero carries the matching key of a locked DOOR, unlocking will be possible through just <span class="play">&gt; <em>unlock door</em></span> or even <span class="play">&gt; <em>open door</em></span> and not necessarily using the longer formulation <span class="play">&gt; <em>unlock door with key</em></span>.
+<p>Every lockable DOOR has a <code>matching_key</code> attribute (see the above example) which should be declared at the DOOR instance if it&#8217;s meant to be locked/unlocked.
+If the hero carries the matching key of a locked DOOR, unlocking it will be possible bu just typing <span class="play">&gt; <em>unlock door</em></span> or even <span class="play">&gt; <em>open door</em></span> and not necessarily using the longer formulation <span class="play">&gt; <em>unlock door with key</em></span>.
 This attribute also eases up the coding required for locked DOORs.</p>
 </li>
 <li>
-<p>the closed and closeable attributes have been changed to open and openable which is more intuitive.</p>
+<p>The <code>closed</code> and <code>closeable</code> attributes have been changed to <code>open</code> and <code>openable</code>, which are more intuitive.</p>
 </li>
 <li>
-<p>the <code>SCENERY</code> class has been removed.
-Instead, <code>scenery</code> is declared as an attribute.</p>
+<p>The <code>SCENERY</code> class has been removed.
+Instead, <code>scenery</code> is now declared as an attribute.</p>
 </li>
 <li>
-<p>similarly, the <code>BACKGROUND</code> class has been removed.
-Use the (NOT) <code>reachable</code>/<code>distant</code> attributes instead where applicable.</p>
+<p>Similarly, the <code>BACKGROUND</code> class has been removed.
+Use the (NOT) <code>reachable</code>/<code>distant</code> attributes instead, where applicable.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>some object classes are made to work in a simpler way from v1.0.
-For example, an object in the subclass <code>LIQUID</code> won&#8217;t have to be declared to have a vessel attribute any longer (if the liquid is carried in a vessel of any kind).</p>
+<p>Some object classes are made to work in a simpler way from v1.0.
+For example, an object in the subclass <code>LIQUID</code> won&#8217;t have to be declared to have a <code>vessel</code> attribute any longer (if the liquid is carried in a vessel of any kind).</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> juice <span class="hl kwa">ISA</span> LIQUID <span class="hl kwa">IN</span> bottle&#x000A;<span class="hl kwa">END THE</span> juice<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> bottle <span class="hl kwa">ISA</span> LISTED_CONTAINER&#x000A;<span class="hl kwa">END THE</span> bottle<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 </li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p>similarly, <code>CLOTHING</code> objects worn by the hero and any NPCs can now be implemented more smoothly:</p>
+<p>Similarly, <code>CLOTHING</code> objects worn by the hero and any NPCs can now be implemented more smoothly:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> <span class="hl kwc">hero</span> <span class="hl kwa">ISA</span> <span class="hl kwb">ACTOR</span>&#x000A;  <span class="hl kwa">IS</span> wearing <span class="hl opt">{</span>jeans<span class="hl kwa">,</span> shirt<span class="hl opt">}</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE</span> <span class="hl kwc">hero</span><span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> jeans <span class="hl kwa">ISA</span> CLOTHING&#x000A;  <span class="hl kwa">IS...</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> shirt <span class="hl kwa">ISA</span> CLOTHING&#x000A;  <span class="hl kwa">IS...</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
@@ -1274,23 +1287,31 @@ For example, an object in the subclass <code>LIQUID</code> won&#8217;t have to b
 </div>
 </div>
 </li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p>formatting the game title, author, year and version at the start of the game is made easier.
+<p>Formatting the game title, author, year and version at the start of the game is now easier.
 There is an automatic formulation which can be easily included if desired.</p>
 </li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p>some default verb responses have been changed from v1.0.
+<p>Some default verb responses have been changed from v1.0.
 For example, the response for simplified.</p>
 </li>
 <li>
-<p>it is possible to make any group of verbs to work similarly at once, handy when you for example need to restrict certain verbs from working in the usual way, for example if the hero is tied into a chair, hiding etc.</p>
+<p>It is possible to make any group of verbs to work similarly at once, handy when you for example need to restrict certain verbs from working in the usual way, for example if the hero is tied to a chair, hiding etc.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">EVENT</span> tied_up&#x000A;  <span class="hl str">&quot;One of the thugs ties you tightly into a chair and gags you, and</span>&#x000A;<span class="hl str">  you cannot move your arms or legs at all.&quot;</span>&#x000A;  <span class="hl kwa">SET</span> restricted_level <span class="hl kwa">OF</span> my_game <span class="hl kwa">TO</span> <span class="hl num">2</span><span class="hl kwa">.</span> <span class="hl slc">-- = you cannot talk or move</span>&#x000A;<span class="hl kwa">END EVENT.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>(For the various levels of restriction, see p.69-)</p>
+<p>(For the various levels of restriction, see <a href="#sec.restricted-actions">Sec. 8.8, &#8220;Restricted actions&#8221;</a>)</p>
 </div>
 <div class="paragraph">
 <p>You can also block any individual verb(s) from functioning in the game:</p>
@@ -1308,7 +1329,7 @@ For example, the response for simplified.</p>
 <div class="paragraph">
 <p>To write an ALAN game, you won&#8217;t necessarily need the standard library at all.
 It is perfectly possible to define everything in your game by yourself.
-At its bare-bones minimum, an ALAN game needs one location and a "START AT" instruction:</p>
+At its bare-bones minimum, an ALAN game needs one location and a <code>START AT</code> instruction:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1317,7 +1338,7 @@ At its bare-bones minimum, an ALAN game needs one location and a "START AT" inst
 </div>
 <div class="paragraph">
 <p>This code compiles successfully and doesn&#8217;t use the library at all.
-When you try to play this game, you will find yourself at a location called 'Meadow' but you can&#8217;t do anything, not even prompt will be understood.
+When you try to play this game, you will find yourself at a location called 'Meadow' but you won&#8217;t be able to do anything, not even prompt will be understood.
 You should go on implementing everything by yourself.</p>
 </div>
 <div class="paragraph">
@@ -1336,7 +1357,7 @@ You should go on implementing everything by yourself.</p>
 The five obligatory library files mentioned on p.1, together with the file 'library.i' that imports them, should be in the same folder as your source code file.</p>
 </div>
 <div class="paragraph">
-<p>If you don&#8217;t have 'library.i' in the same folder as the obligatory library files, you should import the obligatory library files in the following way (which is somewhat lengthier):</p>
+<p>If you don&#8217;t have <code>library.i</code> in the same folder as the obligatory library files, you should import the obligatory library files in the following way (which is somewhat lengthier):</p>
 </div>
 <div class="listingblock">
 <div class="content">
