@@ -11,7 +11,7 @@
 
 
 [[ch10]]
-== The my_game instance and its attributes
+= The my_game instance and its attributes
 
 `My_game` is a so called meta-instance that obligatorily has to be included by the author in the game source.
 Without it, the game won't compile successfully.
@@ -97,7 +97,7 @@ In the following, all the various attributes of the `my_game` instance are liste
 
 // @FIXME: This heading should retain it's number even when all other section
 //         numbers are removed!
-=== 1. Attributes for the start section
+== 1. Attributes for the start section
 
 The following five attributes have been declared for the game start:
 
@@ -179,7 +179,7 @@ See also example (3) at the end of this manual.
 
 // @FIXME: This heading should retain it's number even when all other section
 //         numbers are removed!
-=== 2. Attributes for the hero
+== 2. Attributes for the hero
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -205,7 +205,7 @@ END THE hero.
 
 // @FIXME: This heading should retain it's number even when all other section
 //         numbers are removed!
-=== 3. Attributes for locations
+== 3. Attributes for locations
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -226,7 +226,7 @@ This message is shown when a light goes off and the location becomes dark.
 
 // @FIXME: This heading should retain it's number even when all other section
 //         numbers are removed!
-=== 4. Attributes for restricted actions
+== 4. Attributes for restricted actions
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -250,7 +250,7 @@ See also <<sec.restricted-actions>>.
 
 // @FIXME: This heading should retain it's number even when all other section
 //         numbers are removed!
-=== 5. Illegal parameter messages
+== 5. Illegal parameter messages
 
 In this section, all illegal parameter messages used by the library are listed.
 If you wish to change any of these, you can declare them again in the `my_game` instance.
@@ -435,7 +435,7 @@ HAS illegal_parameter_look_out_pl  "Those are not something you can look out of.
 HAS illegal_parameter_look_through "You can't look through $+1.".
 --------------------------------------------------------------------------------
 
-==== Other illegal parameter messages
+=== Other illegal parameter messages
 
 The above are the default messages and their variations.
 There are, however, other illegal parameter messages needed at places.
@@ -502,7 +502,7 @@ HAS illegal_parameter_who_sg  "That's not somebody I know about.".
 HAS illegal_parameter_who_pl  "Those are not somebody I know about.".
 --------------------------------------------------------------------------------
 
-==== Changing the illegal parameter message of a single verb:
+=== Changing the illegal parameter message of a single verb:
 
 The way the illegal parameter messages have been defined in the library, it is not usually possible to affect just one verb at a time.
 Most often, changing a default message will alter the outcome of at least a handful of verbs, because one default message is shared by many verbs.
@@ -511,7 +511,7 @@ Anyway, the quickest way to accomplish this task would be to open 'lib_verbs.i',
 
 // @FIXME: This heading should retain it's number even when all other section
 //         numbers are removed!
-=== 6. Default verb check messages
+== 6. Default verb check messages
 
 All these check messages can be individually changed by listing them under the my_game instance in your game source file.
 They are also listed in the file 'mygame_import.i' in the library distribution package, for easy modification.
@@ -621,7 +621,7 @@ HAS check_obj_suitable_look_out_pl  "Those are not something you can look out of
 HAS check_obj_suitable_look_through "You can't look through $+1.".
 --------------------------------------------------------------------------------
 
-=== Checks for open, closed and locked objects
+== Checks for open, closed and locked objects
 
 open, open_with:
 
@@ -675,7 +675,7 @@ HAS check_obj_not_locked_pl "$+1 are already locked.".
 
 
 
-=== Checks for "not reachable" and "distant" objects
+== Checks for "not reachable" and "distant" objects
 
 A large number of verbs have the following checks:
 
@@ -715,7 +715,7 @@ HAS check_obj2_not_distant_sg "$+2 is too far away.".
 HAS check_obj2_not_distant_pl "$+2 are too far away.".
 --------------------------------------------------------------------------------
 
-=== Checks for the hero sitting or lying_down
+== Checks for the hero sitting or lying_down
 
 Numerous verbs in the library have one of the following checks for sitting:
 
@@ -742,7 +742,7 @@ If the player uses the verbs sit or sit_on, and the hero is already sitting, the
 HAS check_hero_not_lying_down4 "You're lying down already.".
 --------------------------------------------------------------------------------
 
-=== Other attribute checks
+== Other attribute checks
 
 Checking that the object of the action has the ability to talk; verbs ask, ask_for, say_to, tell:
 
@@ -863,7 +863,7 @@ HAS check_obj_writeable "Nothing can be written there.".
 
 // @FIXME: Note sure where this "b)" list odering came from!
 
-=== b. location and containment checks for actors and objects
+== b. location and containment checks for actors and objects
 
 Location and containment checks for actors other than the hero (checks for the hero are listed separately below):
 
@@ -892,7 +892,7 @@ HAS check_obj_not_in_act_pl "$+2 already have $+1.".
 HAS check_obj_not_in_act_sg "$+2 already has $+1.".
 --------------------------------------------------------------------------------
 
-==== Location and containment checks for the hero
+=== Location and containment checks for the hero
 
 The following checks deal with where the hero is or what (s)he is carrying.
 
@@ -978,7 +978,7 @@ HAS check_obj2_not_in_hero3 "You already have $+2.".
 
 
 // @FIXME: Lost track of heading levels!
-==== Checking whether an object is in a container or not
+=== Checking whether an object is in a container or not
 
 When the following check fires, the hero tried to empty the contents of an object into a container that already was contained by the object (for example if there is a bottle in a box, and the player types "empty box in bottle").
 This applies to the verbs empty_in and pour_in:
@@ -1029,7 +1029,7 @@ HAS check_obj_not_on_surface_pl "$+1 are already on $+2.".
 --------------------------------------------------------------------------------
 
 // @FIXME: Lost track of heading levels!
-==== Checking whether an object is worn by the hero or not
+=== Checking whether an object is worn by the hero or not
 
 You can't take off something you're not wearing (remove, take_off):
 [source,alan]
@@ -1063,7 +1063,7 @@ It will have to be removed first (drop):
 HAS check_obj_not_in_worn3: "You'll have to take off $+1 first."
 --------------------------------------------------------------------------------
 
-=== c. checking location states
+== c. checking location states
 
 The following check is found in numerous verbs.
 It prohibits actions requiring seeing when the LOCATION is not lit:
@@ -1073,7 +1073,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:
 HAS check_current_loc_lit "It is too dark to see.".
 --------------------------------------------------------------------------------
 
-=== d. logical checks
+== d. logical checks
 
 The checks in this group a) prohibit the action from being directed at the hero, and 2) prohibit the action in ditransitive verbs where both the first and the second parameter refer to the same instance.
 
@@ -1166,7 +1166,7 @@ HAS check_obj2_not_hero3 "You can't $v things to yourself.".
 
 // @FIXME: This heading should retain it's number even when all other section
 //         numbers are removed!
-=== 2. prohibiting the action in ditransitive verbs where both the first and the second parameter refer to the same instance:
+== 2. prohibiting the action in ditransitive verbs where both the first and the second parameter refer to the same instance:
 
 The following checks prohibit actions like [.play]#&gt; _cut rope with rope_#, [.play]#&gt; _throw stone at stone_# and [.play]#&gt; _put bottle in bottle_#:
 
@@ -1230,7 +1230,7 @@ HAS check_obj_not_obj2_put "That doesn't make sense." .
 
 
 
-=== e. additional checks for classes
+== e. additional checks for classes
 
 Lastly, there are some checks that apply only to a specific class.
 Most of these are found in 'lib_classes.i'.
@@ -1318,7 +1318,7 @@ HAS check_obj_not_broken "Nothing happens.".
 
 // @FIXME: This heading should retain it's number even when all other section
 //         numbers are removed!
-=== 7. Implicit taking message
+== 7. Implicit taking message
 
 [source,alan]
 --------------------------------------------------------------------------------

@@ -10,9 +10,9 @@
 
 
 [[ch5]]
-== Actors
+= Actors
 
-=== Pre-defined actor classes in the library
+== Pre-defined actor classes in the library
 
 * `PERSON`
 * `MALE`
@@ -72,7 +72,7 @@ END THE dog.
 
 
 
-=== Pre-defined actor attributes in the library
+== Pre-defined actor attributes in the library
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ IS NOT compliant.
 They are described in more detail below:
 
 // @ADDED:
-==== inanimate
+=== inanimate
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ To ensure this, the (NOT) inanimate attribute is used.
 All things other than ACTORs are inanimate.
 
 // @ADDED:
-==== following
+=== following
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -141,7 +141,7 @@ MAKE servant NOT following.
 --------------------------------------------------------------------------------
 
 // @ADDED:
-==== sitting and lying_down
+=== sitting and lying_down
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -174,7 +174,7 @@ Similarly, it is possible for the hero to sit or lie down on a SUPPORTER object 
 Refer to: Objects => Supporters.
 
 // @ADDED:
-==== named
+=== named
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -222,7 +222,7 @@ END THE.
 The library takes care of the indefinite/definite article showing before man when the actor (here Jim) is not named yet.
 
 // @ADDED:
-==== wearing
+=== wearing
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -351,7 +351,7 @@ END EVENT.
 Refer also to: Objects => Clothing.
 
 // @ADDED:
-==== compliant
+=== compliant
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -432,7 +432,7 @@ END THE man.
 
 
 
-=== The hero
+== The hero
 
 The hero instance is left out of the library altogether and can be defined from scratch by the game author.
 You won't need to define the hero in your game at all if you're happy with the response [.play]#You notice nothing unusual about yourself.# when the player types [.play]#&gt; _x me_# (= examine myself) and if no attributes are needed for the hero (such as IS (NOT) hungry, HAS strength 20, etc.).
@@ -532,7 +532,7 @@ The hero is by default a container actor (so that it can pick up and carry thing
 
 
 
-=== Describing NPCs
+== Describing NPCs
 
 When the player types [.play]#&gt; _examine [actor]_#, the response will be the default [.play]#You notice nothing unusual about [the actor].#, unless some other description is defined for the ACTOR in the DOES ONLY part of the actor instance:
 
@@ -579,7 +579,7 @@ The boy is carrying a coin and a baseball cap (being worn).
 
 
 
-=== Conversing with NPCs
+== Conversing with NPCs
 
 To engage an NPC in conversation, the library has the pre-defined verbs ask about, tell_about, and talk to.
 (You can also say something but that doesn't require an NPC to be present; for example you can say a magic word to open a door.

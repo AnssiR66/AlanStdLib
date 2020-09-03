@@ -10,7 +10,7 @@
 
 
 [[ch4]]
-== Things
+= Things
 
 Things in ALAN are the comprehensive term for actors and objects.
 Many verbs are defined to work with both actors and objects on the library level.
@@ -72,7 +72,7 @@ END THE.
 --------------------------------------------------------------------------------
 
 
-=== The two methods for examining things
+== The two methods for examining things
 
 The library provides two ways for examining things.
 The first one is the traditional "VERB examine DOES (ONLY)...":

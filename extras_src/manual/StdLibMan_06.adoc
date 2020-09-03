@@ -10,10 +10,10 @@
 
 
 [[ch6]]
-== Objects
+= Objects
 
 
-=== Pre-defined object classes in the library
+== Pre-defined object classes in the library
 
 * `CLOTHING`
 * `DEVICE`
@@ -33,7 +33,7 @@ For scenery objects, use the attribute `scenery`.
 ================================================================================
 
 // @ADDED:
-==== CLOTHING
+=== CLOTHING
 
 
 CLOTHING is a piece of clothing the hero or an NPC wears.
@@ -133,7 +133,7 @@ If the value of an attribute for a piece of CLOTHING is 0 in the table, don't me
 
 
 
-===== The clothing table
+==== The clothing table
 
 Here is the chart showing a selection of fairly typical clothing items and the values to set to obtain appropriate behaviour.
 Should you wish to create an article of CLOTHING not listed, usually a bit of lateral thought as to what it is most like and where it fits into the scheme of things will suggest a workable set of values, but be aware that you MUST use values in this chart, simply adding things with intermediate values is probably going to create nasty bugs:
@@ -268,7 +268,7 @@ START AT restaurant.
 
 
 // @ADDED:
-==== DEVICE
+=== DEVICE
 
 DEVICE is a machine or an electronic device, for example a TV.
 It can be turned (=switched) on and off if it is not broken.
@@ -361,7 +361,7 @@ END THE.
 
 
 // @ADDED:
-==== DOOR
+=== DOOR
 
 
 DOOR can be opened, closed, locked and unlocked.
@@ -465,7 +465,7 @@ It is currently closed.
 
 
 
-===== Locked doors and keys
+==== Locked doors and keys
 
 To unlock a locked DOOR, it has to have a `matching_key` object attributed to it.
 Only this object can unlock the DOOR.
@@ -535,7 +535,7 @@ See also <<ch15>>, <<ch15.example5,example 5>>.
 
 
 
-==== LIQUID
+=== LIQUID
 
 LIQUID can be taken only if it is in a container.
 You can fill something with it, and you can pour it somewhere.
@@ -558,7 +558,7 @@ Note, however, that the verb `empty` is not a synonym for `pour`; `empty` only w
 Consequently, [.play]#&gt; _empty bottle_# will work but [.play]#&gt; _empty juice_# won't.
 
 
-==== LIGHTSOURCE
+=== LIGHTSOURCE
 
 LIGHTSOURCE is `natural` or `NOT natural` (a natural LIGHTSOURCE is for example a match or a torch).
 It can be turned on and off, lighted and extinguished (= put out) if it is not broken.
@@ -681,7 +681,7 @@ END THE torch.
 --------------------------------------------------------------------------------
 
 
-==== LISTED_CONTAINER
+=== LISTED_CONTAINER
 
 `LISTED_CONTAINER` is an object which has the `container` property.
 The contents of a `LISTED_CONTAINER` will be listed both after [.play]#&gt; _look_# (= in the room description), [.play]#&gt; _look in_# and [.play]#&gt; _examine_#, if it is open.
@@ -753,7 +753,7 @@ MAKE box NOT OPAQUE.
 (This is handled automatically by the library when a container is opened or closed.)
 
 
-==== Putting things in containers
+=== Putting things in containers
 
 It is only possible to put something into a container if this something is included in the object.
 
@@ -821,7 +821,7 @@ THE ticket_dispenser ISA LISTED_CONTAINER AT lobby
 END THE.
 --------------------------------------------------------------------------------
 
-==== SOUND
+=== SOUND
 
 `SOUND` can be listened to but not examined, searched, smelled or manipulated.
 It cannot initially be turned on or off, this has to be implemented manually by giving the sound the `switchable` attribute.
@@ -840,7 +840,7 @@ END THE.
 --------------------------------------------------------------------------------
 
 
-==== SUPPORTER
+=== SUPPORTER
 
 `SUPPORTER`: You can put things on a SUPPORTER and you can stand, sit down or lie on it.
 
@@ -1030,7 +1030,7 @@ It is the author's responsibility to make certain objects in the location `NOT r
 
 
 
-==== WEAPON
+=== WEAPON
 
 WEAPON is `fireable` (for example a cannon) or `NOT fireable` (for example a baseball bat), the latter being the default.
 The verbs `attack_with` and `kill_with` won't have successful outcomes if the second parameter in them is not a WEAPON.
@@ -1046,7 +1046,7 @@ END THE.
 --------------------------------------------------------------------------------
 
 
-==== WINDOW
+=== WINDOW
 
 WINDOW can be opened, closed, looked through and out of.
 It will be described as being either open or closed when examined, by default.

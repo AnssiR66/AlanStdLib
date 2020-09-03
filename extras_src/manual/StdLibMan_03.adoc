@@ -10,7 +10,7 @@
 
 
 [[ch3]]
-== Locations
+= Locations
 
 Location classes pre-defined in the library:
 
@@ -43,7 +43,7 @@ THE bathroom ISA LOCATION
 END THE.
 --------------------------------------------------------------------------------
 
-=== ROOM
+== ROOM
 
 If you want to implement an indoor location, you can declare it ISA ROOM:
 
@@ -109,7 +109,7 @@ THE trapdoor ISA DOOR
 END THE trapdoor.
 --------------------------------------------------------------------------------
 
-=== SITE
+== SITE
 
 If you want to implement an outdoor location, you can declare it ISA SITE:
 
@@ -211,7 +211,7 @@ END THE my_game.
 
 ================================================================================
 
-=== DARK_LOCATION and the lit attribute
+== DARK_LOCATION and the lit attribute
 
 
 In dark locations, actions requiring seeing are automatically disabled by the library.
@@ -351,11 +351,11 @@ END THE basement.
 To recap: use the DARK_LOCATION class when a LIGHTSOURCE object determines whether a location is lit or dark; swap between the lit/NOT lit attributes, inherent to all locations, when you don't want to refer to any light sources affecting whether a location is lit or dark.
 
 
-=== The visited and described attributes
+== The visited and described attributes
 
 
 // @ADDED SUB-HEADING:
-==== visited
+=== visited
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -403,7 +403,7 @@ END THE.
 
 
 // @ADDED SUB-HEADING:
-==== described
+=== described
 
 
 [source,alan]
@@ -445,7 +445,7 @@ END THE.
 
 
 
-=== Changing the verb outcome in a certain location
+== Changing the verb outcome in a certain location
 
 Sometimes you might wish to have a verb behave differently in a certain location or locations.
 You can do it like this:
@@ -525,7 +525,7 @@ END THE.
 
 
 
-=== Nested locations
+== Nested locations
 
 Nesting locations is straightforward, as described in the ALAN Manual:
 

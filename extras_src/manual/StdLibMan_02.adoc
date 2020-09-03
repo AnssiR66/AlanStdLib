@@ -9,7 +9,7 @@
 ////
 
 [[ch2]]
-== What is different in v2.x?
+= What is different in v2.x?
 
 * the author doesn't necessarily need to access the library files any longer when writing a game. It is possible to write a game just importing the library and define everything in your own game source file(s). It is still possible to edit the library files directly if this is preferred. There are also some cases when the library needs to be accessed, for example when changing standard runtime messages.
 
@@ -190,7 +190,7 @@ THE my_game ISA DEFINITION_BLOCK
 END THE my_game.
 --------------------------------------------------------------------------------
 
-=== How to import the standard library into an ALAN game
+== How to import the standard library into an ALAN game
 
 To write an ALAN game, you won't necessarily need the standard library at all.
 It is perfectly possible to define everything in your game by yourself.

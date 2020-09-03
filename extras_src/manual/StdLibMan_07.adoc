@@ -11,7 +11,7 @@
 
 
 [[ch7]]
-== Additional attributes for THINGs: (NOT) distant, (NOT) reachable, scenery
+= Additional attributes for THINGs: (NOT) distant, (NOT) reachable, scenery
 
 Distant/NOT distant is a new attribute in v2.0 and later versions of the library.
 It has been added to be used alongside with the existing reachable/NOT reachable attributes.
@@ -152,7 +152,7 @@ Note that actors can be scenery, as well.
 Such actors are not mentioned in the location description by default, and examining them yields the default message "The [actor] is not important.".
 
 
-=== Classes: usage
+== Classes: usage
 
 As we have already seen, it is possible to use classes and subclasses in various contexts in ALAN.
 The library defines a large number of subclasses for actors and objects and locations, as seen in the previous chapters.
@@ -196,7 +196,7 @@ END THE my_game.
 +
 Here, you wouldn't be able to use `ADD TO`, as you cannot add an attribute that has been already defined for a class, even if you change it to its opposite (for example `wearable <> NOT wearable`).
 
-==== Overriding library responses for classes
+=== Overriding library responses for classes
 
 If you wish to override the library response to a verb within a specific class, use DOES ONLY with the verb:
 

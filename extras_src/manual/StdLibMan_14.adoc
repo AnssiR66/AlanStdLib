@@ -10,7 +10,7 @@
 
 
 [[ch14]]
-== Translating to other languages
+= Translating to other languages
 
 To translate the ALAN system and library to other languages, you should
 

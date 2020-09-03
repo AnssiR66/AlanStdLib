@@ -11,7 +11,7 @@
 
 
 [[ch12]]
-== Runtime messages
+= Runtime messages
 
 Many of the runtime messages built into ALAN have been altered in the library from their default wording as stated in the ALAN manual.
 This is to ensure that plural is handled correctly and that there are no clashes between first and second person.

@@ -11,7 +11,7 @@
 
 
 [[ch11]]
-== Have the game banner show at the start
+= Have the game banner show at the start
 
 To show the game banner at the start, after an optional intro text, you must add the text `DESCRIBE banner.` after the `START AT` clause, for example:
 

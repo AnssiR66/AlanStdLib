@@ -9,7 +9,7 @@
 ////
 
 [[ch1]]
-== Introduction
+= Introduction
 
 // @NOTE: We should specify the actual ALAN version that the library was tested
 // 		  against (either Alpha or Beta, depending if a new Beta was released).
@@ -63,7 +63,7 @@ Thank you to Steve Griffiths for the score notification code snippet and for the
 And naturally many thanks to Thomas Nilsson for the ALAN Interactive Fiction Language.
 
 
-=== What to read if you're a complete newbie
+== What to read if you're a complete newbie
 
 It would be advisable to start with the ALAN Manual (available on the ALAN website at {AlanWWW}) to get an idea of how the language works in general.
 The ALAN manual contains all the features of the language; this library manual only describes what is pre-defined in the standard library.
@@ -75,14 +75,14 @@ After reading the ALAN manual, read this manual thoroughly, with the following e
 The later passages in that chapter, listing all possible illegal parameter message attributes and verb check attributes of the `my_game` meta-instance, are meant to serve as a searchable index rather than to be read systematically.
 
 
-=== What to read if you're familiar with ALAN but haven't used the standard library v1.0
+== What to read if you're familiar with ALAN but haven't used the standard library v1.0
 
 // @TODO: ADD XREF
 
 Read through the whole of this library manual carefully, with the exception of <<ch10>>, of which you should read only the early part to understand the significance of using the `my_game` meta-instance in the game source.
 The latter part of that chapter, where the illegal parameter messages and other messages are listed, is meant to be read only cursorily and to be used as a searchable index when needed.
 
-=== What to read if you have been using the v1.0 of the standard library
+== What to read if you have been using the v1.0 of the standard library
 
 // @TODO: ADD XREF
 
@@ -92,7 +92,7 @@ Read carefully the first part of <<ch10>> to understand the significance of usin
 The latter part of that chapter, where the illegal parameter messages and other messages are listed, is meant to be read only cursorily, to be used as a searchable index when needed.
 
 
-=== A note on the coding style used in this manual
+== A note on the coding style used in this manual
 
 The ALAN example code used in this manual follows the principle that all reserved words in the ALAN language are written with all caps:
 

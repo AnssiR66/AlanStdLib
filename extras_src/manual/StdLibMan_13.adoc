@@ -10,7 +10,7 @@
 
 
 [[ch13]]
-== Default attributes used in the standard library
+= Default attributes used in the standard library
 
 The attributes in the following list are pre-defined in the library.
 When you coin your own attributes for your game, please be aware that these attributes already exist.
@@ -189,7 +189,7 @@ HAS weight 5.
 -- the author must set this limit by themselves.
 --------------------------------------------------------------------------------
 
-=== Attributes added to specific classes of objects:
+== Attributes added to specific classes of objects:
 
 These attributes are added to every CLOTHING object:
 
