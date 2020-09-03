@@ -259,7 +259,7 @@ ADD TO EVERY OBJECT
 END ADD.
 --------------------------------------------------------------------------------
 
-
+[[sec.restricted-actions]]
 === Restricted actions
 
 Usually, when you need to restrict a verb from doing what it usually does (= when you want to change the default outcome as defined by the library), you can use a DOES ONLY statement:

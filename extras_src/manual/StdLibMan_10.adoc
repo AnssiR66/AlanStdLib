@@ -242,7 +242,7 @@ HAS restricted_level 0.
 
 // @FIXME: XRef to PDF page...
 By default, all verbs work normally, without restrictions.
-See further the chapter Restricted actions (p. 69-).
+See also <<sec.restricted-actions>>.
 
 // PAGE 81 //
 
@@ -253,13 +253,13 @@ See further the chapter Restricted actions (p. 69-).
 === 5. Illegal parameter messages
 
 In this section, all illegal parameter messages used by the library are listed.
-If you wish to change any of these, you can declare them again in the my_game instance.
+If you wish to change any of these, you can declare them again in the `my_game` instance.
 
 [NOTE]
 ================================================================================
-If you need to change a great number, or all, of these messages, for example if you're writing in another language or you need to change the person or the tense of these messages to better suit your narrative, it is highly recommended that you edit the file 'mygame_import.i' in the library distribution package, find the list of these messages there, edit them, and import the 'mygame_import.i' file to your game source (together with the library). 'mygame_import.i' is a file that lists all the pre-defined attributes of the my_game instance for easy modification.
+If you need to change a great number, or all, of these messages, for example if you're writing in another language or you need to change the person or the tense of these messages to better suit your narrative, it is highly recommended that you edit the file 'mygame_import.i' in the library distribution package, find the list of these messages there, edit them, and import the 'mygame_import.i' file to your game source (together with the library). 'mygame_import.i' is a file that lists all the pre-defined attributes of the `my_game` instance for easy modification.
 It is included in the library distribution package but is not necessarily needed to run a game.
-It makes sense to re-declare these messages within the my_game instance in your own source file ONLY if you need to change a small number that you are not satisfied with.
+It makes sense to re-declare these messages within the `my_game` instance in your own source file ONLY if you need to change a small number that you are not satisfied with.
 Looking through the list of these parameter messages in 'mygame_import.i' will give you a much better overview of them and make it easier to edit them in a uniform way to suit your purposes.
 ================================================================================
 

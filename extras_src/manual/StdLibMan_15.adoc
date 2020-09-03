@@ -53,7 +53,9 @@ include::{utf8dir}/_short-example3.alan[tag=shown]
 include::{utf8dir}/_short-example4.alan[tag=shown]
 --------------------------------------------------------------------------------
 
-5. Here, the game author has added a check of his own to the library-defined drink verb and changed an illegal parameter message for the verbs look_behind, look_in, and look_under:
+
+5. [[ch15.example5]]
+Here, the game author has added a check of his own to the library-defined drink verb and changed an illegal parameter message for the verbs look_behind, look_in, and look_under:
 +
 [source,alan]
 --------------------------------------------------------------------------------

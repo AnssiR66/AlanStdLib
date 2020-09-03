@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.9">
-<title>Alan Standard Library v2.1 User&#8217;s Manual</title>
+<meta name="generator" content="Asciidoctor 2.0.10">
+<title>Alan Standard Library v2.2 User&#8217;s Manual</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -240,7 +240,7 @@ table.linenotable td.linenos{border-right:1px solid currentColor;opacity:.35;pad
 pre.pygments .lineno{border-right:1px solid currentColor;opacity:.35;display:inline-block;margin-right:.75em}
 pre.pygments .lineno::before{content:"";margin-right:-.125em}
 .quoteblock{margin:0 1em 1.25em 1.5em;display:table}
-.quoteblock>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
 .quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
 .quoteblock blockquote{margin:0;padding:0;border:0}
 .quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
@@ -257,7 +257,8 @@ pre.pygments .lineno::before{content:"";margin-right:-.125em}
 .quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
 .quoteblock.abstract{margin:0 1em 1.25em;display:block}
 .quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
-.quoteblock.excerpt,.quoteblock .quoteblock{margin:0 0 1.25em;padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
 .quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
 .quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;text-align:left;margin-right:0}
 table.tableblock{max-width:100%;border-collapse:separate}
@@ -726,13 +727,13 @@ span.play em,
 /*# sourceMappingURL=styles.css.map */
 </style>
 </head>
-<body class="article toc2 toc-left">
+<body class="book toc2 toc-left">
 <div id="header">
-<h1>Alan Standard Library v2.1 User&#8217;s Manual</h1>
+<h1>Alan Standard Library v2.2 User&#8217;s Manual</h1>
 <div class="details">
 <span id="author" class="author">Anssi Räisänen</span><br>
-<span id="revnumber">version 2.1,</span>
-<span id="revdate">2018-04-12</span>
+<span id="revnumber">version 2.2-WIP,</span>
+<span id="revdate">2020-09-03</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -833,7 +834,7 @@ span.play em,
 <li><a href="#_removing_checks_from_library_verbs">8.5. Removing checks from library verbs</a></li>
 <li><a href="#_overriding_default_responses_for_library_verbs">8.6. Overriding default responses for library verbs</a></li>
 <li><a href="#_making_your_own_verbs">8.7. Making your own verbs</a></li>
-<li><a href="#_restricted_actions">8.8. Restricted actions</a></li>
+<li><a href="#sec.restricted-actions">8.8. Restricted actions</a></li>
 </ul>
 </li>
 <li><a href="#ch9">9. Adding synonyms for existing library words (verbs, object and actor classes)</a></li>
@@ -891,7 +892,17 @@ span.play em,
 </td>
 <td class="content">
 <div class="paragraph">
-<p>WIP! Chapters are still being ported from the original PDF, with some basic adjustments of the contents just to ensure the document can be coverted.</p>
+<p>WIP! Chapters are still being ported from the original PDF, with some basic adjustments of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The contents, to make the most out of AsciiDoc and ensure the document can be coverted.</p>
+</li>
+<li>
+<p>The code examples, so that they match the upcoming v2.2 library and latest Alan (alpha).</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>All chapters still need to be cleaned up, they are just drafts.</p>
@@ -909,7 +920,7 @@ span.play em,
 <h2 id="ch1"><a class="anchor" href="#ch1"></a>1. Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This is the manual for the ALAN Standard Library v2.1.
+<p>This is the manual for the ALAN Standard Library v2.2.
 This manual describes how to use the library together with the ALAN Interactive Fiction Language system v3.0 and subsequent versions, to create works of interactive fiction, or text adventures.
 The library defines responses for verbs and commands commonly used in gameplay, such as <em>examine</em>, <em>take</em>, <em>drop</em> and <em>attack</em>, together with numerous other ones.
 The library also defines various global attributes (for example <code>takeable</code>, <code>NOT openable</code>), as well as object and actor attributes and classes (for example <code>CLOTHING</code>, <code>WEAPON</code>, <code>PERSON</code>), together with illegal parameter messages (for example &#8220;That&#8217;s not something you can examine&#8221;).</p>
@@ -920,7 +931,7 @@ Before that, versions 0.x, written by Steve Griffiths, were available for use.
 The writer of the current version is Anssi Räisänen.</p>
 </div>
 <div class="paragraph">
-<p>The ALAN Standard Library v2.1 consists of the following five primary library files:</p>
+<p>The ALAN Standard Library v2.2 consists of the following five primary library files:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1055,11 +1066,11 @@ After reading the ALAN manual, read this manual thoroughly, with the following e
 <div class="ulist">
 <ul>
 <li>
-<p>The chapter <a href="#ch2">What is different in v2.x?</a> is not that necessary to read if you haven&#8217;t used the previous version of the library, but it might be useful if you want to have a quick preview of some features the library is capable of.</p>
+<p>You don&#8217;t need to read <a href="#ch2">Ch. 2, <em>What is different in v2.x?</em></a> if you haven&#8217;t used the previous version 1 of the library, but it might be useful if you want to have a quick preview of some features the library is capable of.</p>
 </li>
 <li>
-<p>Read only the early part (p. 78-) of the chapter <a href="#ch10">The my_game instance and its attributes</a> to get an idea of how that meta-instance is to be used in the game source.
-The later passages in that chapter, listing all possible illegal parameter message attributes and verb check attributes of the <code>my_game</code> meta-instance, are meant to serve as a searchable index sooner than to be read systematically.</p>
+<p>Read only the early part of <a href="#ch10">Ch. 10, <em>The my_game instance and its attributes</em></a> to get an idea of how that meta-instance is to be used in the game source.
+The later passages in that chapter, listing all possible illegal parameter message attributes and verb check attributes of the <code>my_game</code> meta-instance, are meant to serve as a searchable index rather than to be read systematically.</p>
 </li>
 </ul>
 </div>
@@ -1067,16 +1078,16 @@ The later passages in that chapter, listing all possible illegal parameter messa
 <div class="sect2">
 <h3 id="_what_to_read_if_youre_familiar_with_alan_but_havent_used_the_standard_library_v1_0"><a class="anchor" href="#_what_to_read_if_youre_familiar_with_alan_but_havent_used_the_standard_library_v1_0"></a>1.2. What to read if you&#8217;re familiar with ALAN but haven&#8217;t used the standard library v1.0</h3>
 <div class="paragraph">
-<p>Read through the whole of this library manual carefully, with the exception of the chapter The my_game instance and its attributes, of which you should read only the early part (p. 78-) to understand the significance of using the <code>my_game</code> meta-instance in the game source.
+<p>Read through the whole of this library manual carefully, with the exception of <a href="#ch10">Ch. 10, <em>The my_game instance and its attributes</em></a>, of which you should read only the early part to understand the significance of using the <code>my_game</code> meta-instance in the game source.
 The latter part of that chapter, where the illegal parameter messages and other messages are listed, is meant to be read only cursorily and to be used as a searchable index when needed.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_what_to_read_if_you_have_been_using_the_v1_0_of_the_standard_library"><a class="anchor" href="#_what_to_read_if_you_have_been_using_the_v1_0_of_the_standard_library"></a>1.3. What to read if you have been using the v1.0 of the standard library</h3>
 <div class="paragraph">
-<p>V2.0 and 2.1 work in many places quite differently from v1.0, so read first the chapter What is different in v2.x to get an idea of what has changed since the previous version.
-Read cursorily through the chapters on Locations, Actors and Objects to learn about new features such as certain attributes.
-Read carefully the first part (p. 78-) of the chapter on The my_game instance and its attributes to understand the significance of using that meta-instance in the game source.
+<p>In many places v2.x works quite differently from v1.0, so read first <a href="#ch2">Ch. 2, <em>What is different in v2.x?</em></a> to get an idea of what has changed since the previous version.
+Read cursorily through <a href="#ch3">Ch. 3, <em>Locations</em></a>, <a href="#ch5">Ch. 5, <em>Actors</em></a> and <a href="#ch6">Ch. 6, <em>Objects</em></a> to learn about new features such as certain attributes.
+Read carefully the first part of <a href="#ch10">Ch. 10, <em>The my_game instance and its attributes</em></a> to understand the significance of using that meta-instance in the game source.
 The latter part of that chapter, where the illegal parameter messages and other messages are listed, is meant to be read only cursorily, to be used as a searchable index when needed.</p>
 </div>
 </div>
@@ -2993,7 +3004,7 @@ That&#8217;s why it is much shorter to implement the otherside instance of a DOO
 (It wouldn&#8217;t mess things up even if you did declare all of these attributes under <code>wooden_door2</code>, to be sure, but it is not necessary.)</p>
 </div>
 <div class="paragraph">
-<p>See also chapter Short examples, example 5.</p>
+<p>See also <a href="#ch15">Ch. 15, <em>Short examples</em></a>, <a href="#ch15.example5">example 5</a>.</p>
 </div>
 </div>
 </div>
@@ -4681,7 +4692,7 @@ Go to <code>lib_verbs.i</code>, find the verb you wish to remove a check from an
 </div>
 </div>
 <div class="sect2">
-<h3 id="_restricted_actions"><a class="anchor" href="#_restricted_actions"></a>8.8. Restricted actions</h3>
+<h3 id="sec.restricted-actions"><a class="anchor" href="#sec.restricted-actions"></a>8.8. Restricted actions</h3>
 <div class="paragraph">
 <p>Usually, when you need to restrict a verb from doing what it usually does (= when you want to change the default outcome as defined by the library), you can use a DOES ONLY statement:</p>
 </div>
@@ -5223,14 +5234,14 @@ If/when a dark location is lighted, this description won&#8217;t be shown any lo
 </div>
 <div class="paragraph">
 <p>By default, all verbs work normally, without restrictions.
-See further the chapter Restricted actions (p. 69-).</p>
+See also <a href="#sec.restricted-actions">Sec. 8.8, &#8220;Restricted actions&#8221;</a>.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_5_illegal_parameter_messages"><a class="anchor" href="#_5_illegal_parameter_messages"></a>10.5. 5. Illegal parameter messages</h3>
 <div class="paragraph">
 <p>In this section, all illegal parameter messages used by the library are listed.
-If you wish to change any of these, you can declare them again in the my_game instance.</p>
+If you wish to change any of these, you can declare them again in the <code>my_game</code> instance.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -5240,9 +5251,9 @@ If you wish to change any of these, you can declare them again in the my_game in
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If you need to change a great number, or all, of these messages, for example if you&#8217;re writing in another language or you need to change the person or the tense of these messages to better suit your narrative, it is highly recommended that you edit the file 'mygame_import.i' in the library distribution package, find the list of these messages there, edit them, and import the 'mygame_import.i' file to your game source (together with the library). 'mygame_import.i' is a file that lists all the pre-defined attributes of the my_game instance for easy modification.
+<p>If you need to change a great number, or all, of these messages, for example if you&#8217;re writing in another language or you need to change the person or the tense of these messages to better suit your narrative, it is highly recommended that you edit the file 'mygame_import.i' in the library distribution package, find the list of these messages there, edit them, and import the 'mygame_import.i' file to your game source (together with the library). 'mygame_import.i' is a file that lists all the pre-defined attributes of the <code>my_game</code> instance for easy modification.
 It is included in the library distribution package but is not necessarily needed to run a game.
-It makes sense to re-declare these messages within the my_game instance in your own source file ONLY if you need to change a small number that you are not satisfied with.
+It makes sense to re-declare these messages within the <code>my_game</code> instance in your own source file ONLY if you need to change a small number that you are not satisfied with.
 Looking through the list of these parameter messages in 'mygame_import.i' will give you a much better overview of them and make it easier to edit them in a uniform way to suit your purposes.</p>
 </div>
 </td>
@@ -6706,7 +6717,8 @@ In addition, the author has added a check and a response of his/her own to <code
 </div>
 </li>
 <li>
-<p>Here, the game author has added a check of his own to the library-defined drink verb and changed an illegal parameter message for the verbs look_behind, look_in, and look_under:</p>
+<p><a id="ch15.example5"></a>
+Here, the game author has added a check of his own to the library-defined drink verb and changed an illegal parameter message for the verbs look_behind, look_in, and look_under:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">VERB</span> drink&#x000A;    <span class="hl kwa">CHECK</span> <span class="hl kwc">hero</span> <span class="hl kwa">IS</span> thirsty&#x000A;      <span class="hl kwa">ELSE</span> <span class="hl str">&quot;You don&#39;t feel like drinking anything right now.&quot;</span>&#x000A;    <span class="hl kwa">END VERB.</span>&#x000A;&#x000A;  <span class="hl kwa">HAS</span> illegal_parameter_there <span class="hl str">&quot;You can&#39;t</span> <span class="hl esc">$v</span> <span class="hl str">there.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
@@ -6733,7 +6745,7 @@ This code reintroduces the situation used in example 1, with a locked door and t
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 2.1<br>
+Version 2.2-WIP<br>
 </div>
 </div>
 </body>

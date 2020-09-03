@@ -11,7 +11,13 @@
 [[ch1]]
 == Introduction
 
-This is the manual for the ALAN Standard Library v2.1.
+// @NOTE: We should specify the actual ALAN version that the library was tested
+// 		  against (either Alpha or Beta, depending if a new Beta was released).
+// 		  Some of the bug fixes that resulted from bugs discovered during tests
+// 		  tests and development might require the library to use updated ALAN
+// 		  releases.
+
+This is the manual for the ALAN Standard Library v{StdLibVer}.
 This manual describes how to use the library together with the ALAN Interactive Fiction Language system v3.0 and subsequent versions, to create works of interactive fiction, or text adventures.
 The library defines responses for verbs and commands commonly used in gameplay, such as _examine_, _take_, _drop_ and _attack_, together with numerous other ones.
 The library also defines various global attributes (for example `takeable`, `NOT openable`), as well as object and actor attributes and classes (for example `CLOTHING`, `WEAPON`, `PERSON`), together with illegal parameter messages (for example "`That's not something you can examine`").
@@ -21,7 +27,7 @@ Before that, versions 0.x, written by Steve Griffiths, were available for use.
 The writer of the current version is Anssi Räisänen.
 
 
-The ALAN Standard Library v2.1 consists of the following five primary library files:
+The ALAN Standard Library v{StdLibVer} consists of the following five primary library files:
 
 * `lib_classes.i`
 * `lib_definitions.i`
@@ -63,25 +69,26 @@ It would be advisable to start with the ALAN Manual (available on the ALAN websi
 The ALAN manual contains all the features of the language; this library manual only describes what is pre-defined in the standard library.
 After reading the ALAN manual, read this manual thoroughly, with the following exceptions:
 
-* The chapter <<ch2>> is not that necessary to read if you haven't used the previous version of the library, but it might be useful if you want to have a quick preview of some features the library is capable of.
-* Read only the early part (p. 78-) of the chapter <<ch10>> to get an idea of how that meta-instance is to be used in the game source.
-The later passages in that chapter, listing all possible illegal parameter message attributes and verb check attributes of the `my_game` meta-instance, are meant to serve as a searchable index sooner than to be read systematically.
+* You don't need to read <<ch2>> if you haven't used the previous version 1 of the library, but it might be useful if you want to have a quick preview of some features the library is capable of.
+
+* Read only the early part of <<ch10>> to get an idea of how that meta-instance is to be used in the game source.
+The later passages in that chapter, listing all possible illegal parameter message attributes and verb check attributes of the `my_game` meta-instance, are meant to serve as a searchable index rather than to be read systematically.
 
 
 === What to read if you're familiar with ALAN but haven't used the standard library v1.0
 
 // @TODO: ADD XREF
 
-Read through the whole of this library manual carefully, with the exception of the chapter The my_game instance and its attributes, of which you should read only the early part (p. 78-) to understand the significance of using the `my_game` meta-instance in the game source.
+Read through the whole of this library manual carefully, with the exception of <<ch10>>, of which you should read only the early part to understand the significance of using the `my_game` meta-instance in the game source.
 The latter part of that chapter, where the illegal parameter messages and other messages are listed, is meant to be read only cursorily and to be used as a searchable index when needed.
 
 === What to read if you have been using the v1.0 of the standard library
 
 // @TODO: ADD XREF
 
-V2.0 and 2.1 work in many places quite differently from v1.0, so read first the chapter What is different in v2.x to get an idea of what has changed since the previous version.
-Read cursorily through the chapters on Locations, Actors and Objects to learn about new features such as certain attributes.
-Read carefully the first part (p. 78-) of the chapter on The my_game instance and its attributes to understand the significance of using that meta-instance in the game source.
+In many places v2.x works quite differently from v1.0, so read first <<ch2>> to get an idea of what has changed since the previous version.
+Read cursorily through <<ch3>>, <<ch5>> and <<ch6>> to learn about new features such as certain attributes.
+Read carefully the first part of <<ch10>> to understand the significance of using that meta-instance in the game source.
 The latter part of that chapter, where the illegal parameter messages and other messages are listed, is meant to be read only cursorily, to be used as a searchable index when needed.
 
 

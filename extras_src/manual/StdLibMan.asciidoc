@@ -1,9 +1,10 @@
-:StdLibVer: 2.1
+:StdLibVer: 2.2
 :doctitle: Alan Standard Library v{StdLibVer} User's Manual
 :author: Anssi Räisänen
-:revnumber: {StdLibVer}
-:revdate: 2018-04-12
+:revnumber: {StdLibVer}-WIP
+:revdate: 2020-09-03
 :lang: en
+:doctype: book
 // TOC Settings:
 :toc: left
 :toclevels: 5
@@ -11,8 +12,10 @@
 :sectnums:
 :sectnumlevels: 5
 // Cross References:
-:xrefstyle: basic
-:section-refsig: Sect.
+:xrefstyle: full
+:chapter-refsig: Ch.
+:section-refsig: Sec.
+:appendix-refsig: App.
 // Misc Settings:
 :experimental: true
 :icons: font
@@ -37,7 +40,10 @@
 
 [WARNING]
 ================================================================================
-WIP! Chapters are still being ported from the original PDF, with some basic adjustments of the contents just to ensure the document can be coverted.
+WIP! Chapters are still being ported from the original PDF, with some basic adjustments of:
+
+* The contents, to make the most out of AsciiDoc and ensure the document can be coverted.
+* The code examples, so that they match the upcoming v2.2 library and latest Alan (alpha).
 
 All chapters still need to be cleaned up, they are just drafts.
 
