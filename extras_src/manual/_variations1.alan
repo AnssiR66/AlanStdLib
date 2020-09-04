@@ -22,6 +22,21 @@
 Import 'library.i'.
 The my_game IsA DEFINITION_BLOCK
 End the.
+--==============================================================================
+
+-- §3.1. ROOM
+
+--==============================================================================
+-- tag::livingroom[]
+THE livingroom ISA ROOM
+-- end::livingroom[]
+  EXIT north TO garden. -- Exit omitted in example!
+-- tag::livingroom[]
+  HAS floor_desc "There is an exquisite white carpet on the floor.".
+  HAS walls_desc "The wallpaper has a nice flower pattern.".
+  HAS ceiling_desc "A huge chandelier is hanging from the ceiling.".
+END THE livingroom.
+-- end::livingroom[]
 -- =============================================================================
 
 -- The Garden
@@ -101,4 +116,4 @@ THE lamp ISA LIGHTSOURCE AT bedroom
 END THE.
 -- end::lightsource[]
 --------------------------------------------------------------------------------
-Start at garden.
+Start at livingroom.

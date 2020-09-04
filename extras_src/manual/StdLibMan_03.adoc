@@ -66,26 +66,23 @@ HAS walls_desc "".
 HAS ceiling_desc "".
 --------------------------------------------------------------------------------
 
-If the author doesn't change these default values, the default description, at will be "You notice nothing unusual about the \[object\]." (Naturally, these commands won't work in outdoor locations.)
+If the author doesn't change these default values, the default description, at will be "`You notice nothing unusual about the [object].`"
+(Naturally, these commands won't work in outdoor locations.)
 
 
 To have a more varied effect, you can change the descriptions this way:
 
-
 [source,alan]
 --------------------------------------------------------------------------------
-THE livingroom ISA ROOM
-  HAS floor_desc "There is an exquisite white carpet on the floor.".
-  HAS walls_desc "The wallpaper has a nice flower pattern.".
-  HAS ceiling_desc "A huge chandelier is hanging from the ceiling.".
-END THE livingroom.
-
-THE kitchen ISA ROOM
-  HAS walls_desc "The walls are lined with shelves.".
-  -- here, examining the floor and the ceiling would show the default
-  -- description, as they are not especially defined
-END THE kitchen.
+include::{utf8dir}/_variations1.alan[tag=livingroom]
 --------------------------------------------------------------------------------
+
+and the player will be presented with your custom descriptions for the living room's foor, ceiling and walls:
+
+[example,role="gametranscript"]
+================================================================================
+include::{utf8dir}/_variations1.a3ADocLog[tag=livingroom]
+================================================================================
 
 
 You can change the description of a room's floor, walls or ceiling mid-game at any time:

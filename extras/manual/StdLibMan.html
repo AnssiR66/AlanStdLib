@@ -1463,14 +1463,34 @@ The IFID system is defined by the Treaty of Babel which was created in 2006.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If the author doesn&#8217;t change these default values, the default description, at will be "You notice nothing unusual about the \[object\]." (Naturally, these commands won&#8217;t work in outdoor locations.)</p>
+<p>If the author doesn&#8217;t change these default values, the default description, at will be &#8220;You notice nothing unusual about the [object].&#8221;
+(Naturally, these commands won&#8217;t work in outdoor locations.)</p>
 </div>
 <div class="paragraph">
 <p>To have a more varied effect, you can change the descriptions this way:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> livingroom <span class="hl kwa">ISA</span> ROOM&#x000A;  <span class="hl kwa">HAS</span> floor_desc <span class="hl str">&quot;There is an exquisite white carpet on the floor.&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> walls_desc <span class="hl str">&quot;The wallpaper has a nice flower pattern.&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> ceiling_desc <span class="hl str">&quot;A huge chandelier is hanging from the ceiling.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE</span> livingroom<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> kitchen <span class="hl kwa">ISA</span> ROOM&#x000A;  <span class="hl kwa">HAS</span> walls_desc <span class="hl str">&quot;The walls are lined with shelves.&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl slc">-- here, examining the floor and the ceiling would show the default</span>&#x000A;  <span class="hl slc">-- description, as they are not especially defined</span>&#x000A;<span class="hl kwa">END THE</span> kitchen<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> livingroom <span class="hl kwa">ISA</span> ROOM&#x000A;  <span class="hl kwa">HAS</span> floor_desc <span class="hl str">&quot;There is an exquisite white carpet on the floor.&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> walls_desc <span class="hl str">&quot;The wallpaper has a nice flower pattern.&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> ceiling_desc <span class="hl str">&quot;A huge chandelier is hanging from the ceiling.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE</span> livingroom<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and the player will be presented with your custom descriptions for the living room&#8217;s foor, ceiling and walls:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>x floor</em><br>
+There is an exquisite white carpet on the floor.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>x ceiling</em><br>
+A huge chandelier is hanging from the ceiling.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>x walls</em><br>
+The wallpaper has a nice flower pattern.<br></p>
+</div>
 </div>
 </div>
 <div class="paragraph">
