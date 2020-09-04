@@ -129,17 +129,25 @@ END THE outdoor.
 THE indoor ISA LOCATION
 END THE indoor.
 
+ADD TO EVERY location
+  -- ==========================================
+  -- Used internally for 'room' instances only:
+  -- ==========================================
+  HAS floor_desc "".    --| These can set on any room for custom descriptions of
+  HAS walls_desc "".    --| its walls, floor or ceiling, instead of the default
+  HAS ceiling_desc "".  --| "You notice nothing unusual about the [object]."
+  -- ==========================================
+  -- Used internally for 'site' instances only:
+  -- ==========================================
+  HAS ground_desc "".   --| As above, but for descriptions of ground and sky in
+  HAS sky_desc "".      --| sites instances.
+END ADD TO location.
 
 EVERY room ISA LOCATION AT indoor
-  HAS floor_desc "".    --| If these values are left unchanged, the descriptions
-  HAS walls_desc "".    --| of the walls, floor and ceiling will be the default:
-  HAS ceiling_desc "".  --| "You notice nothing unusual about the [object]."
 END EVERY.
 
 
 EVERY site ISA LOCATION AT outdoor
-  HAS ground_desc "".
-  HAS sky_desc "".
 END EVERY.
 
 
@@ -157,6 +165,13 @@ THE floor ISA room_object
   CONTAINER
     -- to allow 'empty/pour/put something on floor'
   DESCRIPTION ""
+
+
+  -- Honor a user-defined 'floor_desc', if present:
+  VERB examine
+    CHECK floor_desc OF CURRENT LOCATION = ""
+      ELSE SAY floor_desc OF CURRENT LOCATION.
+  END VERB examine.
 
 
   -- As we have declared the floor a container, we will disable some verbs
@@ -190,10 +205,7 @@ THE floor ISA room_object
     WHEN cont
       DOES ONLY "That's not something you can $v things into."
   END VERB throw_in.
-
-
-
-END THE.
+END THE floor.
 
 
 THE wall ISA room_object
@@ -201,6 +213,12 @@ THE wall ISA room_object
   IS NOT takeable.
   IS NOT movable.
   DESCRIPTION ""
+
+  -- Honor a user-defined 'walls_desc', if present:
+  VERB examine
+    CHECK walls_desc OF CURRENT LOCATION = ""
+      ELSE SAY walls_desc OF CURRENT LOCATION.
+  END VERB examine.
 END THE.
 
 
@@ -209,6 +227,12 @@ THE ceiling ISA room_object
   IS NOT takeable.
   IS NOT reachable.
   DESCRIPTION ""
+
+  -- Honor a user-defined 'ceiling_desc', if present:
+  VERB examine
+    CHECK ceiling_desc OF CURRENT LOCATION = ""
+      ELSE SAY ceiling_desc OF CURRENT LOCATION.
+  END VERB examine.
 END THE.
 
 
@@ -220,6 +244,12 @@ THE ground ISA site_object
     -- to allow 'empty/pour something on ground'
   DESCRIPTION ""
 
+
+  -- Honor a user-defined 'ground_desc', if present:
+  VERB examine
+    CHECK ground_desc OF CURRENT LOCATION = ""
+      ELSE SAY ground_desc OF CURRENT LOCATION.
+  END VERB examine.
 
 
   -- As we have declared the ground to be a container, we will disable some verbs
@@ -253,9 +283,7 @@ THE ground ISA site_object
     WHEN cont
       DOES ONLY "That's not something you can $v things into."
   END VERB throw_in.
-
-
-END THE.
+END THE ground.
 
 
 
@@ -263,6 +291,12 @@ THE sky ISA site_object
   IS NOT takeable.
   IS distant.
   DESCRIPTION ""
+
+  -- Honor a user-defined 'sky_desc', if present:
+  VERB examine
+    CHECK sky_desc OF CURRENT LOCATION = ""
+      ELSE SAY sky_desc OF CURRENT LOCATION.
+  END VERB examine.
 END THE.
 
 
@@ -273,7 +307,7 @@ ADD TO EVERY room_object
 
   VERB put_against
     WHEN bulk
-      CHECK THIS = wall
+      CHECK THIS = ceiling
         ELSE "That's not possible."
   END VERB put_against.
 
@@ -469,12 +503,4 @@ ADD TO EVERY LOCATION
 END ADD TO.
 
 
-
-
-
-
-
 -- end of file.
-
-
-
