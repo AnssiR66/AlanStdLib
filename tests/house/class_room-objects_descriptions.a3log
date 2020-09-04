@@ -46,15 +46,15 @@ The kitchen is to the south.
 > ; ==============================================================================
 > ; In this room we've provided custom descriptions for walls, floor and ceiling.
 > ; ------------------------------------------------------------------------------
-> ; **FAIL** We're getting the default responses:
 > x walls
-You notice nothing unusual about the wall.
+Oh dear! These walls definitely need a fresh paint job.
 
 > x floor
-You notice nothing unusual about the floor.
+You can't even remember when you last washed this floor.
 
 > x ceiling
-You notice nothing unusual about the ceiling.
+A naked light bulb hangs from the ceiling, strapped to the electric wires
+with some sticky tape.
 
 > 
 

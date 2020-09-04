@@ -125,10 +125,8 @@ The apple is not in the floor.
 > put apple against floor
 That's not possible.
 
-> ; **FAIL** With 'wall', the 'put_under' verb defined on 'room_object' is not
-> ;          being executed, and we're getting the response of the main verb instead:
 > put apple against wall
-That wouldn't accomplish anything.
+That's not possible.
 
 > put apple against ceiling
 The ceiling is out of your reach.

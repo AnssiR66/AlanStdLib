@@ -19,7 +19,6 @@ north
 ; ==============================================================================
 ; In this room we've provided custom descriptions for walls, floor and ceiling.
 ; ------------------------------------------------------------------------------
-; **FAIL** We're getting the default responses:
 x walls
 x floor
 x ceiling

@@ -33,12 +33,11 @@ swimming pool here.
 > ; ==============================================================================
 > ; In this room we've provided custom descriptions for walls, floor and ceiling.
 > ; ------------------------------------------------------------------------------
-> ; **FAIL** We're getting the default responses:
 > x sky
-You notice nothing unusual about the sky.
+There are a few dark clouds, maybe it'll rain tonight.
 
 > x ground
-You notice nothing unusual about the ground.
+The lawn is well looked after, mowed as usual.
 
 > 
 
