@@ -1,0 +1,45 @@
+
+
+The House 
+A rooms & sites setting for various tests. 
+(C) 2018 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880
+.
+Standard Library v2.1 
+Version 1 
+All rights reserved.
+
+
+The Kitchen
+The laundry room is to the north, the south exit leads to your back
+garden. There is a chair, a fridge and a table here. On the table you see 
+a bottle, a chips bag, a jar and a basket.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                      SITE OBJECTS DESCRIPTIONS TESTS                       *
+> ; *                                                                            *
+> ; ******************************************************************************
+> ; This solution tests custom descriptions on 'site_object' class ; instances
+> ; ('ground_desc' and 'sky_desc').
+> ; ------------------------------------------------------------------------------
+> south
+The Back Garden
+To the north lies your home. There is a table, a folding bed and a 
+swimming pool here.
+
+> ; ==============================================================================
+> ; Garden -> CUSTOM DESCRIPTIONS
+> ; ==============================================================================
+> ; In this room we've provided custom descriptions for walls, floor and ceiling.
+> ; ------------------------------------------------------------------------------
+> ; **FAIL** We're getting the default responses:
+> x sky
+You notice nothing unusual about the sky.
+
+> x ground
+You notice nothing unusual about the ground.
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

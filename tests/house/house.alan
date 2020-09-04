@@ -1,5 +1,5 @@
 --==============================================================================
--- "The House" by Tristano Ajmone, 2018.
+-- "The House" by Tristano Ajmone, 2018-2020.
 --==============================================================================
 IMPORT 'library.i'. -- ALAN Standard Library v2.1
 
@@ -24,10 +24,30 @@ END THE.
 
 THE kitchen IsA room.
   NAME 'The Kitchen'.
+  EXIT north TO laundry.
   EXIT south TO garden.
-  DESCRIPTION "The south exit leads to your back garden."
-  
+  DESCRIPTION "The laundry room is to the north,
+               the south exit leads to your back garden."
 END THE kitchen.
+
+-- =============================================================================
+
+-- ROOM: The Laundry Room
+
+-- =============================================================================
+-- The laundry will be our testbed for custom descriptions of 'site_object'
+-- (walls, floor, ceiling).
+
+THE laundry IsA room.
+  NAME 'The Laundry Room'.
+  EXIT south TO kitchen.
+  DESCRIPTION "The kitchen is to the south."
+  HAS walls_desc   "Oh dear! These walls definitely need a fresh paint job.".
+  HAS floor_desc   "You can't even remember when you last washed this floor.".
+  HAS ceiling_desc "A naked light bulb hangs from the ceiling, strapped to the
+                    electric wires with some sticky tape.".
+
+END THE laundry.
 
 -- =============================================================================
 
@@ -35,12 +55,15 @@ END THE kitchen.
 
 -- =============================================================================
 -- The garden will be our testing location for the 'site' class.
+-- We'll hadd custom descriptions for the sky and ground.
 
 THE garden IsA site.
   NAME 'The Back Garden'.
   EXIT north TO kitchen.
   DESCRIPTION "To the north lies your home."
-  
+  HAS ground_desc "The lawn is well looked after, mowed as usual.".
+  HAS sky_desc    "There are a few dark clouds, maybe it'll rain tonight.".
+
   -- Since we've excluded the 'chirp' sound from the room description, we'll
   -- make it available at the garden via 'listen':
   VERB listen0
@@ -60,7 +83,7 @@ END THE garden.
 -- Let's provide a usable chair.
 
 THE chair IsA supporter AT kitchen.
-  
+
   VERB sit_on
     DOES ONLY
       IF hero IS lying_down
@@ -85,7 +108,7 @@ THE fridge IsA listed_container AT kitchen.
     FOR EACH fooditem IsA food
       DO INCLUDE fooditem IN allowed OF THIS.
     END FOR.
-  
+
 END THE fridge.
 --==============================================================================
 -- The Kitchen Table (supported)
@@ -101,7 +124,7 @@ END THE kitchen_table.
 --==============================================================================
 
 THE basket IsA listed_container IN kitchen_table.
-  
+
 END THE basket.
 
 -- =============================================================================
@@ -226,7 +249,7 @@ END THE chips.
 THE chirp IsA sound AT garden.
   DESCRIPTION ""  -- We don't want it to show up in the room description
                   -- (it'll show up when listening in the garden via listen0).
-  
+
   VERB listen
     DOES ONLY
       IF hero AT obj
@@ -252,7 +275,7 @@ THE garden_bed IsA supporter AT garden.
   NAME folding bed.
   NAME bed.
   HAS ex "It's a folding bed, ideal for beaches and camping.".
-  
+
   VERB lie_on
     DOES ONLY
       IF hero IS sitting
@@ -272,7 +295,7 @@ END THE garden_bed.
 THE swimming_pool IsA liquid AT garden.
   NAME swimming pool.
   NAME water.
-  
+
   VERB swim
     DOES ONLY
       IF hero DIRECTLY AT inside_pool
@@ -281,7 +304,7 @@ THE swimming_pool IsA liquid AT garden.
           LOCATE hero AT inside_pool.
       END IF.
   END VERB swim.
-  
+
   VERB swim_in
     DOES ONLY
       IF hero DIRECTLY AT inside_pool
@@ -290,7 +313,7 @@ THE swimming_pool IsA liquid AT garden.
           LOCATE hero AT inside_pool.
       END IF.
   END VERB swim_in.
-    
+
   VERB enter
     DOES ONLY
       IF hero DIRECTLY AT inside_pool
@@ -321,10 +344,10 @@ THE inside_pool IsA location AT garden.
   NAME 'Inside The Swimming Pool (in Garden)'.
   DESCRIPTION
     "The pool is wide enough to enjoy swimming in it."
-  
+
   ENTERED
     "You dive savagely into the pool, splashing water everywhere."
-  
+
 END THE inside_pool.
 
 --------------------------------------------------------------------------------

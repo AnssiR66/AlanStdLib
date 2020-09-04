@@ -17,64 +17,44 @@ a bottle, a chips bag, a jar and a basket.
 
 > ; ******************************************************************************
 > ; *                                                                            *
-> ; *                           TEST HANDLING LIQUIDS                            *
+> ; *                      ROOM OBJECTS DESCRIPTIONS TESTS                       *
 > ; *                                                                            *
 > ; ******************************************************************************
-> ; Liquids inside takable containers can be handled by using either the container
-> ; or the liquid itself as the verb object.
-> x bottle
-The bottle contains some wine.
+> ; This solution tests default and custom descriptions on 'room_object' class
+> ; instances ('walls_desc', 'floor_desc', 'ceiling_desc').
+> ; ==============================================================================
+> ; Kitchen -> DEFAULT DESCRIPTIONS
+> ; ==============================================================================
+> ; No custom descriptions are set for this room:
+> x walls
+You notice nothing unusual about the wall.
+
+> x floor
+You notice nothing unusual about the floor.
+
+> x ceiling
+You notice nothing unusual about the ceiling.
+
+> 
+
+> north
+The Laundry Room
+The kitchen is to the south.
 
 > ; ==============================================================================
-> ; TEST HANDLING VIA CONTAINER
+> ; Laundry -> CUSTOM DESCRIPTIONS
 > ; ==============================================================================
-> take bottle
-Taken.
+> ; In this room we've provided custom descriptions for walls, floor and ceiling.
+> ; ------------------------------------------------------------------------------
+> ; **FAIL** We're getting the default responses:
+> x walls
+You notice nothing unusual about the wall.
 
-> take bottle
-You already have the bottle.
+> x floor
+You notice nothing unusual about the floor.
 
-> put bottle on table
-You put the bottle on the table.
-
-> take bottle from table
-You take the bottle from the table.
-
-> take bottle from table
-You already have the bottle.
-
-> put bottle on table
-You put the bottle on the table.
-
-> ; ==============================================================================
-> ; TEST HANDLING VIA LIQUID
-> ; ==============================================================================
-> take wine
-(the bottle of wine)
-Taken.
-
-> take wine
-You already have the wine.
-
-> put wine on table
-You put the bottle of wine onto the table.
-
-> inventory
-You are empty-handed.
-
-> x table
-You notice nothing unusual about the table. On the table you see a bottle, 
-a chips bag, a jar and a basket.
-
-> x bottle
-The bottle contains some wine.
-
-> take wine from table
-(the bottle of wine)
-Taken.
-
-> take wine from table
-The wine is not on the table.
+> x ceiling
+You notice nothing unusual about the ceiling.
 
 > 
 

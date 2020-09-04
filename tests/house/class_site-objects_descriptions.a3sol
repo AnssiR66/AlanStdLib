@@ -1,0 +1,17 @@
+; ******************************************************************************
+; *                                                                            *
+; *                      SITE OBJECTS DESCRIPTIONS TESTS                       *
+; *                                                                            *
+; ******************************************************************************
+; This solution tests custom descriptions on 'site_object' class ; instances
+; ('ground_desc' and 'sky_desc').
+; ------------------------------------------------------------------------------
+south
+; ==============================================================================
+; Garden -> CUSTOM DESCRIPTIONS
+; ==============================================================================
+; In this room we've provided custom descriptions for walls, floor and ceiling.
+; ------------------------------------------------------------------------------
+; **FAIL** We're getting the default responses:
+x sky
+x ground
