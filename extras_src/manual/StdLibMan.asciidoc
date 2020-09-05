@@ -2,7 +2,7 @@
 :doctitle: Alan Standard Library v{StdLibVer} User's Manual
 :author: Anssi Räisänen
 :revnumber: {StdLibVer}-WIP
-:revdate: 2020-09-03
+:revdate: 2020-09-05
 :lang: en
 :doctype: book
 // TOC Settings:
@@ -31,6 +31,7 @@
 //                              CUSTOM ATTRIBUTES
 // =============================================================================
 :AlanWWW: link:https://www.alanif.se/[www.alanif.se^,title="Visit Alan website"]
+:StdLibInc: {utf8dir}/../StdLib
 
 // *****************************************************************************
 // *                                                                           *
