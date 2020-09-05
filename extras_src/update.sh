@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# update.sh               v1.5.0 | 2019/05/29 | by Tristano Ajmone, MIT License.
+# update.sh               v1.6.0 | 2020/09/05 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                          BUILD STDLIB EXTRAS FOLDER                          #
@@ -10,8 +10,12 @@
 
 foldersList="manual tutorials"
 
-# The script will build, compile, convert and/or process the following type of
-# contents in the source folders "extras_src/<foldername>/":
+# The script will begin by creating in "./utf8/StdLib/" an UTF-8 encoded version
+# of all the StdLib sources, to ensure that all documents will be including
+# up-to-date library snippets.
+
+# Then the script will build, compile, convert and/or process the following type
+# of contents in the source folders "extras_src/<foldername>/":
 #
 #  -- Alan example adventures
 #  -- Adventures command scripts
@@ -49,6 +53,28 @@ for dirName in $foldersList; do
   fi
 done
 foldersTot=$counter
+
+################################################################################
+#                       CONVERT LIBRARY SOURCE TO UTF-8                        #
+################################################################################
+printHeading1 "Create UTF-8 Version of StdLib Sources"
+echo -e "Because Asciidoctor can't handle inclusion of external files in ISO-8859-1"
+echo -e "econding, we need to create UTF-8 versions of them."
+
+# Define Source & Destination folders:
+srcDir="../StdLib" # path of AsciiDoc sources and Alan examples
+utfDir="$utfBasePath/StdLib" # path of UTF-8 converted Alan files
+
+rm -rf $utfDir
+mkdir  $utfDir
+touch  $utfDir/.gitkeep
+
+for sourcefile in $srcDir/*.{alan,i} ; do
+  alan2utf8 $sourcefile
+  if [ $? -ne 0 ] ; then
+    printAborting ; exit 1
+  fi
+done
 
 ################################################################################
 #                           FOLDERS-PROCESSING LOOP                            #
