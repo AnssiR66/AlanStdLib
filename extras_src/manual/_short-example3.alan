@@ -23,20 +23,64 @@ THE my_game ISA DEFINITION_BLOCK
       "Let's just stay on the ground, shall we?"
   END VERB.
 
-  VERB take_from
-    WHEN obj
-      CHECK COUNT ISA ACTOR, AT hero = 1
-      -- ( = the hero himself)
-        ELSE "You don't want to take anything
-              while somebody might be looking."
-      DOES
-        "Triumphantly, you fish" SAY THE obj.
-        "out of" SAY THE holder. "."
+  VERB take
+    CHECK COUNT ISA ACTOR, HERE = 1
+    -- ( = the hero must be alone)
+      ELSE "You don't want to take anything
+            while somebody might be looking."
+    DOES
+      "Triumphantly, you pick up" SAY THE obj. "."
   END VERB.
 END THE.
 -- end::shown[]
 
+-- =============================================================================
+
+-- EXTRA STRUCTURAL CODE
+
+-- =============================================================================
+-- Some extra code (not shown in the Manual) so that the above example can be
+-- actually compiled:
+
 THE startlocation IsA site.
 END THE startlocation.
+-- =============================================================================
+-- TEST CODE
+-- =============================================================================
+-- And now let's add some entities to test that example works as expected...
+--------------------------------------------------------------------------------
+-- TEST -> EAT
+--------------------------------------------------------------------------------
+THE apple IsA object AT startlocation.
+  IS edible.
+END THE.
+--------------------------------------------------------------------------------
+-- TEST -> CLIMB
+--------------------------------------------------------------------------------
+THE tree IsA object AT startlocation.
+END THE.
+--------------------------------------------------------------------------------
+-- TEST -> TAKE
+--------------------------------------------------------------------------------
+-- We need an NPC to test if the 'take' action is prevented when the Hero is not
+-- alone in the location...
 
+THE bystander IsA male AT startlocation.
+END THE.
+
+THE newspaper IsA object AT startlocation.
+  DESCRIPTION "A newspaper lies abandoned on the floor."
+END THE.
+
+-- Because the player won't be able to take the newspaper from the trashcan
+-- while the NPC is present, we need to devise a way to make him leave...
+
+VERB fart
+  CHECK COUNT ISA ACTOR, HERE > 1
+    ELSE "No need to, you're finally alone now."
+  DOES
+    "You release a cloud of toxic fumes, the bystander runs away in disgust."
+    LOCATE bystander AT nowhere.
+END VERB.
+--------------------------------------------------------------------------------
 START AT startlocation.

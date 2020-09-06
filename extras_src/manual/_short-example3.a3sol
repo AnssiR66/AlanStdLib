@@ -1,0 +1,30 @@
+; ******************************************************************************
+; *                                                                            *
+; *                  TEST OVVERRIDING DEFAULT VERB RESPONSES                   *
+; *                                                                            *
+; ******************************************************************************
+; TEST "_short-example3.a3c" to verify that what the Manual says holds true!
+;
+; The source example shows how to override default verb responses directly on
+; the `my_game` instance.
+; ==============================================================================
+; VERB -> EAT
+; ==============================================================================
+; EXPECT: "You don't feel like eating anything in this game."
+eat apple
+; ==============================================================================
+; VERB -> CLIMB
+; ==============================================================================
+; EXPECT: "Let's just stay on the ground, shall we?"
+climb tree
+; ==============================================================================
+; VERB -> TAKE
+; ==============================================================================
+; The 'take' action will fail with a custom message if an NPC is present.
+; ------------------------------------------------------------------------------
+; EXPECT: "You don't want to take anything while somebody might be looking."
+take newspaper
+; Make the NPC go away...
+fart
+; EXPECT: "Triumphantly, you pick up the newshpaper."
+take newspaper

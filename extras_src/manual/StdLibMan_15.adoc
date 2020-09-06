@@ -38,8 +38,8 @@ include::{utf8dir}/short-example2.alan[tag=shown]
 +
 Examples 3-4 below show mainly different variations of the `my_game` instance and not complete games:
 
-3. In this example of defining the `my_game` instance, the author has changed the default verb responses for `eat`, `climb` and `take_from`.
-In addition, the author has added a check and a response of his/her own to `take_from`:
+3. In this example of defining the `my_game` instance, the author has changed the default verb responses for `eat`, `climb` and `take`.
+In addition, the author has added a check and a response of his/her own to `take`:
 +
 [source,alan]
 --------------------------------------------------------------------------------
