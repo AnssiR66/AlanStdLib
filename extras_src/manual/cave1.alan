@@ -1,0 +1,24 @@
+Import 'library.i'.
+The my_game IsA DEFINITION_BLOCK
+End the.
+
+--==============================================================================
+
+-- The Cave
+
+--==============================================================================
+-- This room location is IMPLICITLY used in the following examples:
+--    * §6.1.5. lightsource_torch
+THE cave IsA room.
+END THE.
+--------------------------------------------------------------------------------
+-- §6.1.5. lightsource_torch
+--------------------------------------------------------------------------------
+-- tag::lightsource_torch[]
+THE torch ISA LIGHTSOURCE AT cave
+  IS lit.
+END THE.
+
+-- end::lightsource_torch[]
+--------------------------------------------------------------------------------
+Start at cave.

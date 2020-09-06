@@ -1,0 +1,30 @@
+Import 'library.i'.
+The my_game IsA DEFINITION_BLOCK
+End the.
+
+-- =============================================================================
+
+-- The Garden
+
+-- =============================================================================
+-- This site location is IMPLICITLY used in the following examples:
+--    * §4.1. The two methods for examining things
+--    * §6.1.3. DOOR
+The garden IsA site.
+End the.
+--------------------------------------------------------------------------------
+-- §4.1. The two methods for examining things
+--------------------------------------------------------------------------------
+THE ball IsA OBJECT AT garden
+  HAS ex "It's a small red ball.".
+END THE ball.
+--------------------------------------------------------------------------------
+-- §6.1.3. DOOR
+--------------------------------------------------------------------------------
+THE front_door ISA DOOR AT garden
+  NAME front door
+  DESCRIPTION ""
+  HAS ex "It's a white wooden door leading into the house.".
+END THE front_door.
+
+START AT garden.

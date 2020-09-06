@@ -1,0 +1,9 @@
+; ------------------------------------------------------------------------------
+; §4.1. The two methods for examining things
+; ------------------------------------------------------------------------------
+; tag::ball_garden[]
+x ball
+; end::ball_garden[]
+; tag::front_door[]
+x front door
+; end::front_door[]

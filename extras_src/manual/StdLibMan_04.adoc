@@ -58,6 +58,7 @@ Thus, the following won't work:
 
 To have something like the above work, you should define a separate bedroom object, present in the bedroom location, that can then be examined or manipulated in some other ways if needed:
 
+// @EXTERNALIZE CODE: bedroom_object
 [source,alan]
 --------------------------------------------------------------------------------
 THE bedroom_object ISA OBJECT AT bedroom
@@ -77,34 +78,21 @@ END THE.
 The library provides two ways for examining things.
 The first one is the traditional "VERB examine DOES (ONLY)...":
 
+// @EXTERN CODE: ball_garden
 [source,alan]
 --------------------------------------------------------------------------------
-include::{utf8dir}/_variations1.alan[tag=ball_garden]
+include::{utf8dir}/garden1.alan[tag=ball_garden]
 --------------------------------------------------------------------------------
-
-// [source,alan]
-// --------------------------------------------------------------------------------
-// THE ball ISA OBJECT AT garden
-//   VERB examine
-//     DOES ONLY "It's a small red ball."
-//   END VERB.
-// END THE ball.
-// --------------------------------------------------------------------------------
 
 
 which will yield
 
+// @EXTERN TRANSCRIPT: ball_garden
 [example,role="gametranscript"]
 ================================================================================
-include::{utf8dir}/_variations1.a3ADocLog[tag=ball_garden]
+include::{utf8dir}/garden1.a3ADocLog[tag=ball_garden]
 ================================================================================
 
-
-// [example,role="gametranscript"]
-// ================================================================================
-// &gt; _x ball_ +
-// It's a small red ball.
-// ================================================================================
 
 
 Above, you would have to use DOES ONLY, because if you use only DOES, the library-defined response for all things would show first: "You notice nothing unusual about the ball. It's a small red ball."
@@ -112,31 +100,20 @@ Above, you would have to use DOES ONLY, because if you use only DOES, the librar
 Another way for examining things is to use the `ex` attribute.
 `Ex` is here short for "examine":
 
+// @EXTERN CODE: ball_garden (variation)
 [source,alan]
 --------------------------------------------------------------------------------
-include::{utf8dir}/_variations2.alan[tag=ball_garden]
+include::{utf8dir}/garden2.alan[tag=ball_garden]
 --------------------------------------------------------------------------------
-
-// [source,alan]
-// --------------------------------------------------------------------------------
-// THE ball ISA OBJECT AT garden.
-//   HAS ex "It's a small red ball."
-// END THE.
-// --------------------------------------------------------------------------------
 
 
 which will yield the same response as the first method:
 
+// @EXTERN TRANSCRIPT: ball_garden (variation)
 [example,role="gametranscript"]
 ================================================================================
-include::{utf8dir}/_variations2.a3ADocLog[tag=ball_garden]
+include::{utf8dir}/garden2.a3ADocLog[tag=ball_garden]
 ================================================================================
-
-// [example,role="gametranscript"]
-// ================================================================================
-// &gt; _x ball_ +
-// It's a small red ball.
-// ================================================================================
 
 
 but you notice how the needed formulation is shorter.

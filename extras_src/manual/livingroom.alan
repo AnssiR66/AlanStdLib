@@ -1,0 +1,31 @@
+Import 'library.i'.
+The my_game IsA DEFINITION_BLOCK
+End the.
+
+-- tag::livingroom[]
+THE livingroom ISA ROOM
+  HAS floor_desc "There is an exquisite white carpet on the floor.".
+  HAS walls_desc "The wallpaper has a nice flower pattern.".
+  HAS ceiling_desc "A huge chandelier is hanging from the ceiling.".
+END THE livingroom.
+-- end::livingroom[]
+
+-- tag::trapdoor[]
+THE carpet ISA OBJECT AT livingroom
+  VERB move
+    CHECK trapdoor NOT AT livingroom
+      ELSE "There is no need to move the carpet any longer."
+    DOES ONLY
+      "You move the carpet, revealing a trapdoor!"
+      LOCATE trapdoor AT livingroom.
+      SET floor_desc OF livingroom TO "A trapdoor has been revealed when you
+                                       moved the carpet. It leads down to
+                                       darkness.".
+  END VERB.
+END THE carpet.
+
+THE trapdoor ISA DOOR
+END THE trapdoor.
+-- end::trapdoor[]
+
+Start at livingroom.

@@ -1,0 +1,11 @@
+; Test room objects overrides:
+; tag::livingroom[]
+x floor
+x ceiling
+x walls
+; end::livingroom[]
+; tag::trapdoor[]
+x floor
+move carpet
+x floor
+; end::trapdoor[]

@@ -1,24 +1,12 @@
 ; ------------------------------------------------------------------------------
-; §4.1. The two methods for examining things
-; ------------------------------------------------------------------------------
-; tag::ball_garden[]
-x ball
-; end::ball_garden[]
-; tag::front_door[]
-x front door
-; end::front_door[]
-; ------------------------------------------------------------------------------
 ; §6.1.2. DEVICE
 ; ------------------------------------------------------------------------------
-NORTH
 ; tag::thingummyjig[]
 x thingummyjig
 ; end::thingummyjig[]
 ; ------------------------------------------------------------------------------
 ; §6.1.5. LIGHTSOURCE
 ; ------------------------------------------------------------------------------
-; NOTE: Unlike "varation1", there's no 'cave' location here!
-NORTH ; GO TO BEDROOM
 ; tag::lightsource_lamp[]
 x lamp
 ; end::lightsource_lamp[]

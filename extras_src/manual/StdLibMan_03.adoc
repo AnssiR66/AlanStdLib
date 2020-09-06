@@ -71,16 +71,18 @@ If the author doesn't change these default values, the default description shown
 
 To have a more varied effect, you can change the descriptions this way:
 
+// @EXTERN CODE: livingroom
 [source,alan]
 --------------------------------------------------------------------------------
-include::{utf8dir}/_variations1.alan[tag=livingroom]
+include::{utf8dir}/livingroom.alan[tag=livingroom]
 --------------------------------------------------------------------------------
 
 and the player will be presented with your custom descriptions for the living room's foor, ceiling and walls:
 
+// @EXTERN TRANSCRIPT: livingroom
 [example,role="gametranscript"]
 ================================================================================
-include::{utf8dir}/_variations1.a3ADocLog[tag=livingroom]
+include::{utf8dir}/livingroom.a3ADocLog[tag=livingroom]
 ================================================================================
 
 
@@ -91,17 +93,18 @@ Setting these room attributes in an `outdoor` location won't have any effect; th
 
 You can even change the description of a room's floor, walls or ceiling mid-game at any time:
 
+// @EXTERN CODE: livingroom -> trapdoor
 [source,alan]
 --------------------------------------------------------------------------------
-include::{utf8dir}/_variations1.alan[tag=trapdoor]
+include::{utf8dir}/livingroom.alan[tag=trapdoor]
 --------------------------------------------------------------------------------
 
 
+// @EXTERN TRANSCRIPT: livingroom -> trapdoor
 [example,role="gametranscript"]
 ================================================================================
-include::{utf8dir}/_variations1.a3ADocLog[tag=trapdoor]
+include::{utf8dir}/livingroom.a3ADocLog[tag=trapdoor]
 ================================================================================
-
 
 
 
@@ -446,6 +449,7 @@ END THE.
 Sometimes you might wish to have a verb behave differently in a certain location or locations.
 You can do it like this:
 
+// @EXTERNALIZE CODE: basement
 [source,alan]
 --------------------------------------------------------------------------------
 THE basement ISA LOCATION
@@ -459,6 +463,7 @@ END THE.
 
 or
 
+// @EXTERNALIZE CODE: exhibition_hall
 [source,alan]
 --------------------------------------------------------------------------------
 THE exhibition_hall ISA ROOM
@@ -479,6 +484,7 @@ Thus, if there was an exquisite vase in the exhibition hall and the hero tried t
 Verbs cannot refer to locations, they usually apply to things or numerals.
 Thus, the above coding will result in:
 
+// @EXTERNALIZE TRANSCRIPT: exhibition_hall -> vase
 [example,role="gametranscript"]
 ================================================================================
 &gt; _take vase_ +

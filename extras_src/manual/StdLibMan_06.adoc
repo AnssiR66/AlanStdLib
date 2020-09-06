@@ -280,22 +280,14 @@ For example:
 
 [source,alan]
 --------------------------------------------------------------------------------
-include::{utf8dir}/_variations1.alan[tag=thingummyjig]
+include::{utf8dir}/lab1.alan[tag=thingummyjig]
 --------------------------------------------------------------------------------
-
-
-// [source,alan]
-// --------------------------------------------------------------------------------
-// THE thingummyjig ISA DEVICE AT lab
-// END THE.
-// --------------------------------------------------------------------------------
-
 
 yields by default
 
 [example,role="gametranscript"]
 ================================================================================
-include::{utf8dir}/_variations1.a3ADocLog[tag=thingummyjig]
+include::{utf8dir}/lab1.a3ADocLog[tag=thingummyjig]
 ================================================================================
 
 // [example,role="gametranscript"]
@@ -310,7 +302,7 @@ Using the `ex` attribute, you can define a bit more personal response than [.pla
 
 [source,alan]
 --------------------------------------------------------------------------------
-include::{utf8dir}/_variations2.alan[tag=thingummyjig]
+include::{utf8dir}/lab2.alan[tag=thingummyjig]
 --------------------------------------------------------------------------------
 
 // [source,alan]
@@ -325,7 +317,7 @@ yields
 
 [example,role="gametranscript"]
 ================================================================================
-include::{utf8dir}/_variations2.a3ADocLog[tag=thingummyjig]
+include::{utf8dir}/lab2.a3ADocLog[tag=thingummyjig]
 ================================================================================
 
 // [example,role="gametranscript"]
@@ -371,7 +363,7 @@ A DOOR is described by default as being either open or closed when examined.
 
 [source,alan]
 --------------------------------------------------------------------------------
-include::{utf8dir}/_variations1.alan[tag=front_door]
+include::{utf8dir}/garden1.alan[tag=front_door]
 --------------------------------------------------------------------------------
 
 
@@ -388,7 +380,7 @@ would yield by default:
 
 [example,role="gametranscript"]
 ================================================================================
-include::{utf8dir}/_variations1.a3ADocLog[tag=front_door]
+include::{utf8dir}/garden1.a3ADocLog[tag=front_door]
 ================================================================================
 
 // [example,role="gametranscript"]
@@ -404,7 +396,7 @@ Adding
 
 [source,alan]
 --------------------------------------------------------------------------------
-include::{utf8dir}/_variations2.alan[tag=front_door]
+include::{utf8dir}/garden2.alan[tag=front_door]
 --------------------------------------------------------------------------------
 
 // [source,alan]
@@ -418,7 +410,7 @@ will yield
 
 [example,role="gametranscript"]
 ================================================================================
-include::{utf8dir}/_variations2.a3ADocLog[tag=front_door]
+include::{utf8dir}/garden2.a3ADocLog[tag=front_door]
 ================================================================================
 
 // [example,role="gametranscript"]
@@ -566,89 +558,57 @@ A natural LIGHTSOURCE cannot be turned on or off, it can only be lighted and ext
 When examined, a LIGHTSOURCE is by default supplied with a description of whether it is providing light or not.
 The default attributes for a LIGHTSOURCE object are: `natural`, `NOT lit`.
 
+// 'torch' -> LIGHTSOURCE (LIT) AT cave:
+
 [source,alan]
 --------------------------------------------------------------------------------
-include::{utf8dir}/_variations1.alan[tag=lightsource]
+include::{utf8dir}/cave1.alan[tag=lightsource_torch]
 --------------------------------------------------------------------------------
 
-// [source,alan]
-// --------------------------------------------------------------------------------
-// THE torch ISA LIGHTSOURCE AT cave
-//   IS lit.
-// END THE.
+// 'lamp' -> LIGHTSOURCE (NOT natural) AT lab:
 
-// THE lamp ISA LIGHTSOURCE AT bedroom
-//   IS NOT natural.
-// END THE.
-// --------------------------------------------------------------------------------
+[source,alan]
+--------------------------------------------------------------------------------
+include::{utf8dir}/lab1.alan[tag=lightsource_lamp]
+--------------------------------------------------------------------------------
 
 
 Examining for example these instances in-game would yield
 
 [example,role="gametranscript"]
 ================================================================================
-include::{utf8dir}/_variations1.a3ADocLog[tag=lightsource_torch]
+include::{utf8dir}/cave1.a3ADocLog[tag=lightsource_torch]
 ================================================================================
-
-// [example,role="gametranscript"]
-// ================================================================================
-// &gt; _x torch_
-
-// You notice nothing unusual about the torch.
-// It is currently lit.
-// ================================================================================
 
 and
 
 [example,role="gametranscript"]
 ================================================================================
-include::{utf8dir}/_variations1.a3ADocLog[tag=lightsource_lamp]
+include::{utf8dir}/lab1.a3ADocLog[tag=lightsource_lamp]
 ================================================================================
-
-// [example,role="gametranscript"]
-// ================================================================================
-// &gt; _x lamp_
-
-// You notice nothing unusual about the lamp.
-// It is currently off.
-// ================================================================================
 
 
 (The opposites of the above messages would be [.play]#It is currently not lit.# and [.play]#It is currently on.#, respectively.)
 
 If you add a specific examine response for either, you can use the `ex` attribute for the lightsource object to describe it, and after your description there will be an automatic description of its being lit or not lit:
 
+// 'lamp' -> LIGHTSOURCE (NOT natural) AT lab + HAS ex:
+
 [source,alan]
 --------------------------------------------------------------------------------
-include::{utf8dir}/_variations2.alan[tag=lightsource]
+include::{utf8dir}/lab2.alan[tag=lightsource_lamp]
 --------------------------------------------------------------------------------
-
-// [source,alan]
-// --------------------------------------------------------------------------------
-// THE lamp ISA LIGHTSOURCE AT bedroom
-//   IS NOT natural.
-//   HAS ex "It is an elegant table lamp with a blue lampshade."
-// END THE.
-// --------------------------------------------------------------------------------
 
 which yields
 
 [example,role="gametranscript"]
 ================================================================================
-include::{utf8dir}/_variations2.a3ADocLog[tag=lightsource_lamp]
+include::{utf8dir}/lab2.a3ADocLog[tag=lightsource_lamp]
 ================================================================================
-
-// [example,role="gametranscript"]
-// ================================================================================
-// &gt; _x lamp_
-
-// It is an elegant table lamp with a blue lampshade.
-// It is currently off.
-// ================================================================================
-
 
 Using `VERB examine DOES ONLY…` you'll have to add manually the mention about the instance being on or off, for example:
 
+// @EXTERNALIZE CODE: bedroom -> LIGHTSOURCE -> VERB examine ???
 [source,alan]
 --------------------------------------------------------------------------------
 THE lamp ISA LIGHTSOURCE AT bedroom
@@ -666,6 +626,7 @@ END THE lamp.
 
 or
 
+// @EXTERNALIZE CODE: cave -> LIGHTSOURCE -> VERB examine ???
 [source,alan]
 --------------------------------------------------------------------------------
 THE torch ISA LIGHTSOURCE AT cave

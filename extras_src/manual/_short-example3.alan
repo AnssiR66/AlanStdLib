@@ -31,7 +31,7 @@ THE my_game ISA DEFINITION_BLOCK
               while somebody might be looking."
       DOES
         "Triumphantly, you fish" SAY THE obj.
-        "out of"SAY THE holder. "."
+        "out of" SAY THE holder. "."
   END VERB.
 END THE.
 -- end::shown[]

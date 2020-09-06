@@ -12,6 +12,7 @@ Porting the _Alan Standard Library v2.1 User's Manual_ from PDF to AsciiDoc, and
 
 - [Folder Contents](#folder-contents)
     - [Examples and Transcripts](#examples-and-transcripts)
+    - [Internal Examples](#internal-examples)
 - [Document Status](#document-status)
 
 <!-- /MarkdownTOC -->
@@ -44,25 +45,22 @@ The entire original PDF was ported to AsciiDoc and split into one file per chapt
 
 In order to ensure that the code and transcript examples in the Manual always represent the current state of the library, real source adventures and game transcripts are employed — which the toolchain compiles and runs against solution files (i.e. commands scripts).
 
-Adventures sources (`*.alan`, `*.i`), solution files (`*.a3sol`) and transcripts  (`*.a3log`) starting with underscore will not be deployed (copied) to the output folder, but only used internally for building the documentation.
+We try to keep the number of source adventures and transcripts down to the minimum, packing together as many examples as possible into the same adventure — by creating multiple locations, and making a smart use of Asciidoctor tagged regions in both Alan sources and transcripts.
 
-We try to keep the number of source adventures and transcripts down to the minimum, by packing together as many examples as possible into the same adventure — by creating multiple locations, and making a smart use of Asciidoctor tagged regions in both Alan sources and transcripts.
+During conversion, these source adventures will be stripped of all the comment lines for AsciiDoc tag regions and then copied to the `extras/manual/` folder, so that end users can access the source code of the Manual examples — except for adventures with filenames starting with `_` (see below).
 
 Because the Manual often illustrates multiple ways to do the same thing, separate files are required to host these variations (otherwise the Alan compiler will complain about instances being defined multiple times).
+Therefore, some adventures will have variations in the form `<adventure1>.alan`,  `<adventure2>.alan`, etc. (for as many variations as required), along with their associated `<adventureX>.a3log` files.
 
-Examples showing one way to implement something:
+## Internal Examples
 
-- [`_variations1.alan`](./_variations1.alan)
-- [`_variations1.a3sol`](./_variations1.a3sol)
-- [`_variations1.a3log`](./_variations1.a3log) (ignored by Git)
+Adventures sources starting with underscore (`_*.alan`, `_*.i`) _will not_ be deployed (copied) to `extras/manual/` for end-users consumption, but only used internally for building the documentation.
 
-Examples showing another way to implement the same thing:
+These internal-use-only adventures contain all those code snippets that don't need to be included in the distributed code examples — e.g. hypothetical code alternatives that end users are not supposed to use, like the alternative verbose code that would be required if there wasn't a given library feature, and other similar code _minutiae_ or trivia provided for information purposes only.
 
-- [`_variations2.alan`](./_variations2.alan)
-- [`_variations2.a3sol`](./_variations2.a3sol)
-- [`_variations2.a3log`](./_variations2.a3log) (ignored by Git)
+The reason why we're externalizing these code snippets to real adventure files, instead of just keeping them as text inside a `[source]` block, is to ensure that these code snippets are valid code — just like all other examples, they'll be compiled and tested against solution files. As time passes and both ALAN and the StdLib evolve, it's easy to forget about loose code snippets in the Manual, which might have become outdated and incompatible in the meantime.
 
-
+We want to ensure that _every single line of code_ provided in the documentation is valid code that would compile with the current ALAN and StdLib versions, and there's no better way to achieve this than using real ALAN code which gets processed each time the Manual is rebuilt.
 
 # Document Status
 
@@ -90,7 +88,7 @@ It must be manually fixed, element by element, using the original PDF as a visua
 
 
 <!-----------------------------------------------------------------------------
-                               REFERENCE LINKS                                
+                               REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
 [Man PDF]: ../../ALAN%20Library2.1%20manual.pdf "View the original PDF Manual"
