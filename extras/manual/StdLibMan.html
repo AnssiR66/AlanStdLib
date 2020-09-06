@@ -733,7 +733,7 @@ span.play em,
 <div class="details">
 <span id="author" class="author">Anssi Räisänen</span><br>
 <span id="revnumber">version 2.2-WIP,</span>
-<span id="revdate">2020-09-05</span>
+<span id="revdate">2020-09-06</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1338,7 +1338,7 @@ At its bare-bones minimum, an ALAN game needs one location and a <code>START AT<
 </div>
 <div class="paragraph">
 <p>This code compiles successfully and doesn&#8217;t use the library at all.
-When you try to play this game, you will find yourself at a location called 'Meadow' but you won&#8217;t be able to do anything, not even prompt will be understood.
+When you try to play this game, you will find yourself at a location called 'Meadow' but you won&#8217;t be able to do anything&#8201;&#8212;&#8201;nothing you type at the prompt will be understood.
 You should go on implementing everything by yourself.</p>
 </div>
 <div class="paragraph">
@@ -1463,8 +1463,8 @@ The IFID system is defined by the Treaty of Babel which was created in 2006.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If the author doesn&#8217;t change these default values, the default description, at will be &#8220;You notice nothing unusual about the [object].&#8221;
-(Naturally, these commands won&#8217;t work in outdoor locations.)</p>
+<p>If the author doesn&#8217;t change these default values, the default description shown when examining the walls, floor and ceiling of a room will be &#8220;You notice nothing unusual about the [object].&#8221;
+(Obviously, these commands won&#8217;t work in outdoor locations.)</p>
 </div>
 <div class="paragraph">
 <p>To have a more varied effect, you can change the descriptions this way:</p>
@@ -1493,19 +1493,50 @@ The wallpaper has a nice flower pattern.<br></p>
 </div>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>You can change the description of a room&#8217;s floor, walls or ceiling mid-game at any time:</p>
+<p>Setting these room attributes in an <code>outdoor</code> location won&#8217;t have any effect; they only work on instances of the <code>room</code> class, or its sub-classes, and will be ignored elsewhere.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can even change the description of a room&#8217;s floor, walls or ceiling mid-game at any time:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> carpet <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> livingroom&#x000A;  <span class="hl kwa">VERB</span> move&#x000A;    <span class="hl kwa">CHECK</span> trapdoor <span class="hl kwa">NOT IN</span> livingroom&#x000A;      <span class="hl kwa">ELSE</span> <span class="hl str">&quot;There is no need to move the carpet any longer.&quot;</span>&#x000A;    <span class="hl kwa">DOES ONLY</span>&#x000A;      <span class="hl str">&quot;You move the carpet, revealing a trapdoor!&quot;</span>&#x000A;      <span class="hl kwa">LOCATE</span> trapdoor <span class="hl kwa">IN</span> livingroom<span class="hl kwa">.</span>&#x000A;      <span class="hl kwa">SET</span> floor_desc <span class="hl kwa">OF</span> livingroom <span class="hl kwa">TO</span> <span class="hl str">&quot;A trapdoor has been revealed when you</span>&#x000A;<span class="hl str">                                      moved the carpet. It leads down to</span>&#x000A;<span class="hl str">                                      darkness.&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE</span> carpet<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> trapdoor <span class="hl kwa">ISA</span> DOOR&#x000A;<span class="hl kwa">END THE</span> trapdoor<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> carpet <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> livingroom&#x000A;  <span class="hl kwa">VERB</span> move&#x000A;    <span class="hl kwa">CHECK</span> trapdoor <span class="hl kwa">NOT AT</span> livingroom&#x000A;      <span class="hl kwa">ELSE</span> <span class="hl str">&quot;There is no need to move the carpet any longer.&quot;</span>&#x000A;    <span class="hl kwa">DOES ONLY</span>&#x000A;      <span class="hl str">&quot;You move the carpet, revealing a trapdoor!&quot;</span>&#x000A;      <span class="hl kwa">LOCATE</span> trapdoor <span class="hl kwa">AT</span> livingroom<span class="hl kwa">.</span>&#x000A;      <span class="hl kwa">SET</span> floor_desc <span class="hl kwa">OF</span> livingroom <span class="hl kwa">TO</span> <span class="hl str">&quot;A trapdoor has been revealed when you</span>&#x000A;<span class="hl str">                                       moved the carpet. It leads down to</span>&#x000A;<span class="hl str">                                       darkness.&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE</span> carpet<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> trapdoor <span class="hl kwa">ISA</span> DOOR&#x000A;<span class="hl kwa">END THE</span> trapdoor<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>x floor</em><br>
+There is an exquisite white carpet on the floor.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>move carpet</em><br>
+You move the carpet, revealing a trapdoor!<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>x floor</em><br>
+A trapdoor has been revealed when you moved the carpet. It leads down to<br>
+darkness.<br></p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_site"><a class="anchor" href="#_site"></a>3.2. SITE</h3>
 <div class="paragraph">
-<p>If you want to implement an outdoor location, you can declare it ISA SITE:</p>
+<p>If you want to implement an outdoor location, you can declare it <code>ISA SITE</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">

@@ -66,9 +66,8 @@ HAS walls_desc "".
 HAS ceiling_desc "".
 --------------------------------------------------------------------------------
 
-If the author doesn't change these default values, the default description, at will be "`You notice nothing unusual about the [object].`"
-(Naturally, these commands won't work in outdoor locations.)
-
+If the author doesn't change these default values, the default description shown when examining the walls, floor and ceiling of a room will be "`You notice nothing unusual about the [object].`"
+(Obviously, these commands won't work in outdoor locations.)
 
 To have a more varied effect, you can change the descriptions this way:
 
@@ -85,30 +84,30 @@ include::{utf8dir}/_variations1.a3ADocLog[tag=livingroom]
 ================================================================================
 
 
-You can change the description of a room's floor, walls or ceiling mid-game at any time:
+[NOTE]
+================
+Setting these room attributes in an `outdoor` location won't have any effect; they only work on instances of the `room` class, or its sub-classes, and will be ignored elsewhere.
+================
+
+You can even change the description of a room's floor, walls or ceiling mid-game at any time:
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE carpet ISA OBJECT AT livingroom
-  VERB move
-    CHECK trapdoor NOT IN livingroom
-      ELSE "There is no need to move the carpet any longer."
-    DOES ONLY
-      "You move the carpet, revealing a trapdoor!"
-      LOCATE trapdoor IN livingroom.
-      SET floor_desc OF livingroom TO "A trapdoor has been revealed when you
-                                      moved the carpet. It leads down to
-                                      darkness.".
-  END VERB.
-END THE carpet.
-
-THE trapdoor ISA DOOR
-END THE trapdoor.
+include::{utf8dir}/_variations1.alan[tag=trapdoor]
 --------------------------------------------------------------------------------
+
+
+[example,role="gametranscript"]
+================================================================================
+include::{utf8dir}/_variations1.a3ADocLog[tag=trapdoor]
+================================================================================
+
+
+
 
 == SITE
 
-If you want to implement an outdoor location, you can declare it ISA SITE:
+If you want to implement an outdoor location, you can declare it `ISA SITE`:
 
 
 [source,alan]

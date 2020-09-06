@@ -2,7 +2,7 @@
 :doctitle: Alan Standard Library v{StdLibVer} User's Manual
 :author: Anssi Räisänen
 :revnumber: {StdLibVer}-WIP
-:revdate: 2020-09-05
+:revdate: 2020-09-06
 :lang: en
 :doctype: book
 // TOC Settings:

@@ -215,7 +215,7 @@ START AT meadow.
 
 // @FIXME: "not even prompt will be understood." ???!!!
 This code compiles successfully and doesn't use the library at all.
-When you try to play this game, you will find yourself at a location called 'Meadow' but you won't be able to do anything, not even prompt will be understood.
+When you try to play this game, you will find yourself at a location called 'Meadow' but you won't be able to do anything -- nothing you type at the prompt will be understood.
 You should go on implementing everything by yourself.
 
 
