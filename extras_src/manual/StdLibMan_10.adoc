@@ -276,13 +276,13 @@ Key to the parameter symbols used in ALAN:
 
 [horizontal]
 `$v`  :: the verb the player used
-`$1`  :: the first parameter the player used (for example the noun after the first verb used), without any articles, for example "key" in the command "examine key")
-`$+1` :: the definite form of the first parameter the player used (for example "the key")
-`$-1` :: the negative form of the first parameter the player used (for example "no key") (not used in the library)
-`$01` :: the indefinite form of the first parameter the player used (for example "a key")
-`$2`  :: etc. would be the second parameter the player used, ( for example the word "key" in "unlock door with key")
+`$1`  :: the first parameter the player used (e.g. the noun after the first verb used), without any articles (e.g. "`key`" in the command "`examine key`")
+`$+1` :: the definite form of the first parameter the player used (e.g. "`the key`")
+`$-1` :: the negative form of the first parameter the player used (e.g. "`no key`") -- _not used in the library_.
+`$01` :: the indefinite form of the first parameter the player used (e.g. "`a key`")
+`$2`  :: etc. would be the second parameter the player used (e.g. the word "`key`" in [.play]#&gt; _unlock door with key_#)
 
-The general message for when a parameter is not suitable with the verb (for example "That's not something you can attack"):
+The general message for when a parameter is not suitable with the verb (e.g "`That's not something you can attack`"):
 
 
 [source,alan]
@@ -293,7 +293,7 @@ HAS illegal_parameter_pl "Those are not something you can $v.".
 --------------------------------------------------------------------------------
 
 The library accounts for singular and plural cases; that's why many messages have both a singular (sg) and a plural (pl) formulation.
-In the following there are variations of the above message when a preposition is required after the verb (for example "That's not something you can ask about." or "That's not something you can cut things with."):
+In the following there are variations of the above message when a preposition is required after the verb (e.g. "`That's not something you can ask about.`" or "`That's not something you can cut things with.`"):
 
 For verbs requiring about (the library verbs ask_about, tell_about and think_about):
 
@@ -306,14 +306,14 @@ HAS illegal_parameter_about_sg "That's not something you can $v about.".
 HAS illegal_parameter_about_pl "Those are not something you can $v about.".
 --------------------------------------------------------------------------------
 
-There are two ditransitive verbs requiring at in the library, fire_at (e.g"fire rifle at bear") and throw_at (for example "throw remote control at TV"):
+There are two ditransitive verbs requiring at in the library, `fire_at` (e.g. [.play]#&gt; _fire rifle at bear_#) and `throw_at` (e.g. [.play]#&gt; _throw remote control at TV_#):
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS illegal_parameter_at "You can't $v anything at $2."
 --------------------------------------------------------------------------------
 
-The following is needed for the verb ask_for (for example "ask servant for tea"):
+The following is needed for the verb `ask_for` (e.g. [.play]#&gt; _ask servant for tea_#):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -321,7 +321,7 @@ HAS illegal_parameter_for_sg "That's not something you can $v for.".
 HAS illegal_parameter_for_pl "Those are not something you can $v for.".
 --------------------------------------------------------------------------------
 
-The verb take_from needs the following formulations:
+The verb `take_from` needs the following formulations:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -329,7 +329,7 @@ HAS illegal_parameter_from_sg "That's not something you can take things from.
 HAS illegal_parameter_from_pl "Those are not something you can take things from.".
 --------------------------------------------------------------------------------
 
-The verbs dive_in, jump_in, lie_in and swim_in use the following parameter messages:
+The verbs `dive_in`, `jump_in`, `lie_in` and `swim_in` use the following parameter messages:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -337,7 +337,7 @@ HAS illegal_parameter_in_sg "That's not something you can $v in.".
 HAS illegal_parameter_in_pl "Those are not something you can $v in.".
 --------------------------------------------------------------------------------
 
-Climb_on, jump_on, knock, lie_on, sit_on, stand_on, switch_on, turn_on, for their part, use the following messages:
+`Climb_on`, `jump_on`, `knock`, `lie_on`, `sit_on`, `stand_on`, `switch_on`, `turn_on`, for their part, use the following messages:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -345,7 +345,7 @@ HAS illegal_parameter_on_sg "That's not something you can $v on.".
 HAS illegal_parameter_on_pl "Those are not something you can $v on.".
 --------------------------------------------------------------------------------
 
-For get_off, switch_off and turn_of f, the following parameter messages are used:
+For `get_off`, `switch_off` and `turn_off`, the following parameter messages are used:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -353,7 +353,7 @@ HAS illegal_parameter_off_sg "That's not something you can $v off.".
 HAS illegal_parameter_off_pl "Those are not something you can $v off.".
 --------------------------------------------------------------------------------
 
-The preposition to is needed in the verbs listen_to and talk_to:
+The preposition _to_ is needed in the verbs `listen_to` and `talk_to`:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -361,7 +361,7 @@ HAS illegal_parameter_to_sg "That's not something you can $v to.".
 HAS illegal_parameter_to_pl "Those are not something you can $v to.".
 --------------------------------------------------------------------------------
 
-A slightly different message is needed for give, show, tell, tie_to, throw_to which are ditransitive verbs with the second parameter preceded by to:
+A slightly different message is needed for `give`, `show`, `tell`, `tie_to`, `throw_to` which are ditransitive verbs with the second parameter preceded by _to_:
 
 // PAGE 83 //
 
@@ -372,8 +372,8 @@ HAS illegal_parameter2_to_sg "That's not something you can $v things to.".
 HAS illegal_parameter2_to_pl "Those are not something you can $v things to.".
 --------------------------------------------------------------------------------
 
-For with, we have two separate messages.
-The verbs kill_with, shoot_with and play_with use the following formulation:
+For _with_, we have two separate messages.
+The verbs `kill_with`, `shoot_with` and `play_with` use the following formulation:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -381,7 +381,7 @@ HAS illegal_parameter_with_sg "That's not something you can $v with.".
 HAS illegal_parameter_with_pl "Those are not something you can $v with.".
 --------------------------------------------------------------------------------
 
-while a somewhat bigger group of verbs -- attack_with, break_with, burn_with, close_with, cut_with, fill_with, lock_with, open_with, pry_with, push_with, unlock_with -- are accompanied with a message one word longer: the word 'things' is added, for no other reason than that it sounds better than if left out, as far as these verbs are concerned:
+while a somewhat bigger group of verbs -- `attack_with`, `break_with`, `burn_with`, `close_with`, `cut_with`, `fill_with`, `lock_with`, `open_with`, `pry_with`, `push_with`, `unlock_with` -- are accompanied with a message one word longer: the word '`things`' is added, for no other reason than that it sounds better than if left out, as far as these verbs are concerned:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -391,7 +391,7 @@ with.".
 --------------------------------------------------------------------------------
 
 
-The communication verbs ask, ask_for, say_to, talk_to and tell use a message of their own:
+The communication verbs `ask`, `ask_for`, `say_to`, `talk_to` and `tell` use a message of their own:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -401,7 +401,7 @@ HAS illegal_parameter_talk_pl "Those are not something you can talk to.".
 
 We have a separate individual default parameter message for a handful of verbs.
 
-For consult, we have the following:
+For `consult`, we have the following:
 
 
 [source,alan]
@@ -412,7 +412,7 @@ HAS illegal_parameter_consult_pl "Those are not something you can find
                                   information about."
 --------------------------------------------------------------------------------
 
-You'll find this message at examine :
+You'll find this message at `examine`:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -420,13 +420,11 @@ HAS illegal_parameter_examine_sg "That's not something you can examine.".
 HAS illegal_parameter_examine_pl "Those are not something you can examine.".
 --------------------------------------------------------------------------------
 
-The reason why examine doesn't use the general default message (scroll above) is that when the player types for example [.play]#&gt; _x 34_# the response would be [.play]#That's not something you can x.# which isn't such pretty-looking as when the verb is printed in full.
+The reason why `examine` doesn't use the general default message (scroll above) is that when the player types for example [.play]#&gt; _x 34_# the response would be [.play]#That's not something you can x.# which isn't such pretty-looking as when the verb is printed in full.
 
-The verbs look_out_of and look_through use prepositions other verbs don't, and that's why they need their own messages:
+The verbs `look_out_of` and `look_through` use prepositions other verbs don't, and that's why they need their own messages:
 
 // PAGE 84 //
-
-
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -434,6 +432,7 @@ HAS illegal_parameter_look_out_sg  "That's not something you can look out of.".
 HAS illegal_parameter_look_out_pl  "Those are not something you can look out of.".
 HAS illegal_parameter_look_through "You can't look through $+1.".
 --------------------------------------------------------------------------------
+
 
 === Other illegal parameter messages
 
@@ -450,14 +449,14 @@ The verbs in which this message is found are `empty_in`, `pour_in`, `put_in`, an
 HAS illegal_parameter_act "That doesn't make sense.".
 --------------------------------------------------------------------------------
 
-The following message is displayed when the player tries to use the verbs give, put, put_in, put_on, put_against, put_near, put_behind, put_under, throw_at, throw_in, throw_to, use and use_with with actors as direct objects:
+The following message is displayed when the player tries to use the verbs `give`, `put`, `put_in`, `put_on`, `put_against`, `put_near`, `put_behind`, `put_under`, `throw_at`, `throw_in`, `throw_to`, `use` and `use_with` with actors as direct objects:
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS illegal_parameter_obj "You can only $v objects.".
 --------------------------------------------------------------------------------
 
-The verbs answer, say, say_to and write require that what we wish to answer, say or write is put into a string ( = surrounded by quotes).
+The verbs `answer`, `say`, `say_to` and `write` require that what we wish to answer, say or write is put into a string ( = surrounded by quotes).
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -465,14 +464,14 @@ HAS illegal_parameter_string "Please state inside double quotes ("""") what
                               you want to $v.".
 --------------------------------------------------------------------------------
 
-The verbs look_behind, look_in and look_under have the following message when the player tries to look somewhere that is not suitable object for these verbs:
+The verbs `look_behind`, `look_in` and `look_under` have the following message when the player tries to look somewhere that is not suitable object for these verbs:
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS illegal_parameter_there "It's not possible to $v there.".
 --------------------------------------------------------------------------------
 
-The verb go_to has its own message:
+The verb `go_to` has its own message:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -481,7 +480,7 @@ HAS illegal_parameter_go "It's not possible to go there."
 
 The following is a variation of the above and is used when the second parameter of a ditransitive verb is not suitable.
 
-The verbs empty_in, empty_on, pour_in, pour_on, put_in, put_on, put_against, put_behind, put_near, put_under, throw_in, throw_to, tie_to and write use this message:
+The verbs `empty_in`, `empty_on`, `pour_in`, `pour_on`, `put_in`, `put_on`, `put_against`, `put_behind`, `put_near`, `put_under`, `throw_in`, `throw_to`, `tie_to` and `write` use this message:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -492,7 +491,8 @@ HAS illegal_parameter2_there "It's not possible to $v anything there.".
 
 
 
-Finally, there are some messages for the information "verbs" what_is, where_is and who_is. (The first two messages below also apply to where_is besides what_is.)
+Finally, there are some messages for the information "`verbs`" `what_is`, `where_is` and `who_is`.
+(The first two messages below also apply to `where_is` besides `what_is`.)
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -502,22 +502,23 @@ HAS illegal_parameter_who_sg  "That's not somebody I know about.".
 HAS illegal_parameter_who_pl  "Those are not somebody I know about.".
 --------------------------------------------------------------------------------
 
+
 === Changing the illegal parameter message of a single verb:
 
 The way the illegal parameter messages have been defined in the library, it is not usually possible to affect just one verb at a time.
 Most often, changing a default message will alter the outcome of at least a handful of verbs, because one default message is shared by many verbs.
 There are some default parameter messages that only affect one verb; you should check the list of parameter messages (above) for details.
-Anyway, the quickest way to accomplish this task would be to open 'lib_verbs.i', find the verb, then modify the appropriate parameter message in its syntax statement.
+Anyway, the quickest way to accomplish this task would be to open `lib_verbs.i`, find the verb, then modify the appropriate parameter message in its syntax statement.
 
 // @FIXME: This heading should retain it's number even when all other section
 //         numbers are removed!
 == 6. Default verb check messages
 
 All these check messages can be individually changed by listing them under the my_game instance in your game source file.
-They are also listed in the file 'mygame_import.i' in the library distribution package, for easy modification.
-These check messages are used in verb definitions, mainly in 'lib_verbs.i'.
+They are also listed in the file `mygame_import.i` in the library distribution package, for easy modification.
+These check messages are used in verb definitions, mainly in `lib_verbs.i`.
 Changing one check message will affect all verbs where that particular check is found.
-Again, as with parameter messages, edit these messages directly in 'mygame_import.i' if you need to change a great number of them, otherwise redefine them within the my_game instance in your own source file.
+Again, as with parameter messages, edit these messages directly in `mygame_import.i` if you need to change a great number of them, otherwise redefine them within the my_game instance in your own source file.
 You'll quickly notice that the list is quite long, and listing any number greater than just a few under the my_game instance would be a rather frustrating task.
 
 ////
@@ -555,7 +556,7 @@ That's not something you can take.
 ================================================================================
 +
 The verb take only works with objects, not with any other instances.
-Thus, if you try to take something else than an object (for example a numerical value in the above case), an illegal parameter message is shown.
+Thus, if you try to take something else than an object (e.g. a numerical value in the above case), an illegal parameter message is shown.
 This restriction is defined in the syntax of the verb.
 Checks, on the other hand, are used to ensure that an instance has the proper attribute needed with the verb, for example edible, takeable, NOT open, and so forth.
 +
@@ -610,7 +611,7 @@ HAS check_obj2_suitable_with_pl "Those are not something you can $v things with.
 --------------------------------------------------------------------------------
 --
 +
-Again, we have a separate message for examine, look_out_of and look_through:
+Again, we have a separate message for `examine`, `look_out_of` and `look_through`:
 +
 [source,alan]
 --------------------------------------------------------------------------------
@@ -623,7 +624,7 @@ HAS check_obj_suitable_look_through "You can't look through $+1.".
 
 == Checks for open, closed and locked objects
 
-open, open_with:
+`open`, `open_with`:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -631,7 +632,7 @@ HAS check_obj_not_open_sg "$+1 is already open.".
 HAS check_obj_not_open_pl "$+1 are already open.".
 --------------------------------------------------------------------------------
 
-close, close_with:
+`close`, `close_with`:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -647,7 +648,7 @@ HAS check_obj_open2_sg "You can't, since $+1 is closed.".
 HAS check_obj_open2_pl "You can't, since $+1 are closed.".
 --------------------------------------------------------------------------------
 
-empty_in, pour_in, put_in, throw_in:
+`empty_in`, `pour_in`, `put_in`, `throw_in`:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -655,7 +656,7 @@ HAS check_obj2_open_sg "You can't, since $+2 is closed.".
 HAS check_obj2_open_pl "You can't, since $+2 are closed.".
 --------------------------------------------------------------------------------
 
-unlock, unlock_with:
+`unlock`, `unlock_with`:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -663,7 +664,7 @@ HAS check_obj_locked_sg "$+1 is already unlocked.".
 HAS check_obj_locked_pl "$+1 are already unlocked.".
 --------------------------------------------------------------------------------
 
-lock, lock_with
+`lock`, `lock_with`:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -687,7 +688,7 @@ HAS check_obj_not_distant_sg "$+1 is too far away.".
 HAS check_obj_not_distant_pl "$+1 are too far away.".
 --------------------------------------------------------------------------------
 
-In addition, the verbs empty_in, fill_with, pour_in, put_in, take_from and tie_to have the following check for the reachability of the second parameter:
+In addition, the verbs `empty_in`, `fill_with`, `pour_in`, `put_in`, `take_from` and `tie_to` have the following check for the reachability of the second parameter:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -695,17 +696,18 @@ HAS check_obj2_reachable_sg "$+2 is out of your reach.".
 HAS check_obj2_reachable_pl "$+2 are out of your reach.".
 --------------------------------------------------------------------------------
 
-and the verb ask_for has the following check:
+and the verb `ask_for` has the following check:
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj_reachable_ask "$+1 wouldn't be able to reach $+2.".
 --------------------------------------------------------------------------------
 
-which is triggered when the hero asks an NPC for something that the NPC cannot reach. (This happens when the object in question has the attribute 'NOT reachable'.)
+which is triggered when the hero asks an NPC for something that the NPC cannot reach.
+(This happens when the object in question has the attribute `NOT reachable`.)
 
-The verbs throw_at, throw_in, throw_to allow the action to succeed if the second parameter is reachable, but not if the second parameter is distant:.
-Thus, the way things are defined in the library, it is possible to e,g, throw something in a container if that container is otherwise NOT reachable.
+The verbs `throw_at`, `throw_in`, `throw_to` allow the action to succeed if the second parameter is reachable, but not if the second parameter is distant:.
+Thus, the way things are defined in the library, it is possible to e.g. throw something in a container if that container is otherwise NOT reachable.
 But if the container is distant, the action will fail.
 
 [source,alan]
@@ -714,6 +716,7 @@ HAS check_obj2_not_distant_sg "$+2 is too far away.".
 
 HAS check_obj2_not_distant_pl "$+2 are too far away.".
 --------------------------------------------------------------------------------
+
 
 == Checks for the hero sitting or lying_down
 
@@ -726,7 +729,7 @@ HAS check_hero_not_sitting2 "It is difficult to $v anything while sitting down."
 HAS check_hero_not_sitting3 "It is difficult to $v anywhere while sitting down.".
 --------------------------------------------------------------------------------
 
-and for lying down:
+and for lying `down`:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -735,16 +738,17 @@ HAS check_hero_not_lying_down2 "It is difficult to $v anything while lying down.
 HAS check_hero_not_lying_down3 "It is difficult to $v anywhere while lying down.".
 --------------------------------------------------------------------------------
 
-If the player uses the verbs sit or sit_on, and the hero is already sitting, the following check message is displayed:
+If the player uses the verbs `sit` or `sit_on`, and the hero is already sitting, the following check message is displayed:
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_hero_not_lying_down4 "You're lying down already.".
 --------------------------------------------------------------------------------
 
+
 == Other attribute checks
 
-Checking that the object of the action has the ability to talk; verbs ask, ask_for, say_to, tell:
+Checking that the object of the action has the ability to talk; verbs `ask`, `ask_for`, `say_to`, `tell`:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -752,7 +756,7 @@ HAS check_act_can_talk_sg "That's not something you can talk to.".
 HAS check_act_can_talk_pl "Those are not something you can talk to.".
 --------------------------------------------------------------------------------
 
-Checking that the object is allowed to be emptied/poured/put/thrown in the container (empty_in, pour_in, put_in, throw_in):
+Checking that the object is allowed to be emptied/poured/put/thrown in the container (`empty_in`, `pour_in`, `put_in`, `throw_in`):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -760,7 +764,7 @@ HAS check_obj_allowed_in_sg "$+1 doesn't belong in $+2".
 HAS check_obj_allowed_in_pl "$+1 don't belong in $+2."
 --------------------------------------------------------------------------------
 
-Checking that something is broken; the verb fix:
+Checking that something is broken; the verb `fix`:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -768,14 +772,14 @@ HAS check_obj_broken_sg "That doesn't need fixing.".
 HAS check_obj_broken_pl "Those don't need fixing.".
 --------------------------------------------------------------------------------
 
-Checking that the object of the action is inanimate, because normally the action would be considered improper if done to a person: pull, push, push_with, scratch, search
+Checking that the object of the action is inanimate, because normally the action would be considered improper if done to a person: `pull`, `push`, `push_with`, `scratch`, `search`
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj_inanimate1 "$+1 wouldn't probably appreciate that.".
 --------------------------------------------------------------------------------
 
-With some verbs, the above message is slightly altered; rub, touch, touch_with:
+With some verbs, the above message is slightly altered; `rub`, `touch`, `touch_with`:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -784,14 +788,14 @@ HAS check_obj_inanimate2 "You are not sure whether $+1 would appreciate that.".
 
 // PAGE 90 //
 
-Checking if something is movable; the verbs lift, pull, push, push_with, shake, take, take_from:
+Checking if something is movable; the verbs `lift`, `pull`, `push`, `push_with`, `shake`, `take`, `take_from`:
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj_movable "It's not possible to $v $+1.".
 --------------------------------------------------------------------------------
 
-Checking whether something is scenery; the verbs examine, take, take_from:
+Checking whether something is scenery; the verbs `examine`, `take`, `take_from`:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -799,7 +803,7 @@ HAS check_obj_not_scenery_sg "$+1 is not important.".
 HAS check_obj_not_scenery_pl "$+1 are not important.".
 --------------------------------------------------------------------------------
 
-In the verbs ask_for and take_from there is also a check for whether the second parameter in the command happens to be a scenery object:
+In the verbs `ask_for` and `take_from` there is also a check for whether the second parameter in the command happens to be a scenery object:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -807,14 +811,14 @@ HAS check_obj2_not_scenery_sg "$+2 is not important.".
 HAS check_obj2_not_scenery_pl "$+2 are not important.".
 --------------------------------------------------------------------------------
 
-For some verbs, the target of looking is checked with the following message: look_behind, look_under:
+For some verbs, the target of looking is checked with the following message: `look_behind`, `look_under`:
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj_suitable_there "It's not possible to $v there.".
 --------------------------------------------------------------------------------
 
-The verbs throw_in and tie_to has a slightly different formulation from the above:
+The verbs `throw_in` and `tie_to` has a slightly different formulation from the above:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -828,21 +832,21 @@ The following check is found in verbs in which implicit taking is possible but t
 HAS check_obj_takeable "You don't have $+1.".
 --------------------------------------------------------------------------------
 
-fill_with has the following check:fill_with
+`fill_with` has the following check:
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj2_takeable1 "You don't have $+2.".
 --------------------------------------------------------------------------------
 
-while ask_for has:
+while `ask_for` has:
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj2_takeable2 "You can't have $+2.".
 --------------------------------------------------------------------------------
 
-Checking that an object is not too heavy (lift, take, take_from):
+Checking that an object is not too heavy (`lift`, `take`, `take_from`):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -876,7 +880,7 @@ HAS check_act_near_hero "You don't quite know where $+1 went.
 You should state direction where you want to go.".
 --------------------------------------------------------------------------------
 
-If the hero tries to take something from an NPC and the NPC doesn't have the stated object, the following check is triggered (take_from):
+If the hero tries to take something from an NPC and the NPC doesn't have the stated object, the following check is triggered (`take_from`):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -892,18 +896,20 @@ HAS check_obj_not_in_act_pl "$+2 already have $+1.".
 HAS check_obj_not_in_act_sg "$+2 already has $+1.".
 --------------------------------------------------------------------------------
 
+
+
 === Location and containment checks for the hero
 
 The following checks deal with where the hero is or what (s)he is carrying.
 
-The verb shoot has the following check:
+The verb `shoot` has the following check:
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_count_weapon_in_hero "You are not carrying any firearms.".
 --------------------------------------------------------------------------------
 
-find, follow, go_to, where_is:
+`find`, `follow`, `go_to`, `where_is`:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -911,7 +917,7 @@ HAS check_obj_not_at_hero_sg "$+1 is right here.".
 HAS check_obj_not_at_hero_pl "$+1 are right here.".
 --------------------------------------------------------------------------------
 
-drop, fire, fire_at, put, show:
+`drop`, `fire`, `fire_at`, `put`, `show`:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -922,35 +928,35 @@ HAS check_obj_in_hero "You don't have the $+1.".
 
 
 
-The following check is used in many verbs, typically ditransitive ones such as break_with, cut_with etc:
+The following check is used in many verbs, typically ditransitive ones such as `break_with`, `cut_with`, etc.:
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj2_in_hero "You don't have the $+2.".
 --------------------------------------------------------------------------------
 
-In the following, the action tried out by the player is targeted at something the hero is holding, and the action would not make sense (verbs attack, attack_with, kick, lift, shoot and shoot_with):
+In the following, the action tried out by the player is targeted at something the hero is holding, and the action would not make sense (verbs `attack`, `attack_with`, `kick`, `lift`, `shoot` and `shoot_with`):
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj_not_in_hero1 "It doesn't make sense to $v something you're
 --------------------------------------------------------------------------------
 
-The following check ensures that the hero is not trying to get something (s)he already has (the verbs take, take_from):
+The following check ensures that the hero is not trying to get something (s)he already has (the verbs `take`, `take_from`):
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj_not_in_hero2 "You already have $+1.".
 --------------------------------------------------------------------------------
 
-The throwing verbs (throw_at, throw_in throw_to)have this check to prohibit the hero from throwing something at, to or into something that (s)he is holding:
+The throwing verbs (`throw_at`, `throw_in` and `throw_to`) have this check to prohibit the hero from throwing something at, to or into something that (s)he is holding:
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj2_not_in_hero1 "You are carrying $+2.".
 --------------------------------------------------------------------------------
 
-For "putting" verbs other than put_in and put_on, the following check ensures that the hero cannot succeed in putting something against, behind, near, on or under something else when (s)he carries the object referenced by second parameter (the verbs put_against, put_behind, put_near, put_under):
+For "`putting`" verbs other than `put_in` and `put_on`, the following check ensures that the hero cannot succeed in putting something against, behind, near, on or under something else when (s)he carries the object referenced by second parameter (the verbs `put_against`, `put_behind`, `put_near`, `put_under`):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -980,15 +986,15 @@ HAS check_obj2_not_in_hero3 "You already have $+2.".
 // @FIXME: Lost track of heading levels!
 === Checking whether an object is in a container or not
 
-When the following check fires, the hero tried to empty the contents of an object into a container that already was contained by the object (for example if there is a bottle in a box, and the player types "empty box in bottle").
-This applies to the verbs empty_in and pour_in:
+When the following check fires, the hero tried to empty the contents of an object into a container that already was contained by the object (e.g. if there is a bottle in a box, and the player types [.play]#&gt; _empty box in bottle_#).
+This applies to the verbs `empty_in` and `pour_in`:
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_cont_not_in_obj "That doesn't make sense.".
 --------------------------------------------------------------------------------
 
-If the hero tries to take something from a container and that something is not there to begin with, the following check message is displayed (take_from):
+If the hero tries to take something from a container and that something is not there to begin with, the following check message is displayed (`take_from`):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -996,7 +1002,7 @@ HAS check_obj_in_cont_sg "$+1 is not in $+2.".
 HAS check_obj_in_cont_pl "$+1 are not in $+2.".
 --------------------------------------------------------------------------------
 
-If the hero tries to put or throw something into a container but the object is already in the container, the following message is displayed (put_in, throw_in):
+If the hero tries to put or throw something into a container but the object is already in the container, the following message is displayed (`put_in`, `throw_in`):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1004,7 +1010,7 @@ HAS check_obj_not_in_cont_sg "$+1 is in $+2 already.".
 HAS check_obj_not_in_cont_pl "$+1 are in $+2 already.".
 --------------------------------------------------------------------------------
 
-The following check message is displayed when the hero tries to fill a container with something that the container already is full of (fill_with):
+The following check message is displayed when the hero tries to fill a container with something that the container already is full of (`fill_with`):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1012,7 +1018,7 @@ HAS check_obj_not_in_cont2_sg "$+1 is already full of $+2.".
 HAS check_obj_not_in_cont2_pl "$+1 is already full of $+2.".
 --------------------------------------------------------------------------------
 
-Checking whether an OBJECT is on a SUPPORTER or not (take_from):
+Checking whether an OBJECT is on a SUPPORTER or not (`take_from`):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1020,7 +1026,7 @@ HAS check_obj_on_surface_sg "$+1 is not on $+2.".
 HAS check_obj_on_surface_pl "$+1 are not on $+2.".
 --------------------------------------------------------------------------------
 
-Putting something on a SUPPORTER (put_on):
+Putting something on a SUPPORTER (`put_on`):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1028,10 +1034,12 @@ HAS check_obj_not_on_surface_sg "$+1 is already on $+2.".
 HAS check_obj_not_on_surface_pl "$+1 are already on $+2.".
 --------------------------------------------------------------------------------
 
+
 // @FIXME: Lost track of heading levels!
 === Checking whether an object is worn by the hero or not
 
 You can't take off something you're not wearing (remove, take_off):
+
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj_in_worn "You are not wearing $+1.".
@@ -1040,14 +1048,14 @@ HAS check_obj_in_worn "You are not wearing $+1.".
 // PAGE 94 //
 
 
-The following check is for cases when the hero tries to put on something (s)he is already wearing (put_on, wear):
+The following check is for cases when the hero tries to put on something (s)he is already wearing (`put_on`, `wear`):
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj_not_in_worn1 "You are already wearing $+1.".
 --------------------------------------------------------------------------------
 
-Here, the action is stopped if the hero tries to attack, kick or shoot something (s)he's wearing (attack, attack_with, kick, shoot, shoot_with):
+Here, the action is stopped if the hero tries to attack, kick or shoot something (s)he's wearing (`attack`, `attack_with`, `kick`, `shoot`, `shoot_with`):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1056,12 +1064,13 @@ HAS check_obj_not_in_worn2 "It doesn't make sense to $v something you're
 --------------------------------------------------------------------------------
 
 Lastly, it's not possible to drop a piece of CLOTHING if it is worn.
-It will have to be removed first (drop):
+It will have to be removed first (`drop`):
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj_not_in_worn3: "You'll have to take off $+1 first."
 --------------------------------------------------------------------------------
+
 
 == c. checking location states
 
@@ -1073,20 +1082,21 @@ It prohibits actions requiring seeing when the LOCATION is not lit:
 HAS check_current_loc_lit "It is too dark to see.".
 --------------------------------------------------------------------------------
 
+
 == d. logical checks
 
 The checks in this group a) prohibit the action from being directed at the hero, and 2) prohibit the action in ditransitive verbs where both the first and the second parameter refer to the same instance.
 
 1. prohibiting the action from being directed at the hero:
 +
-The following check is triggered when the player tries something like [.play]#&gt; _attack me_# (ask, ask_for, attack, attack_with, catch, follow, kick, listen, pull, push, push_with, take, take_from, tell):
+The following check is triggered when the player tries something like [.play]#&gt; _attack me_# (`ask`, `ask_for`, `attack`, `attack_with`, `catch`, `follow`, `kick`, `listen`, `pull`, `push`, `push_with`, `take`, `take_from`, `tell`):
 +
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj_not_hero1 "It doesn't make sense to $v yourself.".
 --------------------------------------------------------------------------------
 +
-For the verbs fire_at, kill, kill_with, shoot, shoot_with there is a specific message when the target of the action is the hero:
+For the verbs `fire_at`, `kill`, `kill_with`, `shoot`, `shoot_with` there is a specific message when the target of the action is the hero:
 +
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1095,35 +1105,35 @@ HAS check_obj_not_hero2 "There is no need to be that desperate.".
 +
 For a couple of actions where the hero is the target, the action might make sense but it is anyway not deemed fruitful.
 +
-This applies to the verbs scratch and touch:
+This applies to the verbs `scratch` and `touch`:
 +
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj_not_hero3 "That wouldn't accomplish anything.".
 --------------------------------------------------------------------------------
 +
-The verbs find and go_to have the following check triggered when the player types [.play]#&gt; _find me_# or [.play]#&gt; _go to me_#:
+The verbs `find` and `go_to` have the following check triggered when the player types [.play]#&gt; _find me_# or [.play]#&gt; _go to me_#:
 +
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj_not_hero4 "You're right here.".
 --------------------------------------------------------------------------------
 +
-If the player tries [.play]#&gt; _free me_#, the following check message is displayed (free):
+If the player tries [.play]#&gt; _free me_#, the following check message is displayed (`free`):
 +
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj_not_hero5 "You don't have to be freed.".
 --------------------------------------------------------------------------------
 
-The verbs kiss, play_with and rub have the following check:
+The verbs `kiss`, `play_with` and `rub` have the following check:
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj_not_hero6 "There's no time for that now.".
 --------------------------------------------------------------------------------
 
-The verb look_behind has the following check for cases when the hero looks behind him-/herself :
+The verb `look_behind` has the following check for cases when the hero looks behind him-/herself :
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj_not_hero7 "Turning your head, you notice nothing unusual behind
@@ -1137,7 +1147,7 @@ while look_under has the following one:
 HAS check_obj_not_hero8 "You notice nothing unusual under yourself.".
 --------------------------------------------------------------------------------
 
-Many ditransitive verbs have the following check when the hero tries to perform these actions to her-/himself (say_to, show, take_from, touch_with, throw_at, throw_in, throw_to):
+Many ditransitive verbs have the following check when the hero tries to perform these actions to her-/himself (`say_to`, `show`, `take_from`, `touch_with`, `throw_at`, `throw_in`, `throw_to`):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1146,14 +1156,14 @@ HAS check_obj2_not_hero1 "That doesn't make sense.".
 
 Lastly, some other cases:
 
-put_against, put_behind, put_near, put_under:
+`put_against`, `put_behind`, `put_near`, `put_under`:
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj2_not_hero2 "That would be futile.".
 --------------------------------------------------------------------------------
 
-give, tie_to:
+`give`, `tie_to`:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1170,14 +1180,14 @@ HAS check_obj2_not_hero3 "You can't $v things to yourself.".
 
 The following checks prohibit actions like [.play]#&gt; _cut rope with rope_#, [.play]#&gt; _throw stone at stone_# and [.play]#&gt; _put bottle in bottle_#:
 
-fire_at, throw_at:
+`fire_at`, `throw_at`:
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj_not_obj2_at "It doesn't make sense to $v something at itself.".
 --------------------------------------------------------------------------------
 
-take_from:
+`take_from`:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1186,32 +1196,30 @@ HAS check_obj_not_obj2_from "It doesn't make sense to $v something from
 
 itself.".
 
-empty_in, pour_in, put_in, throw_in:
+`empty_in`, `pour_in`, `put_in`, `throw_in`:
 
 [source,alan]
 --------------------------------------------------------------------------------
-HAS check_obj_not_obj2_in "It doesn't make sense to $v something into
+HAS check_obj_not_obj2_in "It doesn't make sense to $v something into itself.".
 --------------------------------------------------------------------------------
 
-itself.".
 
-empty_on, pour_on, put_on:
+`empty_on`, `pour_on`, `put_on`:
 
 [source,alan]
 --------------------------------------------------------------------------------
-HAS check_obj_not_obj2_on "It doesn't make sense to $v something onto
+HAS check_obj_not_obj2_on "It doesn't make sense to $v something onto itself.".
 --------------------------------------------------------------------------------
 
-itself.".
 
-give, show, throw_to, tie_to:
+`give`, `show`, `throw_to`, `tie_to`:
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_obj_not_obj2_to "It doesn't make sense to $v something to itself.".
 --------------------------------------------------------------------------------
 
-attack_with, break_with, burn_with, close_with, cut_with, fill_with , lock_with, open_with, pry_with, push_with, shoot_with, touch_with, unlock_with, use_with:
+`attack_with`, `break_with`, `burn_with`, `close_with`, `cut_with`, `fill_with`, `lock_with`, `open_with`, `pry_with`, `push_with`, `shoot_with`, `touch_with`, `unlock_with`, `use_with`:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1219,7 +1227,7 @@ HAS check_obj_not_obj2_with "It doesn't make sense to $v something with itself."
 --------------------------------------------------------------------------------
 
 
-put_against, put_behind, put_near, put_under:
+`put_against`, `put_behind`, `put_near`, `put_under`:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1233,7 +1241,7 @@ HAS check_obj_not_obj2_put "That doesn't make sense." .
 == e. additional checks for classes
 
 Lastly, there are some checks that apply only to a specific class.
-Most of these are found in 'lib_classes.i'.
+Most of these are found in `lib_classes.i`.
 
 The first one checks that a MALE character doesn't put on women's CLOTHING by default, and vice versa:
 
@@ -1249,7 +1257,7 @@ The following check ensures that it won't be possible to put something inside a 
 HAS check_cont_not_supporter "You can't put $+1 inside $+2.".
 --------------------------------------------------------------------------------
 
-If the player tries to turn off a DEVICE that is already off, the following check is triggered (turn_off, switch_off):
+If the player tries to turn off a DEVICE that is already off, the following check is triggered (`turn_off`, `switch_off`):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1257,8 +1265,7 @@ HAS check_device_on_sg "$+1 is already off.".
 HAS check_device_on_pl "$+1 are already off.".
 --------------------------------------------------------------------------------
 
-The following message is triggered if the player tries to turn on a DEVICE which is already on (device: turn_on,
-switch_on)
+The following message is triggered if the player tries to turn on a DEVICE which is already on (device: `turn_on`, `switch_on`)
 
 
 [source,alan]
@@ -1267,14 +1274,14 @@ HAS check_device_not_on_sg "$+1 is already on.".
 HAS check_device_not_on_pl "$+1 are already on.".
 --------------------------------------------------------------------------------
 
-If the player tries to unlock or lock a door with something that is not the matching_key of the DOOR in question (lock_with, unlock_with):
+If the player tries to unlock or lock a door with something that is not the `matching_key` of the DOOR in question (`lock_with`, `unlock_with`):
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_door_matching_key "You can't use $+2 to $v $+1.".
 --------------------------------------------------------------------------------
 
-The following message is for situations where the hero tries to turn off or extinguish a LIGHTSOURCE that is NOT lit (lightsource: extinguish, turn_off):
+The following message is for situations where the hero tries to turn off or extinguish a LIGHTSOURCE that is NOT lit (lightsource: `extinguish`, `turn_off`):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1282,7 +1289,7 @@ HAS check_lightsource_lit_sg "But $+1 is not lit.".
 HAS check_lightsource_lit_pl "But $+1 are not lit.".
 --------------------------------------------------------------------------------
 
-while the following is for the opposite case (lightsource: light, turn_on):
+while the following is for the opposite case (lightsource: `light`, `turn_on`):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1294,7 +1301,7 @@ HAS check_lightsource_not_lit_pl "$+1 are already lit.".
 
 
 
-Checking that the verb switch won't work with a natural LIGHTSOURCE (lightsource: switch):
+Checking that the verb switch won't work with a natural LIGHTSOURCE (lightsource: `switch`):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1302,14 +1309,14 @@ HAS check_lightsource_switchable_sg "That's not something you can switch on and 
 HAS check_lightsource_switchable_pl "Those are not something you can switch on and off.".
 --------------------------------------------------------------------------------
 
-When there is some LIQUID in a container, for example some juice in a bottle, and the player types [.play]#&gt; _take juice from bottle_#, the following check is triggered (liquid: take_from):
+When there is some LIQUID in a container, for example some juice in a bottle, and the player types [.play]#&gt; _take juice from bottle_#, the following check is triggered (liquid: `take_from`):
 
 [source,alan]
 --------------------------------------------------------------------------------
 HAS check_liquid_vessel_not_cont "You can't carry $+1 around in your bare hands.".
 --------------------------------------------------------------------------------
 
-When the player tries to turn on a DEVICE or light a LIGHTSOURCE which is broken, the following check message is displayed (device, lightsource: light, turn_on):
+When the player tries to turn on a DEVICE or light a LIGHTSOURCE which is broken, the following check message is displayed (device, lightsource: `light`, `turn_on`):
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -1327,9 +1334,9 @@ HAS implicit_taking_message "(taking $+1 first)$n".
 
 The following verbs use implicit taking:
 
-bite, drink, eat, empty, empty_in, empty_on, give, pour, pour_in, pour_on, put_in, put_on, throw, throw_at, throw_in, throw_to, tie_to.
+`bite`, `drink`, `eat`, `empty`, `empty_in`, `empty_on`, `give`, `pour`, `pour_in`, `pour_on`, `put_in`, `put_on`, `throw`, `throw_at`, `throw_in`, `throw_to`, `tie_to`.
 
-(If you wish to disable automatic implicit taking for any of these verbs, you should open the library file 'lib_verbs.i', locate the needed verbs in that file, go to their DOES sections and delete the implicit taking code.
+(If you wish to disable automatic implicit taking for any of these verbs, you should open the library file `lib_verbs.i`, locate the needed verbs in that file, go to their DOES sections and delete the implicit taking code.
 Moreover, you should add the following check to each affected verb:
 
 [source,alan]

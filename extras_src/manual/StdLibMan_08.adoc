@@ -124,7 +124,7 @@ or just
 
 
 in other words, stating the character with whom you wish to talk, after the verb, without the preposition 'to'.
-The easiest way to allow this is just to add an additional syntax for 'talk_to' in your own game file:
+The easiest way to allow this is just to add an additional syntax for `talk_to` in your own game file:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -133,7 +133,7 @@ SYNTAX  talk_to = talk (act).
 --------------------------------------------------------------------------------
 
 This syntax declaration should be outside the `my_game` instance, in your own game file.
-This syntax declaration won't cancel the original syntax for 'talk_to' defined in the library; it would still be possible for the player to type [.play]#&gt; _talk to man_#, as well.
+This syntax declaration won't cancel the original syntax for `talk_to` defined in the library; it would still be possible for the player to type [.play]#&gt; _talk to man_#, as well.
 
 If you wish to cancel the original syntax altogether, do like this in your own game file:
 
@@ -150,7 +150,7 @@ END THE my_game.
 // PAGE 66 //
 
 
-Then, outside the my_game instance, still in your own game source file, define your own talk verb, for example:
+Then, outside the `my_game` instance, still in your own game source file, define your own _talk_ verb, for example:
 
 [source,alan]
 --------------------------------------------------------------------------------

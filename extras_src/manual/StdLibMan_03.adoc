@@ -531,6 +531,7 @@ END THE.
 
 Nesting locations is straightforward, as described in the ALAN Manual:
 
+[[example.house-nested-locations]]
 [source,alan]
 --------------------------------------------------------------------------------
 THE house ISA LOCATION
@@ -561,10 +562,13 @@ Remember, however, that if you implement a takeable OBJECT this way, the OBJECT 
 Also, the ceiling lamp in the above example, if implemented as a LIGHTSOURCE, would be lit/unlit in all of the three locations simultaneously.
 
 
-NOTE: An OBJECT implemented this way won't show automatically in the nested LOCATIONs.
-You have to add a mention of it in the individual location descriptions manually.
+[NOTE]
+=============
+The DESCRIPTION of an OBJECT implemented this way won't show automatically in the nested LOCATIONs.
+You'll have to mention it manually in the description of individual locations.
+=============
 
-If you want a certain object to be present in all indoor or in all outdoor locations of your game, you can define
+If you want a certain object to be present in all indoor or in all outdoor locations of your game, you can define:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -588,7 +592,7 @@ Also, the objects wall, floor and ceiling are located in indoor, and the ground 
 That's why the wall, floor and ceiling objects are found in every ROOM, and the ground and sky objects are found in every SITE.)
 
 
-If you want a certain object to present in absolutely every location of your game, you should define for example
+If you want a certain object to be present in absolutely every location of your game, you should define for example
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -598,7 +602,7 @@ END THE sea.
 
 [NOTE]
 ================================================================================
-For SITEs and ROOMs to work correctly when nested, the mother location should be of the same kind as the nested locations.
+For SITEs and ROOMs to work correctly when nested, the parent location should be of the same kind as the nested locations.
 For example, in the example above, if you declare the kitchen, the bedroom and the living-room to be ROOMs, the house instance should also be declared a ROOM.
 Sometimes this can bring problems: say you have a driveway location, with a nested location where you are inside your car.
 The driveway would naturally be a SITE (outdoor location), while the inside of your car is more naturally a ROOM.
@@ -634,7 +638,7 @@ END THE.
 // @FIXME: Change XREf to page number:
 
 Using nested locations, you can also make selected locations behave in a similar way.
-Going back to the house example on p. 20, you could define
+Going back to <<example.house-nested-locations,the previous house example>>, you could define:
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -645,7 +649,7 @@ THE house ISA LOCATION
 END THE.
 --------------------------------------------------------------------------------
 
-and this message would display for [.play]#&gt; _jump_# if the hero tried that action in the bedroom, in the kitchen or in the living-room.
+and this message would display for [.play]#&gt; _jump_# if the player tried that action in the bedroom, in the kitchen or in the living-room.
 
 You can also check if the hero is in a certain area, or group of locations:
 
@@ -680,7 +684,7 @@ EVENT explosion
 END EVENT.
 --------------------------------------------------------------------------------
 
-The locations nested in a certain mother location don't have to be adjacent (= connected by exits with each other).
+The locations nested in a certain parent location don't have to be _adjacent_ (i.e. connected to each other by exits).
 Bearing this in mind, you can group even very different and distant locations together, as long as you want a certain object to be found, a certain verb outcome to happen, or even a certain event to take place only in those locations and not anywhere else in the game:
 
 [source,alan]
@@ -710,11 +714,8 @@ END EVENT.
 --------------------------------------------------------------------------------
 
 
-Note that the event is scheduled to trigger "AT hero".
-If you defined "SCHEDULE thief_appears AT thief_area AFTER 10 TO 20." above, the event would trigger only in the mother location thief_area which the hero never actually visits (it's just the name of the "area" where the actual locations where the thief appears are nested) and thus the event would be invisible to the player.
-Events are not in scope in "mother locations" of nested locations.
-
-
+Note that the event is scheduled to trigger `AT hero`.
+If you defined `SCHEDULE thief_appears AT thief_area AFTER 10 TO 20.` above, the event would trigger only in the parent location thief_area which the hero never actually visits (it's just the name of the "`area`" where the actual locations where the thief appears are nested) and thus the event would be invisible to the player.
+Events are not in scope in "`parent locations`" of nested locations.
 
 // EOF //
-

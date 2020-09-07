@@ -12,13 +12,14 @@
 [[ch4]]
 = Things
 
-Things in ALAN are the comprehensive term for actors and objects.
-Many verbs are defined to work with both actors and objects on the library level.
-For example examine works with both.
-Then, there are a number of verbs that work with only one.
-For example take works with objects only (actors cannot be inside a container, not even in the hero container, so they cannot be taken).
+In ALAN, "`things`" is the comprehensive term for actors and objects.
+At the library level, many verbs are defined to work with both actors and objects.
+For example, _examine_ works with both.
+Then there are various verbs that only work with one of them.
+For example, _take_ works with objects only (actors cannot be inside a container, not even in the hero container, so they cannot be taken).
 Thus, if you want the hero to be able to take a cat or a bird, you should define them to be objects instead.
-Here is a list of transitive verbs work with actors only:
+
+Here is a list of transitive verbs that only work with actors:
 
 // @FIXME: Improve formatting of verbs list:
 ask, ask_for, follow, give, kill, kill_with, say_to, talk, tell, show,
@@ -26,9 +27,9 @@ ask, ask_for, follow, give, kill, kill_with, say_to, talk, tell, show,
 while these verbs work with objects only:
 
 // @FIXME: Improve formatting of verbs list:
-bite, break,break_with, burn, burn_with, buy, clean, climb, climb_on, climb_through, close,close_with, consult, cut, cut_with, dig, dive_in, drink, drive, drop, eat, empty, empty_in, empty_on, examine, exit, extinguish, fill, fill_with, fire, fire_at, fix, get_off, go_to, jump_in, jump_on, knock, lie_in, lie_on, lift, light, lock, lock_with, look_in, look_out_of, look_through, open, open_with, play, pour, pour_in, pour_on, pry, pry_with, put, put_in, put_on, read, remove, remove_from, take, throw,tie
+bite, break, break_with, burn, burn_with, buy, clean, climb, climb_on, climb_through, close,close_with, consult, cut, cut_with, dig, dive_in, drink, drive, drop, eat, empty, empty_in, empty_on, examine, exit, extinguish, fill, fill_with, fire, fire_at, fix, get_off, go_to, jump_in, jump_on, knock, lie_in, lie_on, lift, light, lock, lock_with, look_in, look_out_of, look_through, open, open_with, play, pour, pour_in, pour_on, pry, pry_with, put, put_in, put_on, read, remove, remove_from, take, throw,tie
 
-The following verbs work with both but have slightly different outcomes:
+The following verbs work with both, but have slightly different outcomes:
 
 // @FIXME: Improve formatting of verbs list:
 kiss, listen, pull, push, push_with, rub, scratch, touch
@@ -38,7 +39,7 @@ Lastly, there are some verbs that won't work with either.
 // @FIXME: Improve formatting of verbs list:
 answer, say, write
 
-as these verbs only can be used with quoted text:
+as these verbs can only be used with quoted text:
 
 [example,role="gametranscript"]
 ================================================================================

@@ -1828,7 +1828,7 @@ You would naturally need to define an alarm object here, for example:</p>
 <div class="paragraph">
 <p>Nesting locations is straightforward, as described in the ALAN Manual:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock" id="example.house-nested-locations">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> house <span class="hl kwa">ISA</span> <span class="hl kwb">LOCATION</span>&#x000A;<span class="hl kwa">END THE</span> house<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> kitchen <span class="hl kwa">ISA</span> <span class="hl kwb">LOCATION</span> <span class="hl kwa">AT</span> house&#x000A;<span class="hl kwa">END THE</span> kitchen<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> bedroom <span class="hl kwa">ISA</span> <span class="hl kwb">LOCATION</span> <span class="hl kwa">AT</span> house&#x000A;<span class="hl kwa">END THE</span> bedroom<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> livingroom <span class="hl kwa">ISA</span> <span class="hl kwb">LOCATION</span> <span class="hl kwa">AT</span> house&#x000A;<span class="hl kwa">END THE</span> livingroom<span class="hl kwa">.</span></code></pre>
 </div>
@@ -1853,14 +1853,16 @@ Also, the ceiling lamp in the above example, if implemented as a LIGHTSOURCE, wo
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-An OBJECT implemented this way won&#8217;t show automatically in the nested LOCATIONs.
-You have to add a mention of it in the individual location descriptions manually.
+<div class="paragraph">
+<p>The DESCRIPTION of an OBJECT implemented this way won&#8217;t show automatically in the nested LOCATIONs.
+You&#8217;ll have to mention it manually in the description of individual locations.</p>
+</div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>If you want a certain object to be present in all indoor or in all outdoor locations of your game, you can define</p>
+<p>If you want a certain object to be present in all indoor or in all outdoor locations of your game, you can define:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1882,7 +1884,7 @@ Also, the objects wall, floor and ceiling are located in indoor, and the ground 
 That&#8217;s why the wall, floor and ceiling objects are found in every ROOM, and the ground and sky objects are found in every SITE.)</p>
 </div>
 <div class="paragraph">
-<p>If you want a certain object to present in absolutely every location of your game, you should define for example</p>
+<p>If you want a certain object to be present in absolutely every location of your game, you should define for example</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1897,7 +1899,7 @@ That&#8217;s why the wall, floor and ceiling objects are found in every ROOM, an
 </td>
 <td class="content">
 <div class="paragraph">
-<p>For SITEs and ROOMs to work correctly when nested, the mother location should be of the same kind as the nested locations.
+<p>For SITEs and ROOMs to work correctly when nested, the parent location should be of the same kind as the nested locations.
 For example, in the example above, if you declare the kitchen, the bedroom and the living-room to be ROOMs, the house instance should also be declared a ROOM.
 Sometimes this can bring problems: say you have a driveway location, with a nested location where you are inside your car.
 The driveway would naturally be a SITE (outdoor location), while the inside of your car is more naturally a ROOM.
@@ -1915,7 +1917,7 @@ In fact, you really don&#8217;t need the walls instance for the car interior, as
 </div>
 <div class="paragraph">
 <p>Using nested locations, you can also make selected locations behave in a similar way.
-Going back to the house example on p. 20, you could define</p>
+Going back to <a href="#example.house-nested-locations">the previous house example</a>, you could define:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1923,7 +1925,7 @@ Going back to the house example on p. 20, you could define</p>
 </div>
 </div>
 <div class="paragraph">
-<p>and this message would display for <span class="play">&gt; <em>jump</em></span> if the hero tried that action in the bedroom, in the kitchen or in the living-room.</p>
+<p>and this message would display for <span class="play">&gt; <em>jump</em></span> if the player tried that action in the bedroom, in the kitchen or in the living-room.</p>
 </div>
 <div class="paragraph">
 <p>You can also check if the hero is in a certain area, or group of locations:</p>
@@ -1950,7 +1952,7 @@ Going back to the house example on p. 20, you could define</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The locations nested in a certain mother location don&#8217;t have to be adjacent (= connected by exits with each other).
+<p>The locations nested in a certain parent location don&#8217;t have to be <em>adjacent</em> (i.e. connected to each other by exits).
 Bearing this in mind, you can group even very different and distant locations together, as long as you want a certain object to be found, a certain verb outcome to happen, or even a certain event to take place only in those locations and not anywhere else in the game:</p>
 </div>
 <div class="listingblock">
@@ -1959,9 +1961,9 @@ Bearing this in mind, you can group even very different and distant locations to
 </div>
 </div>
 <div class="paragraph">
-<p>Note that the event is scheduled to trigger "AT hero".
-If you defined "SCHEDULE thief_appears AT thief_area AFTER 10 TO 20." above, the event would trigger only in the mother location thief_area which the hero never actually visits (it&#8217;s just the name of the "area" where the actual locations where the thief appears are nested) and thus the event would be invisible to the player.
-Events are not in scope in "mother locations" of nested locations.</p>
+<p>Note that the event is scheduled to trigger <code>AT hero</code>.
+If you defined <code>SCHEDULE thief_appears AT thief_area AFTER 10 TO 20.</code> above, the event would trigger only in the parent location thief_area which the hero never actually visits (it&#8217;s just the name of the &#8220;area&#8221; where the actual locations where the thief appears are nested) and thus the event would be invisible to the player.
+Events are not in scope in &#8220;parent locations&#8221; of nested locations.</p>
 </div>
 </div>
 </div>
@@ -1970,13 +1972,15 @@ Events are not in scope in "mother locations" of nested locations.</p>
 <h2 id="ch4"><a class="anchor" href="#ch4"></a>4. Things</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Things in ALAN are the comprehensive term for actors and objects.
-Many verbs are defined to work with both actors and objects on the library level.
-For example examine works with both.
-Then, there are a number of verbs that work with only one.
-For example take works with objects only (actors cannot be inside a container, not even in the hero container, so they cannot be taken).
-Thus, if you want the hero to be able to take a cat or a bird, you should define them to be objects instead.
-Here is a list of transitive verbs work with actors only:</p>
+<p>In ALAN, &#8220;things&#8221; is the comprehensive term for actors and objects.
+At the library level, many verbs are defined to work with both actors and objects.
+For example, <em>examine</em> works with both.
+Then there are various verbs that only work with one of them.
+For example, <em>take</em> works with objects only (actors cannot be inside a container, not even in the hero container, so they cannot be taken).
+Thus, if you want the hero to be able to take a cat or a bird, you should define them to be objects instead.</p>
+</div>
+<div class="paragraph">
+<p>Here is a list of transitive verbs that only work with actors:</p>
 </div>
 <div class="paragraph">
 <p>ask, ask_for, follow, give, kill, kill_with, say_to, talk, tell, show,</p>
@@ -1985,10 +1989,10 @@ Here is a list of transitive verbs work with actors only:</p>
 <p>while these verbs work with objects only:</p>
 </div>
 <div class="paragraph">
-<p>bite, break,break_with, burn, burn_with, buy, clean, climb, climb_on, climb_through, close,close_with, consult, cut, cut_with, dig, dive_in, drink, drive, drop, eat, empty, empty_in, empty_on, examine, exit, extinguish, fill, fill_with, fire, fire_at, fix, get_off, go_to, jump_in, jump_on, knock, lie_in, lie_on, lift, light, lock, lock_with, look_in, look_out_of, look_through, open, open_with, play, pour, pour_in, pour_on, pry, pry_with, put, put_in, put_on, read, remove, remove_from, take, throw,tie</p>
+<p>bite, break, break_with, burn, burn_with, buy, clean, climb, climb_on, climb_through, close,close_with, consult, cut, cut_with, dig, dive_in, drink, drive, drop, eat, empty, empty_in, empty_on, examine, exit, extinguish, fill, fill_with, fire, fire_at, fix, get_off, go_to, jump_in, jump_on, knock, lie_in, lie_on, lift, light, lock, lock_with, look_in, look_out_of, look_through, open, open_with, play, pour, pour_in, pour_on, pry, pry_with, put, put_in, put_on, read, remove, remove_from, take, throw,tie</p>
 </div>
 <div class="paragraph">
-<p>The following verbs work with both but have slightly different outcomes:</p>
+<p>The following verbs work with both, but have slightly different outcomes:</p>
 </div>
 <div class="paragraph">
 <p>kiss, listen, pull, push, push_with, rub, scratch, touch</p>
@@ -2000,7 +2004,7 @@ Here is a list of transitive verbs work with actors only:</p>
 <p>answer, say, write</p>
 </div>
 <div class="paragraph">
-<p>as these verbs only can be used with quoted text:</p>
+<p>as these verbs can only be used with quoted text:</p>
 </div>
 <div class="exampleblock gametranscript">
 <div class="content">
@@ -4673,7 +4677,7 @@ From there, you&#8217;ll find out that the syntax of the talk verb is</p>
 </div>
 <div class="paragraph">
 <p>in other words, stating the character with whom you wish to talk, after the verb, without the preposition 'to'.
-The easiest way to allow this is just to add an additional syntax for 'talk_to' in your own game file:</p>
+The easiest way to allow this is just to add an additional syntax for <code>talk_to</code> in your own game file:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4682,7 +4686,7 @@ The easiest way to allow this is just to add an additional syntax for 'talk_to' 
 </div>
 <div class="paragraph">
 <p>This syntax declaration should be outside the <code>my_game</code> instance, in your own game file.
-This syntax declaration won&#8217;t cancel the original syntax for 'talk_to' defined in the library; it would still be possible for the player to type <span class="play">&gt; <em>talk to man</em></span>, as well.</p>
+This syntax declaration won&#8217;t cancel the original syntax for <code>talk_to</code> defined in the library; it would still be possible for the player to type <span class="play">&gt; <em>talk to man</em></span>, as well.</p>
 </div>
 <div class="paragraph">
 <p>If you wish to cancel the original syntax altogether, do like this in your own game file:</p>
@@ -4693,7 +4697,7 @@ This syntax declaration won&#8217;t cancel the original syntax for 'talk_to' def
 </div>
 </div>
 <div class="paragraph">
-<p>Then, outside the my_game instance, still in your own game source file, define your own talk verb, for example:</p>
+<p>Then, outside the <code>my_game</code> instance, still in your own game source file, define your own <em>talk</em> verb, for example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5374,7 +5378,7 @@ If changing illegal parameter messages is not a high priority for you, you might
 <code>$1</code>  
 </td>
 <td class="hdlist2">
-<p>the first parameter the player used (for example the noun after the first verb used), without any articles, for example "key" in the command "examine key")</p>
+<p>the first parameter the player used (e.g. the noun after the first verb used), without any articles (e.g. &#8220;key&#8221; in the command &#8220;examine key&#8221;)</p>
 </td>
 </tr>
 <tr>
@@ -5382,7 +5386,7 @@ If changing illegal parameter messages is not a high priority for you, you might
 <code>$+1</code> 
 </td>
 <td class="hdlist2">
-<p>the definite form of the first parameter the player used (for example "the key")</p>
+<p>the definite form of the first parameter the player used (e.g. &#8220;the key&#8221;)</p>
 </td>
 </tr>
 <tr>
@@ -5390,7 +5394,7 @@ If changing illegal parameter messages is not a high priority for you, you might
 <code>$-1</code> 
 </td>
 <td class="hdlist2">
-<p>the negative form of the first parameter the player used (for example "no key") (not used in the library)</p>
+<p>the negative form of the first parameter the player used (e.g. &#8220;no key&#8221;)&#8201;&#8212;&#8201;<em>not used in the library</em>.</p>
 </td>
 </tr>
 <tr>
@@ -5398,7 +5402,7 @@ If changing illegal parameter messages is not a high priority for you, you might
 <code>$01</code> 
 </td>
 <td class="hdlist2">
-<p>the indefinite form of the first parameter the player used (for example "a key")</p>
+<p>the indefinite form of the first parameter the player used (e.g. &#8220;a key&#8221;)</p>
 </td>
 </tr>
 <tr>
@@ -5406,13 +5410,13 @@ If changing illegal parameter messages is not a high priority for you, you might
 <code>$2</code>  
 </td>
 <td class="hdlist2">
-<p>etc. would be the second parameter the player used, ( for example the word "key" in "unlock door with key")</p>
+<p>etc. would be the second parameter the player used (e.g. the word &#8220;key&#8221; in <span class="play">&gt; <em>unlock door with key</em></span>)</p>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>The general message for when a parameter is not suitable with the verb (for example "That&#8217;s not something you can attack"):</p>
+<p>The general message for when a parameter is not suitable with the verb (e.g &#8220;That&#8217;s not something you can attack&#8221;):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5421,7 +5425,7 @@ If changing illegal parameter messages is not a high priority for you, you might
 </div>
 <div class="paragraph">
 <p>The library accounts for singular and plural cases; that&#8217;s why many messages have both a singular (sg) and a plural (pl) formulation.
-In the following there are variations of the above message when a preposition is required after the verb (for example "That&#8217;s not something you can ask about." or "That&#8217;s not something you can cut things with."):</p>
+In the following there are variations of the above message when a preposition is required after the verb (e.g. &#8220;That&#8217;s not something you can ask about.&#8221; or &#8220;That&#8217;s not something you can cut things with.&#8221;):</p>
 </div>
 <div class="paragraph">
 <p>For verbs requiring about (the library verbs ask_about, tell_about and think_about):</p>
@@ -5432,7 +5436,7 @@ In the following there are variations of the above message when a preposition is
 </div>
 </div>
 <div class="paragraph">
-<p>There are two ditransitive verbs requiring at in the library, fire_at (e.g"fire rifle at bear") and throw_at (for example "throw remote control at TV"):</p>
+<p>There are two ditransitive verbs requiring at in the library, <code>fire_at</code> (e.g. <span class="play">&gt; <em>fire rifle at bear</em></span>) and <code>throw_at</code> (e.g. <span class="play">&gt; <em>throw remote control at TV</em></span>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5440,7 +5444,7 @@ In the following there are variations of the above message when a preposition is
 </div>
 </div>
 <div class="paragraph">
-<p>The following is needed for the verb ask_for (for example "ask servant for tea"):</p>
+<p>The following is needed for the verb <code>ask_for</code> (e.g. <span class="play">&gt; <em>ask servant for tea</em></span>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5448,7 +5452,7 @@ In the following there are variations of the above message when a preposition is
 </div>
 </div>
 <div class="paragraph">
-<p>The verb take_from needs the following formulations:</p>
+<p>The verb <code>take_from</code> needs the following formulations:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5456,7 +5460,7 @@ In the following there are variations of the above message when a preposition is
 </div>
 </div>
 <div class="paragraph">
-<p>The verbs dive_in, jump_in, lie_in and swim_in use the following parameter messages:</p>
+<p>The verbs <code>dive_in</code>, <code>jump_in</code>, <code>lie_in</code> and <code>swim_in</code> use the following parameter messages:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5464,7 +5468,7 @@ In the following there are variations of the above message when a preposition is
 </div>
 </div>
 <div class="paragraph">
-<p>Climb_on, jump_on, knock, lie_on, sit_on, stand_on, switch_on, turn_on, for their part, use the following messages:</p>
+<p><code>Climb_on</code>, <code>jump_on</code>, <code>knock</code>, <code>lie_on</code>, <code>sit_on</code>, <code>stand_on</code>, <code>switch_on</code>, <code>turn_on</code>, for their part, use the following messages:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5472,7 +5476,7 @@ In the following there are variations of the above message when a preposition is
 </div>
 </div>
 <div class="paragraph">
-<p>For get_off, switch_off and turn_of f, the following parameter messages are used:</p>
+<p>For <code>get_off</code>, <code>switch_off</code> and <code>turn_off</code>, the following parameter messages are used:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5480,7 +5484,7 @@ In the following there are variations of the above message when a preposition is
 </div>
 </div>
 <div class="paragraph">
-<p>The preposition to is needed in the verbs listen_to and talk_to:</p>
+<p>The preposition <em>to</em> is needed in the verbs <code>listen_to</code> and <code>talk_to</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5488,7 +5492,7 @@ In the following there are variations of the above message when a preposition is
 </div>
 </div>
 <div class="paragraph">
-<p>A slightly different message is needed for give, show, tell, tie_to, throw_to which are ditransitive verbs with the second parameter preceded by to:</p>
+<p>A slightly different message is needed for <code>give</code>, <code>show</code>, <code>tell</code>, <code>tie_to</code>, <code>throw_to</code> which are ditransitive verbs with the second parameter preceded by <em>to</em>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5496,8 +5500,8 @@ In the following there are variations of the above message when a preposition is
 </div>
 </div>
 <div class="paragraph">
-<p>For with, we have two separate messages.
-The verbs kill_with, shoot_with and play_with use the following formulation:</p>
+<p>For <em>with</em>, we have two separate messages.
+The verbs <code>kill_with</code>, <code>shoot_with</code> and <code>play_with</code> use the following formulation:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5505,7 +5509,7 @@ The verbs kill_with, shoot_with and play_with use the following formulation:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>while a somewhat bigger group of verbs&#8201;&#8212;&#8201;attack_with, break_with, burn_with, close_with, cut_with, fill_with, lock_with, open_with, pry_with, push_with, unlock_with&#8201;&#8212;&#8201;are accompanied with a message one word longer: the word 'things' is added, for no other reason than that it sounds better than if left out, as far as these verbs are concerned:</p>
+<p>while a somewhat bigger group of verbs&#8201;&#8212;&#8201;<code>attack_with</code>, <code>break_with</code>, <code>burn_with</code>, <code>close_with</code>, <code>cut_with</code>, <code>fill_with</code>, <code>lock_with</code>, <code>open_with</code>, <code>pry_with</code>, <code>push_with</code>, <code>unlock_with</code>&#8201;&#8212;&#8201;are accompanied with a message one word longer: the word &#8216;things&#8217; is added, for no other reason than that it sounds better than if left out, as far as these verbs are concerned:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5513,7 +5517,7 @@ The verbs kill_with, shoot_with and play_with use the following formulation:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The communication verbs ask, ask_for, say_to, talk_to and tell use a message of their own:</p>
+<p>The communication verbs <code>ask</code>, <code>ask_for</code>, <code>say_to</code>, <code>talk_to</code> and <code>tell</code> use a message of their own:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5524,7 +5528,7 @@ The verbs kill_with, shoot_with and play_with use the following formulation:</p>
 <p>We have a separate individual default parameter message for a handful of verbs.</p>
 </div>
 <div class="paragraph">
-<p>For consult, we have the following:</p>
+<p>For <code>consult</code>, we have the following:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5532,7 +5536,7 @@ The verbs kill_with, shoot_with and play_with use the following formulation:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>You&#8217;ll find this message at examine :</p>
+<p>You&#8217;ll find this message at <code>examine</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5540,10 +5544,10 @@ The verbs kill_with, shoot_with and play_with use the following formulation:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The reason why examine doesn&#8217;t use the general default message (scroll above) is that when the player types for example <span class="play">&gt; <em>x 34</em></span> the response would be <span class="play">That&#8217;s not something you can x.</span> which isn&#8217;t such pretty-looking as when the verb is printed in full.</p>
+<p>The reason why <code>examine</code> doesn&#8217;t use the general default message (scroll above) is that when the player types for example <span class="play">&gt; <em>x 34</em></span> the response would be <span class="play">That&#8217;s not something you can x.</span> which isn&#8217;t such pretty-looking as when the verb is printed in full.</p>
 </div>
 <div class="paragraph">
-<p>The verbs look_out_of and look_through use prepositions other verbs don&#8217;t, and that&#8217;s why they need their own messages:</p>
+<p>The verbs <code>look_out_of</code> and <code>look_through</code> use prepositions other verbs don&#8217;t, and that&#8217;s why they need their own messages:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5567,7 +5571,7 @@ The verbs in which this message is found are <code>empty_in</code>, <code>pour_i
 </div>
 </div>
 <div class="paragraph">
-<p>The following message is displayed when the player tries to use the verbs give, put, put_in, put_on, put_against, put_near, put_behind, put_under, throw_at, throw_in, throw_to, use and use_with with actors as direct objects:</p>
+<p>The following message is displayed when the player tries to use the verbs <code>give</code>, <code>put</code>, <code>put_in</code>, <code>put_on</code>, <code>put_against</code>, <code>put_near</code>, <code>put_behind</code>, <code>put_under</code>, <code>throw_at</code>, <code>throw_in</code>, <code>throw_to</code>, <code>use</code> and <code>use_with</code> with actors as direct objects:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5575,7 +5579,7 @@ The verbs in which this message is found are <code>empty_in</code>, <code>pour_i
 </div>
 </div>
 <div class="paragraph">
-<p>The verbs answer, say, say_to and write require that what we wish to answer, say or write is put into a string ( = surrounded by quotes).</p>
+<p>The verbs <code>answer</code>, <code>say</code>, <code>say_to</code> and <code>write</code> require that what we wish to answer, say or write is put into a string ( = surrounded by quotes).</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5583,7 +5587,7 @@ The verbs in which this message is found are <code>empty_in</code>, <code>pour_i
 </div>
 </div>
 <div class="paragraph">
-<p>The verbs look_behind, look_in and look_under have the following message when the player tries to look somewhere that is not suitable object for these verbs:</p>
+<p>The verbs <code>look_behind</code>, <code>look_in</code> and <code>look_under</code> have the following message when the player tries to look somewhere that is not suitable object for these verbs:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5591,7 +5595,7 @@ The verbs in which this message is found are <code>empty_in</code>, <code>pour_i
 </div>
 </div>
 <div class="paragraph">
-<p>The verb go_to has its own message:</p>
+<p>The verb <code>go_to</code> has its own message:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5602,7 +5606,7 @@ The verbs in which this message is found are <code>empty_in</code>, <code>pour_i
 <p>The following is a variation of the above and is used when the second parameter of a ditransitive verb is not suitable.</p>
 </div>
 <div class="paragraph">
-<p>The verbs empty_in, empty_on, pour_in, pour_on, put_in, put_on, put_against, put_behind, put_near, put_under, throw_in, throw_to, tie_to and write use this message:</p>
+<p>The verbs <code>empty_in</code>, <code>empty_on</code>, <code>pour_in</code>, <code>pour_on</code>, <code>put_in</code>, <code>put_on</code>, <code>put_against</code>, <code>put_behind</code>, <code>put_near</code>, <code>put_under</code>, <code>throw_in</code>, <code>throw_to</code>, <code>tie_to</code> and <code>write</code> use this message:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5610,7 +5614,8 @@ The verbs in which this message is found are <code>empty_in</code>, <code>pour_i
 </div>
 </div>
 <div class="paragraph">
-<p>Finally, there are some messages for the information "verbs" what_is, where_is and who_is. (The first two messages below also apply to where_is besides what_is.)</p>
+<p>Finally, there are some messages for the information &#8220;verbs&#8221; <code>what_is</code>, <code>where_is</code> and <code>who_is</code>.
+(The first two messages below also apply to <code>where_is</code> besides <code>what_is</code>.)</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5624,7 +5629,7 @@ The verbs in which this message is found are <code>empty_in</code>, <code>pour_i
 <p>The way the illegal parameter messages have been defined in the library, it is not usually possible to affect just one verb at a time.
 Most often, changing a default message will alter the outcome of at least a handful of verbs, because one default message is shared by many verbs.
 There are some default parameter messages that only affect one verb; you should check the list of parameter messages (above) for details.
-Anyway, the quickest way to accomplish this task would be to open 'lib_verbs.i', find the verb, then modify the appropriate parameter message in its syntax statement.</p>
+Anyway, the quickest way to accomplish this task would be to open <code>lib_verbs.i</code>, find the verb, then modify the appropriate parameter message in its syntax statement.</p>
 </div>
 </div>
 </div>
@@ -5632,10 +5637,10 @@ Anyway, the quickest way to accomplish this task would be to open 'lib_verbs.i',
 <h3 id="_6_default_verb_check_messages"><a class="anchor" href="#_6_default_verb_check_messages"></a>10.6. 6. Default verb check messages</h3>
 <div class="paragraph">
 <p>All these check messages can be individually changed by listing them under the my_game instance in your game source file.
-They are also listed in the file 'mygame_import.i' in the library distribution package, for easy modification.
-These check messages are used in verb definitions, mainly in 'lib_verbs.i'.
+They are also listed in the file <code>mygame_import.i</code> in the library distribution package, for easy modification.
+These check messages are used in verb definitions, mainly in <code>lib_verbs.i</code>.
 Changing one check message will affect all verbs where that particular check is found.
-Again, as with parameter messages, edit these messages directly in 'mygame_import.i' if you need to change a great number of them, otherwise redefine them within the my_game instance in your own source file.
+Again, as with parameter messages, edit these messages directly in <code>mygame_import.i</code> if you need to change a great number of them, otherwise redefine them within the my_game instance in your own source file.
 You&#8217;ll quickly notice that the list is quite long, and listing any number greater than just a few under the my_game instance would be a rather frustrating task.</p>
 </div>
 <div class="olist loweralpha">
@@ -5677,7 +5682,7 @@ That&#8217;s not something you can take.</p>
 </div>
 <div class="paragraph">
 <p>The verb take only works with objects, not with any other instances.
-Thus, if you try to take something else than an object (for example a numerical value in the above case), an illegal parameter message is shown.
+Thus, if you try to take something else than an object (e.g. a numerical value in the above case), an illegal parameter message is shown.
 This restriction is defined in the syntax of the verb.
 Checks, on the other hand, are used to ensure that an instance has the proper attribute needed with the verb, for example edible, takeable, NOT open, and so forth.</p>
 </div>
@@ -5741,7 +5746,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 </div>
 <div class="paragraph">
-<p>Again, we have a separate message for examine, look_out_of and look_through:</p>
+<p>Again, we have a separate message for <code>examine</code>, <code>look_out_of</code> and <code>look_through</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5755,7 +5760,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 <div class="sect2">
 <h3 id="_checks_for_open_closed_and_locked_objects"><a class="anchor" href="#_checks_for_open_closed_and_locked_objects"></a>10.7. Checks for open, closed and locked objects</h3>
 <div class="paragraph">
-<p>open, open_with:</p>
+<p><code>open</code>, <code>open_with</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5763,7 +5768,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 </div>
 <div class="paragraph">
-<p>close, close_with:</p>
+<p><code>close</code>, <code>close_with</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5779,7 +5784,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 </div>
 <div class="paragraph">
-<p>empty_in, pour_in, put_in, throw_in:</p>
+<p><code>empty_in</code>, <code>pour_in</code>, <code>put_in</code>, <code>throw_in</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5787,7 +5792,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 </div>
 <div class="paragraph">
-<p>unlock, unlock_with:</p>
+<p><code>unlock</code>, <code>unlock_with</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5795,7 +5800,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 </div>
 <div class="paragraph">
-<p>lock, lock_with</p>
+<p><code>lock</code>, <code>lock_with</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5814,7 +5819,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 </div>
 <div class="paragraph">
-<p>In addition, the verbs empty_in, fill_with, pour_in, put_in, take_from and tie_to have the following check for the reachability of the second parameter:</p>
+<p>In addition, the verbs <code>empty_in</code>, <code>fill_with</code>, <code>pour_in</code>, <code>put_in</code>, <code>take_from</code> and <code>tie_to</code> have the following check for the reachability of the second parameter:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5822,7 +5827,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 </div>
 <div class="paragraph">
-<p>and the verb ask_for has the following check:</p>
+<p>and the verb <code>ask_for</code> has the following check:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5830,11 +5835,12 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 </div>
 <div class="paragraph">
-<p>which is triggered when the hero asks an NPC for something that the NPC cannot reach. (This happens when the object in question has the attribute 'NOT reachable'.)</p>
+<p>which is triggered when the hero asks an NPC for something that the NPC cannot reach.
+(This happens when the object in question has the attribute <code>NOT reachable</code>.)</p>
 </div>
 <div class="paragraph">
-<p>The verbs throw_at, throw_in, throw_to allow the action to succeed if the second parameter is reachable, but not if the second parameter is distant:.
-Thus, the way things are defined in the library, it is possible to e,g, throw something in a container if that container is otherwise NOT reachable.
+<p>The verbs <code>throw_at</code>, <code>throw_in</code>, <code>throw_to</code> allow the action to succeed if the second parameter is reachable, but not if the second parameter is distant:.
+Thus, the way things are defined in the library, it is possible to e.g. throw something in a container if that container is otherwise NOT reachable.
 But if the container is distant, the action will fail.</p>
 </div>
 <div class="listingblock">
@@ -5854,7 +5860,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>and for lying down:</p>
+<p>and for lying <code>down</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5862,7 +5868,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If the player uses the verbs sit or sit_on, and the hero is already sitting, the following check message is displayed:</p>
+<p>If the player uses the verbs <code>sit</code> or <code>sit_on</code>, and the hero is already sitting, the following check message is displayed:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5873,7 +5879,7 @@ But if the container is distant, the action will fail.</p>
 <div class="sect2">
 <h3 id="_other_attribute_checks"><a class="anchor" href="#_other_attribute_checks"></a>10.10. Other attribute checks</h3>
 <div class="paragraph">
-<p>Checking that the object of the action has the ability to talk; verbs ask, ask_for, say_to, tell:</p>
+<p>Checking that the object of the action has the ability to talk; verbs <code>ask</code>, <code>ask_for</code>, <code>say_to</code>, <code>tell</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5881,7 +5887,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Checking that the object is allowed to be emptied/poured/put/thrown in the container (empty_in, pour_in, put_in, throw_in):</p>
+<p>Checking that the object is allowed to be emptied/poured/put/thrown in the container (<code>empty_in</code>, <code>pour_in</code>, <code>put_in</code>, <code>throw_in</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5889,7 +5895,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Checking that something is broken; the verb fix:</p>
+<p>Checking that something is broken; the verb <code>fix</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5897,7 +5903,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Checking that the object of the action is inanimate, because normally the action would be considered improper if done to a person: pull, push, push_with, scratch, search</p>
+<p>Checking that the object of the action is inanimate, because normally the action would be considered improper if done to a person: <code>pull</code>, <code>push</code>, <code>push_with</code>, <code>scratch</code>, <code>search</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5905,7 +5911,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>With some verbs, the above message is slightly altered; rub, touch, touch_with:</p>
+<p>With some verbs, the above message is slightly altered; <code>rub</code>, <code>touch</code>, <code>touch_with</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5913,7 +5919,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Checking if something is movable; the verbs lift, pull, push, push_with, shake, take, take_from:</p>
+<p>Checking if something is movable; the verbs <code>lift</code>, <code>pull</code>, <code>push</code>, <code>push_with</code>, <code>shake</code>, <code>take</code>, <code>take_from</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5921,7 +5927,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Checking whether something is scenery; the verbs examine, take, take_from:</p>
+<p>Checking whether something is scenery; the verbs <code>examine</code>, <code>take</code>, <code>take_from</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5929,7 +5935,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In the verbs ask_for and take_from there is also a check for whether the second parameter in the command happens to be a scenery object:</p>
+<p>In the verbs <code>ask_for</code> and <code>take_from</code> there is also a check for whether the second parameter in the command happens to be a scenery object:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5937,7 +5943,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>For some verbs, the target of looking is checked with the following message: look_behind, look_under:</p>
+<p>For some verbs, the target of looking is checked with the following message: <code>look_behind</code>, <code>look_under</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5945,7 +5951,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The verbs throw_in and tie_to has a slightly different formulation from the above:</p>
+<p>The verbs <code>throw_in</code> and <code>tie_to</code> has a slightly different formulation from the above:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5961,7 +5967,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>fill_with has the following check:fill_with</p>
+<p><code>fill_with</code> has the following check:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5969,7 +5975,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>while ask_for has:</p>
+<p>while <code>ask_for</code> has:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5977,7 +5983,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Checking that an object is not too heavy (lift, take, take_from):</p>
+<p>Checking that an object is not too heavy (<code>lift</code>, <code>take</code>, <code>take_from</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6008,7 +6014,7 @@ The following check will verify this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If the hero tries to take something from an NPC and the NPC doesn&#8217;t have the stated object, the following check is triggered (take_from):</p>
+<p>If the hero tries to take something from an NPC and the NPC doesn&#8217;t have the stated object, the following check is triggered (<code>take_from</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6029,7 +6035,7 @@ The following check will verify this:</p>
 <p>The following checks deal with where the hero is or what (s)he is carrying.</p>
 </div>
 <div class="paragraph">
-<p>The verb shoot has the following check:</p>
+<p>The verb <code>shoot</code> has the following check:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6037,7 +6043,7 @@ The following check will verify this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>find, follow, go_to, where_is:</p>
+<p><code>find</code>, <code>follow</code>, <code>go_to</code>, <code>where_is</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6045,7 +6051,7 @@ The following check will verify this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>drop, fire, fire_at, put, show:</p>
+<p><code>drop</code>, <code>fire</code>, <code>fire_at</code>, <code>put</code>, <code>show</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6053,7 +6059,7 @@ The following check will verify this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The following check is used in many verbs, typically ditransitive ones such as break_with, cut_with etc:</p>
+<p>The following check is used in many verbs, typically ditransitive ones such as <code>break_with</code>, <code>cut_with</code>, etc.:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6061,7 +6067,7 @@ The following check will verify this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In the following, the action tried out by the player is targeted at something the hero is holding, and the action would not make sense (verbs attack, attack_with, kick, lift, shoot and shoot_with):</p>
+<p>In the following, the action tried out by the player is targeted at something the hero is holding, and the action would not make sense (verbs <code>attack</code>, <code>attack_with</code>, <code>kick</code>, <code>lift</code>, <code>shoot</code> and <code>shoot_with</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6069,7 +6075,7 @@ The following check will verify this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The following check ensures that the hero is not trying to get something (s)he already has (the verbs take, take_from):</p>
+<p>The following check ensures that the hero is not trying to get something (s)he already has (the verbs <code>take</code>, <code>take_from</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6077,7 +6083,7 @@ The following check will verify this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The throwing verbs (throw_at, throw_in throw_to)have this check to prohibit the hero from throwing something at, to or into something that (s)he is holding:</p>
+<p>The throwing verbs (<code>throw_at</code>, <code>throw_in</code> and <code>throw_to</code>) have this check to prohibit the hero from throwing something at, to or into something that (s)he is holding:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6085,7 +6091,7 @@ The following check will verify this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>For "putting" verbs other than put_in and put_on, the following check ensures that the hero cannot succeed in putting something against, behind, near, on or under something else when (s)he carries the object referenced by second parameter (the verbs put_against, put_behind, put_near, put_under):</p>
+<p>For &#8220;putting&#8221; verbs other than <code>put_in</code> and <code>put_on</code>, the following check ensures that the hero cannot succeed in putting something against, behind, near, on or under something else when (s)he carries the object referenced by second parameter (the verbs <code>put_against</code>, <code>put_behind</code>, <code>put_near</code>, <code>put_under</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6117,8 +6123,8 @@ The following check will verify this:</p>
 <div class="sect3">
 <h4 id="_checking_whether_an_object_is_in_a_container_or_not"><a class="anchor" href="#_checking_whether_an_object_is_in_a_container_or_not"></a>10.11.2. Checking whether an object is in a container or not</h4>
 <div class="paragraph">
-<p>When the following check fires, the hero tried to empty the contents of an object into a container that already was contained by the object (for example if there is a bottle in a box, and the player types "empty box in bottle").
-This applies to the verbs empty_in and pour_in:</p>
+<p>When the following check fires, the hero tried to empty the contents of an object into a container that already was contained by the object (e.g. if there is a bottle in a box, and the player types <span class="play">&gt; <em>empty box in bottle</em></span>).
+This applies to the verbs <code>empty_in</code> and <code>pour_in</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6126,7 +6132,7 @@ This applies to the verbs empty_in and pour_in:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If the hero tries to take something from a container and that something is not there to begin with, the following check message is displayed (take_from):</p>
+<p>If the hero tries to take something from a container and that something is not there to begin with, the following check message is displayed (<code>take_from</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6134,7 +6140,7 @@ This applies to the verbs empty_in and pour_in:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If the hero tries to put or throw something into a container but the object is already in the container, the following message is displayed (put_in, throw_in):</p>
+<p>If the hero tries to put or throw something into a container but the object is already in the container, the following message is displayed (<code>put_in</code>, <code>throw_in</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6142,7 +6148,7 @@ This applies to the verbs empty_in and pour_in:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The following check message is displayed when the hero tries to fill a container with something that the container already is full of (fill_with):</p>
+<p>The following check message is displayed when the hero tries to fill a container with something that the container already is full of (<code>fill_with</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6150,7 +6156,7 @@ This applies to the verbs empty_in and pour_in:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Checking whether an OBJECT is on a SUPPORTER or not (take_from):</p>
+<p>Checking whether an OBJECT is on a SUPPORTER or not (<code>take_from</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6158,7 +6164,7 @@ This applies to the verbs empty_in and pour_in:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Putting something on a SUPPORTER (put_on):</p>
+<p>Putting something on a SUPPORTER (<code>put_on</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6177,7 +6183,7 @@ This applies to the verbs empty_in and pour_in:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The following check is for cases when the hero tries to put on something (s)he is already wearing (put_on, wear):</p>
+<p>The following check is for cases when the hero tries to put on something (s)he is already wearing (<code>put_on</code>, <code>wear</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6185,7 +6191,7 @@ This applies to the verbs empty_in and pour_in:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Here, the action is stopped if the hero tries to attack, kick or shoot something (s)he&#8217;s wearing (attack, attack_with, kick, shoot, shoot_with):</p>
+<p>Here, the action is stopped if the hero tries to attack, kick or shoot something (s)he&#8217;s wearing (<code>attack</code>, <code>attack_with</code>, <code>kick</code>, <code>shoot</code>, <code>shoot_with</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6194,7 +6200,7 @@ This applies to the verbs empty_in and pour_in:</p>
 </div>
 <div class="paragraph">
 <p>Lastly, it&#8217;s not possible to drop a piece of CLOTHING if it is worn.
-It will have to be removed first (drop):</p>
+It will have to be removed first (<code>drop</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6225,7 +6231,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 <li>
 <p>prohibiting the action from being directed at the hero:</p>
 <div class="paragraph">
-<p>The following check is triggered when the player tries something like <span class="play">&gt; <em>attack me</em></span> (ask, ask_for, attack, attack_with, catch, follow, kick, listen, pull, push, push_with, take, take_from, tell):</p>
+<p>The following check is triggered when the player tries something like <span class="play">&gt; <em>attack me</em></span> (<code>ask</code>, <code>ask_for</code>, <code>attack</code>, <code>attack_with</code>, <code>catch</code>, <code>follow</code>, <code>kick</code>, <code>listen</code>, <code>pull</code>, <code>push</code>, <code>push_with</code>, <code>take</code>, <code>take_from</code>, <code>tell</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6233,7 +6239,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>For the verbs fire_at, kill, kill_with, shoot, shoot_with there is a specific message when the target of the action is the hero:</p>
+<p>For the verbs <code>fire_at</code>, <code>kill</code>, <code>kill_with</code>, <code>shoot</code>, <code>shoot_with</code> there is a specific message when the target of the action is the hero:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6244,7 +6250,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 <p>For a couple of actions where the hero is the target, the action might make sense but it is anyway not deemed fruitful.</p>
 </div>
 <div class="paragraph">
-<p>This applies to the verbs scratch and touch:</p>
+<p>This applies to the verbs <code>scratch</code> and <code>touch</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6252,7 +6258,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The verbs find and go_to have the following check triggered when the player types <span class="play">&gt; <em>find me</em></span> or <span class="play">&gt; <em>go to me</em></span>:</p>
+<p>The verbs <code>find</code> and <code>go_to</code> have the following check triggered when the player types <span class="play">&gt; <em>find me</em></span> or <span class="play">&gt; <em>go to me</em></span>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6260,7 +6266,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If the player tries <span class="play">&gt; <em>free me</em></span>, the following check message is displayed (free):</p>
+<p>If the player tries <span class="play">&gt; <em>free me</em></span>, the following check message is displayed (<code>free</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6271,7 +6277,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 </ol>
 </div>
 <div class="paragraph">
-<p>The verbs kiss, play_with and rub have the following check:</p>
+<p>The verbs <code>kiss</code>, <code>play_with</code> and <code>rub</code> have the following check:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6279,7 +6285,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The verb look_behind has the following check for cases when the hero looks behind him-/herself :</p>
+<p>The verb <code>look_behind</code> has the following check for cases when the hero looks behind him-/herself :</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6295,7 +6301,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Many ditransitive verbs have the following check when the hero tries to perform these actions to her-/himself (say_to, show, take_from, touch_with, throw_at, throw_in, throw_to):</p>
+<p>Many ditransitive verbs have the following check when the hero tries to perform these actions to her-/himself (<code>say_to</code>, <code>show</code>, <code>take_from</code>, <code>touch_with</code>, <code>throw_at</code>, <code>throw_in</code>, <code>throw_to</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6306,7 +6312,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 <p>Lastly, some other cases:</p>
 </div>
 <div class="paragraph">
-<p>put_against, put_behind, put_near, put_under:</p>
+<p><code>put_against</code>, <code>put_behind</code>, <code>put_near</code>, <code>put_under</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6314,7 +6320,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>give, tie_to:</p>
+<p><code>give</code>, <code>tie_to</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6328,7 +6334,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 <p>The following checks prohibit actions like <span class="play">&gt; <em>cut rope with rope</em></span>, <span class="play">&gt; <em>throw stone at stone</em></span> and <span class="play">&gt; <em>put bottle in bottle</em></span>:</p>
 </div>
 <div class="paragraph">
-<p>fire_at, throw_at:</p>
+<p><code>fire_at</code>, <code>throw_at</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6336,7 +6342,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>take_from:</p>
+<p><code>take_from</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6347,29 +6353,23 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 <p>itself.".</p>
 </div>
 <div class="paragraph">
-<p>empty_in, pour_in, put_in, throw_in:</p>
+<p><code>empty_in</code>, <code>pour_in</code>, <code>put_in</code>, <code>throw_in</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_obj2_in <span class="hl str">&quot;It doesn&#39;t make sense to</span> <span class="hl esc">$v</span> <span class="hl str">something into</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_obj2_in <span class="hl str">&quot;It doesn&#39;t make sense to</span> <span class="hl esc">$v</span> <span class="hl str">something into itself.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>itself.".</p>
-</div>
-<div class="paragraph">
-<p>empty_on, pour_on, put_on:</p>
+<p><code>empty_on</code>, <code>pour_on</code>, <code>put_on</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_obj2_on <span class="hl str">&quot;It doesn&#39;t make sense to</span> <span class="hl esc">$v</span> <span class="hl str">something onto</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> check_obj_not_obj2_on <span class="hl str">&quot;It doesn&#39;t make sense to</span> <span class="hl esc">$v</span> <span class="hl str">something onto itself.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>itself.".</p>
-</div>
-<div class="paragraph">
-<p>give, show, throw_to, tie_to:</p>
+<p><code>give</code>, <code>show</code>, <code>throw_to</code>, <code>tie_to</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6377,7 +6377,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>attack_with, break_with, burn_with, close_with, cut_with, fill_with , lock_with, open_with, pry_with, push_with, shoot_with, touch_with, unlock_with, use_with:</p>
+<p><code>attack_with</code>, <code>break_with</code>, <code>burn_with</code>, <code>close_with</code>, <code>cut_with</code>, <code>fill_with</code>, <code>lock_with</code>, <code>open_with</code>, <code>pry_with</code>, <code>push_with</code>, <code>shoot_with</code>, <code>touch_with</code>, <code>unlock_with</code>, <code>use_with</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6385,7 +6385,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>put_against, put_behind, put_near, put_under:</p>
+<p><code>put_against</code>, <code>put_behind</code>, <code>put_near</code>, <code>put_under</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6397,7 +6397,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 <h3 id="_e_additional_checks_for_classes"><a class="anchor" href="#_e_additional_checks_for_classes"></a>10.15. e. additional checks for classes</h3>
 <div class="paragraph">
 <p>Lastly, there are some checks that apply only to a specific class.
-Most of these are found in 'lib_classes.i'.</p>
+Most of these are found in <code>lib_classes.i</code>.</p>
 </div>
 <div class="paragraph">
 <p>The first one checks that a MALE character doesn&#8217;t put on women&#8217;s CLOTHING by default, and vice versa:</p>
@@ -6416,7 +6416,7 @@ Most of these are found in 'lib_classes.i'.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If the player tries to turn off a DEVICE that is already off, the following check is triggered (turn_off, switch_off):</p>
+<p>If the player tries to turn off a DEVICE that is already off, the following check is triggered (<code>turn_off</code>, <code>switch_off</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6424,8 +6424,7 @@ Most of these are found in 'lib_classes.i'.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The following message is triggered if the player tries to turn on a DEVICE which is already on (device: turn_on,
-switch_on)</p>
+<p>The following message is triggered if the player tries to turn on a DEVICE which is already on (device: <code>turn_on</code>, <code>switch_on</code>)</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6433,7 +6432,7 @@ switch_on)</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If the player tries to unlock or lock a door with something that is not the matching_key of the DOOR in question (lock_with, unlock_with):</p>
+<p>If the player tries to unlock or lock a door with something that is not the <code>matching_key</code> of the DOOR in question (<code>lock_with</code>, <code>unlock_with</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6441,7 +6440,7 @@ switch_on)</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The following message is for situations where the hero tries to turn off or extinguish a LIGHTSOURCE that is NOT lit (lightsource: extinguish, turn_off):</p>
+<p>The following message is for situations where the hero tries to turn off or extinguish a LIGHTSOURCE that is NOT lit (lightsource: <code>extinguish</code>, <code>turn_off</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6449,7 +6448,7 @@ switch_on)</p>
 </div>
 </div>
 <div class="paragraph">
-<p>while the following is for the opposite case (lightsource: light, turn_on):</p>
+<p>while the following is for the opposite case (lightsource: <code>light</code>, <code>turn_on</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6457,7 +6456,7 @@ switch_on)</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Checking that the verb switch won&#8217;t work with a natural LIGHTSOURCE (lightsource: switch):</p>
+<p>Checking that the verb switch won&#8217;t work with a natural LIGHTSOURCE (lightsource: <code>switch</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6465,7 +6464,7 @@ switch_on)</p>
 </div>
 </div>
 <div class="paragraph">
-<p>When there is some LIQUID in a container, for example some juice in a bottle, and the player types <span class="play">&gt; <em>take juice from bottle</em></span>, the following check is triggered (liquid: take_from):</p>
+<p>When there is some LIQUID in a container, for example some juice in a bottle, and the player types <span class="play">&gt; <em>take juice from bottle</em></span>, the following check is triggered (liquid: <code>take_from</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6473,7 +6472,7 @@ switch_on)</p>
 </div>
 </div>
 <div class="paragraph">
-<p>When the player tries to turn on a DEVICE or light a LIGHTSOURCE which is broken, the following check message is displayed (device, lightsource: light, turn_on):</p>
+<p>When the player tries to turn on a DEVICE or light a LIGHTSOURCE which is broken, the following check message is displayed (device, lightsource: <code>light</code>, <code>turn_on</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6492,10 +6491,10 @@ switch_on)</p>
 <p>The following verbs use implicit taking:</p>
 </div>
 <div class="paragraph">
-<p>bite, drink, eat, empty, empty_in, empty_on, give, pour, pour_in, pour_on, put_in, put_on, throw, throw_at, throw_in, throw_to, tie_to.</p>
+<p><code>bite</code>, <code>drink</code>, <code>eat</code>, <code>empty</code>, <code>empty_in</code>, <code>empty_on</code>, <code>give</code>, <code>pour</code>, <code>pour_in</code>, <code>pour_on</code>, <code>put_in</code>, <code>put_on</code>, <code>throw</code>, <code>throw_at</code>, <code>throw_in</code>, <code>throw_to</code>, <code>tie_to</code>.</p>
 </div>
 <div class="paragraph">
-<p>(If you wish to disable automatic implicit taking for any of these verbs, you should open the library file 'lib_verbs.i', locate the needed verbs in that file, go to their DOES sections and delete the implicit taking code.
+<p>(If you wish to disable automatic implicit taking for any of these verbs, you should open the library file <code>lib_verbs.i</code>, locate the needed verbs in that file, go to their DOES sections and delete the implicit taking code.
 Moreover, you should add the following check to each affected verb:</p>
 </div>
 <div class="listingblock">
