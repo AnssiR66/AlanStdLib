@@ -1,0 +1,89 @@
+IMPORT 'library.i'.
+
+THE my_game ISA DEFINITION_BLOCK
+END THE.
+
+
+THE hero ISA ACTOR
+END THE.
+
+THE your_tuxedo ISA CLOTHING IN hero
+  NAME your tuxedo NAME my tuxedo
+  INDEFINITE ARTICLE ""
+  DEFINITE ARTICLE ""
+  HAS ex "Sam wanted the two of you to wear identical tuxedos
+          for the occasion, so you went and bought them together.".
+  IS topcover 32.
+  IS botcover 16.
+  IS worn.
+END THE.
+
+THE restaurant ISA ROOM
+  DESCRIPTION
+    "All the wedding guests follow keenly as the newly-wedded
+     couple is slicing the cake together. Many are taking
+     photographs."
+END THE.
+
+THE people ISA PERSON AT restaurant
+  NAME guests NAME wedding folk NAME people
+  MENTIONED "the wedding folk"
+  DESCRIPTION ""
+
+  VERB examine
+    DOES ONLY "Everybody's smiling and laughing."
+  END VERB.
+END THE.
+
+THE couple ISA PERSON AT restaurant
+  NAME couple NAME bride NAME groom
+  DESCRIPTION ""
+
+  VERB examine
+    DOES "They look very happy."
+  END VERB.
+END THE.
+
+THE cake ISA OBJECT AT restaurant
+  IS edible.
+  DESCRIPTION ""
+
+  VERB examine
+    DOES ONLY "A big, delicious-looking cream cake."
+  END VERB.
+
+  VERB take
+    DOES ONLY "Hands off! Wait until the couple has got their slice."
+  END VERB.
+
+  VERB eat
+    DOES ONLY "Hands off! Wait until the couple has got their slice."
+  END VERB.
+END THE.
+
+
+THE sam ISA MALE AT restaurant
+  IS named.
+  HAS ex "Sam and you have been best friends since childhood.
+          Today he's getting married, and he asked you to be his witness.".
+END THE sam.
+
+THE sams_tuxedo ISA CLOTHING in sam
+  NAME his tuxedo NAME 'sam''s' tuxedo
+  INDEFINITE ARTICLE ""
+  DEFINITE ARTICLE ""
+  HAS ex "Although you're wearing identical tuxedos, you can't
+          avoid the feeling that Sam's nicer than yours.
+          Maybe it's just the ""bridegroom effect"".".
+  IS worn.
+
+
+  VERB ask_for
+    DOES ONLY
+      "Puzzled by your request, Sam scoffs at you,
+       $n""What's wrong with yours?
+           We bought them together, same model and all."""
+  END VERB ask_for.
+END THE.
+
+START AT restaurant.

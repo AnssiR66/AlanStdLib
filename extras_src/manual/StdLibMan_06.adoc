@@ -163,6 +163,9 @@ Should you wish to create an article of CLOTHING not listed, usually a bit of la
 
 The library, as it stands, also prevents wearing of duplicate clothes, or things that are logically mutually exclusive -- for example the player can wear a dress or a skirt, but not both.
 
+[[sec.clothing-tips]]
+==== Clothing Tips & Tricks
+
 The hero's CLOTHING is described when the player types [.play]#&gt; _inventory_# in-game.
 If you want the listing of the hero's clothing to appear also when the player types [.play]#&gt; _x me_#, add "LIST worn." to the response of the examine verb of the hero:
 
@@ -177,94 +180,27 @@ THE hero ISA ACTOR
 END THE hero.
 --------------------------------------------------------------------------------
 
+Clothes can be tricky to implement when you have multiple clothing items with the same name that need to be real game objects.
+To avoid disambiguation problems, authors should always try to give to each character a unique clothing item (e.g. jeans vs. sweatpants) or provide some qualifier that distinguishes them (e.g. red shirt vs green shirt); but in some cases this is not possible, for example when dealing with characters wearing identical uniforms.
+As a last resort, you can always use the character's name as the disambiguating qualifier.
 
+The following excerpts from {wedding_alan} demonstrate how to implement a game in which the hero and another NPC are both wearing tuxedos:
 
-_Example_.
-The implementation of the hero and his friend both wearing tuxedos at a wedding reception:
+// @EXTERN CODE: wedding -> tuxedos
 
-// @TODO: Import external adventure instead (file: "example_OBJECTS_01.alan"):
+[[example.tuxedos]]
+.Example: Implementing same-named clothing items (from {wedding_alan})
 [source,alan]
 --------------------------------------------------------------------------------
-IMPORT 'library.i'.
-
-THE my_game ISA DEFINITION_BLOCK
-END THE.
-
-
-THE hero ISA ACTOR
-  IS wearing {tuxedo}.
-END THE.
-
-THE your_tuxedo ISA CLOTHING
-  NAME your tuxedo
-  INDEFINITE ARTICLE ""
-  DEFINITE ARTICLE ""
-  IS topcover 32.
-  IS botcover 16.
-END THE.
-
-THE restaurant ISA ROOM
-  DESCRIPTION
-    "All the wedding guests follow keenly as the newly-wedded
-     couple is slicing the cake together. Many are taking
-     photographs."
-END THE.
-
-THE people ISA PERSON AT restaurant
-  NAME guests NAME wedding folk NAME people
-  MENTIONED "the wedding folk"
-  DESCRIPTION ""
-
-  VERB examine
-    DOES ONLY "Everybody's smiling and laughing."
-  END VERB.
-END THE.
-
-THE couple ISA PERSON AT restaurant
-  NAME couple NAME bride NAME groom
-  DESCRIPTION ""
-
-  VERB examine
-    DOES "They look very happy."
-  END VERB.
-END THE.
-
-THE cake ISA OBJECT AT restaurant
-  IS edible.
-  DESCRIPTION ""
-
-  VERB examine
-    DOES ONLY "A big, delicious-looking cream cake."
-  END VERB.
-
-  VERB take
-    DOES ONLY "Hands off! Wait until the couple has got their slice."
-  END VERB.
-
-  VERB eat
-    DOES ONLY "Hands off! Wait until the couple has got their slice."
-  END VERB.
-END THE.
-
-THE sam ISA MALE AT restaurant
-  IS named.
-  IS wearing {sams_tuxedo}.
-
-  VERB examine
-    DOES ONLY "He's your friend since childhood." LIST sam.
-  END VERB.
-END THE sam.
-
-THE sams_tuxedo ISA CLOTHING
-  NAME his tuxedo NAME 'sam''s' tuxedo
-  IS NOT takeable.
-  INDEFINITE ARTICLE ""
-  DEFINITE ARTICLE ""
-END THE.
-
-START AT restaurant.
+include::{utf8dir}/wedding.alan[tag=tuxedos]
 --------------------------------------------------------------------------------
 
+By adding `your`/`my` and `his`/`'sam''s'` before `tuxedo` in the `NAME` clauses, we've ensured that the player will be able to target any tuxedo in his commands:
+
+[example,role="gametranscript"]
+================================================================================
+include::{utf8dir}/wedding.a3ADocLog[tag=tuxedos]
+================================================================================
 
 
 // @ADDED:
