@@ -1,5 +1,5 @@
 --==============================================================================
--- "Emporium Giorgio Alani" by Tristano Ajmone, 2018.
+-- "Emporium Giorgio Alani" by Tristano Ajmone, 2020.
 --==============================================================================
 -- A small adventure for testing the StdLib's clothing functionality and the
 -- predefined verb reponses.
@@ -10,7 +10,7 @@
 -- WIP NOTE: This file is still work-in-progress, and doesn't yet test all the
 --           commands and contexts related to clothing.
 --------------------------------------------------------------------------------
-IMPORT 'library.i'.      -- ALAN Standard Library v2.1
+IMPORT 'library.i'.      -- ALAN Standard Library v2.2.0
 IMPORT '../inc_debug.i'. -- Debugging Module (adds useful test verbs)
 
 
@@ -19,9 +19,9 @@ THE my_game IsA DEFINITION_BLOCK
   HAS title    "Emporium Giorgio Alani".
   HAS subtitle "An adventure to test clothing.".
   HAS author   "Tristano Ajmone".
-  HAS year     2018.
+  HAS year     2020.
   HAS version  "1".
-  HAS AlanV    "v3.0beta6 build 1880".
+  HAS AlanV    "v3.0beta7".
 
 END THE.
 
@@ -677,7 +677,7 @@ THE trashcan IsA listed_container AT ega_hall.
     FOR EACH obj IsA object
       DO INCLUDE obj IN allowed OF THIS.
     END FOR.
-  
+
   VERB examine
     DOES ONLY
       LIST THIS.
@@ -773,7 +773,7 @@ THE personal_assistant IsA female AT ega_hall.
   NAME personal assistant.
   INDEFINITE FORM "your personal assistant"
   HAS ex "She's your personal shopping assistant.".
-  
+
   INITIALIZE
     -- ---------------------------------------------------------
     -- Turn every clothing IN assistant into an item worn by her

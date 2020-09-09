@@ -1,7 +1,7 @@
 --==============================================================================
--- "Test Look Verbs" by Tristano Ajmone, 2018.
+-- "Test Look Verbs" by Tristano Ajmone, 2020.
 --==============================================================================
-IMPORT 'library.i'. -- ALAN Standard Library v2.1
+IMPORT 'library.i'. -- ALAN Standard Library v2.2.0
 
 
 THE my_game IsA DEFINITION_BLOCK
@@ -9,9 +9,9 @@ THE my_game IsA DEFINITION_BLOCK
   HAS title    "Test Look Verbs".
   HAS subtitle "An adventure to test the family of look verbs.".
   HAS author   "Tristano Ajmone".
-  HAS year     2018.
+  HAS year     2020.
   HAS version  "1".
-  HAS AlanV    "v3.0beta6 build 1880".
+  HAS AlanV    "v3.0beta7".
 
 END THE.
 

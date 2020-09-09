@@ -213,9 +213,9 @@ EVERY definition_block ISA LOCATION
   HAS    title  "My New Game".
   HAS subtitle  "".
   HAS   author  "An ALAN Author".
-  HAS     year  2017.
+  HAS     year  2020.
   HAS  version  "1".
-  HAS    AlanV  "v3.0 beta6".
+  HAS    AlanV  "v3.0 beta7".
 
   -- The predefined AlanV value is that of the latest Alan release at the time
   -- the library was last updated. Authors are free to override this with a more
@@ -1302,7 +1302,7 @@ THE banner ISA LOCATION
     "$n(C)" SAY year OF my_game. "by" SAY author OF my_game.
 
     "$nProgrammed with the ALAN Interactive Fiction Language" SAY my_game:AlanV.
-    ".$nStandard Library v2.1"
+    ".$nStandard Library v2.2.0"
 
     IF version OF my_game <> "0"
       THEN "$nVersion" SAY version OF my_game.

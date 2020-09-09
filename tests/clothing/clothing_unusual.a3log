@@ -2,10 +2,9 @@
 
 Emporium Giorgio Alani 
 An adventure to test clothing. 
-(C) 2018 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880
-.
-Standard Library v2.1 
+(C) 2020 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0beta7.
+Standard Library v2.2.0 
 Version 1 
 All rights reserved. 
 
@@ -17,7 +16,7 @@ clothing item.
 Outside Emporium Alani
 You're standing in front of the Giorgio Alani Emporium entrance. Two
 large brass doors await northward your entrance into the sanctuary of
-fashion consumism. 
+fashion consumism.
 
 > ; ******************************************************************************
 > ; *                                                                            *

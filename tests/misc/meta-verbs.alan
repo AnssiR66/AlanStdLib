@@ -1,9 +1,9 @@
 --==============================================================================
--- "Meta Verbs Tests" by Tristano Ajmone, 2018.
+-- "Meta Verbs Tests" by Tristano Ajmone, 2020.
 --==============================================================================
 OPTION WIDTH 82.
 
-IMPORT 'library.i'. -- ALAN Standard Library v2.1
+IMPORT 'library.i'. -- ALAN Standard Library v2.2.0
 
 
 THE my_game IsA DEFINITION_BLOCK
@@ -11,9 +11,9 @@ THE my_game IsA DEFINITION_BLOCK
   HAS title    "Meta Verbs Tests".
   HAS subtitle "Testing out-of-game commands (meta verbs).".
   HAS author   "Tristano Ajmone".
-  HAS year     2018.
+  HAS year     2020.
   HAS version  "1".
-  HAS AlanV    "v3.0beta6 build 1880".
+  HAS AlanV    "v3.0beta7".
 
 END THE.
 
@@ -31,10 +31,10 @@ THE testlab IsA LOCATION.
   DESCRIPTION
     IF THIS:described = 1
       THEN
- 
+
         "Here you are (a dream come true) at the famous top-secret lab where
          bleeding edge versions of the StdLib are tested before public release.
-         
+
          $pThis facility is so secretive that only a bunch of high brass in the
          short chain of command that links the President to Anssi are in the know
          of its exact location. Rumors say it's located somewhere in the Black
@@ -85,7 +85,7 @@ THE scoreboard IsA object AT testlab.
   IS NOT takeable.
   IS NOT reachable.
   DESCRIPTION "Hanging high on the wall there is a scoreboard."
-  
+
   VERB examine
     DOES ONLY "The scoreboard displays" SAY SCORE. "points."
   END VERB examine.
@@ -115,7 +115,7 @@ THE orange IsA fruit AT testlab.
   NAME orange.
   INDEFINITE ARTICLE "an"
   HAS ex "A nice and juicy orange.".
-  
+
   VERB eat
     DOES AFTER SCORE 1.
   END VERB.
@@ -125,7 +125,7 @@ THE avocado IsA fruit AT testlab.
   NAME avocado.
   INDEFINITE ARTICLE "an"
   HAS ex "This avocado looks nice.".
-  
+
   VERB eat
     DOES AFTER SCORE 1.
   END VERB.
@@ -134,7 +134,7 @@ END THE.
 THE banana IsA fruit AT testlab.
   NAME banana.
   HAS ex "Sometimes a banana is just a banana.".
-  
+
   VERB eat
     DOES AFTER SCORE 1.
   END VERB.
@@ -144,7 +144,7 @@ THE fig IsA fruit AT testlab.
   NAME fig.
   HAS ex "Oh, a fig! You've read somewhere that back in the days they'd use its
           leaves as underware.".
-  
+
   VERB eat
     DOES AFTER SCORE 1.
   END VERB.
@@ -156,7 +156,7 @@ THE apple IsA fruit AT testlab.
   HAS ex
     "This apple is so tempting ... A small sticker mentions that it was picked
      in the Gan Eden.".
-  
+
   VERB eat
     DOES AFTER SCORE 666.
   END VERB.

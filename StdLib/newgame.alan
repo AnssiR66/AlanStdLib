@@ -1,6 +1,6 @@
 -- newgame.alan
 
--- A basic barebones source code file using the ALAN library v2.1
+-- A basic barebones source code file using the ALAN library v2.2.0
 -- that can be used as a starting point for a new game
 
 
@@ -11,12 +11,12 @@ IMPORT 'library.i'.
 THE my_game ISA DEFINITION_BLOCK
     -- (needed obligatorily in every new game!)
 
-    -- the following can be edited:
-    HAS title "A New Game".
-    HAS subtitle "".
-    HAS author "An ALAN Author".
-    HAS year 2018.
-    HAS version "1".
+    -- The following can be edited:
+    HAS title     "A New Game".
+    HAS subtitle  "".
+    HAS author    "An ALAN Author".
+    HAS year      2020.
+    HAS version   "1".
 
 END THE.
 

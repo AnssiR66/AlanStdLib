@@ -2,9 +2,9 @@
 
 Meta Verbs Tests 
 Testing out-of-game commands (meta verbs). 
-(C) 2018 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880.
-Standard Library v2.1 
+(C) 2020 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0beta7.
+Standard Library v2.2.0 
 Version 1 
 All rights reserved.
 
@@ -316,9 +316,9 @@ Are you sure (press ENTER to confirm)?
 
 Meta Verbs Tests 
 Testing out-of-game commands (meta verbs). 
-(C) 2018 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880.
-Standard Library v2.1 
+(C) 2020 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0beta7.
+Standard Library v2.2.0 
 Version 1 
 All rights reserved.
 
@@ -388,9 +388,9 @@ Do you want to RESTART, RESTORE, QUIT or UNDO? restart
 
 Meta Verbs Tests 
 Testing out-of-game commands (meta verbs). 
-(C) 2018 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0beta6 build 1880.
-Standard Library v2.1 
+(C) 2020 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0beta7.
+Standard Library v2.2.0 
 Version 1 
 All rights reserved.
 
