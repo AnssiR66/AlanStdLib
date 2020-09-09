@@ -2481,26 +2481,30 @@ ADD TO EVERY THING
         END IF.
 
     DOES
-      IF obj IS readable
-      -- for readable objects, 'examine' behaves just as 'read'
-        THEN
-          IF text OF obj = ""
-            THEN "There is nothing written on" SAY THE obj. "."
-            ELSE "You read" SAY THE obj. "."
-              IF obj IS NOT plural
-                THEN "It says"
-                ELSE "They say"
-              END IF.
-              """$$" SAY text OF obj. "$$""."
-          END IF.
-        ELSE
-          IF ex OF obj <> ""
-            THEN SAY ex OF obj.
-          ELSIF obj = hero
-            THEN "You notice nothing unusual about yourself."
-            ELSE "You notice nothing unusual about" SAY THE obj. "."
-          END IF.
+      IF ex OF obj <> "" -- honour the custmom description, if present:
+        THEN SAY ex OF obj.
+      ELSIF obj IS readable THEN
+        --+---------------------------------------------------------------+
+        --| If its 'ex' attribute is an empty string, and it's a readable |
+        --| object, then EXAMINE behaves like READ:                       |
+        --+---------------------------------------------------------------+
+        IF text OF obj = ""
+          THEN "There is nothing written on" SAY THE obj. "."
+          ELSE "You read" SAY THE obj. "."
+            IF obj IS NOT plural
+              THEN "It says"
+              ELSE "They say"
+            END IF.
+            """$$" SAY text OF obj. "$$""."
+        END IF.
+      ELSE -- Default examine behaviour:
+        "You notice nothing unusual about"
+        IF obj = hero
+          THEN "yourself."
+          ELSE SAY THE obj. "."
+        END IF.
       END IF.
+
   END VERB examine.
 END ADD TO.
 

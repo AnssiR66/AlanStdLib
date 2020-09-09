@@ -1,0 +1,13 @@
+; ==============================================================================
+; Shopping List (readable object)
+; ==============================================================================
+; This readable object has no 'ex', so EXAMINE and READ should act the same:
+x shopping list
+read it
+; ==============================================================================
+; Postcard (readable object with 'ex')
+; ==============================================================================
+; This readable object has also a custom 'ex' description, so EXAMINE should
+; not act like READ:
+x postcard
+read it

@@ -12,7 +12,7 @@ All rights reserved.
 The Kitchen
 The laundry room is to the north, the south exit leads to your back
 garden. There is a chair, a fridge and a table here. On the table you see 
-a bottle, a chips bag, a jar and a basket.
+a postcard, a jar, a bottle, a chips bag, a shopping list and a basket.
 
 > ; ******************************************************************************
 > ; *                                                                            *
@@ -21,8 +21,8 @@ a bottle, a chips bag, a jar and a basket.
 > ; ******************************************************************************
 > ; This solution file carries out some tests on the 'site_object' class.
 > x table
-You notice nothing unusual about the table. On the table you see a bottle, 
-a chips bag, a jar and a basket.
+You notice nothing unusual about the table. On the table you see a 
+postcard, a jar, a bottle, a chips bag, a shopping list and a basket.
 
 > x basket
 The basket contains a pear, a banana and a apple.

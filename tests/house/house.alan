@@ -127,6 +127,29 @@ THE basket IsA listed_container IN kitchen_table.
 
 END THE basket.
 
+--==============================================================================
+-- Shopping List (readable object)
+--==============================================================================
+-- It has no 'ex' description, so READ and EXAMINE behave the same.
+THE shopping_list IsA object IN kitchen_table.
+  NAME shopping 'list'.
+  IS readable.
+  HAS text "Don't forget to buy: milk, flour, eggs, yeast. (for the cake!)".
+END THE shopping_list.
+
+--==============================================================================
+-- Postcard (readable object with 'ex')
+--==============================================================================
+-- It has an 'ex' description, to test EXAMINE vs READ.
+THE postcard IsA object IN kitchen_table.
+  NAME postcard. NAME card.
+  IS readable.
+  HAS ex "The postcard front picture depicts Paris at night, with the
+          illuminated Eiffel Tower in the background.".
+  HAS text
+    "Paris is sooooo cool and romantic! Love, Norma.".
+END THE postcard.
+
 -- =============================================================================
 
 -- Food & Beverages (Edibles & Drinkables)

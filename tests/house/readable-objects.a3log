@@ -1,0 +1,44 @@
+
+
+The House 
+A rooms & sites setting for various tests. 
+(C) 2020 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0beta7.
+Standard Library v2.2.0 
+Version 1 
+All rights reserved.
+
+
+The Kitchen
+The laundry room is to the north, the south exit leads to your back
+garden. There is a chair, a fridge and a table here. On the table you see 
+a postcard, a jar, a bottle, a chips bag, a shopping list and a basket.
+
+> ; ==============================================================================
+> ; Shopping List (readable object)
+> ; ==============================================================================
+> ; This readable object has no 'ex', so EXAMINE and READ should act the same:
+> x shopping list
+You read the shopping list. It says "Don't forget to buy: milk, flour,
+eggs, yeast. (for the cake!)".
+
+> read it
+You read the shopping list. It says "Don't forget to buy: milk, flour,
+eggs, yeast. (for the cake!)".
+
+> ; ==============================================================================
+> ; Postcard (readable object with 'ex')
+> ; ==============================================================================
+> ; This readable object has also a custom 'ex' description, so EXAMINE should
+> ; not act like READ:
+> x postcard
+The postcard front picture depicts Paris at night, with the illuminated
+Eiffel Tower in the background.
+
+> read it
+You read the postcard. It says "Paris is sooooo cool and romantic! Love,
+Norma.".
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 
