@@ -105,72 +105,6 @@ Web Internet site
 
 
 > ; ==============================================================================
-> ; BRIEF vs VERBOSE
-> ; ==============================================================================
-> ; The library has two modes: brief and verbose.
-> ; ----------
-> ; BRIEF MODE
-> ; ----------
-> brief
-Brief mode is now on. Location descriptions will only be shown the first time
-you visit.
-
-> north
-W.C.
-Every lab worth its salt has a W.C. (better know as loo among the working
-class). The exit SOUTH leads back to the lab. 
-
-/// TICK (turn N° 4) ///
-
-> south
-Alan Library Test Laboratory
-The lab is shrouded in the hum of high-tech hardware processing the StdLib. 
-NORTH of the lab is a restroom.
-Hanging high on the wall there is a scoreboard. There is an orange, an avocado, a 
-banana, a fig and an apple here. 
-
-/// TICK (turn N° 5) ///
-
-> north
-W.C.
-Every lab worth its salt has a W.C. (better know as loo among the working
-class). The exit SOUTH leads back to the lab. 
-
-/// TICK (turn N° 6) ///
-
-> south
-Alan Library Test Laboratory
-The lab is shrouded in the hum of high-tech hardware processing the StdLib. 
-NORTH of the lab is a restroom.
-Hanging high on the wall there is a scoreboard. There is an orange, an avocado, a 
-banana, a fig and an apple here. 
-
-/// TICK (turn N° 7) ///
-
-> ; !!! BRIEF TEST FAILED !!!
-> ; ------------
-> ; VERBOSE MDOE
-> ; ------------
-> verbose
-Verbose mode is now on. Location descriptions will be always shown in full.
-
-> north
-W.C.
-Every lab worth its salt has a W.C. (better know as loo among the working
-class). The exit SOUTH leads back to the lab. 
-
-/// TICK (turn N° 8) ///
-
-> south
-Alan Library Test Laboratory
-The lab is shrouded in the hum of high-tech hardware processing the StdLib. 
-NORTH of the lab is a restroom.
-Hanging high on the wall there is a scoreboard. There is an orange, an avocado, a 
-banana, a fig and an apple here. 
-
-/// TICK (turn N° 9) ///
-
-> ; ==============================================================================
 > ; SCORE & NOTIFICATIONS
 > ; ==============================================================================
 > ; NOTE: Eating a fruit will reward score points.
@@ -181,7 +115,7 @@ You have scored 0 points out of 670.
 > examine the scoreboard
 The scoreboard displays 0 points. 
 
-/// TICK (turn N° 10) ///
+/// TICK (turn N° 4) ///
 
 > ; ------------------------------------------------------------------------------
 > ; TEST Notify Commands
@@ -196,7 +130,7 @@ You eat all of the avocado.
 
 (You can use the NOTIFY command to disable score change messages.) 
 
-/// TICK (turn N° 11) ///
+/// TICK (turn N° 5) ///
 
 > ; Now the instructions shouldn't appear:
 > eat the orange
@@ -205,7 +139,7 @@ You eat all of the orange.
 
 (Your score has just gone up by 1 point.) 
 
-/// TICK (turn N° 12) ///
+/// TICK (turn N° 6) ///
 
 > ; --------------------------
 > ; DISABLE SCORE NOTIFICATION
@@ -218,12 +152,12 @@ command again.)
 (taking the apple first)
 You eat all of the apple. 
 
-/// TICK (turn N° 13) ///
+/// TICK (turn N° 7) ///
 
 > examine the scoreboard
 The scoreboard displays 668 points. 
 
-/// TICK (turn N° 14) ///
+/// TICK (turn N° 8) ///
 
 > ; -------------------------
 > ; ENABLE SCORE NOTIFICATION
@@ -235,7 +169,7 @@ again.)
 > examine the banana
 Sometimes a banana is just a banana. 
 
-/// TICK (turn N° 15) ///
+/// TICK (turn N° 9) ///
 
 > eat it
 (taking the banana first)
@@ -243,12 +177,12 @@ You eat all of the banana.
 
 (Your score has just gone up by 1 point.) 
 
-/// TICK (turn N° 16) ///
+/// TICK (turn N° 10) ///
 
 > examine the scoreboard
 The scoreboard displays 669 points. 
 
-/// TICK (turn N° 17) ///
+/// TICK (turn N° 11) ///
 
 > ; -------------------------
 > ; TOGGLE SCORE NOTIFICATION
@@ -261,12 +195,12 @@ command again.)
 (taking the fig first)
 You eat all of the fig. 
 
-/// TICK (turn N° 18) ///
+/// TICK (turn N° 12) ///
 
 > examine the scoreboard
 The scoreboard displays 670 points. 
 
-/// TICK (turn N° 19) ///
+/// TICK (turn N° 13) ///
 
 > notify
 Score notification is now enabled. (You can turn it off using the NOTIFY command 
@@ -325,12 +259,12 @@ The lab is shrouded in the hum of high-tech hardware processing the StdLib.
 NORTH of the lab is a restroom.
 Hanging high on the wall there is a scoreboard. 
 
-/// TICK (turn N° 20) ///
+/// TICK (turn N° 14) ///
 
 > inventory
 You are empty-handed. 
 
-/// TICK (turn N° 21) ///
+/// TICK (turn N° 15) ///
 
 > script off
 Transcripting turned off.
