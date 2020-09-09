@@ -54,7 +54,7 @@ General features:
   system, for easy editing
 
 - lib_verbs.i lists all the default verbs needed in gameplay. Also commands other than verbs are
-  here, such as 'verbose', 'inventory' and 'about'
+  here, such as 'inventory' and 'about'
 
 - in labeling parameters in syntax statements, tailored (mnemonic)
   parameters are used as much as possible to ease up code-reading and

@@ -1,4 +1,4 @@
--- ALAN Standard Library v2.1
+-- ALAN Standard Library v2.2.0-WIP | ALAN 3.0beta7
 -- Messages (file name: 'lib_messages.i')
 
 

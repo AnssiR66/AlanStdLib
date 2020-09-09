@@ -1,11 +1,11 @@
--- ALAN Standard Library v2.1
+-- ALAN Standard Library v2.2.0-WIP | ALAN 3.0beta7
 -- Verbs (file name: 'lib_verbs.i')
 
 
 
 ----- This library file defines common verbs needed in gameplay. The verbs
 ----- are listed alphabetically. This file also includes common commands which are not
------ actually verbs, such as "inventory", "verbose" and "again".
+----- actually verbs, such as "inventory" and "again".
 ----- Verbs originally defined in this file are the following:
 
 
@@ -21,7 +21,6 @@
 ----- bite        (+ chew)                                        bite (obj)                          1       x
 ----- break       (+ destroy)                                     break (obj)                         1       x
 ----- break_with                                                  break (obj) with (instr)            2       x
------ brief                                                       brief                               0
 ----- burn                                                        burn (obj)                          1       x
 ----- burn_with                                                   burn (obj) with (instr)             2       x
 ----- buy         (+ purchase)                                    buy (item)                          1
@@ -171,7 +170,6 @@
 ----- unlock_with                                                 unlock (obj) with (key)             2       x
 ----- use                                                         use (obj)                           1       x
 ----- use_with                                                    use (obj) with (instr)              2       x
------ verbose                                                     verbose                             0
 ----- wait        (+ z)                                           wait                                0
 ----- wear                                                        wear (obj)                          1       x
 ----- what_am_i                                                   what am i                           0
@@ -335,7 +333,7 @@ ADD TO EVERY ACTOR
             THEN SAY check_obj_not_distant_sg OF my_game.
             ELSE SAY check_obj_not_distant_pl OF my_game.
           END IF.
-      
+
       DOES
         "There is no reply."
   END VERB ask.
@@ -808,34 +806,6 @@ ADD TO EVERY OBJECT
         "wouldn't accomplish anything."
   END VERB break_with.
 END ADD TO.
-
-
-
--- ================================================================
-
-
------ BRIEF
-
-
--- ================================================================
-
-
--- Use "Visits 0." or "Visits 1000." in the START section if you want
--- the game to start in verbose or brief mode. (By default,
--- all games start in the verbose mode.)
-
-
-SYNTAX brief = brief.
-
-
-META VERB brief
-  CHECK my_game CAN brief
-    ELSE SAY restricted_response OF my_game.
-  DOES
-    Visits 1000.
-    "Brief mode is now on. Location descriptions will only be shown
-    the first time you visit."
-END VERB brief.
 
 
 
@@ -5217,7 +5187,7 @@ ADD TO EVERY OBJECT
               ELSE SAY check_obj_not_distant_pl OF my_game.
             END IF.
         END IF.
- 
+
     DOES
       "That wouldn't accomplish anything."
 
@@ -8475,7 +8445,7 @@ VERB undress
     ELSE SAY restricted_response OF my_game.
   AND CURRENT LOCATION IS lit
     ELSE SAY check_current_loc_lit OF my_game.
-  
+
   DOES
     "You don't feel like undressing is a good idea right now."
 
@@ -8698,30 +8668,6 @@ ADD TO EVERY OBJECT
 
   END VERB use_with.
 END ADD TO.
-
-
-
-
--- ==============================================================
-
-
------ VERBOSE (see also -> BRIEF)
-
-
--- ==============================================================
-
-
-SYNTAX verbose = verbose.
-
-
-META VERB verbose
-  CHECK my_game CAN verbose
-    ELSE SAY restricted_response OF my_game.
-  DOES
-    VISITS 0.
-    "Verbose mode is now on. Location descriptions will be
-    always shown in full."
-END VERB verbose.
 
 
 
@@ -9090,6 +9036,4 @@ VERB yes
 END VERB yes.
 
 
-
 -- end of file.
-

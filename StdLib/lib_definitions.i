@@ -1,4 +1,4 @@
--- ALAN Standard Library v2.1
+-- ALAN Standard Library v2.2.0-WIP | ALAN 3.0beta7
 -- Definitions (file name: 'lib_definitions.i')
 
 -- Included in this file:
@@ -622,7 +622,7 @@ EVERY definition_block ISA LOCATION
   -- The following attributes are used internally by the Library to temporarily
   -- store values of attributes which need to be changed and then restored; ignore.
   HAS temp_compliant.
-  
+
 
   INITIALIZE
     SCHEDULE check_score AFTER 0.
@@ -705,7 +705,6 @@ EVERY definition_block ISA LOCATION
   CAN bite.        -- (+ chew)
   CAN break.       -- (+ destroy)
   CAN break_with.
-  CAN 'brief'.
   CAN burn.
   CAN burn_with.
   CAN buy.         -- (+ purchase)
@@ -858,7 +857,6 @@ EVERY definition_block ISA LOCATION
   CAN unlock_with.
   CAN 'use'.
   CAN use_with.
-  CAN 'verbose'.
   CAN 'wait'.        -- (+ z)
   CAN wear.
   CAN what_am_i.
@@ -893,7 +891,7 @@ EVENT check_restriction
       -- Restriction Level 0
       ----------------------
       -- All verbs work normally, without restriction.
- 
+
       MAKE my_game about.
       MAKE my_game 'again'.
       MAKE my_game answer.      -- (+ reply)
@@ -904,7 +902,6 @@ EVENT check_restriction
       MAKE my_game bite.        -- (+ chew)
       MAKE my_game break.       -- (+ destroy)
       MAKE my_game break_with.
-      MAKE my_game 'brief'.
       MAKE my_game burn.
       MAKE my_game burn_with.
       MAKE my_game buy.         -- (+ purchase)
@@ -1057,7 +1054,6 @@ EVENT check_restriction
       MAKE my_game unlock_with.
       MAKE my_game 'use'.
       MAKE my_game use_with.
-      MAKE my_game 'verbose'.
       MAKE my_game 'wait'.        -- (+ z)
       MAKE my_game wear.
       MAKE my_game what_am_i.
@@ -1257,7 +1253,6 @@ EVENT check_restriction
         THEN
           MAKE my_game NOT about.
           MAKE my_game NOT 'again'.
-          MAKE my_game NOT 'brief'.
           MAKE my_game NOT credits.     -- (+ acknowledgments, author, copyright)
           MAKE my_game NOT hint.        -- (+ hints)
           MAKE my_game NOT 'no'.
@@ -1272,7 +1267,6 @@ EVENT check_restriction
           MAKE my_game NOT 'script'.
           MAKE my_game NOT script_on.
           MAKE my_game NOT script_off.
-          MAKE my_game NOT 'verbose'.
           MAKE my_game NOT yes.
       END IF.
 
@@ -1317,7 +1311,6 @@ THE banner ISA LOCATION
     "$nAll rights reserved."
 
 END THE banner.
-
 
 
 -- end of file.

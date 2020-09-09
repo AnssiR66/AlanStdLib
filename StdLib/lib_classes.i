@@ -1,4 +1,4 @@
--- ALAN Standard Library v2.1
+-- ALAN Standard Library v2.2.0-WIP | ALAN 3.0beta7
 -- Classes (file name: 'lib_classes.i')
 
 
@@ -226,7 +226,7 @@ EVERY clothing ISA OBJECT
   -- Items which are 'twopieces' (eg. a bikini) can be worn/removed while
   -- wearing a skirt for, although handled as a single clothing item, they cover
   -- legs and torso via two separate pieces.
-  
+
   INITIALIZE
 
     -- Any objects inside a clothing item (e.g. a wallet in a jacket) will be
@@ -2212,8 +2212,4 @@ EVERY male ISA PERSON
 END EVERY.
 
 
-
-
 -- end of file.
-
-
