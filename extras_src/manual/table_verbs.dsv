@@ -9,7 +9,6 @@ attack_with   :                                        : attack (target) with (w
 bite          : (+ chew)                               : bite (obj)
 break         : (+ destroy)                            : break (obj)
 break_with    :                                        : break (obj) with (instr)
-brief         :                                        : brief
 burn          :                                        : burn (obj)
 burn_with     :                                        : burn (obj) with (instr)
 buy           : (+ purchase)                           : buy (item)
@@ -159,7 +158,6 @@ unlock        :                                        : unlock (obj)
 unlock_with   :                                        : unlock (obj) with (key)
 use           :                                        : use (obj)
 use_with      :                                        : use (obj) with (instr)
-verbose       :                                        : verbose
 wait          : (+ z)                                  : wait
 wear          :                                        : wear (obj)
 what_am_i     :                                        : what am i

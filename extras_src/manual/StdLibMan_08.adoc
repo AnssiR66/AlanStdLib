@@ -441,7 +441,7 @@ All action verbs, like attack, take, drop, eat, throw, put, etc. are disabled.
 All communication verbs, like ask, say and tell are disabled, as well.
 Sensory verbs and "passive" action verbs like look, examine, smell, listen, think and wait work.
 +
-_Allowed actions_: `about`, `again`, `brief`, `credits`, `examine`, `hint`, `inventory`, `listen0`, `listen`, `look`, `look_at`, `look_behind`, `look_in`, `look_out_of`, `look_through`, `look_under`, `look_up`, `no`, `notify`, `notify_off`, `notify_on`, `pray`, `quit`, `restart`, `restore`, `save`, `score`, `script`, `script_off`, `script_on`, `smell0`, `smell`, `think`, `think_about`, `verbose`, `wait`, `what_am_i`, `what_is`, `where_am_i`, `where_is`, `who_am_i`, `who_is`, `yes`.
+_Allowed actions_: `about`, `again`, `credits`, `examine`, `hint`, `inventory`, `listen0`, `listen`, `look`, `look_at`, `look_behind`, `look_in`, `look_out_of`, `look_through`, `look_under`, `look_up`, `no`, `notify`, `notify_off`, `notify_on`, `pray`, `quit`, `restart`, `restore`, `save`, `score`, `script`, `script_off`, `script_on`, `smell0`, `smell`, `think`, `think_about`, `wait`, `what_am_i`, `what_is`, `where_am_i`, `where_is`, `who_am_i`, `who_is`, `yes`.
 +
 If you anyway want an individual action verb to work additionally, you can for example do like this:
 +
@@ -469,7 +469,7 @@ You can't even look or examine.
 You can use this restriction level when you want to for example ignore what the player typed and bring the story forward nevertheless.
 Only meta verbs like save, quit, restore and about work.
 +
-_Allowed actions_: `about`, `again`, `brief`, `credits`, `hint`, `no`, `notify`, `notify_off`, `notify_on`, `quit`, `restart`, `restore`, `save`, `score`, `script`, `script_off`, `script_on`, `verbose`, `yes`.
+_Allowed actions_: `about`, `again`, `credits`, `hint`, `no`, `notify`, `notify_off`, `notify_on`, `quit`, `restart`, `restore`, `save`, `score`, `script`, `script_off`, `script_on`, `yes`.
 +
 Let's say that you might wish to make a game where only the look, examine and use verbs work.
 +
