@@ -158,7 +158,8 @@ END ADD TO OBJECT.
 
 
 
--- An attribute for keeping track of nested locations; used internally in the library (ignore).
+-- An attribute for keeping track of nested locations;
+-- used internally in the library (ignore).
 
 ADD TO EVERY LOCATION
   HAS nested {nowhere}.
@@ -178,15 +179,14 @@ END ADD TO.
 
 SYNONYMS
 
-into, inside = 'in'.
-onto = on.
-thru = through.
-using = 'with'.
+  into, inside = 'in'.
+  onto = on.
+  thru = through.
+  using = 'with'.
 
+  -- Here are some synonyms for the player character:
 
--- Here are some synonyms for the player character:
-
-me, myself, yourself, self = hero.
+  me, myself, yourself, self = hero.
 
 
 
@@ -194,14 +194,13 @@ me, myself, yourself, self = hero.
 -- Attributes for the my_game definition block
 -- ===========================================
 
--- Here, we create a class, "definition_block", to group various definitions under.
--- In the game source file, the author should declare an instance 'my_game' which belongs
--- to this class.
+-- Here we create the "definition_block" class, to group various definitions.
+-- In the game source file, the author should declare an instance 'my_game'
+-- which belongs to this class.
 
 
 
 EVERY definition_block ISA LOCATION
-
 
   -- attributes for the start section (banner):
   -- ==========================================
@@ -240,8 +239,8 @@ EVERY definition_block ISA LOCATION
   -- ========================================
 
   HAS dark_loc_desc "It is pitch black. You can't see anything at all.".
-    -- This message is shown when the player tries to LOOK or do actions requiring light
-    -- in a dark location.
+    -- This message is shown when the player tries to LOOK or do actions
+    -- requiring light in a dark location.
 
   HAS light_goes_off "It is now pitch black.".
     -- This message is shown when a light goes off and the location becomes dark.
@@ -251,8 +250,8 @@ EVERY definition_block ISA LOCATION
   -- ================================
 
   HAS restricted_response "You can't do that.".
-    -- This message is shown whenever the player used a verb that has been restricted
-     -- by the "CAN NOT [verb]" attributes further down this file.
+    -- This message is shown whenever the player used a verb that has been
+    -- restricted by the "CAN NOT [verb]" attributes further down this file.
 
   HAS restricted_level 0.           -- 0 = no verbs are restricted
   HAS previous_restricted_level 0.  -- used to detect changes in restrcition level.
@@ -261,9 +260,9 @@ EVERY definition_block ISA LOCATION
 
 
 
-  -- all illegal parameter messages, typically found in the ELSE parts of SYNTAX structures and
-  -- the first two below being by far the most common.
-  -- ==========================================================================================
+  -- all illegal parameter messages, typically found in the ELSE parts of SYNTAX
+  -- structures and the first two below being by far the most common.
+  -- ===========================================================================
 
 
   -- the general message for when a parameter is not suitable with the verb:
