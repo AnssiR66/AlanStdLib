@@ -1,5 +1,6 @@
 -- ALAN Standard Library v2.2.0-WIP | ALAN 3.0beta7
--- Messages (file name: 'lib_messages.i')
+-- Run-Time Messages (file name: 'lib_messages_runtime.i')
+--------------------------------------------------------------------------------
 
 
 -- All runtime messages are listed below.

@@ -116,7 +116,7 @@ Library modules status:
 - [x] `lib_classes.i`
 - [x] `lib_definitions.i`
 - [x] `lib_locations.i`
-- [x] `lib_messages.i`
+- [x] `lib_messages_runtime.i`
 - [x] `lib_verbs.i`
 
 
@@ -166,7 +166,7 @@ Now to update the contents of `extras/` we'll need to run `extras_src/update.sh`
                     * [x]  wrap player commands in `_`
                     * [x]  wrap input comments in `#[comment]`..`#`
                         - [x]  make it work also when comments follow commands (eg: `inventory ; some comment`).
-                + [x]  Preserve region tags in input lines and convert them to ADoc comments (so they are not shown in final doc). 
+                + [x]  Preserve region tags in input lines and convert them to ADoc comments (so they are not shown in final doc).
 
 We should also make sure that every HTML document inside `extras/` is fully standalone, by embedding all images and custom CSS; because users should be free to move a tutorial file around without breaking it.
 
@@ -344,7 +344,7 @@ When taking inventory or examining actors, the library should produce two separa
 
 The various library-defined runtime MESSAGES must also be tweaked now that the `worn` entity will be removed:
 
-- [x] `lib_messages.i` — fix references to `worn` entity:
+- [x] `lib_messages_runtime.i` — fix references to `worn` entity:
     + [x] `CONTAINS_COMMA`
     + [x] `CONTAINS_AND`
     + [x] `CONTAINS_END`
@@ -489,7 +489,7 @@ In these verbs the action either is always carried out or it's carried out in so
 
 
 <!-----------------------------------------------------------------------------
-                               REFERENCE LINKS                                
+                               REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
 [branch220]: https://github.com/AnssiR66/AlanStdLib/tree/dev-2.2.0 "View branch on GitHub"

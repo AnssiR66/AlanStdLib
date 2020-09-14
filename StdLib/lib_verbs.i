@@ -1,195 +1,192 @@
 -- ALAN Standard Library v2.2.0-WIP | ALAN 3.0beta7
 -- Verbs (file name: 'lib_verbs.i')
+--------------------------------------------------------------------------------
+
+-- This library file defines common verbs needed in gameplay. The verbs are
+-- listed alphabetically. This file also includes common commands which are not
+-- actually verbs, such as "inventory" and "again".
+
+--------------------------------------------------------------------------------
 
 
-
------ This library file defines common verbs needed in gameplay. The verbs
------ are listed alphabetically. This file also includes common commands which are not
------ actually verbs, such as "inventory" and "again".
 ----- Verbs originally defined in this file are the following:
 
+--| VERB             | SYNONYMS                               | SYNTAX                            | A | O
+--|------------------+----------------------------------------+-----------------------------------+---+---
+--| about            | (+ help, info)                         | about                             | 0 |
+--| again            | (+ g)                                  | again                             | 0 |
+--| answer           | (+ reply)                              | answer (topic)                    | 1 |
+--| ask              | (+ enquire, inquire, interrogate)      | ask (act) about (topic)           | 2 |
+--| ask_for          |                                        | ask (act) for (obj)               | 2 | x
+--| attack           | (+ beat, fight, hit, punch)            | attack (target)                   | 1 |
+--| attack_with      |                                        | attack (target) with (weapon)     | 2 |
+--| bite             | (+ chew)                               | bite (obj)                        | 1 | x
+--| break            | (+ destroy)                            | break (obj)                       | 1 | x
+--| break_with       |                                        | break (obj) with (instr)          | 2 | x
+--| burn             |                                        | burn (obj)                        | 1 | x
+--| burn_with        |                                        | burn (obj) with (instr)           | 2 | x
+--| buy              | (+ purchase)                           | buy (item)                        | 1 |
+--| catch            |                                        | catch (obj)                       | 1 | x
+--| clean            | (+ polish, wipe)                       | clean (obj)                       | 1 | x
+--| climb            |                                        | climb (obj)                       | 1 | x
+--| climb_on         |                                        | climb on (surface)                | 1 |
+--| climb_through    |                                        | climb through (obj)               | 1 | x
+--| close            | (+ shut)                               | close (obj)                       | 1 | x
+--| close_with       |                                        | close (obj) with (instr)          | 2 | x
+--| consult          |                                        | consult (source) about (topic)    | 2 |
+--| credits          | (+ acknowledgments, author, copyright) | credits                           | 0 |
+--| cut              |                                        | cut (obj)                         | 1 | x
+--| cut_with         |                                        | cut (obj) with (instr)            | 2 | x
+--| dance            |                                        | dance                             | 0 |
+--| dig              |                                        | dig (obj)                         | 1 | x
+--| dive             |                                        | dive                              | 0 |
+--| dive_in          |                                        | dive in (liq)                     | 1 |
+--| drink            |                                        | drink (liq)                       | 1 |
+--| drive            |                                        | drive (vehicle)                   | 1 |
+--| drop             | (+ discard, dump, reject)              | drop (obj)                        | 1 | x
+--| eat              |                                        | eat (food)                        | 1 |
+--| empty            |                                        | empty (obj)                       | 1 | x
+--| empty_in         |                                        | empty (obj) in (cont)             | 2 | x
+--| empty_on         |                                        | empty (obj) on (surface)          | 2 | x
+--| enter            |                                        | enter (obj)                       | 1 | x
+--| examine          | (+ check, inspect, observe, x)         | examine (obj)                     | 1 | x
+--| exit             |                                        | exit (obj)                        | 1 | x
+--| extinguish       | (+ put out, quench)                    | extinguish (obj)                  | 1 | x
+--| fill             |                                        | fill (cont)                       | 1 |
+--| fill_with        |                                        | fill (cont) with (substance)      | 2 |
+--| find             | (+ locate)                             | find (obj)                        | 1 | x
+--| fire             |                                        | fire (weapon)                     | 1 |
+--| fire_at          |                                        | fire (weapon) at (target)         | 2 |
+--| fix              | (+ mend, repair)                       | fix (obj)                         | 1 | x
+--| follow           |                                        | follow (act)                      | 1 |
+--| free             | (+ release)                            | free (obj)                        | 1 | x
+--| get_up           |                                        | get up                            | 0 |
+--| get_off          |                                        | get off (obj)                     | 1 | x
+--| give             |                                        | give (obj) to (recipient)         | 2 | x
+--| go_to            |                                        | go to (dest)                      | 1 |
+--| hint             | (+ hints)                              | hint                              | 0 |
+--| i                | (+ inv, inventory)                     | inventory                         | 0 |
+--| jump             |                                        | jump                              | 0 |
+--| jump_in          |                                        | jump in (cont)                    | 1 |
+--| jump_on          |                                        | jump on (surface)                 | 1 |
+--| kick             |                                        | kick (target)                     | 1 |
+--| kill             | (+ murder)                             | kill (victim)                     | 1 |
+--| kill_with        |                                        | kill (victim) with (weapon)       | 2 |
+--| kiss             | (+ hug, embrace)                       | kiss (obj)                        | 1 | x
+--| knock (on)       |                                        | knock on (obj)                    | 1 | x
+--| lie_down         |                                        | lie down                          | 0 |
+--| lie_in           |                                        | lie in (cont)                     | 1 |
+--| lie_on           |                                        | lie on (surface)                  | 1 |
+--| lift             |                                        | lift (obj)                        | 1 | x
+--| light            | (+ lit)                                | light (obj)                       | 1 | x
+--| listen0          |                                        | listen                            | 0 |
+--| listen           |                                        | listen to (obj)                   | 1 | x
+--| lock             |                                        | lock (obj)                        | 1 | x
+--| lock_with        |                                        | lock (obj) with (key)             | 2 | x
+--| look             | (+ gaze, peek)                         | look                              | 0 |
+--| look_behind      |                                        | look behind (bulk)                | 1 |
+--| look_in          |                                        | look in (cont)                    | 1 |
+--| look_out_of      |                                        | look out of (obj)                 | 1 | x
+--| look_through     |                                        | look through (bulk)               | 1 |
+--| look_under       |                                        | look under (bulk)                 | 1 |
+--| look_up          |                                        | look up                           | 0 |
+--| no               |                                        | no                                | 0 |
+--| notify (on, off) |                                        | notify.  notify on.  notify off   | 0 |
+--| open             |                                        | open (obj)                        | 1 | x
+--| open_with        |                                        | open (obj) with (instr)           | 2 | x
+--| play             |                                        | play (obj)                        | 1 | x
+--| play_with        |                                        | play with (obj)                   | 1 | x
+--| pour             | (= defined at the verb 'empty')        | pour (obj)                        | 1 | x
+--| pour_in          | (= defined at the verb 'emtpy_in')     | pour (obj) in (cont)              | 2 | x
+--| pour_on          | (= defined at the verb 'empty_on')     | pour (obj) on (surface)           | 2 | x
+--| pray             |                                        | pray                              | 0 |
+--| pry              |                                        | pry (obj)                         | 1 | x
+--| pry_with         |                                        | pry (obj) with (instr)            | 2 | x
+--| pull             |                                        | pull (obj)                        | 1 | x
+--| push             |                                        | push (obj)                        | 1 | x
+--| push_with        |                                        | push (obj) with (instr)           | 2 | x
+--| put              | (+ lay, place)                         | put (obj)                         | 1 | x
+--| put_against      |                                        | put (obj) against (bulk))         | 2 | x
+--| put_behind       |                                        | put (obj) behind (bulk)           | 2 | x
+--| put_down         | (= defined at the verb 'drop')         | put down (obj)                    | 1 | x
+--| put_in           | (+ insert)                             | put (obj) in (cont)               | 2 | x
+--| put_near         |                                        | put (obj) near (bulk)             | 2 | x
+--| put_on           |                                        | put (obj) on (surface)            | 2 | x
+--| put_under        |                                        | put (obj) under (bulk)            | 2 | x
+--| quit             | (+ q)                                  | quit                              | 0 |
+--| read             |                                        | read (obj)                        | 1 | x
+--| remove           |                                        | remove (obj)                      | 1 | x
+--| restart          |                                        | restart                           | 0 |
+--| restore          |                                        | restore                           | 0 |
+--| rub              |                                        | rub (obj)                         | 1 | x
+--| save             |                                        | save                              | 0 |
+--| say              |                                        | say (topic)                       | 1 |
+--| say_to           |                                        | say (topic) to (act)              | 2 |
+--| score            |                                        | score                             | 0 |
+--| scratch          |                                        | scratch (obj)                     | 1 | x
+--| script           |                                        | script.  script on.  script off.  | 0 |
+--| search           |                                        | search (obj)                      | 1 | x
+--| sell             |                                        | sell (item)                       | 1 |
+--| shake            |                                        | shake (obj)                       | 1 | x
+--| shoot (at)       |                                        | shoot at (target)                 | 1 |
+--| shoot_with       |                                        | shoot (target) with (weapon)      | 2 |
+--| shout            | (+ scream, yell)                       | shout                             | 0 |
+--| show             | (+ reveal)                             | show (obj) to (act)               | 2 | x
+--| sing             |                                        | sing                              | 0 |
+--| sip              |                                        | sip (liq)                         | 1 |
+--| sit (down)       |                                        | sit.  sit down.                   | 0 |
+--| sit_on           |                                        | sit on (surface)                  | 1 |
+--| sleep            | (+ rest)                               | sleep                             | 0 |
+--| smell0           |                                        | smell                             | 0 |
+--| smell            |                                        | smell (odour)                     | 1 |
+--| squeeze          |                                        | squeeze (obj)                     | 1 | x
+--| stand (up)       |                                        | stand.  stand up.                 | 0 |
+--| stand_on         |                                        | stand on (surface)                | 1 |
+--| swim             |                                        | swim                              | 0 |
+--| swim_in          |                                        | swim in (liq)                     | 1 |
+--| switch           |                                        | switch (obj)                      | 1 | x
+--| switch_on        | (= defined at the verb 'turn_on')      | switch on (app)                   | 1 |
+--| switch_off       | (= defined at the verb 'turn_off')     | switch off (app)                  | 1 |
+--| take             | (+ carry, get, grab, hold, obtain)     | take (obj)                        | 1 | x
+--| take_from        | (+ remove from)                        | take (obj) from (holder)          | 2 | x
+--| talk             |                                        | talk                              | 0 |
+--| talk_to          | (+ speak)                              | talk to (act)                     | 1 |
+--| taste            | (+ lick)                               | taste (obj)                       | 1 | x
+--| tear             | (+ rip)                                | tear (obj)                        | 1 | x
+--| tell             | (+ enlighten, inform)                  | tell (act) about (topic)          | 2 |
+--| think            |                                        | think                             | 0 |
+--| think_about      |                                        | think about (topic)               | 1 |
+--| throw            |                                        | throw (projectile)                | 1 |
+--| throw_at         |                                        | throw (projectile) at (target)    | 2 |
+--| throw_in         |                                        | throw (projectile) in (cont)      | 2 |
+--| throw_to         |                                        | throw (projectile) to (recipient) | 2 |
+--| tie              |                                        | tie (obj)                         | 1 | x
+--| tie_to           |                                        | tie (obj) to (target)             | 2 | x
+--| touch            | (+ feel)                               | touch (obj)                       | 1 | x
+--| touch_with       | (+ feel)                               | touch (ogg) 'with' (strum)        | 2 | x
+--| turn             | (+ rotate)                             | turn (obj)                        | 1 | x
+--| turn_on          |                                        | turn on (app)                     | 1 |
+--| turn_off         |                                        | turn off (app)                    | 1 |
+--| undress          |                                        | undress                           | 0 |
+--| unlock           |                                        | unlock (obj)                      | 1 | x
+--| unlock_with      |                                        | unlock (obj) with (key)           | 2 | x
+--| use              |                                        | use (obj)                         | 1 | x
+--| use_with         |                                        | use (obj) with (instr)            | 2 | x
+--| wait             | (+ z)                                  | wait                              | 0 |
+--| wear             |                                        | wear (obj)                        | 1 | x
+--| what_am_i        |                                        | what am i                         | 0 |
+--| what_is          |                                        | what is (obj)                     | 1 | x
+--| where_am_i       |                                        | where am i                        | 0 |
+--| where_is         |                                        | where is (obj)                    | 1 | x
+--| who_am_i         |                                        | who am i                          | 0 |
+--| who_is           |                                        | who is (act)                      | 1 |
+--| write            |                                        | write (txt) on (obj)              | 2 | x
+--| yes              |                                        | yes                               | 0 |
+--|------------------+----------------------------------------+-----------------------------------+---+---
 
------ VERB        SYNONYMS                                        SYNTAX                              ARITY   OBJ
+-- Directions (north, south, up, etc.) are declared in the file 'locations.i'.
 
------ about       (+ help, info)                                  about                               0
------ again       (+ g)                                           again                               0
------ answer      (+ reply)                                       answer (topic)                      1
------ ask         (+ enquire, inquire, interrogate)               ask (act) about (topic)             2
------ ask_for                                                     ask (act) for (obj)                 2       x
------ attack      (+ beat, fight, hit, punch)                     attack (target)                     1
------ attack_with                                                 attack (target) with (weapon)       2
------ bite        (+ chew)                                        bite (obj)                          1       x
------ break       (+ destroy)                                     break (obj)                         1       x
------ break_with                                                  break (obj) with (instr)            2       x
------ burn                                                        burn (obj)                          1       x
------ burn_with                                                   burn (obj) with (instr)             2       x
------ buy         (+ purchase)                                    buy (item)                          1
------ catch                                                       catch (obj)                         1       x
------ clean       (+ polish, wipe)                                clean (obj)                         1       x
------ climb                                                       climb (obj)                         1       x
------ climb_on                                                    climb on (surface)                  1
------ climb_through                                               climb through (obj)                 1       x
------ close       (+ shut)                                        close (obj)                         1       x
------ close_with                                                  close (obj) with (instr)            2       x
------ consult                                                     consult (source) about (topic)      2
------ credits     (+ acknowledgments, author, copyright)          credits                             0
------ cut                                                         cut (obj)                           1       x
------ cut_with                                                    cut (obj) with (instr)              2       x
------ dance                                                       dance                               0
------ dig                                                         dig (obj)                           1       x
------ dive                                                        dive                                0
------ dive_in                                                     dive in (liq)                       1
------ drink                                                       drink (liq)                         1
------ drive                                                       drive (vehicle)                     1
------ drop        (+ discard, dump, reject)                       drop (obj)                          1       x
------ eat                                                         eat (food)                          1
------ empty                                                       empty (obj)                         1       x
------ empty_in                                                    empty (obj) in (cont)               2       x
------ empty_on                                                    empty (obj) on (surface)            2       x
------ enter                                                       enter (obj)                         1       x
------ examine     (+ check, inspect, observe, x)                  examine (obj)                       1       x
------ exit                                                        exit (obj)                          1       x
------ extinguish  (+ put out, quench)                             extinguish (obj)                    1       x
------ fill                                                        fill (cont)                         1
------ fill_with                                                   fill (cont) with (substance)        2
------ find        (+ locate)                                      find (obj)                          1       x
------ fire                                                        fire (weapon)                       1
------ fire_at                                                     fire (weapon) at (target)           2
------ fix         (+ mend, repair)                                fix (obj)                           1       x
------ follow                                                      follow (act)                        1
------ free        (+ release)                                     free (obj)                          1       x
------ get_up                                                      get up                              0
------ get_off                                                     get off (obj)                       1       x
------ give                                                        give (obj) to (recipient)           2       x
------ go_to                                                       go to (dest)                        1
------ hint        (+ hints)                                       hint                                0
------ i           (+ inv, inventory)                              inventory                           0
------ jump                                                        jump                                0
------ jump_in                                                     jump in (cont)                      1
------ jump_on                                                     jump on (surface)                   1
------ kick                                                        kick (target)                       1
------ kill        (+ murder)                                      kill (victim)                       1
------ kill_with                                                   kill (victim) with (weapon)         2
------ kiss        (+ hug, embrace)                                kiss (obj)                          1       x
------ knock (on)                                                  knock on (obj)                      1       x
------ lie_down                                                    lie down                            0
------ lie_in                                                      lie in (cont)                       1
------ lie_on                                                      lie on (surface)                    1
------ lift                                                        lift (obj)                          1       x
------ light       (+ lit)                                         light (obj)                         1       x
------ listen0                                                     listen                              0
------ listen                                                      listen to (obj)                     1       x
------ lock                                                        lock (obj)                          1       x
------ lock_with                                                   lock (obj) with (key)               2       x
------ look        (+ gaze, peek)                                  look                                0
------ look_behind                                                 look behind (bulk)                  1
------ look_in                                                     look in (cont)                      1
------ look_out_of                                                 look out of (obj)                   1       x
------ look_through                                                look through (bulk)                 1
------ look_under                                                  look under (bulk)                   1
------ look_up                                                     look up                             0
------ no                                                          no                                  0
------ notify (on, off)                                            notify.  notify on.  notify off     0
------ open                                                        open (obj)                          1       x
------ open_with                                                   open (obj) with (instr)             2       x
------ play                                                        play (obj)                          1       x
------ play_with                                                   play with (obj)                     1       x
------ pour        (= defined at the verb 'empty')                 pour (obj)                          1       x
------ pour_in     (= defined at the verb 'emtpy_in')              pour (obj) in (cont)                2       x
------ pour_on     (= defined at the verb 'empty_on')              pour (obj) on (surface)             2       x
------ pray                                                        pray                                0
------ pry                                                         pry (obj)                           1       x
------ pry_with                                                    pry (obj) with (instr)              2       x
------ pull                                                        pull (obj)                          1       x
------ push                                                        push (obj)                          1       x
------ push_with                                                   push (obj) with (instr)             2       x
------ put         (+ lay, place)                                  put (obj)                           1       x
------ put_against                                                 put (obj) against (bulk))           2       x
------ put_behind                                                  put (obj) behind (bulk)             2       x
------ put_down    (= defined at the verb 'drop')                  put down (obj)                      1       x
------ put_in      (+ insert)                                      put (obj) in (cont)                 2       x
------ put_near                                                    put (obj) near (bulk)               2       x
------ put_on                                                      put (obj) on (surface)              2       x
------ put_under                                                   put (obj) under (bulk)              2       x
------ quit        (+ q)                                           quit                                0
------ read                                                        read (obj)                          1       x
------ remove                                                      remove (obj)                        1       x
------ restart                                                     restart                             0
------ restore                                                     restore                             0
------ rub                                                         rub (obj)                           1       x
------ save                                                        save                                0
------ say                                                         say (topic)                         1
------ say_to                                                      say (topic) to (act)                2
------ score                                                       score                               0
------ scratch                                                     scratch (obj)                       1       x
------ script                                                      script.  script on.  script off.    0
------ search                                                      search (obj)                        1       x
------ sell                                                        sell (item)                         1
------ shake                                                       shake (obj)                         1       x
------ shoot (at)                                                  shoot at (target)                   1
------ shoot_with                                                  shoot (target) with (weapon)        2
------ shout       (+ scream, yell)                                shout                               0
------ show        (+ reveal)                                      show (obj) to (act)                 2       x
------ sing                                                        sing                                0
------ sip                                                         sip (liq)                           1
------ sit (down)                                                  sit.  sit down.                     0
------ sit_on                                                      sit on (surface)                    1
------ sleep       (+ rest)                                        sleep                               0
------ smell0                                                      smell                               0
------ smell                                                       smell (odour)                       1
------ squeeze                                                     squeeze (obj)                       1       x
------ stand (up)                                                  stand.  stand up.                   0
------ stand_on                                                    stand on (surface)                  1
------ swim                                                        swim                                0
------ swim_in                                                     swim in (liq)                       1
------ switch                                                      switch (obj)                        1       x
------ switch_on   (= defined at the verb 'turn_on')               switch on (app)                     1
------ switch_off  (= defined at the verb 'turn_off')              switch off (app)                    1
------ take        (+ carry, get, grab, hold, obtain)              take (obj)                          1       x
------ take_from   (+ remove from)                                 take (obj) from (holder)            2       x
------ talk                                                        talk                                0
------ talk_to     (+ speak)                                       talk to (act)                       1
------ taste       (+ lick)                                        taste (obj)                         1       x
------ tear        (+ rip)                                         tear (obj)                          1       x
------ tell        (+ enlighten, inform)                           tell (act) about (topic)            2
------ think                                                       think                               0
------ think_about                                                 think about (topic)                 1
------ throw                                                       throw (projectile)                  1
------ throw_at                                                    throw (projectile) at (target)      2
------ throw_in                                                    throw (projectile) in (cont)        2
------ throw_to                                                    throw (projectile) to (recipient)   2
------ tie                                                         tie (obj)                           1       x
------ tie_to                                                      tie (obj) to (target)               2       x
------ touch       (+ feel)                                        touch (obj)                         1       x
------ touch_with  (+ feel)                                        touch (ogg) 'with' (strum)          2       x
------ turn        (+ rotate)                                      turn (obj)                          1       x
------ turn_on                                                     turn on (app)                       1
------ turn_off                                                    turn off (app)                      1
------ undress                                                     undress                             0
------ unlock                                                      unlock (obj)                        1       x
------ unlock_with                                                 unlock (obj) with (key)             2       x
------ use                                                         use (obj)                           1       x
------ use_with                                                    use (obj) with (instr)              2       x
------ wait        (+ z)                                           wait                                0
------ wear                                                        wear (obj)                          1       x
------ what_am_i                                                   what am i                           0
------ what_is                                                     what is (obj)                       1       x
------ where_am_i                                                  where am i                          0
------ where_is                                                    where is (obj)                      1       x
------ who_am_i                                                    who am i                            0
------ who_is                                                      who is (act)                        1
------ write                                                       write (txt) on (obj)                2       x
------ yes                                                         yes                                 0
-
-
-
-
------ Directions (north, south, up, etc.) are declared in the file 'locations.i'.
-
-
-
-
-
+--------------------------------------------------------------------------------
 
 
 ----- The verbs and commands:

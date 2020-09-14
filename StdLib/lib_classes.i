@@ -1,12 +1,14 @@
 -- ALAN Standard Library v2.2.0-WIP | ALAN 3.0beta7
 -- Classes (file name: 'lib_classes.i')
-
+--------------------------------------------------------------------------------
 
 -- This library file defines various object and actor classes.
 -- Many of these classes are frequently used in verb definitions in 'lib_verbs.i'
 -- so they should be edited or removed with caution. However, to ease things up,
 -- it is mentioned at the beginning of every class below if and where the class
 -- is cross-referenced in the other library files.
+
+--------------------------------------------------------------------------------
 
 
 ---- First, we define the default description for scenery objects

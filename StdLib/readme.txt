@@ -4,13 +4,15 @@ Alan is an easy-to-use adventure text authoring tool, and this library
 makes using it even easier.
 
 The library consists of one top level file (library.i) which in turn
-imports the five files:
+imports all the other files:
 
 - lib_classes.i
 - lib_definitions.i
 - lib_locations.i
-- lib_messages.i
+- lib_messages_runtime.i
+- lib_messages_library.i
 - lib_verbs.i
+- lib_verbs_restrictions.i
 
 Other files in this distribution package are:
 
@@ -40,7 +42,7 @@ for the Score notification code snippet. Thanks to Alan Bampton for the
 General features:
 
 - the library consists of five files: lib_classes.i, lib_definitions.i, lib_locations.i,
-  lib_messages.i and lib_verbs.i.
+  lib_messages_runtime.i and lib_verbs.i.
 
 - lib_classes.i defines various object and actor classes
 
@@ -50,7 +52,7 @@ General features:
 - lib_locations.i defines the default directions (exits) and also various
   location classes and attributes
 
-- lib_messages.i lists all the standard runtime messages in the ALAN
+- lib_messages_runtime.i lists all the standard runtime messages in the ALAN
   system, for easy editing
 
 - lib_verbs.i lists all the default verbs needed in gameplay. Also commands other than verbs are

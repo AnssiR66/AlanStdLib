@@ -1,20 +1,16 @@
 -- ALAN Standard Library v2.2.0-WIP | ALAN 3.0beta7
 -- Locations (file name: 'lib_locations.i')
+--------------------------------------------------------------------------------
 
-
--- This library file defines the default directions (exits) and the location 'nowhere',
--- a useful place to locate things when you want to remove them from play.
--- This file also defines four specific location classes: rooms (= indoor locations),
--- sites (= outdoor locations) dark_locations and areas.
+-- This library file defines the default directions (exits) and the location
+-- 'nowhere', a useful place to locate things when you want to remove them from
+-- play. This file also defines four specific location classes: rooms (= indoor
+-- locations), sites (= outdoor locations) dark_locations and areas.
 -- Finally, the attributes 'visited' and 'described' are defined.
--- You may modify this file in any way that suits your purposes.
--- To use this file, you should have it in the same folder as your source code file,
--- and the line
---
--- IMPORT 'locations.i'.
---
--- in your source code.
 
+-- You may modify this file in any way that suits your purposes.
+
+--------------------------------------------------------------------------------
 
 
 -- ========================================================
