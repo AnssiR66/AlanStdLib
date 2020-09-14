@@ -459,7 +459,7 @@ END THE.
 Above, the `wooden_door2` is also lockable and locked at the start of the game, has `wooden_door1` as its `otherside` and can be opened with `iron_key`.
 (It wouldn't mess things up even if you did declare all of these attributes under `wooden_door2`, to be sure, but it is not necessary.)
 
-See also <<ch15>>, <<ch15.example5,example 5>>.
+See also <<ch.short-examples>>, <<sec.short-example.5,example 5>>.
 
 
 

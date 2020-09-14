@@ -9,62 +9,80 @@
 ////
 
 
-[[ch15]]
+[[ch.short-examples]]
 = Short examples
 
-1. A very short complete game using minimal obligatory imports and coding.
+
+== Example 1
+
+
+A very short complete game using minimal obligatory imports and coding.
 Here, the hero must go from room1 north to room2 and eat an apple to win the game.
-+
+
 [source,alan]
 --------------------------------------------------------------------------------
 include::{utf8dir}/short-example1.alan[tag=shown]
 --------------------------------------------------------------------------------
-+
+
 (This game wouldn't actually need the library at all; it would be even shorter to code:)
-+
+
 [source,alan]
 --------------------------------------------------------------------------------
 include::{utf8dir}/short-example1_no-lib.alan[tag=shown]
 --------------------------------------------------------------------------------
-+
+
 In this latter case, though, the player wouldn't for example be able to examine him-/herself, trying to go any other direction, take inventory, try various things with the apple, quit properly, etc.
 
-2. Here, the player must get a candy from the kitchen and give it to a crying child in the nursery to win the game.
-+
+
+== Example 2
+
+
+Here, the player must get a candy from the kitchen and give it to a crying child in the nursery to win the game.
+
 [source,alan]
 --------------------------------------------------------------------------------
 include::{utf8dir}/short-example2.alan[tag=shown]
 --------------------------------------------------------------------------------
-+
+
 Examples 3-4 below show mainly different variations of the `my_game` instance and not complete games:
 
-3. In this example of defining the `my_game` instance, the author has changed the default verb responses for `eat`, `climb` and `take`.
+== Example 3
+
+In this example of defining the `my_game` instance, the author has changed the default verb responses for `eat`, `climb` and `take`.
 In addition, the author has added a check and a response of his/her own to `take`:
-+
+
 [source,alan]
 --------------------------------------------------------------------------------
 include::{utf8dir}/_short-example3.alan[tag=shown]
 --------------------------------------------------------------------------------
 
-4. Here, the author uses the automatic formulation for the game title, author, and other information:
-+
+
+== Example 4
+
+Here, the author uses the automatic formulation for the game title, author, and other information:
+
 [source,alan]
 --------------------------------------------------------------------------------
 include::{utf8dir}/_short-example4.alan[tag=shown]
 --------------------------------------------------------------------------------
 
 
-5. [[ch15.example5]]
+[[sec.short-example.5]]
+== Example 5
+
 Here, the game author has added a check of his own to the library-defined drink verb and changed an illegal parameter message for the verbs look_behind, look_in, and look_under:
-+
+
 [source,alan]
 --------------------------------------------------------------------------------
 include::{utf8dir}/_short-example5.alan[tag=shown]
 --------------------------------------------------------------------------------
 
-6. A complete example game with locked doors and keys.
+
+== Example 6
+
+A complete example game with locked doors and keys.
 This code reintroduces the situation used in example 1, with a locked door and two keys added.
-+
+
 [source,alan]
 --------------------------------------------------------------------------------
 include::{utf8dir}/short-example6.alan[tag=shown]

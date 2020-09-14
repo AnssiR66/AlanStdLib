@@ -733,7 +733,7 @@ span.play em,
 <div class="details">
 <span id="author" class="author">Anssi Räisänen</span><br>
 <span id="revnumber">version 2.2.0-WIP,</span>
-<span id="revdate">2020-09-09</span>
+<span id="revdate">2020-09-14</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -878,7 +878,16 @@ span.play em,
 </ul>
 </li>
 <li><a href="#ch14">14. Translating to other languages</a></li>
-<li><a href="#ch15">15. Short examples</a></li>
+<li><a href="#ch.short-examples">15. Short examples</a>
+<ul class="sectlevel2">
+<li><a href="#_example_1">15.1. Example 1</a></li>
+<li><a href="#_example_2">15.2. Example 2</a></li>
+<li><a href="#_example_3">15.3. Example 3</a></li>
+<li><a href="#_example_4">15.4. Example 4</a></li>
+<li><a href="#sec.short-example.5">15.5. Example 5</a></li>
+<li><a href="#_example_6">15.6. Example 6</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -3129,7 +3138,7 @@ That&#8217;s why it is much shorter to implement the otherside instance of a DOO
 (It wouldn&#8217;t mess things up even if you did declare all of these attributes under <code>wooden_door2</code>, to be sure, but it is not necessary.)</p>
 </div>
 <div class="paragraph">
-<p>See also <a href="#ch15">Ch. 15, <em>Short examples</em></a>, <a href="#ch15.example5">example 5</a>.</p>
+<p>See also <a href="#ch.short-examples">Ch. 15, <em>Short examples</em></a>, <a href="#sec.short-example.5">example 5</a>.</p>
 </div>
 </div>
 </div>
@@ -6779,13 +6788,14 @@ Using any of the attributes listed below for your own purposes doesn&#8217;t nec
 </div>
 </div>
 <div class="sect1">
-<h2 id="ch15"><a class="anchor" href="#ch15"></a>15. Short examples</h2>
+<h2 id="ch.short-examples"><a class="anchor" href="#ch.short-examples"></a>15. Short examples</h2>
 <div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
+<div class="sect2">
+<h3 id="_example_1"><a class="anchor" href="#_example_1"></a>15.1. Example 1</h3>
+<div class="paragraph">
 <p>A very short complete game using minimal obligatory imports and coding.
 Here, the hero must go from room1 north to room2 and eat an apple to win the game.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IMPORT</span> &#39;library.i&#39;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> room1 <span class="hl kwa">ISA</span> <span class="hl kwb">LOCATION</span>&#x000A;  <span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;North to room2.&quot;</span>&#x000A;  <span class="hl kwa">EXIT</span> north <span class="hl kwa">TO</span> room2<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> room2 <span class="hl kwa">ISA</span> <span class="hl kwb">LOCATION</span>&#x000A;  <span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;South to room1.&quot;</span>&#x000A;  <span class="hl kwa">EXIT</span> south <span class="hl kwa">TO</span> room1<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> apple <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> room2&#x000A;  <span class="hl kwa">IS</span> edible<span class="hl kwa">.</span>&#x000A;&#x000A;  <span class="hl kwa">VERB</span> eat&#x000A;    <span class="hl kwa">DOES</span> <span class="hl str">&quot;Congratulations!&quot;</span> <span class="hl kwa">QUIT.</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">START AT</span> room1<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">DESCRIBE</span> banner<span class="hl kwa">.</span></code></pre>
@@ -6802,9 +6812,12 @@ Here, the hero must go from room1 north to room2 and eat an apple to win the gam
 <div class="paragraph">
 <p>In this latter case, though, the player wouldn&#8217;t for example be able to examine him-/herself, trying to go any other direction, take inventory, try various things with the apple, quit properly, etc.</p>
 </div>
-</li>
-<li>
+</div>
+<div class="sect2">
+<h3 id="_example_2"><a class="anchor" href="#_example_2"></a>15.2. Example 2</h3>
+<div class="paragraph">
 <p>Here, the player must get a candy from the kitchen and give it to a crying child in the nursery to win the game.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IMPORT</span> &#39;library.i&#39;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> nursery <span class="hl kwa">ISA</span> ROOM&#x000A;  <span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;The kitchen is to the east.&quot;</span>&#x000A;  <span class="hl kwa">EXIT</span> east <span class="hl kwa">to</span> kitchen<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> child <span class="hl kwa">ISA</span> PERSON <span class="hl kwa">AT</span> nursery&#x000A;  <span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;There is a crying child here.&quot;</span>&#x000A;&#x000A;  <span class="hl kwa">VERB</span> give&#x000A;    <span class="hl kwa">WHEN</span> recipient&#x000A;      <span class="hl kwa">DOES ONLY</span>&#x000A;        <span class="hl kwa">IF</span> obj <span class="hl opt">=</span> candy&#x000A;          <span class="hl kwa">THEN</span> <span class="hl str">&quot;You give the candy to the child who stops</span>&#x000A;<span class="hl str">                crying and starts licking it happily.&quot;</span>&#x000A;          <span class="hl kwa">QUIT.</span>&#x000A;        <span class="hl kwa">END IF.</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> kitchen <span class="hl kwa">ISA</span> ROOM&#x000A;  <span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;You can go west, back to the nursery.&quot;</span>&#x000A;  <span class="hl kwa">EXIT</span> west <span class="hl kwa">TO</span> nursery<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> table <span class="hl kwa">ISA</span> SUPPORTER <span class="hl kwa">AT</span> kitchen&#x000A;  <span class="hl kwa">IS NOT</span> takeable<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> candy <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">IN</span> table&#x000A;  <span class="hl kwa">IS</span> edible<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">START AT</span> nursery<span class="hl kwa">.</span></code></pre>
@@ -6813,47 +6826,56 @@ Here, the hero must go from room1 north to room2 and eat an apple to win the gam
 <div class="paragraph">
 <p>Examples 3-4 below show mainly different variations of the <code>my_game</code> instance and not complete games:</p>
 </div>
-</li>
-<li>
+</div>
+<div class="sect2">
+<h3 id="_example_3"><a class="anchor" href="#_example_3"></a>15.3. Example 3</h3>
+<div class="paragraph">
 <p>In this example of defining the <code>my_game</code> instance, the author has changed the default verb responses for <code>eat</code>, <code>climb</code> and <code>take</code>.
 In addition, the author has added a check and a response of his/her own to <code>take</code>:</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">VERB</span> eat&#x000A;    <span class="hl kwa">DOES ONLY</span>&#x000A;      <span class="hl str">&quot;You don&#39;t feel like eating anything in this game.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;&#x000A;  <span class="hl kwa">VERB</span> climb&#x000A;    <span class="hl kwa">DOES ONLY</span>&#x000A;      <span class="hl str">&quot;Let&#39;s just stay on the ground, shall we?&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;&#x000A;  <span class="hl kwa">VERB</span> take&#x000A;    <span class="hl kwa">CHECK COUNT ISA</span> <span class="hl kwb">ACTOR</span><span class="hl kwa">, HERE</span> <span class="hl opt">=</span> <span class="hl num">1</span>&#x000A;    <span class="hl slc">-- ( = the hero must be alone)</span>&#x000A;      <span class="hl kwa">ELSE</span> <span class="hl str">&quot;You don&#39;t want to take anything</span>&#x000A;<span class="hl str">            while somebody might be looking.&quot;</span>&#x000A;    <span class="hl kwa">DOES</span>&#x000A;      <span class="hl str">&quot;Triumphantly, you pick up&quot;</span> <span class="hl kwa">SAY THE</span> obj<span class="hl kwa">.</span> <span class="hl str">&quot;.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
 </div>
 </div>
-</li>
-<li>
+</div>
+<div class="sect2">
+<h3 id="_example_4"><a class="anchor" href="#_example_4"></a>15.4. Example 4</h3>
+<div class="paragraph">
 <p>Here, the author uses the automatic formulation for the game title, author, and other information:</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">HAS</span> title <span class="hl str">&quot;The Lost Treasure&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> subtitle <span class="hl str">&quot;An interactive treasure hunt&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> author <span class="hl str">&quot;Sam&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> year <span class="hl num">2019</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> version <span class="hl str">&quot;1&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> garden <span class="hl kwa">ISA</span> <span class="hl kwb">LOCATION</span>&#x000A;  <span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;...&quot;</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">START AT</span> garden<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">DESCRIBE</span> banner<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
-</li>
-<li>
-<p><a id="ch15.example5"></a>
-Here, the game author has added a check of his own to the library-defined drink verb and changed an illegal parameter message for the verbs look_behind, look_in, and look_under:</p>
+</div>
+<div class="sect2">
+<h3 id="sec.short-example.5"><a class="anchor" href="#sec.short-example.5"></a>15.5. Example 5</h3>
+<div class="paragraph">
+<p>Here, the game author has added a check of his own to the library-defined drink verb and changed an illegal parameter message for the verbs look_behind, look_in, and look_under:</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">VERB</span> drink&#x000A;    <span class="hl kwa">CHECK</span> <span class="hl kwc">hero</span> <span class="hl kwa">IS</span> thirsty&#x000A;      <span class="hl kwa">ELSE</span> <span class="hl str">&quot;You don&#39;t feel like drinking anything right now.&quot;</span>&#x000A;    <span class="hl kwa">END VERB.</span>&#x000A;&#x000A;  <span class="hl kwa">HAS</span> illegal_parameter_there <span class="hl str">&quot;You can&#39;t</span> <span class="hl esc">$v</span> <span class="hl str">there.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
 </div>
 </div>
-</li>
-<li>
+</div>
+<div class="sect2">
+<h3 id="_example_6"><a class="anchor" href="#_example_6"></a>15.6. Example 6</h3>
+<div class="paragraph">
 <p>A complete example game with locked doors and keys.
 This code reintroduces the situation used in example 1, with a locked door and two keys added.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IMPORT</span> &#39;lib_classes.i&#39;<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">IMPORT</span> &#39;lib_definitions.i&#39;<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">IMPORT</span> &#39;lib_locations.i&#39;<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">IMPORT</span> &#39;lib_messages.i&#39;<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">IMPORT</span> &#39;lib_verbs.i&#39;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> room1 <span class="hl kwa">ISA</span> <span class="hl kwb">LOCATION</span>&#x000A;  <span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;North to room2.&quot;</span>&#x000A;  <span class="hl kwa">EXIT</span> north <span class="hl kwa">TO</span> room2&#x000A;    <span class="hl kwa">CHECK</span> locked_door_1 <span class="hl kwa">IS</span> open&#x000A;      <span class="hl kwa">ELSE</span> <span class="hl str">&quot;The door to the north is on the way.&quot;</span>&#x000A;  <span class="hl kwa">END EXIT.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> locked_door_1 <span class="hl kwa">ISA</span> DOOR <span class="hl kwa">AT</span> room1&#x000A;  <span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;&quot;</span>&#x000A;  <span class="hl kwa">NAME</span> door&#x000A;  <span class="hl kwa">HAS</span> otherside locked_door_2<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">IS</span> lockable<span class="hl kwa">. IS</span> locked<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">HAS</span> matching_key silver_key<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> silver_key <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> room1&#x000A;  <span class="hl kwa">NAME</span> silver key&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> brass_key <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> room1&#x000A;  <span class="hl kwa">NAME</span> brass key&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> room2 <span class="hl kwa">ISA</span> <span class="hl kwb">LOCATION</span>&#x000A;  <span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;South to room1.&quot;</span>&#x000A;  <span class="hl kwa">EXIT</span> south <span class="hl kwa">TO</span> room1&#x000A;    <span class="hl kwa">CHECK</span> locked_door_2 <span class="hl kwa">IS</span> open&#x000A;      <span class="hl kwa">ELSE</span> <span class="hl str">&quot;The door to the south is on the way.&quot;</span>&#x000A;  <span class="hl kwa">END EXIT.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> locked_door_2 <span class="hl kwa">ISA</span> DOOR <span class="hl kwa">AT</span> room2&#x000A;  <span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;&quot;</span>&#x000A;  <span class="hl kwa">NAME</span> door&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> apple <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span> <span class="hl kwa">AT</span> room2&#x000A;  <span class="hl kwa">IS</span> edible<span class="hl kwa">.</span>&#x000A;&#x000A;  <span class="hl kwa">VERB</span> eat&#x000A;    <span class="hl kwa">DOES</span> <span class="hl str">&quot;Congratulations!&quot;</span> <span class="hl kwa">QUIT.</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE.</span>&#x000A;&#x000A;<span class="hl kwa">START AT</span> room1<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">DESCRIBE</span> banner<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
-</li>
-</ol>
-</div>
 <hr>
 <div class="paragraph">
 <p>* * * The End * * *</p>
+</div>
 </div>
 </div>
 </div>
