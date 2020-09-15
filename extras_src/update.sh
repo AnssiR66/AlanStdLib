@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# update.sh               v2.0.0 | 2020/09/15 | by Tristano Ajmone, MIT License.
+# extras_src/update.sh    v2.1.0 | 2020/09/15 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                          BUILD STDLIB EXTRAS FOLDER                          #
@@ -28,12 +28,13 @@ foldersList="manual tutorials"
 #  -- Alan example adventures (stripped of Asciidoctor region tags)
 
 ################################################################################
-#                                   SETTINGS                                   #
+#                               SETUP & SETTINGS                               #
 ################################################################################
 source ../assets/sh/init-env.sh  # Initialize work environment
-source _print-funcs.sh   # Ornamental print functions
-source _build-funcs.sh   # Build and deploy functions
+source _print-funcs.sh           # Ornamental print functions
+source _build-funcs.sh           # Build and deploy functions
 
+export invoker="extras_src/update.sh"   # Used by some external scripts
 ################################################################################
 #                                BANNER & INTRO                                #
 ################################################################################
@@ -58,24 +59,7 @@ foldersTot=$counter
 ################################################################################
 #                       CONVERT LIBRARY SOURCE TO UTF-8                        #
 ################################################################################
-printHeading1 "Create UTF-8 Version of StdLib Sources"
-echo -e "Because Asciidoctor can't handle inclusion of external files in ISO-8859-1"
-echo -e "econding, we need to create UTF-8 versions of them."
-
-# Define Source & Destination folders:
-srcDir="../StdLib" # path of AsciiDoc sources and Alan examples
-utfDir="$utfBasePath/StdLib" # path of UTF-8 converted Alan files
-
-rm -rf $utfDir
-mkdir  $utfDir
-touch  $utfDir/.gitkeep
-
-for sourcefile in $srcDir/*.{alan,i} ; do
-  alan2utf8 $sourcefile
-  if [ $? -ne 0 ] ; then
-    printAborting ; exit 1
-  fi
-done
+./stdlib2utf8.sh
 
 ################################################################################
 #                           FOLDERS-PROCESSING LOOP                            #
