@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# _build-funcs.sh         v1.2.0 | 2019/05/29 | by Tristano Ajmone, MIT License.
+# _build-funcs.sh         v2.0.0 | 2020/09/15 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                        DOCUMENTATION BUILD FUNCTIONS                         #
@@ -19,6 +19,9 @@
 # | adoc2html          | file          | Conv AsciiDoc -> HTML.          |
 # | deployAlan         | file          | Strip and deploy ".alan" files. |
 # +--------------------+---------------+---------------------------------+
+
+# ** IMPORTANT! ** You need to "source ./init-env.sh" becasue some of these
+#                  functions depend on some environment vars defined by it.
 
 ################################################################################
 #                                   SETTINGS                                   #
@@ -142,7 +145,7 @@ function a3logSanitize {
   printSeparator
   echo -e "\e[90mSOURCE FILE: \e[93m$1"
   echo -e "\e[90mDESTINATION: \e[34m$outfile"
-  sed -E --file=sanitize_a3log.sed $1 > $outfile
+  sed -E --file=$ScriptsDir/sanitize_a3log.sed $1 > $outfile
   normalizeEOL $outfile
 }
 

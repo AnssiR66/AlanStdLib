@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# update.sh               v1.6.0 | 2020/09/05 | by Tristano Ajmone, MIT License.
+# update.sh               v2.0.0 | 2020/09/15 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                          BUILD STDLIB EXTRAS FOLDER                          #
@@ -30,6 +30,7 @@ foldersList="manual tutorials"
 ################################################################################
 #                                   SETTINGS                                   #
 ################################################################################
+source ../assets/sh/init-env.sh  # Initialize work environment
 source _print-funcs.sh   # Ornamental print functions
 source _build-funcs.sh   # Build and deploy functions
 
