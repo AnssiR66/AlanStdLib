@@ -5,11 +5,7 @@
 -- and two keys added.
 --------------------------------------------------------------------------------
 
-IMPORT 'lib_classes.i'.
-IMPORT 'lib_definitions.i'.
-IMPORT 'lib_locations.i'.
-IMPORT 'lib_messages.i'.
-IMPORT 'lib_verbs.i'.
+IMPORT 'library.i'.
 
 THE my_game ISA DEFINITION_BLOCK
 END THE.
@@ -53,7 +49,7 @@ END THE.
 
 THE apple ISA OBJECT AT room2
   IS edible.
-  
+
   VERB eat
     DOES "Congratulations!" QUIT.
   END VERB.

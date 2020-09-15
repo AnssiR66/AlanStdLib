@@ -19,9 +19,9 @@ The first person of some default wordings (for example "`I don't know the word $
 To edit these for your game, open `lib_messages.i` and edit the wanted message(s) there.
 
 [source,alan]
---------------------------------------------------------------------------------
-include::{StdLibInc}/lib_messages.i[]
---------------------------------------------------------------------------------
+---------------------------------------------
+include::{StdLibInc}/lib_messages_runtime.i[]
+---------------------------------------------
 
 // EOF //
 
