@@ -733,17 +733,22 @@ span.play em,
 <div class="details">
 <span id="author" class="author">Anssi Räisänen</span><br>
 <span id="revnumber">version 2.2.0-WIP,</span>
-<span id="revdate">2020-09-14</span>
+<span id="revdate">2020-09-19</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#ch1">1. Introduction</a>
+<li><a href="#ch.intro">1. Introduction</a>
 <ul class="sectlevel2">
-<li><a href="#_what_to_read_if_youre_a_complete_newbie">1.1. What to read if you&#8217;re a complete newbie</a></li>
-<li><a href="#_what_to_read_if_youre_familiar_with_alan_but_havent_used_the_standard_library_v1_0">1.2. What to read if you&#8217;re familiar with ALAN but haven&#8217;t used the standard library v1.0</a></li>
-<li><a href="#_what_to_read_if_you_have_been_using_the_v1_0_of_the_standard_library">1.3. What to read if you have been using the v1.0 of the standard library</a></li>
-<li><a href="#_a_note_on_the_coding_style_used_in_this_manual">1.4. A note on the coding style used in this manual</a></li>
+<li><a href="#_additional_resources">1.1. Additional Resources</a></li>
+<li><a href="#_where_to_start">1.2. Where to Start</a>
+<ul class="sectlevel3">
+<li><a href="#_alan_newbies">1.2.1. ALAN Newbies</a></li>
+<li><a href="#_standard_library_newbies">1.2.2. Standard Library Newbies</a></li>
+</ul>
+</li>
+<li><a href="#_typographic_conventions">1.3. Typographic Conventions</a></li>
+<li><a href="#sec.acknowledgments">1.4. Acknowledgments</a></li>
 </ul>
 </li>
 <li><a href="#ch2">2. What is different in v2.x?</a>
@@ -927,13 +932,15 @@ span.play em,
 </div>
 </div>
 <div class="sect1">
-<h2 id="ch1"><a class="anchor" href="#ch1"></a>1. Introduction</h2>
+<h2 id="ch.intro"><a class="anchor" href="#ch.intro"></a>1. Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This is the manual for the ALAN Standard Library v2.2.0.
-This manual describes how to use the library together with the ALAN Interactive Fiction Language system v3.0 and subsequent versions, to create works of interactive fiction, or text adventures.
-The library defines responses for verbs and commands commonly used in gameplay, such as <em>examine</em>, <em>take</em>, <em>drop</em> and <em>attack</em>, together with numerous other ones.
-The library also defines various global attributes (for example <code>takeable</code>, <code>NOT openable</code>), as well as object and actor attributes and classes (for example <code>CLOTHING</code>, <code>WEAPON</code>, <code>PERSON</code>), together with illegal parameter messages (for example &#8220;That&#8217;s not something you can examine&#8221;).</p>
+You&#8217;ll learn how to use the library, together with the ALAN Interactive Fiction Language system v3.0, to create works of interactive fiction, also known as text adventures.</p>
+</div>
+<div class="paragraph">
+<p>The library defines numerous verbs and commands commonly used in gameplay, such as <em>examine</em>, <em>take</em>, <em>drop</em>, <em>attack</em>, etc., along with appropriate checks and default responses to ensure they are used correctly.
+It also defines various global attributes (e.g. <code>takeable</code>, <code>NOT openable</code>), as well as object and actor attributes and classes (e.g. <code>CLOTHING</code>, <code>WEAPON</code>, <code>PERSON</code>), together with illegal parameter messages (e.g. &#8220;That&#8217;s not something you can examine&#8221;).</p>
 </div>
 <div class="paragraph">
 <p>The first official version (v1.0) of the ALAN Standard Library was published in 2010.
@@ -946,7 +953,7 @@ The writer of the current version is Anssi Räisänen.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>library.i</code>&#8201;&#8212;&#8201;the main library file that imports all the others:</p>
+<p><code>library.i</code>&#8201;&#8212;&#8201;the main library file that imports all the other modules:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -959,10 +966,16 @@ The writer of the current version is Anssi Räisänen.</p>
 <p><code>lib_locations.i</code></p>
 </li>
 <li>
-<p><code>lib_messages.i</code></p>
+<p><code>lib_messages_runtime.i</code></p>
+</li>
+<li>
+<p><code>lib_messages_library.i</code></p>
 </li>
 <li>
 <p><code>lib_verbs.i</code></p>
+</li>
+<li>
+<p><code>lib_verbs_restrictions.i</code></p>
 </li>
 </ul>
 </div>
@@ -970,15 +983,17 @@ The writer of the current version is Anssi Räisänen.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>To import the standard library to your game, just add the following line to your adventure source file:</p>
+<p>To import the library in your game, just add the following line to your adventure source file:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IMPORT</span> &#39;library.i&#39;<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_additional_resources"><a class="anchor" href="#_additional_resources"></a>1.1. Additional Resources</h3>
 <div class="paragraph">
-<p>In addition, the following files, none of which are necessary for using the library, can be found in the library distribution package:</p>
+<p>In addition to library modules, the Standard Library distribution package contains some extra files, none of which are necessary for using the library:</p>
 </div>
 <div class="hdlist">
 <table>
@@ -1066,24 +1081,31 @@ You can use this as a starting point for a new project.</p>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Thank you to Steve Griffiths for the score notification code snippet and for the early versions of the library, and to Alan Bampton for the code used for clothing objects (layered clothing).</p>
-</div>
-<div class="paragraph">
-<p>And naturally many thanks to Thomas Nilefalk and Göran Forslund for the ALAN Interactive Fiction Language.</p>
 </div>
 <div class="sect2">
-<h3 id="_what_to_read_if_youre_a_complete_newbie"><a class="anchor" href="#_what_to_read_if_youre_a_complete_newbie"></a>1.1. What to read if you&#8217;re a complete newbie</h3>
+<h3 id="_where_to_start"><a class="anchor" href="#_where_to_start"></a>1.2. Where to Start</h3>
 <div class="paragraph">
-<p>It would be advisable to start with the ALAN Manual (available on the ALAN website at <a href="https://www.alanif.se/" title="Visit Alan website" target="_blank" rel="noopener">www.alanif.se</a>) to get an idea of how the language works in general.
-The ALAN manual contains all the features of the language; this library manual only describes what is pre-defined in the standard library.
-After reading the ALAN manual, read this manual thoroughly, with the following exceptions:</p>
+<p>Some guidelines on how to approach reading this manual, based on your knowledge and experience of the ALAN language, or lack thereof.</p>
+</div>
+<div class="sect3">
+<h4 id="_alan_newbies"><a class="anchor" href="#_alan_newbies"></a>1.2.1. ALAN Newbies</h4>
+<div class="paragraph">
+<p><span class="big"><em>Where to start if you’re a complete newbie to ALAN IF.</em></span></p>
+</div>
+<div class="paragraph">
+<p>If you&#8217;ve never programmed in ALAN before, it&#8217;s advisable that you being by studying the <em>ALAN Manual</em> (available on the ALAN website at <a href="https://www.alanif.se/" title="Visit Alan website" target="_blank" rel="noopener">www.alanif.se</a>) to get an idea of how the language works in general.
+The <em>ALAN Manual</em> described all the features of the language, whereas this manual focuses only on the features defined in the Standard Library.
+After reading the <em>ALAN Manual</em>, read this manual thoroughly, with the following exceptions:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p>You don&#8217;t need to read <a href="#ch2">Ch. 2, <em>What is different in v2.x?</em></a> if you haven&#8217;t used the previous version 1 of the library, but it might be useful if you want to have a quick preview of some features the library is capable of.</p>
 </li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>Read only the early part of <a href="#ch10">Ch. 10, <em>The my_game instance and its attributes</em></a> to get an idea of how that meta-instance is to be used in the game source.
 The later passages in that chapter, listing all possible illegal parameter message attributes and verb check attributes of the <code>my_game</code> meta-instance, are meant to serve as a searchable index rather than to be read systematically.</p>
@@ -1091,24 +1113,19 @@ The later passages in that chapter, listing all possible illegal parameter messa
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_what_to_read_if_youre_familiar_with_alan_but_havent_used_the_standard_library_v1_0"><a class="anchor" href="#_what_to_read_if_youre_familiar_with_alan_but_havent_used_the_standard_library_v1_0"></a>1.2. What to read if you&#8217;re familiar with ALAN but haven&#8217;t used the standard library v1.0</h3>
+<div class="sect3">
+<h4 id="_standard_library_newbies"><a class="anchor" href="#_standard_library_newbies"></a>1.2.2. Standard Library Newbies</h4>
+<div class="paragraph">
+<p><span class="big"><em>What to read if you&#8217;re familiar with ALAN but haven&#8217;t used the Standard Library</em></span></p>
+</div>
 <div class="paragraph">
 <p>Read through the whole of this library manual carefully, with the exception of <a href="#ch10">Ch. 10, <em>The my_game instance and its attributes</em></a>, of which you should read only the early part to understand the significance of using the <code>my_game</code> meta-instance in the game source.
 The latter part of that chapter, where the illegal parameter messages and other messages are listed, is meant to be read only cursorily and to be used as a searchable index when needed.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_what_to_read_if_you_have_been_using_the_v1_0_of_the_standard_library"><a class="anchor" href="#_what_to_read_if_you_have_been_using_the_v1_0_of_the_standard_library"></a>1.3. What to read if you have been using the v1.0 of the standard library</h3>
-<div class="paragraph">
-<p>In many places v2.x works quite differently from v1.0, so read first <a href="#ch2">Ch. 2, <em>What is different in v2.x?</em></a> to get an idea of what has changed since the previous version.
-Read cursorily through <a href="#ch3">Ch. 3, <em>Locations</em></a>, <a href="#ch5">Ch. 5, <em>Actors</em></a> and <a href="#ch6">Ch. 6, <em>Objects</em></a> to learn about new features such as certain attributes.
-Read carefully the first part of <a href="#ch10">Ch. 10, <em>The my_game instance and its attributes</em></a> to understand the significance of using that meta-instance in the game source.
-The latter part of that chapter, where the illegal parameter messages and other messages are listed, is meant to be read only cursorily, to be used as a searchable index when needed.</p>
-</div>
 </div>
 <div class="sect2">
-<h3 id="_a_note_on_the_coding_style_used_in_this_manual"><a class="anchor" href="#_a_note_on_the_coding_style_used_in_this_manual"></a>1.4. A note on the coding style used in this manual</h3>
+<h3 id="_typographic_conventions"><a class="anchor" href="#_typographic_conventions"></a>1.3. Typographic Conventions</h3>
 <div class="paragraph">
 <p>The ALAN example code used in this manual follows the principle that all reserved words in the ALAN language are written in all caps:</p>
 </div>
@@ -1149,6 +1166,15 @@ Newcomers to ALAN should, however, bear in mind that the ALAN language is not ca
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">the</span> garden <span class="hl kwa">isa</span> <span class="hl kwb">location</span><span class="hl kwa">. exit</span> west <span class="hl kwa">to</span> street<span class="hl kwa">. end the</span> garden<span class="hl kwa">.</span></code></pre>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sec.acknowledgments"><a class="anchor" href="#sec.acknowledgments"></a>1.4. Acknowledgments</h3>
+<div class="paragraph">
+<p>Thanks to Steve Griffiths for the score notification code snippet and for his early versions of the library, and to Alan Bampton for the code used for implementing clothing objects (layered clothing).</p>
+</div>
+<div class="paragraph">
+<p>And, obviously, many thanks to Thomas Nilefalk and Göran Forslund for the ALAN Interactive Fiction Language.</p>
 </div>
 </div>
 </div>
