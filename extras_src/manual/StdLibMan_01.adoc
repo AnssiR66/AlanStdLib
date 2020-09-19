@@ -87,9 +87,6 @@ If you've never programmed in ALAN before, it's advisable that you being by stud
 The _ALAN Manual_ described all the features of the language, whereas this manual focuses only on the features defined in the Standard Library.
 After reading the _ALAN Manual_, read this manual thoroughly, with the following exceptions:
 
-// @DELME: "Ch2. What is different in v2.x?" will be eliminated from the book:
-* You don't need to read <<ch2>> if you haven't used the previous version 1 of the library, but it might be useful if you want to have a quick preview of some features the library is capable of.
-
 // @FIXME: What is now Ch.10 will be revised soon; also, the library messages have
 //         been moved to 'lib_messages_library.i', so they no longer belong to the
 // 		   'my_game' file/chapter:
