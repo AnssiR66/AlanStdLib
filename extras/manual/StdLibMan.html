@@ -1475,10 +1475,12 @@ You can refer to them in your coding in the way illustrated above when you need 
 <div class="sect2">
 <h3 id="_dark_location_and_the_lit_attribute"><a class="anchor" href="#_dark_location_and_the_lit_attribute"></a>3.3. DARK_LOCATION and the lit attribute</h3>
 <div class="paragraph">
-<p>In dark locations, actions requiring seeing are automatically disabled by the library.
-All dark locations have the attribute <code>NOT lit</code>.
-The locations belonging to the subclass DARK_LOCATION need a lit LIGHTSOURCE object to be present to be lit.
-To implement a DARK_LOCATION, it is enough to implement it for example in the following way:</p>
+<p>In dark locations, all actions requiring the ability to see are automatically disabled by the library.
+All dark locations have the <code>NOT lit</code> attribute.
+In order for locations of the <code>DARK_LOCATION</code> subclass to be lit, they need the presence of a lit <code>LIGHTSOURCE</code> object.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example of how to implement a <code>DARK_LOCATION</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1486,11 +1488,12 @@ To implement a DARK_LOCATION, it is enough to implement it for example in the fo
 </div>
 </div>
 <div class="paragraph">
-<p>The description of a dark location will be by default "It is pitch black.
-You can&#8217;t see anything at all." This default can be changed by editing the <code>dark_loc_desc</code> attribute of the <code>my_game</code> instance (see p. 78).</p>
+<p>The default description of a dark location will be &#8220;It is pitch black.
+You can&#8217;t see anything at all.&#8221;
+This default description can be changed by editing the <code>dark_loc_desc</code> attribute of the <code>my_game</code> instance (see p. 78).</p>
 </div>
 <div class="paragraph">
-<p>If you add a description of your own to a <code>DARK_LOCATION</code>, this description will be shown only if the location is lit up by any means:</p>
+<p>If you add your own description to a <code>DARK_LOCATION</code>, it will only be shown if the location is lit up by some means:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1498,7 +1501,7 @@ You can&#8217;t see anything at all." This default can be changed by editing the
 </div>
 </div>
 <div class="paragraph">
-<p>In order that a DARK_LOCATION is lighted, a LIGHTSOURCE object (a lantern, a match, a ceiling lamp, any other kind of light object) should be present.</p>
+<p>In order for a <code>DARK_LOCATION</code> to be lit, a <code>LIGHTSOURCE</code> object (a lantern, a match, a ceiling lamp, or any other kind of object emitting light) needs to be present and lit.</p>
 </div>
 <div class="paragraph">
 <p>In darkness, you are not able to manipulate things other than turn on a LIGHTSOURCE and drop items you&#8217;re carrying (these checks are found in <code>lib_verbs.i</code>).
@@ -1508,7 +1511,7 @@ If you wish to change these restrictions, see the respective verbs in <code>lib_
 </div>
 <div class="paragraph">
 <p>Note that you cannot change the name of a location mid-game.
-Thus, if you define a dark location called for example 'Darkness' and wish to make it lit at some point in the game, the name will still be 'Darkness' even if the location description can be changed to describe the illuminated location.
+Therefore, if you name a dark location &#8216;Darkness&#8217; and wish to make it lit at some point in the game, its name will still be &#8216;Darkness&#8217; even if the location description can be changed to describe the illuminated location.
 To show a change in the location name, you must locate the hero in another location when the dark location is lit.
 For example,</p>
 </div>
@@ -2331,7 +2334,7 @@ You eat all of the apple.</p>
 <div class="paragraph">
 <p>The hero instance is left out of the library altogether and can be defined from scratch by the game author.
 You won&#8217;t need to define the hero in your game at all if you&#8217;re happy with the response <span class="play">You notice nothing unusual about yourself.</span> when the player types <span class="play">&gt; <em>x me</em></span> (= examine myself) and if no attributes are needed for the hero (such as IS (NOT) hungry, HAS strength 20, etc.).
-There are also numerous other verb outcomes (than for examine) for the hero defined by default in the library:</p>
+The library also defines numerous other default responses for actions targeting the hero:</p>
 </div>
 <div class="exampleblock gametranscript">
 <div class="content">

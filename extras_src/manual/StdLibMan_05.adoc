@@ -73,9 +73,6 @@ END THE dog.
 
 
 
-
-
-
 == Pre-defined actor attributes in the library
 
 // @EXTERNALIZE STDLIB CODE: pre-defined actor attributes
@@ -472,7 +469,7 @@ END THE man.
 
 The hero instance is left out of the library altogether and can be defined from scratch by the game author.
 You won't need to define the hero in your game at all if you're happy with the response [.play]#You notice nothing unusual about yourself.# when the player types [.play]#&gt; _x me_# (= examine myself) and if no attributes are needed for the hero (such as IS (NOT) hungry, HAS strength 20, etc.).
-There are also numerous other verb outcomes (than for examine) for the hero defined by default in the library:
+The library also defines numerous other default responses for actions targeting the hero:
 
 // @EXTERNALIZE TRANSCRIPT: hero: self-directed actions
 [example,role="gametranscript"]
