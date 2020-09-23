@@ -9,10 +9,14 @@
 ////
 
 
-[[ch5]]
+[[ch.actors]]
 = Actors
 
-== Pre-defined actor classes in the library
+
+[[sec.actor-classes]]
+== Actor Classes
+
+Pre-defined actor classes in the library:
 
 * `PERSON`
 * `MALE`
@@ -73,7 +77,10 @@ END THE dog.
 
 
 
-== Pre-defined actor attributes in the library
+[[sec.actor-attributes]]
+== Actor Attributes
+
+Pre-defined actor attributes in the library:
 
 // @EXTERNALIZE STDLIB CODE: pre-defined actor attributes
 [source,alan]
@@ -91,6 +98,7 @@ IS NOT compliant.
 They are described in more detail below:
 
 // @ADDED:
+[[sec.inanimate]]
 === inanimate
 
 // @INTERN CODE
@@ -104,6 +112,7 @@ To ensure this, the (NOT) inanimate attribute is used.
 All things other than ACTORs are inanimate.
 
 // @ADDED:
+[[sec.following]]
 === following
 
 // @INTERN CODE
@@ -149,6 +158,7 @@ MAKE servant NOT following.
 
 
 // @ADDED:
+[[sec.sitting]]
 === sitting and lying_down
 
 // @INTERN CODE
@@ -184,6 +194,7 @@ Refer to: Objects => Supporters.
 
 
 // @ADDED:
+[[sec.named]]
 === named
 
 // @INTERN CODE
@@ -236,6 +247,7 @@ The library takes care of the indefinite/definite article showing before man whe
 
 
 // @ADDED:
+[[sec.compliant]]
 === compliant
 
 // @INTERN CODE
@@ -325,7 +337,7 @@ END THE man.
 --------------------------------------------------------------------------------
 
 
-
+[[sec.hero]]
 == The hero
 
 The hero instance is left out of the library altogether and can be defined from scratch by the game author.
@@ -428,7 +440,7 @@ The hero is by default a container actor (so that it can pick up and carry thing
 
 
 
-
+[[sec.describing-npcs]]
 == Describing NPCs
 
 When the player types [.play]#&gt; _examine [actor]_#, the response will be the default [.play]#You notice nothing unusual about [the actor].#, unless some other description is defined for the ACTOR in the DOES ONLY part of the actor instance:
@@ -476,6 +488,7 @@ The boy is carrying a coin and a baseball cap (being worn).
 
 
 
+[[sec.conversing-with-npcs]]
 == Conversing with NPCs
 
 To engage an NPC in conversation, the library has the pre-defined verbs ask about, tell_about, and talk to.

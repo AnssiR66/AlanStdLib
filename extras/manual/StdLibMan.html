@@ -733,7 +733,7 @@ span.play em,
 <div class="details">
 <span id="author" class="author">Anssi Räisänen</span><br>
 <span id="revnumber">version 2.2.0-WIP,</span>
-<span id="revdate">2020-09-19</span>
+<span id="revdate">2020-09-23</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -776,47 +776,47 @@ span.play em,
 <li><a href="#_the_two_methods_for_examining_things">4.1. The two methods for examining things</a></li>
 </ul>
 </li>
-<li><a href="#ch5">5. Actors</a>
+<li><a href="#ch.actors">5. Actors</a>
 <ul class="sectlevel2">
-<li><a href="#_pre_defined_actor_classes_in_the_library">5.1. Pre-defined actor classes in the library</a></li>
-<li><a href="#_pre_defined_actor_attributes_in_the_library">5.2. Pre-defined actor attributes in the library</a>
+<li><a href="#sec.actor-classes">5.1. Actor Classes</a></li>
+<li><a href="#sec.actor-attributes">5.2. Actor Attributes</a>
 <ul class="sectlevel3">
-<li><a href="#_inanimate">5.2.1. inanimate</a></li>
-<li><a href="#_following">5.2.2. following</a></li>
-<li><a href="#_sitting_and_lying_down">5.2.3. sitting and lying_down</a></li>
-<li><a href="#_named">5.2.4. named</a></li>
-<li><a href="#_compliant">5.2.5. compliant</a></li>
+<li><a href="#sec.inanimate">5.2.1. inanimate</a></li>
+<li><a href="#sec.following">5.2.2. following</a></li>
+<li><a href="#sec.sitting">5.2.3. sitting and lying_down</a></li>
+<li><a href="#sec.named">5.2.4. named</a></li>
+<li><a href="#sec.compliant">5.2.5. compliant</a></li>
 </ul>
 </li>
-<li><a href="#_the_hero">5.3. The hero</a></li>
-<li><a href="#_describing_npcs">5.4. Describing NPCs</a></li>
-<li><a href="#_conversing_with_npcs">5.5. Conversing with NPCs</a></li>
+<li><a href="#sec.hero">5.3. The hero</a></li>
+<li><a href="#sec.describing-npcs">5.4. Describing NPCs</a></li>
+<li><a href="#sec.conversing-with-npcs">5.5. Conversing with NPCs</a></li>
 </ul>
 </li>
-<li><a href="#ch6">6. Objects</a>
+<li><a href="#ch.objects">6. Objects</a>
 <ul class="sectlevel2">
-<li><a href="#_pre_defined_object_classes_in_the_library">6.1. Pre-defined object classes in the library</a>
+<li><a href="#_object_classes">6.1. Object Classes</a>
 <ul class="sectlevel3">
-<li><a href="#_clothing">6.1.1. CLOTHING</a>
+<li><a href="#sec.clothing">6.1.1. CLOTHING</a>
 <ul class="sectlevel4">
-<li><a href="#_the_clothing_table">6.1.1.1. The clothing table</a></li>
+<li><a href="#sec.clothing-table">6.1.1.1. The Clothing Table</a></li>
 <li><a href="#sec.clothing-tips">6.1.1.2. Clothing Tips &amp; Tricks</a></li>
 </ul>
 </li>
-<li><a href="#_device">6.1.2. DEVICE</a></li>
-<li><a href="#_door">6.1.3. DOOR</a>
+<li><a href="#sec.device">6.1.2. DEVICE</a></li>
+<li><a href="#_door">DOOR</a>
 <ul class="sectlevel4">
-<li><a href="#_locked_doors_and_keys">6.1.3.1. Locked doors and keys</a></li>
+<li><a href="#sec.locked-doors">Locked doors and keys</a></li>
 </ul>
 </li>
-<li><a href="#_liquid">6.1.4. LIQUID</a></li>
-<li><a href="#_lightsource">6.1.5. LIGHTSOURCE</a></li>
-<li><a href="#_listed_container">6.1.6. LISTED_CONTAINER</a></li>
-<li><a href="#_putting_things_in_containers">6.1.7. Putting things in containers</a></li>
-<li><a href="#_sound">6.1.8. SOUND</a></li>
-<li><a href="#_supporter">6.1.9. SUPPORTER</a></li>
-<li><a href="#_weapon">6.1.10. WEAPON</a></li>
-<li><a href="#_window">6.1.11. WINDOW</a></li>
+<li><a href="#sec.liquid">6.1.3. LIQUID</a></li>
+<li><a href="#sec.lightsource">6.1.4. LIGHTSOURCE</a></li>
+<li><a href="#sec.listed_container">6.1.5. LISTED_CONTAINER</a></li>
+<li><a href="#_putting_things_in_containers">6.1.6. Putting things in containers</a></li>
+<li><a href="#sec.sound">6.1.7. SOUND</a></li>
+<li><a href="#sec.supporter">6.1.8. SUPPORTER</a></li>
+<li><a href="#sec.weapon">6.1.9. WEAPON</a></li>
+<li><a href="#sec.window">6.1.10. WINDOW</a></li>
 </ul>
 </li>
 </ul>
@@ -1946,10 +1946,13 @@ Which of the two methods to use is completely voluntary and up to the game autho
 </div>
 </div>
 <div class="sect1">
-<h2 id="ch5"><a class="anchor" href="#ch5"></a>5. Actors</h2>
+<h2 id="ch.actors"><a class="anchor" href="#ch.actors"></a>5. Actors</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_pre_defined_actor_classes_in_the_library"><a class="anchor" href="#_pre_defined_actor_classes_in_the_library"></a>5.1. Pre-defined actor classes in the library</h3>
+<h3 id="sec.actor-classes"><a class="anchor" href="#sec.actor-classes"></a>5.1. Actor Classes</h3>
+<div class="paragraph">
+<p>Pre-defined actor classes in the library:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -2005,7 +2008,10 @@ If you just use PERSON or ACTOR instead of MALE or FEMALE, you should remember t
 </div>
 </div>
 <div class="sect2">
-<h3 id="_pre_defined_actor_attributes_in_the_library"><a class="anchor" href="#_pre_defined_actor_attributes_in_the_library"></a>5.2. Pre-defined actor attributes in the library</h3>
+<h3 id="sec.actor-attributes"><a class="anchor" href="#sec.actor-attributes"></a>5.2. Actor Attributes</h3>
+<div class="paragraph">
+<p>Pre-defined actor attributes in the library:</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS NOT</span> inanimate<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">IS NOT</span> following<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">IS NOT</span> sitting<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">IS NOT</span> lying_down<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">IS NOT</span> named<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">IS</span> wearing <span class="hl opt">{</span>clothing<span class="hl opt">}</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">IS NOT</span> compliant<span class="hl kwa">.</span></code></pre>
@@ -2015,7 +2021,7 @@ If you just use PERSON or ACTOR instead of MALE or FEMALE, you should remember t
 <p>They are described in more detail below:</p>
 </div>
 <div class="sect3">
-<h4 id="_inanimate"><a class="anchor" href="#_inanimate"></a>5.2.1. inanimate</h4>
+<h4 id="sec.inanimate"><a class="anchor" href="#sec.inanimate"></a>5.2.1. inanimate</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS NOT</span> inanimate<span class="hl kwa">.</span></code></pre>
@@ -2028,7 +2034,7 @@ All things other than ACTORs are inanimate.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_following"><a class="anchor" href="#_following"></a>5.2.2. following</h4>
+<h4 id="sec.following"><a class="anchor" href="#sec.following"></a>5.2.2. following</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS NOT</span> following<span class="hl kwa">.</span></code></pre>
@@ -2061,7 +2067,7 @@ To make any ACTOR follow the hero, give that actor the following attribute, for 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_sitting_and_lying_down"><a class="anchor" href="#_sitting_and_lying_down"></a>5.2.3. sitting and lying_down</h4>
+<h4 id="sec.sitting"><a class="anchor" href="#sec.sitting"></a>5.2.3. sitting and lying_down</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS NOT</span> sitting<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">IS NOT</span> lying_down<span class="hl kwa">.</span></code></pre>
@@ -2082,7 +2088,7 @@ Refer to: Objects &#8658; Supporters.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_named"><a class="anchor" href="#_named"></a>5.2.4. named</h4>
+<h4 id="sec.named"><a class="anchor" href="#sec.named"></a>5.2.4. named</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS NOT</span> named<span class="hl kwa">.</span></code></pre>
@@ -2110,7 +2116,7 @@ By default, all ACTORs are NOT named.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_compliant"><a class="anchor" href="#_compliant"></a>5.2.5. compliant</h4>
+<h4 id="sec.compliant"><a class="anchor" href="#sec.compliant"></a>5.2.5. compliant</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS NOT</span> compliant<span class="hl kwa">.</span></code></pre>
@@ -2193,7 +2199,7 @@ You eat all of the apple.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_the_hero"><a class="anchor" href="#_the_hero"></a>5.3. The hero</h3>
+<h3 id="sec.hero"><a class="anchor" href="#sec.hero"></a>5.3. The hero</h3>
 <div class="paragraph">
 <p>The hero instance is left out of the library altogether and can be defined from scratch by the game author.
 You won&#8217;t need to define the hero in your game at all if you&#8217;re happy with the response <span class="play">You notice nothing unusual about yourself.</span> when the player types <span class="play">&gt; <em>x me</em></span> (= examine myself) and if no attributes are needed for the hero (such as IS (NOT) hungry, HAS strength 20, etc.).
@@ -2281,7 +2287,7 @@ The hero is by default a container actor (so that it can pick up and carry thing
 </div>
 </div>
 <div class="sect2">
-<h3 id="_describing_npcs"><a class="anchor" href="#_describing_npcs"></a>5.4. Describing NPCs</h3>
+<h3 id="sec.describing-npcs"><a class="anchor" href="#sec.describing-npcs"></a>5.4. Describing NPCs</h3>
 <div class="paragraph">
 <p>When the player types <span class="play">&gt; <em>examine [actor]</em></span>, the response will be the default <span class="play">You notice nothing unusual about [the actor].</span>, unless some other description is defined for the ACTOR in the DOES ONLY part of the actor instance:</p>
 </div>
@@ -2312,7 +2318,7 @@ The boy is carrying a coin and a baseball cap (being worn).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_conversing_with_npcs"><a class="anchor" href="#_conversing_with_npcs"></a>5.5. Conversing with NPCs</h3>
+<h3 id="sec.conversing-with-npcs"><a class="anchor" href="#sec.conversing-with-npcs"></a>5.5. Conversing with NPCs</h3>
 <div class="paragraph">
 <p>To engage an NPC in conversation, the library has the pre-defined verbs ask about, tell_about, and talk to.
 (You can also say something but that doesn&#8217;t require an NPC to be present; for example you can say a magic word to open a door.
@@ -2331,10 +2337,13 @@ You can for example answer a phone or a door, or you can answer a riddle written
 </div>
 </div>
 <div class="sect1">
-<h2 id="ch6"><a class="anchor" href="#ch6"></a>6. Objects</h2>
+<h2 id="ch.objects"><a class="anchor" href="#ch.objects"></a>6. Objects</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_pre_defined_object_classes_in_the_library"><a class="anchor" href="#_pre_defined_object_classes_in_the_library"></a>6.1. Pre-defined object classes in the library</h3>
+<h3 id="_object_classes"><a class="anchor" href="#_object_classes"></a>6.1. Object Classes</h3>
+<div class="paragraph">
+<p>Pre-defined object classes in the library:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -2383,9 +2392,9 @@ For scenery objects, use the attribute <code>scenery</code>.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_clothing"><a class="anchor" href="#_clothing"></a>6.1.1. CLOTHING</h4>
+<h4 id="sec.clothing"><a class="anchor" href="#sec.clothing"></a>6.1.1. CLOTHING</h4>
 <div class="paragraph">
-<p>CLOTHING is a piece of clothing the hero or an NPC wears.
+<p><code>CLOTHING</code> is a piece of clothing the hero or an NPC wears.
 As far as the hero is concerned, clothes are prevented from being worn in an illogical order, for example you cannot put on a shirt if you are already wearing a jacket, and so forth.
 For this, clothing objects have a number of numerical attributes that need to be used.
 Note that NPCs cannot wear clothing in layers.</p>
@@ -2466,7 +2475,7 @@ If the value of an attribute for a piece of CLOTHING is 0 in the table, don&#821
 <p>&#8201;&#8212;&#8201;The above is enough; the rest is then handled automatically by the library.</p>
 </div>
 <div class="sect4">
-<h5 id="_the_clothing_table"><a class="anchor" href="#_the_clothing_table"></a>6.1.1.1. The clothing table</h5>
+<h5 id="sec.clothing-table"><a class="anchor" href="#sec.clothing-table"></a>6.1.1.1. The Clothing Table</h5>
 <div class="paragraph">
 <p>Here is the chart showing a selection of fairly typical clothing items and the values to set to obtain appropriate behaviour.
 Should you wish to create an article of CLOTHING not listed, usually a bit of lateral thought as to what it is most like and where it fits into the scheme of things will suggest a workable set of values, but be aware that you MUST use values in this chart, simply adding things with intermediate values is probably going to create nasty bugs:</p>
@@ -2685,7 +2694,7 @@ It is not clear if you mean your tuxedo or his tuxedo.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_device"><a class="anchor" href="#_device"></a>6.1.2. DEVICE</h4>
+<h4 id="sec.device"><a class="anchor" href="#sec.device"></a>6.1.2. DEVICE</h4>
 <div class="paragraph">
 <p>DEVICE is a machine or an electronic device, for example a TV.
 It can be turned (=switched) on and off if it is not broken.
@@ -2743,8 +2752,8 @@ You have to add it manually:</p>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_door"><a class="anchor" href="#_door"></a>6.1.3. DOOR</h4>
+<div class="sect3 door">
+<h4 id="_door"><a class="anchor" href="#_door"></a>DOOR</h4>
 <div class="paragraph">
 <p>DOOR can be opened, closed, locked and unlocked.
 It is by default closed (= NOT open) and NOT locked.
@@ -2809,7 +2818,7 @@ It is currently closed.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_locked_doors_and_keys"><a class="anchor" href="#_locked_doors_and_keys"></a>6.1.3.1. Locked doors and keys</h5>
+<h5 id="sec.locked-doors"><a class="anchor" href="#sec.locked-doors"></a>Locked doors and keys</h5>
 <div class="paragraph">
 <p>To unlock a locked DOOR, it has to have a <code>matching_key</code> object attributed to it.
 Only this object can unlock the DOOR.</p>
@@ -2856,7 +2865,7 @@ That&#8217;s why it is much shorter to implement the otherside instance of a DOO
 </div>
 </div>
 <div class="sect3">
-<h4 id="_liquid"><a class="anchor" href="#_liquid"></a>6.1.4. LIQUID</h4>
+<h4 id="sec.liquid"><a class="anchor" href="#sec.liquid"></a>6.1.3. LIQUID</h4>
 <div class="paragraph">
 <p>LIQUID can be taken only if it is in a container.
 You can fill something with it, and you can pour it somewhere.
@@ -2880,7 +2889,7 @@ Consequently, <span class="play">&gt; <em>empty bottle</em></span> will work but
 </div>
 </div>
 <div class="sect3">
-<h4 id="_lightsource"><a class="anchor" href="#_lightsource"></a>6.1.5. LIGHTSOURCE</h4>
+<h4 id="sec.lightsource"><a class="anchor" href="#sec.lightsource"></a>6.1.4. LIGHTSOURCE</h4>
 <div class="paragraph">
 <p>LIGHTSOURCE is <code>natural</code> or <code>NOT natural</code> (a natural LIGHTSOURCE is for example a match or a torch).
 It can be turned on and off, lighted and extinguished (= put out) if it is not broken.
@@ -2960,7 +2969,7 @@ It is an elegant table lamp with a blue lampshade. It is currently off.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_listed_container"><a class="anchor" href="#_listed_container"></a>6.1.6. LISTED_CONTAINER</h4>
+<h4 id="sec.listed_container"><a class="anchor" href="#sec.listed_container"></a>6.1.5. LISTED_CONTAINER</h4>
 <div class="paragraph">
 <p><code>LISTED_CONTAINER</code> is an object which has the <code>container</code> property.
 The contents of a <code>LISTED_CONTAINER</code> will be listed both after <span class="play">&gt; <em>look</em></span> (= in the room description), <span class="play">&gt; <em>look in</em></span> and <span class="play">&gt; <em>examine</em></span>, if it is open.
@@ -3029,7 +3038,7 @@ To change this, declare for example</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_putting_things_in_containers"><a class="anchor" href="#_putting_things_in_containers"></a>6.1.7. Putting things in containers</h4>
+<h4 id="_putting_things_in_containers"><a class="anchor" href="#_putting_things_in_containers"></a>6.1.6. Putting things in containers</h4>
 <div class="paragraph">
 <p>It is only possible to put something into a container if this something is included in the object.</p>
 </div>
@@ -3076,7 +3085,7 @@ This would make the above coding unnecessary but would make the <code>take</code
 </div>
 </div>
 <div class="sect3">
-<h4 id="_sound"><a class="anchor" href="#_sound"></a>6.1.8. SOUND</h4>
+<h4 id="sec.sound"><a class="anchor" href="#sec.sound"></a>6.1.7. SOUND</h4>
 <div class="paragraph">
 <p><code>SOUND</code> can be listened to but not examined, searched, smelled or manipulated.
 It cannot initially be turned on or off, this has to be implemented manually by giving the sound the <code>switchable</code> attribute.</p>
@@ -3088,7 +3097,7 @@ It cannot initially be turned on or off, this has to be implemented manually by 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_supporter"><a class="anchor" href="#_supporter"></a>6.1.9. SUPPORTER</h4>
+<h4 id="sec.supporter"><a class="anchor" href="#sec.supporter"></a>6.1.8. SUPPORTER</h4>
 <div class="paragraph">
 <p><code>SUPPORTER</code>: You can put things on a SUPPORTER and you can stand, sit down or lie on it.</p>
 </div>
@@ -3224,7 +3233,7 @@ It is the author&#8217;s responsibility to make certain objects in the location 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_weapon"><a class="anchor" href="#_weapon"></a>6.1.10. WEAPON</h4>
+<h4 id="sec.weapon"><a class="anchor" href="#sec.weapon"></a>6.1.9. WEAPON</h4>
 <div class="paragraph">
 <p>WEAPON is <code>fireable</code> (for example a cannon) or <code>NOT fireable</code> (for example a baseball bat), the latter being the default.
 The verbs <code>attack_with</code> and <code>kill_with</code> won&#8217;t have successful outcomes if the second parameter in them is not a WEAPON.
@@ -3240,7 +3249,7 @@ The verbs <code>attack_with</code> and <code>kill_with</code> won&#8217;t have s
 </div>
 </div>
 <div class="sect3">
-<h4 id="_window"><a class="anchor" href="#_window"></a>6.1.11. WINDOW</h4>
+<h4 id="sec.window"><a class="anchor" href="#sec.window"></a>6.1.10. WINDOW</h4>
 <div class="paragraph">
 <p>WINDOW can be opened, closed, looked through and out of.
 It will be described as being either open or closed when examined, by default.
