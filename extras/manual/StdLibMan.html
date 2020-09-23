@@ -785,8 +785,7 @@ span.play em,
 <li><a href="#_following">5.2.2. following</a></li>
 <li><a href="#_sitting_and_lying_down">5.2.3. sitting and lying_down</a></li>
 <li><a href="#_named">5.2.4. named</a></li>
-<li><a href="#_wearing">5.2.5. wearing</a></li>
-<li><a href="#_compliant">5.2.6. compliant</a></li>
+<li><a href="#_compliant">5.2.5. compliant</a></li>
 </ul>
 </li>
 <li><a href="#_the_hero">5.3. The hero</a></li>
@@ -2111,143 +2110,7 @@ By default, all ACTORs are NOT named.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_wearing"><a class="anchor" href="#_wearing"></a>5.2.5. wearing</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS</span> wearing <span class="hl opt">{</span>clothing<span class="hl opt">}</span><span class="hl kwa">.</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>By default, the hero character, or any other ACTOR for that matter, isn&#8217;t described as wearing any particular clothing.
-If the author implements any clothing for the hero, this will show up by default in the inventory verb, for example:</p>
-</div>
-<div class="exampleblock gametranscript">
-<div class="content">
-<div class="paragraph">
-<p>&gt; <em>inventory</em><br>
-You&#8217;re empty-handed.
-You&#8217;re wearing a T-shirt and shorts.</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>To implement CLOTHING for the hero, first implement the piece of clothing:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> tshirt <span class="hl kwa">ISA</span> CLOTHING&#x000A;  <span class="hl kwa">NAME</span> shirt <span class="hl slc">-- you cannot use a dash in-game, so you cannot</span>&#x000A;             <span class="hl slc">-- name the object &quot;t-shirt&quot; here</span>&#x000A;  <span class="hl kwa">IS</span> topcover <span class="hl num">8</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">DESCRIPTION</span> <span class="hl str">&quot;&quot;</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>(See the table on Clothing (p.39) for assigning values to the various pieces of clothing.)</p>
-</div>
-<div class="paragraph">
-<p>Above, we have created the piece of clothing (in this example, a shirt).
-Now, if we wish to make the hero wear it, we must define the hero:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> <span class="hl kwc">hero</span> <span class="hl kwa">ISA</span> <span class="hl kwb">ACTOR</span>&#x000A;  <span class="hl kwa">IS</span> wearing <span class="hl opt">{</span>tshirt<span class="hl opt">}</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE</span> <span class="hl kwc">hero</span><span class="hl kwa">.</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This would produce by default</p>
-</div>
-<div class="exampleblock gametranscript">
-<div class="content">
-<div class="paragraph">
-<p>&gt; <em>inventory</em><br>
-You are empty-handed.
-You are wearing a shirt.</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>The IS wearing attribute is needed when any actor, not just the hero, is described as wearing something.
-Remember to place CLOTHING items inside curly brackets.
-If there are more than one item in the set wearing, separate the items with a comma:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> bob <span class="hl kwa">ISA</span> <span class="hl kwb">ACTOR</span> <span class="hl kwa">AT</span> livingroom&#x000A;  <span class="hl kwa">IS</span> wearing <span class="hl opt">{</span>suit<span class="hl kwa">,</span> tie<span class="hl kwa">,</span> bowlerhat<span class="hl opt">}</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>or</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> boy <span class="hl kwa">ISA</span> <span class="hl kwb">ACTOR</span> <span class="hl kwa">AT</span> street&#x000A;  <span class="hl kwa">IS</span> wearing <span class="hl opt">{</span>bike_helmet<span class="hl opt">}</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE.</span></code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-the older way to define clothing for the hero is to use the <code>worn</code> container:
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> shirt <span class="hl kwa">ISA</span> CLOTHING <span class="hl kwa">IN</span> worn&#x000A;  <span class="hl kwa">IS</span> topcover <span class="hl num">8</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE</span> shirt<span class="hl kwa">.</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This is still possible in the current version of the library and works without any problems.</p>
-</div>
-<div class="paragraph">
-<p>Pieces of CLOTHING can be put on or taken off by the hero by default, for example</p>
-</div>
-<div class="exampleblock gametranscript">
-<div class="content">
-<div class="paragraph">
-<p>&gt; <em>wear shirt</em><br>
-You put on the shirt.</p>
-</div>
-<div class="paragraph">
-<p>&gt; <em>take off shirt</em><br>
-You take off the shirt.</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>This is handled automatically by the library.</p>
-</div>
-<div class="paragraph">
-<p>The wear verb, defined in the library, automatically includes the piece of CLOTHING in the wearing set of the actor.
-The alternative syntaxes for wear are put 'on' (obj) and put (obj) 'on'.
-If you wish to use any verb or situation of your own to make the hero wear a piece of CLOTHING mid-game, you have two alternatives:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>INCLUDE shirt IN wearing OF hero.</code></p>
-</li>
-<li>
-<p><code>LOCATE shirt IN worn.</code></p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The take_off verb automatically excludes the applicable piece of CLOTHING from the wearing set.
-If you wish to have a piece of CLOTHING doffed by an actor any circumstances, do like below:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">EVENT</span> blow&#x000A;  <span class="hl str">&quot;There is a strong gust of wind which blows the hat off your head!&quot;</span>&#x000A;  <span class="hl kwa">LOCATE</span> hat <span class="hl kwa">IN</span> ditch<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END EVENT.</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Refer also to: Objects &#8658; Clothing.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_compliant"><a class="anchor" href="#_compliant"></a>5.2.6. compliant</h4>
+<h4 id="_compliant"><a class="anchor" href="#_compliant"></a>5.2.5. compliant</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS NOT</span> compliant<span class="hl kwa">.</span></code></pre>
