@@ -53,24 +53,49 @@ IMPORT 'library.i'.
 
 In addition to library modules, the Standard Library distribution package contains some extra files, none of which are necessary for using the library:
 
-// @TODO: FIX LIST OF EXTRA LIB FILES!
-// [ ] Some of these files have been renamed or have different extensions now.
-// [ ] Add links to these files?
+// >>> CUSTOM ATTRIBUTES FOR ASSETS LINKS: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// -----------------------------------------------------------------------------
+// Defining these links as attributes helps to keep the list below cleaner to
+// read and work on. Also, in the future we might want to defined the links
+// conditionally, depending on the output backend (suppressing links in the PDF,
+// or providing alternative links on the GHP ages website, etc.).
+// -----------------------------------------------------------------------------
+:CHANGELOG: pass:q,a[link:{StdLibDir}/CHANGELOG.html[`CHANGELOG.html`^,title="View the CHANGELOG"]]
+:COPYING: pass:q,a[link:{StdLibDir}/COPYING[`COPYING`^,title="View the StdLib license file"] ]
+:newgame_alan: pass:q,a[link:{StdLibDir}/newgame.alan[`newgame.alan`^,title="Open adventure template"]]
+:testgame_alan: pass:q,a[link:{StdLibDir}/testgame.alan[`testgame.alan`^,title="Open source adventure"]]
+:mygame_import: pass:q,a[link:{StdLibDir}/mygame_import.i[`mygame_import.i`^,title="Open source file"]]
+// :XXXX: pass:q,a[YYYY]
+// :XXXX: pass:q,a[link:{StdLibDir}/YYYY[`YYYY`^,title="Open source adventure"]]
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+
+// @TODO: FIX LIST OF EXTRA LIB FILES!
+// [ ] Some of these files will have different extensions soon.
+// [ ] Fix the direct links to those files
+
+// @TODO: MISSING ASSETS: The`quickref.text` and `quickstart.pdf` mentioned here
+// 		  are not in the StdLib repository. These docs are outdated and need to
+// 		  to be edited to match StdLib v2.2.0, and possibly also be ported to
+//        AsciiDoc, so their output format will probably be HTML.
 
 [horizontal]
-`changelog.txt`   :: A text file listing the changes made to the library after version v2.0.
-`copying.txt`     :: A text file clarifying some copyright issues.
-`mygame_import.i` :: An auxiliary, not obligatory, definition file for the library.
+{CHANGELOG} :: A text file listing the changes made to the library after version v2.0.
+
+{COPYING} :: A text file clarifying the Standard Library copyright status, its Artistic License 2.0 terms, and other legal issues regarding usage of the library in your own adventures, or creating variations of the library for public distribution.
+
+{mygame_import} :: An auxiliary, not obligatory, definition file for the library.
 If you need to edit a great number of default library messages (for verb outcomes, verb check messages etc.), you can edit this file and import it to your game project.
-`newgame.a3c`     :: A compiled game of the source code included in `newgame.alan` (below).
-`newgame.alan`    :: A barebones game source file defining some necessary coding when starting to write a new game.
+
+{newgame_alan} :: A barebones game source file defining some necessary coding when starting to write a new game.
 You can use this as a starting point for a new project.
+
 `quickref.text`   :: A quick summary of the library features and how to use them.
+
 `quickstart.pdf`  :: A quick summary for starting to use the library.
-`testgame.a3c`    :: The compiled test game, ready to run and play, to test the features of the library.
-`testgame.alan`   :: The source code for a test game showcasing the features of the library.
-`testgame.ifid`   :: An IFID identification number of the compiled `testgame.a3c` file.
+
+{testgame_alan} :: The source code for a test game showcasing the features of the library.
+
 
 
 

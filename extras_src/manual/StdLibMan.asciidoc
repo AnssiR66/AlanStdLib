@@ -2,7 +2,7 @@
 :doctitle: Alan Standard Library v{StdLibVer} User's Manual
 :author: Anssi Räisänen
 :revnumber: {StdLibVer}-WIP
-:revdate: 2020-09-23
+:revdate: 2020-09-24
 :lang: en
 :doctype: book
 // TOC Settings:
@@ -31,7 +31,10 @@
 //                              CUSTOM ATTRIBUTES
 // =============================================================================
 :AlanWWW: link:https://www.alanif.se/[www.alanif.se^,title="Visit Alan website"]
+
+// Directories Paths:
 :StdLibInc: {utf8dir}/../StdLib
+:StdLibDir: ../../StdLib
 
 // examples files:
 :wedding_alan: pass:q[link:wedding.alan[`wedding.alan`^,title="View example source file"]]
