@@ -35,6 +35,7 @@
 // Directories Paths:
 :StdLibInc: {utf8dir}/../StdLib
 :StdLibDir: ../../StdLib
+:ExtrasDir: ../../extras
 
 // examples files:
 :wedding_alan: pass:q[link:wedding.alan[`wedding.alan`^,title="View example source file"]]

@@ -62,9 +62,9 @@ In addition to library modules, the Standard Library distribution package contai
 // -----------------------------------------------------------------------------
 :CHANGELOG: pass:q,a[link:{StdLibDir}/CHANGELOG.html[`CHANGELOG.html`^,title="View the CHANGELOG"]]
 :COPYING: pass:q,a[link:{StdLibDir}/COPYING[`COPYING`^,title="View the StdLib license file"] ]
-:newgame_alan: pass:q,a[link:{StdLibDir}/newgame.alan[`newgame.alan`^,title="Open adventure template"]]
-:testgame_alan: pass:q,a[link:{StdLibDir}/testgame.alan[`testgame.alan`^,title="Open source adventure"]]
-:mygame_import: pass:q,a[link:{StdLibDir}/mygame_import.i[`mygame_import.i`^,title="Open source file"]]
+:newgame_alan: pass:q,a[link:{ExtrasDir}/newgame.alan[`newgame.alan`^,title="Open adventure template"]]
+:testgame_alan: pass:q,a[link:{ExtrasDir}/testgame.alan[`testgame.alan`^,title="Open source adventure"]]
+:mygame_import: pass:q,a[link:{ExtrasDir}/mygame_import.i[`mygame_import.i`^,title="Open source file"]]
 // :XXXX: pass:q,a[YYYY]
 // :XXXX: pass:q,a[link:{StdLibDir}/YYYY[`YYYY`^,title="Open source adventure"]]
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -90,12 +90,22 @@ If you need to edit a great number of default library messages (for verb outcome
 {newgame_alan} :: A barebones game source file defining some necessary coding when starting to write a new game.
 You can use this as a starting point for a new project.
 
+{testgame_alan} :: The source code for a test game showcasing the features of the library.
+
+// @TEMPORARILY REMOVED: Assets that won't be included until they've been updated
+//                       to the latest StdLib version, and/or ported to AsciiDoc:
+////
 `quickref.text`   :: A quick summary of the library features and how to use them.
 
 `quickstart.pdf`  :: A quick summary for starting to use the library.
+////
 
-{testgame_alan} :: The source code for a test game showcasing the features of the library.
+[WARNING]
+============================
+The _Quick Start Guide_ and _Quick Reference_ documents, which were previously distributed with the *Standard Library v2* package (files `QuickStart.docx` and `QuickRef.txt`), have been temporarily removed from the current distribution.
 
+We're working on porting both documents (along with _The Alan Cookbook_) to AsciiDoc, in order to integrate them with the new *Standard Library* repository on GitHub, and updating their contents and examples code to mirror the latest Standard Library version.
+============================
 
 
 
