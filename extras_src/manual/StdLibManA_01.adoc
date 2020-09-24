@@ -8,8 +8,8 @@
 ********************************************************************************
 ////
 
-
-[[ch14]]
+[appendix]
+[[app.translating]]
 = Translating to other languages
 
 To translate the ALAN system and library to other languages, you should

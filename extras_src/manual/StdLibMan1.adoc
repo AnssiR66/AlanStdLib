@@ -1,0 +1,30 @@
+// *****************************************************************************
+// *                                                                           *
+// *                   ALAN Standard Library User's Manual                     *
+// *                                                                           *
+// *                                  PART I                                   *
+// *                                                                           *
+// *****************************************************************************
+
+
+[[part.getting-started]]
+= Getting Started
+
+[partintro]
+--
+In the following chapters you'll learn how to integrate the Standard Library into your ALAN adentures, how to set up your working environment, and other useful notions as a beginner to the library.
+--
+
+:leveloffset: +1
+
+include::StdLibMan1_01.adoc[]
+
+include::StdLibMan1_02.adoc[]
+
+include::StdLibMan1_03.adoc[]
+
+include::StdLibMan1_04.adoc[]
+
+include::StdLibMan1_05.adoc[]
+
+:leveloffset: -1

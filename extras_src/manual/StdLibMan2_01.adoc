@@ -9,7 +9,7 @@
 ////
 
 
-[[ch3]]
+[[ch.locations]]
 = Locations
 
 Location classes pre-defined in the library:

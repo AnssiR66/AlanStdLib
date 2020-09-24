@@ -1,0 +1,6 @@
+[[ch.library-overview]]
+= Library Overview
+
+[big]_A brief introduction to the Standard Library, it's constituent modules and what they do, its general structure and the philosophy behind it._#
+
+WARNING: *TBD!* This chapter still need to be written.

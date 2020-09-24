@@ -1,0 +1,25 @@
+// *****************************************************************************
+// *                                                                           *
+// *                   ALAN Standard Library User's Manual                     *
+// *                                                                           *
+// *                                 PART IV                                   *
+// *                                                                           *
+// *****************************************************************************
+
+
+[[part.library-messages]]
+= Library Messages
+
+
+[partintro]
+--
+In this part we'll present the pre-defined messages defined by the library, how to reuses them, and how to customize them according to your needs.
+--
+
+:leveloffset: +1
+
+include::StdLibMan4_01.adoc[]
+
+include::StdLibMan4_02.adoc[]
+
+:leveloffset: -1

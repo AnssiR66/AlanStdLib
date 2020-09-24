@@ -1,0 +1,30 @@
+// *****************************************************************************
+// *                                                                           *
+// *                   ALAN Standard Library User's Manual                     *
+// *                                                                           *
+// *                                 PART II                                   *
+// *                                                                           *
+// *****************************************************************************
+
+
+[[part.library-classes]]
+= Library Classes
+
+[partintro]
+--
+In this part you'll learn about the special classes pre-defined by the library, and how to use them to implement game objects of various types.
+--
+
+:leveloffset: +1
+
+include::StdLibMan2_01.adoc[]
+
+include::StdLibMan2_02.adoc[]
+
+include::StdLibMan2_03.adoc[]
+
+include::StdLibMan2_04.adoc[]
+
+include::StdLibMan2_05.adoc[]
+
+:leveloffset: -1

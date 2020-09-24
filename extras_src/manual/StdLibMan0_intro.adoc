@@ -8,6 +8,7 @@
 ********************************************************************************
 ////
 
+[preface]
 [[ch.intro]]
 = Introduction
 
@@ -48,7 +49,7 @@ IMPORT 'library.i'.
 --------------------------------------------------------------------------------
 
 
-== Additional Resources
+=== Additional Resources
 
 In addition to library modules, the Standard Library distribution package contains some extra files, none of which are necessary for using the library:
 
@@ -73,13 +74,13 @@ You can use this as a starting point for a new project.
 
 
 
-== Where to Start
+=== Where to Start
 
 Some guidelines on how to approach reading this manual, based on your knowledge and experience of the ALAN language, or lack thereof.
 
 
 
-=== ALAN Newbies
+==== ALAN Newbies
 
 [big]#_Where to start if you’re a complete newbie to ALAN IF._#
 
@@ -87,23 +88,24 @@ If you've never programmed in ALAN before, it's advisable that you being by stud
 The _ALAN Manual_ described all the features of the language, whereas this manual focuses only on the features defined in the Standard Library.
 After reading the _ALAN Manual_, read this manual thoroughly, with the following exceptions:
 
-// @FIXME: What is now Ch.10 will be revised soon; also, the library messages have
+// @FIXME: dead XRef Ch???
+//  	   What is now Ch.10 will be revised soon; also, the library messages have
 //         been moved to 'lib_messages_library.i', so they no longer belong to the
 // 		   'my_game' file/chapter:
-* Read only the early part of <<ch10>> to get an idea of how that meta-instance is to be used in the game source.
+* Read only the early part of Ch??? to get an idea of how that meta-instance is to be used in the game source.
 The later passages in that chapter, listing all possible illegal parameter message attributes and verb check attributes of the `my_game` meta-instance, are meant to serve as a searchable index rather than to be read systematically.
 
 
-=== Standard Library Newbies
+==== Standard Library Newbies
 
 [big]#_What to read if you're familiar with ALAN but haven't used the Standard Library_#
 
-
-Read through the whole of this library manual carefully, with the exception of <<ch10>>, of which you should read only the early part to understand the significance of using the `my_game` meta-instance in the game source.
+// @FIXME: dead XRef Ch???
+Read through the whole of this library manual carefully, with the exception of Ch???, of which you should read only the early part to understand the significance of using the `my_game` meta-instance in the game source.
 The latter part of that chapter, where the illegal parameter messages and other messages are listed, is meant to be read only cursorily and to be used as a searchable index when needed.
 
 
-== Typographic Conventions
+=== Typographic Conventions
 
 The ALAN example code used in this manual follows the principle that all reserved words in the ALAN language are written in all caps:
 
@@ -153,7 +155,7 @@ the garden isa location. exit west to street. end the garden.
 --------------------------------------------------------------------------------
 
 [[sec.acknowledgments]]
-== Acknowledgments
+=== Acknowledgments
 
 Thanks to Steve Griffiths for the score notification code snippet and for his early versions of the library, and to Alan Bampton for the code used for implementing clothing objects (layered clothing).
 

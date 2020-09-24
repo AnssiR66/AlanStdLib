@@ -1,0 +1,24 @@
+// *****************************************************************************
+// *                                                                           *
+// *                   ALAN Standard Library User's Manual                     *
+// *                                                                           *
+// *                                 PART III                                  *
+// *                                                                           *
+// *****************************************************************************
+
+
+[[part.appendices]]
+= Appendices
+
+[partintro]
+--
+This last part of the book presents various appendices on side topics of the Standard Library.
+--
+
+:leveloffset: +1
+
+include::StdLibManA_01.adoc[]
+
+include::StdLibManA_02.adoc[]
+
+:leveloffset: -1

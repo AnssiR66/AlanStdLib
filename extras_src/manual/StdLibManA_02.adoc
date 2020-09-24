@@ -9,7 +9,8 @@
 ////
 
 
-[[ch.short-examples]]
+[appendix]
+[[app.short-examples]]
 = Short examples
 
 

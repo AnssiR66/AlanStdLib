@@ -1,0 +1,23 @@
+// *****************************************************************************
+// *                                                                           *
+// *                   ALAN Standard Library User's Manual                     *
+// *                                                                           *
+// *                                 PART III                                  *
+// *                                                                           *
+// *****************************************************************************
+
+
+[[part.library-verbs]]
+= Library Verbs
+
+
+[partintro]
+--
+In this part you'll learn about the pre-defined verbs of the library, how to use them efficiently in your adventures, and how to adapt them to your needs.
+--
+
+:leveloffset: +1
+
+include::StdLibMan3_01.adoc[]
+
+:leveloffset: -1

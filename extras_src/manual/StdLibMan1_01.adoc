@@ -8,14 +8,9 @@
 ********************************************************************************
 ////
 
-[[ch.getting-started]]
-= Getting Started
 
-In this chapter you'll learn how to integrate the Standard Library into your ALAN adentures, how to set up your working environment, and other useful notions as a beginner to the library.
-
-
-[[sec.importing-stdlib]]
-== Importing the Library
+[[ch.importing-stdlib]]
+= Importing the Library
 
 [big]_How to import the Standard Library into your ALAN adenture games_#
 

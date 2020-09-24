@@ -55,39 +55,28 @@ Section numbering and max-depth of TOC level are temporarily kept to simplify an
 ================================================================================
 
 
-:leveloffset: +1
+include::StdLibMan0_intro.adoc[]
 
-include::StdLibMan_01.adoc[]
+// Part I -- Getting Started
 
-include::StdLibMan_02.adoc[]
+include::StdLibMan1.adoc[]
 
-include::StdLibMan_03.adoc[]
+// Part II -- Library Classes
 
-include::StdLibMan_04.adoc[]
+include::StdLibMan2.adoc[]
 
-include::StdLibMan_05.adoc[]
+// Part III -- Library Verbs
 
-include::StdLibMan_06.adoc[]
+include::StdLibMan3.adoc[]
 
-include::StdLibMan_07.adoc[]
+// Part IV -- Library Messages
 
-include::StdLibMan_08.adoc[]
+include::StdLibMan4.adoc[]
 
-include::StdLibMan_09.adoc[]
+// Appendices
 
-include::StdLibMan_10.adoc[]
+include::StdLibManA.adoc[]
 
-include::StdLibMan_11.adoc[]
-
-include::StdLibMan_12.adoc[]
-
-include::StdLibMan_13.adoc[]
-
-include::StdLibMan_14.adoc[]
-
-include::StdLibMan_15.adoc[]
-
-:leveloffset: -1
 
 
 '''
