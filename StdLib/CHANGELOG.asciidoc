@@ -1,0 +1,60 @@
+:StdLibVer: 2.2.0
+:doctitle: Changelog for ALAN Standard Library v{StdLibVer}
+:author: Anssi Räisänen
+:email: <anssir66@hotmail.com>
+:lang: en
+// TOC Settings:
+:toclevels: 1
+:toc: left
+// Sections Numbering:
+:sectnums!:
+// Cross References:
+:xrefstyle: short
+:section-refsig: Sect.
+// Misc Settings:
+:experimental:
+:icons: font
+:linkattrs:
+:reproducible:
+:sectanchors:
+
+// Preamble
+
+This changelog documents all changes to the Standard Library in each new release, covering new features, bug fixes, as well as updates to its documentation and other assets shipping in the distribution package.
+
+
+== v2.2.0 -- 2020
+
+Version `2.2.0` marks an important turning point for the Standard Library, introducing many new changes, not only in the library code but also in its development workflow and its documentation:
+
+* *[red]#GitHub Hosting#* --
+Development of the Standard Library has now moved to GitHub, allowing collaborative participation to the project via Git.
+The new GitHub repository is now the official channel for the StdLib development and its distribution:
+
+** link:https://github.com/AnssiR66/AlanStdLib[github.com/AnssiR66/AlanStdLib^, title="Visit the Standard Library repository on GitHub"]
+
+* *[red]#AsciiDoc Documentation#* --
+All library documentation has been ported to AsciiDoc, a powerful syntax for managing documentation in text-based source files which can be version controlled via Git, thus greatly simplifying collaborative editing on the documentation.
+AsciiDoc is a format-agnostic syntax, meaning that the same source documents can now be converted (i.e. _built_) to numerous ouput formats, including HTML, PDF, and many others.
++
+The new documentation is now built using Asciidoctor.
+All documents are now distributed in HTML format, and some selected documents are also distributed in PDF format (e.g. _The StdLib Manual_, and other medium- to big-sized docs).
+In the future, more formats might be supported (e.g. eBook formats), if there's a demand for them.
+
+* *[red]#Semantic Versioning#* --
+The library has now adopted the link:https://semver.org/[Semantic Versioning 2.0.0^,title="Visit Semantic Versioning website"] version scheme (hence the additional third digit in its new version number).
+SemVer has become the most widely used versioning scheme, by adoption it the StdLib will benefit from better integration in the GitHub open source ecosystem.
+
+
+== v2.1 -- 2018-05-27
+
+* Added verb restrictions
+* Polished and expanded the manual
+
+
+
+== v2.0 -- 2016-05-15
+
+First version.
+
+// EOF //

@@ -152,16 +152,24 @@ UNLICENSE    text
 .gitignore      export-ignore
 .gitmodules     export-ignore
 
-## Dev folders
-##############
+## Developer folders
+#####################
 /assets/        export-ignore
 /assets_src/    export-ignore
 /extras_src/    export-ignore
 /tests/         export-ignore
 
-## Specific dev files
-#####################
-/StdLib/UPDATE.bat   export-ignore
+## Build Scripts
+################
+*.bat   export-ignore
+*.sh    export-ignore
+
+## Developer and source documents
+#################################
+# Docs destined to end uesers will be converted to HTML.
+*.md         export-ignore
+*.asciidoc   export-ignore
+*.adoc       export-ignore
 
 # ==============================================================================
 #                                GitHub Linguist                                
