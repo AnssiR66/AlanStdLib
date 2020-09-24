@@ -10,7 +10,7 @@
 
 [appendix]
 [[app.translating]]
-= Translating to other languages
+= Translating to Other Languages
 
 To translate the ALAN system and library to other languages, you should
 

@@ -733,7 +733,7 @@ span.play em,
 <div class="details">
 <span id="author" class="author">Anssi Räisänen</span><br>
 <span id="revnumber">version 2.2.0-WIP,</span>
-<span id="revdate">2020-09-24</span>
+<span id="revdate">2020-09-25</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -755,9 +755,9 @@ span.play em,
 <ul class="sectlevel1">
 <li><a href="#ch.importing-stdlib">1. Importing the Library</a></li>
 <li><a href="#ch.library-overview">2. Library Overview</a></li>
-<li><a href="#ch11">3. Have the game banner show at the start</a></li>
-<li><a href="#ch9">4. Adding synonyms for existing library words (verbs, object and actor classes)</a></li>
-<li><a href="#ch13">5. Default attributes used in the standard library</a>
+<li><a href="#ch.game-banner">3. The Game Banner</a></li>
+<li><a href="#ch.adding-synonyms">4. Adding Synonyms</a></li>
+<li><a href="#ch.default-attributes">5. Default Library Attributes</a>
 <ul class="sectlevel2">
 <li><a href="#_attributes_added_to_specific_classes_of_objects">5.1. Attributes added to specific classes of objects:</a></li>
 </ul>
@@ -831,11 +831,12 @@ span.play em,
 </li>
 </ul>
 </li>
-<li><a href="#ch7">10. Additional attributes for THINGs: (NOT) distant, (NOT) reachable, scenery</a>
+<li><a href="#ch7">10. Additional THINGs Attributes</a>
 <ul class="sectlevel2">
-<li><a href="#_classes_usage">10.1. Classes: usage</a>
+<li><a href="#_not_distant_not_reachable_scenery">10.1. (NOT) distant, (NOT) reachable, scenery</a></li>
+<li><a href="#_classes_usage">10.2. Classes: usage</a>
 <ul class="sectlevel3">
-<li><a href="#_overriding_library_responses_for_classes">10.1.1. Overriding library responses for classes</a></li>
+<li><a href="#_overriding_library_responses_for_classes">10.2.1. Overriding library responses for classes</a></li>
 </ul>
 </li>
 </ul>
@@ -844,7 +845,7 @@ span.play em,
 </li>
 <li><a href="#part.library-verbs">Library Verbs</a>
 <ul class="sectlevel1">
-<li><a href="#ch8">11. Using verbs and commands</a>
+<li><a href="#ch8">11. Using Verbs and Commands</a>
 <ul class="sectlevel2">
 <li><a href="#_verb_syntaxes_used_in_the_standard_library">11.1. Verb syntaxes used in the standard library</a></li>
 <li><a href="#_the_philosophy_used_in_deciding_successful_and_unsuccessful_outcomes_for_action_in_the_library_verbs">11.2. The philosophy used in deciding successful and unsuccessful outcomes for action in the library verbs</a></li>
@@ -860,7 +861,7 @@ span.play em,
 </li>
 <li><a href="#part.library-messages">Library Messages</a>
 <ul class="sectlevel1">
-<li><a href="#ch.runtime-messages">12. Runtime messages</a></li>
+<li><a href="#ch.runtime-messages">12. Runtime Messages</a></li>
 <li><a href="#ch.library-messages">13. Library Messages</a>
 <ul class="sectlevel2">
 <li><a href="#_the_my_game_instance_and_its_attributes">13.1. The my_game instance and its attributes</a></li>
@@ -897,8 +898,8 @@ span.play em,
 </li>
 <li><a href="#part.appendices">Appendices</a>
 <ul class="sectlevel1">
-<li><a href="#app.translating">Appendix A: Translating to other languages</a></li>
-<li><a href="#app.short-examples">Appendix B: Short examples</a>
+<li><a href="#app.translating">Appendix A: Translating to Other Languages</a></li>
+<li><a href="#app.short-examples">Appendix B: Short Examples</a>
 <ul class="sectlevel2">
 <li><a href="#_example_1">B.1. Example 1</a></li>
 <li><a href="#_example_2">B.2. Example 2</a></li>
@@ -1269,7 +1270,7 @@ The IFID system is defined by the Treaty of Babel which was created in 2006.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="ch11"><a class="anchor" href="#ch11"></a>3. Have the game banner show at the start</h2>
+<h2 id="ch.game-banner"><a class="anchor" href="#ch.game-banner"></a>3. The Game Banner</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>To show the game banner at the start, after an optional intro text, you must add the text <code>DESCRIBE banner.</code> after the <code>START AT</code> clause, for example:</p>
@@ -1314,8 +1315,11 @@ All rights reserved</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="ch9"><a class="anchor" href="#ch9"></a>4. Adding synonyms for existing library words (verbs, object and actor classes)</h2>
+<h2 id="ch.adding-synonyms"><a class="anchor" href="#ch.adding-synonyms"></a>4. Adding Synonyms</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p><span class="big"><em>How to add synonyms for existing library words (verbs, object and actor classes).</em></span></p>
+</div>
 <div class="paragraph">
 <p>Declare the synonym in your own game source file, outside any instance declarations, and outside the <code>my_game</code> instance, like this:</p>
 </div>
@@ -1330,7 +1334,7 @@ All rights reserved</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="ch13"><a class="anchor" href="#ch13"></a>5. Default attributes used in the standard library</h2>
+<h2 id="ch.default-attributes"><a class="anchor" href="#ch.default-attributes"></a>5. Default Library Attributes</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The attributes in the following list are pre-defined in the library.
@@ -3050,7 +3054,7 @@ That&#8217;s why it is much shorter to implement the otherside instance of a DOO
 (It wouldn&#8217;t mess things up even if you did declare all of these attributes under <code>wooden_door2</code>, to be sure, but it is not necessary.)</p>
 </div>
 <div class="paragraph">
-<p>See also <a href="#app.short-examples">App. B, <em>Short examples</em></a>, <a href="#sec.short-example.5">example 5</a>.</p>
+<p>See also <a href="#app.short-examples">App. B, <em>Short Examples</em></a>, <a href="#sec.short-example.5">example 5</a>.</p>
 </div>
 </div>
 </div>
@@ -3476,8 +3480,10 @@ It is by default <code>NOT open</code>.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="ch7"><a class="anchor" href="#ch7"></a>10. Additional attributes for THINGs: (NOT) distant, (NOT) reachable, scenery</h2>
+<h2 id="ch7"><a class="anchor" href="#ch7"></a>10. Additional THINGs Attributes</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_not_distant_not_reachable_scenery"><a class="anchor" href="#_not_distant_not_reachable_scenery"></a>10.1. (NOT) distant, (NOT) reachable, scenery</h3>
 <div class="paragraph">
 <p>Distant/NOT distant is a new attribute in v2.0 and later versions of the library.
 It has been added to be used alongside with the existing reachable/NOT reachable attributes.
@@ -3599,8 +3605,9 @@ The flowerpot is not important.</p>
 <p>Note that actors can be scenery, as well.
 Such actors are not mentioned in the location description by default, and examining them yields the default message "The [actor] is not important.".</p>
 </div>
+</div>
 <div class="sect2">
-<h3 id="_classes_usage"><a class="anchor" href="#_classes_usage"></a>10.1. Classes: usage</h3>
+<h3 id="_classes_usage"><a class="anchor" href="#_classes_usage"></a>10.2. Classes: usage</h3>
 <div class="paragraph">
 <p>As we have already seen, it is possible to use classes and subclasses in various contexts in ALAN.
 The library defines a large number of subclasses for actors and objects and locations, as seen in the previous chapters.</p>
@@ -3647,7 +3654,7 @@ Here, the game author wants (for some reason) to make all CLOTHING objects not w
 </ol>
 </div>
 <div class="sect3">
-<h4 id="_overriding_library_responses_for_classes"><a class="anchor" href="#_overriding_library_responses_for_classes"></a>10.1.1. Overriding library responses for classes</h4>
+<h4 id="_overriding_library_responses_for_classes"><a class="anchor" href="#_overriding_library_responses_for_classes"></a>10.2.1. Overriding library responses for classes</h4>
 <div class="paragraph">
 <p>If you wish to override the library response to a verb within a specific class, use DOES ONLY with the verb:</p>
 </div>
@@ -3692,7 +3699,7 @@ Here, the verb outcome for examine has been modified for all WINDOWs in the game
 </div>
 </div>
 <div class="sect1">
-<h2 id="ch8"><a class="anchor" href="#ch8"></a>11. Using verbs and commands</h2>
+<h2 id="ch8"><a class="anchor" href="#ch8"></a>11. Using Verbs and Commands</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The library defines numerous verbs that can be readily used in-game with any objects or actors.
@@ -5071,7 +5078,7 @@ Here is an example with the verb 'drive' which is not included in the library by
 </div>
 </div>
 <div class="sect1">
-<h2 id="ch.runtime-messages"><a class="anchor" href="#ch.runtime-messages"></a>12. Runtime messages</h2>
+<h2 id="ch.runtime-messages"><a class="anchor" href="#ch.runtime-messages"></a>12. Runtime Messages</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Many of the runtime messages built into ALAN have been altered in the library from their default wording as stated in the ALAN manual.
@@ -6493,7 +6500,7 @@ Moreover, you should add the following check to each affected verb:</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="app.translating"><a class="anchor" href="#app.translating"></a>Appendix A: Translating to other languages</h2>
+<h2 id="app.translating"><a class="anchor" href="#app.translating"></a>Appendix A: Translating to Other Languages</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>To translate the ALAN system and library to other languages, you should</p>
@@ -6562,7 +6569,7 @@ Moreover, you should add the following check to each affected verb:</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="app.short-examples"><a class="anchor" href="#app.short-examples"></a>Appendix B: Short examples</h2>
+<h2 id="app.short-examples"><a class="anchor" href="#app.short-examples"></a>Appendix B: Short Examples</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_example_1"><a class="anchor" href="#_example_1"></a>B.1. Example 1</h3>

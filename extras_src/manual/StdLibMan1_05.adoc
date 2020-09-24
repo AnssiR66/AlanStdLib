@@ -9,8 +9,8 @@
 ////
 
 
-[[ch13]]
-= Default attributes used in the standard library
+[[ch.default-attributes]]
+= Default Library Attributes
 
 The attributes in the following list are pre-defined in the library.
 When you coin your own attributes for your game, please be aware that these attributes already exist.

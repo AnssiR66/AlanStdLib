@@ -11,7 +11,7 @@
 
 [appendix]
 [[app.short-examples]]
-= Short examples
+= Short Examples
 
 
 == Example 1

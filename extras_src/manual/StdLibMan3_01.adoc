@@ -10,7 +10,7 @@
 
 
 [[ch8]]
-= Using verbs and commands
+= Using Verbs and Commands
 
 The library defines numerous verbs that can be readily used in-game with any objects or actors.
 For example, if you implement
