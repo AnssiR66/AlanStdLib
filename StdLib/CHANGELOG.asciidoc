@@ -22,6 +22,15 @@
 
 This changelog documents all changes to the Standard Library in each new release, covering new features, bug fixes, as well as updates to its documentation and other assets shipping in the distribution package.
 
+TIP: For each new library release, we provide a list of all the bugs that were fixed, along with links to their associated Issues on GitHub, in order to provide authors with all the required information to check if these bugs might be affecting their past adventures and, if so, how they could fix them by migrating to the latest library version.
+
+// >>> CUSTOM ATTRIBUTES FOR SUBSTITUTIONS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// Repository Issues Links:
+:Issue_57: link:https://github.com/AnssiR66/AlanStdLib/issues/57[Issue&nbsp;#57^, title="See original Issue on GitHub"]
+:Issue_60: link:https://github.com/AnssiR66/AlanStdLib/issues/60[Issue&nbsp;#60^, title="See original Issue on GitHub"]
+:Issue_61: link:https://github.com/AnssiR66/AlanStdLib/issues/61[Issue&nbsp;#61^, title="See original Issue on GitHub"]
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 
 == v2.2.0 -- 2020
 
@@ -44,6 +53,101 @@ In the future, more formats might be supported (e.g. eBook formats), if there's 
 * *[red]#Semantic Versioning#* --
 The library has now adopted the link:https://semver.org/[Semantic Versioning 2.0.0^,title="Visit Semantic Versioning website"] version scheme (hence the additional third digit in its new version number).
 SemVer has become the most widely used versioning scheme, by adoption it the StdLib will benefit from better integration in the GitHub open source ecosystem.
+
+
+=== StdLib Changes
+
+The library sources have been thoroughly revisited, the code polished and optimized, various bugs fixed, and new features added.
+
+* *[red]#Library Modules#* --
+`lib_messages.i` has been renamed to `lib_messages_runtime.i`, and some code from `lib_definitions.i` was moved to two new modules: `lib_messages_library.i`, now containing all the `my_game` string attributes for library responses; and `lib_verbs_restrictions.i`, containing all the attributes and code dealing with actions restrictions.
+The Standard Library now consists in the following files:
+
+** `library.i`
+** `lib_classes.i`
+** `lib_definitions.i`
+** `lib_locations.i`
+** `lib_messages_runtime.i`
+** `lib_messages_library.i`
+** `lib_verbs.i`
+** `lib_verbs_restrictions.i`
+
++
+This new modular structure provides better compartmentalization of library features, each module focusing on specific aspects of the library.
+End users wishing to study and customize the StdLib will find the new structure more intuitive and easier to work on.
+
+* *[red]#Clothing#* --
+The clothing system has been totally revamped, and it's now more flexible, more powerful, and easier to use.
+The new system is very similar to the previous one, and migrating an adventure to StdLib `v2.2.0` might require just a few small adjustments (if any).
+
+** The `worn` entity and the `wearing` set have been dropped, replaced by the `worn` boolean attribute, which is now used to track if a clothing items is being donned by a character (hero or NPC).
+The `worn` attribute is defined on the `thing` class so that authors might also use it for wearables other than clothes (e.g. wearable devices, like VR headsets, etc.), by defining their own custom wearable classes, unconnected to the `clothing` class.
+
+** The `inventory` and `examine <NPC>` commands will now produce separate lists for the items carried by the actor and the clothes being worn.
+
+** When the  `wear` and `remove` commands fail, they now report which blocking-clothing items are preventing the action (instead of printing the full list of worn items, as in previous versions of the library).
+
+** *[red]#Unconstrained Layers#* -- The clothing layer-coverage values are no longer restricted to a specific set of values (2, 4, 8, 16, 32, 64), now any valid integer can be freely used.
+Clothes types are no longer bound to the _Clothing Table_ values of previous versions; authors are now free to assign any arbitrary coverage values to clothing layers.
+
+*** Special clothings, like coats and skirts, are no longer hard-coded to specific layer-coverage values, and can now be implemented by setting two new boolean attributes:
+**** `IS NOT blockslegs` -- skirt and coats don't prevent wearing/removing legsware from the layers below (i.e. although they both cover the `botcover` layer, they don't block access to the legs).
+**** `IS twopieces` -- For items covering legs and torso via two separate pieces (e.g. a bikini) and which should be handled as a single clothing item (i.e. worn/removed in single action).
+Unlike a single-piece legs and torso item (e.g. a one-piece swimming suite), a `twopieces` item like a bikini can be worn/removed while wearing a skirt.
+
+** The new `facecover` attribute was added to allow handling goggles, fake beards, masks, etc., independently from the `headcover` layer.
+
+** The `worn_clothing_check` EVENT was removed because it was crashing the interpreter when moving around worn clothing items (see {Issue_57}).
+
+** The library now implements a new strategy for tracking worn clothing items, preventing any verb from dislocating a worn item from its wearing actor, and ensuring that any verb which legitimately dislocates an item worn by an actor (e.g. dropping it, throwing it giving it to an NPC, or asking a compliant NPC for it) also changes its status to `NOT worn`.
+
+// * *[red]#XXXXXXXXXXX#* --
+
+
+////
+@TODO: PENDING CHANGES TO MENTION:
+
+- Readable objects that have an `ex` string: the examine verb doesn't behave
+  like read for them. If the attribute is empty, it behaves as before (read),
+  so it doesn't break backward compatibility. (Issue ???)
+- Brief/Verbose verbs dropped because not working:
+  https://github.com/AnssiR66/AlanStdLib/issues/32
+
+////
+
+==== Bug Fixes
+
+Various library bugs were discovered and fixed:
+
+
+////
+@TODO: CHECK FULL LIST OF CLOSED BUG-ISSUES:
+
+https://github.com/AnssiR66/AlanStdLib/issues?q=is%3Aissue+is%3Aclosed+label%3A%22%3Askull%3A+bug%22
+
+--------------------------------------------------------------------------------
+#39 — Bug in `fill_with`
+https://github.com/AnssiR66/AlanStdLib/issues/39
+
+#32 — Brief Verb Not Working
+https://github.com/AnssiR66/AlanStdLib/issues/32
+
+#83 — Custom Descriptions for Room/Site Objects Is Not Working
+https://github.com/AnssiR66/AlanStdLib/issues/83
+
+#24 — Restriction Level 2 Doesn't Include 'talk' and 'talk_to'?
+https://github.com/AnssiR66/AlanStdLib/issues/24
+
+#18 — Verb 'ask_for' and Compliance
+https://github.com/AnssiR66/AlanStdLib/issues/18
+--------------------------------------------------------------------------------
+
+////
+
+* *[red]#Clothing#* -- bugs related to the clothing system:
+** Moving around worn clothing items could crash the interpreter due to a stack error (see {Issue_57}).
+** Various verbs dislocating worn items from its wearer were not updating the item's status to `NOT worn`, leading to erratic behavior in verbs with special worn-status checks when handling clothes (see {Issue_60}).
+** Clothes nested inside worn clothing items (e.g. a pair of gloves inside the coat pockets) were also marked as being worn during game initialization (see {Issue_61}).
 
 
 == v2.1 -- 2018-05-27

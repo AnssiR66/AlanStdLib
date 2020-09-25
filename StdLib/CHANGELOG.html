@@ -459,6 +459,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>This changelog documents all changes to the Standard Library in each new release, covering new features, bug fixes, as well as updates to its documentation and other assets shipping in the distribution package.</p>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For each new library release, we provide a list of all the bugs that were fixed, along with links to their associated Issues on GitHub, in order to provide authors with all the required information to check if these bugs might be affecting their past adventures and, if so, how they could fix them by migrating to the latest library version.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -494,6 +506,127 @@ In the future, more formats might be supported (e.g. eBook formats), if there&#8
 SemVer has become the most widely used versioning scheme, by adoption it the StdLib will benefit from better integration in the GitHub open source ecosystem.</p>
 </li>
 </ul>
+</div>
+<div class="sect2">
+<h3 id="_stdlib_changes"><a class="anchor" href="#_stdlib_changes"></a>StdLib Changes</h3>
+<div class="paragraph">
+<p>The library sources have been thoroughly revisited, the code polished and optimized, various bugs fixed, and new features added.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><span class="red">Library Modules</span></strong>&#8201;&#8212;&#8201;<code>lib_messages.i</code> has been renamed to <code>lib_messages_runtime.i</code>, and some code from <code>lib_definitions.i</code> was moved to two new modules: <code>lib_messages_library.i</code>, now containing all the <code>my_game</code> string attributes for library responses; and <code>lib_verbs_restrictions.i</code>, containing all the attributes and code dealing with actions restrictions.
+The Standard Library now consists in the following files:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>library.i</code></p>
+</li>
+<li>
+<p><code>lib_classes.i</code></p>
+</li>
+<li>
+<p><code>lib_definitions.i</code></p>
+</li>
+<li>
+<p><code>lib_locations.i</code></p>
+</li>
+<li>
+<p><code>lib_messages_runtime.i</code></p>
+</li>
+<li>
+<p><code>lib_messages_library.i</code></p>
+</li>
+<li>
+<p><code>lib_verbs.i</code></p>
+</li>
+<li>
+<p><code>lib_verbs_restrictions.i</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This new modular structure provides better compartmentalization of library features, each module focusing on specific aspects of the library.
+End users wishing to study and customize the StdLib will find the new structure more intuitive and easier to work on.</p>
+</div>
+</li>
+<li>
+<p><strong><span class="red">Clothing</span></strong>&#8201;&#8212;&#8201;The clothing system has been totally revamped, and it&#8217;s now more flexible, more powerful, and easier to use.
+The new system is very similar to the previous one, and migrating an adventure to StdLib <code>v2.2.0</code> might require just a few small adjustments (if any).</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>worn</code> entity and the <code>wearing</code> set have been dropped, replaced by the <code>worn</code> boolean attribute, which is now used to track if a clothing items is being donned by a character (hero or NPC).
+The <code>worn</code> attribute is defined on the <code>thing</code> class so that authors might also use it for wearables other than clothes (e.g. wearable devices, like VR headsets, etc.), by defining their own custom wearable classes, unconnected to the <code>clothing</code> class.</p>
+</li>
+<li>
+<p>The <code>inventory</code> and <code>examine &lt;NPC&gt;</code> commands will now produce separate lists for the items carried by the actor and the clothes being worn.</p>
+</li>
+<li>
+<p>When the  <code>wear</code> and <code>remove</code> commands fail, they now report which blocking-clothing items are preventing the action (instead of printing the full list of worn items, as in previous versions of the library).</p>
+</li>
+<li>
+<p><strong><span class="red">Unconstrained Layers</span></strong>&#8201;&#8212;&#8201;The clothing layer-coverage values are no longer restricted to a specific set of values (2, 4, 8, 16, 32, 64), now any valid integer can be freely used.
+Clothes types are no longer bound to the <em>Clothing Table</em> values of previous versions; authors are now free to assign any arbitrary coverage values to clothing layers.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Special clothings, like coats and skirts, are no longer hard-coded to specific layer-coverage values, and can now be implemented by setting two new boolean attributes:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>IS NOT blockslegs</code>&#8201;&#8212;&#8201;skirt and coats don&#8217;t prevent wearing/removing legsware from the layers below (i.e. although they both cover the <code>botcover</code> layer, they don&#8217;t block access to the legs).</p>
+</li>
+<li>
+<p><code>IS twopieces</code>&#8201;&#8212;&#8201;For items covering legs and torso via two separate pieces (e.g. a bikini) and which should be handled as a single clothing item (i.e. worn/removed in single action).
+Unlike a single-piece legs and torso item (e.g. a one-piece swimming suite), a <code>twopieces</code> item like a bikini can be worn/removed while wearing a skirt.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The new <code>facecover</code> attribute was added to allow handling goggles, fake beards, masks, etc., independently from the <code>headcover</code> layer.</p>
+</li>
+<li>
+<p>The <code>worn_clothing_check</code> EVENT was removed because it was crashing the interpreter when moving around worn clothing items (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/57" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#57</a>).</p>
+</li>
+<li>
+<p>The library now implements a new strategy for tracking worn clothing items, preventing any verb from dislocating a worn item from its wearing actor, and ensuring that any verb which legitimately dislocates an item worn by an actor (e.g. dropping it, throwing it giving it to an NPC, or asking a compliant NPC for it) also changes its status to <code>NOT worn</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_bug_fixes"><a class="anchor" href="#_bug_fixes"></a>Bug Fixes</h4>
+<div class="paragraph">
+<p>Various library bugs were discovered and fixed:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><span class="red">Clothing</span></strong>&#8201;&#8212;&#8201;bugs related to the clothing system:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Moving around worn clothing items could crash the interpreter due to a stack error (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/57" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#57</a>).</p>
+</li>
+<li>
+<p>Various verbs dislocating worn items from its wearer were not updating the item&#8217;s status to <code>NOT worn</code>, leading to erratic behavior in verbs with special worn-status checks when handling clothes (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/60" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#60</a>).</p>
+</li>
+<li>
+<p>Clothes nested inside worn clothing items (e.g. a pair of gloves inside the coat pockets) were also marked as being worn during game initialization (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/61" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#61</a>).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 </div>
