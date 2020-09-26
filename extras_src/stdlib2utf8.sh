@@ -1,15 +1,15 @@
 #!/bin/bash
 
-# stdlib2utf8.sh          v1.0.0 | 2020/09/15 | by Tristano Ajmone, MIT License.
+# stdlib2utf8.sh          v1.0.1 | 2020/09/27 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                       CONVERT LIBRARY SOURCE TO UTF-8                        #
 #                                                                              #
 ################################################################################
 
-source ../assets/sh/init-env.sh  # Initialize work environment
-source _print-funcs.sh   # Ornamental print functions
-source _build-funcs.sh   # Build and deploy functions
+if ! [[ -v AlanEnv ]]; then # If ALAN env is not already initialized:
+	source ../assets/sh/init-env.sh  # Initialize the work environment
+fi
 
 printHeading1 "Create UTF-8 Version of StdLib Sources"
 echo -e "Because Asciidoctor can't handle inclusion of external files in ISO-8859-1"
@@ -40,7 +40,7 @@ done
 if ! [[ -v invoker ]]
 	then printFinished
 fi
-exit
+return 0
 
 # ------------------------------------------------------------------------------
 # The MIT License

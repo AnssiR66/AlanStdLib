@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# manual/html-build.sh    v0.0.1 | 2020/09/23 | by Tristano Ajmone, MIT License.
+# manual/html-build.sh    v0.0.2 | 2020/09/27 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                           BUILD STDLIB MANUAL HTML                           #
@@ -18,8 +18,6 @@
 #                               SETUP & SETTINGS                               #
 ################################################################################
 source ../../assets/sh/init-env.sh  # Initialize work environment
-source _print-funcs.sh           # Ornamental print functions
-source _build-funcs.sh           # Build and deploy functions
 
 export invoker="manual/html-build.sh"   # Used by some external scripts
 ################################################################################
@@ -40,7 +38,6 @@ fi
 done
 
 printFinished
-exit
 
 # ------------------------------------------------------------------------------
 # The MIT License

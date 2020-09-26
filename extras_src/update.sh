@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# extras_src/update.sh    v2.1.0 | 2020/09/15 | by Tristano Ajmone, MIT License.
+# extras_src/update.sh    v2.1.1 | 2020/09/27 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                          BUILD STDLIB EXTRAS FOLDER                          #
@@ -30,9 +30,9 @@ foldersList="manual tutorials"
 ################################################################################
 #                               SETUP & SETTINGS                               #
 ################################################################################
-source ../assets/sh/init-env.sh  # Initialize work environment
-source _print-funcs.sh           # Ornamental print functions
-source _build-funcs.sh           # Build and deploy functions
+if ! [[ -v AlanEnv ]]; then # If ALAN env is not already initialized:
+	source ../assets/sh/init-env.sh  # Initialize the work environment
+fi
 
 export invoker="extras_src/update.sh"   # Used by some external scripts
 ################################################################################
@@ -59,7 +59,7 @@ foldersTot=$counter
 ################################################################################
 #                       CONVERT LIBRARY SOURCE TO UTF-8                        #
 ################################################################################
-./stdlib2utf8.sh
+source ./stdlib2utf8.sh
 
 ################################################################################
 #                           FOLDERS-PROCESSING LOOP                            #
