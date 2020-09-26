@@ -1,111 +1,105 @@
-################################################################################
-# The Standard Library for ALAN Interactive Fiction Language                   #
-# https://github.com/AnssiR66/AlanStdLib                                       #
-################################################################################
+################################################################
+#  The Standard Library for ALAN Interactive Fiction Language  #
+#  https://github.com/AnssiR66/AlanStdLib                      #
+################################################################
 
 # Set Git's default behaviour to text-files autodetection, in case users don't
 # have `core.autocrlf` set:
 * text=auto
 
 # ==============================================================================
-#                      File Extensions Setting: Text/Binary                     
+#                               ALAN RELATED FILES
 # ==============================================================================
-# Explicitly declare all used file extensions as either text or binary, and tell
-# Git how to handle line-endings normalization.
+[attr]Alan text linguist-language=Alan linguist-detectable=true
 
-## ==========
-## Alan Files
-## ==========
-*.a3c      binary
-*.a3r      binary
-*.alan     text
-*.i        text
-*.ifid     text
-*.sav      binary
+## Alan Sources
+###############
+*.alan   Alan
+*.i      Alan
+*.ifid   text linguist-generated=true
+# UTF-8 converted Alan sources for Asciidoctor inclusion:
+*.utf8_alan    text linguist-generated=true
 
-## ===================
-## Game Scripts & Logs
-## ===================
-*.log      text
-*.a3log    text
-*.a3sol    text
+## Alan Story-Files
+###################
+*.a3c   binary
+*.a3r   binary
+*.sav   binary
 
-## =============
+## Adventures Solutions & Transcripts
+#####################################
+*.a3sol   text linguist-detectable=false
+*.a3log   text linguist-generated=true
+*.log     text linguist-generated=true
+
 ## AlanIDE Files
-## =============
-.project   text
+################
+.project   text linguist-language=XML linguist-generated=true
 
-## ===========
+# ==============================================================================
+#                             ASCIIDOCTOR TOOLCHAIN
+# ==============================================================================
+# Asciidoctor and related assets of our build system...
+
 ## Asciidoctor
-## ===========
-*.adoc      text
-*.asciidoc  text
-*.csv       text
-*.dsv       text
+##############
+*.adoc       text
+*.asciidoc   text
+*.csv        text
+*.dsv        text
+*.haml       text
+*.rb         text
 
-## =============
-## SHELL SCRIPTS
-## =============
-*.bat      text eol=crlf
-*.com      text eol=crlf
-*.sh       text eol=lf
-*.ps1      text eol=crlf
-*.sed      text eol=lf
+## HTML Backend
+###############
+*.htm      text linguist-generated=true
+*.html     text linguist-generated=true
+*.css      text linguist-generated=true
+*.js       text linguist-vendored=true
 
-## ==================
-## MISC. DATA FORMATS
-## ==================
-*.haml     text
-*.json     text
-*.xhtml    text
-*.xml      text
-*.yaml     text
-*.yml      text
 
-## =================
-## WEB-RELATED FILES
-## =================
-*.htm      text
-*.html     text
-*.css      text eol=lf
-*.css.map  text
-*.js       text
+# SASS/SCSS:
+*.sass   text
+*.scss   text
 
-## ===============
-## SASS/SCSS FILES
-## ===============
-*.scss     text
+## Third Party Tools File Formats
+#################################
+# Dia Diagram Editor: http://dia-installer.de
+*.dia    binary
+# ColorImpact 4 palettes: http://www.tigercolor.com
+*.cifc   binary
 
-## ===================
-## DOCUMENTATION FILES
-## ===================
-*.docx       binary
+# ==============================================================================
+#                                GENERIC SETTINGS
+# ==============================================================================
+
+## Repository Configuration
+###########################
+.editorconfig    text eol=lf
+.travis.yml      text eol=lf
+.gitattributes   text eol=lf
+.gitconfig       text eol=lf
+.gitignore       text eol=lf
+.gitmodules      text eol=lf
+
+## Shell/CMD Scripts
+####################
+*.bat   text eol=crlf
+*.com   text eol=crlf
+*.sh    text eol=lf
+*.sed   text eol=lf
+
+## Documentation
+################
 *.markdown   text
 *.md         text
-*.pdf        binary
+*.odt        binary
 *.txt        text
 COPYING      text
 LICENSE      text
-UNLICENSE    text
 
-## ============
-## CONFIG FILES
-## ============
-*.cnf          text
-*.conf         text
-*.config       text
-*.ini          text
-*.prefs        text
-.editorconfig  text
-.gitattributes text
-.gitconfig     text
-.gitignore     text
-.gitkeep       text
-.gitmodules    text eol=lf
-
-## ========
-## ARCHIVES
-## ========
+## Archives
+###########
 *.7z    binary
 *.gz    binary
 *.jar   binary
@@ -113,32 +107,31 @@ UNLICENSE    text
 *.tar   binary
 *.zip   binary
 
-## ========
-## GRAPHICS
-## ========
-*.ai    binary
-*.bmp   binary
-*.eps   binary
-*.gif   binary
-*.ico   binary
-*.jng   binary
-*.jp2   binary
-*.jpg   binary
-*.jpeg  binary
-*.jpx   binary
-*.jxr   binary
-*.png   binary
-*.psb   binary
-*.psd   binary
-*.svg   binary
-*.svgz  binary
-*.tif   binary
-*.tiff  binary
-*.wbmp  binary
-*.webp  binary
+## Graphics
+###########
+*.ai     binary
+*.bmp    binary
+*.eps    binary
+*.gif    binary
+*.ico    binary
+*.jng    binary
+*.jp2    binary
+*.jpg    binary
+*.jpeg   binary
+*.jpx    binary
+*.jxr    binary
+*.png    binary
+*.psb    binary
+*.psd    binary
+*.svg    binary
+*.svgz   binary
+*.tif    binary
+*.tiff   binary
+*.wbmp   binary
+*.webp   binary
 
 # ==============================================================================
-#                             Git Archive Exclusions                            
+#                             Git Archive Exclusions
 # ==============================================================================
 # Define patterns to selectively exclude maintainers' files and folders from the
 # Zip archives downloadable from GitHub (releases and download button).
@@ -172,7 +165,7 @@ UNLICENSE    text
 *.adoc       export-ignore
 
 # ==============================================================================
-#                                GitHub Linguist                                
+#                                GitHub Linguist
 # ==============================================================================
 #  -- https://github.com/github/linguist
 #

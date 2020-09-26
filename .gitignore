@@ -1,7 +1,7 @@
-################################################################################
-# The Standard Library for ALAN Interactive Fiction Language                   #
-# https://github.com/AnssiR66/AlanStdLib                                       #
-################################################################################
+################################################################
+#  The Standard Library for ALAN Interactive Fiction Language  #
+#  https://github.com/AnssiR66/AlanStdLib                      #
+################################################################
 
 ## ==========
 ## Alan Files
@@ -46,7 +46,7 @@ ___*.*
 
 
 # ==============================================================================
-#                              MISC IGNORE PATTERNS                             
+#                              MISC IGNORE PATTERNS
 # ==============================================================================
 # Based on ".gitignore" created by:
 # https://www.gitignore.io/api/windows,linux,macos,purebasic

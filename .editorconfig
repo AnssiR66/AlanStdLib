@@ -1,12 +1,109 @@
+################################################################
+#  The Standard Library for ALAN Interactive Fiction Language  #
+#  https://github.com/AnssiR66/AlanStdLib                      #
+################################################################
+
 root = true
 
-# Common settings for all Alan files
-[*.{alan,i,a3sol,a3log}]
-indent_style = space
-indent_size = 2
-charset = latin1
+# ==============================================================================
+#                               ALAN RELATED FILES
+# ==============================================================================
 
-# Additional settings for non-generated Alan files
+# Common settings for non-generated Alan files
 [*.{alan,i,a3sol}]
+indent_style = space
+indent_size = unset
+charset = latin1
 trim_trailing_whitespace = true
 insert_final_newline = true
+
+# Exclude Encoding Exception:
+; Skip encoding validation on some ALAN sources that contain non-ASCII chars,
+; because of EClint's buggy support of this feature, leading to false positive
+; error reports. (See #73)
+
+[tests/misc/{meta-verbs,restricted-actions}.alan]
+charset = unset
+[{extras,extras_src}/manual/wedding.a3sol]
+charset = unset
+[{extras,extras_src}/manual/{cave,garden,lab}?.*]
+charset = unset
+
+# Exclude generated files:
+[extras_src/utf8/**]
+indent_style = unset
+indent_size = unset
+charset = unset
+trim_trailing_whitespace = unset
+insert_final_newline = unset
+
+# ==============================================================================
+#                             ASCIIDOCTOR TOOLCHAIN
+# ==============================================================================
+# Asciidoctor and related assets of our build system...
+
+## AsciiDoc
+###########
+[*.{ad,adoc,asciidoc}]
+indent_size = unset
+indent_style = space
+end_of_line = unset
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# ==============================================================================
+#                                GENERIC SETTINGS
+# ==============================================================================
+
+## Repository Configurations
+############################
+[.{git*,editorconfig,*.yml}]
+end_of_line = lf
+indent_style = space
+indent_size = unset
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[.gitmodules]
+indent_style = tab
+
+[.gitkeep]
+end_of_line = unset
+insert_final_newline = unset
+
+
+## Batch Scripts
+################
+[*.{bat,cmd}]
+indent_style = space
+indent_size = unset
+end_of_line = crlf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+
+## Shell Scripts
+################
+[*.sh]
+end_of_line = lf
+indent_style = tab
+indent_size = unset
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+
+## Markdown GFM
+###############
+[*.md]
+indent_style = space
+indent_size = unset
+end_of_line = unset
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# EOF #
