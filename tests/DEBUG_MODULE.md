@@ -25,7 +25,7 @@ Description of the "debugging" module available for inclusion in the test advent
 # Introduction
 
 - [`inc_debug.i`][inc_debug]
- 
+
 This module offers some "debugging verbs" and helpers which are useful both in automated tests as well as playing the test adventures while working on library features. Needless to say, it can also be useful to authors during the creation stages of their own adventures.
 
 This document will present the additional verbs and features introuced by the debug module.
@@ -50,7 +50,7 @@ These are the debugging verbs added to any adventure by the debug module:
 | `dbg_comp (act)*!`    | Shows compliance state of actors.               |
 | `dbg_inv (act)*!`     | Show contents of an actor using `LIST` command. |
 
-<!-- 
+<!--
 | `xxxx`                | xxx                                      |
 -->
 
@@ -82,7 +82,7 @@ These are the helper verbs added to any adventure by the debug module:
 |-----------------------|------------------------------------------|
 | `subjugate (act)*`    | Toggles the compliancy state of an actor |
 
-<!-- 
+<!--
 | `xxxx`                | xxx                                      |
 -->
 
@@ -93,7 +93,7 @@ The verb `SUBJUGATE <ACTOR>` will toggle the compliancy state of an actor.
 A useful shortcut to alter compliancy of actors and test how verbs that depend on actors' compliancy behave in different compliancy contexts.
 
 <!-----------------------------------------------------------------------------
-                               REFERENCE LINKS                                
+                               REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
 <!-- PROJECT FILES -->

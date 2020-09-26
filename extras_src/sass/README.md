@@ -68,7 +68,7 @@ These are the Sass/SCSS sources for building the custom CSS stylesheets used in 
 
 The generated CSS file ([`./styles.css`][styles.css]) is injected into the docinfo file ([`../adoc/docinfo.html`][docinfo file]) so that every HTML document will be fully standalone.
 
-This also means that updating the CSS and docinfo files won't affect the appearance of the HTML documents until they are converted again, for they no longer rely on an external stylesheet — the custom CSS is now in the document `<head>` section. 
+This also means that updating the CSS and docinfo files won't affect the appearance of the HTML documents until they are converted again, for they no longer rely on an external stylesheet — the custom CSS is now in the document `<head>` section.
 
 ## Production Work
 
@@ -162,7 +162,7 @@ SOFTWARE.
 - [`_helpers.scss`][helpers]
 
 The `fontFace` Mixin was adapted from Sass Boilerplate project's "[`fontface.scss`][fontface]", Copyright (c) 2013 Peter Mescalchin, MIT License:
- 
+
 -  https://github.com/magnetikonline/sass-boilerplate
 
 <!--  -->
@@ -189,7 +189,7 @@ The `fontFace` Mixin was adapted from Sass Boilerplate project's "[`fontface.scs
     CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 <!-----------------------------------------------------------------------------
-                               REFERENCE LINKS                                
+                               REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
 [_shared-settings.sh]: ./_shared-settings.sh "View script source"

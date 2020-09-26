@@ -20,7 +20,7 @@ END THE.
 
 THE apple ISA OBJECT AT room2
   IS edible.
-  
+
   VERB eat
     DOES "Congratulations!" QUIT.
   END VERB.

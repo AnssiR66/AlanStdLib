@@ -30,14 +30,14 @@ touch  $utfDir/.gitkeep
 # Convert Library Sources to UTF-8
 # --------------------------------
 for sourcefile in $srcDir/*.{alan,i} ; do
-  alan2utf8 $sourcefile
-  if [ $? -ne 0 ] ; then
-    printAborting ; exit 1
-  fi
+	alan2utf8 $sourcefile
+	if [ $? -ne 0 ] ; then
+		printAborting ; exit 1
+	fi
 done
 # ------------------------------------------------------------------------------
 # Don't print finish message if invoked by another script:
-if ! [[ -v invoker ]] 
+if ! [[ -v invoker ]]
 	then printFinished
 fi
 exit

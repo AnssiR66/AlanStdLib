@@ -87,7 +87,7 @@ The `_shared-docs-funcs.sh` will define some vars to determine the base paths fo
 
 If on the one hand this makes all docs portable, it also hinders maintainance — for when editing the Sass sources you need to rebuild all the docs, even to just preview changes, which makes using Sass watch functionality pretty useless.
 
-Because of this, we need to add in the `sass/` folder a test document that uses the external CSS file, so we can test the Sass tweaks live when editing them. 
+Because of this, we need to add in the `sass/` folder a test document that uses the external CSS file, so we can test the Sass tweaks live when editing them.
 
 ## GitHub Export Rules
 
@@ -95,7 +95,7 @@ Because of this, we need to add in the `sass/` folder a test document that uses 
     + [x] Exclude `extras_src/`.
 
 <!-----------------------------------------------------------------------------
-                               REFERENCE LINKS                                
+                               REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
 

@@ -48,7 +48,7 @@ For more info on its progress status, see:
 - [`../extras_src/manual/README.md`](../extras_src/manual/README.md)
 
 <!-----------------------------------------------------------------------------
-                               REFERENCE LINKS                                
+                               REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
 

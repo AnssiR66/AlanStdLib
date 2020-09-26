@@ -16,7 +16,7 @@ END THE.
 
 THE child ISA PERSON AT nursery
   DESCRIPTION "There is a crying child here."
-  
+
   VERB give
     WHEN recipient
       DOES ONLY

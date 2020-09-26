@@ -32,7 +32,7 @@ utfDir="utf8/manual"
 for sourcefile in ./*.asciidoc ; do
 adoc2html $sourcefile
 if [ $? -ne 0 ] ; then
-  printAborting ; exit 1
+	printAborting ; exit 1
 fi
 done
 

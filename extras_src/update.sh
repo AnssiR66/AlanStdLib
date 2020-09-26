@@ -46,13 +46,13 @@ printBanner "Build StdLib Extras Folders"
 counter=0
 echo -e "The following folders will be processed:\n\e[93m"
 for dirName in $foldersList; do
-  (( counter = counter + 1 ))
-  echo -e "  \e[90m$counter. \e[93m$dirName"
-  if [ ! -d "$dirName" ]; then
-    printErrMsg "Subfolder \"$dirName\" doesn't exist!"
-    printAborting
-    exit 1
-  fi
+	(( counter = counter + 1 ))
+	echo -e "  \e[90m$counter. \e[93m$dirName"
+	if [ ! -d "$dirName" ]; then
+		printErrMsg "Subfolder \"$dirName\" doesn't exist!"
+		printAborting
+		exit 1
+	fi
 done
 foldersTot=$counter
 
@@ -67,94 +67,94 @@ foldersTot=$counter
 
 counter=0
 for dirName in $foldersList; do
-  (( counter = counter + 1 ))
+	(( counter = counter + 1 ))
 
-  # Define Source & Destination folders:
-  outDir="$outBasePath/$dirName" # destination folder for HTML docs and examples
-  srcDir="$srcBasePath/$dirName" # path of AsciiDoc sources and Alan examples
-  utfDir="$utfBasePath/$dirName" # path of UTF-8 converted Alan files
-  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  printHeading1 "Processing Folder $counter/$foldersTot: \"$dirName\""
+	# Define Source & Destination folders:
+	outDir="$outBasePath/$dirName" # destination folder for HTML docs and examples
+	srcDir="$srcBasePath/$dirName" # path of AsciiDoc sources and Alan examples
+	utfDir="$utfBasePath/$dirName" # path of UTF-8 converted Alan files
+	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	printHeading1 "Processing Folder $counter/$foldersTot: \"$dirName\""
 
-  # ============================================================================
-  printHeading2 "Process Alan Adventures"
-  # ============================================================================
+	# ============================================================================
+	printHeading2 "Process Alan Adventures"
+	# ============================================================================
 
-  # ----------------------------------------------------------------------------
-  printHeading3 "Compile Adventures"
-  # ----------------------------------------------------------------------------
-  pushd "$srcDir" > /dev/null
-  rm -f *.a3c *.a3log
-  for sourcefile in *.alan ; do
-    compile $sourcefile
-    if [ $? -ne 0 ] ; then
-      printAborting ; exit 1
-    fi
-  done
-  popd > /dev/null
+	# ----------------------------------------------------------------------------
+	printHeading3 "Compile Adventures"
+	# ----------------------------------------------------------------------------
+	pushd "$srcDir" > /dev/null
+	rm -f *.a3c *.a3log
+	for sourcefile in *.alan ; do
+		compile $sourcefile
+		if [ $? -ne 0 ] ; then
+			printAborting ; exit 1
+		fi
+	done
+	popd > /dev/null
 
-  # ----------------------------------------------------------------------------
-  printHeading3 "Run Commands Scripts"
-  # ----------------------------------------------------------------------------
+	# ----------------------------------------------------------------------------
+	printHeading3 "Run Commands Scripts"
+	# ----------------------------------------------------------------------------
 
-  for adventure in $srcDir/*.a3c ; do
-    runCommandsScripts $adventure
-  done
+	for adventure in $srcDir/*.a3c ; do
+		runCommandsScripts $adventure
+	done
 
-  # ----------------------------------------------------------------------------
-  printHeading3 "Deploy Alan Source Files"
-  # ----------------------------------------------------------------------------
-  echo -e "Take every \".alan\" source file whose name doesn't start with an underscore,"
-  echo -e "strip away AsciiDoc region-tag comments, and copy it to the destination folder."
+	# ----------------------------------------------------------------------------
+	printHeading3 "Deploy Alan Source Files"
+	# ----------------------------------------------------------------------------
+	echo -e "Take every \".alan\" source file whose name doesn't start with an underscore,"
+	echo -e "strip away AsciiDoc region-tag comments, and copy it to the destination folder."
 
-  for file in $srcDir/[^_]*.alan ; do
-    deployAlan $file
-  done
+	for file in $srcDir/[^_]*.alan ; do
+		deployAlan $file
+	done
 
-  # ============================================================================
-  printHeading2 "Build AsciiDoc Documentation"
-  # ============================================================================
+	# ============================================================================
+	printHeading2 "Build AsciiDoc Documentation"
+	# ============================================================================
 
-  # ----------------------------------------------------------------------------
-  printHeading3 "Create UTF-8 Version of Alan Sources and Transcripts"
-  # ----------------------------------------------------------------------------
+	# ----------------------------------------------------------------------------
+	printHeading3 "Create UTF-8 Version of Alan Sources and Transcripts"
+	# ----------------------------------------------------------------------------
 
-  echo -e "Because Asciidoctor can't handle inclusion of external files in ISO-8859-1"
-  echo -e "econding, we need to create UTF-8 versions of them."
+	echo -e "Because Asciidoctor can't handle inclusion of external files in ISO-8859-1"
+	echo -e "econding, we need to create UTF-8 versions of them."
 
-  rm -rf $utfDir
-  mkdir  $utfDir
-  touch  $utfDir/.gitkeep
+	rm -rf $utfDir
+	mkdir  $utfDir
+	touch  $utfDir/.gitkeep
 
-  for sourcefile in $srcDir/*.{alan,i,a3log} ; do
-    alan2utf8 $sourcefile
-    if [ $? -ne 0 ] ; then
-      printAborting ; exit 1
-    fi
-  done
+	for sourcefile in $srcDir/*.{alan,i,a3log} ; do
+		alan2utf8 $sourcefile
+		if [ $? -ne 0 ] ; then
+			printAborting ; exit 1
+		fi
+	done
 
-  # ----------------------------------------------------------------------------
-  printHeading3 "Sanitize Game Transcripts"
-  # ----------------------------------------------------------------------------
+	# ----------------------------------------------------------------------------
+	printHeading3 "Sanitize Game Transcripts"
+	# ----------------------------------------------------------------------------
 
-  echo -e "Reformat game transcripts from verbatim to AsciiDoc example blocks."
+	echo -e "Reformat game transcripts from verbatim to AsciiDoc example blocks."
 
-  for transcript in $utfDir/*.a3log ; do
-    a3logSanitize $transcript
-    if [ $? -ne 0 ] ; then
-      printAborting ; exit 1
-    fi
-  done
+	for transcript in $utfDir/*.a3log ; do
+		a3logSanitize $transcript
+		if [ $? -ne 0 ] ; then
+			printAborting ; exit 1
+		fi
+	done
 
-  # ----------------------------------------------------------------------------
-  printHeading3 "Convert Docs to HTML"
-  # ----------------------------------------------------------------------------
-  for sourcefile in $srcDir/*.asciidoc ; do
-    adoc2html $sourcefile
-    if [ $? -ne 0 ] ; then
-      printAborting ; exit 1
-    fi
-  done
+	# ----------------------------------------------------------------------------
+	printHeading3 "Convert Docs to HTML"
+	# ----------------------------------------------------------------------------
+	for sourcefile in $srcDir/*.asciidoc ; do
+		adoc2html $sourcefile
+		if [ $? -ne 0 ] ; then
+			printAborting ; exit 1
+		fi
+	done
 done
 
 # ------------------------------------------------------------------------------

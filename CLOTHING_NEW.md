@@ -48,7 +48,7 @@ The criteria to distinguish between worn and not-worn items is simple:
 
 Therefore, in the new system is sufficient to ensure that any verb (or event or script) that _might_ dislocate clothing items outside an actor also sets the dislocated item as `NOT worn` — if the item is not of a wearable type it doesn't matter, for non clothing items should be set to `NOT worn` anyhow.
 
-It's important to notice here that, although the library only offers werables of `clothing` type, the new system introduces a general concept of 'wearability', which extends also to other types of wearables which authors might implement. 
+It's important to notice here that, although the library only offers werables of `clothing` type, the new system introduces a general concept of 'wearability', which extends also to other types of wearables which authors might implement.
 
 The library redefines many verbs on the `clothing` class to ensure that clothing is handled as expected by the vanilla library, which also includes additional CHECKs to prevent most verbs from dislocating worn items.
 
@@ -63,7 +63,7 @@ The `worn` attribute is defined on the `thing` class instead of the `clothing` c
 
 In view of possible author-defined wearables, the Library also ensures that any of its built-in verbs that move around objects always set them to `NOT worn`. This means that authors implementing custom wearables won't have to worry about library verbs mishandling worn objects status.
 
-Obviously, when implement custom wearable types, authors are better off implementing some new class for them and override on the new class many of the base library verbs, just like the library does with `clothing`. 
+Obviously, when implement custom wearable types, authors are better off implementing some new class for them and override on the new class many of the base library verbs, just like the library does with `clothing`.
 
 ## Working With Clothes in Adventures
 
@@ -95,7 +95,7 @@ Any clothing item is considered to block wearing/removing items occupying the sa
 
 ```alan
 THE skirt IsA clothing
-  HAS botcover 5. 
+  HAS botcover 5.
   IS NOT blockslegs.
 ```
 
@@ -113,7 +113,7 @@ THE bikini IsA clothing
 
 
 <!-----------------------------------------------------------------------------
-                               REFERENCE LINKS                                
+                               REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
 

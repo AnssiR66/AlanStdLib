@@ -4,7 +4,7 @@ This folder contains useful resources for working with ALAN and the Standard Lib
 
 ## The Clothing Guide
 
-A reference guide to using the library clothing features and undestanding the coverage attributes of the `clothing` class, and how to set their values in clothes istances. 
+A reference guide to using the library clothing features and undestanding the coverage attributes of the `clothing` class, and how to set their values in clothes istances.
 
 - [`Clothing_Guide.html`][Clothing html] ([Live HTML][Clothing live])
 
@@ -16,7 +16,7 @@ A reference guide to using the library clothing features and undestanding the co
 
 
 <!-----------------------------------------------------------------------------
-                               REFERENCE LINKS                                
+                               REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
 <!-- project files -->

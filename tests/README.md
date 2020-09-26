@@ -93,15 +93,15 @@ The advantages offered by this approach are management simplicity and richness o
 
 Each test script targets specific features in the adventure (a group of verbs/actions, some specific functionality, interactions between actors, etc.), and the source adventure was crafted to provide a setting that facilitates all the various tests.
 
-Each single adventure in these subfolders contains a moltitude of locations, actors, furniture and props, devices, etc. They offer a large-scale test environment, which resembles the simulation of a real adventure game. And because there is a single source file to administer in the course of time, more energy can be invested to polish the adventure. 
+Each single adventure in these subfolders contains a moltitude of locations, actors, furniture and props, devices, etc. They offer a large-scale test environment, which resembles the simulation of a real adventure game. And because there is a single source file to administer in the course of time, more energy can be invested to polish the adventure.
 
 > __NOTE__ — Currently the [`RUNTESTS.bat`][RUNTESTS] script supports an unlimited number of test folders of this type. A new folder can be added by editing the batch script.
 
 ## Type2 Tests: Multiple Adventures, One or More Tests
 
-- [`/misc/`][misc] 
+- [`/misc/`][misc]
 
-The tests in this folder consist in many small adventures which are usually associated to a single test script, although in some cases there might be more than one test for the same adventure. 
+The tests in this folder consist in many small adventures which are usually associated to a single test script, although in some cases there might be more than one test for the same adventure.
 
 ### Files Naming Convention
 
@@ -138,9 +138,9 @@ For these reasons, as well as some other more practical ones, it was deemed usef
 Due to scarce reusability of the tests in the `misc/` subfolder (which usually serve a single test), the time dedicated to polish and beautify them is reduced to the minimal required.
 
 > __NOTE__ — Currently the [`RUNTESTS.bat`][RUNTESTS] script only supports a single folders of this type of test (i.e. `misc/`).
-> 
+>
 > Since at the present stage there is no need to separate this kind of tests into different folders, it's unlikely that the batch script will be changed to allow multiple folders of this type.
-> 
+>
 > But if in the future the number of such tests grows beyond manageabilty, adaptments might be made to accomodate further subfoldering.
 
 
@@ -151,13 +151,13 @@ All scripts are designed for MS Windows.
 In order to use these scripts, make sure that the correct version of the __Alan compiler__ (`alan.exe`) and __Arun interpreter__ (`arun.exe`) are available on your system PATH.
 
 > __IMPORTANT!__ — The Alan SDK version required to run these tests is the one indicated at the very beginning of this document. Using different version (older releases, or developer snapshots) might produce unexpected results.
-> 
+>
 > Tests transcripts obtained with different versions of the Alan SDK should not be commmited to the project, as they might not reflect the correct status of results.
 
 <!-- sep -->
 
 > __NOTE__ — Just copying the  "`alan.exe`" and "`arun.exe`" executables into this folder wouldn't work because the batch script that runs the tests switches working the directory every time it runs tests in one of the tests subfolders.
-> 
+>
 > A viable workaround to using the system PATH would require you to create symlinks to "`alan.exe`" and "`arun.exe`" in every tests subfoler, making them point to the correct version of the binaries they represent. This would be better than having to add multiple copies (three) of these binaries in every subfolder. You could then place the required binaries inside this folder, and have symlinks in the subfolders point to them, so whenever you override the binaries real the symlinks will reflect the new versions.
 
 
@@ -282,7 +282,7 @@ SOFTWARE.
 
 
 <!-----------------------------------------------------------------------------
-                               REFERENCE LINKS                                
+                               REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
 

@@ -71,7 +71,7 @@ Changes concerning the __House__ test adventure in [`/house/`][house].
 Changes concerning the miscellanea tests in [`/misc/`][misc] folder (multiple adventures).
 
 <!-----------------------------------------------------------------------------
-                               REFERENCE LINKS                                
+                               REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
 [clothing]: ./clothing/ "Navigate folder"

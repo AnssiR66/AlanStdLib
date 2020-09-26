@@ -93,7 +93,7 @@ The files inside the [`/haml/`][haml] folder were adapted by Tristano Ajmone fro
 [Asciidoctor Backends] project, Copyright (C) 2012-2016 Dan Allen and the Asciidoctor Project, released under MIT License:
 
     The MIT License
-    
+
     Copyright (C) 2018 Tristano Ajmone.
     Copyright (C) 2012-2016 Dan Allen and the Asciidoctor Project
 
@@ -118,7 +118,7 @@ The files inside the [`/haml/`][haml] folder were adapted by Tristano Ajmone fro
 
 
 <!-----------------------------------------------------------------------------
-                               REFERENCE LINKS                                
+                               REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
 <!-- proj folders -->

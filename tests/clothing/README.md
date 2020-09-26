@@ -23,7 +23,7 @@ This folder of the Alan StdLib is dedicated to testing the clothing class.
 
 _Emporium Giorgio Alani_ (aka _EGA_) is a small adventure created specifically to test clothing functionality in the Alan StdLib.
 
-The author chose the prestigious fashion emporium G.Alani as a setting for these tests, mainly because of the vast choice of clothes that could be found therein, but partly also because of his Italian heritage and connections to the Alani family. 
+The author chose the prestigious fashion emporium G.Alani as a setting for these tests, mainly because of the vast choice of clothes that could be found therein, but partly also because of his Italian heritage and connections to the Alani family.
 
 
 ## Map
@@ -43,7 +43,7 @@ On request of the Giorgio Alani&reg; fashion house, we did not disclose the actu
 
 
 <!-----------------------------------------------------------------------------
-                               REFERENCE LINKS                                
+                               REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
 

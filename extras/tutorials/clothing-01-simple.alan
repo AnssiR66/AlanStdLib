@@ -6,7 +6,7 @@ End the.
 The bedroom IsA room.
   Description
     "The exit is west."
-  
+
   Exit west, leave to bedroom -- also allow using 'leave' to exit!
     Check uniform directly in hero and uniform is worn
       else "You can't leave the house naked!"
@@ -22,7 +22,7 @@ End the bedroom.
 The shower IsA object at bedroom.
   Name shower stall. Name shower.
   Is not taken. -- i.e. the Hero hasn't yet taken his shower.
-  
+
   Verb take
     Check this is not taken
       else "There's no time left for a second shower."

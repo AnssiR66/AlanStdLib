@@ -8,7 +8,7 @@
 ################################################################################
 # Rebuild the StdLib Man (HTML) from AsciiDoc, without rebuilding the examples.
 
-# NOTE: This is a temporary script, it was setup quickly and in a rather hackish 
+# NOTE: This is a temporary script, it was setup quickly and in a rather hackish
 #       way just to be able to quickly update the HTML document without having
 # 		to run "../update.sh", which compiles all the ALAN adventures at each
 # 		run and takes ages. It will soon be replaced with a better script, as
@@ -35,7 +35,7 @@ utfDir="utf8/manual"
 for sourcefile in ./*.asciidoc ; do
 adoc2html $sourcefile
 if [ $? -ne 0 ] ; then
-  printAborting ; exit 1
+	printAborting ; exit 1
 fi
 done
 
