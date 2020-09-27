@@ -1,6 +1,6 @@
 #!/bin/bash
 # ==============================================================================
-# "assets/sh/init-env.sh" v1.0.3 | 2020/09/27 | by Tristano Ajmone
+# "assets/sh/init-env.sh" v1.1.0 | 2020/09/27 | by Tristano Ajmone
 # Released into the Public Domain (https://unlicense.org)
 # ------------------------------------------------------------------------------
 # RUN ME WITH:
@@ -81,12 +81,45 @@ if [[ $(uname -s) == MINGW* ]];then # Amend Obtained Path:
 	RepoRoot="/${RepoRoot,}"	# Drive unit to lowercase
 fi
 
+# /StdLib/ -> $StdLibDir
+# ======================
+export StdLibDir="$RepoRoot/StdLib"
+
+# /extras_src/adoc/ -> $ADocDir
+# ==================================
+export ADocDir="$RepoRoot/extras_src/adoc"
+
+# /extras_src/adoc/haml/ -> $HamlDir
+# ==================================
+export HamlDir="$ADocDir/haml"
+
+
+# /extras_src/utf8/ -> $utfBasePath
+# =================================
+export utfBasePath="$RepoRoot/extras_src/utf8"
+
 ## PRINT REPORT
 ###############
 arr="\e[32;1m->\e[34;1m"
 echo -e "\e[32;1mThese variables point to absolute repo paths (short paths shown here):"
-echo -e "\e[33;1m   \$RepoRoot   $arr /"
-echo -e "\e[33;1m   \$ScriptsDir $arr ${ScriptsDir#$RepoRoot}/"
+echo -e "\e[33;1m   \$RepoRoot    $arr /"
+echo -e "\e[33;1m   \$ScriptsDir  $arr ${ScriptsDir#$RepoRoot}/"
+echo -e "\e[33;1m   \$StdLibDir   $arr ${StdLibDir#$RepoRoot}/"
+echo -e "\e[33;1m   \$ADocDir     $arr ${ADocDir#$RepoRoot}/"
+echo -e "\e[33;1m   \$HamlDir     $arr ${HamlDir#$RepoRoot}/"
+echo -e "\e[33;1m   \$utfBasePath $arr ${utfBasePath#$RepoRoot}/"
+echo -e "\e[32;1m$HyphensLine"
+# ==============================================================================
+# Export Env-Vars for Custom Options
+# ==============================================================================
+# Alan compiler options:
+AlanCompileOpts="-import $StdLibDir"
+
+## PRINT REPORT
+###############
+arr="\e[32;1m->\e[34;1m"
+echo -e "\e[32;1mThese variables define custom options:"
+echo -e "\e[33;1m   \$AlanCompileOpts   $arr \"-import \$StdLibDir\""
 echo -e "\e[32;1m$HyphensLine"
 # ==============================================================================
 # Prepend to PATH Special Directories

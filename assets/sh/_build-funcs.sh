@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# _build-funcs.sh         v2.1.0 | 2020/09/27 | by Tristano Ajmone, MIT License.
+# _build-funcs.sh         v2.2.0 | 2020/09/27 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                        DOCUMENTATION BUILD FUNCTIONS                         #
@@ -41,17 +41,16 @@ fi
 
 shopt -s nullglob # Set nullglob to avoid patterns matching null files
 
-# Alan compiler options:
-AlanOpts="-import ../../StdLib/"
-
-# Asciidoctor options:
-adocDir="./adoc"
-hamlDir="$adocDir/haml"
-
 # Base Paths for Source & Destination
 srcBasePath="."
 outBasePath="../extras"
-utfBasePath="./utf8"
+
+# This script expects the following settings env-vars to be defined elsewhere:
+#
+# - $AlanCompileOpts -> Alan compiler options
+# - $ADocDir         -> path to Asciidoctor assets
+# - $HamlDir         -> path to Haml templates
+# - $utfBasePath     -> path to UTF-8 converted ALAN files
 
 # ******************************************************************************
 # *                                                                            *
@@ -84,13 +83,13 @@ function compile {
 	# ----------------------------------------------------------------------------
 	# Parameters and Env Vars:
 	# - $1: the source adventure to compile.
-	# - $AlanOpts: compiler options.
+	# - $AlanCompileOpts: compiler options.
 	# ============================================================================
 	printSeparator
 	echo -e "\e[90mCOMPILING: \e[93m$srcDir/$1"
-	alan $AlanOpts $1 > /dev/null 2>&1 || (
+	alan $AlanCompileOpts $1 > /dev/null 2>&1 || (
 		echo -e "\n\e[91m*** COMPILER ERROR!!! ********************************************************"
-		alan $AlanOpts $1
+		alan $AlanCompileOpts $1
 		echo -e "\e[91m$AsterisksLine\e[97m"
 		cmd_failed="true"
 		return 1
@@ -169,8 +168,8 @@ function adoc2html {
 	# - $1: the input AsciiDOc file to convert.
 	# Required Env Vars:
 	# - $outDir: path of output directory.
-	# - $hamlDir: path to Haml templates.
-	# - $adocDir: path to Asciidoctor custom extensions.
+	# - $HamlDir: path to Haml templates.
+	# - $ADocDir: path to Asciidoctor custom extensions.
 	# ============================================================================
 	printSeparator
 	echo -e "\e[90mCONVERTING: \e[93m$1"
@@ -178,12 +177,12 @@ function adoc2html {
 		--verbose \
 		--safe-mode unsafe \
 		--destination-dir $outDir \
-		--template-dir $hamlDir \
-		--require $adocDir/highlight-treeprocessor_mod.rb \
+		--template-dir $HamlDir \
+		--require $ADocDir/highlight-treeprocessor_mod.rb \
 		-a source-highlighter=highlight \
-		-a docinfodir@=../$adocDir \
+		-a docinfodir@=$ADocDir \
 		-a docinfo@=shared-head \
-		-a utf8dir=../$utfDir \
+		-a utf8dir=$utfDir \
 		-a data-uri \
 			$1
 }

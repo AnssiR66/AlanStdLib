@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# stdlib2utf8.sh          v1.0.1 | 2020/09/27 | by Tristano Ajmone, MIT License.
+# stdlib2utf8.sh          v1.1.0 | 2020/09/27 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                       CONVERT LIBRARY SOURCE TO UTF-8                        #
@@ -17,7 +17,7 @@ echo -e "econding, we need to create UTF-8 versions of them."
 
 # Define Source & Destination Folders
 # -----------------------------------
-srcDir="../StdLib" # path of AsciiDoc sources and Alan examples
+srcDir="$StdLibDir" # path of AsciiDoc sources and Alan examples
 utfDir="$utfBasePath/StdLib" # path of UTF-8 converted Alan files
 
 
@@ -40,7 +40,14 @@ done
 if ! [[ -v invoker ]]
 	then printFinished
 fi
-return 0
+
+# Check is script is being sourced:
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
+	then # Not sourced:
+		exit 0
+	else # It's sourced:
+		return 0
+fi
 
 # ------------------------------------------------------------------------------
 # The MIT License
