@@ -12,7 +12,7 @@
 
 [partintro]
 --
-In the following chapters you'll learn how to integrate the Standard Library into your ALAN adentures, how to set up your working environment, and other useful notions as a beginner to the library.
+In the following chapters you'll be presented with an overiew of the Standard Library, learn how to integrate it into your ALAN adentures, how to set up your working environment, and other useful notions as a beginner to the library.
 --
 
 :leveloffset: +1

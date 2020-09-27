@@ -14,24 +14,6 @@
 
 [big]_How to import the Standard Library into your ALAN adenture games_#
 
-To write an ALAN game, you won't necessarily need the standard library at all.
-It is perfectly possible to define everything in your game by yourself.
-At its bare-bones minimum, an ALAN game needs one location and a `START AT` instruction:
-
-[source,alan]
---------------------------------------------------------------------------------
-THE meadow ISA LOCATION
-END THE meadow.
-
-START AT meadow.
---------------------------------------------------------------------------------
-
-
-// @FIXME: "not even prompt will be understood." ???!!!
-This code compiles successfully and doesn't use the library at all.
-When you try to play this game, you will find yourself at a location called 'Meadow' but you won't be able to do anything -- nothing you type at the prompt will be understood.
-You should go on implementing everything by yourself.
-
 
 When you import the library, there are a couple of extra things you need to add to the code:
 
