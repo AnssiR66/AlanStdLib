@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# _print-funcs.sh         v1.3.0 | 2019/05/05 | by Tristano Ajmone, MIT License.
+# _print-funcs.sh         v1.4.0 | 2020/09/27 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                          ORNAMENTAL PRINT FUNCTIONS                          #
@@ -24,6 +24,11 @@
 # | printFinished  |        | Print end of script success message |
 # +----------------+--------+-------------------------------------+
 
+# Define vars for horizontal Ascii dividers (78 chars):
+export AsterisksLine="******************************************************************************"
+export EqualsLine="=============================================================================="
+export TildesLine="~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+export HyphensLine="------------------------------------------------------------------------------"
 
 function printBanner {
 	# ============================================================================
@@ -35,11 +40,11 @@ function printBanner {
 	printf -v padding "%*s" $(((76 - ${#1})/2))
 	centeredText="$padding$1$padding"
 	[[ $(( (76 - ${#1}) % 2 )) -ne 0 ]] && centeredText="$centeredText "
-	echo -e "\e[94m******************************************************************************"
-	echo -e "*                                                                            *"
-	echo -e "*\e[93m$centeredText\e[94m*"
-	echo -e "*                                                                            *"
-	echo -e "******************************************************************************\e[97m"
+	echo -e "\e[94m$AsterisksLine"
+	echo -e "\e[94m*                                                                            *"
+	echo -e "\e[94m*\e[93m$centeredText\e[94m*"
+	echo -e "\e[94m*                                                                            *"
+	echo -e "\e[94m$AsterisksLine\e[97m"
 }
 
 function printHeading1 {
@@ -49,9 +54,9 @@ function printHeading1 {
 	# Parameters:
 	# - $1: the heading string (title).
 	# ============================================================================
-	echo -e "\n\e[93m******************************************************************************"
+	echo -e "\n\e[93m$AsterisksLine"
 	printf  "\e[94m%*s\n" $(((${#1}+78)/2)) "$1"
-	echo -e "\e[93m******************************************************************************\e[97m"
+	echo -e "\e[93m$AsterisksLine\e[97m"
 }
 
 function printHeading2 {
@@ -61,9 +66,9 @@ function printHeading2 {
 	# Parameters:
 	# - $1: the heading string (title).
 	# ============================================================================
-	echo -e "\e[94m=============================================================================="
+	echo -e "\e[94m$EqualsLine"
 	echo -e "\e[95m$1"
-	echo -e "\e[94m==============================================================================\e[97m"
+	echo -e "\e[94m$EqualsLine\e[97m"
 }
 
 function printHeading3 {
@@ -73,16 +78,16 @@ function printHeading3 {
 	# Parameters:
 	# - $1: the heading string (title).
 	# ============================================================================
-	echo -e "\e[95m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+	echo -e "\e[95m$TildesLine"
 	echo -e "\e[94m$1"
-	echo -e "\e[95m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\e[97m"
+	echo -e "\e[95m$TildesLine\e[97m"
 }
 
 function printSeparator {
 	# ============================================================================
 	# Print a dark grey horizontal ruler. Width 78.
 	# ============================================================================
-	echo -e "\e[90m------------------------------------------------------------------------------\e[97m"
+	echo -e "\e[90m$HyphensLine\e[97m"
 }
 
 function printErrMsg {
@@ -90,9 +95,9 @@ function printErrMsg {
 	# Print the message of $1 in red, framed and preceded by "** ERROR! **".
 	# ============================================================================
 	echo -e "\n\e[91m" \
-		"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" \
+		"$TildesLine\n" \
 		"** ERROR! ** $1\n" \
-		"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\e[0m"
+		"$TildesLine\e[0m"
 }
 
 function printAborting {

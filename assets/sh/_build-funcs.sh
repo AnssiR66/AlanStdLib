@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# _build-funcs.sh         v2.0.0 | 2020/09/15 | by Tristano Ajmone, MIT License.
+# _build-funcs.sh         v2.1.0 | 2020/09/27 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                        DOCUMENTATION BUILD FUNCTIONS                         #
@@ -20,8 +20,19 @@
 # | deployAlan         | file          | Strip and deploy ".alan" files. |
 # +--------------------+---------------+---------------------------------+
 
-# ** IMPORTANT! ** You need to "source ./init-env.sh" becasue some of these
-#                  functions depend on some environment vars defined by it.
+# ** IMPORTANT! **
+# You need to "source ./init-env.sh" before loading this scirpt, becasue some
+# functions herein defined depend on environment vars defined by the former.
+
+# If ALAN env is not initialized, abort:
+if ! [[ -v AlanEnv ]] && [[ $invoker != "init-env.sh" ]]; then
+	echo -e "\e[31;1m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+	echo -e "\e[31;1m*** ERROR *** You must source \"init-env.sh\""
+	echo -e "\e[31;1mto use the \"_build-funcs.sh\" script."
+	echo -e "\e[31;1m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\e[0m"
+	return 1
+fi
+
 
 ################################################################################
 #                                   SETTINGS                                   #
@@ -80,7 +91,7 @@ function compile {
 	alan $AlanOpts $1 > /dev/null 2>&1 || (
 		echo -e "\n\e[91m*** COMPILER ERROR!!! ********************************************************"
 		alan $AlanOpts $1
-		echo -e "******************************************************************************\e[97m"
+		echo -e "\e[91m$AsterisksLine\e[97m"
 		cmd_failed="true"
 		return 1
 	)
