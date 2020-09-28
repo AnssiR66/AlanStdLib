@@ -1,6 +1,6 @@
 #!/bin/bash
 # ==============================================================================
-# "assets/sh/init-env.sh" v1.1.0 | 2020/09/27 | by Tristano Ajmone
+# "assets/sh/init-env.sh" v1.1.1 | 2020/09/28 | by Tristano Ajmone
 # Released into the Public Domain (https://unlicense.org)
 # ------------------------------------------------------------------------------
 # RUN ME WITH:
@@ -81,6 +81,11 @@ if [[ $(uname -s) == MINGW* ]];then # Amend Obtained Path:
 	RepoRoot="/${RepoRoot,}"	# Drive unit to lowercase
 fi
 
+# /assets/images/ -> $ImagesDir
+# =============================
+export ImagesDir="$RepoRoot/assets/images"
+
+
 # /StdLib/ -> $StdLibDir
 # ======================
 export StdLibDir="$RepoRoot/StdLib"
@@ -104,6 +109,7 @@ arr="\e[32;1m->\e[34;1m"
 echo -e "\e[32;1mThese variables point to absolute repo paths (short paths shown here):"
 echo -e "\e[33;1m   \$RepoRoot    $arr /"
 echo -e "\e[33;1m   \$ScriptsDir  $arr ${ScriptsDir#$RepoRoot}/"
+echo -e "\e[33;1m   \$ImagesDir   $arr ${ImagesDir#$RepoRoot}/"
 echo -e "\e[33;1m   \$StdLibDir   $arr ${StdLibDir#$RepoRoot}/"
 echo -e "\e[33;1m   \$ADocDir     $arr ${ADocDir#$RepoRoot}/"
 echo -e "\e[33;1m   \$HamlDir     $arr ${HamlDir#$RepoRoot}/"
