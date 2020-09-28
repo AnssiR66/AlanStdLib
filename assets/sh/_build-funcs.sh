@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# _build-funcs.sh         v2.2.1 | 2020/09/28 | by Tristano Ajmone, MIT License.
+# _build-funcs.sh         v2.2.2 | 2020/09/28 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                        DOCUMENTATION BUILD FUNCTIONS                         #
@@ -181,7 +181,7 @@ function adoc2html {
 		--require $ADocDir/highlight-treeprocessor_mod.rb \
 		-a imagesdir=$ImagesDir \
 		-a source-highlighter=highlight \
-		-a docinfodir@=$ADocDir \
+		-a docinfodir=$ADocDir \
 		-a docinfo@=shared-head \
 		-a utf8dir=$utfDir \
 		-a data-uri \

@@ -1,6 +1,6 @@
 #!/bin/bash
 # ==============================================================================
-# "assets/sh/init-env.sh" v1.1.1 | 2020/09/28 | by Tristano Ajmone
+# "assets/sh/init-env.sh" v1.2.0| 2020/09/28 | by Tristano Ajmone
 # Released into the Public Domain (https://unlicense.org)
 # ------------------------------------------------------------------------------
 # RUN ME WITH:
@@ -90,12 +90,12 @@ export ImagesDir="$RepoRoot/assets/images"
 # ======================
 export StdLibDir="$RepoRoot/StdLib"
 
-# /extras_src/adoc/ -> $ADocDir
-# ==================================
-export ADocDir="$RepoRoot/extras_src/adoc"
+# /assets/adoc/ -> $ADocDir
+# =========================
+export ADocDir="$RepoRoot/assets/adoc"
 
-# /extras_src/adoc/haml/ -> $HamlDir
-# ==================================
+# /assets/adoc/haml/ -> $HamlDir
+# ==============================
 export HamlDir="$ADocDir/haml"
 
 

@@ -2,6 +2,7 @@
 
 This folder contains images shared by the various documents of the project.
 
+    /assets/images/
 
 -----
 
@@ -12,6 +13,7 @@ This folder contains images shared by the various documents of the project.
 - [Folder Contents](#folder-contents)
 - [Images Preview and Info](#images-preview-and-info)
     - [Folders Screenshot](#folders-screenshot)
+    - [Library Classes Diagram](#library-classes-diagram)
     - [Predefined Classes Diagram](#predefined-classes-diagram)
 
 <!-- /MarkdownTOC -->
@@ -20,9 +22,13 @@ This folder contains images shared by the various documents of the project.
 
 # Folder Contents
 
-Click on a file to jump to its description and preview.
+The image assets contained in this folder:
 
+- [`img_folders.jpg`][img_folders]
+- [`library-classes.svg`][library-classes]
 - [`predefined-classes.svg`][predefined-classes]
+
+Click on a filename to jump to its description and preview.
 
 
 # Images Preview and Info
@@ -36,11 +42,20 @@ This image was extracted from the original PDF edition of the _StdLib Manual v2.
 ![img_folders.jpg][img_folders.jpg]
 
 
+## Library Classes Diagram
+
+- [`library-classes.svg`][library-classes.svg]
+
+This diagram of the predefined StdLib classes was created using [Dia Diagram Editor], and it's automatically converted to the required formats via scripts.
+
+![library-classes.svg][library-classes.svg]
+
+
 ## Predefined Classes Diagram
 
 - [`predefined-classes.svg`][predefined-classes.svg]
 
-This diagram of the predefined classes was created using [Dia Diagram Editor], and is automatically converted to the required formats via scripts.
+This diagram of the predefined classes was created using [Dia Diagram Editor], and it's automatically converted to the required formats via scripts.
 
 This image was taken from the assets of the _ALAN Manual_, available at the [Alan-Docs] repository:
 
@@ -61,11 +76,14 @@ This image was taken from the assets of the _ALAN Manual_, available at the [Ala
 
 <!-- Internal Links -->
 
-[predefined-classes]: #predefined-classes-diagram
+[img_folders]: #folders-screenshot "Image info and preview"
+[library-classes]: #library-classes-diagram "Image info and preview"
+[predefined-classes]: #predefined-classes-diagram "Image info and preview"
 
 <!-- images links -->
 
-[predefined-classes.svg]: ./predefined-classes.svg
 [img_folders.jpg]: ./img_folders.jpg
+[library-classes.svg]: ./library-classes.svg
+[predefined-classes.svg]: ./predefined-classes.svg
 
 <!-- EOF -->

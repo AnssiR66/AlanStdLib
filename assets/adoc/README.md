@@ -1,8 +1,8 @@
-# Asciidoctor Assets
+# Alan StdLib Assets: Asciidoctor
 
 This directory tree contains assets required by the Asciidoctor conversion toolchain.
 
-    /extras_src/adoc/
+    /assets/adoc/
 
 -----
 
@@ -30,7 +30,7 @@ This directory tree contains assets required by the Asciidoctor conversion toolc
 
 The docinfo file is shared by all documents:
 
-- [`adoc/docinfo.html`][docinfo]
+- [`docinfo.html`][docinfo]
 
 The conversion toolchain is set to use this docinfo file for all converted documents, via CLI-defined attribute:
 
@@ -61,7 +61,7 @@ For more details on docinfo files, see:
 
 ## Highlight Extension
 
-The [`highlight-treeprocessor_mod.rb`][rb] file was adapted by Tristano Ajmone from the original file [`highlight-treeprocessor.rb`][rb upstream] taken from the [Asciidoctor Extensions Lab] (commit 18bdf62), Copyright (C) 2014-2016
+The [`highlight-treeprocessor_mod.rb`][rb] file was adapted by Tristano Ajmone from the original file [`highlight-treeprocessor.rb`][rb upstream] taken from the [Asciidoctor Extensions Lab] (commit 18bdf62), Copyright © 2014-2016
 The Asciidoctor Project, released under MIT License:
 
     The MIT License
@@ -90,7 +90,7 @@ The Asciidoctor Project, released under MIT License:
 ## Haml Templates
 
 The files inside the [`/haml/`][haml] folder were adapted by Tristano Ajmone from the original [Haml HTML5 templates] taken from the
-[Asciidoctor Backends] project, Copyright (C) 2012-2016 Dan Allen and the Asciidoctor Project, released under MIT License:
+[Asciidoctor Backends] project, Copyright © 2012-2016 Dan Allen and the Asciidoctor Project, released under MIT License:
 
     The MIT License
 

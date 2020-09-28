@@ -2,6 +2,9 @@
 
 Source projects files to generate diagrams using [Dia].
 
+    /assets/images/dia/
+
+
 -----
 
 **Table of Contents**
