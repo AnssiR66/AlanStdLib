@@ -29,25 +29,26 @@ Currently the AsciiDoc sources are organized in the following way, but will be c
 - [`StdLibMan.asciidoc`][man] — main document that imports all other sources of the Manual:
     + [`StdLibMan0_intro.adoc`][man0] — _Introduction_
     + [`StdLibMan1.adoc`][man1] — PART I — __Getting Started__
-        * [`StdLibMan1_01.adoc`][man1_1] — 1. _Importing the Library_
-        * [`StdLibMan1_02.adoc`][man1_2] — 2. _Library Overview_
-        * [`StdLibMan1_03.adoc`][man1_3] — 3. _The Game Banner_
-        * [`StdLibMan1_04.adoc`][man1_4] — 4. _Adding Synonyms_
-        * [`StdLibMan1_05.adoc`][man1_5] — 5. _Default Library Attributes_
+        * [`StdLibMan1_01.adoc`][man1_1] — _Importing the Library_
+        * [`StdLibMan1_02.adoc`][man1_2] — _Library Overview_
+        * [`StdLibMan1_03.adoc`][man1_3] — _The Game Banner_
+        * [`StdLibMan1_04.adoc`][man1_4] — _Adding Synonyms_
+        * [`StdLibMan1_05.adoc`][man1_5] — _Default Library Attributes_
     + [`StdLibMan2.adoc`][man2] — PART II — __Library Classes__
-        * [`StdLibMan2_01.adoc`][man2_1] — 6. _Locations_
-        * [`StdLibMan2_02.adoc`][man2_2] — 7. _Things_
-        * [`StdLibMan2_03.adoc`][man2_3] — 8. _Actors_
-        * [`StdLibMan2_04.adoc`][man2_4] — 9. _Objects_
-        * [`StdLibMan2_05.adoc`][man2_5] — 10. _Additional THINGs Attributes_
+        * [`StdLibMan2_01.adoc`][man2_1] — _Introduction_
+        * [`StdLibMan2_02.adoc`][man2_2] — _Locations_
+        * [`StdLibMan2_03.adoc`][man2_3] — _Things_
+        * [`StdLibMan2_04.adoc`][man2_4] — _Actors_
+        * [`StdLibMan2_05.adoc`][man2_5] — _Objects_
+        * [`StdLibMan2_06.adoc`][man2_6] — _Additional THINGs Attributes_
     + [`StdLibMan3.adoc`][man3] — PART III — __Library Verbs__
-        * [`StdLibMan3_01.adoc`][man3_1] — 11. _Using Verbs and Commands_
+        * [`StdLibMan3_01.adoc`][man3_1] — _Using Verbs and Commands_
     + [`StdLibMan4.adoc`][man4] — PART IV — __Library Messages__
-        * [`StdLibMan4_01.adoc`][man4_1] — 12. _Runtime Messages_
-        * [`StdLibMan4_02.adoc`][man4_2] — 13. _Library Messages_
+        * [`StdLibMan4_01.adoc`][man4_1] — _Runtime Messages_
+        * [`StdLibMan4_02.adoc`][man4_2] — _Library Messages_
     + [`StdLibManA.adoc`][manA] — __Appendices__
-        * [`StdLibManA_01.adoc`][manA_1] — App. A. _Translating to Other Languages_
-        * [`StdLibManA_02.adoc`][manA_2] — App. B. _Short Examples_
+        * [`StdLibManA_01.adoc`][manA_1] — _Translating to Other Languages_
+        * [`StdLibManA_02.adoc`][manA_2] — _Short Examples_
 
 
 > **NOTE** — The above list might not always reflect the latest status of the actual library sources, because the book is undergoing rapid transformations in view of the upcoming `v2.2.0` release, and I won't be able to update the above list until I've completed reorganizing the various chapters and sections, and their titles.
@@ -104,6 +105,7 @@ It must be manually fixed, element by element, using the original PDF as a visua
 [man2_3]: ./StdLibMan2_03.adoc
 [man2_4]: ./StdLibMan2_04.adoc
 [man2_5]: ./StdLibMan2_05.adoc
+[man2_6]: ./StdLibMan2_06.adoc
 
 [man3]: ./StdLibMan3.adoc
 [man3_1]: ./StdLibMan3_01.adoc

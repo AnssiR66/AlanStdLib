@@ -31,7 +31,7 @@ The extent of these default features varies from one IF system to the other, som
 
 Finding the right balance in any IF library is a challenging task because the needs of each text adventure are unique, so any library solution tends to be an opinionated compromise on what the standard base line ought to be.
 
-The ALAN language does not define any players commands at all, instead it provides you with the tools to easily create your own verbs from scratch; and, by design, it only defines those core objects classes that are needed by every text adventure (i.e. locations, actors, objects, and a few others), leaving it to the single author to flesh out all the other classes that a game might need.
+The ALAN language does not define any players commands at all, instead it provides you with the tools to easily create your own verbs from scratch; and, by design, it only defines those core objects classes that are needed by every text adventure (i.e. locations, actors, objects, <<fig.alan-classes,and a few others>>), leaving it to the single author to flesh out all the other classes that a game might need.
 
 Therefore, to write a text adventure in ALAN, you won't necessarily need the Standard Library at all.
 It is perfectly possible (and in line with ALAN's philosophy) to define everything in your game by yourself, starting from scratch.
@@ -53,7 +53,7 @@ The ALAN language doesn't define any player commands, therefore you'll have to i
 
 This aspect of ALAN's design philosophy might seem puzzling to some IF authors, especially to authors which are new to IF; so let's expand on this topic, which is what makes ALAN unique among the IF authoring systems.
 
-Experienced IF authors have all struggled in one way or another with the various pre-defined libraries of any IF system, either feeling that the library is too huge and detailed, or that it's too small and lacking granularity.
+Experienced IF authors have all struggled in one way or another with the various predefined libraries of any IF system, either feeling that the library is too huge and detailed, or that it's too small and lacking granularity.
 But, most of all, a huge amount of energy is often spent on adapting the native library to one's personal needs -- overriding predefined commands and messages, suppressing others, and implementing new versions thereof -- which soon turns out to be a daunting task, as well as introducing unnecessary bloat to the adventure source code.
 
 Most important, any native library is necessarily bound to a specific spoken language (a _locale_), usually the English language, which means that IF authors targeting other languages will have to either translate the whole library or, if this can't be done, override every single verb and message with a new version in the target language -- an ordeal which usually results in huge source files.

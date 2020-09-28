@@ -3,527 +3,122 @@
 *                                                                              *
 *                     ALAN Standard Library User's Manual                      *
 *                                                                              *
-*                                  Chapter 5                                   *
+*                                  Chapter 4                                   *
 *                                                                              *
 ********************************************************************************
 ////
 
 
-[[ch.actors]]
-= Actors
+[[ch4]]
+= Things
 
+In ALAN, "`things`" is the comprehensive term for actors and objects.
+At the library level, many verbs are defined to work with both actors and objects.
+For example, _examine_ works with both.
+Then there are various verbs that only work with one of them.
+For example, _take_ works with objects only (actors cannot be inside a container, not even in the hero container, so they cannot be taken).
+Thus, if you want the hero to be able to take a cat or a bird, you should define them to be objects instead.
 
-[[sec.actor-classes]]
-== Actor Classes
+Here is a list of transitive verbs that only work with actors:
 
-Pre-defined actor classes in the library:
+// @FIXME: Improve formatting of verbs list:
+ask, ask_for, follow, give, kill, kill_with, say_to, talk, tell, show,
 
-* `PERSON`
-* `MALE`
-* `FEMALE`
+while these verbs work with objects only:
 
-There are two points where a PERSON differs from an ordinary ACTOR.
-Firstly, a PERSON has the ability to talk, in other words the verbs ask, ask_for, say_to, talk_to and tell work with PERSONs only (or with ACTORs that have the attribute CAN talk).
-Secondly, ACTORs and PERSONs are described differently when their inventory is empty.
-PERSONs are described as for example "The man is empty-handed." while other ACTORs are described as for example "The dog is not carrying anything."
+// @FIXME: Improve formatting of verbs list:
+bite, break, break_with, burn, burn_with, buy, clean, climb, climb_on, climb_through, close,close_with, consult, cut, cut_with, dig, dive_in, drink, drive, drop, eat, empty, empty_in, empty_on, examine, exit, extinguish, fill, fill_with, fire, fire_at, fix, get_off, go_to, jump_in, jump_on, knock, lie_in, lie_on, lift, light, lock, lock_with, look_in, look_out_of, look_through, open, open_with, play, pour, pour_in, pour_on, pry, pry_with, put, put_in, put_on, read, remove, remove_from, take, throw,tie
 
-Based on the above, the following codes are interchangeable (except as to how the empty inventory is described):
+The following verbs work with both, but have slightly different outcomes:
 
-// @EXTERNALIZE CODE: bob
-[source,alan]
---------------------------------------------------------------------------------
-THE bob ISA ACTOR
-  CAN talk.
-END THE bob.
+// @FIXME: Improve formatting of verbs list:
+kiss, listen, pull, push, push_with, rub, scratch, touch
 
-THE bob ISA PERSON
-END THE bob.
---------------------------------------------------------------------------------
+Lastly, there are some verbs that won't work with either.
 
+// @FIXME: Improve formatting of verbs list:
+answer, say, write
 
-MALE and FEMALE are subclasses of PERSON, so they have the ability to talk.
-Using MALE and FEMALE, you don't have to worry about the pronouns 'he' and 'she' and their various forms showing correctly; the library will take care of all default cases.
-If you just use PERSON or ACTOR instead of MALE or FEMALE, you should remember to include the PRONOUN statement to ensure that the pronouns referring to a person show correctly.
+as these verbs can only be used with quoted text:
 
-// @EXTERNALIZE CODE: bob
-[source,alan]
---------------------------------------------------------------------------------
-THE bob ISA ACTOR
-  CAN talk.
-  PRONOUN him.
-END THE.
---------------------------------------------------------------------------------
-
-which would be a lot shorter if coded as
-
-// @EXTERNALIZE CODE: bob
-[source,alan]
---------------------------------------------------------------------------------
-THE bob ISA MALE
-END THE.
---------------------------------------------------------------------------------
-
-
-If you need to implement a male or female animal, do like this:
-
-// @EXTERNALIZE CODE: dog
-[source,alan]
---------------------------------------------------------------------------------
-THE dog ISA MALE
-  CAN NOT talk.
-END THE dog.
---------------------------------------------------------------------------------
-
-
-
-
-[[sec.actor-attributes]]
-== Actor Attributes
-
-Pre-defined actor attributes in the library:
-
-// @EXTERNALIZE STDLIB CODE: pre-defined actor attributes
-[source,alan]
---------------------------------------------------------------------------------
-IS NOT inanimate.
-IS NOT following.
-IS NOT sitting.
-IS NOT lying_down.
-IS NOT named.
-IS wearing {clothing}.
-IS NOT compliant.
---------------------------------------------------------------------------------
-
-
-They are described in more detail below:
-
-// @ADDED:
-[[sec.inanimate]]
-=== inanimate
-
-// @INTERN CODE
-[source,alan]
---------------------------------------------------------------------------------
-IS NOT inanimate.
---------------------------------------------------------------------------------
-
-Verbs push, push_with, rub, scratch, search, touch and touch_with won't have successful outcomes with animate objects (= ACTORS).
-To ensure this, the (NOT) inanimate attribute is used.
-All things other than ACTORs are inanimate.
-
-// @ADDED:
-[[sec.following]]
-=== following
-
-// @INTERN CODE
-[source,alan]
---------------------------------------------------------------------------------
-IS NOT following.
---------------------------------------------------------------------------------
-
-By default, NPCs won't follow the hero around the game map.
-To make any ACTOR follow the hero, give that actor the following attribute, for example:
-
-// @EXTERNALIZE CODE: bear
-[source,alan]
---------------------------------------------------------------------------------
-THE bear ISA ACTOR
-  VERB feed
-    DOES "You give the steak to the bear. It seems to like it."
-         MAKE bear following.
-  END VERB.
-END THE bob.
---------------------------------------------------------------------------------
-
-
-
-If you wish to have an ACTOR follow the hero right from the start of the game, you can naturally just declare
-
-// @EXTERNALIZE CODE: servant
-[source,alan]
---------------------------------------------------------------------------------
-THE servant ISA MALE
-  IS following.
-END THE.
---------------------------------------------------------------------------------
-
-To stop an ACTOR from following the hero, just make the ACTOR NOT following.
-
-// @EXTERNALIZE CODE: bear + servant
-[source,alan]
---------------------------------------------------------------------------------
-MAKE bear NOT following.
-MAKE servant NOT following.
---------------------------------------------------------------------------------
-
-
-// @ADDED:
-[[sec.sitting]]
-=== sitting and lying_down
-
-// @INTERN CODE
-[source,alan]
---------------------------------------------------------------------------------
-IS NOT sitting.
-IS NOT lying_down.
---------------------------------------------------------------------------------
-
-
-These two attributes exist to allow the author to make the hero, or another ACTOR, sitting or lying down.
-The outcomes for the commands [.play]#&gt; _sit_# and [.play]#&gt; _lie down_# are not successful by default, however, and must be manually implemented by the author:
-
-// @EXTERNALIZE CODE: sit + lie_down
-[source,alan]
---------------------------------------------------------------------------------
-THE my_game ISA DEFINITION_BLOCK
-  VERB sit
-    DOES ONLY "You sit down on the floor."
-              MAKE hero sitting.
-  END VERB.
-
-  VERB lie_down
-    DOES ONLY "You lie down on the floor."
-              MAKE hero lying_down.
-  END VERB.
-END THE.
---------------------------------------------------------------------------------
-
-// @FIXME: Add XRef:
-Similarly, it is possible for the hero to sit or lie down on a SUPPORTER object ([.play]#&gt; _lie on bed_#, [.play]#&gt; _sit on chair_#), but the action is not successful by default and must be manually implemented by the author.
-Refer to: Objects => Supporters.
-
-
-// @ADDED:
-[[sec.named]]
-=== named
-
-// @INTERN CODE
-[source,alan]
---------------------------------------------------------------------------------
-IS NOT named.
---------------------------------------------------------------------------------
-
-If you don't need an article in front of an ACTOR name (for example 'Jim', as opposed to for example 'a/the man'), declare the instance as named.
-By default, all ACTORs are NOT named.
-
-
-// @EXTERNALIZE CODE: jim
-[source,alan]
---------------------------------------------------------------------------------
-THE jim ISA ACTOR AT room1
-  IS named.
-END THE.
---------------------------------------------------------------------------------
-
-If you have in your game an ACTOR that starts off as unnamed (such as 'a man'), and the player learns his name later on (say, 'Jim'), you should define the ACTOR in for example the following way to make the player able to refer to him with both 'man' and 'Jim':
-
-
-// @EXTERNALIZE CODE: jim
-[source,alan]
---------------------------------------------------------------------------------
-THE jim ISA PERSON AT room1
-  NAME man
-  NAME Jim
-
-  PRONOUN him
-
-  MENTIONED
-    IF jim IS NOT named
-    THEN "man"
-    ELSE "Jim"
-    END IF.
-
-  VERB ask
-    WHEN act
-      IF topic = name
-        THEN """My name is Jim"", he replies."
-             MAKE jim named.
-      END IF.
-  END VERB.
-END THE.
---------------------------------------------------------------------------------
-
-The library takes care of the indefinite/definite article showing before man when the actor (here Jim) is not named yet.
-
-
-// @ADDED:
-[[sec.compliant]]
-=== compliant
-
-// @INTERN CODE
-[source,alan]
---------------------------------------------------------------------------------
-IS NOT compliant.
---------------------------------------------------------------------------------
-
-
-An ACTOR only gives something to the hero if it is in a compliant mood.
-In practice, this happens by default only when the hero asks the ACTOR for something.
-For example, take_from is not successful by default with ACTORs.
-
-
-// @EXTERNALIZE TRANSCRIPT: non-compliant NPCs
 [example,role="gametranscript"]
 ================================================================================
-&gt; _take apple from man_ +
-That seems to belong to the man.
+&gt; _answer "green"_ +
+&gt; _say "hello"_ +
+&gt; _write "The butler looks guilty" in notepad_
 ================================================================================
 
 
-Implicit taking of OBJECTs is not successful, either, if the OBJECT happens to be held by an NPC who is not compliant, and the following happens:
+Note that verbs don't take locations as their direct objects.
+Thus, the following won't work:
 
-// @EXTERNALIZE TRANSCRIPT: non-compliant NPCs
 [example,role="gametranscript"]
 ================================================================================
-&gt; _eat apple_ +
-That seems to belong to the man.
+&gt; _examine bedroom_
 ================================================================================
 
+To have something like the above work, you should define a separate bedroom object, present in the bedroom location, that can then be examined or manipulated in some other ways if needed:
 
-The verb ask_for works by default, whether the NPC is compliant or not:
-
-// @EXTERNALIZE TRANSCRIPT: non-compliant NPCs
-[example,role="gametranscript"]
-================================================================================
-&gt; _ask man for apple_ +
-The man gives you the apple.
-================================================================================
-
-
-If we declare:
-
-// @EXTERNALIZE CODE: compliant NPCs
+// @EXTERNALIZE CODE: bedroom_object
 [source,alan]
 --------------------------------------------------------------------------------
-THE man ISA MALE AT room1
-  IS compliant.
-END THE.
---------------------------------------------------------------------------------
-
-then, the outcome for taking and implicit taking would be successful:
-
-
-// @EXTERNALIZE TRANSCRIPT: compliant NPCs
-[example,role="gametranscript"]
-================================================================================
-&gt; _take apple_ +
-Taken.
-================================================================================
-
-
-or
-
-// @EXTERNALIZE TRANSCRIPT: compliant NPCs
-[example,role="gametranscript"]
-================================================================================
-&gt; _eat apple_ +
-(taking the apple first) +
-You eat all of the apple.
-================================================================================
-
-
-To disable even the verb ask_for, so that the NPC won't give you something even if you ask for it, use DOES ONLY at the ACTOR instance:
-
-// @EXTERNALIZE CODE: non-compliant NPCs
-[source,alan]
---------------------------------------------------------------------------------
-THE man ISA MALE AT room1
-  ...
-  VERB ask_for
-    WHEN act
-      DOES ONLY "He doesn't seem to be willing to fulfill your wish."
-  END VERB.
-END THE man.
---------------------------------------------------------------------------------
-
-
-[[sec.hero]]
-== The hero
-
-The hero instance is left out of the library altogether and can be defined from scratch by the game author.
-You won't need to define the hero in your game at all if you're happy with the response [.play]#You notice nothing unusual about yourself.# when the player types [.play]#&gt; _x me_# (= examine myself) and if no attributes are needed for the hero (such as IS (NOT) hungry, HAS strength 20, etc.).
-The library also defines numerous other default responses for actions targeting the hero:
-
-// @EXTERNALIZE TRANSCRIPT: hero: self-directed actions
-[example,role="gametranscript"]
-================================================================================
-&gt; _kick me_ +
-It doesn't make sense to kick yourself.
-================================================================================
-
-and so on.
-However, if you need to define attributes or verb responses for the hero, or if the hero is described as wearing any kind of CLOTHING, you need to implement the hero in your own game source file:
-
-// @EXTERNALIZE CODE: hero: self-directed actions
-[source,alan]
---------------------------------------------------------------------------------
-THE hero ISA ACTOR
-  HAS strength 20.
-  IS NOT hungry.
-  IS wearing {old_jacket}.
-
+THE bedroom_object ISA OBJECT AT bedroom
+  NAME bedroom
+  DESCRIPTION "" -- an empty description so that the bedroom_object is
+                 -- not visible in the bedroom
   VERB examine
-    DOES ONLY "You're John Smith, proud of your unusual name."
-  END VERB.
-END THE hero.
---------------------------------------------------------------------------------
-
-
-The command [.play]#&gt; _x me_# would then produce
-
-// @EXTERNALIZE TRANSCRIPT: hero: self-directed actions
-[example,role="gametranscript"]
-================================================================================
-&gt; _x me_ +
-You're John Smith, proud of your unusual name.
-================================================================================
-
-
-By default, any clothing worn by the hero will be described when the player types [.play]#&gt; _inventory_# (or [.play]#&gt; _i_#):
-
-[example,role="gametranscript"]
-================================================================================
-&gt; _inventory_ +
-You're empty-handed.
-You're wearing an old jacket.
-================================================================================
-
-
-If you wish to have the pieces of clothing worn by the hero listed at other verbs, like for example [.play]#&gt; _x me_#, you should use the formulation LIST worn.:
-
-[source,alan]
---------------------------------------------------------------------------------
-THE hero ISA ACTOR
-  ...
-  VERB examine
-    DOES ONLY "You're John Smith..."
-              LIST worn.
-  END VERB.
-END THE hero.
---------------------------------------------------------------------------------
-
-
-which will result in
-
-[example,role="gametranscript"]
-================================================================================
-&gt; _x me_ +
-You're John Smith, proud of your unusual name.
-You are wearing an old jacket.
-================================================================================
-
-
-If you wish to define any object to be in the hero's inventory, define the object to be "IN hero":
-
-[source,alan]
---------------------------------------------------------------------------------
-THE notebook ISA OBJECT IN hero.
-END THE notebook.
---------------------------------------------------------------------------------
-
-
-Pieces of clothing, in addition to the above, need to defined as follows:
-
-// @FIXME: XRef to page (in code):
-
-[source,alan]
---------------------------------------------------------------------------------
-THE old_jacket ISA CLOTHING
-  NAME old jacket
-  MENTIONED "old jacket"
-  IS topcover 64. -- (see further p. 39)
-END THE.
---------------------------------------------------------------------------------
-
-The coding LIST hero will list what the hero is carrying, LIST worn will list what the hero is wearing.
-The hero is by default a container actor (so that it can pick up and carry things) and you never need to declare the hero a container separately.
-
-
-
-[[sec.describing-npcs]]
-== Describing NPCs
-
-When the player types [.play]#&gt; _examine [actor]_#, the response will be the default [.play]#You notice nothing unusual about [the actor].#, unless some other description is defined for the ACTOR in the DOES ONLY part of the actor instance:
-
-[source,alan]
---------------------------------------------------------------------------------
-THE boy ISA ACTOR AT STREET
-  VERB examine
-    DOES ONLY "A boy about twelve years old."
-  END VERB.
-END THE boy.
---------------------------------------------------------------------------------
-
-
-If you wish to have an ACTOR's possessions and worn clothing listed after examine, you should add `LIST [actor].` manually to the appropriate verb (typically examine) of the ACTOR instance:
-
-[source,alan]
---------------------------------------------------------------------------------
-THE boy ISA PERSON AT street
-  IS wearing {baseball_cap}.
-
-  VERB examine
-    DOES ONLY "A boy about twelve years old."
-  END VERB.
-END THE boy.
-
-THE coin ISA OBJECT IN boy
-END THE.
-
-THE baseball_cap ISA CLOTHING IN boy
-  NAME baseball cap
-END THE.
---------------------------------------------------------------------------------
-
-
-will result in:
-
-[example,role="gametranscript"]
-================================================================================
-&gt; _examine boy_ +
-A boy about twelve years old.
-The boy is carrying a coin and a baseball cap (being worn).
-================================================================================
-
-
-
-
-[[sec.conversing-with-npcs]]
-== Conversing with NPCs
-
-To engage an NPC in conversation, the library has the pre-defined verbs ask about, tell_about, and talk to.
-(You can also say something but that doesn't require an NPC to be present; for example you can say a magic word to open a door.
-An answer verb is also defined in the library, but this one doesn't need an NPC to be present, either.
-You can for example answer a phone or a door, or you can answer a riddle written on a piece of paper, etc.)
-
-
-Program an NPC to reply to various topics the hero might ask them, in the following way:
-
-[source,alan]
---------------------------------------------------------------------------------
-THE man ISA PERSON AT street
-  ...
-  VERB ask_about
-    WHEN act
-      -- the syntax 'ask (act) about (topic)'
-      -- has two parameters, 'act' and 'topic'.
-      -- "WHEN act" singles out the cases when the man
-      -- is asked about something, and rules out the
-      -- the cases when the man is a topic
-      DOES ONLY
-        IF topic = explosion
-          THEN """I think it was at the factory,"" the
-                man comtemplates. ""I wonder what happened
-                there."""
-          ELSIF topic = mysterious_letter
-            THEN "You show the letter to the man but he doesn't
-                  have any clue about it."
-          ELSIF topic = ...
-          ELSE "The man doesn't know much about that."
-        END IF.
+    DOES ONLY DESCRIBE bedroom. -- = show the description of the
+                                --   bedroom location
   END VERB.
 END THE.
 --------------------------------------------------------------------------------
+
+
+== The two methods for examining things
+
+The library provides two ways for examining things.
+The first one is the traditional "VERB examine DOES (ONLY)...":
+
+// @EXTERN CODE: ball_garden
+[source,alan]
+--------------------------------------------------------------------------------
+include::{utf8dir}/garden1.alan[tag=ball_garden]
+--------------------------------------------------------------------------------
+
+
+which will yield
+
+// @EXTERN TRANSCRIPT: ball_garden
+[example,role="gametranscript"]
+================================================================================
+include::{utf8dir}/garden1.a3ADocLog[tag=ball_garden]
+================================================================================
+
+
+
+Above, you would have to use DOES ONLY, because if you use only DOES, the library-defined response for all things would show first: "You notice nothing unusual about the ball. It's a small red ball."
+
+Another way for examining things is to use the `ex` attribute.
+`Ex` is here short for "examine":
+
+// @EXTERN CODE: ball_garden (variation)
+[source,alan]
+--------------------------------------------------------------------------------
+include::{utf8dir}/garden2.alan[tag=ball_garden]
+--------------------------------------------------------------------------------
+
+
+which will yield the same response as the first method:
+
+// @EXTERN TRANSCRIPT: ball_garden (variation)
+[example,role="gametranscript"]
+================================================================================
+include::{utf8dir}/garden2.a3ADocLog[tag=ball_garden]
+================================================================================
+
+
+but you notice how the needed formulation is shorter.
+Which of the two methods to use is completely voluntary and up to the game author.
 
 
 // EOF //
