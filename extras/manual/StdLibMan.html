@@ -1602,7 +1602,7 @@ Bear in mind that, for each of these classes, the library defines specific prope
 </div>
 </div>
 <div class="paragraph">
-<p>If the author doesn&#8217;t change these default values, the default description shown when examining the walls, floor and ceiling of a room will be &#8220;You notice nothing unusual about the [object].&#8221;
+<p>If the author doesn&#8217;t change these default values, the default description shown when examining the walls, floor and ceiling of a room will be <span class="play">You notice nothing unusual about the [object].</span>
 (Obviously, these commands won&#8217;t work in outdoor locations.)</p>
 </div>
 <div class="paragraph">
@@ -1679,7 +1679,7 @@ darkness.<br></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> meadow <span class="hl kwa">IsA</span> site&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;...&quot;</span>&#x000A;  <span class="hl kwa">...</span>&#x000A;<span class="hl kwa">End the</span> meadow<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> meadow <span class="hl kwa">IsA</span> site&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;Green grass, tall trees and the big sky above you.</span>&#x000A;<span class="hl str">               What could be more pleasant?&quot;</span>&#x000A;<span class="hl kwa">End the.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1699,14 +1699,32 @@ darkness.<br></p>
 </ul>
 </div>
 <div class="paragraph">
-<p>If the author doesn&#8217;t change these default values, the default description, at <span class="play">&gt; <em>x floor</em></span>, <span class="play">&gt; <em>x walls</em></span> or <span class="play">&gt; <em>x ceiling</em></span> will be <span class="play">You notice nothing unusual about the [object].</span> (Naturally, these commands won&#8217;t work in indoor locations.)</p>
+<p>If the author doesn&#8217;t change these default values, the default description, at <span class="play">&gt; <em>x floor</em></span>, <span class="play">&gt; <em>x walls</em></span> or <span class="play">&gt; <em>x ceiling</em></span> will be <span class="play">You notice nothing unusual about the [object].</span>
+(Obviously, these commands won&#8217;t work in indoor locations.)</p>
 </div>
 <div class="paragraph">
 <p>Again, you can change these messages at any point mid-game:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> meadow <span class="hl kwa">IsA</span> site&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;Green grass, tall trees and the big sky above you.</span>&#x000A;<span class="hl str">               What could be more pleasant?&quot;</span>&#x000A;  <span class="hl kwa">Has</span> sky_desc <span class="hl str">&quot;The sky is blue.&quot;</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">Event</span> evening_falls&#x000A;  <span class="hl str">&quot;It&#39;s getting late. The sun starts to go down and the sky changes colour.&quot;</span>&#x000A;  <span class="hl kwa">Set</span> sky_desc <span class="hl kwa">of</span> meadow <span class="hl kwa">to</span> <span class="hl str">&quot;The sky is red.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End event.</span>&#x000A;&#x000A;<span class="hl kwa">Start at</span> meadow<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">Schedule</span> evening_falls <span class="hl kwa">at</span> meadow <span class="hl kwa">after</span> <span class="hl num">20</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> meadow <span class="hl kwa">IsA</span> site&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;Green grass, tall trees and the big sky above you.</span>&#x000A;<span class="hl str">               What could be more pleasant?&quot;</span>&#x000A;  <span class="hl kwa">Has</span> sky_desc <span class="hl str">&quot;A clear and sunny noon sky.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">Event</span> nightfall&#x000A;  <span class="hl str">&quot;</span><span class="hl esc">$n</span><span class="hl str">It&#39;s getting late. The sun sets rapidly, night has fallen.&quot;</span>&#x000A;  <span class="hl kwa">Set</span> sky_desc <span class="hl kwa">of</span> meadow <span class="hl kwa">to</span> <span class="hl str">&quot;The ink-black sky is dominated by a full moon.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End event.</span>&#x000A;&#x000A;<span class="hl kwa">Start at</span> meadow<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">Schedule</span> nightfall <span class="hl kwa">at</span> meadow <span class="hl kwa">after</span> <span class="hl num">2</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>x sky</em><br>
+A clear and sunny noon sky.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; z<br>
+Time passes&#8230;&#8203; <br>
+It&#8217;s getting late. The sun sets rapidly, night has fallen.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>x sky</em><br>
+The ink-black sky is dominated by a full moon.<br></p>
+</div>
 </div>
 </div>
 <div class="admonitionblock note">

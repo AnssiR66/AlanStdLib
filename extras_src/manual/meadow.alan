@@ -1,0 +1,32 @@
+Import 'library.i'.
+The my_game IsA definition_block
+End the.
+
+--------------------------------------------------------------------------------
+-- §8.2. SITE: Implementing an outdoor location
+--------------------------------------------------------------------------------
+-- tag::outdoor-example[]
+-- tag::change-descs[]
+The meadow IsA site
+  Description "Green grass, tall trees and the big sky above you.
+               What could be more pleasant?"
+-- end::outdoor-example[]
+  Has sky_desc "A clear and sunny noon sky.".
+-- tag::outdoor-example[]
+End the.
+-- end::outdoor-example[]
+
+-- end::change-descs[]
+
+--------------------------------------------------------------------------------
+-- §8.2. SITE: Changing descriptions of site-objects mid-game
+--------------------------------------------------------------------------------
+-- tag::change-descs[]
+Event nightfall
+  "$nIt's getting late. The sun sets rapidly, night has fallen."
+  Set sky_desc of meadow to "The ink-black sky is dominated by a full moon.".
+End event.
+
+Start at meadow.
+Schedule nightfall at meadow after 2.
+-- end::change-descs[]

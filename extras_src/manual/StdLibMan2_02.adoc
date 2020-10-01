@@ -61,7 +61,7 @@ HAS walls_desc "".
 HAS ceiling_desc "".
 --------------------------------------------------------------------------------
 
-If the author doesn't change these default values, the default description shown when examining the walls, floor and ceiling of a room will be "`You notice nothing unusual about the [object].`"
+If the author doesn't change these default values, the default description shown when examining the walls, floor and ceiling of a room will be [.play]#You notice nothing unusual about the [object].#
 (Obviously, these commands won't work in outdoor locations.)
 
 To have a more varied effect, you can change the descriptions this way:
@@ -107,14 +107,11 @@ include::{utf8dir}/livingroom.a3ADocLog[tag=trapdoor]
 
 If you want to implement an outdoor location, you can declare it `IsA SITE`:
 
-
+// @EXTERNALIZE CODE: meadow.alan (implementing outdoor location)
 [source,alan]
---------------------------------------------------------------------------------
-The meadow IsA site
-  Description "..."
-  ...
-End the meadow.
---------------------------------------------------------------------------------
+---------------------------------------------------
+include::{utf8dir}/meadow.alan[tag=outdoor-example]
+---------------------------------------------------
 
 All SITEs will automatically have a ground and a sky.
 
@@ -124,28 +121,23 @@ There are two attributes for describing the ground and the sky in any SITE:
 * `Has ground_desc "".`
 * `Has sky_desc "".`
 
-If the author doesn't change these default values, the default description, at [.play]#&gt; _x floor_#, [.play]#&gt; _x walls_# or [.play]#&gt; _x ceiling_# will be [.play]#You notice nothing unusual about the [object].# (Naturally, these commands won't work in indoor locations.)
+If the author doesn't change these default values, the default description, at [.play]#&gt; _x floor_#, [.play]#&gt; _x walls_# or [.play]#&gt; _x ceiling_# will be [.play]#You notice nothing unusual about the [object].#
+(Obviously, these commands won't work in indoor locations.)
 
 
 Again, you can change these messages at any point mid-game:
 
-
+// @EXTERNALIZE CODE: meadow.alan (changing sit-objs descriptions mid-game)
 [source,alan]
---------------------------------------------------------------------------------
-The meadow IsA site
-  Description "Green grass, tall trees and the big sky above you.
-               What could be more pleasant?"
-  Has sky_desc "The sky is blue."
-End the.
+------------------------------------------------
+include::{utf8dir}/meadow.alan[tag=change-descs]
+------------------------------------------------
 
-Event evening_falls
-  "It's getting late. The sun starts to go down and the sky changes colour."
-  Set sky_desc of meadow to "The sky is red.".
-End event.
-
-Start at meadow.
-Schedule evening_falls at meadow after 20.
---------------------------------------------------------------------------------
+// @EXTERN TRANSCRIPT: XXX
+[example,role="gametranscript"]
+================================================================================
+include::{utf8dir}/meadow.a3ADocLog[tag=change-descs]
+================================================================================
 
 
 [NOTE]
