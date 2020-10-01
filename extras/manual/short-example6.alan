@@ -5,55 +5,55 @@
 -- and two keys added.
 --------------------------------------------------------------------------------
 
-IMPORT 'library.i'.
+Import 'library.i'.
 
-THE my_game ISA DEFINITION_BLOCK
-END THE.
+The my_game IsA definition_block
+End the.
 
-THE room1 ISA LOCATION
-  DESCRIPTION "North to room2."
-  EXIT north TO room2
-    CHECK locked_door_1 IS open
-      ELSE "The door to the north is on the way."
-  END EXIT.
-END THE.
+The room1 IsA location
+  Description "North to room2."
+  Exit north to room2
+    Check locked_door_1 is open
+      else "The door to the north is on the way."
+  End exit.
+End the.
 
-THE locked_door_1 ISA DOOR AT room1
-  DESCRIPTION ""
-  NAME door
-  HAS otherside locked_door_2.
-  IS lockable. IS locked.
-  HAS matching_key silver_key.
-END THE.
+The locked_door_1 IsA door at room1
+  Description ""
+  Name door
+  Has otherside locked_door_2.
+  Is lockable. Is locked.
+  Has matching_key silver_key.
+End the.
 
-THE silver_key ISA OBJECT AT room1
-  NAME silver key
-END THE.
+The silver_key IsA object at room1
+  Name silver key
+End the.
 
-THE brass_key ISA OBJECT AT room1
-  NAME brass key
-END THE.
+The brass_key IsA object at room1
+  Name brass key
+End the.
 
-THE room2 ISA LOCATION
-  DESCRIPTION "South to room1."
-  EXIT south TO room1
-    CHECK locked_door_2 IS open
-      ELSE "The door to the south is on the way."
-  END EXIT.
-END THE.
+The room2 IsA location
+  Description "South to room1."
+  Exit south to room1
+    Check locked_door_2 is open
+      else "The door to the south is on the way."
+  End exit.
+End the.
 
-THE locked_door_2 ISA DOOR AT room2
-  DESCRIPTION ""
-  NAME door
-END THE.
+The locked_door_2 IsA door at room2
+  Description ""
+  Name door
+End the.
 
-THE apple ISA OBJECT AT room2
-  IS edible.
+The apple IsA object at room2
+  Is edible.
 
-  VERB eat
-    DOES "Congratulations!" QUIT.
-  END VERB.
-END THE.
+  Verb eat
+    Does "Congratulations!" quit.
+  End verb.
+End the.
 
-START AT room1.
-DESCRIBE banner.
+Start at room1.
+Describe banner.

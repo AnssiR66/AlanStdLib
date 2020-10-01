@@ -6,20 +6,20 @@
 -- apple, quit properly, etc.
 --------------------------------------------------------------------------------
 
-THE room1 ISA LOCATION
-  DESCRIPTION "North to room2."
-  EXIT north TO room2.
-END THE.
+The room1 IsA location
+  Description "North to room2."
+  Exit north to room2.
+End the.
 
-THE room2 ISA LOCATION
-  DESCRIPTION "South to room1."
-  EXIT south TO room1.
-END THE.
+The room2 IsA location
+  Description "South to room1."
+  Exit south to room1.
+End the.
 
-THE apple ISA OBJECT AT room2
-  VERB eat
-    DOES "Congratulations!" QUIT.
-  END VERB.
-END THE.
+The apple IsA object at room2
+  Verb eat
+    Does "Congratulations!" quit.
+  End verb.
+End the.
 
-START AT room1.
+Start at room1.

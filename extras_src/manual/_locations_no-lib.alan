@@ -1,0 +1,13 @@
+The bedroom IsA location
+  Description "This is your bedroom.
+               Your bathroom is to the north."
+  Exit north to bathroom.
+End the.
+
+The bathroom IsA location
+  Description "This is the bathroom.
+               Your bedroom is back to the south."
+  Exit south to bedroom.
+End the.
+
+Start at bedroom.

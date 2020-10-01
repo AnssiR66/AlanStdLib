@@ -3,7 +3,7 @@
 *                                                                              *
 *                     ALAN Standard Library User's Manual                      *
 *                                                                              *
-*                                  Chapter 3                                   *
+*                    PART II — Library Classes » Locations                     *
 *                                                                              *
 ********************************************************************************
 ////
@@ -29,36 +29,31 @@ Default location attributes pre-defined in the library:
 
 Using the standard library, basic locations are implemented just like advised in the ALAN Manual, for example:
 
-
+// @EXTERN CODE: _locations_no-lib.alan
 [source,alan]
---------------------------------------------------------------------------------
-THE bedroom ISA LOCATION
-  DESCRIPTION "This is your bedroom. Your bathroom is to the north."
-  EXIT north TO bathroom.
-END THE.
+-------------------------------------------
+include::{utf8dir}/_locations_no-lib.alan[]
+-------------------------------------------
 
-THE bathroom ISA LOCATION
-  DESCRIPTION "This is the bathroom. Your bedroom is back to the south."
-  EXIT south TO bedroom.
-END THE.
---------------------------------------------------------------------------------
+
 
 == ROOM
 
-If you want to implement an indoor location, you can declare it ISA ROOM:
+If you want to implement an indoor location, you can declare it `IsA ROOM`:
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE kitchen ISA ROOM
-  DESCRIPTION "..."
+The kitchen IsA room
+  Description "..."
   ...
-END THE kitchen.
+End the kitchen.
 --------------------------------------------------------------------------------
 
 All ROOMs will automatically have walls, a floor and a ceiling.
 
 There are three attributes for describing the walls, the floor and the ceiling in any ROOM:
 
+// @FIXME: Use StdLib color scheme here!
 [source,alan]
 --------------------------------------------------------------------------------
 HAS floor_desc "".
@@ -110,15 +105,15 @@ include::{utf8dir}/livingroom.a3ADocLog[tag=trapdoor]
 
 == SITE
 
-If you want to implement an outdoor location, you can declare it `ISA SITE`:
+If you want to implement an outdoor location, you can declare it `IsA SITE`:
 
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE meadow ISA SITE
-  DESCRIPTION "..."
+The meadow IsA site
+  Description "..."
   ...
-END THE meadow.
+End the meadow.
 --------------------------------------------------------------------------------
 
 All SITEs will automatically have a ground and a sky.
@@ -126,8 +121,8 @@ All SITEs will automatically have a ground and a sky.
 There are two attributes for describing the ground and the sky in any SITE:
 
 
-* `HAS ground_desc "".`
-* `HAS sky_desc "".`
+* `Has ground_desc "".`
+* `Has sky_desc "".`
 
 If the author doesn't change these default values, the default description, at [.play]#&gt; _x floor_#, [.play]#&gt; _x walls_# or [.play]#&gt; _x ceiling_# will be [.play]#You notice nothing unusual about the [object].# (Naturally, these commands won't work in indoor locations.)
 
@@ -137,19 +132,19 @@ Again, you can change these messages at any point mid-game:
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE meadow ISA SITE
-  DESCRIPTION "Green grass, tall trees and the big sky above you. What could
-              be more pleasant?"
-  HAS sky_desc "The sky is blue."
-END THE.
+The meadow IsA site
+  Description "Green grass, tall trees and the big sky above you.
+               What could be more pleasant?"
+  Has sky_desc "The sky is blue."
+End the.
 
-EVENT evening_falls
+Event evening_falls
   "It's getting late. The sun starts to go down and the sky changes colour."
-  SET sky_desc OF meadow TO "The sky is red.".
-END EVENT.
+  Set sky_desc of meadow to "The sky is red.".
+End event.
 
-START AT meadow.
-SCHEDULE evening_falls AT meadow AFTER 20.
+Start at meadow.
+Schedule evening_falls at meadow after 20.
 --------------------------------------------------------------------------------
 
 
@@ -160,25 +155,25 @@ Here, the hero digs the ground on the meadow:
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE meadow ISA SITE
-  DESCRIPTION "Green grass, tall trees and the big sky above you. What could
-              be more pleasant?"
-  HAS sky_desc "The sky is blue."
-  VERB dig
-    DOES ONLY
-    IF obj = ground
-      THEN "You dig the ground with your shovel and find a chest!"
+The meadow IsA site
+  Description "Green grass, tall trees and the big sky above you.
+               What could be more pleasant?"
+  Has sky_desc "The sky is blue."
+  Verb dig
+    Does only
+    If obj = ground
+      Then "You dig the ground with your shovel and find a chest!"
         -- Here, you could change the description of the ground if you wish:
-        --   SET ground_desc OF meadow TO "There's a hole in the ground, left
-        --                                there by your digging efforts.".
-      ELSE "That doesn't work."
-    END IF.
-  END VERB.
-END THE.
+        --   Set ground_desc of meadow to "There's a hole in the ground, left
+        --                                 there by your digging efforts.".
+      Else "That doesn't work."
+    End if.
+  End verb.
+End the.
 --------------------------------------------------------------------------------
 
 
-Notice the bit `IF obj = ground` above.
+Notice the bit `If obj = ground` above.
 The library-defined indoor and outdoor objects, besides the `ground`, are `sky`, `floor`, `walls` and `ceiling`.
 You can refer to them in your coding in the way illustrated above when you need to manipulate them in any way.
 ================================================================================
@@ -190,28 +185,28 @@ __NOTE 2__: Besides using the `floor_desc`, `walls_desc` etc attributes for the 
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE my_game ISA DEFINITION_BLOCK
-  VERB examine
-    DOES ONLY
-    CHECK obj <> walls
-      ELSE
-        IF hero AT kitchen
-         THEN "The walls are lined with shelves."
-        ELSIF hero AT livingroom
-          THEN "The wallpaper has a nice flower pattern."
-        ELSIF hero AT ...
-        END IF.
-    AND obj <> floor
-      THEN ...
+The my_game IsA definition_block
+  Verb examine
+    Does only
+    Check obj <> walls
+      Else
+        If hero at kitchen
+          Then "The walls are lined with shelves."
+        ElsIf hero at livingroom
+          Then "The wallpaper has a nice flower pattern."
+        ElsIf hero at ...
+        End if.
+    And obj <> floor
+      Then ...
       ...
-  END VERB.
-END THE my_game.
+  End verb.
+End the my_game.
 --------------------------------------------------------------------------------
-
 ================================================================================
 
-== DARK_LOCATION and the lit attribute
 
+
+== DARK_LOCATION and the lit attribute
 
 In dark locations, all actions requiring the ability to see are automatically disabled by the library.
 All dark locations have the `NOT lit` attribute.
@@ -222,9 +217,9 @@ Here's an example of how to implement a `DARK_LOCATION`:
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE basement ISA DARK_LOCATION
-  EXIT up TO hall.
-END THE.
+The basement IsA dark_location
+  Exit up to hall.
+End the.
 --------------------------------------------------------------------------------
 
 // @FIXME: The 'dark_loc_desc' attribute is now in "lib_messages_library.i".
@@ -239,10 +234,10 @@ If you add your own description to a `DARK_LOCATION`, it will only be shown if t
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE basement ISA DARK_LOCATION
-  DESCRIPTION "Only useless junk can be seen lying around."
-  EXIT up TO hall.
-END THE.
+The basement IsA dark_location
+  Description "Only useless junk can be seen lying around."
+  Exit up to hall.
+End the.
 --------------------------------------------------------------------------------
 
 
@@ -260,14 +255,14 @@ For example,
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE lantern ISA LIGHTSOURCE
-  VERB turn_on
-    DOES
-    IF hero AT darkness
-      THEN LOCATE hero AT treasure_chamber.
-    END IF.
-  END VERB.
-END THE.
+The lantern IsA lightsource
+  Verb turn_on
+    Does
+    If hero at darkness
+      then locate hero at treasure_chamber.
+    End if.
+  End verb.
+End the.
 --------------------------------------------------------------------------------
 
 Alternatively, you can also use a rule, for example
@@ -275,9 +270,9 @@ Alternatively, you can also use a rule, for example
 
 [source,alan]
 --------------------------------------------------------------------------------
-WHEN lantern IS lit
-  AND hero AT darkness
-THEN LOCATE hero AT treasure_chamber.
+When lantern is lit
+  and hero at darkness
+then locate hero at treasure_chamber.
 --------------------------------------------------------------------------------
 
 Note that you won't always need to define a dark location to be a member of the subclass DARK_LOCATION.
@@ -286,15 +281,15 @@ It can be done for example like this:
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE main_power_switch ISA DEVICE AT lobby
-  VERB switch_on
-    DOES ONLY
-      FOR EACH dl ISA LOCATION, IS NOT lit
-        DO
-        MAKE dl lit.
-      END EACH.
-  END VERB.
-END THE.
+The main_power_switch IsA device at lobby
+  Verb switch_on
+    Does only
+      For each dl isa location, is not lit
+        do
+        make dl lit.
+      End each.
+  ENd verb.
+ENd the.
 --------------------------------------------------------------------------------
 
 If we had used the DARK_LOCATION class above, all locations to be lighted should have had a LIGHTSOURCE object present in them, and all these LIGHTSOURCE objects would have needed to be changed to lit, which would have meant extra programming.
@@ -317,38 +312,38 @@ Here, like above, you could just make the basement a normal location and not a D
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE top_of_stairs ISA ROOM
-  NAME 'At the top of the stairs'
-  EXIT down TO basement.
-  END THE.
+The top_of_stairs IsA room
+  Name 'At the top of the stairs'
+  Exit down to basement.
+  End the.
 
-THE light_switch ISA OBJECT AT top_of_stairs
-  IS NOT 'on'.
-  VERB turn_on
-    DOES ONLY
-      IF light_switch IS NOT 'on'
-        THEN MAKE light_switch 'on'.
-          MAKE basement lit.
-          "You switch on the basement light."
-        ELSE "The light is already switched on."
-      END IF.
-  END VERB.
+The light_switch IsA object at top_of_stairs
+  Is not 'on'.
+  Verb turn_on
+    Does only
+      If light_switch is not 'on'
+        then make light_switch 'on'.
+             make basement lit.
+             "You switch on the basement light."
+        else "The light is already switched on."
+      End if.
+  End verb.
 
-  VERB turn_off
-    DOES ONLY
-      IF light_switch IS 'on'
-        THEN MAKE light_switch NOT'on'.
-          MAKE basement NOT lit.
-          "You switch off the basement light."
-        ELSE "The light is already switched off."
-      END IF.
-  END VERB.
-END THE.
+  Verb turn_off
+    Does only
+      If light_switch is 'on'
+        then make light_switch not'on'.
+             make basement not lit.
+             "You switch off the basement light."
+        else "The light is already switched off."
+      End if.
+  End verb.
+End the.
 
-THE basement ISA ROOM
+the basement IsA ROOM
   -- and not a DARK_LOCATION
-  IS NOT lit.
-END THE basement.
+  Is not lit.
+End the basement.
 --------------------------------------------------------------------------------
 
 
@@ -374,41 +369,41 @@ Now, in your source code you can define something like the following:
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE kitchen ISA LOCATION
-  DESCRIPTION
+The kitchen IsA location
+  Description
     "You are in the kitchen."
-  IF visited OF THIS = 1
-    THEN "This is your first time here."
-    ELSE "You remember you've been here before."
-  END IF.
-END THE.
+  If visited of this = 1
+    then "This is your first time here."
+    else "You remember you've been here before."
+  End if.
+End the.
 --------------------------------------------------------------------------------
 
 You can also check whether the hero has been in a LOCATION if needed:
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE king ISA PERSON
-  VERB ask
-    WHEN act
-    IF topic = treasure_chamber
-      THEN
-        IF visited OF treasure_chamber = 0
-          THEN "You are not supposed to know anything
+The king IsA person
+  Verb ask
+    When act
+    If topic = treasure_chamber
+      then
+        IF visited of treasure_chamber = 0
+          then "You are not supposed to know anything
                 about the treasure chamber - you
                 haven't found it yet."
-          ELSE """Just take what you want from the
+          else """Just take what you want from the
                 chamber"", the king smiles."
-        END IF.
-    END IF.
-  END VERB.
-END THE.
+        End if.
+    End if.
+  End verb.
+End the.
 --------------------------------------------------------------------------------
+
 
 
 // @ADDED SUB-HEADING:
 === described
-
 
 [source,alan]
 --------------------------------------------------------------------------------
@@ -422,28 +417,28 @@ When the player reads the location description for the first time, the value is 
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE library ISA ROOM
-  DESCRIPTION
-    IF described OF THIS = 1
-      THEN "There is an old man reading at a desk in one of the
+The library IsA room
+  Description
+    If described of this = 1
+      then "There is an old man reading at a desk in one of the
             corners."
-      ELSE "The old man keeps on reading at his desk."
-    END IF.
-END THE.
+      else "The old man keeps on reading at his desk."
+    End if.
+End the.
 --------------------------------------------------------------------------------
 
 or:
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE meadow ISA SITE
-  DESCRIPTION
+The meadow IsA site
+  Description
     "Flies and other insects buzz around you"
-    IF described OF meadow > 5
-      THEN ", which starts to annoy you little by little"
-    END IF.
+    If described OF meadow > 5
+      then ", which starts to annoy you little by little"
+    End if.
     "."
-END THE.
+End the.
 --------------------------------------------------------------------------------
 
 
@@ -457,13 +452,13 @@ You can do it like this:
 // @EXTERNALIZE CODE: basement
 [source,alan]
 --------------------------------------------------------------------------------
-THE basement ISA LOCATION
-  DESCRIPTION "This is the basement of your house. Stairs lead up."
-  EXIT up TO livingroom.
-  VERB jump
-    DOES ONLY "The ceiling is too low here."
-  END VERB.
-END THE.
+The basement IsA location
+  Description "This is the basement of your house. Stairs lead up."
+  Exit up to livingroom.
+  Verb jump
+    Does only "The ceiling is too low here."
+  End verb.
+End the.
 --------------------------------------------------------------------------------
 
 or
@@ -471,14 +466,14 @@ or
 // @EXTERNALIZE CODE: exhibition_hall
 [source,alan]
 --------------------------------------------------------------------------------
-THE exhibition_hall ISA ROOM
-  DESCRIPTION "You are in the main exhibition of the museum. There is
+The exhibition_hall IsA room
+  Description "You are in the main exhibition of the museum. There is
                exquisite art all around you."
-  VERB take
-    DOES ONLY "Trying to take anything here just like that would
+  Verb take
+    does only "Trying to take anything here just like that would
                set the alarm off immediately."
-  END VERB.
-END THE.
+  End verb.
+End the.
 --------------------------------------------------------------------------------
 
 
@@ -504,15 +499,15 @@ In the following example, the hero will be able to take the vase, or anything el
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE exhibition_hall ISA ROOM
-  DESCRIPTION "You are in the main exhibition of the museum. There is
+The exhibition_hall IsA room
+  Description "You are in the main exhibition of the museum. There is
                exquisite art all around you."
-  VERB take
-    CHECK alarm IS NOT 'on'
-      ELSE "Trying to take anything here just like that would
+  Verb take
+    Check alarm is not 'on'
+      else "Trying to take anything here just like that would
             set the alarm off immediately."
-  END VERB.
-END THE.
+  End verb.
+End the.
 --------------------------------------------------------------------------------
 
 
@@ -522,12 +517,12 @@ You would naturally need to define an alarm object here, for example:
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE alarm ISA DEVICE
-  IS 'on'.
-  VERB examine
-    DOES ONLY "The main alarm switch is a small metal lever."
-  END VERB.
-END THE.
+The alarm IsA device
+  Is 'on'.
+  Verb examine
+    Does only "The main alarm switch is a small metal lever."
+  End verb.
+End the.
 --------------------------------------------------------------------------------
 
 
@@ -539,17 +534,17 @@ Nesting locations is straightforward, as described in the ALAN Manual:
 [[example.house-nested-locations]]
 [source,alan]
 --------------------------------------------------------------------------------
-THE house ISA LOCATION
-END THE house.
+The house IsA location
+End the house.
 
-THE kitchen ISA LOCATION AT house
-END THE kitchen.
+The kitchen Isa location at house
+End the kitchen.
 
-THE bedroom ISA LOCATION AT house
-END THE bedroom.
+The bedroom Isa location at house
+End the bedroom.
 
-THE livingroom ISA LOCATION AT house
-END THE livingroom.
+The livingroom Isa location at house
+End the livingroom.
 --------------------------------------------------------------------------------
 
 
@@ -558,8 +553,8 @@ This is handy when you want for example a certain OBJECT to be found in many sim
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE ceiling_lamp ISA OBJECT AT house
-END THE.
+The ceiling_lamp IsA object at house
+End the.
 --------------------------------------------------------------------------------
 
 The `ceiling_lamp` would now be found in the kitchen, bedroom and living-room.
@@ -577,18 +572,18 @@ If you want a certain object to be present in all indoor or in all outdoor locat
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE sun ISA OBJECT
-  IS distant.
-END THE sun.
+The sun IsA object
+  Is distant.
+End the.
 --------------------------------------------------------------------------------
 
 or
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE carpet ISA OBJECT
-  IS scenery.
-END THE.
+The carpet IsA object
+  Is scenery.
+End the.
 --------------------------------------------------------------------------------
 
 (Indoor and outdoor are library-defined locations.
@@ -601,8 +596,8 @@ If you want a certain object to be present in absolutely every location of your 
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE sea ISA OBJECT AT my_game
-END THE sea.
+The sea IsA OBJECT at my_game
+End the.
 --------------------------------------------------------------------------------
 
 [NOTE]
@@ -616,27 +611,27 @@ In fact, you really don't need the walls instance for the car interior, as one w
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE driveway ISA LOCATION
-END THE driveway.
+The driveway IsA location
+End the driveway.
 
-THE driveway_ground ISA OBJECT AT driveway
-  NAME ground
-END THE.
+The driveway_ground IsA object at driveway
+  Name ground
+End the.
 
-THE driveway_sky ISA OBJECT AT driveway
-  NAME sky
-END THE.
+The driveway_sky IsA object at driveway
+  Name sky
+End the.
 
-THE inside_car ISA LOCATION AT driveway
-END THE inside_car.
+The inside_car IsA location at driveway
+End the inside_car.
 
-THE car_floor ISA OBJECT AT inside_car
-  NAME floor
-END THE.
+The car_floor IsA object at inside_car
+  Name floor
+End the.
 
-THE car_ceiling ISA OBJECT AT inside_car
-  NAME ceiling
-END THE.
+The car_ceiling IsA object at inside_car
+  Name ceiling
+End the.
 --------------------------------------------------------------------------------
 ================================================================================
 
@@ -647,11 +642,11 @@ Going back to <<example.house-nested-locations,the previous house example>>, you
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE house ISA LOCATION
-  VERB jump
-    DOES ONLY "It's better to jump outdoors."
-  END VERB.
-END THE.
+The house IsA location
+  Verb jump
+    Does only "It's better to jump outdoors."
+  End verb.
+End the.
 --------------------------------------------------------------------------------
 
 and this message would display for [.play]#&gt; _jump_# if the player tried that action in the bedroom, in the kitchen or in the living-room.
@@ -660,16 +655,16 @@ You can also check if the hero is in a certain area, or group of locations:
 
 [source,alan]
 --------------------------------------------------------------------------------
-IF location OF hero AT house
-  THEN...
+If location of hero at house
+  then...
 --------------------------------------------------------------------------------
 
 or
 
 [source,alan]
 --------------------------------------------------------------------------------
-CHECK location OF hero AT house
-  ELSE...
+Check location of hero at house
+  else...
 --------------------------------------------------------------------------------
 
 
@@ -677,16 +672,16 @@ Thus, we could have for example
 
 [source,alan]
 --------------------------------------------------------------------------------
-SCHEDULE explosion AT hero AFTER 5.
+Schedule explosion at hero after 5.
 
-EVENT explosion
-  IF location OF hero AT house -- (house is the "area" where the hero
+Event explosion
+  If location of hero at house -- (house is the "area" where the hero
                                -- is located)
-    THEN "From an open window, you hear an explosion out in the street."
-  ELSIF hero AT garden
-    THEN "You hear an explosion nearby."
-  END IF.
-END EVENT.
+    then "From an open window, you hear an explosion out in the street."
+  ElsIf hero at garden
+    then "You hear an explosion nearby."
+  end if.
+end event.
 --------------------------------------------------------------------------------
 
 The locations nested in a certain parent location don't have to be _adjacent_ (i.e. connected to each other by exits).
@@ -694,33 +689,33 @@ Bearing this in mind, you can group even very different and distant locations to
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE thief_area ISA ROOM
-END THE.
+The thief_area IsA room
+End the.
 
-THE round_cave ISA ROOM AT thief_area
-END THE.
+The round_cave IsA room at thief_area
+End the.
 
-THE inn ISA ROOM AT thief_area
-END THE.
+The inn IsA room at thief_area
+End the.
 
-THE train_carriage2 ISA ROOM AT thief_area
-END THE.
+The train_carriage2 IsA room at thief_area
+End the.
 
 EVENT thief_appears
-  IF location OF hero AT thief_area
-    THEN "A thief appears suddenly from nowhere and snatches something
+  IF location of hero at thief_area
+    Then "A thief appears suddenly from nowhere and snatches something
           from you!"
-          LOCATE RANDOM IN hero IN thief.
+         Locate random in hero in thief.
           -- (This line would locate a random object from the hero's
           -- inventory in the possession of the thief.)
-    END IF.
-  SCHEDULE thief_appears AT hero AFTER RANDOM 10 TO 20.
-END EVENT.
+    End if.
+  Schedule thief_appears at hero after random 10 to 20.
+End event.
 --------------------------------------------------------------------------------
 
 
-Note that the event is scheduled to trigger `AT hero`.
-If you defined `SCHEDULE thief_appears AT thief_area AFTER 10 TO 20.` above, the event would trigger only in the parent location thief_area which the hero never actually visits (it's just the name of the "`area`" where the actual locations where the thief appears are nested) and thus the event would be invisible to the player.
+Note that the event is scheduled to trigger `at hero`.
+If you defined `Schedule thief_appears at thief_area after 10 to 20.` above, the event would trigger only in the parent location thief_area which the hero never actually visits (it's just the name of the "`area`" where the actual locations where the thief appears are nested) and thus the event would be invisible to the player.
 Events are not in scope in "`parent locations`" of nested locations.
 
 // EOF //

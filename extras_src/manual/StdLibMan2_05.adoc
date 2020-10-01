@@ -3,7 +3,7 @@
 *                                                                              *
 *                     ALAN Standard Library User's Manual                      *
 *                                                                              *
-*                                  Chapter 6                                   *
+*                     PART II — Library Classes » Objects                      *
 *                                                                              *
 ********************************************************************************
 ////

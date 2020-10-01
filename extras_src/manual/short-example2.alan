@@ -4,42 +4,42 @@
 --------------------------------------------------------------------------------
 
 -- tag::shown[]
-IMPORT 'library.i'.
+Import 'library.i'.
 
-THE my_game ISA DEFINITION_BLOCK
-END THE.
+The my_game IsA definition_block
+End the.
 
-THE nursery ISA ROOM
-  DESCRIPTION "The kitchen is to the east."
-  EXIT east to kitchen.
-END THE.
+The nursery IsA room
+  Description "The kitchen is to the east."
+  Exit east to kitchen.
+End the.
 
-THE child ISA PERSON AT nursery
-  DESCRIPTION "There is a crying child here."
+The child IsA person at nursery
+  Description "There is a crying child here."
 
-  VERB give
-    WHEN recipient
-      DOES ONLY
-        IF obj = candy
-          THEN "You give the candy to the child who stops
+  Verb give
+    When recipient
+      Does only
+        If obj = candy
+          then "You give the candy to the child who stops
                 crying and starts licking it happily."
-          QUIT.
-        END IF.
-  END VERB.
-END THE.
+          quit.
+        End if.
+  End verb.
+End the.
 
-THE kitchen ISA ROOM
-  DESCRIPTION "You can go west, back to the nursery."
-  EXIT west TO nursery.
-END THE.
+The kitchen IsA room
+  Description "You can go west, back to the nursery."
+  Exit west to nursery.
+End the.
 
-THE table ISA SUPPORTER AT kitchen
-  IS NOT takeable.
-END THE.
+The table IsA supporter at kitchen
+  Is not takeable.
+End the.
 
-THE candy ISA OBJECT IN table
-  IS edible.
-END THE.
+The candy IsA object in table
+  Is edible.
+End the.
 
-START AT nursery.
+Start at nursery.
 -- end::shown[]

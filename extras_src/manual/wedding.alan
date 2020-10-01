@@ -1,95 +1,94 @@
-IMPORT 'library.i'.
+Import 'library.i'.
 
-THE my_game ISA DEFINITION_BLOCK
-END THE.
+The my_game IsA definition_block
+End the.
 
 
-THE hero ISA ACTOR
-END THE.
+The hero IsA actor
+End the.
 
 -- tag::tuxedos[]
-THE your_tuxedo ISA CLOTHING IN hero
-  NAME your tuxedo NAME my tuxedo
-  INDEFINITE ARTICLE ""
-  DEFINITE ARTICLE ""
-  HAS ex "Sam wanted the two of you to wear identical tuxedos
+The your_tuxedo IsA clothing in hero
+  Name your tuxedo Name my tuxedo
+  Indefinite article ""
+  Definite article ""
+  Has ex "Sam wanted the two of you to wear identical tuxedos
           for the occasion, so you went and bought them together.".
-  IS topcover 32.
-  IS botcover 16.
-  IS worn.
-END THE.
+  Is topcover 32.
+  Is botcover 16.
+  Is worn.
+End the.
 
 -- end::tuxedos[]
-THE restaurant ISA ROOM
-  DESCRIPTION
+The restaurant IsA room
+  Description
     "All the wedding guests follow keenly as the newly-wedded
      couple is slicing the cake together. Many are taking
      photographs."
-END THE.
+End the.
 
-THE people ISA PERSON AT restaurant
-  NAME guests NAME wedding folk NAME people
-  MENTIONED "the wedding folk"
-  DESCRIPTION ""
+The people IsA person at restaurant
+  Name guests Name wedding folk Name people
+  Mentioned "the wedding folk"
+  Description ""
 
-  VERB examine
-    DOES ONLY "Everybody's smiling and laughing."
-  END VERB.
-END THE.
+  Verb examine
+    Does only "Everybody's smiling and laughing."
+  End verb.
+End the.
 
-THE couple ISA PERSON AT restaurant
-  NAME couple NAME bride NAME groom
-  DESCRIPTION ""
+The couple IsA person at restaurant
+  Name couple Name bride Name groom
+  Description ""
 
-  VERB examine
-    DOES "They look very happy."
-  END VERB.
-END THE.
+  Verb examine
+    Does "They look very happy."
+  End verb.
+End the.
 
-THE cake ISA OBJECT AT restaurant
-  IS edible.
-  DESCRIPTION ""
+The cake IsA object at restaurant
+  Is edible.
+  Description ""
 
-  VERB examine
-    DOES ONLY "A big, delicious-looking cream cake."
-  END VERB.
+  Verb examine
+    Does only "A big, delicious-looking cream cake."
+  End verb.
 
-  VERB take
-    DOES ONLY "Hands off! Wait until the couple has got their slice."
-  END VERB.
+  Verb take
+    Does only "Hands off! Wait until the couple has got their slice."
+  End verb.
 
-  VERB eat
-    DOES ONLY "Hands off! Wait until the couple has got their slice."
-  END VERB.
-END THE.
+  Verb eat
+    Does only "Hands off! Wait until the couple has got their slice."
+  End verb.
+End the.
 
 
 -- tag::tuxedos[]
-THE sam ISA MALE AT restaurant
-  IS named.
-  HAS ex "Sam and you have been best friends since childhood.
+The sam IsA male at restaurant
+  Is named.
+  Has ex "Sam and you have been best friends since childhood.
           Today he's getting married, and he asked you to be his witness.".
-END THE sam.
+End the sam.
 
-THE sams_tuxedo ISA CLOTHING in sam
-  NAME his tuxedo NAME 'sam''s' tuxedo
-  INDEFINITE ARTICLE ""
-  DEFINITE ARTICLE ""
-  HAS ex "Although you're wearing identical tuxedos, you can't
+The sams_tuxedo IsA clothing in sam
+  Name his tuxedo Name 'sam''s' tuxedo
+  Indefinite article ""
+  Definite article ""
+  Has ex "Although you're wearing identical tuxedos, you can't
           avoid the feeling that Sam's nicer than yours.
           Maybe it's just the ""bridegroom effect"".".
-  IS worn.
+  Is worn.
 -- end::tuxedos[]
 
-
-  VERB ask_for
-    DOES ONLY
+  Verb ask_for
+    Does only
       "Puzzled by your request, Sam scoffs at you,
        $n""What's wrong with yours?
            We bought them together, same model and all."""
-  END VERB ask_for.
+  End verb ask_for.
 -- tag::tuxedos[]
-END THE.
+End the.
 -- end::tuxedos[]
 
-START AT restaurant.
+Start at restaurant.

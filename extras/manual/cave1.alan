@@ -1,5 +1,5 @@
 Import 'library.i'.
-The my_game IsA DEFINITION_BLOCK
+The my_game IsA definition_block
 End the.
 
 --==============================================================================
@@ -9,14 +9,14 @@ End the.
 --==============================================================================
 -- This room location is IMPLICITLY used in the following examples:
 --    * §6.1.5. lightsource_torch
-THE cave IsA room.
-END THE.
+The cave IsA room.
+End the.
 --------------------------------------------------------------------------------
 -- §6.1.5. lightsource_torch
 --------------------------------------------------------------------------------
-THE torch ISA LIGHTSOURCE AT cave
-  IS lit.
-END THE.
+THE torch ISA lightsource at cave
+  Is lit.
+End the.
 
 --------------------------------------------------------------------------------
 Start at cave.

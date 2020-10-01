@@ -4,29 +4,29 @@
 --------------------------------------------------------------------------------
 
 -- tag::shown[]
-IMPORT 'library.i'.
+Import 'library.i'.
 
-THE my_game ISA DEFINITION_BLOCK
-END THE.
+The my_game IsA definition_block
+End the.
 
-THE room1 ISA LOCATION
-  DESCRIPTION "North to room2."
-  EXIT north TO room2.
-END THE.
+THE room1 IsA location
+  Description "North to room2."
+  Exit north to room2.
+End the.
 
-THE room2 ISA LOCATION
-  DESCRIPTION "South to room1."
-  EXIT south TO room1.
-END THE.
+The room2 IsA location
+  Description "South to room1."
+  Exit south to room1.
+End the.
 
-THE apple ISA OBJECT AT room2
-  IS edible.
+The apple IsA object at room2
+  Is edible.
 
-  VERB eat
-    DOES "Congratulations!" QUIT.
-  END VERB.
-END THE.
+  Verb eat
+    Does "congratulations!" quit.
+  End verb.
+End the.
 
-START AT room1.
-DESCRIBE banner.
+Start at room1.
+Describe banner.
 -- end::shown[]

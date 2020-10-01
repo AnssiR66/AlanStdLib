@@ -1,5 +1,5 @@
 Import 'library.i'.
-The my_game IsA DEFINITION_BLOCK
+The my_game IsA definition_block
 End the.
 
 -- =============================================================================
@@ -9,20 +9,20 @@ End the.
 -- =============================================================================
 -- This room location is IMPLICITLY used in the following examples:
 --    * §6.1.2. DEVICE
-THE lab IsA room.
-END THE.
+The lab IsA room.
+End the.
 --------------------------------------------------------------------------------
 -- §6.1.2. DEVICE
 --------------------------------------------------------------------------------
-THE thingummyjig ISA DEVICE AT lab
-  HAS ex "It's full of knobs and buttons.".
-END THE.
+The thingummyjig IsA device at lab
+  Has ex "It's full of knobs and buttons.".
+End the.
 --------------------------------------------------------------------------------
 -- §6.1.5. LIGHTSOURCE
 --------------------------------------------------------------------------------
-THE lamp ISA LIGHTSOURCE AT lab
-  IS NOT natural.
-  HAS ex "It is an elegant table lamp with a blue lampshade.".
-END THE.
+The lamp IsA lightsource at lab
+  Is not natural.
+  Has ex "It is an elegant table lamp with a blue lampshade.".
+End the.
 --------------------------------------------------------------------------------
-START AT lab.
+Start at lab.
