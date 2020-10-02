@@ -369,6 +369,10 @@ END ADD TO.
 
 ADD TO EVERY LOCATION
   IS lit.
+
+  DESCRIPTION
+    CHECK THIS IS lit
+      ELSE SAY dark_loc_desc OF my_game.
 END ADD TO.
 
 
@@ -423,8 +427,8 @@ EVENT light_off
 END EVENT.
 
 
--- We make sure that dark_locations will be dark after the hero leaves them, if the hero took the
--- lightsource with him:
+-- We need to ensure that a dark_locations will become dark again after the hero
+-- leaves, if her took the lightsource with him:
 
 EVENT check_darkness
   FOR EACH dl ISA dark_location, IS lit
