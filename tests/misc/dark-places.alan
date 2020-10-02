@@ -1,0 +1,150 @@
+--==============================================================================
+-- "Dark Locations Tests" by Tristano Ajmone, 2020.
+--==============================================================================
+Import 'library.i'. -- ALAN Standard Library v2.2.0
+
+The my_game IsA DEFINITION_BLOCK
+  Has
+    title    "Dark Locations Tests".
+    subtitle "Testing unlit locations vs DARK_LOCATION instances".
+    author   "Tristano Ajmone".
+    year     2020.
+    version  "1".
+End the.
+
+-- =============================================================================
+
+-- Locations
+
+-- =============================================================================
+-- We'll be testing the similarities and differences between unlit locations and
+-- DARK_LOCATION instances, carrying out stress-tests for different actors and
+-- light sources entering and leaving both types of locations while they're both
+-- lit and dark.
+--------------------------------------------------------------------------------
+-- The Kitchen (an unlit ROOM)
+--------------------------------------------------------------------------------
+The unlit_room IsA room.
+  Name 'Kitchen (a ROOM)'.
+  Is not lit.
+  Description "Stairs lead down the old basement."
+
+
+  Exit down to dark_loc.
+End the unlit_room.
+
+The light_switch IsA object at unlit_room
+  Name light switch. Name light.
+  Is not 'on'.
+
+  Verb turn_on
+    Does only
+      If light_switch is not 'on'
+        then make light_switch 'on'.
+             make unlit_room lit.
+             "You switch on the kitchen light."
+        else "The light is already switched on."
+      End if.
+  End verb.
+
+  Verb turn_off
+    Does only
+      If light_switch is 'on'
+        then make light_switch not'on'.
+             make unlit_room not lit.
+             "You switch off the kitchen light."
+        else "The light is already switched off."
+      End if.
+  End verb.
+End the light_switch.
+--------------------------------------------------------------------------------
+-- The Basement (a DARK_LOCATION)
+--------------------------------------------------------------------------------
+The dark_loc IsA DARK_LOCATION.
+  Name 'Basement (a DARK_LOCATION)'.
+  Description "Stairs lead up to the kitchen."
+
+  Exit up to unlit_room.
+End the dark_loc.
+-- =============================================================================
+
+-- NPCs
+
+-- =============================================================================
+-- We need two NPCs, one carrying a lit light source and the other one not, so
+-- that we might test how their entrance and exit affect both types of dark
+-- locations. We also need to provide the player with a command to summon and
+-- dismiss them.
+--------------------------------------------------------------------------------
+-- Lumen (NPC carrying a light source)
+--------------------------------------------------------------------------------
+The Lumen IsA male.
+  Is named.
+End the.
+--------------------------------------------------------------------------------
+-- Darko (NPC without a light source)
+--------------------------------------------------------------------------------
+The Darko IsA male.
+  Is named.
+End the.
+--==============================================================================
+-- VERBS: Summon / Dismiss NPC
+--==============================================================================
+Syntax summon = summon (act)!
+  Where act IsA actor
+    else "You can only summon living beens."
+
+Syntax dismiss = dismiss (act)!
+  Where act IsA actor
+    else "You can only dismiss living beens."
+
+ADd to every thing
+  Verb summon
+    Check act not here
+      else "$1 is already here."
+    Does
+      "$+1 promptly materializes in the room."
+      -- --------------------------------------------------
+      -- Extra text for Lumen, to clarify test expectations
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      If act = Lumen then
+        If candle in act and candle is lit then
+          If location of hero is not lit
+            then "His candle brings light to the room."
+            else "He's carrying a lit candle, as usual."
+          End if.
+        End if.
+      End if.
+      -- --------------------------------------------------
+      locate act here.
+  End verb.
+
+  Verb dismiss
+    Check act here
+      else "$1 is not currently here."
+    Does
+      locate act at nowhere.
+      "$+1 promptly vanishes at your command."
+  End verb.
+End add.
+-- =============================================================================
+
+-- Light Sources
+
+-- =============================================================================
+The torch IsA lightsource in Hero.
+  Name torch.
+  Name flashlight.
+  Is not natural.
+End the torch.
+
+The candle IsA lightsource in Lumen.
+  Is lit. natural.
+End the candle.
+--------------------------------------------------------------------------------
+Start at unlit_room.
+Describe banner.
+"$pThis small adventure allows extensive testing of 'not lit' locations and
+ DARK_LOCATION instances. The player carries an electric torch, and he can
+ SUMMON and DISMISS two NPCs: Lumen, which carries a lit candle, and Darko,
+ which doesn't carry any light sources."

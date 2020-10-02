@@ -1,0 +1,8 @@
+; Let's invoke Lumen, who will light up the room with his candle:
+summon Lumen
+; Let's now dismiss him, which should make the room unlit again:
+dismiss Lumen
+; **ERROR** The room didn't become dark again!
+;           The 'LIGHT_OFF' event shouuld have triggered and printed the
+;           'my_game:light_goes_off' message.
+look
