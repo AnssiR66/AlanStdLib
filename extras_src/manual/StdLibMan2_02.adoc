@@ -215,6 +215,7 @@ End the my_game.
 ================================================================================
 
 
+[[sec.dark-places]]
 == Dark Places
 
 [WARNING]
@@ -226,6 +227,54 @@ The we should present first the "`Unlit Locations`" subsection, followed by the 
 In it's current state, were the distinction between the two follows the DARK_LOCATION section, it's confusing because there's too much info at stake; whereas an overview intro would prepare the reader to pick-up better the subtle differences between the two.
 Also, keeping the two approaches separate, each with its own examples, is going to offer a better context, and possibly stick more with the reader.
 =====================================
+
+When it comes to implementing dark locations, the library offers two different solutions:
+
+1. Using an unlit location.
+
+2. Using a `DARK_LOCATION` instance.
+
+Both solutions have similarities, but they also differ in significant ways, so it's worth spending a few introductory words on the pros and cons of each approach.
+
+The library adds to every location the `IS lit` attribute, except for the `DARK_LOCATION` class, which is set to `NOT lit` by default.
+Therefore, any location can be turned dark (i.e. _unlit_) by clearing its `lit` attribute.
+
+The library also ensures that, whenever the player's is in an unlit location of _any_ type, he/she won't be able to carry out any actions that require the presence of light, and instead of printing the location's description it will show the default `dark_loc_desc` message:
+
+[example,role="gametranscript"]
+=================================================
+It is pitch black. You can't see anything at all.
+=================================================
+
+These are the commonalities between unlit locations and `DARK_LOCATION` instances.
+Let's now look at their significant differences -- skipping the obvious and trivial fact that locations are lit by default, whereas `DARK_LOCATION` instances are unlit.
+
+In order to be lit, a `DARK_LOCATION` requires the presence of a `lightsource` object (e.g. a candle, a torch, whatever).
+The library constantly checks for the presence of `lightsource` objects in a `DARK_LOCATION`, and automatically sets or clears its `lit` attribute whenever a light source enters or leaves the location (e.g. not only via the hero, but also an entering or leaving NPC that is carrying a light source, or the light source materializing or disappearing by other means).
+
+Unlike unlit locations, which have specific mechanisms for determining the transition from lit to unlit (e.g. a switch, a timer, etc.), a `DARK_LOCATION` can be lit by _any_ light source -- which has far-reaching implications on how an adventure might unfold.
+
+To state it simply, the diffrence between the two approaches boils down to _who's in charge_ of the location's ligthing mechanism:
+
+* With unlit locations, the author is in control of the location's illumination.
+* With DARK_LOCATIONs, the player is in control of the location's illumination.
+
+Setting or clearing the `lit` attribute of a given location is something that only the game author can do, by implementing some mechanism that flips the attribute -- be it the result of the player acting on a switch, an actor carrying out a specific action, or via an internal timer set by the game author, or some other EVENT or RULE mechanism.
+
+On the other hand, the player is able to choose _if_ and _which_ light source to carry to the dark location in order light it up, as long as `lightsource` objects are available in the game world.
+
+The two approaches have different implications on how the adventure might unfold for the player.
+If the hero has dropped the only available light source on the opposite end of a huge map, he might have to go all the way back to fetch it in order to light a DARK_LOCATION -- providing an unforgiving game play experience.
+If there are multiple light sources to be found in the game, anyone will do the job -- providing a flexible game play experience.
+
+On the other hand, there are also implications on the author's side, especially when it comes to unpredicted consequences.
+If the player destroys or renders otherwise unreachable all light sources, the adventure might become unwinnable.
+Miscalculated access to light source objects across the map might break the puzzle sequence of a DARK_LOCATION, if the player manages to get hold of an unexpected light source.
+
+Because unlit locations have a limited set of ways by which they can become lit, they provide authors with a more rigid (and reliable) way to control how the player can illuminate them.
+On the other hand, the flexibility of DARK_LOCATIONs can lead to a more realistic and "`open world`" player experience (with all its pros and cons).
+
+
 
 === DARK_LOCATION and the lit attribute
 

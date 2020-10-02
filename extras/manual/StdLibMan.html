@@ -776,7 +776,7 @@ span.play em,
 <li><a href="#_site">8.1.2. SITE</a></li>
 </ul>
 </li>
-<li><a href="#_dark_places">8.2. Dark Places</a>
+<li><a href="#sec.dark-places">8.2. Dark Places</a>
 <ul class="sectlevel3">
 <li><a href="#_dark_location_and_the_lit_attribute">8.2.1. DARK_LOCATION and the lit attribute</a></li>
 </ul>
@@ -1818,7 +1818,7 @@ You can refer to them in your coding in the way illustrated above when you need 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_dark_places"><a class="anchor" href="#_dark_places"></a>8.2. Dark Places</h3>
+<h3 id="sec.dark-places"><a class="anchor" href="#sec.dark-places"></a>8.2. Dark Places</h3>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -1839,6 +1839,80 @@ Also, keeping the two approaches separate, each with its own examples, is going 
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>When it comes to implementing dark locations, the library offers two different solutions:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Using an unlit location.</p>
+</li>
+<li>
+<p>Using a <code>DARK_LOCATION</code> instance.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Both solutions have similarities, but they also differ in significant ways, so it&#8217;s worth spending a few introductory words on the pros and cons of each approach.</p>
+</div>
+<div class="paragraph">
+<p>The library adds to every location the <code>IS lit</code> attribute, except for the <code>DARK_LOCATION</code> class, which is set to <code>NOT lit</code> by default.
+Therefore, any location can be turned dark (i.e. <em>unlit</em>) by clearing its <code>lit</code> attribute.</p>
+</div>
+<div class="paragraph">
+<p>The library also ensures that, whenever the player&#8217;s is in an unlit location of <em>any</em> type, he/she won&#8217;t be able to carry out any actions that require the presence of light, and instead of printing the location&#8217;s description it will show the default <code>dark_loc_desc</code> message:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>It is pitch black. You can&#8217;t see anything at all.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>These are the commonalities between unlit locations and <code>DARK_LOCATION</code> instances.
+Let&#8217;s now look at their significant differences&#8201;&#8212;&#8201;skipping the obvious and trivial fact that locations are lit by default, whereas <code>DARK_LOCATION</code> instances are unlit.</p>
+</div>
+<div class="paragraph">
+<p>In order to be lit, a <code>DARK_LOCATION</code> requires the presence of a <code>lightsource</code> object (e.g. a candle, a torch, whatever).
+The library constantly checks for the presence of <code>lightsource</code> objects in a <code>DARK_LOCATION</code>, and automatically sets or clears its <code>lit</code> attribute whenever a light source enters or leaves the location (e.g. not only via the hero, but also an entering or leaving NPC that is carrying a light source, or the light source materializing or disappearing by other means).</p>
+</div>
+<div class="paragraph">
+<p>Unlike unlit locations, which have specific mechanisms for determining the transition from lit to unlit (e.g. a switch, a timer, etc.), a <code>DARK_LOCATION</code> can be lit by <em>any</em> light source&#8201;&#8212;&#8201;which has far-reaching implications on how an adventure might unfold.</p>
+</div>
+<div class="paragraph">
+<p>To state it simply, the diffrence between the two approaches boils down to <em>who&#8217;s in charge</em> of the location&#8217;s ligthing mechanism:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>With unlit locations, the author is in control of the location&#8217;s illumination.</p>
+</li>
+<li>
+<p>With DARK_LOCATIONs, the player is in control of the location&#8217;s illumination.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Setting or clearing the <code>lit</code> attribute of a given location is something that only the game author can do, by implementing some mechanism that flips the attribute&#8201;&#8212;&#8201;be it the result of the player acting on a switch, an actor carrying out a specific action, or via an internal timer set by the game author, or some other EVENT or RULE mechanism.</p>
+</div>
+<div class="paragraph">
+<p>On the other hand, the player is able to choose <em>if</em> and <em>which</em> light source to carry to the dark location in order light it up, as long as <code>lightsource</code> objects are available in the game world.</p>
+</div>
+<div class="paragraph">
+<p>The two approaches have different implications on how the adventure might unfold for the player.
+If the hero has dropped the only available light source on the opposite end of a huge map, he might have to go all the way back to fetch it in order to light a DARK_LOCATION&#8201;&#8212;&#8201;providing an unforgiving game play experience.
+If there are multiple light sources to be found in the game, anyone will do the job&#8201;&#8212;&#8201;providing a flexible game play experience.</p>
+</div>
+<div class="paragraph">
+<p>On the other hand, there are also implications on the author&#8217;s side, especially when it comes to unpredicted consequences.
+If the player destroys or renders otherwise unreachable all light sources, the adventure might become unwinnable.
+Miscalculated access to light source objects across the map might break the puzzle sequence of a DARK_LOCATION, if the player manages to get hold of an unexpected light source.</p>
+</div>
+<div class="paragraph">
+<p>Because unlit locations have a limited set of ways by which they can become lit, they provide authors with a more rigid (and reliable) way to control how the player can illuminate them.
+On the other hand, the flexibility of DARK_LOCATIONs can lead to a more realistic and &#8220;open world&#8221; player experience (with all its pros and cons).</p>
 </div>
 <div class="sect3">
 <h4 id="_dark_location_and_the_lit_attribute"><a class="anchor" href="#_dark_location_and_the_lit_attribute"></a>8.2.1. DARK_LOCATION and the lit attribute</h4>
