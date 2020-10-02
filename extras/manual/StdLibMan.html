@@ -733,7 +733,7 @@ span.play em,
 <div class="details">
 <span id="author" class="author">Anssi Räisänen</span><br>
 <span id="revnumber">version 2.2.0-WIP,</span>
-<span id="revdate">2020-10-01</span>
+<span id="revdate">2020-10-02</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -770,17 +770,25 @@ span.play em,
 <li><a href="#ch.classes-intro">7. Introduction</a></li>
 <li><a href="#ch.locations">8. Locations</a>
 <ul class="sectlevel2">
-<li><a href="#_room">8.1. ROOM</a></li>
-<li><a href="#_site">8.2. SITE</a></li>
-<li><a href="#_dark_location_and_the_lit_attribute">8.3. DARK_LOCATION and the lit attribute</a></li>
-<li><a href="#_the_visited_and_described_attributes">8.4. The visited and described attributes</a>
+<li><a href="#_indoor_and_outdoor">8.1. Indoor and Outdoor</a>
 <ul class="sectlevel3">
-<li><a href="#_visited">8.4.1. visited</a></li>
-<li><a href="#_described">8.4.2. described</a></li>
+<li><a href="#_room">8.1.1. ROOM</a></li>
+<li><a href="#_site">8.1.2. SITE</a></li>
 </ul>
 </li>
-<li><a href="#_changing_the_verb_outcome_in_a_certain_location">8.5. Changing the verb outcome in a certain location</a></li>
-<li><a href="#_nested_locations">8.6. Nested locations</a></li>
+<li><a href="#_dark_places">8.2. Dark Places</a>
+<ul class="sectlevel3">
+<li><a href="#_dark_location_and_the_lit_attribute">8.2.1. DARK_LOCATION and the lit attribute</a></li>
+</ul>
+</li>
+<li><a href="#_the_visited_and_described_attributes">8.3. The visited and described attributes</a>
+<ul class="sectlevel3">
+<li><a href="#_visited">8.3.1. visited</a></li>
+<li><a href="#_described">8.3.2. described</a></li>
+</ul>
+</li>
+<li><a href="#_changing_the_verb_outcome_in_a_certain_location">8.4. Changing the verb outcome in a certain location</a></li>
+<li><a href="#_nested_locations">8.5. Nested locations</a></li>
 </ul>
 </li>
 <li><a href="#ch4">9. Things</a>
@@ -1581,7 +1589,43 @@ Bear in mind that, for each of these classes, the library defines specific prope
 </div>
 </div>
 <div class="sect2">
-<h3 id="_room"><a class="anchor" href="#_room"></a>8.1. ROOM</h3>
+<h3 id="_indoor_and_outdoor"><a class="anchor" href="#_indoor_and_outdoor"></a>8.1. Indoor and Outdoor</h3>
+<div class="paragraph">
+<p>Since any medium- to large-adventure is likely to contain both indoor and outdoor locations, the library provides two useful predefined classes for the task:</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<code>ROOM</code> 
+</td>
+<td class="hdlist2">
+<p>An indoor location equipped with walls, floor and ceiling.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>SITE</code> 
+</td>
+<td class="hdlist2">
+<p>An outdoor location equipped with ground and sky.</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>These allow you to quickly create indoor and outdoor locations without having to worry about the details, providing a more realistic game experience.
+The library also provides some default responses for when the player attempts to examine the predefined room- and site-objects (walls, ground, etc.), which you can easily override either globally or on a per room/site basis.</p>
+</div>
+<div class="paragraph">
+<p>The <code>ROOM</code> and <code>SITE</code> classes are implemented as nested locations inside the <code>indoor</code> and <code>outdoor</code> locations, respectively, which are two predefined library instances acting as &#8220;regions&#8221;&#8201;&#8212;&#8201;i.e. outward containers for every <code>ROOM</code> and <code>SITE</code> instance of an adventure.</p>
+</div>
+<div class="paragraph">
+<p>The room objects (<code>walls</code>, <code>floor</code> and <code>ceiling</code>) are implemented on the <code>indoor</code> instance, which makes them available to every instance of the <code>ROOM</code> class, because of how scoping rules work with nested locations.
+Likewise, site objects (<code>ground</code> and <code>sky</code>) are defined directly on the <code>outdoor</code> location instance, and &#8220;inherited&#8221; (so to speak) by every <code>SITE</code> instance.</p>
+</div>
+<div class="sect3">
+<h4 id="_room"><a class="anchor" href="#_room"></a>8.1.1. ROOM</h4>
 <div class="paragraph">
 <p>If you want to implement an indoor location, you can declare it <code>IsA ROOM</code>:</p>
 </div>
@@ -1672,8 +1716,8 @@ darkness.<br></p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_site"><a class="anchor" href="#_site"></a>8.2. SITE</h3>
+<div class="sect3">
+<h4 id="_site"><a class="anchor" href="#_site"></a>8.1.2. SITE</h4>
 <div class="paragraph">
 <p>If you want to implement an outdoor location, you can declare it <code>IsA SITE</code>:</p>
 </div>
@@ -1772,8 +1816,32 @@ You can refer to them in your coding in the way illustrated above when you need 
 </table>
 </div>
 </div>
+</div>
 <div class="sect2">
-<h3 id="_dark_location_and_the_lit_attribute"><a class="anchor" href="#_dark_location_and_the_lit_attribute"></a>8.3. DARK_LOCATION and the lit attribute</h3>
+<h3 id="_dark_places"><a class="anchor" href="#_dark_places"></a>8.2. Dark Places</h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The original section on <code>DARK_LOCATION</code>s is a bit confusing; it will be much better if we add an introduction briefly explaining that the Library offers two possible ways of handling dark places: via unlit ROOMs, or using DARK_LOCATIONs.</p>
+</div>
+<div class="paragraph">
+<p>The we should present first the &#8220;Unlit Locations&#8221; subsection, followed by the &#8220;DARK_LOCATION&#8221; section.</p>
+</div>
+<div class="paragraph">
+<p>In it&#8217;s current state, were the distinction between the two follows the DARK_LOCATION section, it&#8217;s confusing because there&#8217;s too much info at stake; whereas an overview intro would prepare the reader to pick-up better the subtle differences between the two.
+Also, keeping the two approaches separate, each with its own examples, is going to offer a better context, and possibly stick more with the reader.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_dark_location_and_the_lit_attribute"><a class="anchor" href="#_dark_location_and_the_lit_attribute"></a>8.2.1. DARK_LOCATION and the lit attribute</h4>
 <div class="paragraph">
 <p>In dark locations, all actions requiring the ability to see are automatically disabled by the library.
 All dark locations have the <code>NOT lit</code> attribute.
@@ -1860,17 +1928,59 @@ Here, like above, you could just make the basement a normal location and not a D
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> top_of_stairs <span class="hl kwa">IsA</span> room&#x000A;  <span class="hl kwa">Name</span> &#39;At the top of the stairs&#39;&#x000A;  <span class="hl kwa">Exit</span> down <span class="hl kwa">to</span> basement<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> light_switch <span class="hl kwa">IsA</span> <span class="hl kwb">object</span> <span class="hl kwa">at</span> top_of_stairs&#x000A;  <span class="hl kwa">Is not</span> &#39;on&#39;<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Verb</span> turn_on&#x000A;    <span class="hl kwa">Does only</span>&#x000A;      <span class="hl kwa">If</span> light_switch <span class="hl kwa">is not</span> &#39;on&#39;&#x000A;        <span class="hl kwa">then make</span> light_switch &#39;on&#39;<span class="hl kwa">.</span>&#x000A;             <span class="hl kwa">make</span> basement lit<span class="hl kwa">.</span>&#x000A;             <span class="hl str">&quot;You switch on the basement light.&quot;</span>&#x000A;        <span class="hl kwa">else</span> <span class="hl str">&quot;The light is already switched on.&quot;</span>&#x000A;      <span class="hl kwa">End if.</span>&#x000A;  <span class="hl kwa">End verb.</span>&#x000A;&#x000A;  <span class="hl kwa">Verb</span> turn_off&#x000A;    <span class="hl kwa">Does only</span>&#x000A;      <span class="hl kwa">If</span> light_switch <span class="hl kwa">is</span> &#39;on&#39;&#x000A;        <span class="hl kwa">then make</span> light_switch <span class="hl kwa">not</span>&#39;on&#39;<span class="hl kwa">.</span>&#x000A;             <span class="hl kwa">make</span> basement <span class="hl kwa">not</span> lit<span class="hl kwa">.</span>&#x000A;             <span class="hl str">&quot;You switch off the basement light.&quot;</span>&#x000A;        <span class="hl kwa">else</span> <span class="hl str">&quot;The light is already switched off.&quot;</span>&#x000A;      <span class="hl kwa">End if.</span>&#x000A;  <span class="hl kwa">End verb.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">the</span> basement <span class="hl kwa">IsA</span> ROOM&#x000A;  <span class="hl slc">-- and not a DARK_LOCATION</span>&#x000A;  <span class="hl kwa">Is not</span> lit<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the</span> basement<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> stairs_top <span class="hl kwa">IsA</span> room&#x000A;  <span class="hl kwa">Name</span> &#39;At the top of the stairs&#39;&#x000A;  <span class="hl kwa">Exit</span> down <span class="hl kwa">to</span> basement<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> light_switch <span class="hl kwa">IsA</span> <span class="hl kwb">object</span> <span class="hl kwa">at</span> stairs_top&#x000A;  <span class="hl kwa">Name</span> light switch<span class="hl kwa">. Name</span> light<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Is not</span> &#39;on&#39;<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Verb</span> turn_on&#x000A;    <span class="hl kwa">Does only</span>&#x000A;      <span class="hl kwa">If</span> light_switch <span class="hl kwa">is not</span> &#39;on&#39;&#x000A;        <span class="hl kwa">then make</span> light_switch &#39;on&#39;<span class="hl kwa">.</span>&#x000A;             <span class="hl kwa">make</span> basement lit<span class="hl kwa">.</span>&#x000A;             <span class="hl str">&quot;You switch on the basement light.&quot;</span>&#x000A;        <span class="hl kwa">else</span> <span class="hl str">&quot;The light is already switched on.&quot;</span>&#x000A;      <span class="hl kwa">End if.</span>&#x000A;  <span class="hl kwa">End verb.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> basement <span class="hl kwa">IsA</span> ROOM <span class="hl slc">-- and not a DARK_LOCATION</span>&#x000A;  <span class="hl kwa">Is not</span> lit<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;Cobwebs and old junk are the only things you see here.&quot;</span>&#x000A;  <span class="hl kwa">Exit</span> up <span class="hl kwa">to</span> stairs_top<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the</span> basement<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see in the following transcript, while the basement location is <code>NOT lit</code> the player in unable to see the room&#8217;s description or carry out any actions that require the presence of light:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>down</em><br>
+Basement<br>
+It is pitch black. You can&#8217;t see anything at all.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>x floor</em><br>
+It is too dark to see.<br></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>by return upstairs and turning on the light switch the basement becomes <code>lit</code>, and the room&#8217;s normal behavior is restored:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>up</em><br>
+At the top of the stairs<br>
+There is a light switch here.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>turn on light</em><br>
+You switch on the basement light.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>down</em><br>
+Basement<br>
+Cobwebs and old junk are the only things you see here.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>x floor</em><br>
+You notice nothing unusual about the floor.<br></p>
+</div>
 </div>
 </div>
 <div class="paragraph">
 <p>To recap: use the DARK_LOCATION class when a LIGHTSOURCE object determines whether a location is lit or dark; swap between the lit/NOT lit attributes, inherent to all locations, when you don&#8217;t want to refer to any light sources affecting whether a location is lit or dark.</p>
 </div>
 </div>
+</div>
 <div class="sect2">
-<h3 id="_the_visited_and_described_attributes"><a class="anchor" href="#_the_visited_and_described_attributes"></a>8.4. The visited and described attributes</h3>
+<h3 id="_the_visited_and_described_attributes"><a class="anchor" href="#_the_visited_and_described_attributes"></a>8.3. The visited and described attributes</h3>
 <div class="sect3">
-<h4 id="_visited"><a class="anchor" href="#_visited"></a>8.4.1. visited</h4>
+<h4 id="_visited"><a class="anchor" href="#_visited"></a>8.3.1. visited</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS</span> visited <span class="hl num">0</span><span class="hl kwa">.</span></code></pre>
@@ -1899,7 +2009,7 @@ On the second visit the value will be 2, etc.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_described"><a class="anchor" href="#_described"></a>8.4.2. described</h4>
+<h4 id="_described"><a class="anchor" href="#_described"></a>8.3.2. described</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IS</span> described <span class="hl num">0</span><span class="hl kwa">.</span></code></pre>
@@ -1927,7 +2037,7 @@ When the player reads the location description for the first time, the value is 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_changing_the_verb_outcome_in_a_certain_location"><a class="anchor" href="#_changing_the_verb_outcome_in_a_certain_location"></a>8.5. Changing the verb outcome in a certain location</h3>
+<h3 id="_changing_the_verb_outcome_in_a_certain_location"><a class="anchor" href="#_changing_the_verb_outcome_in_a_certain_location"></a>8.4. Changing the verb outcome in a certain location</h3>
 <div class="paragraph">
 <p>Sometimes you might wish to have a verb behave differently in a certain location or locations.
 You can do it like this:</p>
@@ -1984,7 +2094,7 @@ You would naturally need to define an alarm object here, for example:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_nested_locations"><a class="anchor" href="#_nested_locations"></a>8.6. Nested locations</h3>
+<h3 id="_nested_locations"><a class="anchor" href="#_nested_locations"></a>8.5. Nested locations</h3>
 <div class="paragraph">
 <p>Nesting locations is straightforward, as described in the ALAN Manual:</p>
 </div>

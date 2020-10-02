@@ -37,7 +37,25 @@ include::{utf8dir}/_locations_no-lib.alan[]
 
 
 
-== ROOM
+== Indoor and Outdoor
+
+Since any medium- to large-adventure is likely to contain both indoor and outdoor locations, the library provides two useful predefined classes for the task:
+
+[horizontal]
+`ROOM` :: An indoor location equipped with walls, floor and ceiling.
+`SITE` :: An outdoor location equipped with ground and sky.
+
+These allow you to quickly create indoor and outdoor locations without having to worry about the details, providing a more realistic game experience.
+The library also provides some default responses for when the player attempts to examine the predefined room- and site-objects (walls, ground, etc.), which you can easily override either globally or on a per room/site basis.
+
+The `ROOM` and `SITE` classes are implemented as nested locations inside the `indoor` and `outdoor` locations, respectively, which are two predefined library instances acting as "`regions`" -- i.e. outward containers for every `ROOM` and `SITE` instance of an adventure.
+
+The room objects (`walls`, `floor` and `ceiling`) are implemented on the `indoor` instance, which makes them available to every instance of the `ROOM` class, because of how scoping rules work with nested locations.
+Likewise, site objects (`ground` and `sky`) are defined directly on the `outdoor` location instance, and "`inherited`" (so to speak) by every `SITE` instance.
+
+
+
+=== ROOM
 
 If you want to implement an indoor location, you can declare it `IsA ROOM`:
 
@@ -103,7 +121,7 @@ include::{utf8dir}/livingroom.a3ADocLog[tag=trapdoor]
 
 
 
-== SITE
+=== SITE
 
 If you want to implement an outdoor location, you can declare it `IsA SITE`:
 
@@ -197,8 +215,19 @@ End the my_game.
 ================================================================================
 
 
+== Dark Places
 
-== DARK_LOCATION and the lit attribute
+[WARNING]
+=====================================
+The original section on ``DARK_LOCATION``s is a bit confusing; it will be much better if we add an introduction briefly explaining that the Library offers two possible ways of handling dark places: via unlit ROOMs, or using DARK_LOCATIONs.
+
+The we should present first the "`Unlit Locations`" subsection, followed by the "`DARK_LOCATION`" section.
+
+In it's current state, were the distinction between the two follows the DARK_LOCATION section, it's confusing because there's too much info at stake; whereas an overview intro would prepare the reader to pick-up better the subtle differences between the two.
+Also, keeping the two approaches separate, each with its own examples, is going to offer a better context, and possibly stick more with the reader.
+=====================================
+
+=== DARK_LOCATION and the lit attribute
 
 In dark locations, all actions requiring the ability to see are automatically disabled by the library.
 All dark locations have the `NOT lit` attribute.
@@ -302,41 +331,27 @@ You should program a lamp, a LIGHTSOURCE object, to be present in the basement, 
 But again, this is more than is necessary to reach the wanted effect.
 Here, like above, you could just make the basement a normal location and not a DARK_LOCATION (and make sure it is NOT lit to start with), and just change the attribute to lit when the hero turns on the light switch:
 
+// @EXTERNALIZE CODE: basement.alan
 [source,alan]
 --------------------------------------------------------------------------------
-The top_of_stairs IsA room
-  Name 'At the top of the stairs'
-  Exit down to basement.
-  End the.
-
-The light_switch IsA object at top_of_stairs
-  Is not 'on'.
-  Verb turn_on
-    Does only
-      If light_switch is not 'on'
-        then make light_switch 'on'.
-             make basement lit.
-             "You switch on the basement light."
-        else "The light is already switched on."
-      End if.
-  End verb.
-
-  Verb turn_off
-    Does only
-      If light_switch is 'on'
-        then make light_switch not'on'.
-             make basement not lit.
-             "You switch off the basement light."
-        else "The light is already switched off."
-      End if.
-  End verb.
-End the.
-
-the basement IsA ROOM
-  -- and not a DARK_LOCATION
-  Is not lit.
-End the basement.
+include::{utf8dir}/basement.alan[tag=unlit-room-example]
 --------------------------------------------------------------------------------
+
+As you can see in the following transcript, while the basement location is `NOT lit` the player in unable to see the room's description or carry out any actions that require the presence of light:
+
+// @EXTERN TRANSCRIPT: basement.alan
+[example,role="gametranscript"]
+================================================================================
+include::{utf8dir}/basement.a3ADocLog[tag=unlit-room-example-1]
+================================================================================
+
+by return upstairs and turning on the light switch the basement becomes `lit`, and the room's normal behavior is restored:
+
+// @EXTERN TRANSCRIPT: basement.alan
+[example,role="gametranscript"]
+================================================================================
+include::{utf8dir}/basement.a3ADocLog[tag=unlit-room-example-2]
+================================================================================
 
 
 To recap: use the DARK_LOCATION class when a LIGHTSOURCE object determines whether a location is lit or dark; swap between the lit/NOT lit attributes, inherent to all locations, when you don't want to refer to any light sources affecting whether a location is lit or dark.

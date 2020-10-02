@@ -1,0 +1,10 @@
+; tag::unlit-room-example-1[]
+down
+x floor
+; end::unlit-room-example-1[]
+; tag::unlit-room-example-2[]
+up
+turn on light
+down
+x floor
+; end::unlit-room-example-2[]
