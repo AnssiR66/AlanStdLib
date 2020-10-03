@@ -33,7 +33,7 @@
 :AlanWWW: link:https://www.alanif.se/[www.alanif.se^,title="Visit Alan website"]
 
 // Directories Paths:
-:StdLibInc: ../utf8/StdLib
+:StdLibInc: {utf8dir}/../StdLib
 :StdLibDir: ../../StdLib
 :ExtrasDir: ../../extras
 

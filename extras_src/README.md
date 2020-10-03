@@ -25,8 +25,12 @@ This directory contains the source files and assets required to build the docume
 # Directory Contents
 
 - [`/manual/`][manual/] — Sources for [`../extras/manual/`][extras/manual/] (_Standard Library User's Manual_).
-- [`/tutoria[utf8/] (_ignored folder_) — UTF-8 converted Alan files (`*.alan`, `*.i`, `*.a3sol`, `*.a3log`).
-- [`update.sh`](update.sh) — build script to update contents of "`../extras/`". (Depends on various scripts from [`../assets/sh/`][assets/sh/])
+- [`/tutorials/`][tutorials/] — Sources for [`../extras/tutorials/`][extras/tutorials/] (_The Clothing Guide_).
+- [`stdlib2utf8.sh`](stdlib2utf8.sh) — Creates an UTF-8 version of StdLib sources (in [`../assets/utf8/StdLib/`][utf8/StdLib/]).
+- [`update.sh`](update.sh) — Builds all contents of "`../extras/`".
+
+> **NOTE** — all `*.sh` scripts in this folder depend on various scripts from [`../assets/sh/`][assets/sh/].
+
 
 # Introduction
 
@@ -55,14 +59,14 @@ Working with symmetrical source/destination folders greatly simplifies reusabili
 
 The `update.sh` script carries out multiple tasks.
 
-First of all, at each execution it creates in `utf8/StdLib/` (ignored by Git) an UTF-8 encoded version of all the library sources from `../StdLib/`, so that the documentation may use the `include::` directive on them ([Asciidoctor doesn't support ISO-8859-1 files]), and to ensure that code excerpts from the StdLib always mirror its current state.
+First of all, at each execution it creates in [`../assets/utf8/StdLib/`][utf8/StdLib/] (ignored by Git) an UTF-8 encoded version of all the library sources from `../StdLib/` (via the [`stdlib2utf8.sh`](stdlib2utf8.sh) script), so that the documentation may use the `include::` directive on them ([Asciidoctor doesn't support ISO-8859-1 files]), and to ensure that code excerpts from the StdLib always mirror its current state.
 
 Then, for every source documentation folder `<foldername>` (defined in `$foldersList`):
 
 1. __Compile Adventures__ — Compile every adventure inside the source folder.
 2. __Generate Transcripts__ — Run every compiled adventure against one or more `.a3sol` command scripts whose name contains the adventure name (i.e. `<adv-name>*.a3sol`) and save the transcript as an `.a3log` file.
-3. __Sanitize Files Encoding__ — Create inside `extras_src/utf8/<foldername>/` (ignored by Git) an UTF-8 converted copy of every ISO-8859-1 Alan source (`*.alan`) and transcript (`*.a3log`) in the source folder, so that they might be included in the AsciiDoc sources ([Asciidoctor doesn't support ISO-8859-1 files]).
-4. __Sanitize & Style Transcipts__ — Convert every `.a3log` file inside `extras_src/utf8/<foldername>/` to `.a3ADocLog`, converting the verbatim transcript into a well-formatted AsciiDoc example block:
+3. __Sanitize Files Encoding__ — Create inside `../assets/utf8/<foldername>/` (ignored by Git) an UTF-8 converted copy of every ISO-8859-1 Alan source (`*.alan`) and transcript (`*.a3log`) in the source folder, so that they might be included in the AsciiDoc sources ([Asciidoctor doesn't support ISO-8859-1 files]).
+4. __Sanitize & Style Transcipts__ — Convert every `.a3log` file inside `../assets/utf8/<foldername>/` to `.a3ADocLog`, converting the verbatim transcript into a well-formatted AsciiDoc example block:
     - Convert special characters (that could be interpreted as formatting) into its [predefined Asciidoctor attribute for replacement] equivalent (or its HTML entity equivalent, if no attribute is available).
     - Preserve hard line-breaks by adding ` +` at end-of-line, where required.
     - Style player input in emphasis.
@@ -103,7 +107,8 @@ Once Ruby is installed on your system, open a shell and type:
 
 <!-- project folders -->
 
-[utf8/]: ./utf8/ "Navigate to folder"
+[utf8/]: ../assets/utf8/ "Navigate to temporary folder for UTF-8 converted ALAN files"
+[utf8/StdLib/]: ../assets/utf8/StdLib/ "Navigate to temporary folder for UTF-8 converted StdLib source files"
 [extras/]: ../extras/ "Navigate to folder"
 
 [tutorials/]: ./tutorials/ "Navigate to folder"

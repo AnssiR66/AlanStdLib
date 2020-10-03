@@ -101,7 +101,7 @@ export HamlDir="$ADocDir/haml"
 
 # /extras_src/utf8/ -> $utfBasePath
 # =================================
-export utfBasePath="$RepoRoot/extras_src/utf8"
+export utfBasePath="$RepoRoot/assets/utf8"
 
 ## PRINT REPORT
 ###############
