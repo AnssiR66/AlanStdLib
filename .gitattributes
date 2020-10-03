@@ -52,10 +52,10 @@
 
 ## HTML Backend
 ###############
-*.htm      text linguist-generated=true
-*.html     text linguist-generated=true
-*.css      text linguist-generated=true
-*.js       text linguist-vendored=true
+*.htm      text         linguist-generated=true
+*.html     text         linguist-generated=true
+*.css      text eol=lf  linguist-generated=true
+*.js       text         linguist-vendored=true
 
 
 # SASS/SCSS:

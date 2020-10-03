@@ -3,7 +3,7 @@
 The Sass sources to build the custom CSS stylesheets for Alan StdLib documentation.
 
 - Output CSS stylesheet: [`./styles.css`][styles.css].
-- Output docinfo file: [`../adoc/docinfo.html`][docinfo file]
+- Output docinfo file: [`../../assets/adoc/docinfo.html`][docinfo file]
 
 
 -----
@@ -18,7 +18,6 @@ The Sass sources to build the custom CSS stylesheets for Alan StdLib documentati
 - [Output Files](#output-files)
 - [Usage Instructions](#usage-instructions)
     - [Production Work](#production-work)
-    - [Sass Editing Work](#sass-editing-work)
 - [System Requirements](#system-requirements)
     - [Installing Dart Sass](#installing-dart-sass)
 - [Credits](#credits)
@@ -52,21 +51,20 @@ The Sass sources to build the custom CSS stylesheets for Alan StdLib documentati
 
 ## Build Scripts
 
-- [`_shared-settings.sh`][_shared-settings.sh] — defines env-vars common to all scripts.
-- [`css-build.sh`][css-build.sh] — Builds the CSS stylesheet.
-- [`docinfo-inject.sh`][docinfo-inject.sh] — Builds the CSS stylesheet and injects it into the [docinfo file].
-- [`watch-sass.sh`][watch-sass.sh] — Watch and build Sass sources.
+- [`build-docinfo.sh`][build-docinfo.sh]
+
+Builds the CSS stylesheet from Sass sources, then injects it into the [docinfo file] shared by all AsciiDoc documents in HTML format.
 
 # Output Files
 
 - [`./styles.css`][styles.css] — compiled stylesheet form SCSS sources.
-- [`../adoc/docinfo.html`][docinfo file] — docinfo file with CSS injected into  `<head>` section.
+- [`../../assets/adoc/docinfo.html`][docinfo file] — docinfo file with CSS injected into  `<head>` section.
 
 # Usage Instructions
 
 These are the Sass/SCSS sources for building the custom CSS stylesheets used in the Alan StdLib documentation, providing the required styles for code blocks highligthed with Highlight, as well as custom styles for game transcripts, and other custom elements.
 
-The generated CSS file ([`./styles.css`][styles.css]) is injected into the docinfo file ([`../adoc/docinfo.html`][docinfo file]) so that every HTML document will be fully standalone.
+The generated CSS file ([`./styles.css`][styles.css]) is injected into the docinfo file ([`../../assets/adoc/docinfo.html`][docinfo file]) so that every HTML document will be fully standalone.
 
 This also means that updating the CSS and docinfo files won't affect the appearance of the HTML documents until they are converted again, for they no longer rely on an external stylesheet — the custom CSS is now in the document `<head>` section.
 
@@ -74,19 +72,8 @@ This also means that updating the CSS and docinfo files won't affect the appeara
 
 To update the CSS stylesheets and propagate changes into the HTML documentation:
 
-1. Execute [`docinfo-inject.sh`][docinfo-inject.sh].
+1. Execute [`build-docinfo.sh`][build-docinfo.sh].
 2. Execute the scripts to rebuild the whole documentation.
-
-## Sass Editing Work
-
-To work on the Sass/SCSS sources and test the results, use either:
-
-- [`css-build.sh`][css-build.sh]
-- [`watch-sass.sh`][watch-sass.sh]
-
-And to preview the resulting CSS changes, use the local test document (which relies on the external [`./styles.css`][styles.css] file).
-
-> __TDB!__ — Currently there isn't a test document to test the CSS with. Will be added soon.
 
 # System Requirements
 
@@ -192,12 +179,8 @@ The `fontFace` Mixin was adapted from Sass Boilerplate project's "[`fontface.scs
                                REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
-[_shared-settings.sh]: ./_shared-settings.sh "View script source"
-[css-build.sh]: ./css-build.sh "View script source"
-[docinfo-inject.sh]: ./docinfo-inject.sh "View script source"
-[watch-sass.sh]: ./watch-sass.sh "View script source"
-
-[docinfo file]: ../adoc/docinfo.html "View the target docinfo file"
+[build-docinfo.sh]: ./build-docinfo.sh "View script source"
+[docinfo file]: ../../assets/adoc/docinfo.html "View the target docinfo file"
 
 <!-- SCSS/CSS files -->
 

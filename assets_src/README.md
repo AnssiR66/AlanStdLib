@@ -2,11 +2,31 @@
 
 This directory contains the source files to build some of the resources in the [`../assets/`][assets/] folder, needed by the build toolchain.
 
+|       source dir      |          dest build dir          |                    description                     |
+|-----------------------|----------------------------------|----------------------------------------------------|
+| [`images/`][images/]  | [`../assets/images/`][dest imgs] |                                                    |
+| [`images/dia/`][dia/] | [`../assets/images/`][dest imgs] | [Dia] projects for SVG diagrams                    |
+| [`sass/`][sass/]      | [`../assets/adoc/`][adoc/]       | [Sass] sources for CSS injection in `docinfo.html` |
 
 <!-----------------------------------------------------------------------------
                                REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
-[assets/]: ./assets/ "Navigate to folder"
+<!-- source directories -->
+
+[images/]: ./images/ "Navigate to folder"
+[dia/]: ./images/dia/ "Navigate to folder"
+[sass/]: ./sass/ "Navigate to folder"
+
+<!-- destinatrion build directories -->
+
+[assets/]: ../assets/ "Navigate to 'assets/' folder"
+[dest imgs]: ../assets/images/ "Navigate to images assets build folder"
+[adoc/]:  ../assets/adoc/ "Navigate to AsciiDoctor assets build folder"
+
+<!-- 3rd Party Tools -->
+
+[Dia]: http://dia-installer.de "Visit Dia (Diagrams Editor) website"
+[Sass]: https://sass-lang.com "Visit Sass website"
 
 <!-- EOF -->
