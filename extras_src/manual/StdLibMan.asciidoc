@@ -2,7 +2,7 @@
 :doctitle: Alan Standard Library v{StdLibVer} User's Manual
 :author: Anssi Räisänen
 :revnumber: {StdLibVer}-WIP
-:revdate: 2020-10-02
+:revdate: 2020-10-04
 :lang: en
 :doctype: book
 // TOC Settings:
@@ -37,8 +37,20 @@
 :StdLibDir: ../../StdLib
 :ExtrasDir: ../../extras
 
-// examples files:
+// Links to examples files:
 :wedding_alan: pass:q[link:wedding.alan[`wedding.alan`^,title="View example source file"]]
+
+// Links to StdLib sources:
+:library: pass:q,a[link:{StdLibDir}/library.i[`library.i`^,title="View library source file"]]
+:lib_classes: pass:q,a[link:{StdLibDir}/lib_classes.i[`lib_classes.i`^,title="View library source file"]]
+:lib_definitions: pass:q,a[link:{StdLibDir}/lib_definitions.i[`lib_definitions.i`^,title="View library source file"]]
+:lib_locations: pass:q,a[link:{StdLibDir}/lib_locations.i[`lib_locations.i`^,title="View library source file"]]
+:lib_messages_library: pass:q,a[link:{StdLibDir}/lib_messages_library.i[`lib_messages_library.i`^,title="View library source file"]]
+:lib_messages_runtime: pass:q,a[link:{StdLibDir}/lib_messages_runtime.i[`lib_messages_runtime.i`^,title="View library source file"]]
+:lib_verbs: pass:q,a[link:{StdLibDir}/lib_verbs.i[`lib_verbs.i`^,title="View library source file"]]
+:lib_verbs_restrictions: pass:q,a[link:{StdLibDir}/lib_verbs_restrictions.i[`lib_verbs_restrictions.i`^,title="View library source file"]]
+
+
 
 // *****************************************************************************
 // *                                                                           *

@@ -202,6 +202,7 @@ END ADD TO definition_block.
 --    headphones, VR headsets, etc.), therefore the 'worn' state should not be
 --    exclusive to the clothing class.
 
+-- tag::default-attributes-clothing[]
 EVERY clothing ISA OBJECT
 
   IS wearable.
@@ -219,15 +220,16 @@ EVERY clothing ISA OBJECT
   -- Attributes for special clothing (skirts, coats, bikinis, etc.):
 
   IS blockslegs.
-  -- i.e. the item prevents wearing/removing legsware from the layers below
-  -- (skirts and coats are 'NOT blockslegs').
+    -- i.e. the item prevents wearing/removing legsware from the layers below
+    -- (skirts and coats are 'NOT blockslegs').
 
   IS NOT twopieces.
-  -- For items covering legs + torso ('topcover' & 'botcover' <> 0) that should
-  -- be treated as a single piece (e.g. a one-piece swimming suite).
-  -- Items which are 'twopieces' (eg. a bikini) can be worn/removed while
-  -- wearing a skirt for, although handled as a single clothing item, they cover
-  -- legs and torso via two separate pieces.
+    -- For items covering legs + torso ('topcover' & 'botcover' <> 0) that
+    -- should be treated as a single piece (e.g. a one-piece swimming suite).
+    -- Items which are 'twopieces' (eg. a bikini) can be worn/removed while
+    -- wearing a skirt for, although handled as a single clothing item, they
+    -- cover legs and torso via two separate pieces.
+-- end::default-attributes-clothing[]
 
   INITIALIZE
 
@@ -846,6 +848,7 @@ END EVERY.
 -- (This class is not cross-referenced elsewhere in this or any other library file.)
 
 
+-- tag::default-attributes-door[]
 EVERY door ISA OBJECT
   IS openable.
   IS NOT open.
@@ -853,13 +856,13 @@ EVERY door ISA OBJECT
   IS NOT locked.
   IS NOT takeable.
 
+  HAS otherside null_door.  -- matching door in the other room.
 
-  HAS otherside null_door.
-  -- The other side of the door in the next room will be automatically taken care
-  -- of so that it shows correctly in any room or object descriptions.
-  -- 'null_door' is a dummy default that can be ignored.
-
-
+    -- The the other side of the door in the next room will be automatically
+    -- taken care of by the library, so that its status is updated and shown
+    -- correctly in any room or object descriptions.
+    -- `null_door` is a dummy-object default that can be ignored.
+-- end::default-attributes-door[]
 
   INITIALIZE
 
@@ -1053,12 +1056,13 @@ END THE.
 
 
 
+-- tag::default-attributes-lightsource[]
 EVERY lightsource ISA OBJECT
   IS NOT lit.
-  IS natural.   -- A natural lightsource is for example a candle, a match or a torch.
-        -- A NOT natural lightsource is for example a flashlight or a lamp.
-        -- You cannot switch on or off a natural lightsource.
-
+  IS natural. -- A natural light source, e.g. a candle, a match or a torch.
+              -- A `NOT natural` light source is, e.g., a flashlight or a lamp.
+              -- You cannot switch on or off a natural light source.
+-- end::default-attributes-lightsource[]
 
   VERB examine
     DOES AFTER
@@ -1216,7 +1220,23 @@ END EVERY.
 -- (In the file 'lib_verbs.i', ISA LIQUID is used in the syntax definitions of the verbs 'drink' and 'sip'.)
 
 
+-- tag::default-attributes-liquid[]
 EVERY liquid ISA OBJECT
+
+  HAS vessel null_vessel. -- The liquid is not in a container.
+
+    -- The `vessel` attribute ensures that if a liquid is inside a container,
+    -- the verb `take` will automatically take the container instead (if the
+    -- container is `takeable`).
+    -- Trying to take a liquid that is in a fixed-in-place container, or a
+    -- liquid outside any container, will yield:
+    --
+    --    You can't carry [the liquid] around in your bare hands.
+    --
+    -- The default value `null_vessel` informs the library that the liquid is
+    -- not inside any container (e.g. a pool, a lake, the sea, etc.).
+    -- `null_vessel` is a dummy-object default that can be ignored.
+-- end::default-attributes-liquid[]
 
   CONTAINER
     HEADER "In" SAY THE THIS. "you see"
@@ -1226,20 +1246,6 @@ EVERY liquid ISA OBJECT
     -- 'throw sack into water', 'look into water' and 'take pearl from water'.
     -- Also cases such as 'pour red potion into blue potion' require that this
     -- class behaves like a container.
-
-
-  HAS vessel null_vessel.
-
-    -- The 'vessel' attribute takes care that if a liquid is
-    -- in a container, the verb 'take' will automatically take the
-    -- container instead (if the container is takeable). Trying
-    -- take a liquid that is in a fixed-in-place container, as well
-    -- as trying to take a liquid outside any container, will yield
-    -- "You can't carry [the liquid] around in your bare hands."
-    -- The default value 'null_vessel' tells the compiler that the liquid
-    -- is not in any container. 'null_vessel' is a dummy default that can be
-    -- ignored.
-
 
   INITIALIZE
 
@@ -1279,8 +1285,6 @@ EVERY liquid ISA OBJECT
   -- of a liquid; i.e. if there is some juice in a bottle, 'pour bottle' and
   -- 'pour juice' will work equally well. Note, however, that the verb 'empty'
   -- is not a synonym for 'pour'; 'empty' only works for container objects.
-
-
 
     SCHEDULE check_vessel AT THIS AFTER 0.    -- this event is defined further below
 
@@ -1782,11 +1786,13 @@ END EVERY.
 -- (This class is not cross-referenced in this or any other library file.)
 
 
+-- tag::default-attributes-sound[]
 EVERY sound ISA OBJECT
   IS NOT examinable.
   IS NOT takeable.
   IS NOT reachable.
   IS NOT movable.
+-- end::default-attributes-sound[]
 
   VERB smell
     DOES ONLY
@@ -1889,9 +1895,11 @@ END EVERY.
 -- either in the syntax definitions or verb checks.)
 
 
+-- tag::default-attributes-weapon[]
 EVERY weapon ISA OBJECT
   IS NOT fireable.
 END EVERY.
+-- end::default-attributes-weapon[]
 
 
 
@@ -1912,10 +1920,12 @@ END EVERY.
 -- When examined, a window is by default described as being either open or closed.
 
 
+-- tag::default-attributes-window[]
 EVERY window ISA OBJECT
   IS openable.
   IS NOT open.
   IS NOT takeable.
+-- end::default-attributes-window[]
 
   VERB examine
     DOES
@@ -1972,20 +1982,31 @@ END EVERY.
 
 -- First, we declare some common characteristics for all actors:
 
-
+-- tag::default-attributes-actor[]
 ADD TO EVERY ACTOR
   IS NOT inanimate.
   IS NOT following.
   IS NOT sitting.
   IS NOT lying_down.
-  IS NOT named.
-  -- = the actor's name is not known to the player.
-  IS NOT compliant.
-  -- an actor only gives something to the hero if it is in a compliant mood.
-  -- In practice, this happens by default when the hero asks the actor for anything.
-  -- For example, implicit taking of objects is not successful if the object happens
-  -- to be held by an NPC who is not compliant.
+  IS NOT named. -- The NPC's name is unknown or not his primary NAME.
+
+    -- The definite article will precede a `NOT named` actor's NAME whenever
+    -- mentioned (e.g. "the professor") because the NPC's name is either unknown
+    -- or it's defined as a secondary NAME (i.e. it's recognized in the player
+    -- input but it's not used when mentioning the actor).
+
+  IS NOT compliant. -- Won't let the hero take his possession.
+
+    -- NPCs will only give up their possessions if in a compliant mood, or when
+    -- asked for them. Attempting to take objects from a non compliant NPC will
+    -- fail; this applies also to implicit taking (e.g. throwing an object held
+    -- by an actor).
+    -- By default, asking a NPC for his possessions always succeeds, regardless
+    -- of his compliance state. To change this, the author needs to override the
+    -- `ask_for` verb according to needs.
+
   IS NOT takeable.
+-- end::default-attributes-actor[]
 
 
   DEFINITE ARTICLE

@@ -20,84 +20,82 @@
 -- We define general attributes for every thing ( = object or actor):
 
 
+-- tag::default-attributes-thing[]
 ADD TO EVERY THING
 
-  IS examinable.
-    -- the library declares SOUNDs as not examinable.
-     inanimate.
-    -- actors are NOT inanimate.
-     movable.
-    -- to allow pushing, pulling, lifting, etc.
-     open.
-    -- = not closed.
-     reachable.
-    -- See also 'distant' below
-     takeable.
-    -- you'll have to separately define which objects are NOT takeable.
-    -- By default, the floor, walls, ceiling, ground and sky objects
-    -- are not takeable. The same goes for all doors, windows, sounds, liquids
-    -- that are not in containers, and actors.
+  IS examinable.  -- The library declares SOUNDs as not examinable.
+     inanimate.   -- Actors are NOT inanimate.
+     movable.     -- To allow pushing, pulling, lifting, etc.
+     open.        -- = not closed.
+     reachable.   -- See also `distant` below
+     takeable.    -- You'll have to define which objects are NOT takeable.
+                  -- By default, the floor, walls, ceiling, ground and sky
+                  -- objects are not takeable. The same goes for all doors,
+                  -- windows, sounds, liquids without a vessel, and actors.
 
   HAS allowed {null_object}.
-    -- container objects only take what is allowed for them to take;
+    -- Container objects only take what is allowed for them to take;
     -- this applies to verbs empty_in, pour_in, put_in and throw_in.
-    -- "null_object" is a default dummy that can be ignored.
+    -- `null_object` is a default dummy-object that can be ignored.
 
-  HAS ex "".            -- an alternative way of giving responses to >x [thing],
-          -- instead of 'VERB examine DOES ONLY..."
-          -- See the library manual for more info.
+  HAS ex "".  -- An alternative way of providing responses to ">x [thing]",
+              -- instead of `VERB examine DOES ONLY...`
+              -- See the library manual for more info.
 
   HAS matching_key null_key.
     -- All lockable doors need a matching key to lock/unlock them.
-    -- "null_key" is a default dummy that can be ignored. This attribute
-    -- is here added to every thing instead of just doors, to enable
-    -- matching keys to be programmed for other locked objects, too, like for
-    -- example treasure chests etc.
+    -- This attribute is being added to every thing, instead of just to doors,
+    -- to enable matching keys to be implemented on other lockable objects too,
+    -- e.g. for treasure chests, etc.
+    -- `null_key` is a default dummy-object that can be ignored.
 
   HAS text "".
 
   NOT broken.
   NOT distant.
-    -- Usage: you can for example talk to a "not reachable" actor but not to a "distant" one.
-    -- You can also throw things in, to or at a not reachable target but not to a distant one.
-    -- Default response for not reachable things: "The [thing] is out of your reach."
-    -- Default response for distant things: "The [thing] is too far away."
+    -- Usage: you can talk to `not reachable` actors, but not to `distant` ones.
+    -- You can also throw things in, to or at `not reachable` targets but not to
+    -- `distant` ones.
+    -- Default response for `not reachable` things:
+    --    The [thing] is out of your reach.
+    -- Default response for `distant` things:
+    --    The [thing] is too far away.
+
   NOT drinkable.
   NOT edible.
-  NOT fireable.
-    -- can (not) be used as a firearm
+  NOT fireable. -- Can (not) be used as a firearm.
   NOT lockable.
   NOT locked.
   NOT 'on'.
   NOT openable.
   NOT readable.
-  NOT scenery.
-    -- scenery has special responses for 'examine' and 'take', behaves like a normal object otherwise.
+  NOT scenery.  -- A scenery has special responses for 'examine' and 'take',
+                -- behaves like a normal object otherwise.
   NOT wearable.
   NOT writeable.
 
   CAN NOT talk.
 
-  IS NOT worn.
-    -- (for 'clothing' instances) it's not worn by any actor.
+  IS NOT worn.  -- (for `clothing` instances) it's not worn by any actor.
     -- -------------------------------------------------------------------------
     -- NOTE: Authors can also use this attribute to implement wearables other
     --       than clothing (eg. devices, like headphones, a VR headset, etc.).
     --       The library ensures that any verbs which could remove a thing from
-    --       an actor also set the thing as 'NOT worn', in case authors are
-    --       using this attribute outside of the 'clothing' class context.
+    --       an actor also set the thing as `NOT worn`, in case authors are
+    --       using this attribute outside of the `clothing` class context.
     -- -------------------------------------------------------------------------
+-- end::default-attributes-thing[]
 
--- We still define that plural nouns are preceded by "some" (and not by "a" or "an"):
+  INDEFINITE ARTICLE
 
-INDEFINITE ARTICLE
+    -- Plural nouns must be preceded by "some" (and not by "a" or "an"):
 
-  IF THIS IS NOT plural
-    THEN "a"
-    ELSE "some"
-  END IF.
+    IF THIS IS NOT plural
+      THEN "a"
+      ELSE "some"
+    END IF.
 
-END ADD TO.
+END ADD TO THING.
 
 
 -- NOTE: If you need to use "an" instead, you should declare it directly on the

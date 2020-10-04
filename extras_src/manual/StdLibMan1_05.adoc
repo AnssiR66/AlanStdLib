@@ -18,148 +18,31 @@ Using any of the attributes listed below for your own purposes doesn't necessari
 
 This attribute is added to every ENTITY:
 
-[source,alan]
+[source,alan, role="lib"]
 --------------------------------------------------------------------------------
 NOT plural.
 --------------------------------------------------------------------------------
 
 These attributes are added to every THING:
 
-[source,alan]
---------------------------------------------------------------------------------
-IS examinable.
+.Predefined `THING` attributes in {lib_definitions}.
+[source,alan, role="lib"]
+--------------------------------------------------------------------
+include::{StdLibInc}/lib_definitions.i[tag=default-attributes-thing]
+--------------------------------------------------------------------
 
-inanimate.
-
-movable.
-
-open.
-
-reachable.
-
--- See also 'distant' below
-
-takeable.
-
-HAS allowed {null_object}.
-
--- You can only put an object in a container if the object
-
--- is in the 'allowed' set of the container.
-
-HAS ex "".
-
--- an alternative to using "VERB examine DOES..."
-
-HAS matching_key null_key.
-
--- All lockable objects need a matching key to lock/unlock them.
-
--- "null_key" is a default dummy that can be ignored.
-
-HAS text "".
-
-HAS weight 0.
-
--- Actors and objects will have different weight values, see below
-
-NOT broken.
-
-NOT distant.
-
--- Usage: you can for example talk to a "not reachable" actor but
-
--- not to a "distant" one.
-
--- You can also throw things in, to or at a not reachable target
-
--- but not to a distant one.
-
--- The other verbs where the action succeeds if the object is
-
--- not reachable are: dive_in, fire_at, kill_with, read, and
-
-// PAGE 103 //
-
-
-
--- shoot
-
--- Default response for not reachable things: "The \[thing\] is out
-
--- of your reach."
-
--- Default response for distant things: "The \[thing\] is too far
-
--- away."
-
-NOT drinkable.
-
-NOT edible.
-
-NOT fireable.
-
--- can (not) be used as a firearm
-
-NOT lockable.
-
-NOT locked.
-
-NOT 'on'.
-
-NOT openable.
-
-NOT readable.
-
-NOT scenery.
-
--- has special responses for 'ask_for', 'examine', 'take' and
-
--- 'take_from', behaves like a normal object otherwise.
-
-NOT wearable.
-
-NOT writeable.
-
-CAN NOT talk.
---------------------------------------------------------------------------------
 
 These attributes are added to every ACTOR:
 
-[source,alan]
---------------------------------------------------------------------------------
-IS wearing {null_clothing}.
-
--- By default, actors are not described as wearing any specific
-
--- clothing. null_clothing is a default dummy value that can be
-
--- ignored.
-
-HAS weight 50.
-
--- If something has the weight value of 50 or more, it cannot
-
--- be lifted or taken.
-
-NOT following.
-
--- not following the hero character by default
-
-NOT inanimate.
-
-NOT named.
-
-NOT compliant.
-
-NOT sitting.
-
-NOT lying_down.
---------------------------------------------------------------------------------
+.Predefined `ACTOR` attributes in {lib_classes}.
+[source,alan, role="lib"]
+----------------------------------------------------------------
+include::{StdLibInc}/lib_classes.i[tag=default-attributes-actor]
+----------------------------------------------------------------
 
 The code for CLOTHING objects adds these attributes, used only internally in the library, to every actor:
 
-[source,alan]
+[source,alan, role="lib"]
 --------------------------------------------------------------------------------
 IS tempcovered 0.
 
@@ -174,7 +57,7 @@ IS sex 0.
 
 These attributes are added to every OBJECT:
 
-[source,alan]
+[source,alan, role="lib"]
 --------------------------------------------------------------------------------
 HAS weight 5.
 
@@ -189,57 +72,78 @@ HAS weight 5.
 -- the author must set this limit by themselves.
 --------------------------------------------------------------------------------
 
+
+
 == Attributes added to specific classes of objects:
 
 These attributes are added to every CLOTHING object:
 
-[source,alan]
---------------------------------------------------------------------------------
-IS wearable.
+.Predefined `CLOTHING` attributes in {lib_classes}.
+[source,alan, role="lib"]
+-------------------------------------------------------------------
+include::{StdLibInc}/lib_classes.i[tag=default-attributes-clothing]
+-------------------------------------------------------------------
 
-IS NOT donned.
 
--- = not worn by an NPC
+The following attributes are defined for every DOOR object:
 
-IS sex 0.
+.Predefined `DOOR` attributes in {lib_classes}.
+[source,alan, role="lib"]
+---------------------------------------------------------------
+include::{StdLibInc}/lib_classes.i[tag=default-attributes-door]
+---------------------------------------------------------------
 
-IS headcover 0.
 
-IS handscover 0.
+The following attributes are defined for every WINDOW object:
 
-IS feetcover 0.
+.Predefined `WINDOW` attributes in {lib_classes}.
+[source,alan, role="lib"]
+-----------------------------------------------------------------
+include::{StdLibInc}/lib_classes.i[tag=default-attributes-window]
+-----------------------------------------------------------------
 
-IS topcover 0.
-
-IS botcover 0.
---------------------------------------------------------------------------------
-
-The following attribute is defined for every DOOR object:
-
-[source,alan]
---------------------------------------------------------------------------------
-HAS otherside door.
---------------------------------------------------------------------------------
 
 The following attributes are added to every LIGHTSOURCE object:
 
-[source,alan]
---------------------------------------------------------------------------------
-IS natural.
+.Predefined `LIGHTSOURCE` attributes in {lib_classes}.
+[source,alan, role="lib"]
+----------------------------------------------------------------------
+include::{StdLibInc}/lib_classes.i[tag=default-attributes-lightsource]
+----------------------------------------------------------------------
 
-IS NOT lit.
---------------------------------------------------------------------------------
 
 The following attribute is added to every WEAPON:
 
-[source,alan]
---------------------------------------------------------------------------------
-IS NOT fireable.
---------------------------------------------------------------------------------
+.Predefined `WEAPON` attributes in {lib_classes}.
+[source,alan, role="lib"]
+-----------------------------------------------------------------
+include::{StdLibInc}/lib_classes.i[tag=default-attributes-weapon]
+-----------------------------------------------------------------
+
+
+
+The following attributes are added to every LIQUID:
+
+.Predefined `LIQUID` attributes in {lib_classes}.
+[source,alan, role="lib"]
+-----------------------------------------------------------------
+include::{StdLibInc}/lib_classes.i[tag=default-attributes-liquid]
+-----------------------------------------------------------------
+
+
+The following attribute is added to every SOUND:
+
+.Predefined `SOUND` attributes in {lib_classes}.
+[source,alan, role="lib"]
+----------------------------------------------------------------
+include::{StdLibInc}/lib_classes.i[tag=default-attributes-sound]
+----------------------------------------------------------------
+
+
 
 The following attributes are added to every LOCATION:
 
-[source,alan]
+[source,alan, role="lib"]
 --------------------------------------------------------------------------------
 IS lit.
 
@@ -256,7 +160,7 @@ HAS nested {nowhere}.
 
 The score notification coding uses the following attributes:
 
-[source,alan]
+[source,alan, role="lib"]
 --------------------------------------------------------------------------------
 HAS oldscore 0.
 
@@ -265,8 +169,10 @@ IS notify_on.
 IS NOT seen_notify.
 --------------------------------------------------------------------------------
 
-// @FIXME: XRef to specific page.
-Finally, for restricted actions, there is an attribute defined to correspond to every library verb. (See the list on p. 61-.)
+// @FIXME: XRef to specific page (restricted actions attributes).
+
+Finally, for every library verb there is a corresponding attribute defined in {lib_verbs_restrictions} for handling restricted actions.
+(See the list on p. 61.)
 
 // EOF //
 

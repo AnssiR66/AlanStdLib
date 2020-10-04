@@ -91,13 +91,13 @@ How this is done is described in more detail further below.
 == Adding alternative syntaxes for library verbs
 
 If you wish to add flexibility to your game by allowing alternative syntaxes for certain verbs, you can do that easily in your own game source file.
-Let's say that you want to for example change the syntax of the talk_to verb.
+Let's say that you want to for example change the syntax of the `talk_to` verb.
 Elsewhere in this manual you'll find all verb syntaxes listed.
 From there, you'll find out that the syntax of the talk verb is
 
-[source,alan]
+[source,alan, role="lib"]
 --------------------------------------------------------------------------------
-talk_to = talk 'to' (act).
+SYNTAX talk_to = talk 'to' (act)
 --------------------------------------------------------------------------------
 
 enabling commands like
@@ -173,7 +173,7 @@ SYNONYMS t = talk.
 
 a. Accessing the library:
 +
-Find the verb in the library file 'lib_verbs.i' and make the desired changes to the syntax.
+Find the verb in the library file `lib_verbs.i` and make the desired changes to the syntax.
 (If you add or change a parameter, make sure that the verb checks function properly.)
 
 

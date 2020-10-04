@@ -18,7 +18,7 @@ This is to ensure that plural is handled correctly and that there are no clashes
 The first person of some default wordings (for example "`I don't know the word $1`") is changed to a more passive or impersonal formulation.
 To edit these for your game, open `lib_messages.i` and edit the wanted message(s) there.
 
-[source,alan]
+[source,alan, role="lib"]
 ---------------------------------------------
 include::{StdLibInc}/lib_messages_runtime.i[]
 ---------------------------------------------
