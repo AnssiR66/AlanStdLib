@@ -101,7 +101,7 @@ You empty the contents of your khakis on the ground.
 Outside Emporium Alani
 You're standing in front of the Giorgio Alani Emporium entrance. Two
 large brass doors await northward your entrance into the sanctuary of
-fashion consumism.There is your wallet and your kippah here.
+fashion consumism. There is your wallet and your kippah here.
 
 > ; Let's check that the 'worn' state of the trousers hasn't changed:
 > DBG_CLOTHES khakis

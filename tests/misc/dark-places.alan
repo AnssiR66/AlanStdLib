@@ -68,51 +68,118 @@ The dark_loc IsA DARK_LOCATION.
 End the dark_loc.
 -- =============================================================================
 
+-- Props
+
+-- =============================================================================
+-- Let's add a prop to each room, just to test interacting with them when the
+-- location is dark...
+
+The oven IsA object at unlit_room.
+  Indefinite article "an"
+  Has ex "Your state-of-the art oven, with hundreds of knobs
+          and a User Guide thicker than 'War and Peace'.".
+End the.
+
+The bicycle IsA object at dark_loc.
+  Has ex "Just an old rusty bicycle trashed in a corner.".
+End the.
+-- =============================================================================
+
+-- Light Sources
+
+-- =============================================================================
+The torch IsA lightsource in Hero.
+  Name torch.
+  Name flashlight.
+  Is not natural.
+End the.
+
+The candle IsA lightsource in Lumen.
+  Name eternal candle.
+  Mentioned "the eternal candle"
+  Is lit. natural.
+  Has ex "The infernal candle that measures the time left to this world.".
+End the.
+
+The flame IsA lightsource in Lucifer.
+  Name eternal flame.
+  Mentioned "the eternal flame"
+  Is lit. natural.
+  Has ex "The eternal flame of Hell that originally ignited it on fire.".
+End the.
+-- =============================================================================
+
 -- NPCs
 
 -- =============================================================================
--- We need two NPCs, one carrying a lit light source and the other one not, so
+-- We need three NPCs, two carrying a lit light source and the third one not, so
 -- that we might test how their entrance and exit affect both types of dark
 -- locations. We also need to provide the player with a command to summon and
 -- dismiss them.
 --------------------------------------------------------------------------------
+
+-- Dummy placeholder for demon's borne objects:
+The dummy_obj IsA lightsource at nowhere.
+End the.
+
+-- Let's create a demon's class for our purposes:
+EVERY demon IsA male.
+  Is named.
+  Is bearing dummy_obj.
+  Is light_bearing. -- if carrying a light source!
+END EVERY demon.
+
+--------------------------------------------------------------------------------
 -- Lumen (NPC carrying a light source)
 --------------------------------------------------------------------------------
-The Lumen IsA male.
-  Is named.
+The Lumen IsA demon.
+  Is bearing candle.
+End the.
+--------------------------------------------------------------------------------
+-- Lucifer (NPC carrying a light source)
+--------------------------------------------------------------------------------
+The Lucifer IsA demon.
+  Is bearing flame.
 End the.
 --------------------------------------------------------------------------------
 -- Darko (NPC without a light source)
 --------------------------------------------------------------------------------
-The Darko IsA male.
-  Is named.
+The Darko IsA demon.
+  Is bearing coal.
+  Is not light_bearing.
+End the.
+
+The coal IsA lightsource in Darko.
+  Name coal. Name coal chunk. Name coal lump.
+  Mentioned "a lump of  infernal coal"
+  Is not lit.
+  Has ex "A chunk of infernal coal, blacker than the blackest thing on Earth.".
 End the.
 --==============================================================================
 -- VERBS: Summon / Dismiss NPC
 --==============================================================================
 Syntax summon = summon (act)!
-  Where act IsA actor
-    else "You can only summon living beens."
+  Where act IsA demon
+    else "You can only summon demons."
 
 Syntax dismiss = dismiss (act)!
   Where act IsA actor
-    else "You can only dismiss living beens."
+    else "You can only dismiss demons."
 
-ADd to every thing
+Add to every demon
   Verb summon
     Check act not here
       else "$1 is already here."
     Does
-      "$+1 promptly materializes in the room."
+      "$+1 materializes in the room, holding"
+      say bearing of act. "in his claws."
       -- --------------------------------------------------
       -- Extra text for Lumen, to clarify test expectations
       -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      If act = Lumen then
-        If candle in act and candle is lit then
-          If location of hero is not lit
-            then "His candle brings light to the room."
-            else "He's carrying a lit candle, as usual."
-          End if.
+      If bearing of this is lit then
+        If  location of hero IsA dark_location
+        AND location of hero is not lit then
+          say bearing of this. "lights up the room."
         End if.
       End if.
       -- --------------------------------------------------
@@ -127,24 +194,10 @@ ADd to every thing
       "$+1 promptly vanishes at your command."
   End verb.
 End add.
--- =============================================================================
-
--- Light Sources
-
--- =============================================================================
-The torch IsA lightsource in Hero.
-  Name torch.
-  Name flashlight.
-  Is not natural.
-End the torch.
-
-The candle IsA lightsource in Lumen.
-  Is lit. natural.
-End the candle.
 --------------------------------------------------------------------------------
 Start at unlit_room.
 Describe banner.
 "$pThis small adventure allows extensive testing of 'not lit' locations and
  DARK_LOCATION instances. The player carries an electric torch, and he can
- SUMMON and DISMISS two NPCs: Lumen, which carries a lit candle, and Darko,
- which doesn't carry any light sources."
+ SUMMON and DISMISS three NPC demons: Lumen and Lucifer, both carrying a lit
+ light source, and Darko, which carries an unlint light source."

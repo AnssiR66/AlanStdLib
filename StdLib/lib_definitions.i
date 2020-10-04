@@ -240,6 +240,7 @@ EVERY definition_block ISA LOCATION
   INITIALIZE
     SCHEDULE check_score AFTER 0.
     SCHEDULE check_restriction AFTER 0.
+    SCHEDULE check_darkness AFTER 0.
 
   -- ===========================================================================
 

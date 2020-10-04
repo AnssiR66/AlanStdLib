@@ -382,6 +382,7 @@ EVERY dark_location ISA LOCATION
   ENTERED
 
     IF COUNT ISA LIGHTSOURCE, IS lit, HERE > 0
+    AND THIS IS NOT lit
       THEN MAKE THIS lit.
         IF CURRENT ACTOR <> hero
           THEN LOOK.
@@ -404,7 +405,15 @@ EVERY dark_location ISA LOCATION
 END EVERY dark_location.
 
 
-WHEN location OF hero IS NOT lit
+--===============================
+-- Dark Location Rules and Events
+--===============================
+
+-- ------------------------------------------------------
+-- Ensure a DARK_LOCATION is lit if there's light_source:
+-- ------------------------------------------------------
+WHEN  location OF hero ISA dark_location
+  AND location OF hero IS NOT lit
   AND COUNT ISA lightsource, IS lit, AT hero > 0
 THEN MAKE location OF hero lit.
   SCHEDULE light_on AT hero AFTER 0.
@@ -415,6 +424,9 @@ EVENT light_on
 END EVENT.
 
 
+-- --------------------------------------------------------------
+-- Ensure a DARK_LOCATION is unlit if there are no light_sources:
+-- --------------------------------------------------------------
 WHEN location OF hero ISA dark_location
   AND location OF hero IS lit
   AND COUNT ISA lightsource, IS lit, AT hero = 0
@@ -426,9 +438,12 @@ EVENT light_off
   SAY light_goes_off OF my_game.
 END EVENT.
 
-
--- We need to ensure that a dark_locations will become dark again after the hero
--- leaves, if her took the lightsource with him:
+-- -----------------------------------------------------------
+-- Ensure that a dark_locations becomes dark again after
+-- the hero leaves, if he took the only light source with him:
+-- -----------------------------------------------------------
+-- This event is scheduled in the INITIALIZE section of the
+-- `definition_block` instance ("lib_definitions.i").
 
 EVENT check_darkness
   FOR EACH dl ISA dark_location, IS lit
@@ -441,7 +456,6 @@ EVENT check_darkness
 END EVENT.
 
 
--- This event is initialized in the start_section instance ('definitions.i').
 
 
 -- To define a dark location, use a formulation like the following:

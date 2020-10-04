@@ -1,0 +1,119 @@
+; ******************************************************************************
+; *                                                                            *
+; *                       LOCATIONS ILLUMINATIONS TESTS                        *
+; *                                                                            *
+; ******************************************************************************
+; We'll be stress-testing unlit locations vs DARK_LOCATION instances, to ensure
+; they both behave as expected when faced with the presence and absence of light
+; sources, when they change state from lit to unlit (and vice-versa), and when
+; actors enter and leave them (with and without light sources).
+; ==============================================================================
+; LOCATION (NOT LIT)
+; ==============================================================================
+; The kitchen is a normal location, therefore it should not be affected by the
+; presence of light sources.
+; ------------------------------------------------------------------------------
+look
+x walls
+x oven
+; The hero's torch should have NO EFFECT here:
+switch on torch
+look
+x walls
+switch off torch
+; Let's summon and dismiss Lumen, who carries a lit candle (again, NO EFFECT):
+summon Lumen
+look
+x ceiling
+dismiss Lumen
+look
+x ceiling
+; Let's summon and dismiss Darko, who carries no light sources (NO EFFECT):
+summon Darko
+look
+x floor
+dismiss Darko
+look
+x floor
+; ==============================================================================
+; LOCATION (LIT)
+; ==============================================================================
+; Let's light the room up and check that everything works as expected.
+; ------------------------------------------------------------------------------
+turn on light
+; **ERROR?** When the light comes on we don't get an automatic LOOK statement.
+;            Is this supposed to be so?
+look
+x walls
+x oven
+; None of the following actions should have any effect:
+switch on torch
+look
+switch off torch
+look
+summon Lumen
+look
+dismiss Lumen
+look
+summon Darko
+look
+dismiss Darko
+look
+; ------------------------------------------------------------------------------
+; LOCATION TURNS NOT LIT
+; ------------------------------------------------------------------------------
+; We now need to test what happens when the location turns dark:
+turn off light
+; **ERROR?** When the light goes out we don't see printed the 'light_goes_off'
+;            message. Is this supposed to be so?
+; ==============================================================================
+; DARK_LOCATION (NOT LIT)
+; ==============================================================================
+; Time to test the DARK_LOCATION. Here all light source should HAVE EFFECT!
+; ------------------------------------------------------------------------------
+down
+look
+x bicycle
+; Here the torch SHOULD LIGHT UP the place:
+switch on torch
+look
+x bicycle
+switch off torch
+look
+x bicycle
+; Let's summon Lumen, his candle SHOULD LIGHT UP the place:
+summon Lumen
+look
+x bicycle
+; Let's now dismiss him, which SHOULD MAKE IT DARK again:
+dismiss Lumen
+look
+x bicycle
+; Let's summon and dismiss Darko, which should have NO EFFECT:
+summon Darko
+look
+x bicycle
+dismiss Darko
+look
+x bicycle
+; ------------------------------------------------------------------------------
+; DARK_LOCATION Stress-Tests
+; ------------------------------------------------------------------------------
+; Summoning Lumen when light is already on ('light_on' event must not trigger):
+switch on torch
+summon Lumen
+look
+x bicycle
+; Dismissing him when a light source remains in place:
+dismiss Lumen
+look
+x bicycle
+; Summon two light-bearing demons in the dark:
+; (only 1st one must trigger 'light_on')
+switch off torch
+summon Lucifer
+summon Lumen
+; And now dismissing them both:
+; (only 2nd one should trigger 'light_off')
+dismiss Lucifer
+dismiss Lumen

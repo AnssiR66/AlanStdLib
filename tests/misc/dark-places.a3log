@@ -1,0 +1,327 @@
+
+
+Dark Locations Tests 
+Testing unlit locations vs DARK_LOCATION instances 
+(C) 2020 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta7.
+Standard Library v2.2.0 
+Version 1 
+All rights reserved. 
+
+This small adventure allows extensive testing of 'not lit' locations and
+DARK_LOCATION instances. The player carries an electric torch, and he can
+SUMMON and DISMISS three NPC demons: Lumen and Lucifer, both carrying a
+lit light source, and Darko, which carries an unlint light source.
+
+
+Kitchen (a ROOM)
+It is pitch black. You can't see anything at all.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                       LOCATIONS ILLUMINATIONS TESTS                        *
+> ; *                                                                            *
+> ; ******************************************************************************
+> ; We'll be stress-testing unlit locations vs DARK_LOCATION instances, to ensure
+> ; they both behave as expected when faced with the presence and absence of light
+> ; sources, when they change state from lit to unlit (and vice-versa), and when
+> ; actors enter and leave them (with and without light sources).
+> ; ==============================================================================
+> ; LOCATION (NOT LIT)
+> ; ==============================================================================
+> ; The kitchen is a normal location, therefore it should not be affected by the
+> ; presence of light sources.
+> ; ------------------------------------------------------------------------------
+> look
+Kitchen (a ROOM)
+It is pitch black. You can't see anything at all.
+
+> x walls
+It is too dark to see.
+
+> x oven
+It is too dark to see.
+
+> ; The hero's torch should have NO EFFECT here:
+> switch on torch
+You turn on the torch.
+
+> look
+Kitchen (a ROOM)
+It is pitch black. You can't see anything at all.
+
+> x walls
+It is too dark to see.
+
+> switch off torch
+You turn off the torch.
+
+> ; Let's summon and dismiss Lumen, who carries a lit candle (again, NO EFFECT):
+> summon Lumen
+Lumen materializes in the room, holding the eternal candle in his claws.
+
+> look
+Kitchen (a ROOM)
+It is pitch black. You can't see anything at all.
+
+> x ceiling
+It is too dark to see.
+
+> dismiss Lumen
+Lumen promptly vanishes at your command.
+
+> look
+Kitchen (a ROOM)
+It is pitch black. You can't see anything at all.
+
+> x ceiling
+It is too dark to see.
+
+> ; Let's summon and dismiss Darko, who carries no light sources (NO EFFECT):
+> summon Darko
+Darko materializes in the room, holding a lump of infernal coal in his
+claws.
+
+> look
+Kitchen (a ROOM)
+It is pitch black. You can't see anything at all.
+
+> x floor
+It is too dark to see.
+
+> dismiss Darko
+Darko promptly vanishes at your command.
+
+> look
+Kitchen (a ROOM)
+It is pitch black. You can't see anything at all.
+
+> x floor
+It is too dark to see.
+
+> ; ==============================================================================
+> ; LOCATION (LIT)
+> ; ==============================================================================
+> ; Let's light the room up and check that everything works as expected.
+> ; ------------------------------------------------------------------------------
+> turn on light
+You switch on the kitchen light.
+
+> ; **ERROR?** When the light comes on we don't get an automatic LOOK statement.
+> ;            Is this supposed to be so?
+> look
+Kitchen (a ROOM)
+Stairs lead down the old basement. There is a light switch and an oven 
+here.
+
+> x walls
+You notice nothing unusual about the wall.
+
+> x oven
+Your state-of-the art oven, with hundreds of knobs and a User Guide
+thicker than 'War and Peace'.
+
+> ; None of the following actions should have any effect:
+> switch on torch
+You turn on the torch.
+
+> look
+Kitchen (a ROOM)
+Stairs lead down the old basement. There is a light switch and an oven 
+here.
+
+> switch off torch
+You turn off the torch.
+
+> look
+Kitchen (a ROOM)
+Stairs lead down the old basement. There is a light switch and an oven 
+here.
+
+> summon Lumen
+Lumen materializes in the room, holding the eternal candle in his claws.
+
+> look
+Kitchen (a ROOM)
+Stairs lead down the old basement. There is a light switch and an oven 
+here. Lumen is here.
+
+> dismiss Lumen
+Lumen promptly vanishes at your command.
+
+> look
+Kitchen (a ROOM)
+Stairs lead down the old basement. There is a light switch and an oven 
+here.
+
+> summon Darko
+Darko materializes in the room, holding a lump of infernal coal in his
+claws.
+
+> look
+Kitchen (a ROOM)
+Stairs lead down the old basement. There is a light switch and an oven 
+here. Darko is here.
+
+> dismiss Darko
+Darko promptly vanishes at your command.
+
+> look
+Kitchen (a ROOM)
+Stairs lead down the old basement. There is a light switch and an oven 
+here.
+
+> ; ------------------------------------------------------------------------------
+> ; LOCATION TURNS NOT LIT
+> ; ------------------------------------------------------------------------------
+> ; We now need to test what happens when the location turns dark:
+> turn off light
+You switch off the kitchen light.
+
+> ; **ERROR?** When the light goes out we don't see printed the 'light_goes_off'
+> ;            message. Is this supposed to be so?
+> ; ==============================================================================
+> ; DARK_LOCATION (NOT LIT)
+> ; ==============================================================================
+> ; Time to test the DARK_LOCATION. Here all light source should HAVE EFFECT!
+> ; ------------------------------------------------------------------------------
+> down
+Basement (a DARK_LOCATION)
+It is pitch black. You can't see anything at all.
+
+> look
+Basement (a DARK_LOCATION)
+It is pitch black. You can't see anything at all.
+
+> x bicycle
+It is too dark to see.
+
+> ; Here the torch SHOULD LIGHT UP the place:
+> switch on torch
+You turn on the torch.
+
+Basement (a DARK_LOCATION)
+Stairs lead up to the kitchen. There is a bicycle here.
+
+> look
+Basement (a DARK_LOCATION)
+Stairs lead up to the kitchen. There is a bicycle here.
+
+> x bicycle
+Just an old rusty bicycle trashed in a corner.
+
+> switch off torch
+You turn off the torch. It is now pitch black.
+
+> look
+Basement (a DARK_LOCATION)
+It is pitch black. You can't see anything at all.
+
+> x bicycle
+It is too dark to see.
+
+> ; Let's summon Lumen, his candle SHOULD LIGHT UP the place:
+> summon Lumen
+Lumen materializes in the room, holding the eternal candle in his claws. 
+The eternal candle lights up the room.
+
+Basement (a DARK_LOCATION)
+Stairs lead up to the kitchen. There is a bicycle here. Lumen is here.
+
+> look
+Basement (a DARK_LOCATION)
+Stairs lead up to the kitchen. There is a bicycle here. Lumen is here.
+
+> x bicycle
+Just an old rusty bicycle trashed in a corner.
+
+> ; Let's now dismiss him, which SHOULD MAKE IT DARK again:
+> dismiss Lumen
+Lumen promptly vanishes at your command. It is now pitch black.
+
+> look
+Basement (a DARK_LOCATION)
+It is pitch black. You can't see anything at all.
+
+> x bicycle
+It is too dark to see.
+
+> ; Let's summon and dismiss Darko, which should have NO EFFECT:
+> summon Darko
+Darko materializes in the room, holding a lump of infernal coal in his
+claws.
+
+> look
+Basement (a DARK_LOCATION)
+It is pitch black. You can't see anything at all.
+
+> x bicycle
+It is too dark to see.
+
+> dismiss Darko
+Darko promptly vanishes at your command.
+
+> look
+Basement (a DARK_LOCATION)
+It is pitch black. You can't see anything at all.
+
+> x bicycle
+It is too dark to see.
+
+> ; ------------------------------------------------------------------------------
+> ; DARK_LOCATION Stress-Tests
+> ; ------------------------------------------------------------------------------
+> ; Summoning Lumen when light is already on ('light_on' event must not trigger):
+> switch on torch
+You turn on the torch.
+
+Basement (a DARK_LOCATION)
+Stairs lead up to the kitchen. There is a bicycle here.
+
+> summon Lumen
+Lumen materializes in the room, holding the eternal candle in his claws.
+
+> look
+Basement (a DARK_LOCATION)
+Stairs lead up to the kitchen. There is a bicycle here. Lumen is here.
+
+> x bicycle
+Just an old rusty bicycle trashed in a corner.
+
+> ; Dismissing him when a light source remains in place:
+> dismiss Lumen
+Lumen promptly vanishes at your command.
+
+> look
+Basement (a DARK_LOCATION)
+Stairs lead up to the kitchen. There is a bicycle here.
+
+> x bicycle
+Just an old rusty bicycle trashed in a corner.
+
+> ; Summon two light-bearing demons in the dark:
+> ; (only 1st one must trigger 'light_on')
+> switch off torch
+You turn off the torch. It is now pitch black.
+
+> summon Lucifer
+Lucifer materializes in the room, holding the eternal flame in his claws. 
+The eternal flame lights up the room.
+
+Basement (a DARK_LOCATION)
+Stairs lead up to the kitchen. There is a bicycle here. Lucifer is here.
+
+> summon Lumen
+Lumen materializes in the room, holding the eternal candle in his claws.
+
+> ; And now dismissing them both:
+> ; (only 2nd one should trigger 'light_off')
+> dismiss Lucifer
+Lucifer promptly vanishes at your command.
+
+> dismiss Lumen
+Lumen promptly vanishes at your command. It is now pitch black.
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 
