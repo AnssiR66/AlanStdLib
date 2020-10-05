@@ -30,7 +30,8 @@ It is pitch black. You can't see anything at all.
 > ; LOCATION (NOT LIT)
 > ; ==============================================================================
 > ; The kitchen is a normal location, therefore it should not be affected by the
-> ; presence of light sources.
+> ; presence of light sources, nor it should execute a LOOK when it becomes lit,
+> ; or print the 'light_goes_off' message when it becomes dark.
 > ; ------------------------------------------------------------------------------
 > look
 Kitchen (a ROOM)
@@ -104,11 +105,11 @@ It is too dark to see.
 > ; ==============================================================================
 > ; Let's light the room up and check that everything works as expected.
 > ; ------------------------------------------------------------------------------
+> ; === LIGHTS ON! ===
+> ; (no LOOK expected for Location)
 > turn on light
 You switch on the kitchen light.
 
-> ; **ERROR?** When the light comes on we don't get an automatic LOOK statement.
-> ;            Is this supposed to be so?
 > look
 Kitchen (a ROOM)
 Stairs lead down the old basement. There is a light switch and an oven 
@@ -175,15 +176,16 @@ here.
 > ; LOCATION TURNS NOT LIT
 > ; ------------------------------------------------------------------------------
 > ; We now need to test what happens when the location turns dark:
+> ; ------------------------------------------------------------------------------
+> ; === LIGHTS OFF! ===
+> ; (no 'light_goes_off' message expected for Location)
 > turn off light
 You switch off the kitchen light.
 
-> ; **ERROR?** When the light goes out we don't see printed the 'light_goes_off'
-> ;            message. Is this supposed to be so?
 > ; ==============================================================================
 > ; DARK_LOCATION (NOT LIT)
 > ; ==============================================================================
-> ; Time to test the DARK_LOCATION. Here all light source should HAVE EFFECT!
+> ; Time to test the DARK_LOCATION. Here all light sources should HAVE EFFECT!
 > ; ------------------------------------------------------------------------------
 > down
 Basement (a DARK_LOCATION)
@@ -196,7 +198,8 @@ It is pitch black. You can't see anything at all.
 > x bicycle
 It is too dark to see.
 
-> ; Here the torch SHOULD LIGHT UP the place:
+> ; === LIGHTS ON! ===
+> ; Here the torch SHOULD LIGHT UP the place (LOOK expected):
 > switch on torch
 You turn on the torch.
 
@@ -210,6 +213,8 @@ Stairs lead up to the kitchen. There is a bicycle here.
 > x bicycle
 Just an old rusty bicycle trashed in a corner.
 
+> ; === LIGHTS OFF! ===
+> ; ('light_goes_off' message expected)
 > switch off torch
 You turn off the torch. It is now pitch black.
 
@@ -220,6 +225,7 @@ It is pitch black. You can't see anything at all.
 > x bicycle
 It is too dark to see.
 
+> ; === LIGHTS ON! ===
 > ; Let's summon Lumen, his candle SHOULD LIGHT UP the place:
 > summon Lumen
 Lumen materializes in the room, holding the eternal candle in his claws. 
@@ -235,6 +241,7 @@ Stairs lead up to the kitchen. There is a bicycle here. Lumen is here.
 > x bicycle
 Just an old rusty bicycle trashed in a corner.
 
+> ; === LIGHTS OFF! ===
 > ; Let's now dismiss him, which SHOULD MAKE IT DARK again:
 > dismiss Lumen
 Lumen promptly vanishes at your command. It is now pitch black.
@@ -271,13 +278,14 @@ It is too dark to see.
 > ; ------------------------------------------------------------------------------
 > ; DARK_LOCATION Stress-Tests
 > ; ------------------------------------------------------------------------------
-> ; Summoning Lumen when light is already on ('light_on' event must not trigger):
+> ; === LIGHTS ON! ===
 > switch on torch
 You turn on the torch.
 
 Basement (a DARK_LOCATION)
 Stairs lead up to the kitchen. There is a bicycle here.
 
+> ; Summoning Lumen when light is already on ('light_on' event must not trigger):
 > summon Lumen
 Lumen materializes in the room, holding the eternal candle in his claws.
 
@@ -299,11 +307,15 @@ Stairs lead up to the kitchen. There is a bicycle here.
 > x bicycle
 Just an old rusty bicycle trashed in a corner.
 
+> ; --------------------------------------------
 > ; Summon two light-bearing demons in the dark:
 > ; (only 1st one must trigger 'light_on')
+> ; --------------------------------------------
+> ; === LIGHTS OFF! ===
 > switch off torch
 You turn off the torch. It is now pitch black.
 
+> ; === LIGHTS ON! ===
 > summon Lucifer
 Lucifer materializes in the room, holding the eternal flame in his claws. 
 The eternal flame lights up the room.
@@ -319,6 +331,7 @@ Lumen materializes in the room, holding the eternal candle in his claws.
 > dismiss Lucifer
 Lucifer promptly vanishes at your command.
 
+> ; === LIGHTS OFF! ===
 > dismiss Lumen
 Lumen promptly vanishes at your command. It is now pitch black.
 

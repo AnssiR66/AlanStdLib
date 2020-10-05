@@ -11,7 +11,8 @@
 ; LOCATION (NOT LIT)
 ; ==============================================================================
 ; The kitchen is a normal location, therefore it should not be affected by the
-; presence of light sources.
+; presence of light sources, nor it should execute a LOOK when it becomes lit,
+; or print the 'light_goes_off' message when it becomes dark.
 ; ------------------------------------------------------------------------------
 look
 x walls
@@ -40,9 +41,9 @@ x floor
 ; ==============================================================================
 ; Let's light the room up and check that everything works as expected.
 ; ------------------------------------------------------------------------------
+; === LIGHTS ON! ===
+; (no LOOK expected for Location)
 turn on light
-; **ERROR?** When the light comes on we don't get an automatic LOOK statement.
-;            Is this supposed to be so?
 look
 x walls
 x oven
@@ -63,28 +64,34 @@ look
 ; LOCATION TURNS NOT LIT
 ; ------------------------------------------------------------------------------
 ; We now need to test what happens when the location turns dark:
+; ------------------------------------------------------------------------------
+; === LIGHTS OFF! ===
+; (no 'light_goes_off' message expected for Location)
 turn off light
-; **ERROR?** When the light goes out we don't see printed the 'light_goes_off'
-;            message. Is this supposed to be so?
 ; ==============================================================================
 ; DARK_LOCATION (NOT LIT)
 ; ==============================================================================
-; Time to test the DARK_LOCATION. Here all light source should HAVE EFFECT!
+; Time to test the DARK_LOCATION. Here all light sources should HAVE EFFECT!
 ; ------------------------------------------------------------------------------
 down
 look
 x bicycle
-; Here the torch SHOULD LIGHT UP the place:
+; === LIGHTS ON! ===
+; Here the torch SHOULD LIGHT UP the place (LOOK expected):
 switch on torch
 look
 x bicycle
+; === LIGHTS OFF! ===
+; ('light_goes_off' message expected)
 switch off torch
 look
 x bicycle
+; === LIGHTS ON! ===
 ; Let's summon Lumen, his candle SHOULD LIGHT UP the place:
 summon Lumen
 look
 x bicycle
+; === LIGHTS OFF! ===
 ; Let's now dismiss him, which SHOULD MAKE IT DARK again:
 dismiss Lumen
 look
@@ -99,8 +106,9 @@ x bicycle
 ; ------------------------------------------------------------------------------
 ; DARK_LOCATION Stress-Tests
 ; ------------------------------------------------------------------------------
-; Summoning Lumen when light is already on ('light_on' event must not trigger):
+; === LIGHTS ON! ===
 switch on torch
+; Summoning Lumen when light is already on ('light_on' event must not trigger):
 summon Lumen
 look
 x bicycle
@@ -108,12 +116,17 @@ x bicycle
 dismiss Lumen
 look
 x bicycle
+; --------------------------------------------
 ; Summon two light-bearing demons in the dark:
 ; (only 1st one must trigger 'light_on')
+; --------------------------------------------
+; === LIGHTS OFF! ===
 switch off torch
+; === LIGHTS ON! ===
 summon Lucifer
 summon Lumen
 ; And now dismissing them both:
 ; (only 2nd one should trigger 'light_off')
 dismiss Lucifer
+; === LIGHTS OFF! ===
 dismiss Lumen

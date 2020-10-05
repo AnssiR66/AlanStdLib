@@ -126,7 +126,6 @@ End the.
 EVERY demon IsA male.
   Is named.
   Is bearing dummy_obj.
-  Is light_bearing. -- if carrying a light source!
 END EVERY demon.
 
 --------------------------------------------------------------------------------
