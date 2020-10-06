@@ -3,24 +3,28 @@
 --------------------------------------------------------------------------------
 
 -- This library file defines the default directions (exits) and the location
--- 'nowhere', a useful place to locate things when you want to remove them from
+-- `nowhere`, a useful place to locate things when you want to remove them from
 -- play. This file also defines four specific location classes: rooms (= indoor
 -- locations), sites (= outdoor locations) dark_locations and areas.
--- Finally, the attributes 'visited' and 'described' are defined.
+-- Finally, the attributes `visited` and `described` are defined.
 
 -- You may modify this file in any way that suits your purposes.
 
 --------------------------------------------------------------------------------
 
 
--- ========================================================
 
-
------  1. The location 'nowhere' and the default directions
-
-
--- ========================================================
-
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+-- § 1. The `nowhere` Location and the Predefined Directions
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
 THE nowhere ISA LOCATION
   EXIT
@@ -78,15 +82,17 @@ SYNONYMS
 --    -------------------------------------------------------
 
 
-
--- =========================================================================
-
-
------ 2. Location classes ROOM and SITE for indoor and outdoor locations
-
-
--- =========================================================================
-
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+-- § 2. Location classes ROOM and SITE for indoor and outdoor locations
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
 -- ROOM and SITE are optional location classes you can use to ease up coding:
 --
@@ -165,7 +171,7 @@ THE floor ISA room_object
   DESCRIPTION ""
 
 
-  -- Honor a user-defined 'floor_desc', if present:
+  -- Honor a user-defined `floor_desc`, if present:
   VERB examine
     CHECK floor_desc OF CURRENT LOCATION = ""
       ELSE SAY floor_desc OF CURRENT LOCATION.
@@ -212,7 +218,7 @@ THE wall ISA room_object
   IS NOT movable.
   DESCRIPTION ""
 
-  -- Honor a user-defined 'walls_desc', if present:
+  -- Honor a user-defined `walls_desc`, if present:
   VERB examine
     CHECK walls_desc OF CURRENT LOCATION = ""
       ELSE SAY walls_desc OF CURRENT LOCATION.
@@ -226,7 +232,7 @@ THE ceiling ISA room_object
   IS NOT reachable.
   DESCRIPTION ""
 
-  -- Honor a user-defined 'ceiling_desc', if present:
+  -- Honor a user-defined `ceiling_desc`, if present:
   VERB examine
     CHECK ceiling_desc OF CURRENT LOCATION = ""
       ELSE SAY ceiling_desc OF CURRENT LOCATION.
@@ -243,16 +249,15 @@ THE ground ISA site_object
   DESCRIPTION ""
 
 
-  -- Honor a user-defined 'ground_desc', if present:
+  -- Honor a user-defined `ground_desc`, if present:
   VERB examine
     CHECK ground_desc OF CURRENT LOCATION = ""
       ELSE SAY ground_desc OF CURRENT LOCATION.
   END VERB examine.
 
 
-  -- As we have declared the ground to be a container, we will disable some verbs
-  -- defined to work with containers:
-
+  -- Since we have declared the ground to be a container,
+  -- we'll disable some verbs defined to work with containers:
 
   VERB empty_in, pour_in
     WHEN cont
@@ -298,8 +303,8 @@ THE sky ISA site_object
 END THE.
 
 
--- We still declare some shared behavior for all indoor and outdoor objects:
 
+-- We still declare some shared behavior for all indoor and outdoor objects:
 
 ADD TO EVERY room_object
 
@@ -357,15 +362,44 @@ END ADD TO.
 
 
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+-- § 3. Dark Locations
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
--- ==========================================================
+-- The library offers two ways to implement dark locations:
 
+-- 1) Setting a location to `NOT lit`.
+-- 2) Using the `DARK_LOCATION` class.
 
------ 3. Dark locations
+-- Both approaches share the following similarities:
+--  * In any type of `NOT lit` location:
+--    * Verbs that require the presence of light are blocked.
+--    * Instead of its description, the `dark_loc_desc` message is printed.
 
+-- Instances of `DARK_LOCATION` will automatically become lit when there's a lit
+-- `lightsource` in the location, and turn dark when there aren't any.
 
--- ==========================================================
+-- The library takes care of detecting illumination changes and correctly
+-- setting and clearing the `lit` attribute of DARK_LOCATIONs, and will execute
+-- a LOOK statement when the location is lit, and print the `light_goes_off`
+-- message when it becomes dark.
 
+-- For "normal" locations, management of their `lit` attribute is left entirely
+-- to the author, and the library doesn't provide any special features beside
+-- those mentioned above.
+
+-- Also, "normal" locations are lit by default, whereas DARK_LOCATIONs are unlit
+-- by default.
+
+--------------------------------------------------------------------------------
 
 ADD TO EVERY LOCATION
   IS lit.
@@ -375,9 +409,23 @@ ADD TO EVERY LOCATION
       ELSE SAY dark_loc_desc OF my_game.
 END ADD TO.
 
+-- The `lit` attribute is defined on LOCATION, and authors can use it to create
+-- dark locations that are not instances of `DARK_LOCATION`, by manipulating it
+-- via custom VERBs, EVENTs or RULEs. The library will not track nor manage the
+-- illumination state of non-DARK_LOCATION instances, nor execute an automatic
+-- LOOK when they becomes lit, or print the the `light_goes_off` message when
+-- they turn dark.
+
+-- The library will however block any verbs that require light, and show the
+-- `dark_loc_desc` message instead of describing the location, if it's unlit.
+
 
 EVERY dark_location ISA LOCATION
   IS NOT lit.
+
+  -- These ENTERED statements take care of the dark location being correctly lit
+  -- or not lit at entrance; the WHEN rules further down below take care of
+  -- those change when the hero is already in the location.
 
   ENTERED
 
@@ -393,9 +441,6 @@ EVERY dark_location ISA LOCATION
       THEN MAKE THIS NOT lit.
     END IF.
 
-    -- These ENTERED statements take care of the dark location being correctly
-    -- lit or not lit at entrance, the WHEN rules below take care of the change
-    -- when the hero is already in the location.
 
 
   DESCRIPTION
@@ -405,9 +450,11 @@ EVERY dark_location ISA LOCATION
 END EVERY dark_location.
 
 
---===============================
+--==============================================================================
+--------------------------------------------------------------------------------
 -- Dark Location Rules and Events
---===============================
+--------------------------------------------------------------------------------
+--==============================================================================
 
 -- ------------------------------------------------------
 -- Ensure a DARK_LOCATION is lit if there's light_source:
@@ -485,17 +532,17 @@ END EVENT.
 
 
 
-
-
-
--- =====================================================================
-
-
------ 4. The attributes 'visited' and 'described'
-
-
--- =====================================================================
-
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+-- § 4. The `visited` and `described` Attributes
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
 -- A location has the value 'visited 0' until the hero visits it for the first
 -- time, and the value increases on every subsequent visit. This helps when you
@@ -519,7 +566,7 @@ ADD TO EVERY LOCATION
       THEN
         INCREASE visited OF THIS.
         INCREASE described OF THIS.
-        -- The "described" attribute increases also after LOOK (see 'verbs.i').
+        -- `described` is also increased by the LOOK verb (see 'lib_verbs.i').
     END IF.
 END ADD TO.
 
