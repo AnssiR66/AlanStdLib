@@ -1,0 +1,158 @@
+
+
+Testing 'forced_lit' DARK_LOCATION 
+(C) 2020 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta7.
+Standard Library v2.2.0 
+Version 1 
+All rights reserved. 
+
+The 'forced_lit' attribute allows to prevent the library from making dark
+a DARK_LOCATION when there are no lightsources left. It's used to enforce
+light during the day, and then unset during the night to restore the
+default behavior of DARK_LOCATION instances. 
+
+The forest is implemented as a 'DARK_LOCATION AT outdoor', with a
+perpetual day and night cycle.
+
+The player carries an electric torch, and he can SUMMON and DISMISS three
+NPC demons: Lumen and Lucifer, both carrying a lit light source, and
+Darko, which carries an unlint light source.
+
+
+The Forest of Doom
+Thick woods surround you from every direction, you'll never escape the
+forest.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                       FORCED_LIT DARK_LOCATION TESTS                       *
+> ; *                                                                            *
+> ; ******************************************************************************
+> ; It's day-time, so the location is being 'forced_lit' and is prevented from
+> ; becoming dark even if there are no lit light sources right now...
+> ; ------------------------------------------------------------------------------
+> x sky
+Sunny and bright
+
+> x torch
+You notice nothing unusual about the torch. It is currently off.
+
+> ; Last turn before night begins...
+> z
+Time passes... 
+
+The sun has set, night has fallen.
+
+It is now pitch black.
+
+> ; ==============================================================================
+> ; NIGHT TIME TESTS 1
+> ; ==============================================================================
+> ; Now the location is 'NOT forced_lit', and we expect the default DARK_LOCATION
+> ; behaviors to occur...
+> ; ------------------------------------------------------------------------------
+> x sky
+It is too dark to see.
+
+> x torch
+It is too dark to see.
+
+> ; == Expect Light: ==
+> turn on torch
+You turn on the torch.
+
+The Forest of Doom
+Thick woods surround you from every direction, you'll never escape the
+forest.
+
+> x sky
+Pitch black, no stars, no moon.
+
+> ; == Expect Darkness: ==
+> turn off torch
+You turn off the torch. It is now pitch black.
+
+> look
+The Forest of Doom
+It is pitch black. You can't see anything at all.
+
+> ; Last turn before day begins...
+> x sky
+It is too dark to see. 
+
+The sun has risen, it's day again.
+
+> ; ==============================================================================
+> ; DAY TIME TESTS 1
+> ; ==============================================================================
+> ; Now the location is 'forced_lit' again, so it shouldn't ever turn dark.
+> ; ------------------------------------------------------------------------------
+> look
+The Forest of Doom
+Thick woods surround you from every direction, you'll never escape the
+forest.
+
+> x torch
+You notice nothing unusual about the torch. It is currently off.
+
+> summon Lumen
+Lumen materializes in the room, holding the eternal candle in his claws.
+
+> summon Lucifer
+Lucifer materializes in the room, holding the eternal flame in his claws.
+
+> dismiss Lumen
+Lumen promptly vanishes at your command.
+
+> dismiss Lucifer
+Lucifer promptly vanishes at your command.
+
+> ; Last turn before night begins...
+> ; (darkness message NOT EXPECTED)
+> turn on torch
+You turn on the torch. 
+
+The sun has set, night has fallen.
+
+
+> ; ==============================================================================
+> ; NIGHT TIME TESTS 1
+> ; ==============================================================================
+> ; Night should have fallen illuminated because of the lit torch!
+> ; --------------------------------------------------------------
+> x sky
+Pitch black, no stars, no moon.
+
+> ; == Expect Darkness: ==
+> turn off torch
+You turn off the torch. It is now pitch black.
+
+> ; == Expect Light: ==
+> summon Lumen
+Lumen materializes in the room, holding the eternal candle in his claws. 
+The eternal candle lights up the room.
+
+The Forest of Doom
+Thick woods surround you from every direction, you'll never escape the
+forest. Lumen is here.
+
+> summon Lucifer
+Lucifer materializes in the room, holding the eternal flame in his claws.
+
+> dismiss Lumen
+Lumen promptly vanishes at your command.
+
+> ; == Expect Darkness: ==
+> dismiss Lucifer
+Lucifer promptly vanishes at your command. It is now pitch black.
+
+> ; Last turn before day begins...
+> z
+Time passes... 
+
+The sun has risen, it's day again.
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

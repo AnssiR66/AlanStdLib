@@ -106,8 +106,11 @@ x bicycle
 ; ------------------------------------------------------------------------------
 ; DARK_LOCATION Stress-Tests
 ; ------------------------------------------------------------------------------
-; === LIGHTS ON! ===
+up
 switch on torch
+; === ALREADY LITTEN! ===
+; Hero entering with lit light source:
+down
 ; Summoning Lumen when light is already on ('light_on' event must not trigger):
 summon Lumen
 look

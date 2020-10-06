@@ -278,10 +278,16 @@ It is too dark to see.
 > ; ------------------------------------------------------------------------------
 > ; DARK_LOCATION Stress-Tests
 > ; ------------------------------------------------------------------------------
-> ; === LIGHTS ON! ===
+> up
+Kitchen (a ROOM)
+It is pitch black. You can't see anything at all.
+
 > switch on torch
 You turn on the torch.
 
+> ; === ALREADY LITTEN! ===
+> ; Hero entering with lit light source:
+> down
 Basement (a DARK_LOCATION)
 Stairs lead up to the kitchen. There is a bicycle here.
 

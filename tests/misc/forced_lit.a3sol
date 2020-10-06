@@ -1,0 +1,58 @@
+; ******************************************************************************
+; *                                                                            *
+; *                       FORCED_LIT DARK_LOCATION TESTS                       *
+; *                                                                            *
+; ******************************************************************************
+; It's day-time, so the location is being 'forced_lit' and is prevented from
+; becoming dark even if there are no lit light sources right now...
+; ------------------------------------------------------------------------------
+x sky
+x torch
+; Last turn before night begins...
+z
+; ==============================================================================
+; NIGHT TIME TESTS 1
+; ==============================================================================
+; Now the location is 'NOT forced_lit', and we expect the default DARK_LOCATION
+; behaviors to occur...
+; ------------------------------------------------------------------------------
+x sky
+x torch
+; == Expect Light: ==
+turn on torch
+x sky
+; == Expect Darkness: ==
+turn off torch
+look
+; Last turn before day begins...
+x sky
+; ==============================================================================
+; DAY TIME TESTS 1
+; ==============================================================================
+; Now the location is 'forced_lit' again, so it shouldn't ever turn dark.
+; ------------------------------------------------------------------------------
+look
+x torch
+summon Lumen
+summon Lucifer
+dismiss Lumen
+dismiss Lucifer
+; Last turn before night begins...
+; (darkness message NOT EXPECTED)
+turn on torch
+; ==============================================================================
+; NIGHT TIME TESTS 1
+; ==============================================================================
+; Night should have fallen illuminated because of the lit torch!
+; --------------------------------------------------------------
+x sky
+; == Expect Darkness: ==
+turn off torch
+; == Expect Light: ==
+summon Lumen
+summon Lucifer
+dismiss Lumen
+; == Expect Darkness: ==
+dismiss Lucifer
+; Last turn before day begins...
+z

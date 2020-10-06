@@ -1,0 +1,176 @@
+--==============================================================================
+-- "Testing 'forced_lit' DARK_LOCATION" by Tristano Ajmone, 2020.
+--==============================================================================
+Import 'library.i'. -- ALAN Standard Library v2.2.0
+
+The my_game IsA DEFINITION_BLOCK
+  Has
+    title    "Testing 'forced_lit' DARK_LOCATION".
+    subtitle "".
+    author   "Tristano Ajmone".
+    year     2020.
+    version  "1".
+End the.
+
+
+The forest IsA DARK_LOCATION at outdoor.
+  Name 'The Forest of Doom'.
+  Description "Thick woods surround you from every direction,
+               you'll never escape the forest."
+  IS lit.
+  IS forced_lit.
+  Has sky_desc "Sunny and bright".
+  Exit north, south, east, west, northeast, southeast, northwest, southwest
+    to nowhere
+      Check "You only find more trees."
+  End exit.
+End the forest.
+
+--==============================================================================
+
+-- Day an Night Events
+
+--==============================================================================
+
+Event daytime
+  "$pThe sun has risen, it's day again."
+  Make forest lit.
+  Make forest forced_lit.
+  Set sky_desc of forest to "Sunny and bright.$p".
+  Schedule nighttime AT forest after 7.
+End event.
+
+Event nighttime
+  "$pThe sun has set, night has fallen.$p"
+  Make forest NOT forced_lit.
+  Set sky_desc of forest to "Pitch black, no stars, no moon.".
+  Schedule daytime AT forest after 7.
+End event.
+
+-- =============================================================================
+
+-- Light Sources
+
+-- =============================================================================
+The torch IsA lightsource in Hero.
+  Name torch.
+  Name flashlight.
+  Is not natural.
+End the.
+
+The candle IsA lightsource in Lumen.
+  Name eternal candle.
+  Mentioned "the eternal candle"
+  Is lit. natural.
+  Has ex "The infernal candle that measures the time left to this world.".
+End the.
+
+The flame IsA lightsource in Lucifer.
+  Name eternal flame.
+  Mentioned "the eternal flame"
+  Is lit. natural.
+  Has ex "The eternal flame of Hell that originally ignited it on fire.".
+End the.
+
+-- =============================================================================
+
+-- NPCs
+
+-- =============================================================================
+-- We need three NPCs, two carrying a lit light source and the third one not, so
+-- that we might test how their entrance and exit affect both types of dark
+-- locations. We also need to provide the player with a command to summon and
+-- dismiss them.
+--------------------------------------------------------------------------------
+
+-- Dummy placeholder for demon's borne objects:
+The dummy_obj IsA lightsource at nowhere.
+End the.
+
+-- Let's create a demon's class for our purposes:
+EVERY demon IsA male.
+  Is named.
+  Is bearing dummy_obj.
+END EVERY demon.
+
+--------------------------------------------------------------------------------
+-- Lumen (NPC carrying a light source)
+--------------------------------------------------------------------------------
+The Lumen IsA demon.
+  Is bearing candle.
+End the.
+--------------------------------------------------------------------------------
+-- Lucifer (NPC carrying a light source)
+--------------------------------------------------------------------------------
+The Lucifer IsA demon.
+  Is bearing flame.
+End the.
+--------------------------------------------------------------------------------
+-- Darko (NPC without a light source)
+--------------------------------------------------------------------------------
+The Darko IsA demon.
+  Is bearing coal.
+  Is not light_bearing.
+End the.
+
+The coal IsA lightsource in Darko.
+  Name coal. Name coal chunk. Name coal lump.
+  Mentioned "a lump of  infernal coal"
+  Is not lit.
+  Has ex "A chunk of infernal coal, blacker than the blackest thing on Earth.".
+End the.
+--==============================================================================
+-- VERBS: Summon / Dismiss NPC
+--==============================================================================
+Syntax summon = summon (act)!
+  Where act IsA demon
+    else "You can only summon demons."
+
+Syntax dismiss = dismiss (act)!
+  Where act IsA actor
+    else "You can only dismiss demons."
+
+Add to every demon
+  Verb summon
+    Check act not here
+      else "$1 is already here."
+    Does
+      "$+1 materializes in the room, holding"
+      say bearing of act. "in his claws."
+      -- --------------------------------------------------
+      -- Extra text for Lumen, to clarify test expectations
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      If bearing of this is lit then
+        If  location of hero IsA dark_location
+        AND location of hero is not lit then
+          say bearing of this. "lights up the room."
+        End if.
+      End if.
+      -- --------------------------------------------------
+      locate act here.
+  End verb.
+
+  Verb dismiss
+    Check act here
+      else "$1 is not currently here."
+    Does
+      locate act at nowhere.
+      "$+1 promptly vanishes at your command."
+  End verb.
+End add.
+
+--------------------------------------------------------------------------------
+Start at forest.
+Describe banner.
+Schedule nighttime AT forest after 3.
+"$pThe 'forced_lit' attribute allows to prevent the library from making dark a
+ DARK_LOCATION when there are no lightsources left. It's used to enforce light
+ during the day, and then unset during the night to restore the default behavior
+ of DARK_LOCATION instances.
+
+ $pThe forest is implemented as a 'DARK_LOCATION AT outdoor', with a perpetual
+ day and night cycle.
+
+ $pThe player carries an electric torch, and he can SUMMON and DISMISS three NPC
+ demons: Lumen and Lucifer, both carrying a lit light source, and Darko, which
+ carries an unlint light source."

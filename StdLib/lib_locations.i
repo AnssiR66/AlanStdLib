@@ -404,6 +404,19 @@ END ADD TO.
 ADD TO EVERY LOCATION
   IS lit.
 
+  IS NOT forced_lit. -- (used for DARK_LOCATION)
+
+    -- Since the library enforces darkness and illumination on `dark_location`
+    -- instances, the `forced_lit` attribute is useful when a `dark_location` is
+    -- subject to day an night cycle, to ensure that it won't become dark during
+    -- the day. E.g. a forest should always be lit during the day, and dark at
+    -- night if there are no lit lightsources present.
+    -- When a location `IS forced_lit`, the library will not make it dark, so
+    -- an author can set it during the day and unset it during the night.
+
+    -- Of course, this attribute could also be handy for custom verbs on normal
+    -- locations.
+
   DESCRIPTION
     CHECK THIS IS lit
       ELSE SAY dark_loc_desc OF my_game.
@@ -475,6 +488,7 @@ END EVENT.
 -- Ensure a DARK_LOCATION is unlit if there are no light_sources:
 -- --------------------------------------------------------------
 WHEN location OF hero ISA dark_location
+  AND location OF hero IS NOT forced_lit
   AND location OF hero IS lit
   AND COUNT ISA lightsource, IS lit, AT hero = 0
 THEN MAKE location OF hero NOT lit.
@@ -493,7 +507,7 @@ END EVENT.
 -- `definition_block` instance ("lib_definitions.i").
 
 EVENT check_darkness
-  FOR EACH dl ISA dark_location, IS lit
+  FOR EACH dl ISA dark_location, IS lit, IS NOT forced_lit
   DO
     IF COUNT ISA LIGHTSOURCE, AT dl = 0
       THEN MAKE dl NOT lit.
