@@ -85,12 +85,12 @@ x bicycle
 ; ('light_goes_off' message expected)
 switch off torch
 look
-x bicycle
+x ceiling
 ; === LIGHTS ON! ===
 ; Let's summon Lumen, his candle SHOULD LIGHT UP the place:
 summon Lumen
 look
-x bicycle
+x ceiling
 ; === LIGHTS OFF! ===
 ; Let's now dismiss him, which SHOULD MAKE IT DARK again:
 dismiss Lumen
@@ -99,10 +99,10 @@ x bicycle
 ; Let's summon and dismiss Darko, which should have NO EFFECT:
 summon Darko
 look
-x bicycle
+x walls
 dismiss Darko
 look
-x bicycle
+x floor
 ; ------------------------------------------------------------------------------
 ; DARK_LOCATION Stress-Tests
 ; ------------------------------------------------------------------------------
@@ -118,7 +118,7 @@ x bicycle
 ; Dismissing him when a light source remains in place:
 dismiss Lumen
 look
-x bicycle
+x walls
 ; --------------------------------------------
 ; Summon two light-bearing demons in the dark:
 ; (only 1st one must trigger 'light_on')

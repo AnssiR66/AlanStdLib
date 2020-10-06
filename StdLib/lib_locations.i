@@ -2,24 +2,32 @@
 -- Locations (file name: 'lib_locations.i')
 --------------------------------------------------------------------------------
 
--- This library file defines the default directions (exits) and the location
--- `nowhere`, a useful place to locate things when you want to remove them from
--- play. This file also defines four specific location classes: rooms (= indoor
--- locations), sites (= outdoor locations) dark_locations and areas.
--- Finally, the attributes `visited` and `described` are defined.
-
--- You may modify this file in any way that suits your purposes.
-
---------------------------------------------------------------------------------
-
-
+-- This library module defines the standard directions (exits) and the `nowhere`
+-- location, a useful place to locate things that you want to remove from the
+-- game stage.
+--
+-- It also defines some specialized location subclasses:
+--
+--   * ROOM -- an indoor location.
+--   * SITE -- an outdoor location.
+--   * DARK_LOCATION -- requiring light sources to be lit.
+--   * DARK_ROOM -- an indoor dark_location.
+--   * DARK_SITE -- an outdoor dark_location.
+--
+-- Finally, it defines the `visited` and `described` attributes, which keep
+-- track of how many times each location has been visited by the hero and
+-- described to him.
+--
+-- You can easily modify this file to adapt it to your own needs.
 
 --==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --------------------------------------------------------------------------------
 --
--- § 1. The `nowhere` Location and the Predefined Directions
+--                            T H E   N O W H E R E
+--
+--                A N D   S T A N D A R D   D I R E C T I O N S
 --
 --------------------------------------------------------------------------------
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -60,7 +68,6 @@ SYNONYMS
 
 -- Note:
 
-
 -- 1) The directions defined above (and their synonyms) are not predefined nor
 --    hardwired in the interpreter, so you can replace them altogether or add
 --    new ones to be used alongside with them.
@@ -71,15 +78,15 @@ SYNONYMS
 --
 --    for example:
 --
---    -------------------------------------------------------
---    THE piece_of_paper ISA OBJECT
---      ...
---       VERB tear
---         DOES ONLY "You tear the piece of paper to shreds."
---           LOCATE piece_of_paper AT nowhere.
---       END VERB tear.
---    END THE piece_of_paper.
---    -------------------------------------------------------
+--    -----------------------------------------
+--    The pamphlet IsA object
+--       Verb tear
+--         Does only
+--           "You tear the pamphlet to shreds."
+--           Locate pamphlet at nowhere.
+--       End verb.
+--    End the.
+--    -----------------------------------------
 
 
 --==============================================================================
@@ -87,38 +94,41 @@ SYNONYMS
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --------------------------------------------------------------------------------
 --
--- § 2. Location classes ROOM and SITE for indoor and outdoor locations
+--                           R O O M   &   S I T E
+--
+--                       I N D O O R   &   O U T D O O R
 --
 --------------------------------------------------------------------------------
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
--- ROOM and SITE are optional location classes you can use to ease up coding:
+-- ROOM and SITE are optional location subclasses to quickly implement indoor
+-- and outdoor locations:
 --
 --  * All ROOMS have a floor, walls and a ceiling.
 --  * All SITES have a ground and a sky.
 --
 -- Thus, you will be able to define for example
 --
---    THE kitchen ISA ROOM
+--    The kitchen IsA ROOM
 --
 -- and it will automatically have a floor, walls and a ceiling,
 --
 -- or:
 --
---    THE meadow ISA SITE
+--    The meadow IsA SITE
 --
 -- and the ground and the sky are automatically found in that location.
 --
 --
 -- Of course, you're still able to define locations in the usual way:
 --
---    THE kitchen ISA LOCATION
+--    the kitchen isa LOCATION
 --
 -- etc., but the floor, walls and ceiling won't be automatically included there.
 -- The walls, floor, ceiling, ground and sky are not takeable or movable.
--- This library file also defines the sky to be distant and the ceiling to be
+-- This library module also defines the sky to be distant and the ceiling to be
 -- out of reach, so that they can't be touched, for example.
 
 
@@ -367,7 +377,7 @@ END ADD TO.
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --------------------------------------------------------------------------------
 --
--- § 3. Dark Locations
+--                         D A R K   L O C A T I O N S
 --
 --------------------------------------------------------------------------------
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -455,7 +465,6 @@ EVERY dark_location ISA LOCATION
     END IF.
 
 
-
   DESCRIPTION
     CHECK THIS IS lit
       ELSE SAY dark_loc_desc OF my_game.
@@ -465,7 +474,24 @@ END EVERY dark_location.
 
 --==============================================================================
 --------------------------------------------------------------------------------
--- Dark Location Rules and Events
+-- DARK_ROOM & DARK_SITE
+--------------------------------------------------------------------------------
+--==============================================================================
+
+-- The `DARK_ROOM` and `DARK_SITE` classes are the dark locations' equivalents
+-- of the `ROOM` and `SITE` classes. Like their counterparts, all dark room
+-- instances will automatically have a floor, ceiling and walls; and dark sites
+-- will have a ground and sky.
+
+EVERY dark_room ISA dark_location AT indoor.
+END EVERY.
+
+EVERY dark_site ISA dark_location AT outdoor.
+END EVERY.
+
+--==============================================================================
+--------------------------------------------------------------------------------
+-- Dark Locations' Rules and Events
 --------------------------------------------------------------------------------
 --==============================================================================
 
@@ -499,6 +525,7 @@ EVENT light_off
   SAY light_goes_off OF my_game.
 END EVENT.
 
+
 -- -----------------------------------------------------------
 -- Ensure that a dark_locations becomes dark again after
 -- the hero leaves, if he took the only light source with him:
@@ -517,33 +544,43 @@ EVENT check_darkness
 END EVENT.
 
 
+--==============================================================================
+--------------------------------------------------------------------------------
+-- Dark Locations' How To
+--------------------------------------------------------------------------------
+--==============================================================================
 
+-- To create a dark location, just define it as an instance of `DARK_LOCATION`,
+-- `DARK_ROOM` or `DARK_SITE`, according to need. Example:
 
--- To define a dark location, use a formulation like the following:
-
--- ------------------------------
--- THE basement ISA dark_location
---   EXIT up TO kitchen.
+-- --------------------------
+-- The basement IsA dark_room
+--   Exit up to kitchen.
 --   ...
--- END THE.
--- ------------------------------
+-- End the.
+-- --------------------------
 
 
--- The description of a dark_location will automatically be:
---    "It is pitch black. -- You can't see anything at all."
--- (Edit the dark_loc_desc in 'definitions.i' to change this.)
+-- Any unlit dark location will automatically be described as:
+--
+--    It is pitch black. You can't see anything at all.
+--
+-- To modify this default message, edit the `dark_loc_desc` attribute in your
+-- adventure source code according to need, e.g.:
+--
+--    Set dark_loc_desc of my_game to "Total darkness.".
 
 
--- If you add a description to a dark_location, this description will be shown
+-- If you add a description to a dark location, this description will be shown
 -- only if/when the location is lit by any means:
 --
--- -----------------------------------------------------------------------
--- THE basement ISA dark_location
---   DESCRIPTION "Cobwebs and old junk are the only things you see here."
---   EXIT up TO kitchen.
--- END THE.
--- -----------------------------------------------------------------------
-
+-- ---------------------------------------------
+-- The basement IsA dark_room
+--   Description
+--     "You can only see Cobwebs and junk here."
+--   Exit up to kitchen.
+-- End the.
+-- ---------------------------------------------
 
 
 --==============================================================================
@@ -551,7 +588,7 @@ END EVENT.
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --------------------------------------------------------------------------------
 --
--- § 4. The `visited` and `described` Attributes
+--                    V I S I T E D   &   D E S C R I B E D
 --
 --------------------------------------------------------------------------------
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

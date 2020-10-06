@@ -58,10 +58,10 @@ The light_switch IsA object at unlit_room
   End verb.
 End the light_switch.
 --------------------------------------------------------------------------------
--- The Basement (a DARK_LOCATION)
+-- The Basement (a DARK_ROOM)
 --------------------------------------------------------------------------------
-The dark_loc IsA DARK_LOCATION.
-  Name 'Basement (a DARK_LOCATION)'.
+The dark_loc IsA DARK_ROOM.
+  Name 'Basement (a DARK_ROOM)'.
   Description "Stairs lead up to the kitchen."
 
   Exit up to unlit_room.

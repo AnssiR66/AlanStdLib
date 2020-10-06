@@ -188,11 +188,11 @@ You switch off the kitchen light.
 > ; Time to test the DARK_LOCATION. Here all light sources should HAVE EFFECT!
 > ; ------------------------------------------------------------------------------
 > down
-Basement (a DARK_LOCATION)
+Basement (a DARK_ROOM)
 It is pitch black. You can't see anything at all.
 
 > look
-Basement (a DARK_LOCATION)
+Basement (a DARK_ROOM)
 It is pitch black. You can't see anything at all.
 
 > x bicycle
@@ -203,11 +203,11 @@ It is too dark to see.
 > switch on torch
 You turn on the torch.
 
-Basement (a DARK_LOCATION)
+Basement (a DARK_ROOM)
 Stairs lead up to the kitchen. There is a bicycle here.
 
 > look
-Basement (a DARK_LOCATION)
+Basement (a DARK_ROOM)
 Stairs lead up to the kitchen. There is a bicycle here.
 
 > x bicycle
@@ -219,10 +219,10 @@ Just an old rusty bicycle trashed in a corner.
 You turn off the torch. It is now pitch black.
 
 > look
-Basement (a DARK_LOCATION)
+Basement (a DARK_ROOM)
 It is pitch black. You can't see anything at all.
 
-> x bicycle
+> x ceiling
 It is too dark to see.
 
 > ; === LIGHTS ON! ===
@@ -231,15 +231,15 @@ It is too dark to see.
 Lumen materializes in the room, holding the eternal candle in his claws. 
 The eternal candle lights up the room.
 
-Basement (a DARK_LOCATION)
+Basement (a DARK_ROOM)
 Stairs lead up to the kitchen. There is a bicycle here. Lumen is here.
 
 > look
-Basement (a DARK_LOCATION)
+Basement (a DARK_ROOM)
 Stairs lead up to the kitchen. There is a bicycle here. Lumen is here.
 
-> x bicycle
-Just an old rusty bicycle trashed in a corner.
+> x ceiling
+You notice nothing unusual about the ceiling.
 
 > ; === LIGHTS OFF! ===
 > ; Let's now dismiss him, which SHOULD MAKE IT DARK again:
@@ -247,7 +247,7 @@ Just an old rusty bicycle trashed in a corner.
 Lumen promptly vanishes at your command. It is now pitch black.
 
 > look
-Basement (a DARK_LOCATION)
+Basement (a DARK_ROOM)
 It is pitch black. You can't see anything at all.
 
 > x bicycle
@@ -259,20 +259,20 @@ Darko materializes in the room, holding a lump of infernal coal in his
 claws.
 
 > look
-Basement (a DARK_LOCATION)
+Basement (a DARK_ROOM)
 It is pitch black. You can't see anything at all.
 
-> x bicycle
+> x walls
 It is too dark to see.
 
 > dismiss Darko
 Darko promptly vanishes at your command.
 
 > look
-Basement (a DARK_LOCATION)
+Basement (a DARK_ROOM)
 It is pitch black. You can't see anything at all.
 
-> x bicycle
+> x floor
 It is too dark to see.
 
 > ; ------------------------------------------------------------------------------
@@ -288,7 +288,7 @@ You turn on the torch.
 > ; === ALREADY LITTEN! ===
 > ; Hero entering with lit light source:
 > down
-Basement (a DARK_LOCATION)
+Basement (a DARK_ROOM)
 Stairs lead up to the kitchen. There is a bicycle here.
 
 > ; Summoning Lumen when light is already on ('light_on' event must not trigger):
@@ -296,7 +296,7 @@ Stairs lead up to the kitchen. There is a bicycle here.
 Lumen materializes in the room, holding the eternal candle in his claws.
 
 > look
-Basement (a DARK_LOCATION)
+Basement (a DARK_ROOM)
 Stairs lead up to the kitchen. There is a bicycle here. Lumen is here.
 
 > x bicycle
@@ -307,11 +307,11 @@ Just an old rusty bicycle trashed in a corner.
 Lumen promptly vanishes at your command.
 
 > look
-Basement (a DARK_LOCATION)
+Basement (a DARK_ROOM)
 Stairs lead up to the kitchen. There is a bicycle here.
 
-> x bicycle
-Just an old rusty bicycle trashed in a corner.
+> x walls
+You notice nothing unusual about the wall.
 
 > ; --------------------------------------------
 > ; Summon two light-bearing demons in the dark:
@@ -326,7 +326,7 @@ You turn off the torch. It is now pitch black.
 Lucifer materializes in the room, holding the eternal flame in his claws. 
 The eternal flame lights up the room.
 
-Basement (a DARK_LOCATION)
+Basement (a DARK_ROOM)
 Stairs lead up to the kitchen. There is a bicycle here. Lucifer is here.
 
 > summon Lumen

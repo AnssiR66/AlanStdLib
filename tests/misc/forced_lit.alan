@@ -13,7 +13,7 @@ The my_game IsA DEFINITION_BLOCK
 End the.
 
 
-The forest IsA DARK_LOCATION at outdoor.
+The forest IsA DARK_SITE.
   Name 'The Forest of Doom'.
   Description "Thick woods surround you from every direction,
                you'll never escape the forest."
@@ -168,8 +168,7 @@ Schedule nighttime AT forest after 3.
  during the day, and then unset during the night to restore the default behavior
  of DARK_LOCATION instances.
 
- $pThe forest is implemented as a 'DARK_LOCATION AT outdoor', with a perpetual
- day and night cycle.
+ $pThe forest is implemented as a DARK_SITE with a perpetual day and night cycle.
 
  $pThe player carries an electric torch, and he can SUMMON and DISMISS three NPC
  demons: Lumen and Lucifer, both carrying a lit light source, and Darko, which
