@@ -3,8 +3,8 @@ The my_game IsA definition_block
 End the.
 
 The livingroom IsA room
-  Has floor_desc "There is an exquisite white carpet on the floor.".
-  Has walls_desc "The wallpaper has a nice flower pattern.".
+  Has floor_desc   "There is an exquisite white carpet on the floor.".
+  Has walls_desc   "The wallpaper has a nice flower pattern.".
   Has ceiling_desc "A huge chandelier is hanging from the ceiling.".
 End the livingroom.
 

@@ -1,0 +1,36 @@
+Import 'library.i'.
+
+The my_game IsA DEFINITION_BLOCK
+End the.
+
+-- tag::room-site-instances[]
+Every CIA_facility IsA location.
+  -- Whatever code makes this class special...
+End every.
+
+The 'Secret Airfield' IsA CIA_facility AT OUTDOOR. -- i.e. a SITE
+-- end::room-site-instances[]
+  Description
+    "Well hidden by the surrounding jungle, this makeshift runway
+     is long enough to allow landing and takeoff of small aircrafts,
+     just like that unmarked Cessna 210 Centurion waiting for you,
+     its engine running impatiently."
+  Has ground_desc
+    "The tire marks on the runway tarmac testify to hasty aircraft
+     landings and mysterious cargoes being loaded onto trucks.".
+-- tag::room-site-instances[]
+End the.
+
+The 'Safe House' IsA CIA_facility AT INDOOR. -- i.e. a ROOM
+-- end::room-site-instances[]
+  Description
+    "This small apartment is designed to look like an ordinary
+     bachelor's home, not even the trained eye can spot the hidden bugs
+     and cameras, or the panic room that lies behind the large mirror
+     on the western wall."
+-- tag::room-site-instances[]
+End the.
+-- end::room-site-instances[]
+
+--------------------------------------------------------------------------------
+Start at 'Secret Airfield'.

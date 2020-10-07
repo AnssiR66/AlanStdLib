@@ -1580,7 +1580,7 @@ Bear in mind that, for each of these classes, the library defines specific prope
 <h2 id="ch.locations"><a class="anchor" href="#ch.locations"></a>8. Locations</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Location classes pre-defined in the library:</p>
+<p>The predefined location subclasses in the library:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1592,16 +1592,29 @@ Bear in mind that, for each of these classes, the library defines specific prope
 </li>
 <li>
 <p><code>DARK_LOCATION</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>DARK_ROOM</code></p>
+</li>
+<li>
+<p><code>DARK_SITE</code></p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Default location attributes pre-defined in the library:</p>
+<p>Default location attributes predefined in the library:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><code>IS lit.</code></p>
+</li>
+<li>
+<p><code>IS NOT forced_lit.</code></p>
 </li>
 <li>
 <p><code>IS visited 0.</code></p>
@@ -1658,6 +1671,32 @@ The library also provides some default responses for when the player attempts to
 <p>The room objects (<code>walls</code>, <code>floor</code> and <code>ceiling</code>) are implemented on the <code>indoor</code> instance, which makes them available to every instance of the <code>ROOM</code> class, because of how scoping rules work with nested locations.
 Likewise, site objects (<code>ground</code> and <code>sky</code>) are defined directly on the <code>outdoor</code> location instance, and &#8220;inherited&#8221; (so to speak) by every <code>SITE</code> instance.</p>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you&#8217;ve defined your own custom <code>location</code> subclass, you can easily transform its instances into rooms and sites by locating them at <code>indoor</code> and <code>outdoor</code>, respectively:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">Every</span> CIA_facility <span class="hl kwa">IsA</span> <span class="hl kwb">location</span><span class="hl kwa">.</span>&#x000A;  <span class="hl slc">-- Whatever code makes this class special...</span>&#x000A;<span class="hl kwa">End every.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> &#39;Secret Airfield&#39; <span class="hl kwa">IsA</span> CIA_facility <span class="hl kwa">AT</span> OUTDOOR<span class="hl kwa">.</span> <span class="hl slc">-- i.e. a SITE</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> &#39;Safe House&#39; <span class="hl kwa">IsA</span> CIA_facility <span class="hl kwa">AT</span> INDOOR<span class="hl kwa">.</span> <span class="hl slc">-- i.e. a ROOM</span>&#x000A;<span class="hl kwa">End the.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>'Secret Airfield'</code> and <code>'Safe House'</code> will behave just like <code>ROOM</code> and <code>SITE</code> instances, respectively.
+The obvious advantage of this approach, as compared to declaring the <code>CIA_facility</code> a subclass of either <code>ROOM</code> or <code>SITE</code>, is that you&#8217;re not restricting it to a single type (i.e. if declared a subclass of <code>ROOM</code>, it couldn&#8217;t be used to create sites, and vice-versa).</p>
+</div>
+<div class="paragraph">
+<p>Of course, you need to be aware that if you were to add an <code>IsA ROOM</code>/<code>SITE</code> test in your code, they would not pass it, since they are not true subclasses of <code>ROOM</code> and <code>SITE</code>, they just mimick their behaviour.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="sect3">
 <h4 id="_room"><a class="anchor" href="#_room"></a>8.1.1. ROOM</h4>
 <div class="paragraph">
@@ -1676,7 +1715,7 @@ Likewise, site objects (<code>ground</code> and <code>sky</code>) are defined di
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> floor_desc <span class="hl str">&quot;&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> walls_desc <span class="hl str">&quot;&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">HAS</span> ceiling_desc <span class="hl str">&quot;&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">Has</span> floor_desc <span class="hl str">&quot;&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">Has</span> walls_desc <span class="hl str">&quot;&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">Has</span> ceiling_desc <span class="hl str">&quot;&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1687,8 +1726,9 @@ Likewise, site objects (<code>ground</code> and <code>sky</code>) are defined di
 <p>To have a more varied effect, you can change the descriptions this way:</p>
 </div>
 <div class="listingblock">
+<div class="title">Example: Custom room-objects descriptions (from <a href="livingroom.alan" title="View example source file" target="_blank" rel="noopener"><code>livingroom.alan</code></a>)</div>
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> livingroom <span class="hl kwa">IsA</span> room&#x000A;  <span class="hl kwa">Has</span> floor_desc <span class="hl str">&quot;There is an exquisite white carpet on the floor.&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Has</span> walls_desc <span class="hl str">&quot;The wallpaper has a nice flower pattern.&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Has</span> ceiling_desc <span class="hl str">&quot;A huge chandelier is hanging from the ceiling.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the</span> livingroom<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> livingroom <span class="hl kwa">IsA</span> room&#x000A;  <span class="hl kwa">Has</span> floor_desc   <span class="hl str">&quot;There is an exquisite white carpet on the floor.&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Has</span> walls_desc   <span class="hl str">&quot;The wallpaper has a nice flower pattern.&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Has</span> ceiling_desc <span class="hl str">&quot;A huge chandelier is hanging from the ceiling.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the</span> livingroom<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1718,7 +1758,7 @@ The wallpaper has a nice flower pattern.<br></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Setting these room attributes in an <code>outdoor</code> location won&#8217;t have any effect; they only work on instances of the <code>room</code> class, or its sub-classes, and will be ignored elsewhere.</p>
+<p>Setting these room attributes in an <code>outdoor</code> location (i.e. a <code>site</code>) won&#8217;t have any effect; they only work on instances of the <code>room</code> class&#8201;&#8212;&#8201;or <em>any</em> location declared <code>AT indoor</code>&#8201;&#8212;&#8201;and will be ignored elsewhere.</p>
 </div>
 </td>
 </tr>
@@ -1728,6 +1768,7 @@ The wallpaper has a nice flower pattern.<br></p>
 <p>You can even change the description of a room&#8217;s floor, walls or ceiling mid-game at any time:</p>
 </div>
 <div class="listingblock">
+<div class="title">Example: Changing room-objects description mid-game (from <a href="livingroom.alan" title="View example source file" target="_blank" rel="noopener"><code>livingroom.alan</code></a>)</div>
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> carpet <span class="hl kwa">IsA</span> <span class="hl kwb">object</span> <span class="hl kwa">at</span> livingroom&#x000A;  <span class="hl kwa">Verb</span> move&#x000A;    <span class="hl kwa">Check</span> trapdoor <span class="hl kwa">not at</span> livingroom&#x000A;      <span class="hl kwa">else</span> <span class="hl str">&quot;There is no need to move the carpet any longer.&quot;</span>&#x000A;    <span class="hl kwa">Does only</span>&#x000A;      <span class="hl str">&quot;You move the carpet, revealing a trapdoor!&quot;</span>&#x000A;      <span class="hl kwa">Locate</span> trapdoor <span class="hl kwa">at</span> livingroom<span class="hl kwa">.</span>&#x000A;      <span class="hl kwa">Set</span> floor_desc <span class="hl kwa">of</span> livingroom <span class="hl kwa">to</span> <span class="hl str">&quot;A trapdoor has been revealed when you</span>&#x000A;<span class="hl str">                                       moved the carpet. It leads down to</span>&#x000A;<span class="hl str">                                       darkness.&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">End verb.</span>&#x000A;<span class="hl kwa">End the</span> carpet<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> trapdoor <span class="hl kwa">IsA</span> door&#x000A;<span class="hl kwa">End the</span> trapdoor<span class="hl kwa">.</span></code></pre>
 </div>
@@ -1756,6 +1797,7 @@ darkness.<br></p>
 <p>If you want to implement an outdoor location, you can declare it <code>IsA SITE</code>:</p>
 </div>
 <div class="listingblock">
+<div class="title">Example: Creating a site location (from <a href="meadow.alan" title="View example source file" target="_blank" rel="noopener"><code>meadow.alan</code></a>)</div>
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> meadow <span class="hl kwa">IsA</span> site&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;Green grass, tall trees and the big sky above you.</span>&#x000A;<span class="hl str">               What could be more pleasant?&quot;</span>&#x000A;<span class="hl kwa">End the.</span></code></pre>
 </div>
@@ -1766,24 +1808,20 @@ darkness.<br></p>
 <div class="paragraph">
 <p>There are two attributes for describing the ground and the sky in any SITE:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>Has ground_desc "".</code></p>
-</li>
-<li>
-<p><code>Has sky_desc "".</code></p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">Has</span> ground_desc <span class="hl str">&quot;&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">Has</span> sky_desc <span class="hl str">&quot;&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>If the author doesn&#8217;t change these default values, the default description, at <span class="play">&gt; <em>x floor</em></span>, <span class="play">&gt; <em>x walls</em></span> or <span class="play">&gt; <em>x ceiling</em></span> will be <span class="play">You notice nothing unusual about the [object].</span>
+<p>If the author doesn&#8217;t change these default values, the default description, at <span class="play">&gt; <em>x sky</em></span> or <span class="play">&gt; <em>x sky</em></span> will be <span class="play">You notice nothing unusual about the [object].</span>
 (Obviously, these commands won&#8217;t work in indoor locations.)</p>
 </div>
 <div class="paragraph">
 <p>Again, you can change these messages at any point mid-game:</p>
 </div>
 <div class="listingblock">
+<div class="title">Example: Changing site-objects description mid-game (from <a href="meadow.alan" title="View example source file" target="_blank" rel="noopener"><code>meadow.alan</code></a>)</div>
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> meadow <span class="hl kwa">IsA</span> site&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;Green grass, tall trees and the big sky above you.</span>&#x000A;<span class="hl str">               What could be more pleasant?&quot;</span>&#x000A;  <span class="hl kwa">Has</span> sky_desc <span class="hl str">&quot;A clear and sunny noon sky.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">Event</span> nightfall&#x000A;  <span class="hl str">&quot;</span><span class="hl esc">$n</span><span class="hl str">It&#39;s getting late. The sun sets rapidly, night has fallen.&quot;</span>&#x000A;  <span class="hl kwa">Set</span> sky_desc <span class="hl kwa">of</span> meadow <span class="hl kwa">to</span> <span class="hl str">&quot;The ink-black sky is dominated by a full moon.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End event.</span>&#x000A;&#x000A;<span class="hl kwa">Start at</span> meadow<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">Schedule</span> nightfall <span class="hl kwa">at</span> meadow <span class="hl kwa">after</span> <span class="hl num">2</span><span class="hl kwa">.</span></code></pre>
 </div>

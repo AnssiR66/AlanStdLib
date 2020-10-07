@@ -12,16 +12,19 @@
 [[ch.locations]]
 = Locations
 
-Location classes pre-defined in the library:
+The predefined location subclasses in the library:
 
 * `ROOM`
 * `SITE`
 * `DARK_LOCATION`
+** `DARK_ROOM`
+** `DARK_SITE`
 
 
-Default location attributes pre-defined in the library:
+Default location attributes predefined in the library:
 
 * `IS lit.`
+* `IS NOT forced_lit.`
 * `IS visited 0.`
 * `IS described 0.`
 
@@ -54,6 +57,23 @@ The room objects (`walls`, `floor` and `ceiling`) are implemented on the `indoor
 Likewise, site objects (`ground` and `sky`) are defined directly on the `outdoor` location instance, and "`inherited`" (so to speak) by every `SITE` instance.
 
 
+[TIP]
+============================================
+If you've defined your own custom `location` subclass, you can easily transform its instances into rooms and sites by locating them at `indoor` and `outdoor`, respectively:
+
+// @EXTERNALIZE CODE: _custom-room-site-instances.alan
+[source,alan]
+--------------------------------------------------------------------------------
+include::{utf8dir}/_custom-room-site-instances.alan[tag=room-site-instances]
+--------------------------------------------------------------------------------
+
+
+The `'Secret Airfield'` and `'Safe House'` will behave just like `ROOM` and `SITE` instances, respectively.
+The obvious advantage of this approach, as compared to declaring the `CIA_facility` a subclass of either `ROOM` or `SITE`, is that you're not restricting it to a single type (i.e. if declared a subclass of `ROOM`, it couldn't be used to create sites, and vice-versa).
+
+Of course, you need to be aware that if you were to add an `IsA ROOM`/`SITE` test in your code, they would not pass it, since they are not true subclasses of `ROOM` and `SITE`, they just mimick their behaviour.
+============================================
+
 
 === ROOM
 
@@ -74,9 +94,9 @@ There are three attributes for describing the walls, the floor and the ceiling i
 // @FIXME: Use StdLib color scheme here!
 [source,alan]
 --------------------------------------------------------------------------------
-HAS floor_desc "".
-HAS walls_desc "".
-HAS ceiling_desc "".
+Has floor_desc "".
+Has walls_desc "".
+Has ceiling_desc "".
 --------------------------------------------------------------------------------
 
 If the author doesn't change these default values, the default description shown when examining the walls, floor and ceiling of a room will be [.play]#You notice nothing unusual about the [object].#
@@ -85,6 +105,7 @@ If the author doesn't change these default values, the default description shown
 To have a more varied effect, you can change the descriptions this way:
 
 // @EXTERN CODE: livingroom
+.Example: Custom room-objects descriptions (from {livingroom_alan})
 [source,alan]
 --------------------------------------------------------------------------------
 include::{utf8dir}/livingroom.alan[tag=livingroom]
@@ -101,12 +122,13 @@ include::{utf8dir}/livingroom.a3ADocLog[tag=livingroom]
 
 [NOTE]
 ================
-Setting these room attributes in an `outdoor` location won't have any effect; they only work on instances of the `room` class, or its sub-classes, and will be ignored elsewhere.
+Setting these room attributes in an `outdoor` location (i.e. a `site`) won't have any effect; they only work on instances of the `room` class -- or _any_ location declared `AT indoor` -- and will be ignored elsewhere.
 ================
 
 You can even change the description of a room's floor, walls or ceiling mid-game at any time:
 
 // @EXTERN CODE: livingroom -> trapdoor
+.Example: Changing room-objects description mid-game (from {livingroom_alan})
 [source,alan]
 --------------------------------------------------------------------------------
 include::{utf8dir}/livingroom.alan[tag=trapdoor]
@@ -126,6 +148,7 @@ include::{utf8dir}/livingroom.a3ADocLog[tag=trapdoor]
 If you want to implement an outdoor location, you can declare it `IsA SITE`:
 
 // @EXTERNALIZE CODE: meadow.alan (implementing outdoor location)
+.Example: Creating a site location (from {meadow_alan})
 [source,alan]
 ---------------------------------------------------
 include::{utf8dir}/meadow.alan[tag=outdoor-example]
@@ -135,17 +158,20 @@ All SITEs will automatically have a ground and a sky.
 
 There are two attributes for describing the ground and the sky in any SITE:
 
+[source,alan]
+-------------------
+Has ground_desc "".
+Has sky_desc "".
+-------------------
 
-* `Has ground_desc "".`
-* `Has sky_desc "".`
-
-If the author doesn't change these default values, the default description, at [.play]#&gt; _x floor_#, [.play]#&gt; _x walls_# or [.play]#&gt; _x ceiling_# will be [.play]#You notice nothing unusual about the [object].#
+If the author doesn't change these default values, the default description for [.play]#&gt; _x sky_# or [.play]#&gt; _x sky_# will be [.play]#You notice nothing unusual about the [object].#
 (Obviously, these commands won't work in indoor locations.)
 
 
 Again, you can change these messages at any point mid-game:
 
 // @EXTERNALIZE CODE: meadow.alan (changing sit-objs descriptions mid-game)
+.Example: Changing site-objects description mid-game (from {meadow_alan})
 [source,alan]
 ------------------------------------------------
 include::{utf8dir}/meadow.alan[tag=change-descs]

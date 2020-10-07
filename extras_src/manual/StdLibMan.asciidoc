@@ -38,6 +38,8 @@
 :ExtrasDir: ../../extras
 
 // Links to examples files:
+:livingroom_alan: pass:q[link:livingroom.alan[`livingroom.alan`^,title="View example source file"]]
+:meadow_alan: pass:q[link:meadow.alan[`meadow.alan`^,title="View example source file"]]
 :wedding_alan: pass:q[link:wedding.alan[`wedding.alan`^,title="View example source file"]]
 
 // Links to StdLib sources:
