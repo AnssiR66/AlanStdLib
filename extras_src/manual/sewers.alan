@@ -1,0 +1,62 @@
+--==============================================================================
+
+-- The Sewers
+
+--==============================================================================
+-- Code excerpts from this adventure are quoted in the examples of the following
+-- sections of the StdLib Manual:
+--
+--   * §
+--------------------------------------------------------------------------------
+Import 'library.i'.
+The my_game IsA definition_block
+  Has
+    title    "The Sewers".
+    subtitle "A short DARK_LOCATION example.".
+    author   "Tristano Ajmone".
+    year     2020.
+End the.
+--------------------------------------------------------------------------------
+-- tag::dark-location-example[]
+The alley IsA site.
+  Name 'Dead End Alley'.
+  Description "An open manhole leads down into the city's bowels."
+  Has floor_desc "There's an open manhole in the pavement.".
+  Exit down to sewers
+    Does
+      "You gather your courage and slip down the manhole, into the unknown..."
+  End exit.
+End the.
+
+-- end::dark-location-example[]
+The manhole IsA object at alley.
+  Name manhole. Name hole.
+  Is not takeable.
+  Has ex
+    "Someone has removed the cover from the manhole.
+     Why would anyone to that?
+     $nYou peep through the oepn hole but can't see much, it's too dark.
+     $nNow you're really curious. What's down there?".
+End the manhole.
+
+-- tag::dark-location-example[]
+The sewers IsA dark_location.
+  Name 'In the Sewers Tunnels'.
+  Description
+    "The air in this gloomy tunnel is filled with foul smelling fumes.
+     Your eyes are itching and your lungs burning."
+-- end::dark-location-example[]
+  Exit up to alley
+    Check "The manhole it too high up, you'll need a ladder."
+  End exit.
+-- tag::dark-location-example[]
+End the.
+
+The flashlight IsA lightsource in Hero.
+  Name flashlight. Name torch.
+  Is not natural.
+End the.
+-- end::dark-location-example[]
+--------------------------------------------------------------------------------
+Start at alley.
+Describe banner.

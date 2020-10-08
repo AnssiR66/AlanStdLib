@@ -502,13 +502,15 @@ The default attributes for a LIGHTSOURCE object are: `natural`, `NOT lit`.
 
 // 'torch' -> LIGHTSOURCE (LIT) AT cave:
 
+.Example: Implementing a natural light source (from {cave_alan})
 [source,alan]
 --------------------------------------------------------------------------------
-include::{utf8dir}/cave1.alan[tag=lightsource_torch]
+include::{utf8dir}/cave.alan[tag=lightsource_torch]
 --------------------------------------------------------------------------------
 
 // 'lamp' -> LIGHTSOURCE (NOT natural) AT lab:
 
+.Example: Implementing an artificial light source (from {lab1_alan})
 [source,alan]
 --------------------------------------------------------------------------------
 include::{utf8dir}/lab1.alan[tag=lightsource_lamp]
@@ -519,7 +521,7 @@ Examining for example these instances in-game would yield
 
 [example,role="gametranscript"]
 ================================================================================
-include::{utf8dir}/cave1.a3ADocLog[tag=lightsource_torch]
+include::{utf8dir}/cave.a3ADocLog[tag=lightsource_torch]
 ================================================================================
 
 and
@@ -536,6 +538,7 @@ If you add a specific examine response for either, you can use the `ex` attribut
 
 // 'lamp' -> LIGHTSOURCE (NOT natural) AT lab + HAS ex:
 
+.Example: Customizing the examine response of light sources (from {lab2_alan})
 [source,alan]
 --------------------------------------------------------------------------------
 include::{utf8dir}/lab2.alan[tag=lightsource_lamp]

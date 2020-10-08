@@ -1,0 +1,41 @@
+--==============================================================================
+
+-- The Cave
+
+--==============================================================================
+-- Code excerpts from this adventure are quoted in the examples of the following
+-- sections of the StdLib Manual:
+--
+--   * §11.1.4. LIGHTSOURCE
+--------------------------------------------------------------------------------
+Import 'library.i'.
+The my_game IsA definition_block
+End the.
+
+The cave IsA dark_room.
+  Is lit. -- Starts off as lit, by the torch.
+  Description
+    "This cave must be thousands of years old. Graffiti on its walls suggest
+     it was inhabited by humans in a far-gone past."
+  Has ceiling_desc "Menacing stalactites hang from the ceiling.".
+End the.
+
+The torch IsA lightsource at cave
+  Is lit.
+End the.
+--==============================================================================
+-- Darkness Event
+--==============================================================================
+-- We'll make the light source extinguish after some turns.
+
+Event wind_gust
+  "$pA sudden gust of wind extinguishes the torch."
+  make torch not lit.
+End Event.
+
+--------------------------------------------------------------------------------
+Start at cave.
+"This example shows how to implement a DARK_LOCATION and LIGHTSOURCE objects.
+ $nThe cave is a DARK_ROOM, it start off as `lit` due to the presence of the
+ lit torch."
+Schedule wind_gust at cave after 3.

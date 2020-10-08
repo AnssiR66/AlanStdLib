@@ -1,6 +1,11 @@
 ; ------------------------------------------------------------------------------
-; §6.1.5. LIGHTSOURCE
+; §11.1.4. LIGHTSOURCE
 ; ------------------------------------------------------------------------------
 ; tag::lightsource_torch[]
 x torch
 ; end::lightsource_torch[]
+look
+x ceiling
+look
+x ceiling
+x torch

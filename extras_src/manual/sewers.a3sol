@@ -1,0 +1,11 @@
+; tag::dark-location-example1[]
+down
+look
+inventory
+x flashlight
+; end::dark-location-example1[]
+; tag::dark-location-example2[]
+switch on flashlight
+look
+x flashlight
+; end::dark-location-example2[]

@@ -75,6 +75,7 @@ Of course, you need to be aware that if you were to add an `IsA ROOM`/`SITE` tes
 ============================================
 
 
+[[sec.room]]
 === ROOM
 
 If you want to implement an indoor location, you can declare it `IsA ROOM`:
@@ -142,7 +143,7 @@ include::{utf8dir}/livingroom.a3ADocLog[tag=trapdoor]
 ================================================================================
 
 
-
+[[sec.site]]
 === SITE
 
 If you want to implement an outdoor location, you can declare it `IsA SITE`:
@@ -265,14 +266,17 @@ Both solutions have similarities, but they also differ in significant ways, so i
 The library adds to every location the `IS lit` attribute, except for the `DARK_LOCATION` class, which is set to `NOT lit` by default.
 Therefore, any location can be turned dark (i.e. _unlit_) by clearing its `lit` attribute.
 
-The library also ensures that, whenever the player's is in an unlit location of _any_ type, he/she won't be able to carry out any actions that require the presence of light, and instead of printing the location's description it will show the default `dark_loc_desc` message:
+As for the commonalities between unlit locations and `DARK_LOCATION` instances, the library also ensures that, whenever the player is in a `NOT lit` location of _any_ type:
 
+* It won't be possible to carry out any action that requires the presence of light.
+
+* Instead of printing the location's description it the default `dark_loc_desc` message will shown:
++
 [example,role="gametranscript"]
 =================================================
 It is pitch black. You can't see anything at all.
 =================================================
 
-These are the commonalities between unlit locations and `DARK_LOCATION` instances.
 Let's now look at their significant differences -- skipping the obvious and trivial fact that locations are lit by default, whereas `DARK_LOCATION` instances are unlit.
 
 In order to be lit, a `DARK_LOCATION` requires the presence of a `lightsource` object (e.g. a candle, a torch, whatever).
@@ -285,24 +289,135 @@ To state it simply, the diffrence between the two approaches boils down to _who'
 * With unlit locations, the author is in control of the location's illumination.
 * With DARK_LOCATIONs, the player is in control of the location's illumination.
 
-Setting or clearing the `lit` attribute of a given location is something that only the game author can do, by implementing some mechanism that flips the attribute -- be it the result of the player acting on a switch, an actor carrying out a specific action, or via an internal timer set by the game author, or some other EVENT or RULE mechanism.
+Setting or clearing the `lit` attribute of a given location is something that only the game author can do, by implementing some mechanism that flips the attribute -- be it the result of the player acting on a switch, an actor carrying out a specific action, or via an internal timer set by the game author, or some other `EVENT` or `RULE` mechanism.
 
 On the other hand, the player is able to choose _if_ and _which_ light source to carry to the dark location in order light it up, as long as `lightsource` objects are available in the game world.
 
 The two approaches have different implications on how the adventure might unfold for the player.
-If the hero has dropped the only available light source on the opposite end of a huge map, he might have to go all the way back to fetch it in order to light a DARK_LOCATION -- providing an unforgiving game play experience.
+If the hero has dropped the only available light source on the opposite end of a huge map, he might have to go all the way back to fetch it in order to light a `DARK_LOCATION` -- providing an unforgiving game play experience.
 If there are multiple light sources to be found in the game, anyone will do the job -- providing a flexible game play experience.
 
 On the other hand, there are also implications on the author's side, especially when it comes to unpredicted consequences.
-If the player destroys or renders otherwise unreachable all light sources, the adventure might become unwinnable.
-Miscalculated access to light source objects across the map might break the puzzle sequence of a DARK_LOCATION, if the player manages to get hold of an unexpected light source.
+If the player destroys or renders otherwise unreachable every light source provided in the game, the adventure might become unwinnable.
+Miscalculated access to light source objects across the map might break the puzzle sequence of a `DARK_LOCATION`, if the player manages to get hold of an unexpected light source.
 
 Because unlit locations have a limited set of ways by which they can become lit, they provide authors with a more rigid (and reliable) way to control how the player can illuminate them.
-On the other hand, the flexibility of DARK_LOCATIONs can lead to a more realistic and "`open world`" player experience (with all its pros and cons).
+On the other hand, the flexibility of ``DARK_LOCATION``s can lead to a more realistic and "`open world`" player experience (with all its pros and cons).
 
 
 
-=== DARK_LOCATION and the lit attribute
+=== Unlit Location
+
+As far as illumination is concerned, any `location` which is not an instance of the  `DARK_LOCATION` class, is provided by the Library with the following features:
+
+* It's `lit` by default.
+
+* It will be dark when set to `NOT lit`, and as a result:
+
+** Instead of showing the location's description, the following message will be printed instead:
++
+[example,role="gametranscript"]
+=================================================
+It is pitch black. You can't see anything at all.
+=================================================
++
+TIP: This default message can be changed by redefining the `dark_loc_desc` attribute on the `my_game` instance.
+
+** All actions requiring the ability to see will be blocked, and the following message will be printed instead:
++
+[example,role="gametranscript"]
+===============================
+It is too dark to see.
+===============================
++
+TIP: This default message can be changed by redefining the `check_current_loc_lit` attribute on the `my_game` instance.
+
+* Ordinary locations are unaffected by the presence or absence of `lightsource` objects -- an unlit location won't be illuminated by light sources.
+
+
+
+=== DARK_LOCATION
+
+Dark locations are intended for implementing dark places which the hero needs to illuminate with some carried light source (a torch, a candle, etc.).
+This class is ideal for creating natural dark environments like forests and caves, or abandoned buildings without electricity, or buildings in which the hero needs to first put the electricity back on.
+Having found and lit a `lightsource` object, the hero will be able to move around the dark location and interact with it, as long as the light source remains `lit`.
+
+The library also provides two extensions of the `DARK_LOCATION` class: `DARK_ROOM` and `DARK_SITE`, which are the dark location counterparts of the `ROOM` and `SITE` classes, respectively, adding room- (walls, ceiling, and floor) and site-objects (sky and ground) to the base dark location.
+For their added features, refer to <<sec.room>> and <<sec.site>>.
+
+
+Any instance of the `DARK_LOCATION` location class has the following features:
+
+* It's `NOT lit` and `NOT forced_lit` by default.
+
+* It will automatically become dark (and `NOT lit`) when the following conditions are true:
+
+1. There are no `lit` `lightsource` objects at the location.
+2. The location is `NOT forced_lit`.
+
++
+As a result of becoming or being dark:
+
+** If the location becomes dark while hosting the hero, the following message will be printed:
++
+[example,role="gametranscript"]
+===============================
+It is now pitch black.
+===============================
++
+TIP: This default message can be changed by redefining the `light_goes_off` attribute on the `my_game` instance.
+
+** Instead of showing the location's description, the following message will be printed instead:
++
+[example,role="gametranscript"]
+=================================================
+It is pitch black. You can't see anything at all.
+=================================================
++
+TIP: This default message can be changed by redefining the `dark_loc_desc` attribute on the `my_game` instance.
+
+** All actions requiring the ability to see will be blocked, and the following message will be printed instead:
++
+[example,role="gametranscript"]
+===============================
+It is too dark to see.
+===============================
++
+TIP: This default message can be changed by redefining the `check_current_loc_lit` attribute on the `my_game` instance.
+
+* It will automatically become illuminated (and `lit`) whenever there's at least one `lit` `lightsource` object in the location, thus resuming the ordinary functionality of lit locations.
+
+** If a dark location becomes illuminated while hosting the hero, an automatic `LOOK` command will be executed -- i.e. revealing the location's description for the first time, in case the player has not seen it illuminated before, or revealing it again otherwise.
+
+'''
+
+Here's a basic example on how to create a dark location.
+The sewer tunnel is implemented as a `dark_location`, and the hero is provided with a flashlight in his inventory to illuminate the place:
+
+.Example: Implementing a dark location (from {sewers_alan})
+[source,alan]
+--------------------------------------------------------------------------------
+include::{utf8dir}/sewers.alan[tag=dark-location-example]
+--------------------------------------------------------------------------------
+
+When the hero enters the sewer tunnels, they'll be dark by default, so the location's description will be replaced by the `dark_loc_desc` message, and he won't be able to carry out any action that requires the ability to see:
+
+// @EXTERN TRANSCRIPT: sewers.a3ADocLog
+[example,role="gametranscript"]
+================================================================================
+include::{utf8dir}/sewers.a3ADocLog[tag=dark-location-example1]
+================================================================================
+
+In darkness, you can check your inventory, but you can't manipulate things other than turn on a `lightsource` and drop items you're carrying.
+You can traverse exits normally, and use verbs that don't require seeing, such as _smell_, _listen_, _think_, and similar.
+
+If you are in a dark location with other NPCs, you can communicate with them by _asking_ and _telling_, but not by _showing_ and _giving_.
+
+TIP: If you wish to change these restrictions, see the respective verbs in `lib_verbs.i` and modify their checks.
+
+
+
+'''
 
 In dark locations, all actions requiring the ability to see are automatically disabled by the library.
 All dark locations have the `NOT lit` attribute.
@@ -344,6 +459,8 @@ You can exit normally and use verbs that don't require seeing, such as smell, li
 If you are in a DARK_LOCATION with an NPC (= a non-player character), you are able to communicate with them by asking and telling, but not by showing and giving.
 If you wish to change these restrictions, see the respective verbs in `lib_verbs.i` and modify their checks.
 
+==== {asterisk}{asterisk}{asterisk} DUAL-LOCATION TRICK {asterisk}{asterisk}{asterisk}
+
 Note that you cannot change the name of a location mid-game.
 Therefore, if you name a dark location '`Darkness`' and wish to make it lit at some point in the game, its name will still be '`Darkness`' even if the location description can be changed to describe the illuminated location.
 To show a change in the location name, you must locate the hero in another location when the dark location is lit.
@@ -371,8 +488,12 @@ When lantern is lit
 then locate hero at treasure_chamber.
 --------------------------------------------------------------------------------
 
+
+==== {asterisk}{asterisk}{asterisk} ONE-SWITCH FROM MANY UNLIT LOCATIONS EXAMPLE {asterisk}{asterisk}{asterisk}
+
 Note that you won't always need to define a dark location to be a member of the subclass DARK_LOCATION.
-This applies in cases when you don't wish to implement LIGHTSOURCE objects to make locations lit or not lit. (All location instances have by default the attribute lit and they can be made NOT lit when needed.) For example, suppose you want all dark locations in the game to become lighted simultaneously.
+This applies in cases when you don't wish to implement LIGHTSOURCE objects to make locations lit or not lit. (All location instances have by default the attribute lit and they can be made NOT lit when needed.)
+For example, suppose you want all dark locations in the game to become lighted simultaneously.
 It can be done for example like this:
 
 [source,alan]
@@ -395,6 +516,9 @@ Even normal locations, when not lit, will have the description "It is pitch blac
 You can't see anything at all.", so you can use the above method with no worries.
 The only reason for a specific DARK_LOCATION subclass to exist is to make it automatic for them to be lit or NOT lit when the hero is carrying around and/or turning on and off LIGHTSOURCES so that the game author won't constantly need to remember to change the attribute of the location to lit or NOT lit in all imaginable cases.
 
+==== {asterisk}{asterisk}{asterisk} UNLIT LOCATION: BASEMENT EXAMPLE {asterisk}{asterisk}{asterisk}
+
+
 Also consider the following case: suppose the hero can make a basement (a location belonging to the class DARK_LOCATION) lighted by turning on a light switch that is at the top of the stairs leading to the basement (a different location from the basement itself).
 We program the light switch object so that when the hero turns it on, the basement will be lit.
 All ok so far.
@@ -407,6 +531,7 @@ But again, this is more than is necessary to reach the wanted effect.
 Here, like above, you could just make the basement a normal location and not a DARK_LOCATION (and make sure it is NOT lit to start with), and just change the attribute to lit when the hero turns on the light switch:
 
 // @EXTERNALIZE CODE: basement.alan
+.Example: Unlit location (from {basement_alan})
 [source,alan]
 --------------------------------------------------------------------------------
 include::{utf8dir}/basement.alan[tag=unlit-room-example]
