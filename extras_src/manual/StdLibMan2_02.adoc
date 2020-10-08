@@ -389,7 +389,7 @@ TIP: This default message can be changed by redefining the `check_current_loc_li
 
 ** If a dark location becomes illuminated while hosting the hero, an automatic `LOOK` command will be executed -- i.e. revealing the location's description for the first time, in case the player has not seen it illuminated before, or revealing it again otherwise.
 
-'''
+==== Basic Usage Example
 
 Here's a basic example on how to create a dark location.
 The sewer tunnel is implemented as a `dark_location`, and the hero is provided with a flashlight in his inventory to illuminate the place:
@@ -415,6 +415,29 @@ If you are in a dark location with other NPCs, you can communicate with them by 
 
 TIP: If you wish to change these restrictions, see the respective verbs in `lib_verbs.i` and modify their checks.
 
+When the hero switches on the flashlight, the location will automatically become lit, the library will execute a `LOOK` statement, the location's description no longer being hidden, and all actions will work as normal:
+
+// @EXTERN TRANSCRIPT: sewers.a3ADocLog
+[example,role="gametranscript"]
+================================================================================
+include::{utf8dir}/sewers.a3ADocLog[tag=dark-location-example2]
+================================================================================
+
+Of course, switching off the flashlight will make the location dark again, since there are no other light sources in this location:
+
+// @EXTERN TRANSCRIPT: sewers.a3ADocLog
+[example,role="gametranscript"]
+================================================================================
+include::{utf8dir}/sewers.a3ADocLog[tag=dark-location-example3]
+================================================================================
+
+As a final note, the hero could also switch on the flashlight _before_ entering the sewer tunnels, so they won't be dark to start with:
+
+// @EXTERN TRANSCRIPT: sewers.a3ADocLog
+[example,role="gametranscript"]
+================================================================================
+include::{utf8dir}/sewers.a3ADocLog[tag=dark-location-example4]
+================================================================================
 
 
 '''

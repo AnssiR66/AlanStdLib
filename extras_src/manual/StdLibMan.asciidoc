@@ -10,7 +10,7 @@
 :toclevels: 5
 // Sections Numbering:
 :sectnums:
-:sectnumlevels: 5
+:sectnumlevels: 3
 // Cross References:
 :xrefstyle: full
 :chapter-refsig: Ch.

@@ -781,9 +781,10 @@ span.play em,
 <li><a href="#_unlit_location">8.2.1. Unlit Location</a></li>
 <li><a href="#_dark_location">8.2.2. DARK_LOCATION</a>
 <ul class="sectlevel4">
-<li><a href="#_dual_location_trick">8.2.2.1. *** DUAL-LOCATION TRICK ***</a></li>
-<li><a href="#_one_switch_from_many_unlit_locations_example">8.2.2.2. *** ONE-SWITCH FROM MANY UNLIT LOCATIONS EXAMPLE ***</a></li>
-<li><a href="#_unlit_location_basement_example">8.2.2.3. *** UNLIT LOCATION: BASEMENT EXAMPLE ***</a></li>
+<li><a href="#_basic_usage_example">Basic Usage Example</a></li>
+<li><a href="#_dual_location_trick">*** DUAL-LOCATION TRICK ***</a></li>
+<li><a href="#_one_switch_from_many_unlit_locations_example">*** ONE-SWITCH FROM MANY UNLIT LOCATIONS EXAMPLE ***</a></li>
+<li><a href="#_unlit_location_basement_example">*** UNLIT LOCATION: BASEMENT EXAMPLE ***</a></li>
 </ul>
 </li>
 </ul>
@@ -826,8 +827,8 @@ span.play em,
 <ul class="sectlevel3">
 <li><a href="#sec.clothing">11.1.1. CLOTHING</a>
 <ul class="sectlevel4">
-<li><a href="#sec.clothing-table">11.1.1.1. The Clothing Table</a></li>
-<li><a href="#sec.clothing-tips">11.1.1.2. Clothing Tips &amp; Tricks</a></li>
+<li><a href="#sec.clothing-table">The Clothing Table</a></li>
+<li><a href="#sec.clothing-tips">Clothing Tips &amp; Tricks</a></li>
 </ul>
 </li>
 <li><a href="#sec.device">11.1.2. DEVICE</a></li>
@@ -2186,7 +2187,8 @@ This default message can be changed by redefining the <code>check_current_loc_li
 </li>
 </ul>
 </div>
-<hr>
+<div class="sect4">
+<h5 id="_basic_usage_example"><a class="anchor" href="#_basic_usage_example"></a>Basic Usage Example</h5>
 <div class="paragraph">
 <p>Here&#8217;s a basic example on how to create a dark location.
 The sewer tunnel is implemented as a <code>dark_location</code>, and the hero is provided with a flashlight in his inventory to illuminate the place:</p>
@@ -2244,6 +2246,67 @@ If you wish to change these restrictions, see the respective verbs in <code>lib_
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>When the hero switches on the flashlight, the location will automatically become lit, the library will execute a <code>LOOK</code> statement, the location&#8217;s description no longer being hidden, and all actions will work as normal:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>switch on flashlight</em><br>
+You turn on the flashlight.<br></p>
+</div>
+<div class="paragraph">
+<p>In the Sewers Tunnels<br>
+The air in this gloomy tunnel is filled with foul smelling fumes. Your<br>
+eyes are itching and your lungs burning.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>look</em><br>
+In the Sewers Tunnels<br>
+The air in this gloomy tunnel is filled with foul smelling fumes. Your<br>
+eyes are itching and your lungs burning.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>x flashlight</em><br>
+You notice nothing unusual about the flashlight. It is currently on.<br></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Of course, switching off the flashlight will make the location dark again, since there are no other light sources in this location:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>switch off flashlight</em><br>
+You turn off the flashlight. It is now pitch black.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>x flashlight</em><br>
+It is too dark to see.<br></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>As a final note, the hero could also switch on the flashlight <em>before</em> entering the sewer tunnels, so they won&#8217;t be dark to start with:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>switch on flashlight</em><br>
+You turn on the flashlight.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>down</em><br>
+You gather your courage and slip down the manhole, into the unknown&#8230;&#8203;<br></p>
+</div>
+<div class="paragraph">
+<p>In the Sewers Tunnels<br>
+The air in this gloomy tunnel is filled with foul smelling fumes. Your<br>
+eyes are itching and your lungs burning.<br></p>
+</div>
+</div>
+</div>
 <hr>
 <div class="paragraph">
 <p>In dark locations, all actions requiring the ability to see are automatically disabled by the library.
@@ -2280,8 +2343,9 @@ You can exit normally and use verbs that don&#8217;t require seeing, such as sme
 If you are in a DARK_LOCATION with an NPC (= a non-player character), you are able to communicate with them by asking and telling, but not by showing and giving.
 If you wish to change these restrictions, see the respective verbs in <code>lib_verbs.i</code> and modify their checks.</p>
 </div>
+</div>
 <div class="sect4">
-<h5 id="_dual_location_trick"><a class="anchor" href="#_dual_location_trick"></a>8.2.2.1. *** DUAL-LOCATION TRICK ***</h5>
+<h5 id="_dual_location_trick"><a class="anchor" href="#_dual_location_trick"></a>*** DUAL-LOCATION TRICK ***</h5>
 <div class="paragraph">
 <p>Note that you cannot change the name of a location mid-game.
 Therefore, if you name a dark location &#8216;Darkness&#8217; and wish to make it lit at some point in the game, its name will still be &#8216;Darkness&#8217; even if the location description can be changed to describe the illuminated location.
@@ -2303,7 +2367,7 @@ For example,</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_one_switch_from_many_unlit_locations_example"><a class="anchor" href="#_one_switch_from_many_unlit_locations_example"></a>8.2.2.2. *** ONE-SWITCH FROM MANY UNLIT LOCATIONS EXAMPLE ***</h5>
+<h5 id="_one_switch_from_many_unlit_locations_example"><a class="anchor" href="#_one_switch_from_many_unlit_locations_example"></a>*** ONE-SWITCH FROM MANY UNLIT LOCATIONS EXAMPLE ***</h5>
 <div class="paragraph">
 <p>Note that you won&#8217;t always need to define a dark location to be a member of the subclass DARK_LOCATION.
 This applies in cases when you don&#8217;t wish to implement LIGHTSOURCE objects to make locations lit or not lit. (All location instances have by default the attribute lit and they can be made NOT lit when needed.)
@@ -2325,7 +2389,7 @@ The only reason for a specific DARK_LOCATION subclass to exist is to make it aut
 </div>
 </div>
 <div class="sect4">
-<h5 id="_unlit_location_basement_example"><a class="anchor" href="#_unlit_location_basement_example"></a>8.2.2.3. *** UNLIT LOCATION: BASEMENT EXAMPLE ***</h5>
+<h5 id="_unlit_location_basement_example"><a class="anchor" href="#_unlit_location_basement_example"></a>*** UNLIT LOCATION: BASEMENT EXAMPLE ***</h5>
 <div class="paragraph">
 <p>Also consider the following case: suppose the hero can make a basement (a location belonging to the class DARK_LOCATION) lighted by turning on a light switch that is at the top of the stairs leading to the basement (a different location from the basement itself).
 We program the light switch object so that when the hero turns it on, the basement will be lit.
@@ -3300,7 +3364,7 @@ If the value of an attribute for a piece of CLOTHING is 0 in the table, don&#821
 <p>&#8201;&#8212;&#8201;The above is enough; the rest is then handled automatically by the library.</p>
 </div>
 <div class="sect4">
-<h5 id="sec.clothing-table"><a class="anchor" href="#sec.clothing-table"></a>11.1.1.1. The Clothing Table</h5>
+<h5 id="sec.clothing-table"><a class="anchor" href="#sec.clothing-table"></a>The Clothing Table</h5>
 <div class="paragraph">
 <p>Here is the chart showing a selection of fairly typical clothing items and the values to set to obtain appropriate behaviour.
 Should you wish to create an article of CLOTHING not listed, usually a bit of lateral thought as to what it is most like and where it fits into the scheme of things will suggest a workable set of values, but be aware that you MUST use values in this chart, simply adding things with intermediate values is probably going to create nasty bugs:</p>
@@ -3452,7 +3516,7 @@ Should you wish to create an article of CLOTHING not listed, usually a bit of la
 </div>
 </div>
 <div class="sect4">
-<h5 id="sec.clothing-tips"><a class="anchor" href="#sec.clothing-tips"></a>11.1.1.2. Clothing Tips &amp; Tricks</h5>
+<h5 id="sec.clothing-tips"><a class="anchor" href="#sec.clothing-tips"></a>Clothing Tips &amp; Tricks</h5>
 <div class="paragraph">
 <p>The hero&#8217;s CLOTHING is described when the player types <span class="play">&gt; <em>inventory</em></span> in-game.
 If you want the listing of the hero&#8217;s clothing to appear also when the player types <span class="play">&gt; <em>x me</em></span>, add "LIST worn." to the response of the examine verb of the hero:</p>
