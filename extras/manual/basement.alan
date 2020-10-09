@@ -2,7 +2,6 @@ Import 'library.i'.
 The my_game IsA definition_block
 End the.
 
--- tag::unlit-room-example[]
 The stairs_top IsA room
   Name 'At the top of the stairs'
   Exit down to basement.
@@ -20,7 +19,6 @@ The light_switch IsA object at stairs_top
         else "The light is already switched on."
       End if.
   End verb.
--- end::unlit-room-example[]
 
   Verb turn_off
     Does only
@@ -31,7 +29,6 @@ The light_switch IsA object at stairs_top
         else "The light is already switched off."
       End if.
   End verb.
--- tag::unlit-room-example[]
 End the.
 
 The basement IsA ROOM -- and not a DARK_LOCATION
@@ -39,6 +36,5 @@ The basement IsA ROOM -- and not a DARK_LOCATION
   Description "Cobwebs and old junk are the only things you see here."
   Exit up to stairs_top.
 End the basement.
--- end::unlit-room-example[]
 
 Start at stairs_top.

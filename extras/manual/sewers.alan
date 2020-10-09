@@ -9,6 +9,7 @@
 --   * §
 --------------------------------------------------------------------------------
 Import 'library.i'.
+
 The my_game IsA definition_block
   Has
     title    "The Sewers".
@@ -17,7 +18,6 @@ The my_game IsA definition_block
     year     2020.
 End the.
 --------------------------------------------------------------------------------
--- tag::dark-location-example[]
 The alley IsA site.
   Name 'Dead End Alley'.
   Description "An open manhole leads down into the city's bowels."
@@ -28,7 +28,6 @@ The alley IsA site.
   End exit.
 End the.
 
--- end::dark-location-example[]
 The manhole IsA object at alley.
   Name manhole. Name hole.
   Is not takeable.
@@ -39,24 +38,20 @@ The manhole IsA object at alley.
      $nNow you're really curious. What's down there?".
 End the manhole.
 
--- tag::dark-location-example[]
 The sewers IsA dark_location.
   Name 'In the Sewers Tunnels'.
   Description
     "The air in this gloomy tunnel is filled with foul smelling fumes.
      Your eyes are itching and your lungs burning."
--- end::dark-location-example[]
   Exit up to alley
     Check "The manhole it too high up, you'll need a ladder."
   End exit.
--- tag::dark-location-example[]
 End the.
 
 The flashlight IsA lightsource in Hero.
   Name flashlight. Name torch.
   Is not natural.
 End the.
--- end::dark-location-example[]
 --------------------------------------------------------------------------------
 Start at alley.
 Describe banner.

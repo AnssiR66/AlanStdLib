@@ -9,6 +9,7 @@
 --   * §
 --------------------------------------------------------------------------------
 Import 'library.i'.
+
 The my_game IsA definition_block
   Has
     title    "The Sewers".

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# _build-funcs.sh         v2.2.2 | 2020/09/28 | by Tristano Ajmone, MIT License.
+# _build-funcs.sh         v2.3.0 | 2020/10/09 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                        DOCUMENTATION BUILD FUNCTIONS                         #
@@ -202,7 +202,7 @@ function deployAlan {
 	printSeparator
 	echo -e "\e[90mSOURCE FILE: \e[93m$1"
 	echo -e "\e[90mDESTINATION: \e[94m$outfile"
-	sed -r '/^ *-- *(tag|end)::\w+\[/ d' $1 > $outfile
+	sed -r '/^ *-- *(tag|end)::/ d' $1 > $outfile
 	normalizeEOL $outfile
 }
 
