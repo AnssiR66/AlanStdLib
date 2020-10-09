@@ -1,0 +1,86 @@
+--==============================================================================
+
+-- "The Forest" -- A `forced_lit` `DARK_LOCATION` example
+
+--==============================================================================
+-- Code excerpts from this adventure are quoted in the examples of the following
+-- sections of the StdLib Manual:
+--
+--   * §8.2.2. DARK_LOCATION -> Forced-Lit Locations
+--------------------------------------------------------------------------------
+Import 'library.i'.
+
+The my_game IsA definition_block
+  Has
+    title    "The Forest".
+    subtitle "A forced_lit DARK_LOCATION example.".
+    author   "Tristano Ajmone".
+    year     2020.
+End the.
+--------------------------------------------------------------------------------
+The forest IsA DARK_SITE.
+  Name 'The Forest of Doom'.
+  Description
+    "Thick woods surround you from every direction,
+     you'll never escape the forest."
+    If this is not daytime then
+      "$nThe forest looks even more menacing under the trembling
+       light of your torch -- or is it your hand that it's shaking?"
+    End if.
+
+  Is lit. -- The location starts off illuminated.
+  Is forced_lit. -- i.e. don't ever make it dark during daytime.
+  Is daytime. -- When NOT, it's nighttime.
+  Has sky_desc "Sunny and bright".
+
+  Exit north, south, east, west, northeast, southeast, northwest, southwest
+    to nowhere
+      Check "You only find more trees."
+  End exit.
+
+  Verb sleep -- Overriding library default verb...
+    Does only
+      "You take a nap. When you wake up its"
+      If this is daytime
+        then "nighttime.$p"
+          -- -----------------------------------------------------------------
+          -- We don't need to worry about the 'lit' attribute at night!
+          -- The library will handle it, based on the available light sources.
+          -- -----------------------------------------------------------------
+          Make this NOT forced_lit. -- Restore default behavior.
+          Make this NOT daytime.
+          Set sky_desc of this to "Pitch black, no stars, no moon.".
+        else "daytime."
+          Make this lit.
+          Make this forced_lit.
+          Make this daytime.
+          Set sky_desc of this to "Sunny and bright.".
+      End if.
+  End verb sleep.
+End the forest.
+
+-- =============================================================================
+
+-- Light Sources
+
+-- =============================================================================
+-- Needless to say, we need to provide our Hero with some means to light up the
+-- place during the night...
+
+The torch IsA lightsource in Hero.
+  Name torch. Name flashlight.
+  Is not natural.
+End the.
+--------------------------------------------------------------------------------
+Start at forest.
+Describe banner.
+"$pThe 'forced_lit' attribute allows to prevent the library from making dark a
+ DARK_LOCATION when there are no lightsources left. It's used to enforce light
+ during the day, and then unset during the night to restore the default behavior
+ of DARK_LOCATION instances.
+
+ $pThe forest is implemented as a DARK_SITE which toggles from day to night, and
+ vice-versa, each time the Hero sleeps.
+
+ $pThe player carries an electric torch (NOT natural LIGHTSOURCE) by which he
+ can illuminate the forest at nighttime."

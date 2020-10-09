@@ -733,7 +733,7 @@ span.play em,
 <div class="details">
 <span id="author" class="author">Anssi Räisänen</span><br>
 <span id="revnumber">version 2.2.0-WIP,</span>
-<span id="revdate">2020-10-08</span>
+<span id="revdate">2020-10-09</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -778,18 +778,25 @@ span.play em,
 </li>
 <li><a href="#sec.dark-places">8.2. Dark Places</a>
 <ul class="sectlevel3">
-<li><a href="#_unlit_location">8.2.1. Unlit Location</a></li>
-<li><a href="#_dark_location">8.2.2. DARK_LOCATION</a>
+<li><a href="#_unlit_location">8.2.1. Unlit Location</a>
 <ul class="sectlevel4">
-<li><a href="#_basic_usage_example">Basic Usage Example</a></li>
+<li><a href="#sec.unlit-location-basic-example">Basic Usage Example</a></li>
+<li><a href="#_original_example_text">*** ORIGINAL EXAMPLE TEXT ***</a></li>
+</ul>
+</li>
+<li><a href="#sec.dark_location">8.2.2. DARK_LOCATION</a>
+<ul class="sectlevel4">
+<li><a href="#sec.dark_location-basic-example">Basic Usage Example</a></li>
+<li><a href="#sec.forced_lit">Forced-Lit Locations</a></li>
+<li><a href="#_original_text">*** ORIGINAL TEXT ***</a></li>
 <li><a href="#_dual_location_trick">*** DUAL-LOCATION TRICK ***</a></li>
 <li><a href="#_one_switch_from_many_unlit_locations_example">*** ONE-SWITCH FROM MANY UNLIT LOCATIONS EXAMPLE ***</a></li>
-<li><a href="#_unlit_location_basement_example">*** UNLIT LOCATION: BASEMENT EXAMPLE ***</a></li>
+<li><a href="#_recap">*** RECAP ***</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#_the_visited_and_described_attributes">8.3. The visited and described attributes</a>
+<li><a href="#sec.visited-and-described">8.3. Visited and Described</a>
 <ul class="sectlevel3">
 <li><a href="#_visited">8.3.1. visited</a></li>
 <li><a href="#_described">8.3.2. described</a></li>
@@ -2033,7 +2040,7 @@ On the other hand, the flexibility of <code>DARK_LOCATION</code>s can lead to a 
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-This default message can be changed by redefining the <code>dark_loc_desc</code> attribute on the <code>my_game</code> instance.
+This default message can be changed by overriding the <code>dark_loc_desc</code> attribute on the <code>my_game</code> instance.
 </td>
 </tr>
 </table>
@@ -2055,7 +2062,7 @@ This default message can be changed by redefining the <code>dark_loc_desc</code>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-This default message can be changed by redefining the <code>check_current_loc_lit</code> attribute on the <code>my_game</code> instance.
+This default message can be changed by overriding the <code>check_current_loc_lit</code> attribute on the <code>my_game</code> instance.
 </td>
 </tr>
 </table>
@@ -2069,9 +2076,107 @@ This default message can be changed by redefining the <code>check_current_loc_li
 </li>
 </ul>
 </div>
+<div class="sect4">
+<h5 id="sec.unlit-location-basic-example"><a class="anchor" href="#sec.unlit-location-basic-example"></a>Basic Usage Example</h5>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Add introductory text for the example.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Example: Unlit location (from <a href="basement.alan" title="View example source file" target="_blank" rel="noopener"><code>basement.alan</code></a>)</div>
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> stairs_top <span class="hl kwa">IsA</span> room&#x000A;  <span class="hl kwa">Name</span> &#39;At the top of the stairs&#39;&#x000A;  <span class="hl kwa">Exit</span> down <span class="hl kwa">to</span> basement<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> light_switch <span class="hl kwa">IsA</span> <span class="hl kwb">object</span> <span class="hl kwa">at</span> stairs_top&#x000A;  <span class="hl kwa">Name</span> light switch<span class="hl kwa">. Name</span> light<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Is not</span> &#39;on&#39;<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Verb</span> turn_on&#x000A;    <span class="hl kwa">Does only</span>&#x000A;      <span class="hl kwa">If</span> light_switch <span class="hl kwa">is not</span> &#39;on&#39;&#x000A;        <span class="hl kwa">then make</span> light_switch &#39;on&#39;<span class="hl kwa">.</span>&#x000A;             <span class="hl kwa">make</span> basement lit<span class="hl kwa">.</span>&#x000A;             <span class="hl str">&quot;You switch on the basement light.&quot;</span>&#x000A;        <span class="hl kwa">else</span> <span class="hl str">&quot;The light is already switched on.&quot;</span>&#x000A;      <span class="hl kwa">End if.</span>&#x000A;  <span class="hl kwa">End verb.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> basement <span class="hl kwa">IsA</span> ROOM <span class="hl slc">-- and not a DARK_LOCATION</span>&#x000A;  <span class="hl kwa">Is not</span> lit<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;Cobwebs and old junk are the only things you see here.&quot;</span>&#x000A;  <span class="hl kwa">Exit</span> up <span class="hl kwa">to</span> stairs_top<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the</span> basement<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see in the following transcript, while the basement location is <code>NOT lit</code> the player in unable to see the room&#8217;s description or carry out any actions that require the presence of light:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>down</em><br>
+Basement<br>
+It is pitch black. You can&#8217;t see anything at all.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>x floor</em><br>
+It is too dark to see.<br></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>by return upstairs and turning on the light switch the basement becomes <code>lit</code>, and the room&#8217;s normal behavior is restored:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>up</em><br>
+At the top of the stairs<br>
+There is a light switch here.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>turn on light</em><br>
+You switch on the basement light.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>down</em><br>
+Basement<br>
+Cobwebs and old junk are the only things you see here.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>x floor</em><br>
+You notice nothing unusual about the floor.<br></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_original_example_text"><a class="anchor" href="#_original_example_text"></a>*** ORIGINAL EXAMPLE TEXT ***</h5>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>What follows was the original text introducing the above example.
+It was originally inside the <code>DARK_LOCATION</code> section, illustrating practical examples of situations in which is more convenient to use an unlit location instead.</p>
+</div>
+<div class="paragraph">
+<p>Since the chapter on &#8220;Dark Places&#8221; has now been reorganized, the example was moved to the &#8220;Unlit Location&#8221; section, and the original text no longer applies to the context.</p>
+</div>
+<div class="paragraph">
+<p>I need to find a way to adapt the original text to the new context, because its tips are still useful.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Also consider the following case: suppose the hero can make a basement (a location belonging to the class DARK_LOCATION) lighted by turning on a light switch that is at the top of the stairs leading to the basement (a different location from the basement itself).
+We program the light switch object so that when the hero turns it on, the basement will be lit.
+All ok so far.
+However, when the hero enters the actual basement, it will be dark.
+Why?
+Because there is no LIGHTSOURCE present in the basement; we just changed the attribute of the basement location to lit, but this is not enough.
+A check at entering any DARK_LOCATION will make the location dark if no lit LIGHTSOURCE is present.
+You should program a lamp, a LIGHTSOURCE object, to be present in the basement, and this lamp should be made lit at the same time when the hero turns on the switch at the top of the stairs.
+But again, this is more than is necessary to reach the wanted effect.
+Here, like above, you could just make the basement a normal location and not a DARK_LOCATION (and make sure it is NOT lit to start with), and just change the attribute to lit when the hero turns on the light switch:</p>
+</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_dark_location"><a class="anchor" href="#_dark_location"></a>8.2.2. DARK_LOCATION</h4>
+<h4 id="sec.dark_location"><a class="anchor" href="#sec.dark_location"></a>8.2.2. DARK_LOCATION</h4>
 <div class="paragraph">
 <p>Dark locations are intended for implementing dark places which the hero needs to illuminate with some carried light source (a torch, a candle, etc.).
 This class is ideal for creating natural dark environments like forests and caves, or abandoned buildings without electricity, or buildings in which the hero needs to first put the electricity back on.
@@ -2097,7 +2202,7 @@ For their added features, refer to <a href="#sec.room">Sec. 8.1.1, &#8220;ROOM&#
 <p>There are no <code>lit</code> <code>lightsource</code> objects at the location.</p>
 </li>
 <li>
-<p>The location is <code>NOT forced_lit</code>.</p>
+<p>The location is <code>NOT forced_lit</code>&#8201;&#8212;&#8201;i.e. can become dark (see <a href="#sec.forced_lit">Sec. 8.2.2.2, &#8220;Forced-Lit Locations&#8221;</a>).</p>
 </li>
 </ol>
 </div>
@@ -2122,7 +2227,7 @@ For their added features, refer to <a href="#sec.room">Sec. 8.1.1, &#8220;ROOM&#
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-This default message can be changed by redefining the <code>light_goes_off</code> attribute on the <code>my_game</code> instance.
+This default message can be changed by overriding the <code>light_goes_off</code> attribute on the <code>my_game</code> instance.
 </td>
 </tr>
 </table>
@@ -2144,7 +2249,7 @@ This default message can be changed by redefining the <code>light_goes_off</code
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-This default message can be changed by redefining the <code>dark_loc_desc</code> attribute on the <code>my_game</code> instance.
+This default message can be changed by overriding the <code>dark_loc_desc</code> attribute on the <code>my_game</code> instance.
 </td>
 </tr>
 </table>
@@ -2166,7 +2271,7 @@ This default message can be changed by redefining the <code>dark_loc_desc</code>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-This default message can be changed by redefining the <code>check_current_loc_lit</code> attribute on the <code>my_game</code> instance.
+This default message can be changed by overriding the <code>check_current_loc_lit</code> attribute on the <code>my_game</code> instance.
 </td>
 </tr>
 </table>
@@ -2188,7 +2293,7 @@ This default message can be changed by redefining the <code>check_current_loc_li
 </ul>
 </div>
 <div class="sect4">
-<h5 id="_basic_usage_example"><a class="anchor" href="#_basic_usage_example"></a>Basic Usage Example</h5>
+<h5 id="sec.dark_location-basic-example"><a class="anchor" href="#sec.dark_location-basic-example"></a>Basic Usage Example</h5>
 <div class="paragraph">
 <p>Here&#8217;s a basic example on how to create a dark location.
 The sewer tunnel is implemented as a <code>dark_location</code>, and the hero is provided with a flashlight in his inventory to illuminate the place:</p>
@@ -2307,7 +2412,63 @@ eyes are itching and your lungs burning.<br></p>
 </div>
 </div>
 </div>
-<hr>
+</div>
+<div class="sect4">
+<h5 id="sec.forced_lit"><a class="anchor" href="#sec.forced_lit"></a>Forced-Lit Locations</h5>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>TODOs:</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-check-square-o"></i> Explain the function of the <code>forced_lit</code> attribute on <code>DARK_LOCATION</code> instances.</p>
+</li>
+<li>
+<p><i class="fa fa-check-square-o"></i> Create <code>forest.alan</code> example:</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-check-square-o"></i> Include source excerpts.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Include transcripts excerpts.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <code>DARK_LOCATION</code> class is usually employed to simulate places that are <em>naturally</em> dark, i.e. where the absence of light is a natural factor&#8201;&#8212;&#8201;electrically illuminated places are usually implemented using instances of <code>location</code> (or <code>ROOM</code>/<code>SITE</code>) and controlling their illumination by manipulating the <code>lit</code> attribute via switches, etc.</p>
+</div>
+<div class="paragraph">
+<p>In some practical cases you might need to enforce the day-night cycle on a <code>DARK_LOCATION</code>, which should then be dark only during the night.
+This is where the <code>forced_lit</code> attribute enters the scene, for it allows to enforce illumination during the day, preventing a <code>DARK_LOCATION</code> instance from becoming dark when no lit light sources are present during daylight.</p>
+</div>
+<div class="paragraph">
+<p>The following example illustrated how to implement a forest that will toggle from day to night, and vice-versa, every time the hero falls asleep.
+We&#8217;ll implement the forest location as a <code>DARK_SITE</code>, so it will have a <code>ground</code> and <code>sky</code>, and we&#8217;ll start off the game with forest being lit, instead of the default dark state.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example: Day and night cycle using <code>forced_lit</code> on a <code>DARK_LOCATION</code> (from <a href="forest.alan" title="View example source file" target="_blank" rel="noopener"><code>forest.alan</code></a>)</div>
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> forest <span class="hl kwa">IsA</span> DARK_SITE<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Name</span> &#39;The Forest of Doom&#39;<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Description</span>&#x000A;    <span class="hl str">&quot;Thick woods surround you from every direction,</span>&#x000A;<span class="hl str">     you&#39;ll never escape the forest.&quot;</span>&#x000A;    <span class="hl kwa">If this is not</span> daytime <span class="hl kwa">then</span>&#x000A;      <span class="hl str">&quot;</span><span class="hl esc">$n</span><span class="hl str">The forest looks even more menacing under the trembling</span>&#x000A;<span class="hl str">       light of your torch -- or is it your hand that it&#39;s shaking?&quot;</span>&#x000A;    <span class="hl kwa">End if.</span>&#x000A;&#x000A;  <span class="hl kwa">Is</span> lit<span class="hl kwa">.</span> <span class="hl slc">-- The location starts off illuminated.</span>&#x000A;  <span class="hl kwa">Is</span> forced_lit<span class="hl kwa">.</span> <span class="hl slc">-- i.e. don&#39;t ever make it dark during daytime.</span>&#x000A;  <span class="hl kwa">Is</span> daytime<span class="hl kwa">.</span> <span class="hl slc">-- When NOT, it&#39;s nighttime.</span>&#x000A;  <span class="hl kwa">Has</span> sky_desc <span class="hl str">&quot;Sunny and bright&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;  <span class="hl kwa">Verb</span> sleep <span class="hl slc">-- Overriding library default verb...</span>&#x000A;    <span class="hl kwa">Does only</span>&#x000A;      <span class="hl str">&quot;You take a nap. When you wake up its&quot;</span>&#x000A;      <span class="hl kwa">If this is</span> daytime&#x000A;        <span class="hl kwa">then</span> <span class="hl str">&quot;nighttime.</span><span class="hl esc">$p</span><span class="hl str">&quot;</span>&#x000A;          <span class="hl slc">-- -----------------------------------------------------------------</span>&#x000A;          <span class="hl slc">-- We don&#39;t need to worry about the &#39;lit&#39; attribute at night!</span>&#x000A;          <span class="hl slc">-- The library will handle it, based on the available light sources.</span>&#x000A;          <span class="hl slc">-- -----------------------------------------------------------------</span>&#x000A;          <span class="hl kwa">Make this NOT</span> forced_lit<span class="hl kwa">.</span> <span class="hl slc">-- Restore default behavior.</span>&#x000A;          <span class="hl kwa">Make this NOT</span> daytime<span class="hl kwa">.</span>&#x000A;          <span class="hl kwa">Set</span> sky_desc <span class="hl kwa">of this to</span> <span class="hl str">&quot;Pitch black, no stars, no moon.&quot;</span><span class="hl kwa">.</span>&#x000A;        <span class="hl kwa">else</span> <span class="hl str">&quot;daytime.&quot;</span>&#x000A;          <span class="hl kwa">Make this</span> lit<span class="hl kwa">.</span>&#x000A;          <span class="hl kwa">Make this</span> forced_lit<span class="hl kwa">.</span>&#x000A;          <span class="hl kwa">Make this</span> daytime<span class="hl kwa">.</span>&#x000A;          <span class="hl kwa">Set</span> sky_desc <span class="hl kwa">of this to</span> <span class="hl str">&quot;Sunny and bright.&quot;</span><span class="hl kwa">.</span>&#x000A;      <span class="hl kwa">End if.</span>&#x000A;  <span class="hl kwa">End verb</span> sleep<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the</span> forest<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> torch <span class="hl kwa">IsA</span> lightsource <span class="hl kwa">in</span> <span class="hl kwc">Hero</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Name</span> torch<span class="hl kwa">. Name</span> flashlight<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Is not</span> natural<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_original_text"><a class="anchor" href="#_original_text"></a>*** ORIGINAL TEXT ***</h5>
 <div class="paragraph">
 <p>In dark locations, all actions requiring the ability to see are automatically disabled by the library.
 All dark locations have the <code>NOT lit</code> attribute.
@@ -2368,6 +2529,33 @@ For example,</p>
 </div>
 <div class="sect4">
 <h5 id="_one_switch_from_many_unlit_locations_example"><a class="anchor" href="#_one_switch_from_many_unlit_locations_example"></a>*** ONE-SWITCH FROM MANY UNLIT LOCATIONS EXAMPLE ***</h5>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This example and the rationale behind might need to be revised now that we have the <code>forced_lit</code> attribute, because the below statement is no longer true:</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>If we had used the DARK_LOCATION class above, all locations to be lighted should have had a LIGHTSOURCE object present in them, and all these LIGHTSOURCE objects would have needed to be changed to lit, which would have meant extra programming.</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Now it&#8217;s enough to make all these DARK_LOCATIONs <code>lit</code> and <code>forced_lit</code>, and they won&#8217;t become dark even if there are no lit light sources in them.</p>
+</div>
+<div class="paragraph">
+<p>Effectively, the <code>forced_lit</code> attribute grants the author more freedom of action in this respect.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Note that you won&#8217;t always need to define a dark location to be a member of the subclass DARK_LOCATION.
 This applies in cases when you don&#8217;t wish to implement LIGHTSOURCE objects to make locations lit or not lit. (All location instances have by default the attribute lit and they can be made NOT lit when needed.)
@@ -2382,73 +2570,31 @@ It can be done for example like this:</p>
 <div class="paragraph">
 <p>If we had used the DARK_LOCATION class above, all locations to be lighted should have had a LIGHTSOURCE object present in them, and all these LIGHTSOURCE objects would have needed to be changed to lit, which would have meant extra programming.</p>
 </div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>Even normal locations, when not lit, will have the description "It is pitch black.
-You can&#8217;t see anything at all.", so you can use the above method with no worries.
-The only reason for a specific DARK_LOCATION subclass to exist is to make it automatic for them to be lit or NOT lit when the hero is carrying around and/or turning on and off LIGHTSOURCES so that the game author won&#8217;t constantly need to remember to change the attribute of the location to lit or NOT lit in all imaginable cases.</p>
+<p>The above text doesn&#8217;t mention the fact that only LIGHTSOURCE objects which are <code>NOT broken</code> should be set to <code>lit</code>, because wihtout that check the author would be bypassing the library safeguards which prevent broken light sources to become lit again (e.g. the verbs turn/switch on carry out these checks).</p>
+</div>
+<div class="paragraph">
+<p>When re-utilizing the above text, ensure to fix that aspect!</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Even normal locations, when not lit, will have the description &#8220;It is pitch black.
+You can&#8217;t see anything at all.&#8221;, so you can use the above method with no worries.
+The only reason for a specific <code>DARK_LOCATION</code> subclass to exist is to make it automatic for them to be lit or NOT lit when the hero is carrying around and/or turning on and off LIGHTSOURCES so that the game author won&#8217;t constantly need to remember to change the attribute of the location to lit or NOT lit in all imaginable cases.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_unlit_location_basement_example"><a class="anchor" href="#_unlit_location_basement_example"></a>*** UNLIT LOCATION: BASEMENT EXAMPLE ***</h5>
-<div class="paragraph">
-<p>Also consider the following case: suppose the hero can make a basement (a location belonging to the class DARK_LOCATION) lighted by turning on a light switch that is at the top of the stairs leading to the basement (a different location from the basement itself).
-We program the light switch object so that when the hero turns it on, the basement will be lit.
-All ok so far.
-However, when the hero enters the actual basement, it will be dark.
-Why?
-Because there is no LIGHTSOURCE present in the basement; we just changed the attribute of the basement location to lit, but this is not enough.
-A check at entering any DARK_LOCATION will make the location dark if no lit LIGHTSOURCE is present.
-You should program a lamp, a LIGHTSOURCE object, to be present in the basement, and this lamp should be made lit at the same time when the hero turns on the switch at the top of the stairs.
-But again, this is more than is necessary to reach the wanted effect.
-Here, like above, you could just make the basement a normal location and not a DARK_LOCATION (and make sure it is NOT lit to start with), and just change the attribute to lit when the hero turns on the light switch:</p>
-</div>
-<div class="listingblock">
-<div class="title">Example: Unlit location (from <a href="basement.alan" title="View example source file" target="_blank" rel="noopener"><code>basement.alan</code></a>)</div>
-<div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> stairs_top <span class="hl kwa">IsA</span> room&#x000A;  <span class="hl kwa">Name</span> &#39;At the top of the stairs&#39;&#x000A;  <span class="hl kwa">Exit</span> down <span class="hl kwa">to</span> basement<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> light_switch <span class="hl kwa">IsA</span> <span class="hl kwb">object</span> <span class="hl kwa">at</span> stairs_top&#x000A;  <span class="hl kwa">Name</span> light switch<span class="hl kwa">. Name</span> light<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Is not</span> &#39;on&#39;<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Verb</span> turn_on&#x000A;    <span class="hl kwa">Does only</span>&#x000A;      <span class="hl kwa">If</span> light_switch <span class="hl kwa">is not</span> &#39;on&#39;&#x000A;        <span class="hl kwa">then make</span> light_switch &#39;on&#39;<span class="hl kwa">.</span>&#x000A;             <span class="hl kwa">make</span> basement lit<span class="hl kwa">.</span>&#x000A;             <span class="hl str">&quot;You switch on the basement light.&quot;</span>&#x000A;        <span class="hl kwa">else</span> <span class="hl str">&quot;The light is already switched on.&quot;</span>&#x000A;      <span class="hl kwa">End if.</span>&#x000A;  <span class="hl kwa">End verb.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> basement <span class="hl kwa">IsA</span> ROOM <span class="hl slc">-- and not a DARK_LOCATION</span>&#x000A;  <span class="hl kwa">Is not</span> lit<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;Cobwebs and old junk are the only things you see here.&quot;</span>&#x000A;  <span class="hl kwa">Exit</span> up <span class="hl kwa">to</span> stairs_top<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the</span> basement<span class="hl kwa">.</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>As you can see in the following transcript, while the basement location is <code>NOT lit</code> the player in unable to see the room&#8217;s description or carry out any actions that require the presence of light:</p>
-</div>
-<div class="exampleblock gametranscript">
-<div class="content">
-<div class="paragraph">
-<p>&gt; <em>down</em><br>
-Basement<br>
-It is pitch black. You can&#8217;t see anything at all.<br></p>
-</div>
-<div class="paragraph">
-<p>&gt; <em>x floor</em><br>
-It is too dark to see.<br></p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>by return upstairs and turning on the light switch the basement becomes <code>lit</code>, and the room&#8217;s normal behavior is restored:</p>
-</div>
-<div class="exampleblock gametranscript">
-<div class="content">
-<div class="paragraph">
-<p>&gt; <em>up</em><br>
-At the top of the stairs<br>
-There is a light switch here.<br></p>
-</div>
-<div class="paragraph">
-<p>&gt; <em>turn on light</em><br>
-You switch on the basement light.<br></p>
-</div>
-<div class="paragraph">
-<p>&gt; <em>down</em><br>
-Basement<br>
-Cobwebs and old junk are the only things you see here.<br></p>
-</div>
-<div class="paragraph">
-<p>&gt; <em>x floor</em><br>
-You notice nothing unusual about the floor.<br></p>
-</div>
-</div>
-</div>
+<h5 id="_recap"><a class="anchor" href="#_recap"></a>*** RECAP ***</h5>
 <div class="paragraph">
 <p>To recap: use the DARK_LOCATION class when a LIGHTSOURCE object determines whether a location is lit or dark; swap between the lit/NOT lit attributes, inherent to all locations, when you don&#8217;t want to refer to any light sources affecting whether a location is lit or dark.</p>
 </div>
@@ -2456,7 +2602,19 @@ You notice nothing unusual about the floor.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_the_visited_and_described_attributes"><a class="anchor" href="#_the_visited_and_described_attributes"></a>8.3. The visited and described attributes</h3>
+<h3 id="sec.visited-and-described"><a class="anchor" href="#sec.visited-and-described"></a>8.3. Visited and Described</h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Add introductory text!
+</td>
+</tr>
+</table>
+</div>
 <div class="sect3">
 <h4 id="_visited"><a class="anchor" href="#_visited"></a>8.3.1. visited</h4>
 <div class="listingblock">
@@ -2594,11 +2752,11 @@ You would naturally need to define an alarm object here, for example:</p>
 Remember, however, that if you implement a takeable OBJECT this way, the OBJECT will disappear from the other LOCATIONs when the hero takes it, and if the OBJECT will be affected in some way, for example broken, it will be broken in all of the LOCATIONs it is found in.
 Also, the ceiling lamp in the above example, if implemented as a LIGHTSOURCE, would be lit/unlit in all of the three locations simultaneously.</p>
 </div>
-<div class="admonitionblock note">
+<div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 <div class="paragraph">
@@ -2625,11 +2783,22 @@ You&#8217;ll have to mention it manually in the description of individual locati
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> carpet <span class="hl kwa">IsA</span> <span class="hl kwb">object</span>&#x000A;  <span class="hl kwa">Is</span> scenery<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span></code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>(Indoor and outdoor are library-defined locations.
+<p><code>Indoor</code> and <code>outdoor</code> are library-defined locations.
 All ROOMs are nested in indoor and all SITEs are nested in outdoor.
 Also, the objects wall, floor and ceiling are located in indoor, and the ground and the sky are in outdoor.
-That&#8217;s why the wall, floor and ceiling objects are found in every ROOM, and the ground and sky objects are found in every SITE.)</p>
+That&#8217;s why the wall, floor and ceiling objects are found in every ROOM, and the ground and sky objects are found in every SITE.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>If you want a certain object to be present in absolutely every location of your game, you should define for example</p>
