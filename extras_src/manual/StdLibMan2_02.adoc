@@ -32,7 +32,8 @@ Default location attributes predefined in the library:
 
 Using the standard library, basic locations are implemented just like advised in the ALAN Manual, for example:
 
-// @EXTERN CODE: _locations_no-lib.alan
+
+.Example: Implementing locations without using library classes
 [source,alan]
 -------------------------------------------
 include::{utf8dir}/_locations_no-lib.alan[]
@@ -63,9 +64,9 @@ If you've defined your own custom `location` subclass, you can easily transform 
 
 // @EXTERNALIZE CODE: _custom-room-site-instances.alan
 [source,alan]
---------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 include::{utf8dir}/_custom-room-site-instances.alan[tag=room-site-instances]
---------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 
 
 The `'Secret Airfield'` and `'Safe House'` will behave just like `ROOM` and `SITE` instances, respectively.
@@ -105,20 +106,20 @@ If the author doesn't change these default values, the default description shown
 
 To have a more varied effect, you can change the descriptions this way:
 
-// @EXTERN CODE: livingroom
+
 .Example: Custom room-objects descriptions (from {livingroom_alan})
 [source,alan]
---------------------------------------------------------------------------------
+--------------------------------------------------
 include::{utf8dir}/livingroom.alan[tag=livingroom]
---------------------------------------------------------------------------------
+--------------------------------------------------
 
 and the player will be presented with your custom descriptions for the living room's foor, ceiling and walls:
 
-// @EXTERN TRANSCRIPT: livingroom
+
 [example,role="gametranscript"]
-================================================================================
+=======================================================
 include::{utf8dir}/livingroom.a3ADocLog[tag=livingroom]
-================================================================================
+=======================================================
 
 
 [NOTE]
@@ -128,19 +129,18 @@ Setting these room attributes in an `outdoor` location (i.e. a `site`) won't hav
 
 You can even change the description of a room's floor, walls or ceiling mid-game at any time:
 
-// @EXTERN CODE: livingroom -> trapdoor
+
 .Example: Changing room-objects description mid-game (from {livingroom_alan})
 [source,alan]
---------------------------------------------------------------------------------
+------------------------------------------------
 include::{utf8dir}/livingroom.alan[tag=trapdoor]
---------------------------------------------------------------------------------
+------------------------------------------------
 
 
-// @EXTERN TRANSCRIPT: livingroom -> trapdoor
 [example,role="gametranscript"]
-================================================================================
+=====================================================
 include::{utf8dir}/livingroom.a3ADocLog[tag=trapdoor]
-================================================================================
+=====================================================
 
 
 [[sec.site]]
@@ -178,11 +178,11 @@ Again, you can change these messages at any point mid-game:
 include::{utf8dir}/meadow.alan[tag=change-descs]
 ------------------------------------------------
 
-// @EXTERN TRANSCRIPT: XXX
+
 [example,role="gametranscript"]
-================================================================================
+=====================================================
 include::{utf8dir}/meadow.a3ADocLog[tag=change-descs]
-================================================================================
+=====================================================
 
 
 [NOTE]
@@ -343,25 +343,25 @@ WARNING: Add introductory text for the example.
 // @EXTERNALIZE CODE: basement.alan
 .Example: Unlit location (from {basement_alan})
 [source,alan]
---------------------------------------------------------------------------------
+--------------------------------------------------------
 include::{utf8dir}/basement.alan[tag=unlit-room-example]
---------------------------------------------------------------------------------
+--------------------------------------------------------
 
 As you can see in the following transcript, while the basement location is `NOT lit` the player in unable to see the room's description or carry out any actions that require the presence of light:
 
-// @EXTERN TRANSCRIPT: basement.alan
+
 [example,role="gametranscript"]
-================================================================================
+===============================================================
 include::{utf8dir}/basement.a3ADocLog[tag=unlit-room-example-1]
-================================================================================
+===============================================================
 
 by return upstairs and turning on the light switch the basement becomes `lit`, and the room's normal behavior is restored:
 
-// @EXTERN TRANSCRIPT: basement.alan
+
 [example,role="gametranscript"]
-================================================================================
+===============================================================
 include::{utf8dir}/basement.a3ADocLog[tag=unlit-room-example-2]
-================================================================================
+===============================================================
 
 ==== {asterisk}{asterisk}{asterisk} ORIGINAL EXAMPLE TEXT {asterisk}{asterisk}{asterisk}
 
@@ -448,17 +448,17 @@ The sewer tunnel is implemented as a `dark_location`, and the hero is provided w
 
 .Example: Implementing a dark location (from {sewers_alan})
 [source,alan]
---------------------------------------------------------------------------------
+---------------------------------------------------------
 include::{utf8dir}/sewers.alan[tag=dark-location-example]
---------------------------------------------------------------------------------
+---------------------------------------------------------
 
 When the hero enters the sewer tunnels, they'll be dark by default, so the location's description will be replaced by the `dark_loc_desc` message, and he won't be able to carry out any action that requires the ability to see:
 
-// @EXTERN TRANSCRIPT: sewers.a3ADocLog
+
 [example,role="gametranscript"]
-================================================================================
+===============================================================
 include::{utf8dir}/sewers.a3ADocLog[tag=dark-location-example1]
-================================================================================
+===============================================================
 
 In darkness, you can check your inventory, but you can't manipulate things other than turn on a `lightsource` and drop items you're carrying.
 You can traverse exits normally, and use verbs that don't require seeing, such as _smell_, _listen_, _think_, and similar.
@@ -469,27 +469,27 @@ TIP: If you wish to change these restrictions, see the respective verbs in `lib_
 
 When the hero switches on the flashlight, the location will automatically become lit, the library will execute a `LOOK` statement, the location's description no longer being hidden, and all actions will work as normal:
 
-// @EXTERN TRANSCRIPT: sewers.a3ADocLog
+
 [example,role="gametranscript"]
-================================================================================
+===============================================================
 include::{utf8dir}/sewers.a3ADocLog[tag=dark-location-example2]
-================================================================================
+===============================================================
 
 Of course, switching off the flashlight will make the location dark again, since there are no other light sources in this location:
 
-// @EXTERN TRANSCRIPT: sewers.a3ADocLog
+
 [example,role="gametranscript"]
-================================================================================
+===============================================================
 include::{utf8dir}/sewers.a3ADocLog[tag=dark-location-example3]
-================================================================================
+===============================================================
 
 As a final note, the hero could also switch on the flashlight _before_ entering the sewer tunnels, so they won't be dark to start with:
 
-// @EXTERN TRANSCRIPT: sewers.a3ADocLog
+
 [example,role="gametranscript"]
-================================================================================
+===============================================================
 include::{utf8dir}/sewers.a3ADocLog[tag=dark-location-example4]
-================================================================================
+===============================================================
 
 
 
@@ -543,54 +543,13 @@ Executing a `LOOK` when the location becomes lit again is not mandatory, but you
 
 As you can see from the following transcript, the forest only behaves as a `DARK_LOCATION` at nighttime, whereas during the day it's just like a normal lit location:
 
-// @EXTERN TRANSCRIPT: forest.a3ADocLog
+
 [example,role="gametranscript"]
 ============================================================
 include::{utf8dir}/forest.a3ADocLog[tag=forced-lit-example1]
 ============================================================
 
 
-==== {asterisk}{asterisk}{asterisk} ORIGINAL TEXT {asterisk}{asterisk}{asterisk}
-
-In dark locations, all actions requiring the ability to see are automatically disabled by the library.
-All dark locations have the `NOT lit` attribute.
-In order for locations of the `DARK_LOCATION` subclass to be lit, they need the presence of a lit `LIGHTSOURCE` object.
-
-Here's an example of how to implement a `DARK_LOCATION`:
-
-
-[source,alan]
---------------------------------------------------------------------------------
-The basement IsA dark_location
-  Exit up to hall.
-End the.
---------------------------------------------------------------------------------
-
-// @FIXME: The 'dark_loc_desc' attribute is now in "lib_messages_library.i".
-//         Also, update the page cross-ref with a real XRef.
-
-The default description of a dark location will be "`It is pitch black.
-You can't see anything at all.`"
-This default description can be changed by editing the `dark_loc_desc` attribute of the `my_game` instance (see p. 78).
-
-If you add your own description to a `DARK_LOCATION`, it will only be shown if the location is lit up by some means:
-
-
-[source,alan]
---------------------------------------------------------------------------------
-The basement IsA dark_location
-  Description "Only useless junk can be seen lying around."
-  Exit up to hall.
-End the.
---------------------------------------------------------------------------------
-
-
-In order for a `DARK_LOCATION` to be lit, a `LIGHTSOURCE` object (a lantern, a match, a ceiling lamp, or any other kind of object emitting light) needs to be present and lit.
-
-In darkness, you are not able to manipulate things other than turn on a LIGHTSOURCE and drop items you're carrying (these checks are found in `lib_verbs.i`).
-You can exit normally and use verbs that don't require seeing, such as smell, listen and think.
-If you are in a DARK_LOCATION with an NPC (= a non-player character), you are able to communicate with them by asking and telling, but not by showing and giving.
-If you wish to change these restrictions, see the respective verbs in `lib_verbs.i` and modify their checks.
 
 
 

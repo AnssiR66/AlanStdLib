@@ -41,12 +41,19 @@
 :basement_alan: pass:q[link:basement.alan[`basement.alan`^,title="View example source file"]]
 :cave_alan: pass:q[link:cave.alan[`cave.alan`^,title="View example source file"]]
 :forest_alan: pass:q[link:forest.alan[`forest.alan`^,title="View example source file"]]
+:garden1_alan: pass:q[link:garden1.alan[`garden1.alan`^,title="View example source file"]]
+:garden2_alan: pass:q[link:garden2.alan[`garden2.alan`^,title="View example source file"]]
 :lab1_alan: pass:q[link:lab1.alan[`lab1.alan`^,title="View example source file"]]
 :lab2_alan: pass:q[link:lab2.alan[`lab2.alan`^,title="View example source file"]]
 :livingroom_alan: pass:q[link:livingroom.alan[`livingroom.alan`^,title="View example source file"]]
 :meadow_alan: pass:q[link:meadow.alan[`meadow.alan`^,title="View example source file"]]
 :sewers_alan: pass:q[link:sewers.alan[`sewers.alan`^,title="View example source file"]]
 :wedding_alan: pass:q[link:wedding.alan[`wedding.alan`^,title="View example source file"]]
+// Links to short examples files:
+:short_example1_alan: pass:q[link:short-example1.alan[`short-example1.alan`^,title="View example source file"]]
+:short_example1_nolib_alan: pass:q[link:short-example1_no-lib.alan[`short-example1_no-lib.alan`^,title="View example source file"]]
+:short_example2_alan: pass:q[link:short-example2.alan[`short-example2.alan`^,title="View example source file"]]
+:short_example6_alan: pass:q[link:short-example6.alan[`short-example6.alan`^,title="View example source file"]]
 
 // Links to StdLib sources:
 :library: pass:q,a[link:{StdLibDir}/library.i[`library.i`^,title="View library source file"]]

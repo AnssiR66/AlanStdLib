@@ -788,7 +788,6 @@ span.play em,
 <ul class="sectlevel4">
 <li><a href="#sec.dark_location-basic-example">Basic Usage Example</a></li>
 <li><a href="#sec.forced_lit">Forced-Lit Locations</a></li>
-<li><a href="#_original_text">*** ORIGINAL TEXT ***</a></li>
 <li><a href="#_dual_location_trick">*** DUAL-LOCATION TRICK ***</a></li>
 <li><a href="#_one_switch_from_many_unlit_locations_example">*** ONE-SWITCH FROM MANY UNLIT LOCATIONS EXAMPLE ***</a></li>
 <li><a href="#_recap">*** RECAP ***</a></li>
@@ -1646,6 +1645,7 @@ Bear in mind that, for each of these classes, the library defines specific prope
 <p>Using the standard library, basic locations are implemented just like advised in the ALAN Manual, for example:</p>
 </div>
 <div class="listingblock">
+<div class="title">Example: Implementing locations without using library classes</div>
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> bedroom <span class="hl kwa">IsA</span> <span class="hl kwb">location</span>&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;This is your bedroom.</span>&#x000A;<span class="hl str">               Your bathroom is to the north.&quot;</span>&#x000A;  <span class="hl kwa">Exit</span> north <span class="hl kwa">to</span> bathroom<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> bathroom <span class="hl kwa">IsA</span> <span class="hl kwb">location</span>&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;This is the bathroom.</span>&#x000A;<span class="hl str">               Your bedroom is back to the south.&quot;</span>&#x000A;  <span class="hl kwa">Exit</span> south <span class="hl kwa">to</span> bedroom<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">Start at</span> bedroom<span class="hl kwa">.</span></code></pre>
 </div>
@@ -2567,44 +2567,6 @@ by a barrier of vegetation.<br></p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_original_text"><a class="anchor" href="#_original_text"></a>*** ORIGINAL TEXT ***</h5>
-<div class="paragraph">
-<p>In dark locations, all actions requiring the ability to see are automatically disabled by the library.
-All dark locations have the <code>NOT lit</code> attribute.
-In order for locations of the <code>DARK_LOCATION</code> subclass to be lit, they need the presence of a lit <code>LIGHTSOURCE</code> object.</p>
-</div>
-<div class="paragraph">
-<p>Here&#8217;s an example of how to implement a <code>DARK_LOCATION</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> basement <span class="hl kwa">IsA</span> dark_location&#x000A;  <span class="hl kwa">Exit</span> up <span class="hl kwa">to</span> hall<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The default description of a dark location will be &#8220;It is pitch black.
-You can&#8217;t see anything at all.&#8221;
-This default description can be changed by editing the <code>dark_loc_desc</code> attribute of the <code>my_game</code> instance (see p. 78).</p>
-</div>
-<div class="paragraph">
-<p>If you add your own description to a <code>DARK_LOCATION</code>, it will only be shown if the location is lit up by some means:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> basement <span class="hl kwa">IsA</span> dark_location&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;Only useless junk can be seen lying around.&quot;</span>&#x000A;  <span class="hl kwa">Exit</span> up <span class="hl kwa">to</span> hall<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In order for a <code>DARK_LOCATION</code> to be lit, a <code>LIGHTSOURCE</code> object (a lantern, a match, a ceiling lamp, or any other kind of object emitting light) needs to be present and lit.</p>
-</div>
-<div class="paragraph">
-<p>In darkness, you are not able to manipulate things other than turn on a LIGHTSOURCE and drop items you&#8217;re carrying (these checks are found in <code>lib_verbs.i</code>).
-You can exit normally and use verbs that don&#8217;t require seeing, such as smell, listen and think.
-If you are in a DARK_LOCATION with an NPC (= a non-player character), you are able to communicate with them by asking and telling, but not by showing and giving.
-If you wish to change these restrictions, see the respective verbs in <code>lib_verbs.i</code> and modify their checks.</p>
-</div>
-</div>
-<div class="sect4">
 <h5 id="_dual_location_trick"><a class="anchor" href="#_dual_location_trick"></a>*** DUAL-LOCATION TRICK ***</h5>
 <div class="paragraph">
 <p>Note that you cannot change the name of a location mid-game.
@@ -3054,9 +3016,10 @@ Thus, the following won&#8217;t work:</p>
 <h3 id="_the_two_methods_for_examining_things"><a class="anchor" href="#_the_two_methods_for_examining_things"></a>9.1. The two methods for examining things</h3>
 <div class="paragraph">
 <p>The library provides two ways for examining things.
-The first one is the traditional "VERB examine DOES (ONLY)&#8230;&#8203;":</p>
+The first one is the traditional <code>VERB examine DOES ONLY</code>:</p>
 </div>
 <div class="listingblock">
+<div class="title">Example: Custom examine response via <code>VERB DOES ONLY</code> (from <a href="garden1.alan" title="View example source file" target="_blank" rel="noopener"><code>garden1.alan</code></a>)</div>
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> ball <span class="hl kwa">IsA</span> <span class="hl kwb">object</span> <span class="hl kwa">at</span> garden&#x000A;  <span class="hl kwa">Verb</span> examine&#x000A;    <span class="hl kwa">Does only</span> <span class="hl str">&quot;It&#39;s a small red ball.&quot;</span>&#x000A;  <span class="hl kwa">End verb.</span>&#x000A;<span class="hl kwa">End the</span> ball<span class="hl kwa">.</span></code></pre>
 </div>
@@ -3073,13 +3036,14 @@ It&#8217;s a small red ball.<br></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Above, you would have to use DOES ONLY, because if you use only DOES, the library-defined response for all things would show first: "You notice nothing unusual about the ball. It&#8217;s a small red ball."</p>
+<p>In the example above, it was necessary to use <code>DOES ONLY</code>; if we had used <code>DOES</code> instead, the default library response for all things would be shown before the custom reponse: <span class="play">You notice nothing unusual about the ball. It&#8217;s a small red ball.</span></p>
 </div>
 <div class="paragraph">
 <p>Another way for examining things is to use the <code>ex</code> attribute.
-<code>Ex</code> is here short for "examine":</p>
+<code>Ex</code> is here short for &#8220;examine&#8221;:</p>
 </div>
 <div class="listingblock">
+<div class="title">Example: Custom examine response via the <code>ex</code> attribute (from <a href="garden2.alan" title="View example source file" target="_blank" rel="noopener"><code>garden2.alan</code></a>)</div>
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> ball <span class="hl kwa">IsA</span> <span class="hl kwb">object</span> <span class="hl kwa">at</span> garden&#x000A;  <span class="hl kwa">Has</span> ex <span class="hl str">&quot;It&#39;s a small red ball.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the</span> ball<span class="hl kwa">.</span></code></pre>
 </div>
@@ -3862,6 +3826,7 @@ A DEVICE is by default described as being either on or off when examined.</p>
 <p>For example:</p>
 </div>
 <div class="listingblock">
+<div class="title">Example: Basic device implementation (from <a href="lab1.alan" title="View example source file" target="_blank" rel="noopener"><code>lab1.alan</code></a>)</div>
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> thingummyjig <span class="hl kwa">IsA</span> device <span class="hl kwa">at</span> lab&#x000A;<span class="hl kwa">End the.</span></code></pre>
 </div>
@@ -3881,6 +3846,7 @@ You notice nothing unusual about the thingummyjig. It is currently off.<br></p>
 <p>Using the <code>ex</code> attribute, you can define a bit more personal response than <span class="play">You notice nothing unusual&#8230;&#8203;</span>:</p>
 </div>
 <div class="listingblock">
+<div class="title">Example: Custom device description (from <a href="lab2.alan" title="View example source file" target="_blank" rel="noopener"><code>lab2.alan</code></a>)</div>
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> thingummyjig <span class="hl kwa">IsA</span> device <span class="hl kwa">at</span> lab&#x000A;  <span class="hl kwa">Has</span> ex <span class="hl str">&quot;It&#39;s full of knobs and buttons.&quot;</span><span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span></code></pre>
 </div>
@@ -3918,6 +3884,7 @@ Attributes: openable, NOT open, NOT lockable, NOT locked, HAS otherside door.
 A DOOR is described by default as being either open or closed when examined.</p>
 </div>
 <div class="listingblock">
+<div class="title">Example: Basic door implementation (from <a href="garden1.alan" title="View example source file" target="_blank" rel="noopener"><code>garden1.alan</code></a>)</div>
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> front_door <span class="hl kwa">IsA</span> door <span class="hl kwa">at</span> garden&#x000A;  <span class="hl kwa">Name</span> front door&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;&quot;</span>&#x000A;<span class="hl kwa">End the</span> front_door<span class="hl kwa">.</span></code></pre>
 </div>
@@ -3934,10 +3901,11 @@ You notice nothing unusual about the front door. It is currently closed.<br></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Adding an ex attribute for the front door, you can change the default.
+<p>Adding an <code>ex</code> attribute for the front door, you can change the default.
 Adding</p>
 </div>
 <div class="listingblock">
+<div class="title">Example: Custom door description (from <a href="garden2.alan" title="View example source file" target="_blank" rel="noopener"><code>garden2.alan</code></a>)</div>
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> ex <span class="hl str">&quot;It&#39;s a white wooden door leading into the house.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
@@ -7544,14 +7512,16 @@ Moreover, you should add the following check to each affected verb:</p>
 Here, the hero must go from room1 north to room2 and eat an apple to win the game.</p>
 </div>
 <div class="listingblock">
+<div class="title">Short Example #1: <a href="short-example1.alan" title="View example source file" target="_blank" rel="noopener"><code>short-example1.alan</code></a></div>
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">Import</span> &#39;library.i&#39;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> my_game <span class="hl kwa">IsA</span> definition_block&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> room1 <span class="hl kwa">IsA</span> <span class="hl kwb">location</span>&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;North to room2.&quot;</span>&#x000A;  <span class="hl kwa">Exit</span> north <span class="hl kwa">to</span> room2<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> room2 <span class="hl kwa">IsA</span> <span class="hl kwb">location</span>&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;South to room1.&quot;</span>&#x000A;  <span class="hl kwa">Exit</span> south <span class="hl kwa">to</span> room1<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> apple <span class="hl kwa">IsA</span> <span class="hl kwb">object</span> <span class="hl kwa">at</span> room2&#x000A;  <span class="hl kwa">Is</span> edible<span class="hl kwa">.</span>&#x000A;&#x000A;  <span class="hl kwa">Verb</span> eat&#x000A;    <span class="hl kwa">Does</span> <span class="hl str">&quot;congratulations!&quot;</span> <span class="hl kwa">quit.</span>&#x000A;  <span class="hl kwa">End verb.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">Start at</span> room1<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">Describe</span> banner<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>(This game wouldn&#8217;t actually need the library at all; it would be even shorter to code:)</p>
+<p>This game wouldn&#8217;t actually need the library at all; it would be even shorter to code:</p>
 </div>
 <div class="listingblock">
+<div class="title">Short Example #1, without StdLib: <a href="short-example1_no-lib.alan" title="View example source file" target="_blank" rel="noopener"><code>short-example1_no-lib.alan</code></a></div>
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> room1 <span class="hl kwa">IsA</span> <span class="hl kwb">location</span>&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;North to room2.&quot;</span>&#x000A;  <span class="hl kwa">Exit</span> north <span class="hl kwa">to</span> room2<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> room2 <span class="hl kwa">IsA</span> <span class="hl kwb">location</span>&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;South to room1.&quot;</span>&#x000A;  <span class="hl kwa">Exit</span> south <span class="hl kwa">to</span> room1<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> apple <span class="hl kwa">IsA</span> <span class="hl kwb">object</span> <span class="hl kwa">at</span> room2&#x000A;  <span class="hl kwa">Verb</span> eat&#x000A;    <span class="hl kwa">Does</span> <span class="hl str">&quot;Congratulations!&quot;</span> <span class="hl kwa">quit.</span>&#x000A;  <span class="hl kwa">End verb.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">Start at</span> room1<span class="hl kwa">.</span></code></pre>
 </div>
@@ -7566,6 +7536,7 @@ Here, the hero must go from room1 north to room2 and eat an apple to win the gam
 <p>Here, the player must get a candy from the kitchen and give it to a crying child in the nursery to win the game.</p>
 </div>
 <div class="listingblock">
+<div class="title">Short Example #2: <a href="short-example2.alan" title="View example source file" target="_blank" rel="noopener"><code>short-example2.alan</code></a></div>
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">Import</span> &#39;library.i&#39;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> my_game <span class="hl kwa">IsA</span> definition_block&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> nursery <span class="hl kwa">IsA</span> room&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;The kitchen is to the east.&quot;</span>&#x000A;  <span class="hl kwa">Exit</span> east <span class="hl kwa">to</span> kitchen<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> child <span class="hl kwa">IsA</span> person <span class="hl kwa">at</span> nursery&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;There is a crying child here.&quot;</span>&#x000A;&#x000A;  <span class="hl kwa">Verb</span> give&#x000A;    <span class="hl kwa">When</span> recipient&#x000A;      <span class="hl kwa">Does only</span>&#x000A;        <span class="hl kwa">If</span> obj <span class="hl opt">=</span> candy&#x000A;          <span class="hl kwa">then</span> <span class="hl str">&quot;You give the candy to the child who stops</span>&#x000A;<span class="hl str">                crying and starts licking it happily.&quot;</span>&#x000A;          <span class="hl kwa">quit.</span>&#x000A;        <span class="hl kwa">End if.</span>&#x000A;  <span class="hl kwa">End verb.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> kitchen <span class="hl kwa">IsA</span> room&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;You can go west, back to the nursery.&quot;</span>&#x000A;  <span class="hl kwa">Exit</span> west <span class="hl kwa">to</span> nursery<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> table <span class="hl kwa">IsA</span> supporter <span class="hl kwa">at</span> kitchen&#x000A;  <span class="hl kwa">Is not</span> takeable<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> candy <span class="hl kwa">IsA</span> <span class="hl kwb">object</span> <span class="hl kwa">in</span> table&#x000A;  <span class="hl kwa">Is</span> edible<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">Start at</span> nursery<span class="hl kwa">.</span></code></pre>
 </div>
@@ -7615,6 +7586,7 @@ In addition, the author has added a check and a response of his/her own to <code
 This code reintroduces the situation used in example 1, with a locked door and two keys added.</p>
 </div>
 <div class="listingblock">
+<div class="title">Short Example #6: <a href="short-example6.alan" title="View example source file" target="_blank" rel="noopener"><code>short-example6.alan</code></a></div>
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">Import</span> &#39;library.i&#39;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> my_game <span class="hl kwa">IsA</span> definition_block&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> room1 <span class="hl kwa">IsA</span> <span class="hl kwb">location</span>&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;North to room2.&quot;</span>&#x000A;  <span class="hl kwa">Exit</span> north <span class="hl kwa">to</span> room2&#x000A;    <span class="hl kwa">Check</span> locked_door_1 <span class="hl kwa">is</span> open&#x000A;      <span class="hl kwa">else</span> <span class="hl str">&quot;The door to the north is on the way.&quot;</span>&#x000A;  <span class="hl kwa">End exit.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> locked_door_1 <span class="hl kwa">IsA</span> door <span class="hl kwa">at</span> room1&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;&quot;</span>&#x000A;  <span class="hl kwa">Name</span> door&#x000A;  <span class="hl kwa">Has</span> otherside locked_door_2<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Is</span> lockable<span class="hl kwa">. Is</span> locked<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Has</span> matching_key silver_key<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> silver_key <span class="hl kwa">IsA</span> <span class="hl kwb">object</span> <span class="hl kwa">at</span> room1&#x000A;  <span class="hl kwa">Name</span> silver key&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> brass_key <span class="hl kwa">IsA</span> <span class="hl kwb">object</span> <span class="hl kwa">at</span> room1&#x000A;  <span class="hl kwa">Name</span> brass key&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> room2 <span class="hl kwa">IsA</span> <span class="hl kwb">location</span>&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;South to room1.&quot;</span>&#x000A;  <span class="hl kwa">Exit</span> south <span class="hl kwa">to</span> room1&#x000A;    <span class="hl kwa">Check</span> locked_door_2 <span class="hl kwa">is</span> open&#x000A;      <span class="hl kwa">else</span> <span class="hl str">&quot;The door to the south is on the way.&quot;</span>&#x000A;  <span class="hl kwa">End exit.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> locked_door_2 <span class="hl kwa">IsA</span> door <span class="hl kwa">at</span> room2&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;&quot;</span>&#x000A;  <span class="hl kwa">Name</span> door&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> apple <span class="hl kwa">IsA</span> <span class="hl kwb">object</span> <span class="hl kwa">at</span> room2&#x000A;  <span class="hl kwa">Is</span> edible<span class="hl kwa">.</span>&#x000A;&#x000A;  <span class="hl kwa">Verb</span> eat&#x000A;    <span class="hl kwa">Does</span> <span class="hl str">&quot;Congratulations!&quot;</span> <span class="hl kwa">quit.</span>&#x000A;  <span class="hl kwa">End verb.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">Start at</span> room1<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">Describe</span> banner<span class="hl kwa">.</span></code></pre>
 </div>

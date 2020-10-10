@@ -189,21 +189,20 @@ As a last resort, you can always use the character's name as the disambiguating 
 
 The following excerpts from {wedding_alan} demonstrate how to implement a game in which the hero and another NPC are both wearing tuxedos:
 
-// @EXTERN CODE: wedding -> tuxedos
 
 [[example.tuxedos]]
 .Example: Implementing same-named clothing items (from {wedding_alan})
 [source,alan]
---------------------------------------------------------------------------------
+--------------------------------------------
 include::{utf8dir}/wedding.alan[tag=tuxedos]
---------------------------------------------------------------------------------
+--------------------------------------------
 
 By adding `your`/`my` and `his`/`'sam''s'` before `tuxedo` in the `NAME` clauses, we've ensured that the player will be able to target any tuxedo in his commands:
 
 [example,role="gametranscript"]
-================================================================================
+=================================================
 include::{utf8dir}/wedding.a3ADocLog[tag=tuxedos]
-================================================================================
+=================================================
 
 
 // @ADDED:
@@ -218,54 +217,36 @@ A DEVICE is by default described as being either on or off when examined.
 
 For example:
 
+.Example: Basic device implementation (from {lab1_alan})
 [source,alan]
---------------------------------------------------------------------------------
+----------------------------------------------
 include::{utf8dir}/lab1.alan[tag=thingummyjig]
---------------------------------------------------------------------------------
+----------------------------------------------
 
 yields by default
 
 [example,role="gametranscript"]
-================================================================================
+===================================================
 include::{utf8dir}/lab1.a3ADocLog[tag=thingummyjig]
-================================================================================
-
-// [example,role="gametranscript"]
-// ================================================================================
-// &gt; _x thingummyjig_ +
-// You notice nothing unusual about the thingummyjig.
-// It is currently off.
-// ================================================================================
+===================================================
 
 
 Using the `ex` attribute, you can define a bit more personal response than [.play]#You notice nothing unusual...#:
 
+
+.Example: Custom device description (from {lab2_alan})
 [source,alan]
---------------------------------------------------------------------------------
+----------------------------------------------
 include::{utf8dir}/lab2.alan[tag=thingummyjig]
---------------------------------------------------------------------------------
-
-// [source,alan]
-// --------------------------------------------------------------------------------
-// THE thingummyjig ISA DEVICE AT lab
-//   HAS ex "It's full of knobs and buttons.".
-// END THE.
-// --------------------------------------------------------------------------------
-
+----------------------------------------------
 
 yields
 
-[example,role="gametranscript"]
-================================================================================
-include::{utf8dir}/lab2.a3ADocLog[tag=thingummyjig]
-================================================================================
 
-// [example,role="gametranscript"]
-// ================================================================================
-// &gt; _x thingummyjig_ +
-// It's full of knobs and buttons.
-// It is currently off.
-// ================================================================================
+[example,role="gametranscript"]
+===================================================
+include::{utf8dir}/lab2.a3ADocLog[tag=thingummyjig]
+===================================================
 
 
 // @FIXME: Rephrase next 2 paragraphs:
@@ -302,64 +283,40 @@ It is by default closed (= NOT open) and NOT locked.
 Attributes: openable, NOT open, NOT lockable, NOT locked, HAS otherside door.
 A DOOR is described by default as being either open or closed when examined.
 
+
+.Example: Basic door implementation (from {garden1_alan})
 [source,alan]
---------------------------------------------------------------------------------
+-----------------------------------------------
 include::{utf8dir}/garden1.alan[tag=front_door]
---------------------------------------------------------------------------------
-
-
-// [source,alan]
-// --------------------------------------------------------------------------------
-// THE front_door ISA DOOR AT garden
-//   NAME front door
-//   DESCRIPTION ""
-// END THE front_door.
-// --------------------------------------------------------------------------------
+-----------------------------------------------
 
 
 would yield by default:
 
+
 [example,role="gametranscript"]
-================================================================================
+====================================================
 include::{utf8dir}/garden1.a3ADocLog[tag=front_door]
-================================================================================
-
-// [example,role="gametranscript"]
-// ================================================================================
-// &gt; _x front door_ +
-// You notice nothing unusual about the front door.
-// It is currently closed.
-// ================================================================================
+====================================================
 
 
-Adding an ex attribute for the front door, you can change the default.
+Adding an `ex` attribute for the front door, you can change the default.
 Adding
 
+.Example: Custom door description (from {garden2_alan})
 [source,alan]
---------------------------------------------------------------------------------
+-----------------------------------------------
 include::{utf8dir}/garden2.alan[tag=front_door]
---------------------------------------------------------------------------------
-
-// [source,alan]
-// --------------------------------------------------------------------------------
-//   HAS ex "It's a white wooden door leading into the house."
-// --------------------------------------------------------------------------------
+-----------------------------------------------
 
 
 will yield
 
 
 [example,role="gametranscript"]
-================================================================================
+====================================================
 include::{utf8dir}/garden2.a3ADocLog[tag=front_door]
-================================================================================
-
-// [example,role="gametranscript"]
-// ================================================================================
-// &gt; _x front door_ +
-// It's a white wooden door leading into the house.
-// It is currently closed.
-// ================================================================================
+====================================================
 
 
 If you add a response of your own to the examine verb of a DOOR, the default description of it being either open or closed won't show automatically.
@@ -504,32 +461,32 @@ The default attributes for a LIGHTSOURCE object are: `natural`, `NOT lit`.
 
 .Example: Implementing a natural light source (from {cave_alan})
 [source,alan]
---------------------------------------------------------------------------------
+---------------------------------------------------
 include::{utf8dir}/cave.alan[tag=lightsource_torch]
---------------------------------------------------------------------------------
+---------------------------------------------------
 
 // 'lamp' -> LIGHTSOURCE (NOT natural) AT lab:
 
 .Example: Implementing an artificial light source (from {lab1_alan})
 [source,alan]
---------------------------------------------------------------------------------
+--------------------------------------------------
 include::{utf8dir}/lab1.alan[tag=lightsource_lamp]
---------------------------------------------------------------------------------
+--------------------------------------------------
 
 
 Examining for example these instances in-game would yield
 
 [example,role="gametranscript"]
-================================================================================
+========================================================
 include::{utf8dir}/cave.a3ADocLog[tag=lightsource_torch]
-================================================================================
+========================================================
 
 and
 
 [example,role="gametranscript"]
-================================================================================
+=======================================================
 include::{utf8dir}/lab1.a3ADocLog[tag=lightsource_lamp]
-================================================================================
+=======================================================
 
 
 (The opposites of the above messages would be [.play]#It is currently not lit.# and [.play]#It is currently on.#, respectively.)
@@ -540,16 +497,16 @@ If you add a specific examine response for either, you can use the `ex` attribut
 
 .Example: Customizing the examine response of light sources (from {lab2_alan})
 [source,alan]
---------------------------------------------------------------------------------
+--------------------------------------------------
 include::{utf8dir}/lab2.alan[tag=lightsource_lamp]
---------------------------------------------------------------------------------
+--------------------------------------------------
 
 which yields
 
 [example,role="gametranscript"]
-================================================================================
+=======================================================
 include::{utf8dir}/lab2.a3ADocLog[tag=lightsource_lamp]
-================================================================================
+=======================================================
 
 Using `VERB examine DOES ONLY…` you'll have to add manually the mention about the instance being on or off, for example:
 
