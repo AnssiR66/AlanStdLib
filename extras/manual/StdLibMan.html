@@ -733,7 +733,7 @@ span.play em,
 <div class="details">
 <span id="author" class="author">Anssi Räisänen</span><br>
 <span id="revnumber">version 2.2.0-WIP,</span>
-<span id="revdate">2020-10-09</span>
+<span id="revdate">2020-10-10</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -2458,12 +2458,111 @@ This is where the <code>forced_lit</code> attribute enters the scene, for it all
 </div>
 <div class="paragraph">
 <p>The following example illustrated how to implement a forest that will toggle from day to night, and vice-versa, every time the hero falls asleep.
-We&#8217;ll implement the forest location as a <code>DARK_SITE</code>, so it will have a <code>ground</code> and <code>sky</code>, and we&#8217;ll start off the game with forest being lit, instead of the default dark state.</p>
+We&#8217;ll implement the forest location as a <code>DARK_SITE</code>, so it will have a <code>ground</code> and <code>sky</code>, and we&#8217;ll start off the game at daytime, with forest being lit, instead of the default dark state.</p>
 </div>
 <div class="listingblock">
 <div class="title">Example: Day and night cycle using <code>forced_lit</code> on a <code>DARK_LOCATION</code> (from <a href="forest.alan" title="View example source file" target="_blank" rel="noopener"><code>forest.alan</code></a>)</div>
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> forest <span class="hl kwa">IsA</span> DARK_SITE<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Name</span> &#39;The Forest of Doom&#39;<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Description</span>&#x000A;    <span class="hl str">&quot;Thick woods surround you from every direction,</span>&#x000A;<span class="hl str">     you&#39;ll never escape the forest.&quot;</span>&#x000A;    <span class="hl kwa">If this is not</span> daytime <span class="hl kwa">then</span>&#x000A;      <span class="hl str">&quot;</span><span class="hl esc">$n</span><span class="hl str">The forest looks even more menacing under the trembling</span>&#x000A;<span class="hl str">       light of your torch -- or is it your hand that it&#39;s shaking?&quot;</span>&#x000A;    <span class="hl kwa">End if.</span>&#x000A;&#x000A;  <span class="hl kwa">Is</span> lit<span class="hl kwa">.</span> <span class="hl slc">-- The location starts off illuminated.</span>&#x000A;  <span class="hl kwa">Is</span> forced_lit<span class="hl kwa">.</span> <span class="hl slc">-- i.e. don&#39;t ever make it dark during daytime.</span>&#x000A;  <span class="hl kwa">Is</span> daytime<span class="hl kwa">.</span> <span class="hl slc">-- When NOT, it&#39;s nighttime.</span>&#x000A;  <span class="hl kwa">Has</span> sky_desc <span class="hl str">&quot;Sunny and bright&quot;</span><span class="hl kwa">.</span>&#x000A;&#x000A;  <span class="hl kwa">Verb</span> sleep <span class="hl slc">-- Overriding library default verb...</span>&#x000A;    <span class="hl kwa">Does only</span>&#x000A;      <span class="hl str">&quot;You take a nap. When you wake up its&quot;</span>&#x000A;      <span class="hl kwa">If this is</span> daytime&#x000A;        <span class="hl kwa">then</span> <span class="hl str">&quot;nighttime.</span><span class="hl esc">$p</span><span class="hl str">&quot;</span>&#x000A;          <span class="hl slc">-- -----------------------------------------------------------------</span>&#x000A;          <span class="hl slc">-- We don&#39;t need to worry about the &#39;lit&#39; attribute at night!</span>&#x000A;          <span class="hl slc">-- The library will handle it, based on the available light sources.</span>&#x000A;          <span class="hl slc">-- -----------------------------------------------------------------</span>&#x000A;          <span class="hl kwa">Make this NOT</span> forced_lit<span class="hl kwa">.</span> <span class="hl slc">-- Restore default behavior.</span>&#x000A;          <span class="hl kwa">Make this NOT</span> daytime<span class="hl kwa">.</span>&#x000A;          <span class="hl kwa">Set</span> sky_desc <span class="hl kwa">of this to</span> <span class="hl str">&quot;Pitch black, no stars, no moon.&quot;</span><span class="hl kwa">.</span>&#x000A;        <span class="hl kwa">else</span> <span class="hl str">&quot;daytime.&quot;</span>&#x000A;          <span class="hl kwa">Make this</span> lit<span class="hl kwa">.</span>&#x000A;          <span class="hl kwa">Make this</span> forced_lit<span class="hl kwa">.</span>&#x000A;          <span class="hl kwa">Make this</span> daytime<span class="hl kwa">.</span>&#x000A;          <span class="hl kwa">Set</span> sky_desc <span class="hl kwa">of this to</span> <span class="hl str">&quot;Sunny and bright.&quot;</span><span class="hl kwa">.</span>&#x000A;      <span class="hl kwa">End if.</span>&#x000A;  <span class="hl kwa">End verb</span> sleep<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the</span> forest<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> torch <span class="hl kwa">IsA</span> lightsource <span class="hl kwa">in</span> <span class="hl kwc">Hero</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Name</span> torch<span class="hl kwa">. Name</span> flashlight<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Is not</span> natural<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> forest <span class="hl kwa">IsA</span> DARK_SITE<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Name</span> &#39;The Forest of Doom&#39;<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Is</span> lit<span class="hl kwa">.</span> forced_lit<span class="hl kwa">.</span> daytime<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Has</span> sky_desc <span class="hl str">&quot;Sunny and bright&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Description</span>&#x000A;    <span class="hl kwa">If this is</span> daytime <span class="hl kwa">then</span>&#x000A;      <span class="hl str">&quot;The thick forest canopy absorbs most of the daylight.</span>&#x000A;<span class="hl str">       You&#39;re surrounded by a barrier of vegetation.&quot;</span>&#x000A;    <span class="hl kwa">else</span>&#x000A;      <span class="hl str">&quot;At night the forest looks even more menacing under the trembling</span>&#x000A;<span class="hl str">       light of your torch -- or is it your hand that&#39;s shaking?&quot;</span>&#x000A;    <span class="hl kwa">End if.</span>&#x000A;&#x000A;  <span class="hl kwa">Verb</span> sleep <span class="hl slc">-- Overriding library default verb...</span>&#x000A;    <span class="hl kwa">Does only</span>&#x000A;      <span class="hl str">&quot;You take a nap. When you wake up its&quot;</span>&#x000A;      <span class="hl kwa">If this is</span> daytime&#x000A;        <span class="hl kwa">then</span> <span class="hl str">&quot;nighttime.</span><span class="hl esc">$p</span><span class="hl str">&quot;</span>&#x000A;          <span class="hl kwa">Set</span> sky_desc <span class="hl kwa">of this to</span> <span class="hl str">&quot;Pitch black, no stars, no moon.&quot;</span><span class="hl kwa">.</span>&#x000A;          <span class="hl slc">-- ----------------------------------------------------</span>&#x000A;          <span class="hl slc">-- No need to worry about the `lit` attribute at night!</span>&#x000A;          <span class="hl slc">-- The library will handle it automatically for us.</span>&#x000A;          <span class="hl slc">-- ----------------------------------------------------</span>&#x000A;          <span class="hl kwa">Make this not</span> forced_lit<span class="hl kwa">.</span>&#x000A;          <span class="hl kwa">Make this not</span> daytime<span class="hl kwa">.</span>&#x000A;          <span class="hl slc">-- Only perform a LOOK if there are lit light sources:</span>&#x000A;          <span class="hl kwa">If count IsA</span> lightsource<span class="hl kwa">, is</span> lit<span class="hl kwa">, at</span> <span class="hl kwc">hero</span> <span class="hl opt">&gt;</span> <span class="hl num">0</span>&#x000A;            <span class="hl kwa">then look.</span>&#x000A;          <span class="hl kwa">End if.</span>&#x000A;        <span class="hl kwa">else</span> <span class="hl str">&quot;daytime.&quot;</span>&#x000A;          <span class="hl kwa">Set</span> sky_desc <span class="hl kwa">of this to</span> <span class="hl str">&quot;Sunny and bright.&quot;</span><span class="hl kwa">.</span>&#x000A;          <span class="hl kwa">Make this</span> lit<span class="hl kwa">. Make this</span> forced_lit<span class="hl kwa">.</span>&#x000A;          <span class="hl kwa">Make this</span> daytime<span class="hl kwa">. Look.</span>&#x000A;      <span class="hl kwa">End if.</span>&#x000A;  <span class="hl kwa">End verb</span> sleep<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the</span> forest<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> torch <span class="hl kwa">IsA</span> lightsource <span class="hl kwa">in</span> <span class="hl kwc">Hero</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Is not</span> natural<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Note that we had to manually execute a <code>LOOK</code> statement when the <code>sleep</code> verb switches from daytime to nighttime, and vice-versa; the library won&#8217;t do it automatically, since we&#8217;re bypassing its <code>lightsource</code>-driven mechanism in this case.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, when <code>sleep</code> switches to nighttime we only execute a <code>LOOK</code> if a <code>lit</code> <code>lightsource</code> instance is found at the Hero&#8217;s location, because the library will automatically show the <code>light_goes_off</code> message when there are none.
+The reason why the library won&#8217;t execute an automatic <code>LOOK</code> is because it&#8217;s not detecting a change in the illumination status: the location was already lit before, due to the daytime forced-lit status, and entering the night with a lit light source would just keep it lit.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Executing a <code>LOOK</code> when the location becomes lit again is not mandatory, but you might wish to do so for consistency&#8217;s sake with light sources behavior, and to inform the player about the changed location&#8217;s description.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>As you can see from the following transcript, the forest only behaves as a <code>DARK_LOCATION</code> at nighttime, whereas during the day it&#8217;s just like a normal lit location:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>look</em><br>
+The Forest of Doom<br>
+The thick forest canopy absorbs most of the daylight. You&#8217;re surrounded<br>
+by a barrier of vegetation.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>x sky</em><br>
+Sunny and bright<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>sleep</em><br>
+You take a nap. When you wake up its nighttime.<br></p>
+</div>
+<div class="paragraph">
+<p>It is now pitch black.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <span class="comment">; During the night all DARK&lowbar;LOCATION features are active:</span><br>
+&gt; <em>look</em><br>
+The Forest of Doom<br>
+It is pitch black. You can&#8217;t see anything at all.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>x sky</em><br>
+It is too dark to see.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>switch on torch</em><br>
+You turn on the torch.<br></p>
+</div>
+<div class="paragraph">
+<p>The Forest of Doom<br>
+At night the forest looks even more menacing under the trembling light of<br>
+your torch&#8201;&#8212;&#8201;or is it your hand that&#8217;s shaking?<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>x sky</em><br>
+Pitch black, no stars, no moon.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>sleep</em><br>
+You take a nap. When you wake up its daytime.<br></p>
+</div>
+<div class="paragraph">
+<p>The Forest of Doom<br>
+The thick forest canopy absorbs most of the daylight. You&#8217;re surrounded<br>
+by a barrier of vegetation.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <span class="comment">; During the day light sources have no effect:</span><br>
+&gt; <em>switch off torch</em><br>
+You turn off the torch.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>look</em><br>
+The Forest of Doom<br>
+The thick forest canopy absorbs most of the daylight. You&#8217;re surrounded<br>
+by a barrier of vegetation.<br></p>
+</div>
 </div>
 </div>
 </div>

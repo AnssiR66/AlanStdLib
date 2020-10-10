@@ -20,22 +20,21 @@ End the.
 --------------------------------------------------------------------------------
 The forest IsA DARK_SITE.
   Name 'The Forest of Doom'.
-  Description
-    "Thick woods surround you from every direction,
-     you'll never escape the forest."
-    If this is not daytime then
-      "$nThe forest looks even more menacing under the trembling
-       light of your torch -- or is it your hand that it's shaking?"
-    End if.
-
-  Is lit. -- The location starts off illuminated.
-  Is forced_lit. -- i.e. don't ever make it dark during daytime.
-  Is daytime. -- When NOT, it's nighttime.
+  Is lit. forced_lit. daytime.
   Has sky_desc "Sunny and bright".
+  Description
+    If this is daytime then
+      "The thick forest canopy absorbs most of the daylight.
+       You're surrounded by a barrier of vegetation."
+    else
+      "At night the forest looks even more menacing under the trembling
+       light of your torch -- or is it your hand that's shaking?"
+    End if.
 
   Exit north, south, east, west, northeast, southeast, northwest, southwest
     to nowhere
-      Check "You only find more trees."
+      Check "The vegetation bars your passage.
+             You'll never escape the forest"
   End exit.
 
   Verb sleep -- Overriding library default verb...
@@ -43,18 +42,21 @@ The forest IsA DARK_SITE.
       "You take a nap. When you wake up its"
       If this is daytime
         then "nighttime.$p"
-          -- -----------------------------------------------------------------
-          -- We don't need to worry about the 'lit' attribute at night!
-          -- The library will handle it, based on the available light sources.
-          -- -----------------------------------------------------------------
-          Make this NOT forced_lit. -- Restore default behavior.
-          Make this NOT daytime.
           Set sky_desc of this to "Pitch black, no stars, no moon.".
+          -- ----------------------------------------------------
+          -- No need to worry about the `lit` attribute at night!
+          -- The library will handle it automatically for us.
+          -- ----------------------------------------------------
+          Make this not forced_lit.
+          Make this not daytime.
+          -- Only perform a LOOK if there are lit light sources:
+          If count IsA lightsource, is lit, at hero > 0
+            then look.
+          End if.
         else "daytime."
-          Make this lit.
-          Make this forced_lit.
-          Make this daytime.
           Set sky_desc of this to "Sunny and bright.".
+          Make this lit. Make this forced_lit.
+          Make this daytime. Look.
       End if.
   End verb sleep.
 End the forest.
@@ -68,7 +70,6 @@ End the forest.
 -- place during the night...
 
 The torch IsA lightsource in Hero.
-  Name torch. Name flashlight.
   Is not natural.
 End the.
 --------------------------------------------------------------------------------

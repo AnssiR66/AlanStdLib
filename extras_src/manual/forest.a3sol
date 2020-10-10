@@ -1,0 +1,17 @@
+; ------------------------------------------------------------------------------
+; §8.2.2. DARK_LOCATION -> Forced-Lit Locations
+; ------------------------------------------------------------------------------
+; tag::forced-lit-example1[]
+look
+x sky
+sleep
+; During the night all DARK_LOCATION features are active:
+look
+x sky
+switch on torch
+x sky
+sleep
+; During the day light sources have no effect:
+switch off torch
+look
+; end::forced-lit-example1[]

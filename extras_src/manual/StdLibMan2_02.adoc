@@ -512,15 +512,42 @@ In some practical cases you might need to enforce the day-night cycle on a `DARK
 This is where the `forced_lit` attribute enters the scene, for it allows to enforce illumination during the day, preventing a `DARK_LOCATION` instance from becoming dark when no lit light sources are present during daylight.
 
 The following example illustrated how to implement a forest that will toggle from day to night, and vice-versa, every time the hero falls asleep.
-We'll implement the forest location as a `DARK_SITE`, so it will have a `ground` and `sky`, and we'll start off the game with forest being lit, instead of the default dark state.
+We'll implement the forest location as a `DARK_SITE`, so it will have a `ground` and `sky`, and we'll start off the game at daytime, with forest being lit, instead of the default dark state.
 
+
+// @TODO: We might have to add `INCREASE described OF THIS.` when performing
+//        the LOOK statements, for completeness' sake? (See #100)
 
 .Example: Day and night cycle using `forced_lit` on a `DARK_LOCATION` (from {forest_alan})
 [source,alan]
---------------------------------------------------------------------------------
+------------------------------------------------------
 include::{utf8dir}/forest.alan[tag=forced-lit-example]
---------------------------------------------------------------------------------
+------------------------------------------------------
 
+
+
+[NOTE]
+======================
+Note that we had to manually execute a `LOOK` statement when the `sleep` verb switches from daytime to nighttime, and vice-versa; the library won't do it automatically, since we're bypassing its `lightsource`-driven mechanism in this case.
+
+Furthermore, when `sleep` switches to nighttime we only execute a `LOOK` if a `lit` `lightsource` instance is found at the Hero's location, because the library will automatically show the `light_goes_off` message when there are none.
+The reason why the library won't execute an automatic `LOOK` is because it's not detecting a change in the illumination status: the location was already lit before, due to the daytime forced-lit status, and entering the night with a lit light source would just keep it lit.
+======================
+
+
+
+[TIP]
+======================
+Executing a `LOOK` when the location becomes lit again is not mandatory, but you might wish to do so for consistency's sake with light sources behavior, and to inform the player about the changed location's description.
+======================
+
+As you can see from the following transcript, the forest only behaves as a `DARK_LOCATION` at nighttime, whereas during the day it's just like a normal lit location:
+
+// @EXTERN TRANSCRIPT: forest.a3ADocLog
+[example,role="gametranscript"]
+============================================================
+include::{utf8dir}/forest.a3ADocLog[tag=forced-lit-example1]
+============================================================
 
 
 ==== {asterisk}{asterisk}{asterisk} ORIGINAL TEXT {asterisk}{asterisk}{asterisk}
