@@ -1,7 +1,10 @@
--# "block_listing.html.haml"            v1.0.0 | 2019/03/01 | by Tristano Ajmone
+-# "block_listing.html.haml"            v1.1.0 | 2020/10/11 | by Tristano Ajmone
 -# =============================================================================
--#            Custom Haml template for Highlight syntax highlighter             
+-#            Custom Haml template for Highlight syntax highlighter
 -# =============================================================================
+-# Template tweaked to preserve first-line indentation via `:preserve` filter.
+-# The original was chewing up the indentation of the first line.
+-#
 -# Adds 'lang=<language>' to <pre> tag to allow using different CSS themes with
 -# each language. Example:
 -#
@@ -40,6 +43,8 @@
         - nowrap = false
       - pre_class << 'nowrap' if nowrap
       %pre{:class=>pre_class, :lang=>pre_lang}
-        %code{:class=>code_class, 'data-lang'=>code_lang}=content
+        %code{:class=>code_class, 'data-lang'=>code_lang}
+          :preserve
+            #{content}
     - else
       %pre{:class=>('nowrap' if nowrap)}=content
