@@ -245,16 +245,6 @@ End the my_game.
 [[sec.dark-places]]
 == Dark Places
 
-[WARNING]
-=====================================
-The original section on ``DARK_LOCATION``s is a bit confusing; it will be much better if we add an introduction briefly explaining that the Library offers two possible ways of handling dark places: via unlit ROOMs, or using DARK_LOCATIONs.
-
-The we should present first the "`Unlit Locations`" subsection, followed by the "`DARK_LOCATION`" section.
-
-In it's current state, were the distinction between the two follows the DARK_LOCATION section, it's confusing because there's too much info at stake; whereas an overview intro would prepare the reader to pick-up better the subtle differences between the two.
-Also, keeping the two approaches separate, each with its own examples, is going to offer a better context, and possibly stick more with the reader.
-=====================================
-
 When it comes to implementing dark locations, the library offers two different solutions:
 
 1. Using an unlit location.
@@ -305,6 +295,19 @@ Because unlit locations have a limited set of ways by which they can become lit,
 On the other hand, the flexibility of ``DARK_LOCATION``s can lead to a more realistic and "`open world`" player experience (with all its pros and cons).
 
 
+.Dark Places Cheat Sheet
+********************************************************************************
+Here are some simple guidelines on which approach to chose for implementing dark locations:
+
+* If you need a location that can only be illuminated via some fixed mechanism (a switch, a timer, etc.), and won't be affected by light source objects, then use the base `location` class (or `ROOM`/`SITE`) and implement some method to toggle the state of its `lit` attribute.
+
+* If you need a location that can only be illuminated by the presence of lit light source objects (e.g. a cave), then use the `DARK_LOCATION` class (or `DARK_ROOM`/`DARK_SITE`).
+
+* If you need an hybrid approach, where besides using light source objects there's also a mechanism to render the location permanently lit (e.g. to implement a day and night cycle, where light sources are required only during the night), then use `DARK_LOCATION` in conjunction with the `forced_lit` attribute (see the <<example.forced_lit,_forest_ example>>).
+********************************************************************************
+
+
+
 
 === Unlit Location
 
@@ -337,8 +340,6 @@ TIP: This default message can be changed by overriding the `check_current_loc_li
 [[sec.unlit-location-basic-example]]
 ==== Basic Usage Example
 
-
-WARNING: Add introductory text for the example.
 
 The example below illustrates how to implement a dark basement that can be lit via a light switch situated at the top of the stairs (i.e. another location).
 This is a common implementation pattern to create dark locations that can be only be lit via some mechanism controlled by the game author -- in this case, a switch, but it could be a timer, an NPC, whatever.
@@ -519,10 +520,9 @@ This is where the `forced_lit` attribute enters the scene, for it allows to enfo
 The following example illustrated how to implement a forest that will toggle from day to night, and vice-versa, every time the hero falls asleep.
 We'll implement the forest location as a `DARK_SITE`, so it will have a `ground` and `sky`, and we'll start off the game at daytime, with forest being lit, instead of the default dark state.
 
-
 // @TODO: We might have to add `INCREASE described OF THIS.` when performing
 //        the LOOK statements, for completeness' sake? (See #100)
-
+[[example.forced_lit]]
 .Example: Day and night cycle using `forced_lit` on a `DARK_LOCATION` (from {forest_alan})
 [source,alan]
 ------------------------------------------------------

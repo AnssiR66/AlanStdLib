@@ -1905,27 +1905,6 @@ You can refer to them in your coding in the way illustrated above when you need 
 </div>
 <div class="sect2">
 <h3 id="sec.dark-places"><a class="anchor" href="#sec.dark-places"></a>8.2. Dark Places</h3>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>The original section on <code>DARK_LOCATION</code>s is a bit confusing; it will be much better if we add an introduction briefly explaining that the Library offers two possible ways of handling dark places: via unlit ROOMs, or using DARK_LOCATIONs.</p>
-</div>
-<div class="paragraph">
-<p>The we should present first the &#8220;Unlit Locations&#8221; subsection, followed by the &#8220;DARK_LOCATION&#8221; section.</p>
-</div>
-<div class="paragraph">
-<p>In it&#8217;s current state, were the distinction between the two follows the DARK_LOCATION section, it&#8217;s confusing because there&#8217;s too much info at stake; whereas an overview intro would prepare the reader to pick-up better the subtle differences between the two.
-Also, keeping the two approaches separate, each with its own examples, is going to offer a better context, and possibly stick more with the reader.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>When it comes to implementing dark locations, the library offers two different solutions:</p>
 </div>
@@ -2009,6 +1988,27 @@ Miscalculated access to light source objects across the map might break the puzz
 <p>Because unlit locations have a limited set of ways by which they can become lit, they provide authors with a more rigid (and reliable) way to control how the player can illuminate them.
 On the other hand, the flexibility of <code>DARK_LOCATION</code>s can lead to a more realistic and &#8220;open world&#8221; player experience (with all its pros and cons).</p>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Dark Places Cheat Sheet</div>
+<div class="paragraph">
+<p>Here are some simple guidelines on which approach to chose for implementing dark locations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If you need a location that can only be illuminated via some fixed mechanism (a switch, a timer, etc.), and won&#8217;t be affected by light source objects, then use the base <code>location</code> class (or <code>ROOM</code>/<code>SITE</code>) and implement some method to toggle the state of its <code>lit</code> attribute.</p>
+</li>
+<li>
+<p>If you need a location that can only be illuminated by the presence of lit light source objects (e.g. a cave), then use the <code>DARK_LOCATION</code> class (or <code>DARK_ROOM</code>/<code>DARK_SITE</code>).</p>
+</li>
+<li>
+<p>If you need an hybrid approach, where besides using light source objects there&#8217;s also a mechanism to render the location permanently lit (e.g. to implement a day and night cycle, where light sources are required only during the night), then use <code>DARK_LOCATION</code> in conjunction with the <code>forced_lit</code> attribute (see the <a href="#example.forced_lit"><em>forest</em> example</a>).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="sect3">
 <h4 id="_unlit_location"><a class="anchor" href="#_unlit_location"></a>8.2.1. Unlit Location</h4>
 <div class="paragraph">
@@ -2077,18 +2077,6 @@ This default message can be changed by overriding the <code>check_current_loc_li
 </div>
 <div class="sect4">
 <h5 id="sec.unlit-location-basic-example"><a class="anchor" href="#sec.unlit-location-basic-example"></a>Basic Usage Example</h5>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Add introductory text for the example.
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>The example below illustrates how to implement a dark basement that can be lit via a light switch situated at the top of the stairs (i.e. another location).
 This is a common implementation pattern to create dark locations that can be only be lit via some mechanism controlled by the game author&#8201;&#8212;&#8201;in this case, a switch, but it could be a timer, an NPC, whatever.</p>
@@ -2468,7 +2456,7 @@ This is where the <code>forced_lit</code> attribute enters the scene, for it all
 <p>The following example illustrated how to implement a forest that will toggle from day to night, and vice-versa, every time the hero falls asleep.
 We&#8217;ll implement the forest location as a <code>DARK_SITE</code>, so it will have a <code>ground</code> and <code>sky</code>, and we&#8217;ll start off the game at daytime, with forest being lit, instead of the default dark state.</p>
 </div>
-<div class="listingblock">
+<div class="listingblock" id="example.forced_lit">
 <div class="title">Example: Day and night cycle using <code>forced_lit</code> on a <code>DARK_LOCATION</code> (from <a href="forest.alan" title="View example source file" target="_blank" rel="noopener"><code>forest.alan</code></a>)</div>
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> forest <span class="hl kwa">IsA</span> DARK_SITE<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Name</span> &#39;The Forest of Doom&#39;<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Is</span> lit<span class="hl kwa">.</span> forced_lit<span class="hl kwa">.</span> daytime<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Has</span> sky_desc <span class="hl str">&quot;Sunny and bright&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Description</span>&#x000A;    <span class="hl kwa">If this is</span> daytime <span class="hl kwa">then</span>&#x000A;      <span class="hl str">&quot;The thick forest canopy absorbs most of the daylight.</span>&#x000A;<span class="hl str">       You&#39;re surrounded by a barrier of vegetation.&quot;</span>&#x000A;    <span class="hl kwa">else</span>&#x000A;      <span class="hl str">&quot;At night the forest looks even more menacing under the trembling</span>&#x000A;<span class="hl str">       light of your torch -- or is it your hand that&#39;s shaking?&quot;</span>&#x000A;    <span class="hl kwa">End if.</span>&#x000A;&#x000A;  <span class="hl kwa">Verb</span> sleep <span class="hl slc">-- Overriding library default verb...</span>&#x000A;    <span class="hl kwa">Does only</span>&#x000A;      <span class="hl str">&quot;You take a nap. When you wake up its&quot;</span>&#x000A;      <span class="hl kwa">If this is</span> daytime&#x000A;        <span class="hl kwa">then</span> <span class="hl str">&quot;nighttime.</span><span class="hl esc">$p</span><span class="hl str">&quot;</span>&#x000A;          <span class="hl kwa">Set</span> sky_desc <span class="hl kwa">of this to</span> <span class="hl str">&quot;Pitch black, no stars, no moon.&quot;</span><span class="hl kwa">.</span>&#x000A;          <span class="hl slc">-- ----------------------------------------------------</span>&#x000A;          <span class="hl slc">-- No need to worry about the `lit` attribute at night!</span>&#x000A;          <span class="hl slc">-- The library will handle it automatically for us.</span>&#x000A;          <span class="hl slc">-- ----------------------------------------------------</span>&#x000A;          <span class="hl kwa">Make this not</span> forced_lit<span class="hl kwa">.</span>&#x000A;          <span class="hl kwa">Make this not</span> daytime<span class="hl kwa">.</span>&#x000A;          <span class="hl slc">-- Only perform a LOOK if there are lit light sources:</span>&#x000A;          <span class="hl kwa">If count IsA</span> lightsource<span class="hl kwa">, is</span> lit<span class="hl kwa">, at</span> <span class="hl kwc">hero</span> <span class="hl opt">&gt;</span> <span class="hl num">0</span>&#x000A;            <span class="hl kwa">then look.</span>&#x000A;          <span class="hl kwa">End if.</span>&#x000A;        <span class="hl kwa">else</span> <span class="hl str">&quot;daytime.&quot;</span>&#x000A;          <span class="hl kwa">Set</span> sky_desc <span class="hl kwa">of this to</span> <span class="hl str">&quot;Sunny and bright.&quot;</span><span class="hl kwa">.</span>&#x000A;          <span class="hl kwa">Make this</span> lit<span class="hl kwa">. Make this</span> forced_lit<span class="hl kwa">.</span>&#x000A;          <span class="hl kwa">Make this</span> daytime<span class="hl kwa">. Look.</span>&#x000A;      <span class="hl kwa">End if.</span>&#x000A;  <span class="hl kwa">End verb</span> sleep<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the</span> forest<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> torch <span class="hl kwa">IsA</span> lightsource <span class="hl kwa">in</span> <span class="hl kwc">Hero</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Is not</span> natural<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span></code></pre>
