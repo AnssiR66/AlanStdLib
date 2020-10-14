@@ -340,12 +340,24 @@ TIP: This default message can be changed by overriding the `check_current_loc_li
 
 WARNING: Add introductory text for the example.
 
+The example below illustrates how to implement a dark basement that can be lit via a light switch situated at the top of the stairs (i.e. another location).
+This is a common implementation pattern to create dark locations that can be only be lit via some mechanism controlled by the game author -- in this case, a switch, but it could be a timer, an NPC, whatever.
+
+
 // @EXTERNALIZE CODE: basement.alan
 .Example: Unlit location (from {basement_alan})
 [source,alan]
 --------------------------------------------------------
 include::{utf8dir}/basement.alan[tag=unlit-room-example]
 --------------------------------------------------------
+
+For the sake of the example, we'll also equip the Hero with a light source, to demonstrate that it doesn't have any effect on unlit locations that are not `DARK_LOCATION` instances:
+
+// @EXTERNALIZE CODE: basement.alan
+[source,alan]
+--------------------------------------------------------------------
+include::{utf8dir}/basement.alan[tag=unlit-room-example-lightsource]
+--------------------------------------------------------------------
 
 As you can see in the following transcript, while the basement location is `NOT lit` the player in unable to see the room's description or carry out any actions that require the presence of light:
 
@@ -355,36 +367,29 @@ As you can see in the following transcript, while the basement location is `NOT 
 include::{utf8dir}/basement.a3ADocLog[tag=unlit-room-example-1]
 ===============================================================
 
-by return upstairs and turning on the light switch the basement becomes `lit`, and the room's normal behavior is restored:
-
+Attempting to use a light source has no effect on this type of dark location:
 
 [example,role="gametranscript"]
 ===============================================================
 include::{utf8dir}/basement.a3ADocLog[tag=unlit-room-example-2]
 ===============================================================
 
-==== {asterisk}{asterisk}{asterisk} ORIGINAL EXAMPLE TEXT {asterisk}{asterisk}{asterisk}
+By returning upstairs and turning on the light switch the basement becomes `lit`, and the room's normal behavior is restored:
 
-[WARNING]
+[example,role="gametranscript"]
+===============================================================
+include::{utf8dir}/basement.a3ADocLog[tag=unlit-room-example-3]
+===============================================================
+
+
+The same mechanism could be extended so that a single light switch toggles the illumination state of more than just a single location, by ensuring that the `turn_on` verb will affect the `lit` attributes of all the target locations.
+
+[TIP]
 =============
-What follows was the original text introducing the above example.
-It was originally inside the `DARK_LOCATION` section, illustrating practical examples of situations in which is more convenient to use an unlit location instead.
-
-Since the chapter on "`Dark Places`" has now been reorganized, the example was moved to the "`Unlit Location`" section, and the original text no longer applies to the context.
-
-I need to find a way to adapt the original text to the new context, because its tips are still useful.
+To create a dark location with a light switch like the above, but also allow the Hero to use light sources to illuminate it (e.g. until he finds the switch), you should use a `DARK_LOCATION` instance instead, and use the `forced_lit` attribute to enforce light in the room when the switch is turned on, even if there are no lit light sources (see <<sec.forced_lit>>).
 =============
 
-Also consider the following case: suppose the hero can make a basement (a location belonging to the class DARK_LOCATION) lighted by turning on a light switch that is at the top of the stairs leading to the basement (a different location from the basement itself).
-We program the light switch object so that when the hero turns it on, the basement will be lit.
-All ok so far.
-However, when the hero enters the actual basement, it will be dark.
-Why?
-Because there is no LIGHTSOURCE present in the basement; we just changed the attribute of the basement location to lit, but this is not enough.
-A check at entering any DARK_LOCATION will make the location dark if no lit LIGHTSOURCE is present.
-You should program a lamp, a LIGHTSOURCE object, to be present in the basement, and this lamp should be made lit at the same time when the hero turns on the switch at the top of the stairs.
-But again, this is more than is necessary to reach the wanted effect.
-Here, like above, you could just make the basement a normal location and not a DARK_LOCATION (and make sure it is NOT lit to start with), and just change the attribute to lit when the hero turns on the light switch:
+
 
 [[sec.dark_location]]
 === DARK_LOCATION

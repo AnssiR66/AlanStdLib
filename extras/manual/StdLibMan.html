@@ -733,7 +733,7 @@ span.play em,
 <div class="details">
 <span id="author" class="author">Anssi Räisänen</span><br>
 <span id="revnumber">version 2.2.0-WIP,</span>
-<span id="revdate">2020-10-10</span>
+<span id="revdate">2020-10-14</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -781,7 +781,6 @@ span.play em,
 <li><a href="#_unlit_location">8.2.1. Unlit Location</a>
 <ul class="sectlevel4">
 <li><a href="#sec.unlit-location-basic-example">Basic Usage Example</a></li>
-<li><a href="#_original_example_text">*** ORIGINAL EXAMPLE TEXT ***</a></li>
 </ul>
 </li>
 <li><a href="#sec.dark_location">8.2.2. DARK_LOCATION</a>
@@ -2090,10 +2089,22 @@ Add introductory text for the example.
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>The example below illustrates how to implement a dark basement that can be lit via a light switch situated at the top of the stairs (i.e. another location).
+This is a common implementation pattern to create dark locations that can be only be lit via some mechanism controlled by the game author&#8201;&#8212;&#8201;in this case, a switch, but it could be a timer, an NPC, whatever.</p>
+</div>
 <div class="listingblock">
 <div class="title">Example: Unlit location (from <a href="basement.alan" title="View example source file" target="_blank" rel="noopener"><code>basement.alan</code></a>)</div>
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> stairs_top <span class="hl kwa">IsA</span> room&#x000A;  <span class="hl kwa">Name</span> &#39;At the top of the stairs&#39;&#x000A;  <span class="hl kwa">Exit</span> down <span class="hl kwa">to</span> basement<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> light_switch <span class="hl kwa">IsA</span> <span class="hl kwb">object</span> <span class="hl kwa">at</span> stairs_top&#x000A;  <span class="hl kwa">Name</span> light switch<span class="hl kwa">. Name</span> light<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Is not</span> &#39;on&#39;<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Verb</span> turn_on&#x000A;    <span class="hl kwa">Does only</span>&#x000A;      <span class="hl kwa">If</span> light_switch <span class="hl kwa">is not</span> &#39;on&#39;&#x000A;        <span class="hl kwa">then make</span> light_switch &#39;on&#39;<span class="hl kwa">.</span>&#x000A;             <span class="hl kwa">make</span> basement lit<span class="hl kwa">.</span>&#x000A;             <span class="hl str">&quot;You switch on the basement light.&quot;</span>&#x000A;        <span class="hl kwa">else</span> <span class="hl str">&quot;The light is already switched on.&quot;</span>&#x000A;      <span class="hl kwa">End if.</span>&#x000A;  <span class="hl kwa">End verb.</span>&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> basement <span class="hl kwa">IsA</span> ROOM <span class="hl slc">-- and not a DARK_LOCATION</span>&#x000A;  <span class="hl kwa">Is not</span> lit<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Description</span> <span class="hl str">&quot;Cobwebs and old junk are the only things you see here.&quot;</span>&#x000A;  <span class="hl kwa">Exit</span> up <span class="hl kwa">to</span> stairs_top<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the</span> basement<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For the sake of the example, we&#8217;ll also equip the Hero with a light source, to demonstrate that it doesn&#8217;t have any effect on unlit locations that are not <code>DARK_LOCATION</code> instances:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> torch <span class="hl kwa">IsA</span> lightsource <span class="hl kwa">in</span> <span class="hl kwc">Hero</span><span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Is not</span> natural<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2113,7 +2124,23 @@ It is too dark to see.<br></p>
 </div>
 </div>
 <div class="paragraph">
-<p>by return upstairs and turning on the light switch the basement becomes <code>lit</code>, and the room&#8217;s normal behavior is restored:</p>
+<p>Attempting to use a light source has no effect on this type of dark location:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>&gt; <em>switch on torch</em><br>
+You turn on the torch.<br></p>
+</div>
+<div class="paragraph">
+<p>&gt; <em>look</em><br>
+Basement<br>
+It is pitch black. You can&#8217;t see anything at all.<br></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>By returning upstairs and turning on the light switch the basement becomes <code>lit</code>, and the room&#8217;s normal behavior is restored:</p>
 </div>
 <div class="exampleblock gametranscript">
 <div class="content">
@@ -2137,41 +2164,22 @@ You notice nothing unusual about the floor.<br></p>
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p>The same mechanism could be extended so that a single light switch toggles the illumination state of more than just a single location, by ensuring that the <code>turn_on</code> verb will affect the <code>lit</code> attributes of all the target locations.</p>
 </div>
-<div class="sect4">
-<h5 id="_original_example_text"><a class="anchor" href="#_original_example_text"></a>*** ORIGINAL EXAMPLE TEXT ***</h5>
-<div class="admonitionblock warning">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>What follows was the original text introducing the above example.
-It was originally inside the <code>DARK_LOCATION</code> section, illustrating practical examples of situations in which is more convenient to use an unlit location instead.</p>
-</div>
-<div class="paragraph">
-<p>Since the chapter on &#8220;Dark Places&#8221; has now been reorganized, the example was moved to the &#8220;Unlit Location&#8221; section, and the original text no longer applies to the context.</p>
-</div>
-<div class="paragraph">
-<p>I need to find a way to adapt the original text to the new context, because its tips are still useful.</p>
+<p>To create a dark location with a light switch like the above, but also allow the Hero to use light sources to illuminate it (e.g. until he finds the switch), you should use a <code>DARK_LOCATION</code> instance instead, and use the <code>forced_lit</code> attribute to enforce light in the room when the switch is turned on, even if there are no lit light sources (see <a href="#sec.forced_lit">Sec. 8.2.2.2, &#8220;Forced-Lit Locations&#8221;</a>).</p>
 </div>
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>Also consider the following case: suppose the hero can make a basement (a location belonging to the class DARK_LOCATION) lighted by turning on a light switch that is at the top of the stairs leading to the basement (a different location from the basement itself).
-We program the light switch object so that when the hero turns it on, the basement will be lit.
-All ok so far.
-However, when the hero enters the actual basement, it will be dark.
-Why?
-Because there is no LIGHTSOURCE present in the basement; we just changed the attribute of the basement location to lit, but this is not enough.
-A check at entering any DARK_LOCATION will make the location dark if no lit LIGHTSOURCE is present.
-You should program a lamp, a LIGHTSOURCE object, to be present in the basement, and this lamp should be made lit at the same time when the hero turns on the switch at the top of the stairs.
-But again, this is more than is necessary to reach the wanted effect.
-Here, like above, you could just make the basement a normal location and not a DARK_LOCATION (and make sure it is NOT lit to start with), and just change the attribute to lit when the hero turns on the light switch:</p>
 </div>
 </div>
 </div>
@@ -3907,7 +3915,7 @@ Adding</p>
 <div class="listingblock">
 <div class="title">Example: Custom door description (from <a href="garden2.alan" title="View example source file" target="_blank" rel="noopener"><code>garden2.alan</code></a>)</div>
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> ex <span class="hl str">&quot;It&#39;s a white wooden door leading into the house.&quot;</span><span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan">  <span class="hl kwa">HAS</span> ex <span class="hl str">&quot;It&#39;s a white wooden door leading into the house.&quot;</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">

@@ -37,4 +37,11 @@ The basement IsA ROOM -- and not a DARK_LOCATION
   Exit up to stairs_top.
 End the basement.
 
+-- We'll provide the Hero with a light source, to demonstrate that it doesn't
+-- have any effect on unlit locations that are not DARK_LOCATION instances.
+
+The torch IsA lightsource in Hero.
+  Is not natural.
+End the.
+
 Start at stairs_top.

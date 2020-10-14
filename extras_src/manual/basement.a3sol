@@ -3,8 +3,12 @@ down
 x floor
 ; end::unlit-room-example-1[]
 ; tag::unlit-room-example-2[]
+switch on torch
+look
+; end::unlit-room-example-2[]
+; tag::unlit-room-example-3[]
 up
 turn on light
 down
 x floor
-; end::unlit-room-example-2[]
+; end::unlit-room-example-3[]

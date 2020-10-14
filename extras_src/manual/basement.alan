@@ -41,4 +41,13 @@ The basement IsA ROOM -- and not a DARK_LOCATION
 End the basement.
 -- end::unlit-room-example[]
 
+-- We'll provide the Hero with a light source, to demonstrate that it doesn't
+-- have any effect on unlit locations that are not DARK_LOCATION instances.
+
+-- tag::unlit-room-example-lightsource[]
+The torch IsA lightsource in Hero.
+  Is not natural.
+End the.
+-- end::unlit-room-example-lightsource[]
+
 Start at stairs_top.
