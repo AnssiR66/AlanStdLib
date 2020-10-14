@@ -62,7 +62,6 @@ Likewise, site objects (`ground` and `sky`) are defined directly on the `outdoor
 ============================================
 If you've defined your own custom `location` subclass, you can easily transform its instances into rooms and sites by locating them at `indoor` and `outdoor`, respectively:
 
-// @EXTERNALIZE CODE: _custom-room-site-instances.alan
 [source,alan]
 ----------------------------------------------------------------------------
 include::{utf8dir}/_custom-room-site-instances.alan[tag=room-site-instances]
@@ -269,7 +268,7 @@ It is pitch black. You can't see anything at all.
 
 Let's now look at their significant differences -- skipping the obvious and trivial fact that locations are lit by default, whereas `DARK_LOCATION` instances are unlit.
 
-In order to be lit, a `DARK_LOCATION` requires the presence of a `lightsource` object (e.g. a candle, a torch, whatever).
+In order to be lit, a `DARK_LOCATION` requires the presence of a `lit` `lightsource` object (e.g. a candle, a torch, whatever).
 The library constantly checks for the presence of `lightsource` objects in a `DARK_LOCATION`, and automatically sets or clears its `lit` attribute whenever a light source enters or leaves the location (e.g. not only via the hero, but also an entering or leaving NPC that is carrying a light source, or the light source materializing or disappearing by other means).
 
 Unlike unlit locations, which have specific mechanisms for determining the transition from lit to unlit (e.g. a switch, a timer, etc.), a `DARK_LOCATION` can be lit by _any_ light source -- which has far-reaching implications on how an adventure might unfold.
@@ -502,16 +501,6 @@ include::{utf8dir}/sewers.a3ADocLog[tag=dark-location-example4]
 [[sec.forced_lit]]
 ==== Forced-Lit Locations
 
-[WARNING]
-==============================
-TODOs:
-
-* [x] Explain the function of the `forced_lit` attribute on `DARK_LOCATION` instances.
-* [x] Create `forest.alan` example:
-** [x] Include source excerpts.
-** [ ] Include transcripts excerpts.
-==============================
-
 The `DARK_LOCATION` class is usually employed to simulate places that are _naturally_ dark, i.e. where the absence of light is a natural factor -- electrically illuminated places are usually implemented using instances of `location` (or `ROOM`/`SITE`) and controlling their illumination by manipulating the `lit` attribute via switches, etc.
 
 In some practical cases you might need to enforce the day-night cycle on a `DARK_LOCATION`, which should then be dark only during the night.
@@ -555,16 +544,15 @@ include::{utf8dir}/forest.a3ADocLog[tag=forced-lit-example1]
 ============================================================
 
 
+=== Dual Location Approach
 
-
-
-==== {asterisk}{asterisk}{asterisk} DUAL-LOCATION TRICK {asterisk}{asterisk}{asterisk}
-
-Note that you cannot change the name of a location mid-game.
-Therefore, if you name a dark location '`Darkness`' and wish to make it lit at some point in the game, its name will still be '`Darkness`' even if the location description can be changed to describe the illuminated location.
+In Alan you cannot change the name of a location mid-game.
+Therefore, if you name a dark location '`Darkness`' and wish to make it lit at some point in the game, its name will still remain '`Darkness`'.
 To show a change in the location name, you must locate the hero in another location when the dark location is lit.
 For example,
 
+
+// @EXTERNALIZE CODE: treasure_chamber 1
 [source,alan]
 --------------------------------------------------------------------------------
 The lantern IsA lightsource
@@ -580,6 +568,7 @@ End the.
 Alternatively, you can also use a rule, for example
 
 
+// @EXTERNALIZE CODE: treasure_chamber 2
 [source,alan]
 --------------------------------------------------------------------------------
 When lantern is lit
@@ -587,63 +576,9 @@ When lantern is lit
 then locate hero at treasure_chamber.
 --------------------------------------------------------------------------------
 
+This trick will work with both unlit locations and `DARK_LOCATION` instances.
 
 
-==== {asterisk}{asterisk}{asterisk} ONE-SWITCH FROM MANY UNLIT LOCATIONS EXAMPLE {asterisk}{asterisk}{asterisk}
-
-[WARNING]
-=========================================================
-This example and the rationale behind might need to be revised now that we have the `forced_lit` attribute, because the below statement is no longer true:
-
-____
-If we had used the DARK_LOCATION class above, all locations to be lighted should have had a LIGHTSOURCE object present in them, and all these LIGHTSOURCE objects would have needed to be changed to lit, which would have meant extra programming.
-____
-
-Now it's enough to make all these DARK_LOCATIONs `lit` and `forced_lit`, and they won't become dark even if there are no lit light sources in them.
-
-Effectively, the `forced_lit` attribute grants the author more freedom of action in this respect.
-=========================================================
-
-
-Note that you won't always need to define a dark location to be a member of the subclass DARK_LOCATION.
-This applies in cases when you don't wish to implement LIGHTSOURCE objects to make locations lit or not lit. (All location instances have by default the attribute lit and they can be made NOT lit when needed.)
-For example, suppose you want all dark locations in the game to become lighted simultaneously.
-It can be done for example like this:
-
-[source,alan]
---------------------------------------------------------------------------------
-The main_power_switch IsA device at lobby
-  Verb switch_on
-    Does only
-      For each dl isa location, is not lit
-        do
-        make dl lit.
-      End each.
-  ENd verb.
-ENd the.
---------------------------------------------------------------------------------
-
-If we had used the DARK_LOCATION class above, all locations to be lighted should have had a LIGHTSOURCE object present in them, and all these LIGHTSOURCE objects would have needed to be changed to lit, which would have meant extra programming.
-
-
-[WARNING]
-=========================================================
-The above text doesn't mention the fact that only LIGHTSOURCE objects which are `NOT broken` should be set to `lit`, because wihtout that check the author would be bypassing the library safeguards which prevent broken light sources to become lit again (e.g. the verbs turn/switch on carry out these checks).
-
-When re-utilizing the above text, ensure to fix that aspect!
-=========================================================
-
-
-Even normal locations, when not lit, will have the description "`It is pitch black.
-You can't see anything at all.`", so you can use the above method with no worries.
-The only reason for a specific `DARK_LOCATION` subclass to exist is to make it automatic for them to be lit or NOT lit when the hero is carrying around and/or turning on and off LIGHTSOURCES so that the game author won't constantly need to remember to change the attribute of the location to lit or NOT lit in all imaginable cases.
-
-
-
-
-==== {asterisk}{asterisk}{asterisk} RECAP {asterisk}{asterisk}{asterisk}
-
-To recap: use the DARK_LOCATION class when a LIGHTSOURCE object determines whether a location is lit or dark; swap between the lit/NOT lit attributes, inherent to all locations, when you don't want to refer to any light sources affecting whether a location is lit or dark.
 
 [[sec.visited-and-described]]
 == Visited and Described

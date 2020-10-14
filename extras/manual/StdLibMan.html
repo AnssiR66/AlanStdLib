@@ -733,7 +733,7 @@ span.play em,
 <div class="details">
 <span id="author" class="author">Anssi Räisänen</span><br>
 <span id="revnumber">version 2.2.0-WIP,</span>
-<span id="revdate">2020-10-14</span>
+<span id="revdate">2020-10-15</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -787,11 +787,9 @@ span.play em,
 <ul class="sectlevel4">
 <li><a href="#sec.dark_location-basic-example">Basic Usage Example</a></li>
 <li><a href="#sec.forced_lit">Forced-Lit Locations</a></li>
-<li><a href="#_dual_location_trick">*** DUAL-LOCATION TRICK ***</a></li>
-<li><a href="#_one_switch_from_many_unlit_locations_example">*** ONE-SWITCH FROM MANY UNLIT LOCATIONS EXAMPLE ***</a></li>
-<li><a href="#_recap">*** RECAP ***</a></li>
 </ul>
 </li>
+<li><a href="#_dual_location_approach">8.2.3. Dual Location Approach</a></li>
 </ul>
 </li>
 <li><a href="#sec.visited-and-described">8.3. Visited and Described</a>
@@ -1949,7 +1947,7 @@ Therefore, any location can be turned dark (i.e. <em>unlit</em>) by clearing its
 <p>Let&#8217;s now look at their significant differences&#8201;&#8212;&#8201;skipping the obvious and trivial fact that locations are lit by default, whereas <code>DARK_LOCATION</code> instances are unlit.</p>
 </div>
 <div class="paragraph">
-<p>In order to be lit, a <code>DARK_LOCATION</code> requires the presence of a <code>lightsource</code> object (e.g. a candle, a torch, whatever).
+<p>In order to be lit, a <code>DARK_LOCATION</code> requires the presence of a <code>lit</code> <code>lightsource</code> object (e.g. a candle, a torch, whatever).
 The library constantly checks for the presence of <code>lightsource</code> objects in a <code>DARK_LOCATION</code>, and automatically sets or clears its <code>lit</code> attribute whenever a light source enters or leaves the location (e.g. not only via the hero, but also an entering or leaving NPC that is carrying a light source, or the light source materializing or disappearing by other means).</p>
 </div>
 <div class="paragraph">
@@ -2411,40 +2409,6 @@ eyes are itching and your lungs burning.<br></p>
 </div>
 <div class="sect4">
 <h5 id="sec.forced_lit"><a class="anchor" href="#sec.forced_lit"></a>Forced-Lit Locations</h5>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>TODOs:</p>
-</div>
-<div class="ulist checklist">
-<ul class="checklist">
-<li>
-<p><i class="fa fa-check-square-o"></i> Explain the function of the <code>forced_lit</code> attribute on <code>DARK_LOCATION</code> instances.</p>
-</li>
-<li>
-<p><i class="fa fa-check-square-o"></i> Create <code>forest.alan</code> example:</p>
-<div class="ulist checklist">
-<ul class="checklist">
-<li>
-<p><i class="fa fa-check-square-o"></i> Include source excerpts.</p>
-</li>
-<li>
-<p><i class="fa fa-square-o"></i> Include transcripts excerpts.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>The <code>DARK_LOCATION</code> class is usually employed to simulate places that are <em>naturally</em> dark, i.e. where the absence of light is a natural factor&#8201;&#8212;&#8201;electrically illuminated places are usually implemented using instances of <code>location</code> (or <code>ROOM</code>/<code>SITE</code>) and controlling their illumination by manipulating the <code>lit</code> attribute via switches, etc.</p>
 </div>
@@ -2562,11 +2526,12 @@ by a barrier of vegetation.<br></p>
 </div>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_dual_location_trick"><a class="anchor" href="#_dual_location_trick"></a>*** DUAL-LOCATION TRICK ***</h5>
+</div>
+<div class="sect3">
+<h4 id="_dual_location_approach"><a class="anchor" href="#_dual_location_approach"></a>8.2.3. Dual Location Approach</h4>
 <div class="paragraph">
-<p>Note that you cannot change the name of a location mid-game.
-Therefore, if you name a dark location &#8216;Darkness&#8217; and wish to make it lit at some point in the game, its name will still be &#8216;Darkness&#8217; even if the location description can be changed to describe the illuminated location.
+<p>In Alan you cannot change the name of a location mid-game.
+Therefore, if you name a dark location &#8216;Darkness&#8217; and wish to make it lit at some point in the game, its name will still remain &#8216;Darkness&#8217;.
 To show a change in the location name, you must locate the hero in another location when the dark location is lit.
 For example,</p>
 </div>
@@ -2583,78 +2548,8 @@ For example,</p>
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">When</span> lantern <span class="hl kwa">is</span> lit&#x000A;  <span class="hl kwa">and</span> <span class="hl kwc">hero</span> <span class="hl kwa">at</span> darkness&#x000A;<span class="hl kwa">then locate</span> <span class="hl kwc">hero</span> <span class="hl kwa">at</span> treasure_chamber<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
-</div>
-<div class="sect4">
-<h5 id="_one_switch_from_many_unlit_locations_example"><a class="anchor" href="#_one_switch_from_many_unlit_locations_example"></a>*** ONE-SWITCH FROM MANY UNLIT LOCATIONS EXAMPLE ***</h5>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
 <div class="paragraph">
-<p>This example and the rationale behind might need to be revised now that we have the <code>forced_lit</code> attribute, because the below statement is no longer true:</p>
-</div>
-<div class="quoteblock">
-<blockquote>
-<div class="paragraph">
-<p>If we had used the DARK_LOCATION class above, all locations to be lighted should have had a LIGHTSOURCE object present in them, and all these LIGHTSOURCE objects would have needed to be changed to lit, which would have meant extra programming.</p>
-</div>
-</blockquote>
-</div>
-<div class="paragraph">
-<p>Now it&#8217;s enough to make all these DARK_LOCATIONs <code>lit</code> and <code>forced_lit</code>, and they won&#8217;t become dark even if there are no lit light sources in them.</p>
-</div>
-<div class="paragraph">
-<p>Effectively, the <code>forced_lit</code> attribute grants the author more freedom of action in this respect.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Note that you won&#8217;t always need to define a dark location to be a member of the subclass DARK_LOCATION.
-This applies in cases when you don&#8217;t wish to implement LIGHTSOURCE objects to make locations lit or not lit. (All location instances have by default the attribute lit and they can be made NOT lit when needed.)
-For example, suppose you want all dark locations in the game to become lighted simultaneously.
-It can be done for example like this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> main_power_switch <span class="hl kwa">IsA</span> device <span class="hl kwa">at</span> lobby&#x000A;  <span class="hl kwa">Verb</span> switch_on&#x000A;    <span class="hl kwa">Does only</span>&#x000A;      <span class="hl kwa">For each</span> dl <span class="hl kwa">isa</span> <span class="hl kwb">location</span><span class="hl kwa">, is not</span> lit&#x000A;        <span class="hl kwa">do</span>&#x000A;        <span class="hl kwa">make</span> dl lit<span class="hl kwa">.</span>&#x000A;      <span class="hl kwa">End each.</span>&#x000A;  <span class="hl kwa">ENd verb.</span>&#x000A;<span class="hl kwa">ENd the.</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If we had used the DARK_LOCATION class above, all locations to be lighted should have had a LIGHTSOURCE object present in them, and all these LIGHTSOURCE objects would have needed to be changed to lit, which would have meant extra programming.</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>The above text doesn&#8217;t mention the fact that only LIGHTSOURCE objects which are <code>NOT broken</code> should be set to <code>lit</code>, because wihtout that check the author would be bypassing the library safeguards which prevent broken light sources to become lit again (e.g. the verbs turn/switch on carry out these checks).</p>
-</div>
-<div class="paragraph">
-<p>When re-utilizing the above text, ensure to fix that aspect!</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Even normal locations, when not lit, will have the description &#8220;It is pitch black.
-You can&#8217;t see anything at all.&#8221;, so you can use the above method with no worries.
-The only reason for a specific <code>DARK_LOCATION</code> subclass to exist is to make it automatic for them to be lit or NOT lit when the hero is carrying around and/or turning on and off LIGHTSOURCES so that the game author won&#8217;t constantly need to remember to change the attribute of the location to lit or NOT lit in all imaginable cases.</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_recap"><a class="anchor" href="#_recap"></a>*** RECAP ***</h5>
-<div class="paragraph">
-<p>To recap: use the DARK_LOCATION class when a LIGHTSOURCE object determines whether a location is lit or dark; swap between the lit/NOT lit attributes, inherent to all locations, when you don&#8217;t want to refer to any light sources affecting whether a location is lit or dark.</p>
-</div>
+<p>This trick will work with both unlit locations and <code>DARK_LOCATION</code> instances.</p>
 </div>
 </div>
 </div>
