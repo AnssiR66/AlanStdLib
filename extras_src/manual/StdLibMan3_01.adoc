@@ -43,7 +43,7 @@ The synonyms and built-in syntaxes are listed in connection with each verb.
 
 [cols="m,d,d",options="header",format=dsv]
 |===============================================================================
-include::table_verbs.dsv[]
+include::StdLibMan-inc_table_verbs.dsv[]
 |===============================================================================
 
 

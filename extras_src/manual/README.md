@@ -27,6 +27,7 @@ The entire original PDF was ported to AsciiDoc, split into one file per chapter,
 Currently the AsciiDoc sources are organized in the following way, but will be changing often during the final editing stages:
 
 - [`StdLibMan.asciidoc`][man] — main document that imports all other sources of the Manual:
+    + [`StdLibMan-inc_attributes.adoc`][inc_attr] — custom attributes definitions.
     + [`StdLibMan0_intro.adoc`][man0] — _Introduction_
     + [`StdLibMan1.adoc`][man1] — PART I — __Getting Started__
         * [`StdLibMan1_01.adoc`][man1_1] — _Importing the Library_
@@ -43,6 +44,7 @@ Currently the AsciiDoc sources are organized in the following way, but will be c
         * [`StdLibMan2_06.adoc`][man2_6] — _Additional THINGs Attributes_
     + [`StdLibMan3.adoc`][man3] — PART III — __Library Verbs__
         * [`StdLibMan3_01.adoc`][man3_1] — _Using Verbs and Commands_
+            - [`StdLibMan-inc_table_verbs.dsv`][inc_verbs] — DSV (delimiter-separated values) data table of library defined verbs.
     + [`StdLibMan4.adoc`][man4] — PART IV — __Library Messages__
         * [`StdLibMan4_01.adoc`][man4_1] — _Runtime Messages_
         * [`StdLibMan4_02.adoc`][man4_2] — _Library Messages_
@@ -117,5 +119,9 @@ It must be manually fixed, element by element, using the original PDF as a visua
 [manA]: ./StdLibManA.adoc
 [manA_1]: ./StdLibManA_01.adoc
 [manA_2]: ./StdLibManA_02.adoc
+
+[inc_attr]: ./StdLibMan-inc_attributes.adoc "View the source file with custom attributes definitions"
+
+[inc_verbs]: ./StdLibMan-inc_table_verbs.dsv "View the DSV data table of the StdLib verbs"
 
 <!-- EOF -->
