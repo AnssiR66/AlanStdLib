@@ -274,9 +274,9 @@ END THE.
 
 
 // @ADDED:
-[sec.door]
-=== DOOR
 
+[[sec.door]]
+=== DOOR
 
 DOOR can be opened, closed, locked and unlocked.
 It is by default closed (= NOT open) and NOT locked.

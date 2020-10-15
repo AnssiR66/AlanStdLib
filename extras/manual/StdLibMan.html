@@ -835,19 +835,19 @@ span.play em,
 </ul>
 </li>
 <li><a href="#sec.device">11.1.2. DEVICE</a></li>
-<li><a href="#_door">DOOR</a>
+<li><a href="#sec.door">11.1.3. DOOR</a>
 <ul class="sectlevel4">
 <li><a href="#sec.locked-doors">Locked doors and keys</a></li>
 </ul>
 </li>
-<li><a href="#sec.liquid">11.1.3. LIQUID</a></li>
-<li><a href="#sec.lightsource">11.1.4. LIGHTSOURCE</a></li>
-<li><a href="#sec.listed_container">11.1.5. LISTED_CONTAINER</a></li>
-<li><a href="#_putting_things_in_containers">11.1.6. Putting things in containers</a></li>
-<li><a href="#sec.sound">11.1.7. SOUND</a></li>
-<li><a href="#sec.supporter">11.1.8. SUPPORTER</a></li>
-<li><a href="#sec.weapon">11.1.9. WEAPON</a></li>
-<li><a href="#sec.window">11.1.10. WINDOW</a></li>
+<li><a href="#sec.liquid">11.1.4. LIQUID</a></li>
+<li><a href="#sec.lightsource">11.1.5. LIGHTSOURCE</a></li>
+<li><a href="#sec.listed_container">11.1.6. LISTED_CONTAINER</a></li>
+<li><a href="#_putting_things_in_containers">11.1.7. Putting things in containers</a></li>
+<li><a href="#sec.sound">11.1.8. SOUND</a></li>
+<li><a href="#sec.supporter">11.1.9. SUPPORTER</a></li>
+<li><a href="#sec.weapon">11.1.10. WEAPON</a></li>
+<li><a href="#sec.window">11.1.11. WINDOW</a></li>
 </ul>
 </li>
 </ul>
@@ -2969,7 +2969,8 @@ Which of the two methods to use is completely voluntary and up to the game autho
 <ul>
 <li>
 <p><code>PERSON</code></p>
-</li>
+<div class="ulist">
+<ul>
 <li>
 <p><code>MALE</code></p>
 </li>
@@ -2978,18 +2979,26 @@ Which of the two methods to use is completely voluntary and up to the game autho
 </li>
 </ul>
 </div>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p>There are two points where a PERSON differs from an ordinary ACTOR.
-Firstly, a PERSON has the ability to talk, in other words the verbs ask, ask_for, say_to, talk_to and tell work with PERSONs only (or with ACTORs that have the attribute CAN talk).
+Firstly, a PERSON has the ability to talk, in other words the verbs <code>ask</code>, <code>ask_for</code>, <code>say_to</code>, <code>talk_to</code> and <code>tell</code> work with PERSONs only (or with ACTORs that have the attribute <code>CAN talk</code>).
 Secondly, ACTORs and PERSONs are described differently when their inventory is empty.
-PERSONs are described as for example "The man is empty-handed." while other ACTORs are described as for example "The dog is not carrying anything."</p>
+PERSONs are described as for example &#8220;The man is empty-handed.&#8221; while other ACTORs are described as for example &#8220;The dog is not carrying anything.&#8221;</p>
 </div>
 <div class="paragraph">
 <p>Based on the above, the following codes are interchangeable (except as to how the empty inventory is described):</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> bob <span class="hl kwa">ISA</span> <span class="hl kwb">ACTOR</span>&#x000A;  <span class="hl kwa">CAN</span> talk<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE</span> bob<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">THE</span> bob <span class="hl kwa">ISA</span> PERSON&#x000A;<span class="hl kwa">END THE</span> bob<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> bob <span class="hl kwa">ISA</span> <span class="hl kwb">ACTOR</span>&#x000A;  <span class="hl kwa">CAN</span> talk<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">END THE</span> bob<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> bob <span class="hl kwa">ISA</span> PERSON&#x000A;<span class="hl kwa">END THE</span> bob<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3040,7 +3049,7 @@ If you just use PERSON or ACTOR instead of MALE or FEMALE, you should remember t
 </div>
 </div>
 <div class="paragraph">
-<p>Verbs push, push_with, rub, scratch, search, touch and touch_with won&#8217;t have successful outcomes with animate objects (= ACTORS).
+<p>Verbs <code>push</code>, <code>push_with</code>, <code>rub</code>, <code>scratch</code>, <code>search</code>, <code>touch</code> and <code>touch_with</code> won&#8217;t have successful outcomes with animate objects (= ACTORS).
 To ensure this, the (NOT) inanimate attribute is used.
 All things other than ACTORs are inanimate.</p>
 </div>
@@ -3137,7 +3146,7 @@ By default, all ACTORs are NOT named.</p>
 <div class="paragraph">
 <p>An ACTOR only gives something to the hero if it is in a compliant mood.
 In practice, this happens by default only when the hero asks the ACTOR for something.
-For example, take_from is not successful by default with ACTORs.</p>
+For example, <code>take_from</code> is not successful by default with ACTORs.</p>
 </div>
 <div class="exampleblock gametranscript">
 <div class="content">
@@ -3159,7 +3168,7 @@ That seems to belong to the man.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The verb ask_for works by default, whether the NPC is compliant or not:</p>
+<p>The verb <code>ask_for</code> works by default, whether the NPC is compliant or not:</p>
 </div>
 <div class="exampleblock gametranscript">
 <div class="content">
@@ -3201,7 +3210,7 @@ You eat all of the apple.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>To disable even the verb ask_for, so that the NPC won&#8217;t give you something even if you ask for it, use DOES ONLY at the ACTOR instance:</p>
+<p>To disable even the verb <code>ask_for</code>, so that the NPC won&#8217;t give you something even if you ask for it, use DOES ONLY at the ACTOR instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3766,8 +3775,8 @@ You have to add it manually:</p>
 </div>
 </div>
 </div>
-<div class="sect3 door">
-<h4 id="_door"><a class="anchor" href="#_door"></a>DOOR</h4>
+<div class="sect3">
+<h4 id="sec.door"><a class="anchor" href="#sec.door"></a>11.1.3. DOOR</h4>
 <div class="paragraph">
 <p>DOOR can be opened, closed, locked and unlocked.
 It is by default closed (= NOT open) and NOT locked.
@@ -3881,7 +3890,7 @@ That&#8217;s why it is much shorter to implement the otherside instance of a DOO
 </div>
 </div>
 <div class="sect3">
-<h4 id="sec.liquid"><a class="anchor" href="#sec.liquid"></a>11.1.3. LIQUID</h4>
+<h4 id="sec.liquid"><a class="anchor" href="#sec.liquid"></a>11.1.4. LIQUID</h4>
 <div class="paragraph">
 <p>LIQUID can be taken only if it is in a container.
 You can fill something with it, and you can pour it somewhere.
@@ -3905,7 +3914,7 @@ Consequently, <span class="play">&gt; <em>empty bottle</em></span> will work but
 </div>
 </div>
 <div class="sect3">
-<h4 id="sec.lightsource"><a class="anchor" href="#sec.lightsource"></a>11.1.4. LIGHTSOURCE</h4>
+<h4 id="sec.lightsource"><a class="anchor" href="#sec.lightsource"></a>11.1.5. LIGHTSOURCE</h4>
 <div class="paragraph">
 <p>LIGHTSOURCE is <code>natural</code> or <code>NOT natural</code> (a natural LIGHTSOURCE is for example a match or a torch).
 It can be turned on and off, lighted and extinguished (= put out) if it is not broken.
@@ -3988,7 +3997,7 @@ It is an elegant table lamp with a blue lampshade. It is currently off.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="sec.listed_container"><a class="anchor" href="#sec.listed_container"></a>11.1.5. LISTED_CONTAINER</h4>
+<h4 id="sec.listed_container"><a class="anchor" href="#sec.listed_container"></a>11.1.6. LISTED_CONTAINER</h4>
 <div class="paragraph">
 <p><code>LISTED_CONTAINER</code> is an object which has the <code>container</code> property.
 The contents of a <code>LISTED_CONTAINER</code> will be listed both after <span class="play">&gt; <em>look</em></span> (= in the room description), <span class="play">&gt; <em>look in</em></span> and <span class="play">&gt; <em>examine</em></span>, if it is open.
@@ -4057,7 +4066,7 @@ To change this, declare for example</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_putting_things_in_containers"><a class="anchor" href="#_putting_things_in_containers"></a>11.1.6. Putting things in containers</h4>
+<h4 id="_putting_things_in_containers"><a class="anchor" href="#_putting_things_in_containers"></a>11.1.7. Putting things in containers</h4>
 <div class="paragraph">
 <p>It is only possible to put something into a container if this something is included in the object.</p>
 </div>
@@ -4104,7 +4113,7 @@ This would make the above coding unnecessary but would make the <code>take</code
 </div>
 </div>
 <div class="sect3">
-<h4 id="sec.sound"><a class="anchor" href="#sec.sound"></a>11.1.7. SOUND</h4>
+<h4 id="sec.sound"><a class="anchor" href="#sec.sound"></a>11.1.8. SOUND</h4>
 <div class="paragraph">
 <p><code>SOUND</code> can be listened to but not examined, searched, smelled or manipulated.
 It cannot initially be turned on or off, this has to be implemented manually by giving the sound the <code>switchable</code> attribute.</p>
@@ -4116,7 +4125,7 @@ It cannot initially be turned on or off, this has to be implemented manually by 
 </div>
 </div>
 <div class="sect3">
-<h4 id="sec.supporter"><a class="anchor" href="#sec.supporter"></a>11.1.8. SUPPORTER</h4>
+<h4 id="sec.supporter"><a class="anchor" href="#sec.supporter"></a>11.1.9. SUPPORTER</h4>
 <div class="paragraph">
 <p><code>SUPPORTER</code>: You can put things on a SUPPORTER and you can stand, sit down or lie on it.</p>
 </div>
@@ -4252,7 +4261,7 @@ It is the author&#8217;s responsibility to make certain objects in the location 
 </div>
 </div>
 <div class="sect3">
-<h4 id="sec.weapon"><a class="anchor" href="#sec.weapon"></a>11.1.9. WEAPON</h4>
+<h4 id="sec.weapon"><a class="anchor" href="#sec.weapon"></a>11.1.10. WEAPON</h4>
 <div class="paragraph">
 <p>WEAPON is <code>fireable</code> (for example a cannon) or <code>NOT fireable</code> (for example a baseball bat), the latter being the default.
 The verbs <code>attack_with</code> and <code>kill_with</code> won&#8217;t have successful outcomes if the second parameter in them is not a WEAPON.
@@ -4268,7 +4277,7 @@ The verbs <code>attack_with</code> and <code>kill_with</code> won&#8217;t have s
 </div>
 </div>
 <div class="sect3">
-<h4 id="sec.window"><a class="anchor" href="#sec.window"></a>11.1.10. WINDOW</h4>
+<h4 id="sec.window"><a class="anchor" href="#sec.window"></a>11.1.11. WINDOW</h4>
 <div class="paragraph">
 <p>WINDOW can be opened, closed, looked through and out of.
 It will be described as being either open or closed when examined, by default.
@@ -7333,7 +7342,7 @@ Moreover, you should add the following check to each affected verb:</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>translate all the messages in the file <code>lib_definitions.i</code>:</p>
+<p>translate all the messages in the file <code>lib_message_library.i</code>:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -7358,7 +7367,7 @@ Moreover, you should add the following check to each affected verb:</p>
 </div>
 </li>
 <li>
-<p>translate all the <code>CAN [verb]</code> attributes in the file <code>lib_definitions.i</code>.</p>
+<p>translate all the <code>CAN [verb]</code> attributes in the file <code>lib_verb_restrictions.i</code>.</p>
 </li>
 <li>
 <p>translate the verb syntaxes in <code>lib_verbs.i</code> (not parameters and the ELSE parts).</p>
@@ -7367,7 +7376,7 @@ Moreover, you should add the following check to each affected verb:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">SYNTAX</span> attaquer <span class="hl opt">=</span> attaquer <span class="hl opt">(</span>target<span class="hl opt">)</span>&#x000A;&#x000A;<span class="hl kwa">WHERE</span> target <span class="hl kwa">ISA</span> <span class="hl kwb">THING</span>&#x000A;&#x000A;<span class="hl kwa">ELSE</span>&#x000A;&#x000A;<span class="hl kwa">IF</span> target <span class="hl kwa">IS NOT</span> plural&#x000A;&#x000A;<span class="hl kwa">THEN SAY</span> illegal_parameter_sg <span class="hl kwa">OF</span> my_game<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">ELSE SAY</span> illegal_parameter_pl <span class="hl kwa">OF</span> my_game<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">END IF.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">SYNTAX</span> attaquer <span class="hl opt">=</span> attaquer <span class="hl opt">(</span>target<span class="hl opt">)</span>&#x000A;  <span class="hl kwa">WHERE</span> target <span class="hl kwa">ISA</span> <span class="hl kwb">THING</span>&#x000A;    <span class="hl kwa">ELSE</span>&#x000A;      <span class="hl kwa">IF</span> target <span class="hl kwa">IS NOT</span> plural&#x000A;        <span class="hl kwa">THEN SAY</span> illegal_parameter_sg <span class="hl kwa">OF</span> my_game<span class="hl kwa">.</span>&#x000A;        <span class="hl kwa">ELSE SAY</span> illegal_parameter_pl <span class="hl kwa">OF</span> my_game<span class="hl kwa">.</span>&#x000A;      <span class="hl kwa">END IF.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -7381,12 +7390,12 @@ Moreover, you should add the following check to each affected verb:</p>
 <p>translate the direction names, their synonyms and the few marginal verb outcomes for indoor and outdoor objects in <code>lib_locations.i</code></p>
 </li>
 <li>
-<p>translate the runtime messages in <code>lib_messages.i</code>.</p>
+<p>translate the runtime messages in <code>lib_messages_runtime.i</code>.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>Now, every possible response and message in the game is shown in the target language, and it is possible for the player to issue commands in the target language.</p>
+<p>Now, every possible response and message in the game will be shownn in the target language, and it is possible for the player to issue commands in the target language.</p>
 </div>
 <div class="paragraph">
 <p>It&#8217;s up to the translator to decide whether to translate any of the library-defined default attributes.</p>

@@ -19,60 +19,64 @@
 Pre-defined actor classes in the library:
 
 * `PERSON`
-* `MALE`
-* `FEMALE`
+** `MALE`
+** `FEMALE`
 
 There are two points where a PERSON differs from an ordinary ACTOR.
-Firstly, a PERSON has the ability to talk, in other words the verbs ask, ask_for, say_to, talk_to and tell work with PERSONs only (or with ACTORs that have the attribute CAN talk).
+Firstly, a PERSON has the ability to talk, in other words the verbs `ask`, `ask_for`, `say_to`, `talk_to` and `tell` work with PERSONs only (or with ACTORs that have the attribute `CAN talk`).
 Secondly, ACTORs and PERSONs are described differently when their inventory is empty.
-PERSONs are described as for example "The man is empty-handed." while other ACTORs are described as for example "The dog is not carrying anything."
+PERSONs are described as for example "`The man is empty-handed.`" while other ACTORs are described as for example "`The dog is not carrying anything.`"
 
 Based on the above, the following codes are interchangeable (except as to how the empty inventory is described):
 
-// @EXTERNALIZE CODE: bob
+// @EXTERNALIZE CODE: bob (1)
 [source,alan]
---------------------------------------------------------------------------------
+-----------------
 THE bob ISA ACTOR
   CAN talk.
 END THE bob.
+-----------------
 
+// @EXTERNALIZE CODE: bob (2)
+[source,alan]
+------------------
 THE bob ISA PERSON
 END THE bob.
---------------------------------------------------------------------------------
+------------------
 
 
 MALE and FEMALE are subclasses of PERSON, so they have the ability to talk.
 Using MALE and FEMALE, you don't have to worry about the pronouns 'he' and 'she' and their various forms showing correctly; the library will take care of all default cases.
 If you just use PERSON or ACTOR instead of MALE or FEMALE, you should remember to include the PRONOUN statement to ensure that the pronouns referring to a person show correctly.
 
-// @EXTERNALIZE CODE: bob
+// @EXTERNALIZE CODE: bob (1/b)
 [source,alan]
---------------------------------------------------------------------------------
+-----------------
 THE bob ISA ACTOR
   CAN talk.
   PRONOUN him.
 END THE.
---------------------------------------------------------------------------------
+-----------------
 
 which would be a lot shorter if coded as
 
-// @EXTERNALIZE CODE: bob
+// @EXTERNALIZE CODE: bob (3)
 [source,alan]
---------------------------------------------------------------------------------
+----------------
 THE bob ISA MALE
 END THE.
---------------------------------------------------------------------------------
+----------------
 
 
 If you need to implement a male or female animal, do like this:
 
 // @EXTERNALIZE CODE: dog
 [source,alan]
---------------------------------------------------------------------------------
+----------------
 THE dog ISA MALE
   CAN NOT talk.
 END THE dog.
---------------------------------------------------------------------------------
+----------------
 
 
 
@@ -107,7 +111,7 @@ They are described in more detail below:
 IS NOT inanimate.
 --------------------------------------------------------------------------------
 
-Verbs push, push_with, rub, scratch, search, touch and touch_with won't have successful outcomes with animate objects (= ACTORS).
+Verbs `push`, `push_with`, `rub`, `scratch`, `search`, `touch` and `touch_with` won't have successful outcomes with animate objects (= ACTORS).
 To ensure this, the (NOT) inanimate attribute is used.
 All things other than ACTORs are inanimate.
 
@@ -259,7 +263,7 @@ IS NOT compliant.
 
 An ACTOR only gives something to the hero if it is in a compliant mood.
 In practice, this happens by default only when the hero asks the ACTOR for something.
-For example, take_from is not successful by default with ACTORs.
+For example, `take_from` is not successful by default with ACTORs.
 
 
 // @EXTERNALIZE TRANSCRIPT: non-compliant NPCs
@@ -280,7 +284,7 @@ That seems to belong to the man.
 ================================================================================
 
 
-The verb ask_for works by default, whether the NPC is compliant or not:
+The verb `ask_for` works by default, whether the NPC is compliant or not:
 
 // @EXTERNALIZE TRANSCRIPT: non-compliant NPCs
 [example,role="gametranscript"]
@@ -322,7 +326,7 @@ You eat all of the apple.
 ================================================================================
 
 
-To disable even the verb ask_for, so that the NPC won't give you something even if you ask for it, use DOES ONLY at the ACTOR instance:
+To disable even the verb `ask_for`, so that the NPC won't give you something even if you ask for it, use DOES ONLY at the ACTOR instance:
 
 // @EXTERNALIZE CODE: non-compliant NPCs
 [source,alan]
