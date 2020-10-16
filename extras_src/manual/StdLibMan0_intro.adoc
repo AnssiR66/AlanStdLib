@@ -40,10 +40,10 @@ At its bare-bones minimum, an ALAN game needs one location and a `START AT` inst
 
 [source,alan]
 --------------------------------------------------------------------------------
-THE meadow ISA LOCATION
-END THE meadow.
+The meadow IsA location
+End the meadow.
 
-START AT meadow.
+Start at meadow.
 --------------------------------------------------------------------------------
 
 
@@ -64,9 +64,9 @@ By design, ALAN is a _locale agnostic_ IF system -- i.e. it doesn't assume any t
 Surely, the instructions of the ALAN language resemble English (pretty much like any programming language), but beside this there is no locale specific infrastructure to the language that would stand in the way of creating an adventure in any spoken language that uses the Latin alphabet.
 
 The ALAN philosophy is entirely devoted to freedom -- not only because it's a free and open source system, but because it provides IF authors with utter freedom when it comes to designing their own adventure worlds.
-Needless to say, the price of a higher freedom is always a higher burden on those who enjoy it -- in this case, the need to create the entire adventure world from the ground up.
+Needless to say, a higher degree of freedom always entails a higher burden on those who enjoy it -- in this case, the need to create the entire adventure world from the ground up.
 
-For this reason the Standard Library was created, to allow authors to start working on their adventures with a predefined set of common players commands (verbs) and responses, useful objects types (containers, liquids, weapons, doors, etc.), and a solid infrastructure of rules and relations that binds them neatly together, providing a well organized and realistic environment that should fit most adventures.
+For this reason the Standard Library was created, to allow authors to start working on their adventures with a predefined set of common <<table.verbs,players commands>> (verbs) and their <<ch.library-messages,default response messages>>, <<fig.library-classes,useful objects classes>> (containers, liquids, weapons, doors, etc.), and a solid infrastructure of rules and relations that binds them neatly together, providing a well organized and realistic environment that should fit most adventures.
 
 '''
 
@@ -96,7 +96,7 @@ To import the library in your game, just add the following line to your adventur
 
 [source,alan]
 --------------------------------------------------------------------------------
-IMPORT 'library.i'.
+Import 'library.i'.
 --------------------------------------------------------------------------------
 
 
@@ -104,22 +104,15 @@ IMPORT 'library.i'.
 
 In addition to library modules, the Standard Library distribution package contains some extra files, none of which are necessary for using the library:
 
-// >>> CUSTOM ATTRIBUTES FOR ASSETS LINKS: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // -----------------------------------------------------------------------------
-// Defining these links as attributes helps to keep the list below cleaner to
-// read and work on. Also, in the future we might want to defined the links
-// conditionally, depending on the output backend (suppressing links in the PDF,
-// or providing alternative links on the GHP ages website, etc.).
+// The entries in the following list are defined as attributes that expand to
+// linkable and formatted text, in order to keep the list cleaner to read and
+// work on. They are defined in "StdLibMan-inc_attributes.adoc".
+//
+// In the future we might define the links conditionally, based on the output
+// backend (suppressing links in the PDF, or providing alternative links on the
+// GH Pages website, etc.).
 // -----------------------------------------------------------------------------
-:CHANGELOG: pass:q,a[link:{StdLibDir}/CHANGELOG.html[`CHANGELOG.html`^,title="View the CHANGELOG"]]
-:COPYING: pass:q,a[link:{StdLibDir}/COPYING[`COPYING`^,title="View the StdLib license file"] ]
-:newgame_alan: pass:q,a[link:{ExtrasDir}/newgame.alan[`newgame.alan`^,title="Open adventure template"]]
-:testgame_alan: pass:q,a[link:{ExtrasDir}/testgame.alan[`testgame.alan`^,title="Open source adventure"]]
-:mygame_import: pass:q,a[link:{ExtrasDir}/mygame_import.i[`mygame_import.i`^,title="Open source file"]]
-// :XXXX: pass:q,a[YYYY]
-// :XXXX: pass:q,a[link:{StdLibDir}/YYYY[`YYYY`^,title="Open source adventure"]]
-// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
 
 // @TODO: FIX LIST OF EXTRA LIB FILES!
 // [ ] Some of these files will have different extensions soon.
@@ -193,6 +186,20 @@ The latter part of that chapter, where the illegal parameter messages and other 
 
 === Typographic Conventions
 
+
+// @TODO: Amend section: code style conventions have changed.
+
+[WARNING]
+================================
+This section needs to be rewritten because thanks to syntax highlighting we no longer need to rely on letter casing to pinpoint predefined ALAN keywords.
+(See link:https://github.com/AnssiR66/AlanStdLib/issues/86[Issue #86])
+
+* [ ] _StdLib Manual_ examples will adopt prose-casing.
+** [ ] Create new Highlight syntax for ALAN + StdLib, to highlight predefined library elements in a different color.
+*** [ ] Update the text of this section accordingly.
+* [ ] _StdLib_ source excerpts will be shown in a darker theme, and with uppercase keywords (the library follows its own styling conventions).
+================================
+
 The ALAN example code used in this manual follows the principle that all reserved words in the ALAN language are written in all caps:
 
 
@@ -219,8 +226,8 @@ Newcomers to ALAN should, however, bear in mind that the ALAN language is not ca
 
 [source,alan]
 --------------------------------------------------------------------------------
-The garden Isa Location
-  Exit west To street.
+The garden IsA Location
+  Exit west to street.
 End The garden.
 --------------------------------------------------------------------------------
 
@@ -228,16 +235,16 @@ or
 
 [source,alan]
 --------------------------------------------------------------------------------
-the garden isa location
+The garden IsA location
   exit west to street.
-end the garden.
+End the garden.
 --------------------------------------------------------------------------------
 
 or even
 
 [source,alan]
 --------------------------------------------------------------------------------
-the garden isa location. exit west to street. end the garden.
+The garden isa location. Exit west to street. End the garden.
 --------------------------------------------------------------------------------
 
 [[sec.acknowledgments]]

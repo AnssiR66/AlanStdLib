@@ -41,6 +41,8 @@ The synonyms and built-in syntaxes are listed in connection with each verb.
 //        has more columns than this one, so maybe an intermediate source table
 //        would required, from which to extract this one via SED.
 
+[[table.verbs]]
+.Predefined Library Verbs and Their Sytnax
 [cols="m,d,d",options="header",format=dsv]
 |===============================================================================
 include::StdLibMan-inc_table_verbs.dsv[]

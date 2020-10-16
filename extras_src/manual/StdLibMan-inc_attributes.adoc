@@ -9,6 +9,11 @@
 
 This file contains all the custom attributes definitions used for substitutions
 in the StdLib Manual source files.
+
+Defining links as attributes helps to keep the source docs cleaner to read and
+work on. Also, in the future we might want to defined some links conditionally,
+depending on the output backend (suppressing links in the PDF, or providing
+alternative links on the GH Pages website, etc.).
 --------------------------------------------------------------------------------
 ////
 
@@ -19,6 +24,14 @@ in the StdLib Manual source files.
 :StdLibInc: {utf8dir}/../StdLib
 :StdLibDir: ../../StdLib
 :ExtrasDir: ../../extras
+
+// Links to Additional StdLib Assets
+// =================================
+:CHANGELOG: pass:q,a[link:{StdLibDir}/CHANGELOG.html[`CHANGELOG.html`^,title="View the CHANGELOG"]]
+:COPYING: pass:q,a[link:{StdLibDir}/COPYING[`COPYING`^,title="View the StdLib license file"] ]
+:newgame_alan: pass:q,a[link:{ExtrasDir}/newgame.alan[`newgame.alan`^,title="Open adventure template"]]
+:testgame_alan: pass:q,a[link:{ExtrasDir}/testgame.alan[`testgame.alan`^,title="Open source adventure"]]
+:mygame_import: pass:q,a[link:{ExtrasDir}/mygame_import.i[`mygame_import.i`^,title="Open source file"]]
 
 // Links to examples files
 // =======================

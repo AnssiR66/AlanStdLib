@@ -733,7 +733,7 @@ span.play em,
 <div class="details">
 <span id="author" class="author">Anssi Räisänen</span><br>
 <span id="revnumber">version 2.2.0-WIP,</span>
-<span id="revdate">2020-10-15</span>
+<span id="revdate">2020-10-16</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -802,7 +802,7 @@ span.play em,
 <li><a href="#_nested_locations">8.5. Nested locations</a></li>
 </ul>
 </li>
-<li><a href="#ch4">9. Things</a>
+<li><a href="#ch.things">9. Things</a>
 <ul class="sectlevel2">
 <li><a href="#_the_two_methods_for_examining_things">9.1. The two methods for examining things</a></li>
 </ul>
@@ -1002,7 +1002,7 @@ It is perfectly possible (and in line with ALAN&#8217;s philosophy) to define ev
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> meadow <span class="hl kwa">ISA</span> <span class="hl kwb">LOCATION</span>&#x000A;<span class="hl kwa">END THE</span> meadow<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">START AT</span> meadow<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> meadow <span class="hl kwa">IsA</span> <span class="hl kwb">location</span>&#x000A;<span class="hl kwa">End the</span> meadow<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">Start at</span> meadow<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1029,10 +1029,10 @@ Surely, the instructions of the ALAN language resemble English (pretty much like
 </div>
 <div class="paragraph">
 <p>The ALAN philosophy is entirely devoted to freedom&#8201;&#8212;&#8201;not only because it&#8217;s a free and open source system, but because it provides IF authors with utter freedom when it comes to designing their own adventure worlds.
-Needless to say, the price of a higher freedom is always a higher burden on those who enjoy it&#8201;&#8212;&#8201;in this case, the need to create the entire adventure world from the ground up.</p>
+Needless to say, a higher degree of freedom always entails a higher burden on those who enjoy it&#8201;&#8212;&#8201;in this case, the need to create the entire adventure world from the ground up.</p>
 </div>
 <div class="paragraph">
-<p>For this reason the Standard Library was created, to allow authors to start working on their adventures with a predefined set of common players commands (verbs) and responses, useful objects types (containers, liquids, weapons, doors, etc.), and a solid infrastructure of rules and relations that binds them neatly together, providing a well organized and realistic environment that should fit most adventures.</p>
+<p>For this reason the Standard Library was created, to allow authors to start working on their adventures with a predefined set of common <a href="#table.verbs">players commands</a> (verbs) and their <a href="#ch.library-messages">default response messages</a>, <a href="#fig.library-classes">useful objects classes</a> (containers, liquids, weapons, doors, etc.), and a solid infrastructure of rules and relations that binds them neatly together, providing a well organized and realistic environment that should fit most adventures.</p>
 </div>
 <hr>
 <div class="paragraph">
@@ -1084,7 +1084,7 @@ The writer of the current version is Anssi Räisänen.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">IMPORT</span> &#39;library.i&#39;<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">Import</span> &#39;library.i&#39;<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="sect2">
@@ -1193,6 +1193,45 @@ The latter part of that chapter, where the illegal parameter messages and other 
 </div>
 <div class="sect2">
 <h3 id="_typographic_conventions"><a class="anchor" href="#_typographic_conventions"></a>1.3. Typographic Conventions</h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This section needs to be rewritten because thanks to syntax highlighting we no longer need to rely on letter casing to pinpoint predefined ALAN keywords.
+(See <a href="https://github.com/AnssiR66/AlanStdLib/issues/86">Issue #86</a>)</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> <em>StdLib Manual</em> examples will adopt prose-casing.</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Create new Highlight syntax for ALAN + StdLib, to highlight predefined library elements in a different color.</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Update the text of this section accordingly.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> <em>StdLib</em> source excerpts will be shown in a darker theme, and with uppercase keywords (the library follows its own styling conventions).</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>The ALAN example code used in this manual follows the principle that all reserved words in the ALAN language are written in all caps:</p>
 </div>
@@ -1215,7 +1254,7 @@ Newcomers to ALAN should, however, bear in mind that the ALAN language is not ca
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> garden <span class="hl kwa">Isa</span> <span class="hl kwb">Location</span>&#x000A;  <span class="hl kwa">Exit</span> west <span class="hl kwa">To</span> street<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End The</span> garden<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> garden <span class="hl kwa">IsA</span> <span class="hl kwb">Location</span>&#x000A;  <span class="hl kwa">Exit</span> west <span class="hl kwa">to</span> street<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End The</span> garden<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1223,7 +1262,7 @@ Newcomers to ALAN should, however, bear in mind that the ALAN language is not ca
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">the</span> garden <span class="hl kwa">isa</span> <span class="hl kwb">location</span>&#x000A;  <span class="hl kwa">exit</span> west <span class="hl kwa">to</span> street<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">end the</span> garden<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> garden <span class="hl kwa">IsA</span> <span class="hl kwb">location</span>&#x000A;  <span class="hl kwa">exit</span> west <span class="hl kwa">to</span> street<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the</span> garden<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1231,7 +1270,7 @@ Newcomers to ALAN should, however, bear in mind that the ALAN language is not ca
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">the</span> garden <span class="hl kwa">isa</span> <span class="hl kwb">location</span><span class="hl kwa">. exit</span> west <span class="hl kwa">to</span> street<span class="hl kwa">. end the</span> garden<span class="hl kwa">.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> garden <span class="hl kwa">isa</span> <span class="hl kwb">location</span><span class="hl kwa">. Exit</span> west <span class="hl kwa">to</span> street<span class="hl kwa">. End the</span> garden<span class="hl kwa">.</span></code></pre>
 </div>
 </div>
 </div>
@@ -2838,7 +2877,7 @@ Events are not in scope in &#8220;parent locations&#8221; of nested locations.</
 </div>
 </div>
 <div class="sect1">
-<h2 id="ch4"><a class="anchor" href="#ch4"></a>9. Things</h2>
+<h2 id="ch.things"><a class="anchor" href="#ch.things"></a>9. Things</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In ALAN, &#8220;things&#8221; is the comprehensive term for actors and objects.
@@ -2851,29 +2890,178 @@ Thus, if you want the hero to be able to take a cat or a bird, you should define
 <div class="paragraph">
 <p>Here is a list of transitive verbs that only work with actors:</p>
 </div>
-<div class="paragraph">
-<p>ask, ask_for, follow, give, kill, kill_with, say_to, talk, tell, show,</p>
-</div>
+<table class="tableblock frame-none grid-none center" style="width: 75%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ask</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ask_for</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>follow</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>give</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>kill</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>kill_with</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>say_to</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>talk</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tell</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>show</code></p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p>while these verbs work with objects only:</p>
 </div>
-<div class="paragraph">
-<p>bite, break, break_with, burn, burn_with, buy, clean, climb, climb_on, climb_through, close,close_with, consult, cut, cut_with, dig, dive_in, drink, drive, drop, eat, empty, empty_in, empty_on, examine, exit, extinguish, fill, fill_with, fire, fire_at, fix, get_off, go_to, jump_in, jump_on, knock, lie_in, lie_on, lift, light, lock, lock_with, look_in, look_out_of, look_through, open, open_with, play, pour, pour_in, pour_on, pry, pry_with, put, put_in, put_on, read, remove, remove_from, take, throw,tie</p>
-</div>
+<table class="tableblock frame-none grid-none center" style="width: 90%;">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bite</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>break</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>break_with</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>burn</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>burn_with</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>buy</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>clean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>climb</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>climb_on</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>climb_through</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>close</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>close_with</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>consult</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cut</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cut_with</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dig</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dive_in</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>drink</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>drive</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>drop</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>eat</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>empty</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>empty_in</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>empty_on</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>examine</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>exit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>extinguish</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fill</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fill_with</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fire</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fire_at</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fix</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>get_off</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>go_to</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>jump_in</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>jump_on</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>knock</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>lie_in</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>lie_on</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>lift</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>light</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>lock</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>lock_with</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>look_in</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>look_out_of</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>look_through</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>open</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>open_with</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>play</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pour</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pour_in</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pour_on</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pry</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pry_with</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>put</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>put_in</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>put_on</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>read</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remove</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remove_from</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>take</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>throw</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tie</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p>The following verbs work with both, but have slightly different outcomes:</p>
 </div>
+<table class="tableblock frame-none grid-none center" style="width: 75%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>kiss</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>listen</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pull</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>push</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>push_with</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rub</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>scratch</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>touch</code></p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
-<p>kiss, listen, pull, push, push_with, rub, scratch, touch</p>
+<p>Lastly, there are some verbs that won&#8217;t work with either:</p>
 </div>
+<table class="tableblock frame-none grid-none center" style="width: 50%;">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>answer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>say</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>write</code></p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
-<p>Lastly, there are some verbs that won&#8217;t work with either.</p>
-</div>
-<div class="paragraph">
-<p>answer, say, write</p>
-</div>
-<div class="paragraph">
-<p>as these verbs can only be used with quoted text:</p>
+<p>as these verbs can only be used with quoted text (i.e. string literals):</p>
 </div>
 <div class="exampleblock gametranscript">
 <div class="content">
@@ -2885,7 +3073,7 @@ Thus, if you want the hero to be able to take a cat or a bird, you should define
 </div>
 </div>
 <div class="paragraph">
-<p>Note that verbs don&#8217;t take locations as their direct objects.
+<p>Note that none of the library verbs accept locations as direct or indirect objects.
 Thus, the following won&#8217;t work:</p>
 </div>
 <div class="exampleblock gametranscript">
@@ -2896,7 +3084,7 @@ Thus, the following won&#8217;t work:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>To have something like the above work, you should define a separate bedroom object, present in the bedroom location, that can then be examined or manipulated in some other ways if needed:</p>
+<p>In order to make something like this work, you should define a separate bedroom object, present in the bedroom location, which can then be examined or manipulated in any other way that might be required:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4555,7 +4743,8 @@ For example, if you implement</p>
 The synonyms and built-in syntaxes are listed in connection with each verb.
 (The syntaxes show the form of the command the player must type in-game to use each verb so that the game understands it: )</p>
 </div>
-<table class="tableblock frame-all grid-all stretch">
+<table id="table.verbs" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Predefined Library Verbs and Their Sytnax</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
