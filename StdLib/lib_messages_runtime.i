@@ -1,13 +1,20 @@
--- ALAN Standard Library v2.2.0-WIP | ALAN 3.0beta7
--- Run-Time Messages (file name: 'lib_messages_runtime.i')
---------------------------------------------------------------------------------
-
+-- lib_messages_runtime.i     | ALAN Standard Library v2.2.0-WIP | ALAN 3.0beta7
+--+============================================================================+
+--|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//////////////////////////////////////|
+--++--------------------------------------------------------------------------++
+--||                                                                          ||
+--||                    R U N - T I M E   M E S S A G E S                     ||
+--||                                                                          ||
+--++--------------------------------------------------------------------------++
+--|//////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|
+--+============================================================================+
 
 -- All runtime messages are listed below.
 
 -- Many of these messages are not in their default ("built-in") form as described
--- in the ALAN language manual, but have been slightly edited for this library.
+-- in the ALAN Language Manual, but have been slightly edited for this library.
 
+--------------------------------------------------------------------------------
 
 MESSAGE
   AFTER_BUT: "You must give at least one object after '$1'."

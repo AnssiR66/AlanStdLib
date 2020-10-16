@@ -1,14 +1,22 @@
--- ALAN Standard Library v2.2.0-WIP | ALAN 3.0beta7
--- Definitions (file name: 'lib_definitions.i')
---------------------------------------------------------------------------------
+-- lib_definitions.i          | ALAN Standard Library v2.2.0-WIP | ALAN 3.0beta7
+--+============================================================================+
+--|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//////////////////////////////////////|
+--++--------------------------------------------------------------------------++
+--||                                                                          ||
+--||                     C O R E   D E F I N I T I O N S                      ||
+--||                                                                          ||
+--++--------------------------------------------------------------------------++
+--|//////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|
+--+============================================================================+
 
--- Included in this file:
-  -- general attributes
-  -- some article declarations
-  -- common synonyms
-  -- the definition_block class
-    -- attributes for the start section
-  -- the banner instance (for the start section)
+-- This library module defines:
+--
+--   * General attributes.
+--   * Some article declarations.
+--   * Common synonyms.
+--   * The definition_block class.
+--   * Attributes for the start section.
+--   * The banner instance (for the start section).
 
 --------------------------------------------------------------------------------
 

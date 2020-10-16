@@ -1,8 +1,15 @@
--- ALAN Standard Library v2.2.0-WIP | ALAN 3.0beta7
--- Classes (file name: 'lib_classes.i')
---------------------------------------------------------------------------------
+-- lib_classes.i              | ALAN Standard Library v2.2.0-WIP | ALAN 3.0beta7
+--+============================================================================+
+--|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//////////////////////////////////////|
+--++--------------------------------------------------------------------------++
+--||                                                                          ||
+--||                      L I B R A R Y   C L A S S E S                       ||
+--||                                                                          ||
+--++--------------------------------------------------------------------------++
+--|//////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|
+--+============================================================================+
 
--- This library file defines various object and actor classes.
+-- This library module defines various object and actor classes.
 -- Many of these classes are frequently used in verb definitions in 'lib_verbs.i'
 -- so they should be edited or removed with caution. However, to ease things up,
 -- it is mentioned at the beginning of every class below if and where the class

@@ -1,8 +1,16 @@
--- ALAN Standard Library v2.2.0-WIP | ALAN 3.0beta7
--- Library Messages (file name: 'lib_messages_library.i')
---------------------------------------------------------------------------------
+-- lib_messages_library.i     | ALAN Standard Library v2.2.0-WIP | ALAN 3.0beta7
+--+============================================================================+
+--|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//////////////////////////////////////|
+--++--------------------------------------------------------------------------++
+--||                                                                          ||
+--||                     L I B R A R Y   M E S S A G E S                      ||
+--||                                                                          ||
+--++--------------------------------------------------------------------------++
+--|//////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|
+--+============================================================================+
 
--- Included in this file:
+-- This library module defines various library default messages and responses:
+--
 --  * Messages for the hero.
 --  * Messages for dark locations.
 --  * Response for restricted actions.
