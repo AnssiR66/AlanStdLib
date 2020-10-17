@@ -889,6 +889,24 @@ Unlike a single-piece legs and torso item (e.g. a one-piece swimming suite), a <
 </ul>
 </div>
 </li>
+<li>
+<p><strong><span class="red">Library Attributes</span></strong>&#8201;&#8212;&#8201;The behavior for some library attributes has been improved, without breaking backward compatibility:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><span class="red">Scenery</span></strong>&#8201;&#8212;&#8201;Now the <code>examine</code> verb will always honor the description of an <code>ex</code> attribute of a scenery object, if defined; otherwise, it will behave as before, printing &#8220;The [object] is not important.&#8221; (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/99" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#99</a>).
+This allows scenery props to optionally contribute to the game&#8217;s atmosphere and mood by providing some extra text when examined.</p>
+</li>
+<li>
+<p><strong><span class="red">Readable</span></strong>&#8201;&#8212;&#8201;Now the <code>examine</code> verb will always honor the description of an <code>ex</code> attribute of a <code>readable</code> object, if present; otherwise it will behave like <code>read</code>, as before, printing the <code>text</code> string (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/9" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#9</a>).
+This allows to implement readable objects that can be both examined and read, producing a description of the object and its printed text respectively&#8201;&#8212;&#8201;e.g. it&#8217;s useful to provide the physical description of an ancient magic book on examination, and let the <code>read</code> verb show its contents instead; whereas for a simple sticky note, having <code>examine</code> behave like <code>read</code> is more practical.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong><span class="red">Dropped &#8216;verbose&#8217; and &#8216;brief&#8217;</span></strong>&#8201;&#8212;&#8201;The meta-berbs <code>verbose</code> and <code>brief</code> were removed from the library due to <code>brief</code> failing to work as expected, because ALAN resets the <code>VISITS</code> counter every time an attribute of a <code>location</code> instance changes state or value (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/32" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#32</a>).</p>
+</li>
 </ul>
 </div>
 <div class="sect3">

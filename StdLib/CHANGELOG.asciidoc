@@ -26,10 +26,13 @@ TIP: For each new library release, we provide a list of all the bugs that were f
 
 // >>> CUSTOM ATTRIBUTES FOR SUBSTITUTIONS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // Repository Issues Links:
+:Issue_9: link:https://github.com/AnssiR66/AlanStdLib/issues/9[Issue&nbsp;#9^, title="See original Issue on GitHub"]
+:Issue_32: link:https://github.com/AnssiR66/AlanStdLib/issues/32[Issue&nbsp;#32^, title="See original Issue on GitHub"]
 :Issue_57: link:https://github.com/AnssiR66/AlanStdLib/issues/57[Issue&nbsp;#57^, title="See original Issue on GitHub"]
 :Issue_60: link:https://github.com/AnssiR66/AlanStdLib/issues/60[Issue&nbsp;#60^, title="See original Issue on GitHub"]
 :Issue_61: link:https://github.com/AnssiR66/AlanStdLib/issues/61[Issue&nbsp;#61^, title="See original Issue on GitHub"]
 :Issue_96: link:https://github.com/AnssiR66/AlanStdLib/issues/96[Issue&nbsp;#96^, title="See original Issue on GitHub"]
+:Issue_99: link:https://github.com/AnssiR66/AlanStdLib/issues/99[Issue&nbsp;#99^, title="See original Issue on GitHub"]
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -102,17 +105,25 @@ Unlike a single-piece legs and torso item (e.g. a one-piece swimming suite), a `
 
 ** The library now implements a new strategy for tracking worn clothing items, preventing any verb from dislocating a worn item from its wearing actor, and ensuring that any verb which legitimately dislocates an item worn by an actor (e.g. dropping it, throwing it giving it to an NPC, or asking a compliant NPC for it) also changes its status to `NOT worn`.
 
+* *[red]#Library Attributes#* -- The behavior for some library attributes has been improved, without breaking backward compatibility:
+
+** *[red]#Scenery#* --
+Now the `examine` verb will always honor the description of an `ex` attribute of a scenery object, if defined; otherwise, it will behave as before, printing "`The [object] is not important.`" (see {Issue_99}).
+This allows scenery props to optionally contribute to the game's atmosphere and mood by providing some extra text when examined.
+
+** *[red]#Readable#* --
+Now the `examine` verb will always honor the description of an `ex` attribute of a `readable` object, if present; otherwise it will behave like `read`, as before, printing the `text` string (see {Issue_9}).
+This allows to implement readable objects that can be both examined and read, producing a description of the object and its printed text respectively -- e.g. it's useful to provide the physical description of an ancient magic book on examination, and let the `read` verb show its contents instead; whereas for a simple sticky note, having `examine` behave like `read` is more practical.
+
+* *[red]#Dropped '`verbose`' and '`brief`'#* --
+The meta-berbs `verbose` and `brief` were removed from the library due to `brief` failing to work as expected, because ALAN resets the `VISITS` counter every time an attribute of a `location` instance changes state or value (see {Issue_32}).
+
 // * *[red]#XXXXXXXXXXX#* --
 
 
 ////
 @TODO: PENDING CHANGES TO MENTION:
 
-- Readable objects that have an `ex` string: the examine verb doesn't behave
-  like read for them. If the attribute is empty, it behaves as before (read),
-  so it doesn't break backward compatibility. (Issue ???)
-- Brief/Verbose verbs dropped because not working:
-  https://github.com/AnssiR66/AlanStdLib/issues/32
 
 ////
 
