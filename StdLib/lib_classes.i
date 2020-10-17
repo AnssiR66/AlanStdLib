@@ -133,13 +133,13 @@ END ADD.
 --+-----------------------------------------------------------------------------
 --| FEMALE
 --+-----------------------------------------------------------------------------
---| * A subclass of person (= is able to talk)-
---| * Can be referred to with the pronoun 'her'-
+--| * A subclass of person (= is able to talk).
+--| * Can be referred to with the pronoun 'her'.
 --+-----------------------------------------------------------------------------
 --| MALE
 --+-----------------------------------------------------------------------------
---| * A subclass of person (= is able to talk)-
---| * Can be referred to with the pronoun 'him'-
+--| * A subclass of person (= is able to talk).
+--| * Can be referred to with the pronoun 'him'.
 --+-----------------------------------------------------------------------------
 
 -- The contents end here.
@@ -158,25 +158,32 @@ END ADD.
 
 
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--                               C L O T H I N G
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
+-- For instructions on using this class, see the documentation comments after
+-- its code.
 
+-- This class is based on Alan Bampton's 'xwear.i' extension, originally written
+-- for ALAN v2, hereby adapted to ALAN v3 and integrated with the rest of the
+-- library. The original clothing system of StdLib v2.x was entirely revised in
+-- v2.2.0 of the library, by Tristano Ajmone, in order to make it easier to use,
+-- more flexible, and to solve some issues relating to tracking the state of
+-- worn clothing items and preventing verbs from dislocating them while being
+-- worn by actors.
 
--- ==============================================================
+-- Thanks to Alan Bampton for having granted permission to use his code here.
 
-
------ CLOTHING
-
-
--- ==============================================================
-
--- To use this class, see the documentation text right after the
--- code below.
-
--- This class makes use of Alan Bampton's 'xwear.i' extension
--- written originally for ALAN V2, converted here to V3 and
--- assimilated fully to the present library. Thanks to Alan Bampton
--- for the permission to use the code here.
-
+--------------------------------------------------------------------------------
 
 -----------------------------------------------------------------
 -- Define attributes used internally by the library for clothing.
@@ -705,31 +712,32 @@ EVERY clothing ISA OBJECT
 END EVERY.
 
 
---------------------------------------------------------------------
+----------------------------------------------------------------
 -- These attributes are used internally in the library - ignore!
---------------------------------------------------------------------
+----------------------------------------------------------------
 
 ADD TO EVERY ACTOR
   IS sex 0.
 END ADD TO.
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--                                 D E V I C E
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
+-- This class is not cross-referenced elsewhere in this file nor in any other
+-- library module.
 
-
--- =============================================================
-
-
------ DEVICE
-
-
--- =============================================================
-
-
--- (This class is not cross-referenced elsewhere in this or any other library file.)
-
+--------------------------------------------------------------------------------
 
 EVERY device ISA OBJECT
-
 
   VERB examine
     DOES AFTER
@@ -841,19 +849,22 @@ EVERY device ISA OBJECT
 
 END EVERY.
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--                                   D O O R
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
+-- This class is not cross-referenced elsewhere in this file nor in any other
+-- library module.
 
--- =============================================================
-
-
------ DOOR
-
-
--- =============================================================
-
-
--- (This class is not cross-referenced elsewhere in this or any other library file.)
-
+--------------------------------------------------------------------------------
 
 -- tag::default-attributes-door[]
 EVERY door ISA OBJECT
@@ -1047,20 +1058,22 @@ END EVERY.
 THE null_door ISA DOOR
 END THE.
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--                            L I G H T S O U R C E
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
+-- In 'lib_locations.i', `ISA LIGHTSOURCE` expressions are used to define the
+-- behavior of the DARK_LOCATION class.
 
--- =============================================================
-
-
------ LIGHTSOURCE
-
-
--- =============================================================
-
-
--- (In the file 'lib_verbs.i', ISA LIGHTSOURCE is used in the syntax definition of the verb 'light'.
--- Also, in 'lib_locations.i', LIGHTSOURCE is used in defining the behavior of the class DARK_LOCATION.)
-
+--------------------------------------------------------------------------------
 
 
 -- tag::default-attributes-lightsource[]
@@ -1213,19 +1226,22 @@ EVERY lightsource ISA OBJECT
 
 END EVERY.
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--                                 L I Q U I D
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
+-- In 'lib_verbs.i', `ISA LIQUID` expressions are used in the syntax definitions
+-- of the following verbs: dive_in, drink, sip, swim_in.
 
--- ==============================================================
-
-
------ LIQUID
-
-
--- ==============================================================
-
-
--- (In the file 'lib_verbs.i', ISA LIQUID is used in the syntax definitions of the verbs 'drink' and 'sip'.)
-
+--------------------------------------------------------------------------------
 
 -- tag::default-attributes-liquid[]
 EVERY liquid ISA OBJECT
@@ -1652,19 +1668,22 @@ EVENT check_vessel
   SCHEDULE check_vessel AFTER 1.
 END EVENT.
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--                       L I S T E D   C O N T A I N E R
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
+-- In 'lib_verbs.i', this class is cross-referenced in the DOES body of the
+-- take_from verb.
 
--- =============================================================
-
-
------ LISTED_CONTAINER
-
-
--- =============================================================
-
-
--- (This class is not cross-referenced elsewhere in this or any other library file.)
-
+--------------------------------------------------------------------------------
 
 EVERY LISTED_CONTAINER ISA OBJECT
   CONTAINER
@@ -1777,20 +1796,22 @@ EVERY LISTED_CONTAINER ISA OBJECT
 
 END EVERY.
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--                                  S O U N D
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
+-- This class is not cross-referenced elsewhere in this file nor in any other
+-- library module.
 
-
-
--- ===============================================================
-
-
------ SOUND
-
-
--- ===============================================================
-
-
--- (This class is not cross-referenced in this or any other library file.)
+--------------------------------------------------------------------------------
 
 
 -- tag::default-attributes-sound[]
@@ -1813,22 +1834,23 @@ EVERY sound ISA OBJECT
 
 END EVERY.
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--                              S U P P O R T E R
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
+-- In 'lib_verbs.i', this class is referenced in the syntax definitions, verb
+-- checks and/or definitions of the following verbs: climb_on, get_off, jump_on,
+-- lie_on, put_in, put_on, sit_on, stand_on, take_from.
 
--- ==============================================================
-
-
------ SUPPORTER
-
-
--- ==============================================================
-
-
--- (See the file 'verbs.i', verbs 'climb_on', 'empty_on', 'get_off', 'jump_on',
--- 'lie_on', 'pour_on', 'put_in', 'put_on', 'sit_on', 'stand_on', and 'take_from'
--- where SUPPORTER is used in either syntax definitions, verb checks
--- or verb definitions.)
-
+--------------------------------------------------------------------------------
 
 EVERY supporter ISA OBJECT
 
@@ -1882,24 +1904,23 @@ EVERY supporter ISA OBJECT
 
 END EVERY.
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--                                 W E A P O N
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
+-- In 'lib_verbs.i', this class is referenced in the syntax definitions, verb
+-- checks and/or definitions of the following verbs: attack_with, fire, fire_at,
+-- fire_at_error, kill_with, shoot_with.
 
-
-
-
-
--- ==============================================================
-
-
------ WEAPON
-
-
--- ==============================================================
-
-
--- (See the file 'lib_verbs.i', verbs 'attack_with', 'fire',
--- 'fire_with', 'kill_with', 'shoot' and 'shoot_with' where WEAPON is used
--- either in the syntax definitions or verb checks.)
+--------------------------------------------------------------------------------
 
 
 -- tag::default-attributes-weapon[]
@@ -1908,23 +1929,26 @@ EVERY weapon ISA OBJECT
 END EVERY.
 -- end::default-attributes-weapon[]
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--                                 W I N D O W
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
-
-
--- ==============================================================
-
-
------ WINDOW
-
-
--- ==============================================================
-
-
--- (This class is not cross-referenced elsewhere in this or any other library file.)
+-- This class is not cross-referenced elsewhere in this file nor in any other
+-- library module.
 
 
 -- You can look out of and through a window.
--- When examined, a window is by default described as being either open or closed.
+-- When examined, a window is described as being either open or closed.
+
+--------------------------------------------------------------------------------
 
 
 -- tag::default-attributes-window[]
@@ -2180,15 +2204,27 @@ END THE.
 
 
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--                                 P E R S O N
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
--- ================================================================
+-- A `person` actor exhibits the following human features:
+--
+--   * The ability to talk (`CAN talk.`).
+--   * When not carrying anything, is reported as being "empty handed".
 
+-- This class is not cross-referenced elsewhere in this file nor in any other
+-- library module.
 
------ PERSON      -- CAN talk
-
-
--- ================================================================
-
+--------------------------------------------------------------------------------
 
 EVERY person ISA ACTOR
       CAN talk.
@@ -2215,22 +2251,29 @@ EVERY person ISA ACTOR
 
 END EVERY.
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--                          F E M A L E   &   M A L E
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
+-- MALE and FEMALE are both subclasses of PERSON, so they share the ability to
+-- talk, and all the other human traits of the PERSON class.
 
+-- The library only adds the appropriate pronouns for the gender to these two
+-- sub-classes; but authors could extend them to allow gender-specific verb
+-- results, for example.
 
+-- These two classes are not cross-referenced elsewhere in this file nor in any
+-- other library module.
 
--- ================================================================
-
-
------ FEMALE and MALE
-
-
--- ================================================================
-
-
--- MALE and FEMALE are actually subclasses of PERSON, so they both
--- have the ability to talk.
-
+--------------------------------------------------------------------------------
 
 EVERY female ISA PERSON
   PRONOUN her
