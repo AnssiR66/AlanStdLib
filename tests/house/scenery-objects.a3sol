@@ -1,0 +1,36 @@
+; ******************************************************************************
+; *                                                                            *
+; *                           SCENERY OBJECTS TESTS                            *
+; *                                                                            *
+; ******************************************************************************
+; We'll be testing various types of scenery objects, in the 'Laundry Room'.
+; ------------------------------------------------------------------------------
+n
+; ==============================================================================
+; LIGHT BULB: scenery with 'ex'
+; ==============================================================================
+; Expect 'examine' to honor the 'ex' attribute:
+x light bulb
+take it
+; ==============================================================================
+; ELECTRIC WIRES: scenery without 'ex'
+; ==============================================================================
+; This scenery object has no 'ex' description to honor:
+x electric wires
+take it
+; ==============================================================================
+; WARNING SIGN: scenery with 'ex' & readable with 'ex'
+; ==============================================================================
+; Expect 'examine' to honor the 'ex' attribute:
+x warning sign
+; Expect 'read' to show the 'text' string:
+read it
+take it
+; ==============================================================================
+; GRAFFITI: scenery with 'ex' & readable without 'ex'
+; ==============================================================================
+; Expect 'examine' to behave like read:
+x graffiti
+; Expect 'read' to show the 'text' string:
+read it
+take it

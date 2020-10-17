@@ -36,17 +36,22 @@ END THE kitchen.
 
 -- =============================================================================
 -- The laundry will be our testbed for custom descriptions of 'site_object'
--- (walls, floor, ceiling).
+-- (walls, floor, ceiling), and scenery object:
+--   * The bulb is a scenery with 'ex' description.
+--   * The electric wires are plain scenery, with no 'ex'.
+--   * The warning sign, a readable scenery with 'ex' and `text`.
 
 THE laundry IsA room.
   NAME 'The Laundry Room'.
   EXIT south TO kitchen.
-  DESCRIPTION "The kitchen is to the south."
-  HAS walls_desc   "Oh dear! These walls definitely need a fresh paint job.".
+  DESCRIPTION
+    "This room is in a state of neglect.
+     The kitchen is to the south."
+  HAS walls_desc   "Oh dear! These walls definitely need a fresh paint job.
+                    You can see a warning sign on the wall.".
   HAS floor_desc   "You can't even remember when you last washed this floor.".
   HAS ceiling_desc "A naked light bulb hangs from the ceiling, strapped to the
                     electric wires with some sticky tape.".
-
 END THE laundry.
 
 -- =============================================================================
@@ -257,6 +262,52 @@ END THE chips_bag.
 THE chips IsA snack IN chips_bag.
   INDEFINITE ARTICLE "some"
 END THE chips.
+
+-- =============================================================================
+
+-- Laundry Props
+
+-- =============================================================================
+
+--==============================================================================
+-- Scenery Objects
+--==============================================================================
+
+-- For testing various types of scenery objects...
+
+-- Scenery with 'ex':
+THE light_bulb IsA object AT laundry.
+  NAME light bulb.
+  IS scenery.
+  HAS ex
+    "A tungsten light bulb, hanging from the ceiling by electric wires to which
+     it's strapped with some sticky tape. Doesn't look safe at all.".
+END THE.
+
+-- Scenery without 'ex':
+THE electric_wires IsA object AT laundry.
+  NAME electric wires.
+  IS scenery. plural.
+END THE.
+
+-- Readable scenery with 'ex' and 'text':
+THE warning_sign IsA object AT laundry.
+  NAME warning sign.
+  DESCRIPTION "A warning sign is attached to the wall."
+  IS scenery. readable.
+  HAS ex "An old sign nailed into the wall, bearing some printed text.
+          Just below the sign, someone has scribbled some graffiti.".
+  HAS text "WARNING! This room was declared unsafe to live in.
+            Use only for storage.".
+END THE.
+
+-- Readable scenery with 'ex' and 'text':
+THE graffiti IsA object AT laundry.
+  DESCRIPTION ""
+  IS scenery. readable.
+  HAS text "Says who?".
+END THE.
+
 
 -- =============================================================================
 

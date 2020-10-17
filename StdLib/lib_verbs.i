@@ -2477,12 +2477,6 @@ ADD TO EVERY THING
         END IF.
     AND CURRENT LOCATION IS lit
       ELSE SAY check_current_loc_lit OF my_game.
-    AND obj IS NOT scenery
-      ELSE
-        IF obj IS NOT PLURAL
-          THEN SAY check_obj_not_scenery_sg OF my_game.
-          ELSE SAY check_obj_not_scenery_pl OF my_game.
-        END IF.
 
     DOES
       IF ex OF obj <> "" -- honour the custmom description, if present:
@@ -2500,6 +2494,11 @@ ADD TO EVERY THING
               ELSE "They say"
             END IF.
             """$$" SAY text OF obj. "$$""."
+        END IF.
+      ELSIF obj IS scenery THEN
+        IF obj IS NOT PLURAL
+          THEN SAY check_obj_not_scenery_sg OF my_game.
+          ELSE SAY check_obj_not_scenery_pl OF my_game.
         END IF.
       ELSE -- Default examine behaviour:
         "You notice nothing unusual about"

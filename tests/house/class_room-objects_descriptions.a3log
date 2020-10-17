@@ -38,7 +38,7 @@ You notice nothing unusual about the ceiling.
 
 > north
 The Laundry Room
-The kitchen is to the south.
+This room is in a state of neglect. The kitchen is to the south. 
 
 > ; ==============================================================================
 > ; Laundry -> CUSTOM DESCRIPTIONS
@@ -46,7 +46,8 @@ The kitchen is to the south.
 > ; In this room we've provided custom descriptions for walls, floor and ceiling.
 > ; ------------------------------------------------------------------------------
 > x walls
-Oh dear! These walls definitely need a fresh paint job.
+Oh dear! These walls definitely need a fresh paint job. You can see a
+warning sign on the wall.
 
 > x floor
 You can't even remember when you last washed this floor.

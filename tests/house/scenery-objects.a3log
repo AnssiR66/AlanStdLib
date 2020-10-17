@@ -1,0 +1,81 @@
+
+
+The House 
+A rooms & sites setting for various tests. 
+(C) 2020 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0beta7.
+Standard Library v2.2.0 
+Version 1 
+All rights reserved.
+
+
+The Kitchen
+The laundry room is to the north, the south exit leads to your back
+garden. There is a chair, a fridge and a table here. On the table you see 
+a postcard, a jar, a bottle, a chips bag, a shopping list and a basket.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                           SCENERY OBJECTS TESTS                            *
+> ; *                                                                            *
+> ; ******************************************************************************
+> ; We'll be testing various types of scenery objects, in the 'Laundry Room'.
+> ; ------------------------------------------------------------------------------
+> n
+The Laundry Room
+This room is in a state of neglect. The kitchen is to the south. 
+
+> ; ==============================================================================
+> ; LIGHT BULB: scenery with 'ex'
+> ; ==============================================================================
+> ; Expect 'examine' to honor the 'ex' attribute:
+> x light bulb
+A tungsten light bulb, hanging from the ceiling by electric wires to
+which it's strapped with some sticky tape. Doesn't look safe at all.
+
+> take it
+The light bulb is not important.
+
+> ; ==============================================================================
+> ; ELECTRIC WIRES: scenery without 'ex'
+> ; ==============================================================================
+> ; This scenery object has no 'ex' description to honor:
+> x electric wires
+The electric wires are not important.
+
+> take it
+The electric wires are not important.
+
+> ; ==============================================================================
+> ; WARNING SIGN: scenery with 'ex' & readable with 'ex'
+> ; ==============================================================================
+> ; Expect 'examine' to honor the 'ex' attribute:
+> x warning sign
+An old sign nailed into the wall, bearing some printed text. Just below
+the sign, someone has scribbled some graffiti.
+
+> ; Expect 'read' to show the 'text' string:
+> read it
+You read the warning sign. It says "WARNING! This room was declared
+unsafe to live in. Use only for storage.".
+
+> take it
+The warning sign is not important.
+
+> ; ==============================================================================
+> ; GRAFFITI: scenery with 'ex' & readable without 'ex'
+> ; ==============================================================================
+> ; Expect 'examine' to behave like read:
+> x graffiti
+You read the graffiti. It says "Says who?".
+
+> ; Expect 'read' to show the 'text' string:
+> read it
+You read the graffiti. It says "Says who?".
+
+> take it
+The graffiti is not important.
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 
