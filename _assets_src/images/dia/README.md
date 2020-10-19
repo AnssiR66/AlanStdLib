@@ -2,7 +2,7 @@
 
 Source projects files to generate diagrams using [Dia].
 
-    /assets/images/dia/
+    /_assets/images/dia/
 
 
 -----
@@ -33,9 +33,9 @@ The `build-svg.sh` script will:
 
 1. Invoke [Dia] to convert to SVG images all `*.dia` projects in this folder.
 2. Optimize the generated SVGs, using the [SVGO] tool (Node.js).
-3. Deploy them to [`../../../assets/images/`][assets/images/], where the diagrams become available to AsciiDoc sources.
+3. Deploy them to [`../../../_assets/images/`][_assets/images/], where the diagrams become available to AsciiDoc sources.
 
-Since all the genrated images are copied to `assets/images/`, all `*.svg` files in this folder are ignored by Git.
+Since all the genrated images are copied to `_assets/images/`, all `*.svg` files in this folder are ignored by Git.
 
 # System Requirements
 
@@ -51,7 +51,7 @@ In order for the script to optimize the generated SVG images, you'll also need t
                                REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
-[assets/images/]: ../../../assets/images/ "Naviate to folder"
+[_assets/images/]: ../../../_assets/images/ "Naviate to folder"
 
 <!-- 3rd Party Tools -->
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# build-docinfo.sh        v1.0.0 | 2020/10/03 | by Tristano Ajmone, MIT License.
+# build-docinfo.sh        v1.0.1 | 2020/10/19 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                BUILD CUSTOM CSS AND INJECT IT IN DOCINFO FILE                #
@@ -8,7 +8,7 @@
 ################################################################################
 # This script will build from Sass sources our custom CSS for syntax coloring
 # ALAN code blocks, then inject the CSS in the `docinfo.html` file inside the
-# `../../assets/adoc/` folder, shared by all AsciiDoc generated HTML docs.
+# `../../_assets/adoc/` folder, shared by all AsciiDoc generated HTML docs.
 # ------------------------------------------------------------------------------
 # This script requires Dart Sass to be installed on the system:
 #      https://github.com/sass/dart-sass
@@ -21,7 +21,7 @@
 #                               SETUP & SETTINGS                               #
 ################################################################################
 if ! [[ -v AlanEnv ]]; then # If ALAN env is not already initialized:
-	source ../../assets/sh/init-env.sh  # Initialize the work environment
+	source ../../_assets/sh/init-env.sh  # Initialize the work environment
 fi
 
 srcSCSS="./styles.scss"           # SCSS input source file.

@@ -10,27 +10,19 @@ root = true
 # ==============================================================================
 
 # Common settings for non-generated Alan files
+# ============================================
+; Skip encoding validation because of EClint's buggy support of this feature,
+; leading to false positive error reports. (See #73)
+
 [*.{alan,i,a3sol}]
 indent_style = space
 indent_size = unset
-charset = latin1
+charset = unset
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-# Exclude Encoding Exception:
-; Skip encoding validation on some ALAN sources that contain non-ASCII chars,
-; because of EClint's buggy support of this feature, leading to false positive
-; error reports. (See #73)
-
-[tests/misc/{meta-verbs,restricted-actions}.alan]
-charset = unset
-[{extras,extras_src}/manual/wedding.a3sol]
-charset = unset
-[{extras,extras_src}/manual/{cave,garden,lab}?.*]
-charset = unset
-
 # Exclude generated files:
-[extras_src/utf8/**]
+[_assets/utf8/**]
 indent_style = unset
 indent_size = unset
 charset = unset

@@ -1,12 +1,12 @@
 # Assets Source Folder
 
-This directory contains the source files to build some of the resources in the [`../assets/`][assets/] folder, needed by the build toolchain.
+This directory contains the source files to build some of the resources in the [`../_assets/`][_assets/] folder, needed by the build toolchain.
 
 |       source dir      |          dest build dir          |                    description                     |
 |-----------------------|----------------------------------|----------------------------------------------------|
-| [`images/`][images/]  | [`../assets/images/`][dest imgs] |                                                    |
-| [`images/dia/`][dia/] | [`../assets/images/`][dest imgs] | [Dia] projects for SVG diagrams                    |
-| [`sass/`][sass/]      | [`../assets/adoc/`][adoc/]       | [Sass] sources for CSS injection in `docinfo.html` |
+| [`images/`][images/]  | [`../_assets/images/`][dest imgs] |                                                    |
+| [`images/dia/`][dia/] | [`../_assets/images/`][dest imgs] | [Dia] projects for SVG diagrams                    |
+| [`sass/`][sass/]      | [`../_assets/adoc/`][adoc/]       | [Sass] sources for CSS injection in `docinfo.html` |
 
 <!-----------------------------------------------------------------------------
                                REFERENCE LINKS
@@ -20,9 +20,9 @@ This directory contains the source files to build some of the resources in the [
 
 <!-- destinatrion build directories -->
 
-[assets/]: ../assets/ "Navigate to 'assets/' folder"
-[dest imgs]: ../assets/images/ "Navigate to images assets build folder"
-[adoc/]:  ../assets/adoc/ "Navigate to AsciiDoctor assets build folder"
+[_assets/]: ../_assets/ "Navigate to '_assets/' folder"
+[dest imgs]: ../_assets/images/ "Navigate to images assets build folder"
+[adoc/]:  ../_assets/adoc/ "Navigate to AsciiDoctor assets build folder"
 
 <!-- 3rd Party Tools -->
 

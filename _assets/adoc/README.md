@@ -2,7 +2,7 @@
 
 This directory tree contains assets required by the Asciidoctor conversion toolchain.
 
-    /assets/adoc/
+    /_assets/adoc/
 
 -----
 

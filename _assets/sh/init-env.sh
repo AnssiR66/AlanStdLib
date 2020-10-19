@@ -1,6 +1,7 @@
 #!/bin/bash
+
+# _assets/sh/init-env.sh                v1.2.1 | 2020/10/19 | by Tristano Ajmone
 # ==============================================================================
-# "assets/sh/init-env.sh" v1.2.0| 2020/09/28 | by Tristano Ajmone
 # Released into the Public Domain (https://unlicense.org)
 # ------------------------------------------------------------------------------
 # RUN ME WITH:
@@ -9,7 +10,7 @@
 #   source ./init-env.sh
 # ------------------------------------------------------------------------------
 
-# This script prepends to $PATH the "./assets/sh/" folder in order to make the
+# This script prepends to $PATH the "./_assets/sh/" folder in order to make the
 # all the shell scripts and assets of that folder available to all scripts in
 # the repository.
 #
@@ -65,7 +66,7 @@ echo -e "\e[32;1m$HyphensLine"
 # current working directory is unknown.
 # ------------------------------------------------------------------------------
 
-# /assets/sh/ -> $ScriptsDir
+# /_assets/sh/ -> $ScriptsDir
 # ==========================
 export ScriptsDir # (already defined above)
 
@@ -81,27 +82,27 @@ if [[ $(uname -s) == MINGW* ]];then # Amend Obtained Path:
 	RepoRoot="/${RepoRoot,}"	# Drive unit to lowercase
 fi
 
-# /assets/images/ -> $ImagesDir
+# /_assets/images/ -> $ImagesDir
 # =============================
-export ImagesDir="$RepoRoot/assets/images"
+export ImagesDir="$RepoRoot/_assets/images"
 
 
 # /StdLib/ -> $StdLibDir
 # ======================
 export StdLibDir="$RepoRoot/StdLib"
 
-# /assets/adoc/ -> $ADocDir
+# /_assets/adoc/ -> $ADocDir
 # =========================
-export ADocDir="$RepoRoot/assets/adoc"
+export ADocDir="$RepoRoot/_assets/adoc"
 
-# /assets/adoc/haml/ -> $HamlDir
+# /_assets/adoc/haml/ -> $HamlDir
 # ==============================
 export HamlDir="$ADocDir/haml"
 
 
 # /extras_src/utf8/ -> $utfBasePath
 # =================================
-export utfBasePath="$RepoRoot/assets/utf8"
+export utfBasePath="$RepoRoot/_assets/utf8"
 
 ## PRINT REPORT
 ###############

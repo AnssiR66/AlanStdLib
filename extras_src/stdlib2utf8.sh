@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# stdlib2utf8.sh          v1.1.0 | 2020/09/27 | by Tristano Ajmone, MIT License.
+# stdlib2utf8.sh          v1.1.1 | 2020/10/19 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                       CONVERT LIBRARY SOURCE TO UTF-8                        #
@@ -8,7 +8,7 @@
 ################################################################################
 
 if ! [[ -v AlanEnv ]]; then # If ALAN env is not already initialized:
-	source ../assets/sh/init-env.sh  # Initialize the work environment
+	source ../_assets/sh/init-env.sh  # Initialize the work environment
 fi
 
 printHeading1 "Create UTF-8 Version of StdLib Sources"

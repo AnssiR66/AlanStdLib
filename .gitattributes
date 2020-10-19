@@ -147,8 +147,8 @@ LICENSE      text
 
 ## Developer folders
 #####################
-/assets/        export-ignore
-/assets_src/    export-ignore
+/_assets/        export-ignore
+/_assets_src/    export-ignore
 /extras_src/    export-ignore
 /tests/         export-ignore
 

@@ -2,7 +2,7 @@
 
 This directory contains the various resources needed by the build toolchain.
 
-    /assets/
+    /_assets/
 
 -------------------------------------------------------------------------------
 

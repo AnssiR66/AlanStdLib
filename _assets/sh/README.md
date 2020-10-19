@@ -2,7 +2,7 @@
 
 This folder contains shared scripts required by the project and its toolchain.
 
-    /assets/sh/
+    /_assets/sh/
 
 -----
 

@@ -3,7 +3,7 @@
 The Sass sources to build the custom CSS stylesheets for Alan StdLib documentation.
 
 - Output CSS stylesheet: [`./styles.css`][styles.css].
-- Output docinfo file: [`../../assets/adoc/docinfo.html`][docinfo file]
+- Output docinfo file: [`../../_assets/adoc/docinfo.html`][docinfo file]
 
 
 -----
@@ -58,13 +58,13 @@ Builds the CSS stylesheet from Sass sources, then injects it into the [docinfo f
 # Output Files
 
 - [`./styles.css`][styles.css] — compiled stylesheet form SCSS sources.
-- [`../../assets/adoc/docinfo.html`][docinfo file] — docinfo file with CSS injected into  `<head>` section.
+- [`../../_assets/adoc/docinfo.html`][docinfo file] — docinfo file with CSS injected into  `<head>` section.
 
 # Usage Instructions
 
 These are the Sass/SCSS sources for building the custom CSS stylesheets used in the Alan StdLib documentation, providing the required styles for code blocks highligthed with Highlight, as well as custom styles for game transcripts, and other custom elements.
 
-The generated CSS file ([`./styles.css`][styles.css]) is injected into the docinfo file ([`../../assets/adoc/docinfo.html`][docinfo file]) so that every HTML document will be fully standalone.
+The generated CSS file ([`./styles.css`][styles.css]) is injected into the docinfo file ([`../../_assets/adoc/docinfo.html`][docinfo file]) so that every HTML document will be fully standalone.
 
 This also means that updating the CSS and docinfo files won't affect the appearance of the HTML documents until they are converted again, for they no longer rely on an external stylesheet — the custom CSS is now in the document `<head>` section.
 
@@ -180,7 +180,7 @@ The `fontFace` Mixin was adapted from Sass Boilerplate project's "[`fontface.scs
 ------------------------------------------------------------------------------>
 
 [build-docinfo.sh]: ./build-docinfo.sh "View script source"
-[docinfo file]: ../../assets/adoc/docinfo.html "View the target docinfo file"
+[docinfo file]: ../../_assets/adoc/docinfo.html "View the target docinfo file"
 
 <!-- SCSS/CSS files -->
 

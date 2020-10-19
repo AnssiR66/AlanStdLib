@@ -22,8 +22,8 @@ The following table describes the repository structure, and which folders and fi
 
 |              path             |               description               | Git archive |
 |-------------------------------|-----------------------------------------|-------------|
-| [`/assets/`][assets/]         | toolchain assets                        | _excluded_  |
-| [`/assets_src/`][assets_src/] | toolchain assets source files           | _excluded_  |
+| [`/_assets/`][_assets/]         | toolchain assets                        | _excluded_  |
+| [`/_assets_src/`][_assets_src/] | toolchain assets source files           | _excluded_  |
 | [`/extras/`][extras/]         | Standard Library resources              |             |
 | [`/extras_src/`][extras_src/] | Standard Library resources source files | _excluded_  |
 | [`/StdLib/`][StdLib/]         | Standard Library modules                |             |
@@ -47,8 +47,8 @@ Exclusion of files and folders from the generated Zip archives is controlled by 
 
 <!-- project folders -->
 
-[assets/]: ./assets/ "Navigate to folder"
-[assets_src/]: ./assets_src/ "Navigate to folder"
+[_assets/]: ./_assets/ "Navigate to folder"
+[_assets_src/]: ./_assets_src/ "Navigate to folder"
 [extras/]: ./extras/ "Navigate to folder"
 [extras_src/]: ./extras_src/ "Navigate to folder"
 [StdLib/]: ./StdLib/ "Navigate to folder"

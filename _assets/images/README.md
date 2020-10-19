@@ -2,7 +2,7 @@
 
 This folder contains images shared by the various documents of the project.
 
-    /assets/images/
+    /_assets/images/
 
 -----
 

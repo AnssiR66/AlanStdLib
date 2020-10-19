@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# extras_src/update.sh    v2.1.1 | 2020/09/27 | by Tristano Ajmone, MIT License.
+# extras_src/update.sh    v2.1.2 | 2020/10/19 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                          BUILD STDLIB EXTRAS FOLDER                          #
@@ -31,7 +31,7 @@ foldersList="manual tutorials"
 #                               SETUP & SETTINGS                               #
 ################################################################################
 if ! [[ -v AlanEnv ]]; then # If ALAN env is not already initialized:
-	source ../assets/sh/init-env.sh  # Initialize the work environment
+	source ../_assets/sh/init-env.sh  # Initialize the work environment
 fi
 
 export invoker="extras_src/update.sh"   # Used by some external scripts

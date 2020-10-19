@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# StdLib/html-build.sh    v0.0.3 | 2020/09/27 | by Tristano Ajmone, MIT License.
+# StdLib/html-build.sh    v0.0.4 | 2020/10/19 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                            BUILD STDLIB HTML DOCS                            #
@@ -15,7 +15,7 @@
 #                               SETUP & SETTINGS                               #
 ################################################################################
 if ! [[ -v AlanEnv ]]; then # If ALAN env is not already initialized:
-	source ../assets/sh/init-env.sh  # Initialize the work environment
+	source ../_assets/sh/init-env.sh  # Initialize the work environment
 fi
 
 export invoker="manual/html-build.sh"   # Used by some external scripts
