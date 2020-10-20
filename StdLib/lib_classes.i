@@ -1414,8 +1414,8 @@ EVERY liquid ISA OBJECT
         THEN
           IF vessel OF THIS = null_vessel OR vessel OF THIS IS NOT takeable
             THEN "You can't carry" SAY THE THIS. "around in your bare hands."
-            ELSE LOCATE vessel OF THIS IN hero.
-              "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
+            ELSE "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
+              LOCATE vessel OF THIS IN hero.
           END IF.
       END IF.
       -- <<< implicit take <<<
@@ -1423,12 +1423,14 @@ EVERY liquid ISA OBJECT
       IF THIS IN hero
         -- i.e. if the implicit taking was successful
         THEN
-          "You give" SAY THE vessel OF THIS. "of" SAY THIS. "to" SAY THE recipient. "."
+          "You give" SAY THE vessel OF THIS. "of" SAY THIS.
+          "to" SAY THE recipient. "."
           LOCATE vessel OF THIS IN recipient.
       END IF.
 
-      -- there is no 'ELSE' statement in this last IF -clause, as the 'IF THIS NOT
-      -- IN hero' clause above it takes care of the 'ELSE' alternative.
+      -- There is no ELSE statement in this last IF clause, because the previous
+      -- `IF THIS NOT IN hero` clause already takes care of the ELSE
+      -- alternative.
 
   END VERB give.
 
@@ -1550,7 +1552,8 @@ EVERY liquid ISA OBJECT
                 IF THIS NOT IN hero
                   THEN
                     IF vessel OF THIS = null_vessel
-                      THEN "You can't carry" SAY THE THIS. "around in your bare hands."
+                      THEN "You can't carry" SAY THE THIS.
+                           "around in your bare hands."
                     ELSE LOCATE vessel OF THIS IN hero.
                       "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
                     END IF.
@@ -1558,7 +1561,8 @@ EVERY liquid ISA OBJECT
                 -- <<< implicit take <<<
 
                 LOCATE vessel OF THIS IN cont.
-                    "You put" SAY THE vessel OF THIS. "of" SAY THIS. "into" SAY THE cont. "."
+                "You put" SAY THE vessel OF THIS. "of" SAY THIS.
+                "into" SAY THE cont. "."
 
               ELSE "You don't have" SAY THE vessel OF THIS. "of" SAY THIS. "."
             END IF.
@@ -1615,25 +1619,23 @@ EVERY liquid ISA OBJECT
 
 
 
-
-
-  -- The verbs 'empty', 'empty_in' and 'empty_on' will be disabled as ungrammatical with liquids:
+  -- The verbs `'empty'`, `empty_in` and `empty_on` are disabled for liquids,
+  -- because grammatically incorrect:
 
   VERB 'empty'
     WHEN obj
-    DOES ONLY "You can only empty containers."
+      DOES ONLY "You can only empty containers."
   END VERB 'empty'.
 
   VERB empty_in
     WHEN obj
-    DOES ONLY "You can only empty containers."
+      DOES ONLY "You can only empty containers."
   END VERB empty_in.
 
   VERB empty_on
     WHEN obj
-    DOES ONLY "You can only empty containers."
+      DOES ONLY "You can only empty containers."
   END VERB empty_on.
-
 
 END EVERY.
 
@@ -1648,10 +1650,19 @@ THE null_vessel ISA OBJECT
 END THE.
 
 
+--==============================================================================
+--------------------------------------------------------------------------------
+-- Liquid's Events
+--------------------------------------------------------------------------------
+--==============================================================================
 
--- This event checks that if a liquid is outside a container, its container will
--- be 'null_vessel'; ignore:
 
+-- This recurrent event uprated at every turn the state of liquids and vessels,
+-- ensuring their status integrity:
+--
+--   * If a liquid is outside a container, set its `vessel` to `null_vessel`.
+--   * If a `LISTED_CONTAINER` directly contains a liquid, set the former as
+--     the `vessel` of the latter.
 
 EVENT check_vessel
   FOR EACH liq ISA LIQUID, DIRECTLY AT CURRENT LOCATION DO
