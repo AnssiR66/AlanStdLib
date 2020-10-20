@@ -5,44 +5,103 @@ IMPORT 'library.i'. -- ALAN Standard Library v2.2.0
 
 
 THE my_game IsA DEFINITION_BLOCK
-
-  HAS title    "Liquid Tests".
-  HAS subtitle "Testing liquids behavior.".
-  HAS author   "Tristano Ajmone".
-  HAS year     2020.
-  HAS version  "1".
-  HAS AlanV    "v3.0beta7".
-
+  HAS
+    title    "Liquid Tests".
+    subtitle "Testing liquids behavior.".
+    author   "Tristano Ajmone".
+    year     2020.
+    version  "1".
 END THE.
-
-
-THE start_loc IsA LOCATION.
-
-END THE start_loc.
 
 --==============================================================================
 
--- Liquids Containers
+-- Liquids Test Lab
 
+--==============================================================================
+
+THE liqlab IsA room.
+  NAME 'Liquids Test Laboratory'.
+END THE.
+
+--------------------------------------------------------------------------------
+-- NPCs
+--------------------------------------------------------------------------------
+-- Anssi will be providing insights into the tests by answering questions about
+-- the various game objects (ask_about topic).
+
+THE Anssi IsA male AT liqlab.
+  NAME Anssi.
+  NAME Anssi Räisänen.
+  NAME Anssi Raisanen.
+  IS named.
+  DESCRIPTION "$nAnssi Räisänen is here, waiting to assist you."
+  HAS ex "He's Anssi Räisänen, the mastermind behind the ALAN Standard Library.".
+  IS following.
+END THE Anssi.
+
+--==============================================================================
+-- Liquids Containers
 --==============================================================================
 
 --------------------------------------------------------------------------------
 -- Empty Jar
 --------------------------------------------------------------------------------
-THE jar IsA listed_container AT start_loc.
+THE jar IsA listed_container AT liqlab.
   HAS allowed {wine}.
 END THE.
 --------------------------------------------------------------------------------
 -- Wine Bottle
 --------------------------------------------------------------------------------
-THE bottle IsA listed_container AT start_loc.
+-- The wine bottle is closed, it must opened with the corkscrew (held by Anssi)
+-- in order to access it's contents. Once opened, the cork goes in the Hero's
+-- inventory, so he can close again the bottle.
+
+THE wine_bottle IsA listed_container AT liqlab.
+  NAME bottle.
+  NAME wine bottle.
+  -- OPAQUE CONTAINER -- except it's transparent!
+  Is openable. NOT open.
+  -- lockable. locked.
+  -- Has matching_key corkscrew.
+  HAS ex "It's a wine bottle, French, and probably good quality too.".
+
+  VERB open
+    CHECK corkscrew IN hero
+      ELSE "You'll need a corkscrew to open the wine bottle."
+    DOES AFTER
+      "You're now carrying the bottle's cork."
+      locate cork in Hero.
+  END VERB.
+
+  VERB close
+    CHECK cork IN hero
+      ELSE "You'll need a cork to close the wine bottle with."
+    DOES AFTER
+      "Now the cork is back in the bottle."
+      locate cork AT nowhere.
+  END VERB.
 END THE.
 
-THE wine IsA liquid IN bottle.
-  HAS vessel bottle.
+THE wine IsA liquid IN wine_bottle.
+  HAS vessel wine_bottle.
+  IS drinkable.
   INDEFINITE ARTICLE "some"
+  HAS ex "It's dark red, dense.".
 END THE.
+
+THE corkscrew IsA object IN Anssi.
+  HAS ex "It looks a professional tool, for the true wine connoisseur.".
+END THE.
+
+
+THE cork IsA object AT nowhere.
+  HAS ex "It's the cork which you pulled out of the wine bottle.".
+END THE.
+
 
 --------------------------------------------------------------------------------
-Start at start_loc.
+START At liqlab.
 DESCRIBE banner.
+"$pWelcome to the ALAN StdLib's ""Liquids Test Laboratory,"" a private research
+ facility founded by Anssi Räisänen with funds from the ""International ALAN
+ Foundation"" and from IF-tycoon Thomas Nilefalk."

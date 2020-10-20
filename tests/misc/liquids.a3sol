@@ -1,14 +1,67 @@
+; ******************************************************************************
+; *                                                                            *
+; *                            LIQUID GENERAL TESTS                            *
+; *                                                                            *
+; ******************************************************************************
+; This solution file carries out general tests on the behavior of liquids, their
+; vessels, and the various attributes and verbs associated with them.
 ; ==============================================================================
 ; INITIAL STATE OF CONTAINERS
 ; ==============================================================================
-; The bottle has wine in it, the jar is empty:
-x bottle
+; The bottle has wine in it, the jar is empty.
 x jar
+; The bottle has an 'ex' attribute, it should be honored:
+; The bottle is closed, it should be mentioned:
+x bottle
+; **ERROR** 'ex' attribute not honored!
+; **ERROR** 'should mention if it's open or closed!
+; The wine shouldn't be accessible since it's closed:
+x wine
+; ------------------------------------------------------------------------------
+; OPEN BOTTLE
+; ------------------------------------------------------------------------------
+open bottle
+ask Anssi for corkscrew
+open bottle
+i
+; The wine has an 'ex' attribute, it should be honored:
+x wine
+; **ERROR** 'ex' attribute not honored!
+; =================================================
+; TEST BOTTLE: CUSTOM CORK/CORKSCREW IMPLEMENTATION
+; =================================================
+; Just making sure the mechanism works fine...
+drop cork
+drop corkscrew
+close bottle
+take cork
+close bottle
+i
+open bottle
+take corkscrew
+open bottle
 ; ==============================================================================
-; THE 'FILL WITH' BUG!
+; MOVING LIQUIDS AROUND
 ; ==============================================================================
-; Now we attempt to fill the jar with wine (it will fail by default):
+; Trying to fill the jar with wine will fail by default:
 fill jar with wine
+; Trying to pour the wine into the jar should succeed:
+pour wine in jar
 x bottle
 x jar
+; And vice-versa:
+pour wine in bottle
+x bottle
+x jar
+; edge-case test (should fail):
+pour wine in bottle
+; **BUG!** The wine is already in the bottle
+; ==============================================================================
+; BUGS
+; ==============================================================================
+; When the bottle is closed again, it should not be possible to pour it, nor its
+; contents!
+close bottle
+pour bottle
 pour wine
+; **BUG!** There's a missing check on the vessel status (See #108)

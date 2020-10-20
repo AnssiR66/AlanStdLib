@@ -3,42 +3,147 @@
 Liquid Tests 
 Testing liquids behavior. 
 (C) 2020 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0beta7.
+Programmed with the ALAN Interactive Fiction Language v3.0 beta7.
 Standard Library v2.2.0 
 Version 1 
-All rights reserved.
+All rights reserved. 
+
+Welcome to the ALAN StdLib's "Liquids Test Laboratory," a private
+research facility founded by Anssi Räisänen with funds from the
+"International ALAN Foundation" and from IF-tycoon Thomas Nilefalk.
 
 
-Start_loc
-There is a jar and a bottle here. The bottle contains some wine.
+Liquids Test Laboratory
+There is a jar and a bottle here. The bottle contains some wine. 
+Anssi Räisänen is here, waiting to assist you.
 
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                            LIQUID GENERAL TESTS                            *
+> ; *                                                                            *
+> ; ******************************************************************************
+> ; This solution file carries out general tests on the behavior of liquids, their
+> ; vessels, and the various attributes and verbs associated with them.
 > ; ==============================================================================
 > ; INITIAL STATE OF CONTAINERS
 > ; ==============================================================================
-> ; The bottle has wine in it, the jar is empty:
-> x bottle
-The bottle contains some wine.
-
+> ; The bottle has wine in it, the jar is empty.
 > x jar
 The jar is empty.
 
+> ; The bottle has an 'ex' attribute, it should be honored:
+> ; The bottle is closed, it should be mentioned:
+> x bottle
+The bottle contains some wine.
+
+> ; **ERROR** 'ex' attribute not honored!
+> ; **ERROR** 'should mention if it's open or closed!
+> ; The wine shouldn't be accessible since it's closed:
+> x wine
+You can't, since the bottle is closed.
+
+> ; ------------------------------------------------------------------------------
+> ; OPEN BOTTLE
+> ; ------------------------------------------------------------------------------
+> open bottle
+You'll need a corkscrew to open the wine bottle.
+
+> ask Anssi for corkscrew
+Anssi gives the corkscrew to you.
+
+> open bottle
+You open the bottle. The bottle contains some wine. You're now carrying
+the bottle's cork.
+
+> i
+You are carrying a corkscrew and a cork.
+
+> ; The wine has an 'ex' attribute, it should be honored:
+> x wine
+You notice nothing unusual about the wine
+
+> ; **ERROR** 'ex' attribute not honored!
+> ; =================================================
+> ; TEST BOTTLE: CUSTOM CORK/CORKSCREW IMPLEMENTATION
+> ; =================================================
+> ; Just making sure the mechanism works fine...
+> drop cork
+Dropped.
+
+> drop corkscrew
+Dropped.
+
+> close bottle
+You'll need a cork to close the wine bottle with.
+
+> take cork
+Taken.
+
+> close bottle
+You close the bottle. Now the cork is back in the bottle.
+
+> i
+You are empty-handed.
+
+> open bottle
+You'll need a corkscrew to open the wine bottle.
+
+> take corkscrew
+Taken.
+
+> open bottle
+You open the bottle. The bottle contains some wine. You're now carrying
+the bottle's cork.
+
 > ; ==============================================================================
-> ; THE 'FILL WITH' BUG!
+> ; MOVING LIQUIDS AROUND
 > ; ==============================================================================
-> ; Now we attempt to fill the jar with wine (it will fail by default):
+> ; Trying to fill the jar with wine will fail by default:
 > fill jar with wine
 You can't fill the jar with the wine.
 
+> ; Trying to pour the wine into the jar should succeed:
+> pour wine in jar
+(taking the bottle of wine first)
+You pour the wine into the jar.
+
+> x bottle
+The bottle is empty.
+
+> x jar
+The jar contains some wine.
+
+> ; And vice-versa:
+> pour wine in bottle
+(taking the jar of wine first)
+You pour the wine into the bottle.
+
 > x bottle
 The bottle contains some wine.
 
 > x jar
 The jar is empty.
 
-> pour wine
-(taking the bottle of wine first)
-You pour the wine on the ground.
+> ; edge-case test (should fail):
+> pour wine in bottle
+You pour the wine into the bottle.
 
+> ; **BUG!** The wine is already in the bottle
+> ; ==============================================================================
+> ; BUGS
+> ; ==============================================================================
+> ; When the bottle is closed again, it should not be possible to pour it, nor its
+> ; contents!
+> close bottle
+You close the bottle. Now the cork is back in the bottle.
+
+> pour bottle
+You can't, since the bottle is closed.
+
+> pour wine
+You can't see any wine here.
+
+> ; **BUG!** There's a missing check on the vessel status (See #108)
 > 
 
 Do you want to RESTART, RESTORE, QUIT or UNDO? 
