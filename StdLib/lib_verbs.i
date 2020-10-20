@@ -659,24 +659,22 @@ ADD TO EVERY OBJECT
         END IF.
 
     DOES
-      -- This if-statement takes care of implicit taking; i.e. if the hero
-      -- doesn't have the object, (s)he will take it automatically first
-      -- - unless it's carried by another actor.
-      -- This same if-statement is found in numerous other verbs throughout
-      -- the library, as well.
-
       -- >>> implicit take >>>
       IF obj NOT DIRECTLY IN hero
-        THEN LOCATE obj IN hero.
-             SAY implicit_taking_message OF my_game.
+        THEN SAY implicit_taking_message OF my_game.
+             LOCATE obj IN hero.
       END IF.
       -- <<< implicit take <<<
 
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
+      --       the verb would simply abort, and this code never be executed.
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       "You take a bite of" SAY THE obj. "$$."
-        IF obj IS NOT plural
-          THEN "It tastes nothing out of the ordinary."
-          ELSE "They taste nothing out of the ordinary."
-        END IF.
+      IF obj IS NOT plural
+        THEN "It tastes"
+        ELSE "They taste"
+      END IF. "nothing out of the ordinary."
 
   END VERB bite.
 END ADD TO.
@@ -1811,33 +1809,32 @@ ADD TO EVERY LIQUID
 
     DOES
       IF vessel OF liq = null_vessel
-        -- here, if the liquid is in no container, for
-        -- example the hero takes a sip of water from a river,
-        -- the action is allowed to succeed so that the hero
-        -- drinks some of the liquid:
-
+        -- Here, if the liquid is without a container, e.g. the hero
+        -- drinks water from a river, the action is allowed to succeed.
         THEN "You drink a bit of" SAY THE liq. "."
         ELSE
-          -- = if the liquid is in a container:
+          -- i.e. if the liquid is in a container:
 
           -- >>> implicit take >>>
           IF vessel OF liq NOT DIRECTLY IN hero
             THEN
               IF vessel OF liq IS NOT takeable
                 THEN "You can't carry" SAY THE liq. "around in your bare hands."
-                  -- the action stops here if the container is not takeable.
+                     -- The action stops here if the container is not takeable.
                 ELSE
-                  LOCATE vessel OF liq IN hero.
                   "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
+                  LOCATE vessel OF liq IN hero.
               END IF.
           END IF.
           -- <<< implicit take <<<
 
-          IF liq IN hero
-            -- i.e. if the implicit taking was successful
-            THEN
-              "You drink all of" SAY THE liq. "."
-              LOCATE liq AT nowhere.
+          -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+          -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
+          --       the verb would simply abort, and this code never be executed.
+          -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+          IF liq IN hero  -- i.e. if the liquid's vessel was takeable.
+            THEN "You drink all of" SAY THE liq. "."
+                 LOCATE liq AT nowhere.
           END IF.
       END IF.
   END VERB drink.
@@ -2012,11 +2009,15 @@ ADD TO EVERY OBJECT
     DOES
       -- >>> implicit take >>>
       IF food NOT DIRECTLY IN hero
-        THEN LOCATE food IN hero.
-             SAY implicit_taking_message OF my_game.
+        THEN SAY implicit_taking_message OF my_game.
+             LOCATE food IN hero.
       END IF.
       -- <<< implicit take <<<
 
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
+      --       the verb would simply abort, and this code never be executed.
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       "You eat all of" SAY THE food. "."
       LOCATE food AT nowhere.
 
@@ -2105,11 +2106,15 @@ ADD TO EVERY OBJECT
     DOES
       -- >>> implicit take >>>
       IF obj NOT DIRECTLY IN hero
-        THEN LOCATE obj IN hero.
-          SAY implicit_taking_message OF my_game.
+        THEN SAY implicit_taking_message OF my_game.
+             LOCATE obj IN hero.
       END IF.
       -- <<< implicit take <<<
 
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
+      --       the verb would simply abort, and this code never be executed.
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       IF COUNT ISA OBJECT, DIRECTLY IN obj = 0
         THEN "There is nothing in" SAY THE obj. "."
         ELSE
@@ -2250,11 +2255,15 @@ ADD TO EVERY OBJECT
       DOES
       -- >>> implicit take >>>
       IF obj NOT DIRECTLY IN hero
-        THEN LOCATE obj IN hero.
-          SAY implicit_taking_message OF my_game.
+        THEN SAY implicit_taking_message OF my_game.
+             LOCATE obj IN hero.
       END IF.
       -- <<< implicit take <<<
 
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
+      --       the verb would simply abort, and this code never be executed.
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       IF COUNT ISA OBJECT, DIRECTLY IN obj = 0
         THEN "There is nothing in" SAY THE obj. "."
         ELSE
@@ -2365,11 +2374,15 @@ ADD TO EVERY THING
       DOES
         -- >>> implicit take >>>
         IF obj NOT DIRECTLY IN hero
-          THEN LOCATE obj IN hero.
-            SAY implicit_taking_message OF my_game.
+          THEN SAY implicit_taking_message OF my_game.
+               LOCATE obj IN hero.
         END IF.
         -- <<< implicit take <<<
 
+        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
+        --       the verb would simply abort, and this code never be executed.
+        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IF COUNT ISA OBJECT, DIRECTLY IN obj = 0
           THEN "There is nothing in" SAY THE obj. "."
           ELSE
@@ -3235,6 +3248,10 @@ ADD TO EVERY OBJECT
         END IF.
         -- <<< implicit take <<<
 
+        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
+        --       the verb would simply abort, and this code never be executed.
+        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         LOCATE obj IN recipient.
         "You give" SAY THE obj. "to" SAY THE recipient. "."
         MAKE obj NOT worn. -- for non-clothing wearables.
@@ -5653,11 +5670,15 @@ ADD TO EVERY OBJECT
       DOES
         -- >>> implicit take >>>
         IF obj NOT DIRECTLY IN hero
-          THEN LOCATE obj IN hero.
-               SAY implicit_taking_message OF my_game.
+          THEN SAY implicit_taking_message OF my_game.
+               LOCATE obj IN hero.
         END IF.
         -- <<< implicit take <<<
 
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
+      --       the verb would simply abort, and this code never be executed.
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IF surface = floor OR surface = ground
           THEN LOCATE obj AT hero.
           ELSE LOCATE obj IN surface.
@@ -6602,9 +6623,8 @@ ADD TO EVERY LIQUID
 
     DOES
       IF vessel OF liq = null_vessel
-        -- here, if the liquid is in no container, for example
-        -- the hero takes a sip of water from a river,
-        -- the action is allowed to succeed.
+        -- Here, if the liquid is without a container, e.g. the hero
+        -- sips water from a river, the action is allowed to succeed.
         THEN "You take a sip of" SAY THE liq. "."
         ELSE
           -- >>> implicit take >>>
@@ -6612,20 +6632,25 @@ ADD TO EVERY LIQUID
             THEN
               IF vessel OF liq IS NOT takeable
                 THEN "You can't carry" SAY THE liq. "around in your bare hands."
-                  -- the action stops here if the container is not takeable.
-                ELSE LOCATE vessel OF liq IN hero.
-                "(taking" SAY THE vessel OF liq. "first)$n"
+                     -- the action stops here if the container is not takeable.
+                ELSE "(taking" SAY THE vessel OF liq. "first)$n"
+                     LOCATE vessel OF liq IN hero.
               END IF.
           END IF.
           -- <<< implicit take <<<
       END IF.
-
-      IF liq IN hero    -- i.e. if the implicit taking was successful
-        THEN
-          IF vessel OF liq IS NOT open
-            THEN "You can't, since" SAY THE vessel OF liq. "is closed."
-            ELSE "You take a sip of" SAY THE liq. "."
-          END IF.
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
+      --       the verb would simply abort, and this code never be executed.
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      IF liq IN hero THEN
+      -- If the liquid is not in the hero, it means that either:
+      --   * It didn't have a vessel, and was already sipped.
+      --   * Its vessel was not takeable.
+        IF vessel OF liq IS NOT open
+          THEN "You can't, since" SAY THE vessel OF liq. "is closed."
+          ELSE "You take a sip of" SAY THE liq. "."
+        END IF.
       END IF.
 
   END VERB sip.
@@ -7688,22 +7713,26 @@ ADD TO EVERY OBJECT
     DOES
       -- >>> implicit take >>>
       IF projectile NOT DIRECTLY IN hero
-        THEN LOCATE projectile IN hero.
-          SAY implicit_taking_message OF my_game.
+        THEN SAY implicit_taking_message OF my_game.
+             LOCATE projectile IN hero.
       END IF.
       -- <<< implicit take <<<
 
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
+      --       the verb would simply abort, and this code never be executed.
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       "You can't throw very far;" SAY THE projectile.
 
       IF projectile IS NOT plural
-        THEN "ends up"
-        ELSE "end up"
-      END IF.
+        THEN "ends"
+        ELSE "end"
+      END IF. "up on the"
 
       IF floor HERE
-        THEN "on the floor"
+        THEN "floor"
       ELSIF ground HERE
-        THEN "on the ground"
+        THEN "ground"
       END IF.
 
       "nearby."
@@ -7786,10 +7815,15 @@ ADD TO EVERY OBJECT
     DOES
       -- >>> implicit take >>>
       IF projectile NOT DIRECTLY IN hero
-        THEN LOCATE projectile IN hero.
-             SAY implicit_taking_message OF my_game.
+        THEN SAY implicit_taking_message OF my_game.
+             LOCATE projectile IN hero.
       END IF.
       -- <<< implicit take <<<
+
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
+      --       the verb would simply abort, and this code never be executed.
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       MAKE projectile NOT worn. -- for non-clothing wearables.
 
       IF target IS inanimate

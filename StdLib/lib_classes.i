@@ -1420,17 +1420,20 @@ EVERY liquid ISA OBJECT
       END IF.
       -- <<< implicit take <<<
 
-      IF THIS IN hero
-        -- i.e. if the implicit taking was successful
-        THEN
-          "You give" SAY THE vessel OF THIS. "of" SAY THIS.
-          "to" SAY THE recipient. "."
-          LOCATE vessel OF THIS IN recipient.
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
+      --       the verb would simply abort, and this code never be executed.
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      IF THIS IN hero THEN
+        -- i.e. if the liquid wasn't vessel-less, or its vessel not takeable.
+        "You give" SAY THE vessel OF THIS. "of" SAY THIS.
+        "to" SAY THE recipient. "."
+        LOCATE vessel OF THIS IN recipient.
       END IF.
 
-      -- There is no ELSE statement in this last IF clause, because the previous
-      -- `IF THIS NOT IN hero` clause already takes care of the ELSE
-      -- alternative.
+      -- NOTE: There's no ELSE statement in this last IF clause, because the
+      --       previous `IF THIS NOT IN hero` clause already took care of the
+      --       possible alternatives.
 
   END VERB give.
 
@@ -1441,25 +1444,30 @@ EVERY liquid ISA OBJECT
       IF THIS NOT IN hero
         THEN
           IF vessel OF THIS = null_vessel OR vessel OF THIS IS NOT takeable
-            THEN "You can't pour" SAY THE THIS. "anywhere since you are not
-                  carrying"
+            THEN "You can't pour" SAY THE THIS.
+              "anywhere since you are not carrying"
               IF THIS IS NOT plural
                 THEN "it."
                 ELSE "them."
               END IF.
-          ELSE LOCATE vessel OF THIS IN hero.
-            "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
+          ELSE "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
+               LOCATE vessel OF THIS IN hero.
           END IF.
       END IF.
       -- <<< implicit take <<<
 
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
+      --       the verb would simply abort, and this code never be executed.
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       IF THIS IN hero
+        -- i.e. if the liquid wasn't vessel-less, or its vessel not takeable.
         THEN LOCATE THIS AT hero.
           SET vessel OF THIS TO null_vessel.
-          "You pour" SAY THE THIS.
+          "You pour" SAY THE THIS. "on the"
           IF floor HERE
-            THEN "on the floor."
-            ELSE "on the ground."
+            THEN "floor."
+            ELSE "ground."
           END IF.
       END IF.
 
@@ -1476,17 +1484,23 @@ EVERY liquid ISA OBJECT
               THEN "You can't carry" SAY THE THIS. "around in your bare hands."
             ELSIF vessel OF THIS IS NOT takeable
               THEN "You don't have" SAY THE vessel OF THIS. "of" SAY THIS. "."
-            ELSE LOCATE vessel OF THIS IN hero.
-              "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
+            ELSE "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
+              LOCATE vessel OF THIS IN hero.
             END IF.
         END IF.
         -- <<< implicit take <<<
 
-        IF THIS IN hero   --i.e. if the implicit taking was successful
-          THEN LOCATE THIS IN cont.
-            SET vessel OF THIS TO cont.
-            "You pour" SAY THE THIS. "into" SAY THE cont. "."
+        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
+        --       the verb would simply abort, and this code never be executed.
+        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        IF THIS IN hero THEN
+          -- i.e. if the liquid wasn't vessel-less, or its vessel not takeable.
+          LOCATE THIS IN cont.
+          SET vessel OF THIS TO cont.
+          "You pour" SAY THE THIS. "into" SAY THE cont. "."
         END IF.
+
     WHEN cont
       DOES ONLY
         IF vessel OF THIS = null_vessel
@@ -1517,61 +1531,64 @@ EVERY liquid ISA OBJECT
               THEN "You can't carry" SAY THE THIS. "around in your bare hands."
             ELSIF vessel OF THIS IS NOT takeable
               THEN "You don't have" SAY THE vessel OF THIS. "of" SAY THIS. "."
-            ELSE LOCATE vessel OF THIS IN hero.
-              "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
+            ELSE "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
+              LOCATE vessel OF THIS IN hero.
             END IF.
         END IF.
         -- <<< implicit take <<<
 
-        IF THIS IN hero
-          -- i.e. if the implicit taking was successful
-          THEN
-            IF surface = floor OR surface = ground
-              THEN LOCATE THIS AT hero.
+        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
+        --       the verb would simply abort, and this code never be executed.
+        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        IF THIS IN hero THEN
+          -- i.e. if the liquid wasn't vessel-less, or its vessel not takeable.
+          IF surface = floor OR surface = ground
+            THEN LOCATE THIS AT hero.
+              "You pour" SAY THE THIS. "on" SAY THE surface. "."
+              SET vessel OF THIS TO null_vessel.
+            ELSIF surface ISA SUPPORTER
+              THEN LOCATE THIS IN surface.
                 "You pour" SAY THE THIS. "on" SAY THE surface. "."
                 SET vessel OF THIS TO null_vessel.
-              ELSIF surface ISA SUPPORTER
-                THEN LOCATE THIS IN surface.
-                  "You pour" SAY THE THIS. "on" SAY THE surface. "."
-                  SET vessel OF THIS TO null_vessel.
-              ELSE "It wouldn't be sensible to pour anything on" SAY THE surface.
-            END IF.
+            ELSE "It wouldn't be sensible to pour anything on" SAY THE surface.
+          END IF.
         END IF.
   END VERB pour_on.
 
 
   VERB put_in
-    WHEN obj
-      DOES ONLY
-        IF vessel OF THIS = null_vessel
-          THEN "You can't carry" SAY THE THIS. "around in your bare hands."
-          ELSE
-            IF vessel OF THIS IS takeable
-              THEN
-                -- >>> implicit take >>>
-                IF THIS NOT IN hero
-                  THEN
-                    IF vessel OF THIS = null_vessel
-                      THEN "You can't carry" SAY THE THIS.
-                           "around in your bare hands."
-                    ELSE LOCATE vessel OF THIS IN hero.
-                      "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
-                    END IF.
-                END IF.
-                -- <<< implicit take <<<
+    WHEN obj DOES ONLY
+      IF vessel OF THIS = null_vessel
+        THEN "You can't carry" SAY THE THIS. "around in your bare hands."
+        ELSE
+          IF vessel OF THIS IS takeable
+            THEN
+              -- >>> implicit take >>>
+              IF THIS NOT IN hero THEN
+                "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
+                LOCATE vessel OF THIS IN hero.
+              END IF.
+              -- <<< implicit take <<<
 
-                LOCATE vessel OF THIS IN cont.
-                "You put" SAY THE vessel OF THIS. "of" SAY THIS.
-                "into" SAY THE cont. "."
+              -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              -- NOTE: If the implicit-take action failed due to an EXTRACT
+              --       clause, the verb would simply abort, and this code
+              --       never be executed.
+              -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              LOCATE vessel OF THIS IN cont.
+              "You put" SAY THE vessel OF THIS. "of" SAY THIS.
+              "into" SAY THE cont. "."
 
-              ELSE "You don't have" SAY THE vessel OF THIS. "of" SAY THIS. "."
-            END IF.
-        END IF.
-        WHEN cont
-      DOES ONLY
+            ELSE -- If the liquid's vessel is not takeable:
+              "You don't have" SAY THE vessel OF THIS. "of" SAY THIS. "."
+          END IF.
+      END IF.
+
+    WHEN cont DOES ONLY
       IF vessel OF THIS = null_vessel
         THEN
-          "There's not much sense putting" SAY THE obj. "into" SAY THE THIS. "."
+          "Putting" SAY THE obj. "into" SAY THE THIS. "would be senseless."
         ELSE
           IF vessel OF THIS IS open
             THEN
@@ -1592,29 +1609,32 @@ EVERY liquid ISA OBJECT
 
 
   VERB put_on
-    WHEN obj
-      DOES ONLY
-        -- >>> implicit take >>>
-        IF THIS NOT IN hero
-          THEN
-            IF vessel OF THIS = null_vessel
-              THEN "You can't carry" SAY THE THIS. "around in your bare hands."
-              ELSIF vessel OF THIS IS NOT takeable
-                THEN "You don't have" SAY THE vessel OF THIS. "of" SAY THIS. "."
-                ELSE LOCATE vessel OF THIS IN hero.
-                  "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
-            END IF.
-        END IF.
-        -- <<< implicit take <<<
+    WHEN obj DOES ONLY
+      -- >>> implicit take >>>
+      IF THIS NOT IN hero
+        THEN
+          IF vessel OF THIS = null_vessel
+            THEN "You can't carry" SAY THE THIS. "around in your bare hands."
+            ELSIF vessel OF THIS IS NOT takeable
+              THEN "You don't have" SAY THE vessel OF THIS. "of" SAY THIS. "."
+              ELSE "(taking" SAY THE vessel OF THIS. "of" SAY THIS. "first)$n"
+                LOCATE vessel OF THIS IN hero.
+          END IF.
+      END IF.
+      -- <<< implicit take <<<
 
-        IF THIS IN hero
-          -- i.e. if the implicit taking was successful
-          THEN
-            "You put" SAY THE vessel OF THIS. "of" SAY THIS. "onto" SAY THE surface. "."
-            LOCATE vessel OF THIS IN surface.
-        END IF.
-    WHEN surface
-      DOES ONLY "It is not possible to $v" SAY obj. "onto" SAY THE THIS. "."
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
+      --       the verb would simply abort, and this code never be executed.
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      IF THIS IN hero THEN
+        -- i.e. if the liquid wasn't vessel-less, or its vessel not takeable.
+        "You put" SAY THE vessel OF THIS. "of" SAY THIS. "onto" SAY THE surface. "."
+        LOCATE vessel OF THIS IN surface.
+      END IF.
+
+    WHEN surface DOES ONLY
+      "It is not possible to $v" SAY obj. "onto" SAY THE THIS. "."
   END VERB put_on.
 
 
