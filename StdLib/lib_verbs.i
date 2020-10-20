@@ -2492,11 +2492,11 @@ ADD TO EVERY THING
       ELSE SAY check_current_loc_lit OF my_game.
 
     DOES
-      IF ex OF obj <> "" -- honour the custmom description, if present:
+      IF ex OF obj <> "" -- honor the custom description, if present:
         THEN SAY ex OF obj.
       ELSIF obj IS readable THEN
         --+---------------------------------------------------------------+
-        --| If its 'ex' attribute is an empty string, and it's a readable |
+        --| If its `ex` attribute is an empty string, and it's a readable |
         --| object, then EXAMINE behaves like READ:                       |
         --+---------------------------------------------------------------+
         IF text OF obj = ""
