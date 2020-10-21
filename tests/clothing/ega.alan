@@ -588,17 +588,14 @@ END VERB exits.
 
 THE ega_doors IsA object AT ega_entrance.
   NAME 'emporium doors'.
-  NAME doors.
+  NAME doors. NAME door.
   DESCRIPTION
     IF THIS AT ega_entrance
-      THEN
-        "Two large brass doors await northward your entrance into the sanctuary
-         of fashion consumism."
-      ELSE
-        "Two large brass doors lead the way south, out of the fashion temple and
-         back into the world of mortal souls."
+      THEN "Two large brass doors await northward your entrance
+            into the sanctuary of fashion consumerism."
+      ELSE "Two large brass doors lead the way south, out of the fashion
+            temple and back into the world of mortal souls."
     END IF.
-  NAME door.
   HAS ex "Engraved on the large brass doors the striped eagle of the ""GA"" logo
           stares down at you like a g*d upon his humble servant.
           There are no handles on doors, but you notice a small sensor just above
