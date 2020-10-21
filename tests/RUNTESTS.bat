@@ -40,8 +40,9 @@ SET "INITIAL_PATH=%CD%" &:: Store current path
 :: =================
 SETLOCAL EnableDelayedExpansion
 
-:: Set code page to UTF-8 for handling special chars in commands scripts:
-CHCP 65001 > nul 2>&1
+:: Code Page 28591 = ISO 8859-1 Latin 1; Western European (ISO)
+CHCP 28591 > nul
+
 
 CALL :DefineANSICodes   &:: Defines some ANSI codes & colors variables
 :: =================================
