@@ -1,4 +1,4 @@
-:: "tests/house/TEST_FOLDER.bat"        v1.2.0 | 2019/04/18 | by Tristano Ajmone
+:: "tests/house/TEST_FOLDER.bat"        v1.2.1 | 2020/10/21 | by Tristano Ajmone
 :: -----------------------------------------------------------------------------
 :: SINGLE ADVENTURE -- Run all tests in the folder.
 :: -----------------------------------------------------------------------------
@@ -6,6 +6,12 @@
 SET ADV=house.alan
 :: Code Page 28591 = ISO 8859-1 Latin 1; Western European (ISO)
 CHCP 28591 > nul
+
+:: Delete old files:
+DEL *.a3c   2> nul
+DEL *.a3log 2> nul
+DEL *.ifid  2> nul
+DEL *.log   2> nul
 
 ECHO COMPILE: %ADV%
 CALL alan.exe -import ..\..\StdLib\ %ADV%  > nul 2>&1 ^

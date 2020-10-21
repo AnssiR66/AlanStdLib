@@ -1,4 +1,4 @@
-:: "RUNTESTS.bat" v3.1.0 (2019/04/18) | by Tristano Ajmone
+:: "RUNTESTS.bat"                      v3.1.1 | 2020/10/121 | by Tristano Ajmone
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                                                                            ::
 ::                      ALAN STANDARD LIBRARY TEST SUITE                      ::
@@ -25,6 +25,8 @@ SET ADV_SINGLE[1]DIR=house
 SET ADV_SINGLE[1]ADV=house
 SET ADV_SINGLE[2]DIR=clothing
 SET ADV_SINGLE[2]ADV=ega
+SET ADV_SINGLE[3]DIR=liquids
+SET ADV_SINGLE[3]ADV=liquids
 :: -----------------------------------------------------------------------------
 :: Multiple Adventures -> One/More Tests per Adventure
 :: -----------------------------------------------------------------------------
@@ -80,7 +82,7 @@ GOTO :LoopCountSources
 :EndLoopCountSources
 :: Folder of Multiple Adventures -> One/More Tests per Adventure:
 CALL :CountSources %ADV_MULTIPLE_DIR%
-:: Aggiungi il numero delle avventure alle operazioni totali da eseguire:
+:: Add number of adventures to the total number of pending operations:
 SET /A _CNT_TOT_=!_CNT_TOT_! +!_ADV_TOT_!
 ECHO.
 :: ===============================
