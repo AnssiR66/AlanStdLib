@@ -58,7 +58,8 @@ I don't know the word 'XYZZY'.
 > ; ------------------------------------------------------------------------------
 > ; Using 'put' verb with a worn item...
 > examine basket
-The basket is empty.
+It's a wicker basket where you can drop discarded clothing items. The 
+basket is empty.
 
 > ; NOTE: boxers are currently bing worn by hero, underneath trousers (khakis)!
 > inventory
@@ -80,7 +81,8 @@ You'll have to take off your boxers first.
 WORN: Yes (by hero)
 
 > examine basket
-The basket is empty.
+It's a wicker basket where you can drop discarded clothing items. The 
+basket is empty.
 
 > west
 Sportswear Department
