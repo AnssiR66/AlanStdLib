@@ -59,10 +59,8 @@ END THE.
 THE wine_bottle IsA listed_container AT liqlab.
   NAME bottle.
   NAME wine bottle.
-  -- OPAQUE CONTAINER -- except it's transparent!
+  OPAQUE CONTAINER -- except it's supposed to be transparent!
   Is openable. NOT open.
-  -- lockable. locked.
-  -- Has matching_key corkscrew.
   HAS ex "It's a wine bottle, French, and probably good quality too.".
 
   VERB open

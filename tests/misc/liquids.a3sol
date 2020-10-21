@@ -13,7 +13,6 @@ x jar
 ; The bottle has an 'ex' attribute, it should be honored:
 ; The bottle is closed, it should be mentioned:
 x bottle
-; **ERROR** 'ex' attribute not honored!
 ; **ERROR** 'should mention if it's open or closed!
 ; The wine shouldn't be accessible since it's closed:
 x wine
@@ -26,7 +25,6 @@ open bottle
 i
 ; The wine has an 'ex' attribute, it should be honored:
 x wine
-; **ERROR** 'ex' attribute not honored!
 ; =================================================
 ; TEST BOTTLE: CUSTOM CORK/CORKSCREW IMPLEMENTATION
 ; =================================================
@@ -63,5 +61,5 @@ pour wine in bottle
 ; contents!
 close bottle
 pour bottle
+; of course, the wine is out of scope when the bottle (OPAQUE) is closed:
 pour wine
-; **BUG!** There's a missing check on the vessel status (See #108)

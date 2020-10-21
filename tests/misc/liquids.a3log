@@ -14,7 +14,7 @@ research facility founded by Anssi Räisänen with funds from the
 
 
 Liquids Test Laboratory
-There is a jar and a bottle here. The bottle contains some wine. 
+There is a jar and a bottle here. 
 Anssi Räisänen is here, waiting to assist you.
 
 > ; ******************************************************************************
@@ -34,13 +34,13 @@ The jar is empty.
 > ; The bottle has an 'ex' attribute, it should be honored:
 > ; The bottle is closed, it should be mentioned:
 > x bottle
-The bottle contains some wine.
+It's a wine bottle, French, and probably good quality too. You can't see
+what's inside the bottle, since it's closed.
 
-> ; **ERROR** 'ex' attribute not honored!
 > ; **ERROR** 'should mention if it's open or closed!
 > ; The wine shouldn't be accessible since it's closed:
 > x wine
-You can't, since the bottle is closed.
+You can't see any wine here.
 
 > ; ------------------------------------------------------------------------------
 > ; OPEN BOTTLE
@@ -60,9 +60,8 @@ You are carrying a corkscrew and a cork.
 
 > ; The wine has an 'ex' attribute, it should be honored:
 > x wine
-You notice nothing unusual about the wine
+It's dark red, dense.
 
-> ; **ERROR** 'ex' attribute not honored!
 > ; =================================================
 > ; TEST BOTTLE: CUSTOM CORK/CORKSCREW IMPLEMENTATION
 > ; =================================================
@@ -108,7 +107,8 @@ You can't fill the jar with the wine.
 You pour the wine into the jar.
 
 > x bottle
-The bottle is empty.
+It's a wine bottle, French, and probably good quality too. The bottle is
+empty.
 
 > x jar
 The jar contains some wine.
@@ -119,7 +119,8 @@ The jar contains some wine.
 You pour the wine into the bottle.
 
 > x bottle
-The bottle contains some wine.
+It's a wine bottle, French, and probably good quality too. The bottle
+contains some wine.
 
 > x jar
 The jar is empty.
@@ -140,10 +141,10 @@ You close the bottle. Now the cork is back in the bottle.
 > pour bottle
 You can't, since the bottle is closed.
 
+> ; of course, the wine is out of scope when the bottle (OPAQUE) is closed:
 > pour wine
 You can't see any wine here.
 
-> ; **BUG!** There's a missing check on the vessel status (See #108)
 > 
 
 Do you want to RESTART, RESTORE, QUIT or UNDO? 

@@ -1296,20 +1296,20 @@ EVERY liquid ISA OBJECT
     END FOR.
 
 
-  -- If you have some liquid in a container in your game, you should declare the
-  -- liquid instance thus:
+  -- If you need a liquid in a container in your game,
+  -- you should declare the liquid instance thus:
 
-  -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  -- THE juice ISA LIQUID IN bottle
-  -- END THE juice.
-  -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  -- The juice IsA LIQUID in bottle
+  -- End the juice.
+  -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  -- The verb 'pour', as defined in this library, also works for the container
-  -- of a liquid; i.e. if there is some juice in a bottle, 'pour bottle' and
-  -- 'pour juice' will work equally well. Note, however, that the verb 'empty'
-  -- is not a synonym for 'pour'; 'empty' only works for container objects.
+  -- The verb `pour`, as defined in this library, also works for the container
+  -- of a liquid; i.e. if there is some juice in a bottle, "pour bottle" and
+  -- "pour juice" will work equally well. Note, however, that the verb `empty`
+  -- is not a synonym for `pour`; `empty` only works for container objects.
 
-    SCHEDULE check_vessel AT THIS AFTER 0.    -- this event is defined further below
+  SCHEDULE check_vessel AT THIS AFTER 0. -- This event is defined further below.
 
 
   VERB examine
@@ -1317,17 +1317,23 @@ EVERY liquid ISA OBJECT
       IF vessel OF THIS <> null_vessel
         THEN
           IF vessel OF THIS IS open
-            THEN "You notice nothing unusual about" SAY THE THIS.
-            ELSE "You can't, since" SAY THE vessel OF THIS.
-              IF THIS IS NOT plural
-                THEN "is"
-                ELSE "are"
+            THEN
+              IF ex OF THIS <> "" -- honor the custom description, if present:
+                THEN SAY ex OF THIS.
+                ELSE "You notice nothing unusual about" SAY THE THIS.
               END IF.
-              "closed."
-              -- Here we prohibit the player from examining
-              -- a liquid when the liquid is in a closed container.
+            ELSE -- Prevent examining a liquid in a closed container:
+              "You can't see what's inside" SAY THE vessel OF THIS. "$$, since"
+              IF THIS IS NOT plural
+                THEN "it's"
+                ELSE "they are"
+              END IF. "closed."
           END IF.
-        ELSE "You notice nothing unusual about" SAY THE THIS. "."
+        ELSE -- i.e. the liquid doesn't have a vessel:
+          IF ex OF THIS <> "" -- honor the custom description, if present:
+            THEN SAY ex OF THIS.
+            ELSE "You notice nothing unusual about" SAY THE THIS.
+          END IF.
       END IF.
   END VERB examine.
 
@@ -1723,7 +1729,8 @@ EVERY LISTED_CONTAINER ISA OBJECT
 
   INITIALIZE
 
-  -- Every object in a container will be allowed back in that container by default if it's taken out:
+  -- Every object that's inside a LISTED_CONTAINER at the beginning of the game
+  -- will be allowed back in that container, by default, after being taken out:
 
     FOR EACH lc ISA LISTED_CONTAINER
       DO
@@ -1735,13 +1742,18 @@ EVERY LISTED_CONTAINER ISA OBJECT
 
 
 
-
-
   VERB examine
     DOES ONLY
+      IF ex OF THIS <> "" -- honor the custom description, if present:
+        THEN SAY ex OF THIS.
+      END IF.
       IF THIS IS NOT OPAQUE
         THEN LIST THIS.
-        ELSE "You can't see inside" SAY THE THIS. "."
+        ELSE "You can't see what's inside" SAY THE THIS. "$$, since"
+          IF THIS IS NOT plural
+            THEN "it's"
+            ELSE "they are"
+          END IF. "closed."
       END IF.
   END VERB examine.
 
@@ -1750,7 +1762,11 @@ EVERY LISTED_CONTAINER ISA OBJECT
     DOES ONLY
       IF THIS IS NOT OPAQUE
         THEN LIST THIS.
-        ELSE "You can't see inside" SAY THE THIS. "."
+        ELSE "You can't see what's inside" SAY THE THIS. "$$, since"
+          IF THIS IS NOT plural
+            THEN "it's"
+            ELSE "they are"
+          END IF. "closed."
       END IF.
   END VERB look_in.
 
@@ -1759,7 +1775,11 @@ EVERY LISTED_CONTAINER ISA OBJECT
     DOES ONLY
       IF THIS IS NOT OPAQUE
         THEN LIST THIS.
-        ELSE "You can't see inside" SAY THE THIS. "."
+        ELSE "You can't see what's inside" SAY THE THIS. "$$, since"
+          IF THIS IS NOT plural
+            THEN "it's"
+            ELSE "they are"
+          END IF. "closed."
       END IF.
   END VERB search.
 
