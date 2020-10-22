@@ -19,24 +19,66 @@ END THE.
 
 --==============================================================================
 
+Syntax xyzzy = xyzzy.
+
 THE liqlab IsA room.
   NAME 'Liquids Test Laboratory'.
+
+  VERB xyzzy
+    DOES
+     "Thanks to the magic words, now all test equipment in this place has been
+      restored to its initial state!"
+      -- Wine Bottle:
+      LOCATE wine IN wine_bottle.
+      LOCATE cork AT nowhere.
+      MAKE wine_bottle NOT open.
+      -- Beer Can:
+      LOCATE beer IN beer_can.
+      MAKE beer_can NOT open.
+      MAKE beer_can NOT broken.
+  END VERB xyzzy.
 END THE.
 
---------------------------------------------------------------------------------
+--==============================================================================
 -- NPCs
+--==============================================================================
+-- We'll need some NPCs to test dislocating objects possessed by actors.
+
+--------------------------------------------------------------------------------
+-- Anssi Räisänen
 --------------------------------------------------------------------------------
 -- Anssi will be providing insights into the tests by answering questions about
 -- the various game objects (ask_about topic).
 
 THE Anssi IsA male AT liqlab.
-  NAME Anssi.
+  NAME Anssi. NAME Ansi. -- (allow misspellings)
   NAME Anssi Räisänen.
   NAME Anssi Raisanen.
   IS named.
   DESCRIPTION "$nAnssi Räisänen is here, waiting to assist you."
   HAS ex "He's Anssi Räisänen, the mastermind behind the ALAN Standard Library.".
   IS following.
+
+  VERB ask
+    WHEN act DOES ONLY
+      DEPENDING ON topic
+        = wine_bottle THEN
+          "The wine bottle is a non-OPAQUE LISTED_CONTAINER, allowing to see
+           what's inside it even when closed. It starts off as being closed and
+           requires the corkscrew to be opened (it's not a `matching_key`, the
+           bottle simply defines a custom CHECK on `open`). When you open it,
+           its cork will appear in your inventory, and you'll need to posses it
+           in order to close the bottle again; when you close the bottle, the
+           cork disappears.
+           $nBoth the bottle and the wine inside it have `ex` descriptions."
+        = beer_can THEN
+          "The beer can is an OPAQUE LISTED_CONTAINER, so you won't see its
+           contents unless it's open. Once you open it, it becomes broken, so
+           you can't close it again.
+           $nNeither the can nor the beer inside it have `ex` descriptions."
+        ELSE """Sorry, I can't help you with this."""
+      END DEPENDING.
+  END VERB ask.
 END THE Anssi.
 
 --==============================================================================
@@ -50,16 +92,16 @@ THE jar IsA listed_container AT liqlab.
   HAS allowed {wine}.
 END THE.
 --------------------------------------------------------------------------------
--- Wine Bottle
+-- Wine Bottle: 'ex' + non OPAQUE + closed
 --------------------------------------------------------------------------------
 -- The wine bottle is closed, it must opened with the corkscrew (held by Anssi)
 -- in order to access it's contents. Once opened, the cork goes in the Hero's
 -- inventory, so he can close again the bottle.
 
 THE wine_bottle IsA listed_container AT liqlab.
-  NAME bottle.
+  NAME bottle. -- we want it to be mentioned as just "bottle"
   NAME wine bottle.
-  OPAQUE CONTAINER -- except it's supposed to be transparent!
+  -- Without `OPAQUE CONTAINER`, because its' transparent!
   Is openable. NOT open.
   HAS ex "It's a wine bottle, French, and probably good quality too.".
 
@@ -94,6 +136,35 @@ END THE.
 
 THE cork IsA object AT nowhere.
   HAS ex "It's the cork which you pulled out of the wine bottle.".
+END THE.
+--------------------------------------------------------------------------------
+-- Beer Can: no 'ex' + OPAQUE + closed (breaks when opened)
+--------------------------------------------------------------------------------
+-- The beer can is closed, to access the beer inside it you must open, but then
+-- it can't be closed again because it's broken.
+
+THE beer_can IsA listed_container AT liqlab.
+  NAME 'can'. -- we want it to be mentioned as just "can"
+  NAME beer 'can'.
+  OPAQUE CONTAINER -- because cans are not transparent!
+  Is openable. NOT open.
+
+  VERB open
+    DOES AFTER
+      Make this broken.
+  END VERB.
+
+  VERB close
+    CHECK THIS IS NOT broken
+      ELSE "Once opened, the can can't closed again because the stay-on-tab
+            is damaged."
+  END VERB.
+END THE.
+
+THE beer IsA liquid IN beer_can.
+  HAS vessel wine_bottle.
+  IS drinkable.
+  INDEFINITE ARTICLE "some"
 END THE.
 
 

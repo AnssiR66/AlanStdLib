@@ -14,7 +14,8 @@ research facility founded by Anssi Räisänen with funds from the
 
 
 Liquids Test Laboratory
-There is a jar and a bottle here. 
+There is a jar and a bottle here. The bottle contains some wine. There is 
+a can here. 
 Anssi Räisänen is here, waiting to assist you.
 
 > ; ******************************************************************************
@@ -34,13 +35,13 @@ The jar is empty.
 > ; The bottle has an 'ex' attribute, it should be honored:
 > ; The bottle is closed, it should be mentioned:
 > x bottle
-It's a wine bottle, French, and probably good quality too. You can't see
-what's inside the bottle, since it's closed.
+It's a wine bottle, French, and probably good quality too. The bottle
+contains some wine.
 
 > ; **ERROR** 'should mention if it's open or closed!
 > ; The wine shouldn't be accessible since it's closed:
 > x wine
-You can't see any wine here.
+You can't see what's inside the bottle, since it's closed.
 
 > ; ------------------------------------------------------------------------------
 > ; OPEN BOTTLE

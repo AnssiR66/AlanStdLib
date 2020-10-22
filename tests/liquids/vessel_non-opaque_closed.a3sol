@@ -1,0 +1,60 @@
+; ******************************************************************************
+; *                                                                            *
+; *                  TEST LIQUID IN NON-OPAQUE CLOSED VESSEL                   *
+; *                                                                            *
+; ******************************************************************************
+; This solution stress-tests liquids with non-OPAQUE vessels. The StdLib tends
+; to assume that all closed containers will also be OPAQUE, but this might not
+; always be the case, due to either:
+;
+;  * The author forgetting to add `OPAQUE CONTAINER` in a vessel definition
+;    (LISTED_CONTAINER doesn't default to OPAQUE).
+;  * Because the vessel is transparent (e.g. glass) and the author wishes that
+;    its contents are visible even when it's closed.
+;
+; Although the Library doesn't explicitly cover transparent containers, these
+; tests should at least reveal unexpected behaviors, and prepare the ground for
+; the introduction of a `transparent` attribute allowing proper handling of
+; see-through containers.
+; ==============================================================================
+; WINE BOTTLE (LISTED_CONTAINER: non-OPAQUE + closed + `ex`)
+; ==============================================================================
+ask Anssi about wine bottle
+; The bottle has an 'ex' attribute, it should be honored:
+; The bottle is closed, it should be mentioned:
+x bottle
+; **ERROR** 'should mention if it's open or closed!
+; The wine shouldn't be accessible since it's closed:
+x wine
+; **NOTE** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;          The wine is not out of scope, because the bottle is non-OPAQUE.
+;          It's just the 'examine' verb that is CHECKing wether its vessel
+;          is open or not!
+; **TRANSPARENCY NOTE** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;          Since the vesses is not OPAQUE, we might expect 'examine' to reveal
+;          something about its contents -- how much and how, is something that
+;          needs yet to be discussed.
+; ==============================================================================
+; TEST CLOSED-BOTTLE ACTIONS -> on VESSEL
+; ==============================================================================
+; The following actions should fail due to the liquid's vessel being closed...
+; ------------------------------------------------------------------------------
+; TEST PASSED
+; ------------------------------------------------------------------------------
+pour bottle
+; ==============================================================================
+; TEST CLOSED-BOTTLE ACTIONS -> on LIQUID
+; ==============================================================================
+; The following actions should fail due to the liquid's vessel being closed...
+; ------------------------------------------------------------------------------
+; TEST PASSED
+; ------------------------------------------------------------------------------
+pour bottle
+; ------------------------------------------------------------------------------
+; TEST FAILED
+; ------------------------------------------------------------------------------
+pour wine
+; **BUG** Add appropriate CHECKs to `pour` on `liquid` class!
+XYZZY
+drink wine
+; **BUG** Add appropriate CHECKs to `drink` in 'lib_verbs.i'!

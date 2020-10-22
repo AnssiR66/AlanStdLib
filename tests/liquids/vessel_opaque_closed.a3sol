@@ -1,0 +1,35 @@
+; ******************************************************************************
+; *                                                                            *
+; *                    TEST LIQUID IN OPAQUE CLOSED VESSEL                     *
+; *                                                                            *
+; ******************************************************************************
+; This solution stress-tests liquids with OPAQUE vessels. The StdLib assumes
+; that all closed containers are also OPAQUE, so this test is about predefined
+; behaviors for liquids' vessels.
+; ==============================================================================
+; BEER CAN (LISTED_CONTAINER: OPAQUE + closed + no `ex`)
+; ==============================================================================
+ask Anssi about beer can
+; The can doesn't have an 'ex' attribute!
+; The can is closed, it should be mentioned:
+x beer can
+; The beer should be out-of-scope, since the can is closed and OPAQUE:
+x beer
+; ==============================================================================
+; TEST CLOSED-CAN ACTIONS -> on VESSEL
+; ==============================================================================
+; The following actions should fail due to the liquid's vessel being closed...
+; ------------------------------------------------------------------------------
+; TEST PASSED
+; ------------------------------------------------------------------------------
+pour bottle
+; ==============================================================================
+; TEST CLOSED-CAN ACTIONS -> on LIQUID
+; ==============================================================================
+; The following actions should fail due to the liquid's vessel being closed...
+; ------------------------------------------------------------------------------
+; TEST PASSED
+; ------------------------------------------------------------------------------
+pour beer
+drink beer
+

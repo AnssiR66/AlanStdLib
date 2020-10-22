@@ -1,0 +1,74 @@
+
+
+Liquid Tests 
+Testing liquids behavior. 
+(C) 2020 by Tristano Ajmone 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta7.
+Standard Library v2.2.0 
+Version 1 
+All rights reserved. 
+
+Welcome to the ALAN StdLib's "Liquids Test Laboratory," a private
+research facility founded by Anssi Räisänen with funds from the
+"International ALAN Foundation" and from IF-tycoon Thomas Nilefalk.
+
+
+Liquids Test Laboratory
+There is a jar and a bottle here. The bottle contains some wine. There is 
+a can here. 
+Anssi Räisänen is here, waiting to assist you.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                    TEST LIQUID IN OPAQUE CLOSED VESSEL                     *
+> ; *                                                                            *
+> ; ******************************************************************************
+> ; This solution stress-tests liquids with OPAQUE vessels. The StdLib assumes
+> ; that all closed containers are also OPAQUE, so this test is about predefined
+> ; behaviors for liquids' vessels.
+> ; ==============================================================================
+> ; BEER CAN (LISTED_CONTAINER: OPAQUE + closed + no `ex`)
+> ; ==============================================================================
+> ask Anssi about beer can
+The beer can is an OPAQUE LISTED_CONTAINER, so you won't see its contents
+unless it's open. Once you open it, it becomes broken, so you can't close
+it again.
+Neither the can nor the beer inside it have `ex` descriptions.
+
+> ; The can doesn't have an 'ex' attribute!
+> ; The can is closed, it should be mentioned:
+> x beer can
+You can't see what's inside the can, since it's closed.
+
+> ; The beer should be out-of-scope, since the can is closed and OPAQUE:
+> x beer
+You can't see any beer here.
+
+> ; ==============================================================================
+> ; TEST CLOSED-CAN ACTIONS -> on VESSEL
+> ; ==============================================================================
+> ; The following actions should fail due to the liquid's vessel being closed...
+> ; ------------------------------------------------------------------------------
+> ; TEST PASSED
+> ; ------------------------------------------------------------------------------
+> pour bottle
+You can't, since the bottle is closed.
+
+> ; ==============================================================================
+> ; TEST CLOSED-CAN ACTIONS -> on LIQUID
+> ; ==============================================================================
+> ; The following actions should fail due to the liquid's vessel being closed...
+> ; ------------------------------------------------------------------------------
+> ; TEST PASSED
+> ; ------------------------------------------------------------------------------
+> pour beer
+You can't see any beer here.
+
+> drink beer
+You can't see any beer here.
+
+> 
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 
