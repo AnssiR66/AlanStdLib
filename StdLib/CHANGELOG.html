@@ -737,7 +737,12 @@ span.play em,
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_v2_2_02020">v2.2.0&#8201;&#8212;&#8201;2020</a></li>
+<li><a href="#_v2_2_02020">v2.2.0&#8201;&#8212;&#8201;2020</a>
+<ul class="sectlevel2">
+<li><a href="#_stdlib_changes">StdLib Changes</a></li>
+<li><a href="#_bug_fixes">Bug Fixes</a></li>
+</ul>
+</li>
 <li><a href="#_v2_12018_05_27">v2.1&#8201;&#8212;&#8201;2018-05-27</a></li>
 <li><a href="#_v2_02016_05_15">v2.0&#8201;&#8212;&#8201;2016-05-15</a></li>
 </ul>
@@ -905,12 +910,16 @@ This allows to implement readable objects that can be both examined and read, pr
 </div>
 </li>
 <li>
+<p><strong><span class="red">Honoring Custom <code>ex</code> Description</span></strong>&#8201;&#8212;&#8201;Now a non-empty <code>ex</code> attribute will be always honored when examining a <code>readable</code> object (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/9" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#9</a>), a <code>scenery</code> object (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/99" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#99</a>), and instances of <code>liquid</code> and <code>listed_container</code> (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/37" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#37</a>).</p>
+</li>
+<li>
 <p><strong><span class="red">Dropped &#8216;verbose&#8217; and &#8216;brief&#8217;</span></strong>&#8201;&#8212;&#8201;The meta-berbs <code>verbose</code> and <code>brief</code> were removed from the library due to <code>brief</code> failing to work as expected, because ALAN resets the <code>VISITS</code> counter every time an attribute of a <code>location</code> instance changes state or value (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/32" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#32</a>).</p>
 </li>
 </ul>
 </div>
-<div class="sect3">
-<h4 id="_bug_fixes"><a class="anchor" href="#_bug_fixes"></a>Bug Fixes</h4>
+</div>
+<div class="sect2">
+<h3 id="_bug_fixes"><a class="anchor" href="#_bug_fixes"></a>Bug Fixes</h3>
 <div class="paragraph">
 <p>Various library bugs were discovered and fixed:</p>
 </div>
@@ -933,10 +942,30 @@ This allows to implement readable objects that can be both examined and read, pr
 </div>
 </li>
 <li>
-<p><strong><span class="red">Dark Locations</span></strong>&#8201;&#8212;&#8201;Fixed some small bugs and inconsistencies with the mechanics that handle the <code>lit</code> attributes of normal locations and instances of <code>DARK_LOCATION</code> (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/96" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#96</a>).</p>
+<p><strong><span class="red">Liquids</span></strong>&#8201;&#8212;&#8201;bugs related to the instances of <code>liquid</code> and their <code>vessel</code>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>fill_with</code> verb was always changing the liquid&#8217;s vessel to the destination container, regardless of whether the action succeeded or not (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/39" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#39</a>).
+The problem was fixed by editing the <code>check_vessel</code> EVENT so that every turn LISTED_CONTAINERs are iterated and every liquid found directly in a container will have its <code>vessel</code> attribute set to it.
+Furthermore, the <code>fill_with</code> VERB on <code>liquid</code> was deleted since it&#8217;s no longer needed now.</p>
 </li>
 </ul>
 </div>
+</li>
+<li>
+<p><strong><span class="red">Room and Site Objects</span></strong>&#8201;&#8212;&#8201;Custom descriptions for ROOM- (<code>floor_desc</code>, etc.) and SITE-objects (<code>ground_desc</code>, etc.) were not being honored; the problem was fixed and now they work as expected (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/83" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#83</a>).</p>
+</li>
+<li>
+<p><strong><span class="red">Dark Locations</span></strong>&#8201;&#8212;&#8201;Fixed some small bugs and inconsistencies with the mechanics that handle the <code>lit</code> attributes of normal locations and instances of <code>DARK_LOCATION</code> (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/96" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#96</a>).</p>
+</li>
+<li>
+<p><strong><span class="red">Implicit Taking</span></strong>&#8201;&#8212;&#8201;Improved verbs that attempt implicit taking; now the implicit taking message is printed <em>before</em> attempting the action (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/106" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#106</a>), so if re-locating the object fails due to <code>EXTRACT</code> constrains (and the verb aborts), the message is not left unprinted; and if the <code>EXTRACT</code> clause of the target object prints a message, it won&#8217;t be out-of-order.</p>
+</li>
+<li>
+<p><strong><span class="red">Actions Restrictions</span></strong>&#8201;&#8212;&#8201;Restriction Level 2 didn&#8217;t Include the verbs <code>talk</code> and <code>talk_to</code> (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/24" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#24</a>).</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

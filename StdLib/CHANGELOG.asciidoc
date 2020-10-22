@@ -4,7 +4,7 @@
 :email: <anssir66@hotmail.com>
 :lang: en
 // TOC Settings:
-:toclevels: 1
+:toclevels: 2
 :toc: left
 // Sections Numbering:
 :sectnums!:
@@ -27,12 +27,17 @@ TIP: For each new library release, we provide a list of all the bugs that were f
 // >>> CUSTOM ATTRIBUTES FOR SUBSTITUTIONS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // Repository Issues Links:
 :Issue_9: link:https://github.com/AnssiR66/AlanStdLib/issues/9[Issue&nbsp;#9^, title="See original Issue on GitHub"]
+:Issue_24: link:https://github.com/AnssiR66/AlanStdLib/issues/24[Issue&nbsp;#24^, title="See original Issue on GitHub"]
 :Issue_32: link:https://github.com/AnssiR66/AlanStdLib/issues/32[Issue&nbsp;#32^, title="See original Issue on GitHub"]
+:Issue_37: link:https://github.com/AnssiR66/AlanStdLib/issues/37[Issue&nbsp;#37^, title="See original Issue on GitHub"]
+:Issue_39: link:https://github.com/AnssiR66/AlanStdLib/issues/39[Issue&nbsp;#39^, title="See original Issue on GitHub"]
 :Issue_57: link:https://github.com/AnssiR66/AlanStdLib/issues/57[Issue&nbsp;#57^, title="See original Issue on GitHub"]
 :Issue_60: link:https://github.com/AnssiR66/AlanStdLib/issues/60[Issue&nbsp;#60^, title="See original Issue on GitHub"]
 :Issue_61: link:https://github.com/AnssiR66/AlanStdLib/issues/61[Issue&nbsp;#61^, title="See original Issue on GitHub"]
+:Issue_83: link:https://github.com/AnssiR66/AlanStdLib/issues/83[Issue&nbsp;#83^, title="See original Issue on GitHub"]
 :Issue_96: link:https://github.com/AnssiR66/AlanStdLib/issues/96[Issue&nbsp;#96^, title="See original Issue on GitHub"]
 :Issue_99: link:https://github.com/AnssiR66/AlanStdLib/issues/99[Issue&nbsp;#99^, title="See original Issue on GitHub"]
+:Issue_106: link:https://github.com/AnssiR66/AlanStdLib/issues/106[Issue&nbsp;#106^, title="See original Issue on GitHub"]
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -115,6 +120,9 @@ This allows scenery props to optionally contribute to the game's atmosphere and 
 Now the `examine` verb will always honor the description of an `ex` attribute of a `readable` object, if present; otherwise it will behave like `read`, as before, printing the `text` string (see {Issue_9}).
 This allows to implement readable objects that can be both examined and read, producing a description of the object and its printed text respectively -- e.g. it's useful to provide the physical description of an ancient magic book on examination, and let the `read` verb show its contents instead; whereas for a simple sticky note, having `examine` behave like `read` is more practical.
 
+* *[red]#Honoring Custom `ex` Description#* --
+Now a non-empty `ex` attribute will be always honored when examining a `readable` object (see {Issue_9}), a `scenery` object (see {Issue_99}), and instances of `liquid` and `listed_container` (see {Issue_37}).
+
 * *[red]#Dropped '`verbose`' and '`brief`'#* --
 The meta-berbs `verbose` and `brief` were removed from the library due to `brief` failing to work as expected, because ALAN resets the `VISITS` counter every time an attribute of a `location` instance changes state or value (see {Issue_32}).
 
@@ -127,7 +135,7 @@ The meta-berbs `verbose` and `brief` were removed from the library due to `brief
 
 ////
 
-==== Bug Fixes
+=== Bug Fixes
 
 Various library bugs were discovered and fixed:
 
@@ -138,18 +146,6 @@ Various library bugs were discovered and fixed:
 https://github.com/AnssiR66/AlanStdLib/issues?q=is%3Aissue+is%3Aclosed+label%3A%22%3Askull%3A+bug%22
 
 --------------------------------------------------------------------------------
-#39 — Bug in `fill_with`
-https://github.com/AnssiR66/AlanStdLib/issues/39
-
-#32 — Brief Verb Not Working
-https://github.com/AnssiR66/AlanStdLib/issues/32
-
-#83 — Custom Descriptions for Room/Site Objects Is Not Working
-https://github.com/AnssiR66/AlanStdLib/issues/83
-
-#24 — Restriction Level 2 Doesn't Include 'talk' and 'talk_to'?
-https://github.com/AnssiR66/AlanStdLib/issues/24
-
 #18 — Verb 'ask_for' and Compliance
 https://github.com/AnssiR66/AlanStdLib/issues/18
 --------------------------------------------------------------------------------
@@ -161,8 +157,25 @@ https://github.com/AnssiR66/AlanStdLib/issues/18
 ** Various verbs dislocating worn items from its wearer were not updating the item's status to `NOT worn`, leading to erratic behavior in verbs with special worn-status checks when handling clothes (see {Issue_60}).
 ** Clothes nested inside worn clothing items (e.g. a pair of gloves inside the coat pockets) were also marked as being worn during game initialization (see {Issue_61}).
 
+* *[red]#Liquids#* -- bugs related to the instances of `liquid` and their `vessel`:
+** The `fill_with` verb was always changing the liquid's vessel to the destination container, regardless of whether the action succeeded or not (see {Issue_39}).
+The problem was fixed by editing the `check_vessel` EVENT so that every turn LISTED_CONTAINERs are iterated and every liquid found directly in a container will have its `vessel` attribute set to it.
+Furthermore, the `fill_with` VERB on `liquid` was deleted since it's no longer needed now.
+
+
+* *[red]#Room and Site Objects#* --
+Custom descriptions for ROOM- (`floor_desc`, etc.) and SITE-objects (`ground_desc`, etc.) were not being honored; the problem was fixed and now they work as expected (see {Issue_83}).
+
 * *[red]#Dark Locations#* --
 Fixed some small bugs and inconsistencies with the mechanics that handle the `lit` attributes of normal locations and instances of `DARK_LOCATION` (see {Issue_96}).
+
+* *[red]#Implicit Taking#* --
+Improved verbs that attempt implicit taking; now the implicit taking message is printed _before_ attempting the action (see {Issue_106}), so if re-locating the object fails due to `EXTRACT` constrains (and the verb aborts), the message is not left unprinted; and if the `EXTRACT` clause of the target object prints a message, it won't be out-of-order.
+
+* *[red]#Actions Restrictions#* --
+Restriction Level 2 didn't Include the verbs `talk` and `talk_to` (see {Issue_24}).
+
+// * *[red]#XXXXXXXXXXX#* --
 
 
 == v2.1 -- 2018-05-27
