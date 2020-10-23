@@ -51,9 +51,8 @@ x jar
 pour wine in bottle
 x bottle
 x jar
-; edge-case test (should fail):
+; Stress test (should fail): [See #109]
 pour wine in bottle
-; **BUG!** The wine is already in the bottle
 ; ==============================================================================
 ; BUGS
 ; ==============================================================================

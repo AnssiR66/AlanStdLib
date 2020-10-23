@@ -1482,6 +1482,18 @@ EVERY liquid ISA OBJECT
 
   VERB pour_in
     WHEN obj
+      CHECK obj NOT DIRECTLY IN cont
+        AND obj NOT IN cont
+          ELSE
+            IF cont ISA SUPPORTER
+              THEN SAY check_cont_not_supporter OF my_game.
+              ELSE
+                IF obj IS NOT plural
+                  THEN SAY check_obj_not_in_cont_sg OF my_game.
+                  ELSE SAY check_obj_not_in_cont_pl OF my_game.
+                END IF.
+            END IF.
+
       DOES ONLY
         -- >>> implicit take >>>
         IF THIS NOT IN hero

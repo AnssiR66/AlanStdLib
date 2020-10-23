@@ -2035,13 +2035,11 @@ END ADD.
 -- ==============================================================
 
 
--- The verbs 'empty' and 'pour' have similar syntaxes and behaviour here. They are, however,
--- not declared as synonyms but kept separate, as their usage doesn't overlap 100%; for example
--- you can pour liquids but not empty them.
--- That's why in 'classes.i', liquids are defined only to work with the verb 'pour',
--- and the verb 'empty' is disabled for liquids.
-
-
+-- The verbs `empty` and `pour` have similar syntaxes and behavior here.
+-- However, they're not declared as synonyms but kept separate, as their usage
+-- doesn't overlap 100%; for example you can pour liquids but not empty them.
+-- That's why in 'lib_classes.i', liquids are defined to work only with the
+-- `pour` verb, and verb `empty` is disabled for liquids.
 
 
 SYNTAX 'empty' = 'empty' (obj)

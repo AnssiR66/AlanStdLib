@@ -14,9 +14,9 @@ THE my_game IsA DEFINITION_BLOCK
 END THE.
 
 --==============================================================================
-
+--------------------------------------------------------------------------------
 -- Liquids Test Lab
-
+--------------------------------------------------------------------------------
 --==============================================================================
 
 Syntax xyzzy = xyzzy.
@@ -82,14 +82,29 @@ THE Anssi IsA male AT liqlab.
 END THE Anssi.
 
 --==============================================================================
+
+-- Liquids Test Lab Props
+
+--==============================================================================
+
+-- Various props to aid testing..
+
+THE liqlab_table IsA supporter AT liqlab.
+  NAME table.
+END THE.
+
+
+--==============================================================================
+
 -- Liquids Containers
+
 --==============================================================================
 
 --------------------------------------------------------------------------------
 -- Empty Jar
 --------------------------------------------------------------------------------
-THE jar IsA listed_container AT liqlab.
-  HAS allowed {wine}.
+THE jar IsA listed_container IN liqlab_table.
+  HAS allowed {wine,beer}.
 END THE.
 --------------------------------------------------------------------------------
 -- Wine Bottle: 'ex' + non OPAQUE + closed
@@ -98,7 +113,7 @@ END THE.
 -- in order to access it's contents. Once opened, the cork goes in the Hero's
 -- inventory, so he can close again the bottle.
 
-THE wine_bottle IsA listed_container AT liqlab.
+THE wine_bottle IsA listed_container IN liqlab_table.
   NAME bottle. -- we want it to be mentioned as just "bottle"
   NAME wine bottle.
   -- Without `OPAQUE CONTAINER`, because its' transparent!
@@ -143,7 +158,7 @@ END THE.
 -- The beer can is closed, to access the beer inside it you must open, but then
 -- it can't be closed again because it's broken.
 
-THE beer_can IsA listed_container AT liqlab.
+THE beer_can IsA listed_container IN liqlab_table.
   NAME 'can'. -- we want it to be mentioned as just "can"
   NAME beer 'can'.
   OPAQUE CONTAINER -- because cans are not transparent!

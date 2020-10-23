@@ -291,8 +291,8 @@ ADD TO EVERY definition_block
   HAS check_cont_not_in_obj    "That doesn't make sense.".
   HAS check_obj_in_cont_sg     "$+1 is not in $+2.".
   HAS check_obj_in_cont_pl     "$+1 are not in $+2.".
-  HAS check_obj_not_in_cont_sg "$+1 is in $+2 already.".
-  HAS check_obj_not_in_cont_pl "$+1 are in $+2 already.".
+  HAS check_obj_not_in_cont_sg "$+1 is already in $+2.".
+  HAS check_obj_not_in_cont_pl "$+1 are already in $+2.".
   HAS check_obj_not_in_cont2   "$+1 is already full of $+2.".
 
 
