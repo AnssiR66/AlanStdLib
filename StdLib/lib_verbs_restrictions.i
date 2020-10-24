@@ -29,7 +29,7 @@ ADD TO EVERY definition_block
 -- in 'lib_messages_library.i'.
 
   CAN about.
-  CAN 'again'.
+  CAN again.
   CAN answer.      -- (+ reply)
   CAN ask.         -- (+ enquire, inquire, interrogate)
   CAN ask_for.
@@ -224,7 +224,7 @@ EVENT check_restriction
       -- All verbs work normally, without restriction.
 
       MAKE my_game about.
-      MAKE my_game 'again'.
+      MAKE my_game again.
       MAKE my_game answer.      -- (+ reply)
       MAKE my_game ask.         -- (+ enquire, inquire, interrogate)
       MAKE my_game ask_for.
@@ -583,7 +583,7 @@ EVENT check_restriction
       IF restricted_level OF my_game >= 4
         THEN
           MAKE my_game NOT about.
-          MAKE my_game NOT 'again'.
+          MAKE my_game NOT again.
           MAKE my_game NOT credits.     -- (+ acknowledgments, author, copyright)
           MAKE my_game NOT hint.        -- (+ hints)
           MAKE my_game NOT 'no'.

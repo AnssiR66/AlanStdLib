@@ -351,7 +351,7 @@ EVERY clothing ISA OBJECT
   END VERB put_in.
 
 
-  VERB put_on --> put (obj) 'on' (surface)
+  VERB put_on --> put (obj) on (surface)
     WHEN obj
       CHECK obj IS NOT worn
         ELSE
@@ -746,7 +746,7 @@ EVERY device ISA OBJECT
         ELSE "They are"
       END IF.
 
-      IF THIS IS 'on'
+      IF THIS IS on
         THEN "currently on."
         ELSE "currently off."
       END IF.
@@ -754,7 +754,7 @@ EVERY device ISA OBJECT
 
 
   VERB turn_on
-    CHECK THIS IS NOT 'on'
+    CHECK THIS IS NOT on
       ELSE
         IF THIS IS NOT plural
           THEN SAY check_device_not_on_sg OF my_game.
@@ -781,12 +781,12 @@ EVERY device ISA OBJECT
       ELSE SAY check_obj_not_broken OF my_game.
     DOES ONLY
       "You turn on" SAY THE THIS. "."
-      MAKE THIS 'on'.
+      MAKE THIS on.
   END VERB turn_on.
 
 
   VERB turn_off
-    CHECK THIS IS 'on'
+    CHECK THIS IS on
       ELSE
          IF THIS IS NOT plural
           THEN SAY check_device_on_sg OF my_game.
@@ -811,7 +811,7 @@ EVERY device ISA OBJECT
         END IF.
     DOES ONLY
       "You turn off" SAY THE THIS. "."
-      MAKE THIS NOT 'on'.
+      MAKE THIS NOT on.
   END VERB turn_off.
 
 
@@ -839,11 +839,11 @@ EVERY device ISA OBJECT
     AND THIS IS NOT broken
       ELSE SAY check_obj_not_broken OF my_game.
     DOES ONLY
-      IF THIS IS 'on'
+      IF THIS IS on
         THEN "You switch off" SAY THE THIS. "."
-          MAKE THIS NOT 'on'.
+          MAKE THIS NOT on.
         ELSE "You switch on" SAY THE THIS. "."
-          MAKE THIS 'on'.
+          MAKE THIS on.
       END IF.
   END VERB switch.
 
@@ -1195,9 +1195,10 @@ EVERY lightsource ISA OBJECT
   END VERB turn_off.
 
 
--- The following verb switches a NOT natural lightsource on if it is off, and vice versa
--- (when the player forgets, or doesn't bother, to type 'on' or 'off' after 'switch').
-
+  -- The `switch` verb toggles the current state of a NOT natural lightsource
+  -- (i.e. turns it ON if it was OFF, and vice-versa). It's a lazy variant,
+  -- intended for when the player forgets, or doesn't bother, to type 'on' or
+  -- 'off' after the 'switch' command.
 
   VERB switch
     CHECK THIS IS NOT natural

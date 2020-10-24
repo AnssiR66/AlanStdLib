@@ -239,15 +239,15 @@ Score notification is already disabled.
 > ; ==============================================================================
 > ; Time to test commands to activate/deactivate transcript.
 > script
-You can turn transcripting on and off using the 'script on/off' command within
-the game. The transcript will be available in a file with a name starting with
-the game name.
+You can turn file transcription on and off using the SCRIPT ON/OFF command
+within the game. The transcript will be available in a file with a name starting
+with the game name.
 
-In a GUI version you can also find this in the drop-down menu in the
-interpreter. 
+In interpreters with a GUI, you can also access this functionality via the
+application menus.
 
-In a command line version you can start your game with the '-s' switch to get a 
-transcript of the whole game.
+In command line interpreters, you can launch your game with the '-s' switch to
+get a transcript of the whole game.
 
 > script on
 Transcripting turned on.

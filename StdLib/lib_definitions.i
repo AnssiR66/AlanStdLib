@@ -74,7 +74,7 @@ ADD TO EVERY THING
   NOT fireable. -- Can (not) be used as a firearm.
   NOT lockable.
   NOT locked.
-  NOT 'on'.
+  NOT on.
   NOT openable.
   NOT readable.
   NOT scenery.  -- A scenery has special responses for 'examine' and 'take',
