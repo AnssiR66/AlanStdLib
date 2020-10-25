@@ -149,8 +149,8 @@ LICENSE      text
 #####################
 /_assets/        export-ignore
 /_assets_src/    export-ignore
-/extras_src/    export-ignore
-/tests/         export-ignore
+/extras_src/     export-ignore
+/tests/          export-ignore
 
 ## Build Scripts
 ################

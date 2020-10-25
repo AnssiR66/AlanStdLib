@@ -34,11 +34,11 @@ include::{StdLibInc}/lib_definitions.i[tag=default-attributes-thing]
 
 These attributes are added to every ACTOR:
 
-.Predefined `ACTOR` attributes in {lib_classes}.
+.Predefined `ACTOR` attributes in {lib_actors}.
 [source,alan, role="lib"]
-----------------------------------------------------------------
-include::{StdLibInc}/lib_classes.i[tag=default-attributes-actor]
-----------------------------------------------------------------
+---------------------------------------------------------------
+include::{StdLibInc}/lib_actors.i[tag=default-attributes-actor]
+---------------------------------------------------------------
 
 The code for CLOTHING objects adds these attributes, used only internally in the library, to every actor:
 
@@ -78,11 +78,11 @@ HAS weight 5.
 
 These attributes are added to every CLOTHING object:
 
-.Predefined `CLOTHING` attributes in {lib_classes}.
+.Predefined `CLOTHING` attributes in {lib_clothing}.
 [source,alan, role="lib"]
--------------------------------------------------------------------
-include::{StdLibInc}/lib_classes.i[tag=default-attributes-clothing]
--------------------------------------------------------------------
+--------------------------------------------------------------------
+include::{StdLibInc}/lib_clothing.i[tag=default-attributes-clothing]
+--------------------------------------------------------------------
 
 
 The following attributes are defined for every DOOR object:
@@ -124,11 +124,11 @@ include::{StdLibInc}/lib_classes.i[tag=default-attributes-weapon]
 
 The following attributes are added to every LIQUID:
 
-.Predefined `LIQUID` attributes in {lib_classes}.
+.Predefined `LIQUID` attributes in {lib_liquid}.
 [source,alan, role="lib"]
------------------------------------------------------------------
-include::{StdLibInc}/lib_classes.i[tag=default-attributes-liquid]
------------------------------------------------------------------
+----------------------------------------------------------------
+include::{StdLibInc}/lib_liquid.i[tag=default-attributes-liquid]
+----------------------------------------------------------------
 
 
 The following attribute is added to every SOUND:

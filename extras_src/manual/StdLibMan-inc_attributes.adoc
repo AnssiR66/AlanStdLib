@@ -57,12 +57,15 @@ alternative links on the GH Pages website, etc.).
 // Links to StdLib sources
 // =======================
 :library: pass:q,a[link:{StdLibDir}/library.i[`library.i`^,title="View library source file"]]
+:lib_actors: pass:q,a[link:{StdLibDir}/lib_actors.i[`lib_actors.i`^,title="View library source file"]]
 :lib_classes: pass:q,a[link:{StdLibDir}/lib_classes.i[`lib_classes.i`^,title="View library source file"]]
+:lib_clothing: pass:q,a[link:{StdLibDir}/lib_clothing.i[`lib_clothing.i`^,title="View library source file"]]
 :lib_definitions: pass:q,a[link:{StdLibDir}/lib_definitions.i[`lib_definitions.i`^,title="View library source file"]]
+:lib_liquid: pass:q,a[link:{StdLibDir}/lib_liquid.i[`lib_liquid.i`^,title="View library source file"]]
 :lib_locations: pass:q,a[link:{StdLibDir}/lib_locations.i[`lib_locations.i`^,title="View library source file"]]
 :lib_messages_library: pass:q,a[link:{StdLibDir}/lib_messages_library.i[`lib_messages_library.i`^,title="View library source file"]]
 :lib_messages_runtime: pass:q,a[link:{StdLibDir}/lib_messages_runtime.i[`lib_messages_runtime.i`^,title="View library source file"]]
 :lib_verbs: pass:q,a[link:{StdLibDir}/lib_verbs.i[`lib_verbs.i`^,title="View library source file"]]
 :lib_verbs_restrictions: pass:q,a[link:{StdLibDir}/lib_verbs_restrictions.i[`lib_verbs_restrictions.i`^,title="View library source file"]]
 
-
+// EOF //

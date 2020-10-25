@@ -69,15 +69,30 @@ SemVer has become the most widely used versioning scheme, by adoption it the Std
 The library sources have been thoroughly revisited, the code polished and optimized, various bugs fixed, and new features added.
 
 * *[red]#Library Modules#* --
-`lib_messages.i` has been renamed to `lib_messages_runtime.i`, and some code from `lib_definitions.i` was moved to two new modules: `lib_messages_library.i`, now containing all the `my_game` string attributes for library responses; and `lib_verbs_restrictions.i`, containing all the attributes and code dealing with actions restrictions.
-The Standard Library now consists in the following files:
+The library sources have been reorganized, splitting large modules into smaller ones:
++
+--
+** `lib_messages.i` has been renamed to `lib_messages_runtime.i`.
+** `lib_definitions.i` was split into two additional modules:
+*** `lib_messages_library.i` -- all the `my_game` string attributes for library responses.
+*** `lib_verbs_restrictions.i` -- all the attributes and code dealing with actions restrictions.
+** `lib_classes.i` was split into three additional modules:
+*** `lib_actors.i` -- all the code relating to actors and their subclasses.
+*** `lib_clothing.i` -- all the code for the clothing system.
+*** `lib_liquid.i` -- all the code relating to liquids.
+--
++
+The Standard Library now consists of the following files:
 
 ** `library.i`
+** `lib_actors.i`
 ** `lib_classes.i`
+** `lib_clothing.i`
 ** `lib_definitions.i`
+** `lib_liquid.i`
 ** `lib_locations.i`
-** `lib_messages_runtime.i`
 ** `lib_messages_library.i`
+** `lib_messages_runtime.i`
 ** `lib_verbs.i`
 ** `lib_verbs_restrictions.i`
 

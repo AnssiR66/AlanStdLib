@@ -810,27 +810,78 @@ SemVer has become the most widely used versioning scheme, by adoption it the Std
 <div class="ulist">
 <ul>
 <li>
-<p><strong><span class="red">Library Modules</span></strong>&#8201;&#8212;&#8201;<code>lib_messages.i</code> has been renamed to <code>lib_messages_runtime.i</code>, and some code from <code>lib_definitions.i</code> was moved to two new modules: <code>lib_messages_library.i</code>, now containing all the <code>my_game</code> string attributes for library responses; and <code>lib_verbs_restrictions.i</code>, containing all the attributes and code dealing with actions restrictions.
-The Standard Library now consists in the following files:</p>
+<p><strong><span class="red">Library Modules</span></strong>&#8201;&#8212;&#8201;The library sources have been reorganized, splitting large modules into smaller ones:</p>
+<div class="openblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><code>lib_messages.i</code> has been renamed to <code>lib_messages_runtime.i</code>.</p>
+</li>
+<li>
+<p><code>lib_definitions.i</code> was split into two additional modules:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>lib_messages_library.i</code>&#8201;&#8212;&#8201;all the <code>my_game</code> string attributes for library responses.</p>
+</li>
+<li>
+<p><code>lib_verbs_restrictions.i</code>&#8201;&#8212;&#8201;all the attributes and code dealing with actions restrictions.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>lib_classes.i</code> was split into three additional modules:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>lib_actors.i</code>&#8201;&#8212;&#8201;all the code relating to actors and their subclasses.</p>
+</li>
+<li>
+<p><code>lib_clothing.i</code>&#8201;&#8212;&#8201;all the code for the clothing system.</p>
+</li>
+<li>
+<p><code>lib_liquid.i</code>&#8201;&#8212;&#8201;all the code relating to liquids.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The Standard Library now consists of the following files:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
 <p><code>library.i</code></p>
 </li>
 <li>
+<p><code>lib_actors.i</code></p>
+</li>
+<li>
 <p><code>lib_classes.i</code></p>
+</li>
+<li>
+<p><code>lib_clothing.i</code></p>
 </li>
 <li>
 <p><code>lib_definitions.i</code></p>
 </li>
 <li>
+<p><code>lib_liquid.i</code></p>
+</li>
+<li>
 <p><code>lib_locations.i</code></p>
 </li>
 <li>
-<p><code>lib_messages_runtime.i</code></p>
+<p><code>lib_messages_library.i</code></p>
 </li>
 <li>
-<p><code>lib_messages_library.i</code></p>
+<p><code>lib_messages_runtime.i</code></p>
 </li>
 <li>
 <p><code>lib_verbs.i</code></p>

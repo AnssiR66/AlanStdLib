@@ -40,10 +40,10 @@ SYNTAX attaquer = attaquer (target)
       END IF.
 -------------------------------------------------
 +
-Also, translate the verb names, for example `VERB attack DOES ...` becomes, translating into French, `VERB attaquer DOES ...` etc.), and the verb outcomes (what happens after DOES).
+Also, translate the verb names, for example `VERB attack DOES ...` becomes, translating into French, `VERB attaquer DOES ...` etc.), and the verb outcomes (what happens after `DOES`).
 
 
-4. translate the verb outcomes for class objects (what happens after DOES or DOES ONLY) in `lib_classes.i`.
+4. translate the verb outcomes for class objects (what happens after `DOES` or `DOES ONLY`) in `lib_classes.i`, `lib_actors.i`, `lib_clothing.i` and `lib_liquid.i`.
 
 5. translate the direction names, their synonyms and the few marginal verb outcomes for indoor and outdoor objects in `lib_locations.i`
 

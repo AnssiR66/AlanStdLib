@@ -42,11 +42,16 @@ If you don't have `library.i` in the same folder as the obligatory library files
 
 [source,alan]
 --------------------------------------------------------------------------------
+IMPORT 'lib_actors.i'.
 IMPORT 'lib_classes.i'.
+IMPORT 'lib_clothing.i'.
 IMPORT 'lib_definitions.i'.
+IMPORT 'lib_liquid.i'.
 IMPORT 'lib_locations.i'.
-IMPORT 'lib_messages.i'.
+IMPORT 'lib_messages_library.i'.
+IMPORT 'lib_messages_runtime.i'.
 IMPORT 'lib_verbs.i'.
+IMPORT 'lib_verbs_restrictions.i'.
 --------------------------------------------------------------------------------
 
 // @FIXME: XREF TO PAGE

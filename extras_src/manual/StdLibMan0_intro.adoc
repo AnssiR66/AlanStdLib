@@ -83,11 +83,14 @@ The writer of the current version is Anssi Räisänen.
 The ALAN Standard Library v{StdLibVer} consists of the following source files:
 
 * `library.i` -- the main library file that imports all the other modules:
+** `lib_actors.i`
 ** `lib_classes.i`
+** `lib_clothing.i`
 ** `lib_definitions.i`
+** `lib_liquid.i`
 ** `lib_locations.i`
-** `lib_messages_runtime.i`
 ** `lib_messages_library.i`
+** `lib_messages_runtime.i`
 ** `lib_verbs.i`
 ** `lib_verbs_restrictions.i`
 
