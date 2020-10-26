@@ -1,0 +1,103 @@
+--==============================================================================
+-- "'YES' and 'NO' Verbs Example" by Anssi Räisänen, 2020.
+--==============================================================================
+Import 'library.i'. -- ALAN Standard Library v2.2.0
+
+The my_game IsA DEFINITION_BLOCK
+  Has
+    title    "Using the 'YES' and 'NO' Verbs".
+    subtitle "An example on how to use the question verbs.".
+    author   "Anssi Räisänen".
+    year     2020.
+    version  "1".
+
+  Has restricted_level 4. -- Lock every verb.
+  Has original_restricted_response "". -- We'll need this later on.
+End the.
+
+
+
+-- =============================================================================
+
+-- Fake Start Location
+
+-- =============================================================================
+
+-- The `restore_room` is a "fake" start location, where the player is asked
+-- whether he/she wants to restore a previously saved game session, before
+-- entering the actual first room of the adventure, or restoring a game save,
+-- depending on the answer.
+
+
+The restore_room IsA location.
+  Name ''.  -- No name displayed for this room.
+  Description "Do you want to restore a saved game (yes/no?)"
+
+  -- -------------------------------------------------------------------------
+  -- If the player answers YES, tell the interpreter to launch the interface
+  -- for loading saved games. We don't need to change `restricted_level` here,
+  -- because its value will be restored along with the saved game.
+  -- -------------------------------------------------------------------------
+  Verb yes
+    Does only restore.
+  End verb.
+
+  -- ------------------------------------------------------------
+  -- If the player answers NO, just unlock again all verbs and
+  -- move the Hero to the "real" first location of the adventure.
+  -- ------------------------------------------------------------
+  Verb 'no'
+    Does only
+      Set restricted_level of my_game to 0. -- Unlock all verbs.
+      -- Restore original library message for restricted actions:
+      Set my_game:restricted_response to
+          my_game:original_restricted_response.
+      Locate hero at room1. -- Move player to the "real" start location.
+  End verb.
+End the restore_room.
+
+--------------------------------------------------------------------------------
+-- Event to Unlock `yes` and `'no'` Verbs
+--------------------------------------------------------------------------------
+
+-- Since the game starts with Level 4 actions-restrictions (all verbs blocked),
+-- in order to enable the `yes` and `'no'` verbs we need to schedule an event
+-- to set their correct attribute values.
+
+-- The reason we need an event to do this is because restricted actions are
+-- handled by a library event running at every turn, which detects any changes
+-- to the value of `restricted_level` and enable/disables verbs accordingly.
+-- Since events are executed *after* adventure code, whenever we change the
+-- value of `restricted_level` we're actually queuing and event, so in order to
+-- override the default settings of a restriction level (e.g. unlocking `yes`
+-- and `'no'`) we have to do so by scheduling an event that will execute after
+-- the default `check_restriction` event, otherwise any restrictions attributes
+-- changes done in the main code will be overwritten by the default event.
+
+Event unlock_yes_no
+  Make my_game yes.
+  Make my_game 'no'.
+End event.
+
+-- =============================================================================
+
+-- Real Initial Game Room
+
+-- =============================================================================
+
+-- `room1` is the first "real" location of the adventure world.
+
+The room1 IsA room
+  Description "This is the first room of the game."
+End the.
+--------------------------------------------------------------------------------
+Start at restore_room.
+Describe banner.
+
+-- Store a copy of the original library message for restricted actions:
+Set original_restricted_response of my_game to restricted_response of my_game.
+
+-- Set the message to be show when the player tries to use a disabled verb.
+Set restricted_response of my_game to "Please answer YES or NO.".
+
+Schedule unlock_yes_no after 0.
