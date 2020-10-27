@@ -54,9 +54,6 @@ ADD TO EVERY definition_block
     -- Message shown when the player uses a verb that has been restricted by the
     -- "CAN NOT [verb]" attribute. (see 'lib_verbs_restrictions.i').
 
-  HAS restricted_level 0.           -- 0 = no verbs are restricted
-  HAS previous_restricted_level 0.  -- used to detect changes in restriction level.
-
 
   -- ILLEGAL PARAMETER MESSAGES:
   -- ===========================

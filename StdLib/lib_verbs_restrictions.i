@@ -9,24 +9,111 @@
 --|//////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|
 --+============================================================================+
 
--- This library module defines:
---
+-- This library module implements the actions-restrictions feature, which allows
+-- authors to enable or disable specific groups of verbs, all verbs, or even
+-- selected verbs:
+
 --   * Attributes for restricted actions.
---   * Events for restricted actions.
+--   * A restricted actions event (`check_restriction`).
 
+-- When the player attempt a disabled action, the verb will fail to execute and
+-- the `restricted_response` message will be printed ("You can't do that.").
+-- The default restricted-actions message can be changed at any time (including
+-- mid-game) by changing the `restricted_response OF my_game` attribute (defined
+-- in 'lib_messages_library.i').
+
+-- Authors can enable or disable entire groups of verbs by changing the value of
+-- the `restricted_level OF my_game` attribute according to the following table:
+
+--    +---+-----------------------------------------------------------------+
+--    | 0 | All verbs enabled, without restrictions.                        |
+--    +---+-----------------------------------------------------------------+
+--    | 1 | All communication verbs are disabled.                           |
+--    +---+-----------------------------------------------------------------+
+--    | 2 | All in-game actions are disabled except mental and sensory acts |
+--    |   | which don't involve physical interaction with the environment.  |
+--    |   | It doesn't affect out-of-game actions (gameplay meta verbs).    |
+--    +---+-----------------------------------------------------------------+
+--    | 3 | All in-game actions are disabled; only out-of-game action are   |
+--    |   | allowed (gameplay meta verbs like save, restore, score, etc.).  |
+--    +---+-----------------------------------------------------------------+
+--    | 4 | All verbs are disabled, no action whatsoever is possible.       |
+--    +---+-----------------------------------------------------------------+
+
+-- Restriction levels are incremental, each level restricts an additional group
+-- of actions compared to the previous one, along a continuum with levels 0 and
+-- 4 at its extremes; at level 0 all actions are enabled, at level 4 they're all
+-- blocked. Level 0 is the default restriction level of the library.
+
+-- The library constantly monitors the `restricted_level` attribute via the
+-- `check_restriction` event, and whenever it detects a change in its value it
+-- will disable and enable the various groups of verbs according to the new
+-- restriction level encountered.
+
+-- Authors can also enable or disable specific verbs via actions-restrictions
+-- attributes. Each library verb has a corresponding same-named attribute on the
+-- `my_gmae` instance, by changing its boolean value to `CAN` or `CAN NOT` it's
+-- possible to enable or disable any verb. For example:
+
+--    Make my_game NOT shout. -- disable shouting.
+--    Make my_game 'save'.    -- enable saving the game.
+
+--  Beware that changes to the value of the `restricted_level` attribute  will
+--  become effective *after* all the adventure code of the current turn has run
+--  (but before the next turn starts), because the library monitors it within an
+--  EVENT, and events are executed after adventure code. This means that code
+--  like the following:
+
+--      Set my_game:restricted_level to 4. -- Block all verbs.
+--      Make my_game 'look'.               -- Enable looking.
+
+-- won't work as expected: all verbs will be blocked at the next turn, including
+-- LOOK. This happens because the change in restriction level will be detected
+-- *after* the above code from the adventure has executed, so the library will
+-- block all verbs, including LOOK --- i.e. the attempt to preserve the LOOK
+-- verb via the second line of the example is futile, because that line will be
+-- executed immediately, whereas execution of the previous line is postponed to
+-- when EVENTs are processed by the interpreter, which will cancel its effect.
+
+-- In order to switch to a given restriction level and enable/disable specific
+-- actions in the same turn, you'll need to create and SCHEDULE a dedicated
+-- event to handle the specific verbs, so that it gets queued in the events
+-- processing queue of the interpreter, and will execute *after* the library
+-- event `check_restriction`.
+
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --------------------------------------------------------------------------------
+--
+--          R E S T R I C T E D   A C T I O N S   A T T R I B U T E S
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
--- =============================
--- Restricted Actions Attributes
--- =============================
+-- The actions-restrictions feature uses boolean attributes to track which verbs
+-- are enabled or disabled. For each library verb, a same-named attribute is
+-- defined on the `definition_block` class, so that during the game each verb
+-- can be enabled or disabled by setting or clearing its attribute counterpart
+-- on the `my_game` instance.
+
+-- The library uses two `my_game` attributes for managing restricted actions:
+
+--   * `restricted_level`
+--   * `previous_restricted_level` (used internally by the library)
+
+-- The former is used by authors to change the restrictions level mid-game, by
+-- assigning to the attribute a new value (0-4). The latter is used internally
+-- by the library, in the `check_restriction` EVENT, to detect at every turn if
+-- the value of `restricted_level` has changed, compared to its previous value
+-- stored in previous_restricted_level` (see `check_restriction` event code
+-- below).
+
 ADD TO EVERY definition_block
-
--- For restricted actions, we implement the following attributes, corresponding
--- to the library verbs. If you change any of these to CAN NOT..., for example
--- "CAN NOT attack.", that verb, together with its synonyms, becomes disabled in
--- the game. The 'restricted_response' of the 'my_game' instance  will be shown
--- instead ("You can't do that."). The 'restriced_response' attribute is defined
--- in 'lib_messages_library.i'.
+  HAS restricted_level 0.           -- Default value: no verbs are restricted.
+  HAS previous_restricted_level 0.  -- Used to detect restriction level changes.
 
   CAN about.
   CAN again.
@@ -72,7 +159,7 @@ ADD TO EVERY definition_block
   CAN find.        -- (+ locate)
   CAN fire.
   CAN fire_at.
-  CAN fix.      -- (+ mend, repair)
+  CAN fix.         -- (+ mend, repair)
   CAN follow.
   CAN free.        -- (+ release)
   CAN get_up.
@@ -80,7 +167,7 @@ ADD TO EVERY definition_block
   CAN give.
   CAN go_to.
   CAN hint.        -- (+ hints)
-  CAN i.       -- (+ inv, inventory)
+  CAN i.           -- (+ inv, inventory)
   CAN jump.
   CAN jump_in.
   CAN jump_on.
@@ -98,7 +185,7 @@ ADD TO EVERY definition_block
   CAN listen.
   CAN lock.
   CAN lock_with.
-  CAN 'look'.        -- (+ gaze, peek)
+  CAN 'look'.      -- (+ gaze, peek)
   CAN look_behind.
   CAN look_in.
   CAN look_out_of.
@@ -146,19 +233,19 @@ ADD TO EVERY definition_block
   CAN search.
   CAN sell.
   CAN shake.
-  CAN shoot. -- (at)
+  CAN shoot.
   CAN shoot_with.
   CAN shout.       -- (+ scream, yell)
   CAN 'show'.      -- (+ reveal)
   CAN sing.
   CAN sip.
-  CAN sit. -- (down)
+  CAN sit.
   CAN sit_on.
   CAN sleep.       -- (+ rest)
   CAN smell0.
   CAN smell.
   CAN squeeze.
-  CAN stand. -- (up)
+  CAN stand.
   CAN stand_on.
   CAN swim.
   CAN swim_in.
@@ -190,7 +277,7 @@ ADD TO EVERY definition_block
   CAN unlock_with.
   CAN 'use'.
   CAN use_with.
-  CAN 'wait'.        -- (+ z)
+  CAN 'wait'.      -- (+ z)
   CAN wear.
   CAN what_am_i.
   CAN what_is.
@@ -200,51 +287,62 @@ ADD TO EVERY definition_block
   CAN who_is.
   CAN write.
   CAN yes.
-
 END ADD TO definition_block.
 
--- ========================
--- Restricted Actions Event
--- ========================
--- This event runs every turn from the start of the game:
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--               R E S T R I C T E D   A C T I O N S   E V E N T
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
+
+-- This event will run at every turn, since the start of the game.
 
 EVENT check_restriction
-  -- To optimize performance, we compare the current value of restriction with
-  -- last value encountered, and if no changes are detected we don't change
-  -- any action restrictions attributes.
+  -- ---------------------------------------------------------------------------
+  -- To optimize performance, we compare the current restriction value with the
+  -- last value encountered, and if no changes are detected we won't change any
+  -- actions-restrictions attributes.
+  -- ---------------------------------------------------------------------------
   IF restricted_level OF my_game <> previous_restricted_level OF my_game
     THEN
       -- A change in restriction level was detected. Since restriction levels
       -- are built on top of each other, in a progressively restricting manner,
       -- like layers, we first apply all the unrestricted attributes of Level 0,
-      -- and then conditionally apply the requried constraints layers ...
-      ----------------------
-      -- Restriction Level 0
-      ----------------------
+      -- and then conditionally apply the required constraints layers.
+
+      -- ===================
+      -- RESTRICTION LEVEL 0
+      -- ===================
       -- All verbs work normally, without restriction.
 
       MAKE my_game about.
       MAKE my_game again.
-      MAKE my_game answer.      -- (+ reply)
-      MAKE my_game ask.         -- (+ enquire, inquire, interrogate)
+      MAKE my_game answer.
+      MAKE my_game ask.
       MAKE my_game ask_for.
-      MAKE my_game attack.      -- (+ beat, fight, hit, punch)
+      MAKE my_game attack.
       MAKE my_game attack_with.
-      MAKE my_game bite.        -- (+ chew)
-      MAKE my_game break.       -- (+ destroy)
+      MAKE my_game bite.
+      MAKE my_game break.
       MAKE my_game break_with.
       MAKE my_game burn.
       MAKE my_game burn_with.
-      MAKE my_game buy.         -- (+ purchase)
+      MAKE my_game buy.
       MAKE my_game catch.
-      MAKE my_game clean.       -- (+ polish, wipe)
+      MAKE my_game clean.
       MAKE my_game climb.
       MAKE my_game climb_on.
       MAKE my_game climb_through.
-      MAKE my_game close.       -- (+ shut)
+      MAKE my_game close.
       MAKE my_game close_with.
       MAKE my_game consult.
-      MAKE my_game credits.     -- (+ acknowledgments, author, copyright)
+      MAKE my_game credits.
       MAKE my_game cut.
       MAKE my_game cut_with.
       MAKE my_game dance.
@@ -253,47 +351,47 @@ EVENT check_restriction
       MAKE my_game dive_in.
       MAKE my_game drink.
       MAKE my_game drive.
-      MAKE my_game drop.        -- (+ discard, dump, reject)
+      MAKE my_game drop.
       MAKE my_game eat.
       MAKE my_game 'empty'.
       MAKE my_game empty_in.
       MAKE my_game empty_on.
       MAKE my_game enter.
-      MAKE my_game examine.     -- (+ check, inspect, observe, x)
+      MAKE my_game examine.
       MAKE my_game 'exit'.
-      MAKE my_game extinguish.  -- (+ put out, quench)
+      MAKE my_game extinguish.
       MAKE my_game fill.
       MAKE my_game fill_with.
-      MAKE my_game find.        -- (+ locate)
+      MAKE my_game find.
       MAKE my_game fire.
       MAKE my_game fire_at.
-      MAKE my_game fix.     -- (+ mend, repair)
+      MAKE my_game fix.
       MAKE my_game follow.
-      MAKE my_game free.        -- (+ release)
+      MAKE my_game free.
       MAKE my_game get_up.
       MAKE my_game get_off.
       MAKE my_game give.
       MAKE my_game go_to.
-      MAKE my_game hint.        -- (+ hints)
-      MAKE my_game i.        -- (+ inv, inventory)
+      MAKE my_game hint.
+      MAKE my_game i.
       MAKE my_game jump.
       MAKE my_game jump_in.
       MAKE my_game jump_on.
       MAKE my_game kick.
-      MAKE my_game kill.        -- (+ murder)
+      MAKE my_game kill.
       MAKE my_game kill_with.
-      MAKE my_game kiss.        -- (+ hug, embrace)
+      MAKE my_game kiss.
       MAKE my_game knock.
       MAKE my_game lie_down.
       MAKE my_game lie_in.
       MAKE my_game lie_on.
       MAKE my_game lift.
-      MAKE my_game light.       -- (+ lit)
+      MAKE my_game light.
       MAKE my_game listen0.
       MAKE my_game listen.
       MAKE my_game lock.
       MAKE my_game lock_with.
-      MAKE my_game 'look'.        -- (+ gaze, peek)
+      MAKE my_game 'look'.
       MAKE my_game look_behind.
       MAKE my_game look_in.
       MAKE my_game look_out_of.
@@ -317,10 +415,10 @@ EVENT check_restriction
       MAKE my_game pull.
       MAKE my_game push.
       MAKE my_game push_with.
-      MAKE my_game put.         -- (+ lay, place)
+      MAKE my_game put.
       MAKE my_game put_against.
       MAKE my_game put_behind.
-      MAKE my_game put_in.      -- (+ insert)
+      MAKE my_game put_in.
       MAKE my_game put_near.
       MAKE my_game put_on.
       MAKE my_game put_under.
@@ -341,32 +439,32 @@ EVENT check_restriction
       MAKE my_game search.
       MAKE my_game sell.
       MAKE my_game shake.
-      MAKE my_game shoot. -- (at)
+      MAKE my_game shoot.
       MAKE my_game shoot_with.
-      MAKE my_game shout.       -- (+ scream, yell)
-      MAKE my_game 'show'.      -- (+ reveal)
+      MAKE my_game shout.
+      MAKE my_game 'show'.
       MAKE my_game sing.
       MAKE my_game sip.
-      MAKE my_game sit. -- (down)
+      MAKE my_game sit.
       MAKE my_game sit_on.
-      MAKE my_game sleep.       -- (+ rest)
+      MAKE my_game sleep.
       MAKE my_game smell0.
       MAKE my_game smell.
       MAKE my_game squeeze.
-      MAKE my_game stand. -- (up)
+      MAKE my_game stand.
       MAKE my_game stand_on.
       MAKE my_game swim.
       MAKE my_game swim_in.
       MAKE my_game switch.
       MAKE my_game switch_on.
       MAKE my_game switch_off.
-      MAKE my_game take.        -- (+ carry, get, grab, hold, obtain)
-      MAKE my_game take_from.   -- (+ remove from)
+      MAKE my_game take.
+      MAKE my_game take_from.
       MAKE my_game talk.
-      MAKE my_game talk_to.     -- (+ speak)
-      MAKE my_game taste.       -- (+ lick)
-      MAKE my_game tear.        -- (+ rip)
-      MAKE my_game tell.        -- (+ enlighten, inform)
+      MAKE my_game talk_to.
+      MAKE my_game taste.
+      MAKE my_game tear.
+      MAKE my_game tell.
       MAKE my_game think.
       MAKE my_game think_about.
       MAKE my_game throw.
@@ -375,9 +473,9 @@ EVENT check_restriction
       MAKE my_game throw_to.
       MAKE my_game tie.
       MAKE my_game tie_to.
-      MAKE my_game touch.       -- (+ feel)
+      MAKE my_game touch.
       MAKE my_game touch_with.
-      MAKE my_game turn.        -- (+ rotate)
+      MAKE my_game turn.
       MAKE my_game turn_on.
       MAKE my_game turn_off.
       MAKE my_game undress.
@@ -385,7 +483,7 @@ EVENT check_restriction
       MAKE my_game unlock_with.
       MAKE my_game 'use'.
       MAKE my_game use_with.
-      MAKE my_game 'wait'.        -- (+ z)
+      MAKE my_game 'wait'.
       MAKE my_game wear.
       MAKE my_game what_am_i.
       MAKE my_game what_is.
@@ -395,10 +493,11 @@ EVENT check_restriction
       MAKE my_game who_is.
       MAKE my_game write.
       MAKE my_game yes.
-      ----------------------
-      -- Restriction Level 1
-      ----------------------
-      -- This level restricts communication verbs.
+
+      -- ===================
+      -- RESTRICTION LEVEL 1
+      -- ===================
+      -- This level restricts all communication verbs.
 
       IF restricted_level OF my_game >= 1
         THEN
@@ -410,33 +509,36 @@ EVENT check_restriction
           MAKE my_game NOT shout.
           MAKE my_game NOT sing.
           MAKE my_game NOT talk.
-          MAKE my_game NOT talk_to.     -- (+ speak)
+          MAKE my_game NOT talk_to.
           MAKE my_game NOT tell.
-     END IF.
-      ----------------------
-      -- Restriction Level 2
-      ----------------------
-      -- This level further restricts all in-game actions except mental and
-      -- sensory acts which don't involve physical interaction with the
+      END IF.
+
+      -- ===================
+      -- RESTRICTION LEVEL 2
+      -- ===================
+
+      -- This level further restricts all in-game actions, except for mental and
+      -- sensory actions which don't involve physical interactions with the
       -- environment.
-      -- It doesn't affect out-of-game verbs (extradiegetic actions).
+      -- It doesn't affect out-of-game verbs (i.e. meta verbs, or  extradiegetic
+      -- actions, like saving, restoring, etc.).
 
       IF restricted_level OF my_game >= 2
         THEN
-          MAKE my_game NOT attack.      -- (+ beat, fight, hit, punch)
+          MAKE my_game NOT attack.
           MAKE my_game NOT attack_with.
-          MAKE my_game NOT bite.        -- (+ chew)
-          MAKE my_game NOT break.       -- (+ destroy)
+          MAKE my_game NOT bite.
+          MAKE my_game NOT break.
           MAKE my_game NOT break_with.
           MAKE my_game NOT burn.
           MAKE my_game NOT burn_with.
-          MAKE my_game NOT buy.         -- (+ purchase)
+          MAKE my_game NOT buy.
           MAKE my_game NOT catch.
-          MAKE my_game NOT clean.       -- (+ polish, wipe)
+          MAKE my_game NOT clean.
           MAKE my_game NOT climb.
           MAKE my_game NOT climb_on.
           MAKE my_game NOT climb_through.
-          MAKE my_game NOT close.       -- (+ shut)
+          MAKE my_game NOT close.
           MAKE my_game NOT close_with.
           MAKE my_game NOT consult.
           MAKE my_game NOT cut.
@@ -447,22 +549,22 @@ EVENT check_restriction
           MAKE my_game NOT dive_in.
           MAKE my_game NOT drink.
           MAKE my_game NOT drive.
-          MAKE my_game NOT drop.        -- (+ discard, dump, reject)
+          MAKE my_game NOT drop.
           MAKE my_game NOT eat.
           MAKE my_game NOT 'empty'.
           MAKE my_game NOT empty_in.
           MAKE my_game NOT empty_on.
           MAKE my_game NOT enter.
           MAKE my_game NOT 'exit'.
-          MAKE my_game NOT extinguish.  -- (+ put out, quench)
+          MAKE my_game NOT extinguish.
           MAKE my_game NOT fill.
           MAKE my_game NOT fill_with.
-          MAKE my_game NOT find.        -- (+ locate)
+          MAKE my_game NOT find.
           MAKE my_game NOT fire.
           MAKE my_game NOT fire_at.
-          MAKE my_game NOT fix.     -- (+ mend, repair)
+          MAKE my_game NOT fix.
           MAKE my_game NOT follow.
-          MAKE my_game NOT free.        -- (+ release)
+          MAKE my_game NOT free.
           MAKE my_game NOT get_up.
           MAKE my_game NOT get_off.
           MAKE my_game NOT give.
@@ -471,15 +573,15 @@ EVENT check_restriction
           MAKE my_game NOT jump_in.
           MAKE my_game NOT jump_on.
           MAKE my_game NOT kick.
-          MAKE my_game NOT kill.        -- (+ murder)
+          MAKE my_game NOT kill.
           MAKE my_game NOT kill_with.
-          MAKE my_game NOT kiss.        -- (+ hug, embrace)
+          MAKE my_game NOT kiss.
           MAKE my_game NOT knock.
           MAKE my_game NOT lie_down.
           MAKE my_game NOT lie_in.
           MAKE my_game NOT lie_on.
           MAKE my_game NOT lift.
-          MAKE my_game NOT light.       -- (+ lit)
+          MAKE my_game NOT light.
           MAKE my_game NOT lock.
           MAKE my_game NOT lock_with.
           MAKE my_game NOT open.
@@ -494,10 +596,10 @@ EVENT check_restriction
           MAKE my_game NOT pull.
           MAKE my_game NOT push.
           MAKE my_game NOT push_with.
-          MAKE my_game NOT put.         -- (+ lay, place)
+          MAKE my_game NOT put.
           MAKE my_game NOT put_against.
           MAKE my_game NOT put_behind.
-          MAKE my_game NOT put_in.      -- (+ insert)
+          MAKE my_game NOT put_in.
           MAKE my_game NOT put_near.
           MAKE my_game NOT put_on.
           MAKE my_game NOT put_under.
@@ -508,34 +610,34 @@ EVENT check_restriction
           MAKE my_game NOT search.
           MAKE my_game NOT sell.
           MAKE my_game NOT shake.
-          MAKE my_game NOT shoot. -- (at)
+          MAKE my_game NOT shoot.
           MAKE my_game NOT shoot_with.
-          MAKE my_game NOT 'show'.      -- (+ reveal)
+          MAKE my_game NOT 'show'.
           MAKE my_game NOT sip.
-          MAKE my_game NOT sit. -- (down)
+          MAKE my_game NOT sit.
           MAKE my_game NOT sit_on.
-          MAKE my_game NOT sleep.       -- (+ rest)
+          MAKE my_game NOT sleep.
           MAKE my_game NOT squeeze.
-          MAKE my_game NOT stand. -- (up)
+          MAKE my_game NOT stand.
           MAKE my_game NOT stand_on.
           MAKE my_game NOT swim.
           MAKE my_game NOT swim_in.
           MAKE my_game NOT switch.
           MAKE my_game NOT switch_on.
           MAKE my_game NOT switch_off.
-          MAKE my_game NOT take.        -- (+ carry, get, grab, hold, obtain)
-          MAKE my_game NOT take_from.   -- (+ remove from)
-          MAKE my_game NOT taste.       -- (+ lick)
-          MAKE my_game NOT tear.        -- (+ rip)
+          MAKE my_game NOT take.
+          MAKE my_game NOT take_from.
+          MAKE my_game NOT taste.
+          MAKE my_game NOT tear.
           MAKE my_game NOT throw.
           MAKE my_game NOT throw_at.
           MAKE my_game NOT throw_in.
           MAKE my_game NOT throw_to.
           MAKE my_game NOT tie.
           MAKE my_game NOT tie_to.
-          MAKE my_game NOT touch.       -- (+ feel)
+          MAKE my_game NOT touch.
           MAKE my_game NOT touch_with.
-          MAKE my_game NOT turn.        -- (+ rotate)
+          MAKE my_game NOT turn.
           MAKE my_game NOT turn_on.
           MAKE my_game NOT turn_off.
           MAKE my_game NOT undress.
@@ -546,17 +648,19 @@ EVENT check_restriction
           MAKE my_game NOT wear.
           MAKE my_game NOT write.
       END IF.
-      ----------------------
-      -- Restriction Level 3
-      ----------------------
+
+      -- ===================
+      -- RESTRICTION LEVEL 3
+      -- ===================
       -- This level further restricts any verb which isn't an out-of-game action.
+
       IF restricted_level OF my_game >= 3
         THEN
-          MAKE my_game NOT examine.     -- (+ check, inspect, observe, x)
-          MAKE my_game NOT i.        -- (+ inv, inventory)
+          MAKE my_game NOT examine.
+          MAKE my_game NOT i.
           MAKE my_game NOT listen0.
           MAKE my_game NOT listen.
-          MAKE my_game NOT 'look'.        -- (+ gaze, peek)
+          MAKE my_game NOT 'look'.
           MAKE my_game NOT look_behind.
           MAKE my_game NOT look_in.
           MAKE my_game NOT look_out_of.
@@ -568,7 +672,7 @@ EVENT check_restriction
           MAKE my_game NOT smell.
           MAKE my_game NOT think.
           MAKE my_game NOT think_about.
-          MAKE my_game NOT 'wait'.        -- (+ z)
+          MAKE my_game NOT 'wait'.
           MAKE my_game NOT what_am_i.
           MAKE my_game NOT what_is.
           MAKE my_game NOT where_am_i.
@@ -576,16 +680,19 @@ EVENT check_restriction
           MAKE my_game NOT who_am_i.
           MAKE my_game NOT who_is.
       END IF.
-      ----------------------
-      -- Restriction Level 4
-      ----------------------
+
+      -- ===================
+      -- RESTRICTION LEVEL 4
+      -- ===================
       -- This last level further restricts out-of-game actions (extradiegetic).
+      -- All verbs are disabled at this level, no action whatsoever is possible.
+
       IF restricted_level OF my_game >= 4
         THEN
           MAKE my_game NOT about.
           MAKE my_game NOT again.
-          MAKE my_game NOT credits.     -- (+ acknowledgments, author, copyright)
-          MAKE my_game NOT hint.        -- (+ hints)
+          MAKE my_game NOT credits.
+          MAKE my_game NOT hint.
           MAKE my_game NOT 'no'.
           MAKE my_game NOT notify.
           MAKE my_game NOT notify_on.
