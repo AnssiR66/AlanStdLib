@@ -864,13 +864,14 @@ span.play em,
 <li><a href="#ch.verbs-and-things">17. Verbs and Things</a></li>
 <li><a href="#ch.working-with-verbs">18. Working with Verbs</a>
 <ul class="sectlevel2">
-<li><a href="#_the_philosophy_used_in_deciding_successful_and_unsuccessful_outcomes_for_action_in_the_library_verbs">18.1. The philosophy used in deciding successful and unsuccessful outcomes for action in the library verbs</a></li>
-<li><a href="#_adding_alternative_syntaxes_for_library_verbs">18.2. Adding alternative syntaxes for library verbs</a></li>
-<li><a href="#_adding_your_own_checks_for_library_verbs">18.3. Adding your own checks for library verbs</a></li>
-<li><a href="#_removing_checks_from_library_verbs">18.4. Removing checks from library verbs</a></li>
-<li><a href="#_overriding_default_responses_for_library_verbs">18.5. Overriding default responses for library verbs</a></li>
-<li><a href="#_making_your_own_verbs">18.6. Making your own verbs</a></li>
-<li><a href="#sec.restricted-actions">18.7. Restricted actions</a></li>
+<li><a href="#sec.verbs-outcomes">18.1. Verbs Outcomes</a></li>
+<li><a href="#sec.alternative-syntaxes">18.2. Alternative Syntaxes</a></li>
+<li><a href="#_replacing_syntaxes">18.3. Replacing Syntaxes</a></li>
+<li><a href="#sec.adding-checks">18.4. Adding CHECKs</a></li>
+<li><a href="#sec.removing-checks">18.5. Removing CHECKs</a></li>
+<li><a href="#sec.overriding-responses">18.6. Overriding Responses</a></li>
+<li><a href="#sec.custom-verbs">18.7. Custom Verbs</a></li>
+<li><a href="#sec.restricted-actions">18.8. Restricted Actions</a></li>
 </ul>
 </li>
 </ul>
@@ -5692,22 +5693,31 @@ For example, if you implement</p>
 (with more or less successful default outcomes, depending on the verb) without your having to code anything specific to make this possible.</p>
 </div>
 <div class="sect2">
-<h3 id="_the_philosophy_used_in_deciding_successful_and_unsuccessful_outcomes_for_action_in_the_library_verbs"><a class="anchor" href="#_the_philosophy_used_in_deciding_successful_and_unsuccessful_outcomes_for_action_in_the_library_verbs"></a>18.1. The philosophy used in deciding successful and unsuccessful outcomes for action in the library verbs</h3>
+<h3 id="sec.verbs-outcomes"><a class="anchor" href="#sec.verbs-outcomes"></a>18.1. Verbs Outcomes</h3>
 <div class="paragraph">
-<p>If you try the various actions in-game, with the library imported, you will notice that some actions are successful and result in what the player commanded, while other actions do nothing (= the action is unsuccessful).
-For example the response to <span class="play">&gt; <em>drop [object]</em></span> will be <span class="play">Dropped.</span>, the carried object being rejected from the hero&#8217;s inventory and ending up in the location, while the response to <span class="play">&gt; <em>attack [thing]</em></span> is <span class="play">Resorting to brute force is not the solution here.</span>.
-Which actions are allowed to succeed and which are not is based on what is the most reasonable and expected outcome for the action&#8201;&#8212;&#8201;the outcome that the game author most unlikely needs to edit except for special circumstances.
-Please experiment with different verbs in-game to see whether the default outcome of a particular action is suitable for your game&#8201;&#8212;&#8201;otherwise redefine the outcome of the verb in the my_game instance.
-How this is done is described in more detail further below.</p>
+<p>If you try the various library commands, inside an adventure game, you will notice that some commands will succeed to carry out the expected action(s), while others will report a failure message, without carrying out any action.
+For example, the response to <span class="play">&gt; <em>drop [object]</em></span> will be <span class="play">Dropped.</span>, with the carried object being removed from the hero&#8217;s inventory and placed in the location; whereas the response to <span class="play">&gt; <em>attack [thing]</em></span> will be <span class="play">Resorting to brute force is not the solution here.</span>.</p>
+</div>
+<div class="paragraph">
+<p>Which actions are allowed to succeed, and which not, is based on what is the most reasonable and expected outcome for any given action&#8201;&#8212;&#8201;i.e. the outcome that game authors unlikely need to edit, except under special circumstances.</p>
+</div>
+<div class="paragraph">
+<p>You&#8217;re strongly encouraged to experiment with the different verbs, to learn whether the default outcome of a particular action is suitable for your game&#8201;&#8212;&#8201;and if it isn&#8217;t, redefine the outcome of that verb on the <code>my_game</code> instance.
+You&#8217;ll learn the details on how to achieve this further on in this chapter.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_adding_alternative_syntaxes_for_library_verbs"><a class="anchor" href="#_adding_alternative_syntaxes_for_library_verbs"></a>18.2. Adding alternative syntaxes for library verbs</h3>
+<h3 id="sec.alternative-syntaxes"><a class="anchor" href="#sec.alternative-syntaxes"></a>18.2. Alternative Syntaxes</h3>
 <div class="paragraph">
-<p>If you wish to add flexibility to your game by allowing alternative syntaxes for certain verbs, you can do that easily in your own game source file.
-Let&#8217;s say that you want to for example change the syntax of the <code>talk_to</code> verb.
-Elsewhere in this manual you&#8217;ll find all verb syntaxes listed.
-From there, you&#8217;ll find out that the syntax of the talk verb is</p>
+<p>If you wish to add flexibility to your game by allowing alternative syntaxes for certain verbs, you can easily do it directly in your adventure source file, without having to edit the library sources.</p>
+</div>
+<div class="paragraph">
+<p>Suppose that you wished to improve the syntax of the <code>talk_to</code> verb.
+First of all, you&#8217;ll need find out what the default syntax of the <code>talk_to</code> verb looks like.
+You can look the verb up in the <a href="#table.verbs">Verbs Table</a> found in this manual, which provides the base syntax of each verb in a dedicated column; or you can peek inside the library source file <a href="../../StdLib/lib_verbs.i" title="View library source file" target="_blank" rel="noopener"><code>lib_verbs.i</code></a>, where are all verbs and syntaxes are defined.</p>
+</div>
+<div class="paragraph">
+<p>In this case, the default syntax of <code>talk_to</code> is:</p>
 </div>
 <div class="listingblock lib">
 <div class="content">
@@ -5715,17 +5725,19 @@ From there, you&#8217;ll find out that the syntax of the talk verb is</p>
 </div>
 </div>
 <div class="paragraph">
-<p>enabling commands like</p>
+<p>enabling commands like:</p>
 </div>
 <div class="exampleblock gametranscript">
 <div class="content">
 <div class="paragraph">
-<p>&gt; <em>talk to man</em></p>
+<p>&gt; <em>talk to man</em>
+&gt; <em>talk to the teacher</em>
+&gt; <em>talk to Daniel</em></p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s imagine that you want to change this so that it&#8217;s possible for the player to type</p>
+<p>Now let&#8217;s imagine that you wanted to extend the syntax so that it would be possible for the player to type:</p>
 </div>
 <div class="exampleblock gametranscript">
 <div class="content">
@@ -5735,7 +5747,7 @@ From there, you&#8217;ll find out that the syntax of the talk verb is</p>
 </div>
 </div>
 <div class="paragraph">
-<p>or just</p>
+<p>or just:</p>
 </div>
 <div class="exampleblock gametranscript">
 <div class="content">
@@ -5745,8 +5757,10 @@ From there, you&#8217;ll find out that the syntax of the talk verb is</p>
 </div>
 </div>
 <div class="paragraph">
-<p>in other words, stating the character with whom you wish to talk, after the verb, without the preposition 'to'.
-The easiest way to allow this is just to add an additional syntax for <code>talk_to</code> in your own game file:</p>
+<p>In other words, being able to mention the character with whom to talk, directly after the verb, without requiring the &#8216;to&#8217; preposition.</p>
+</div>
+<div class="paragraph">
+<p>The easiest way to accomplish this is by providing an additional syntax for <code>talk_to</code> in your game source file:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5754,41 +5768,86 @@ The easiest way to allow this is just to add an additional syntax for <code>talk
 </div>
 </div>
 <div class="paragraph">
-<p>This syntax declaration should be outside the <code>my_game</code> instance, in your own game file.
-This syntax declaration won&#8217;t cancel the original syntax for <code>talk_to</code> defined in the library; it would still be possible for the player to type <span class="play">&gt; <em>talk to man</em></span>, as well.</p>
-</div>
-<div class="paragraph">
-<p>If you wish to cancel the original syntax altogether, do like this in your own game file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION BLOCK&#x000A;  <span class="hl kwa">VERB</span> talk_to&#x000A;    <span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;To talk to someone, type &quot;</span><span class="hl str">&quot;talk [person]&quot;</span><span class="hl str">&quot;</span>&#x000A;<span class="hl str">               or just &quot;</span><span class="hl str">&quot;t [person]&quot;</span><span class="hl str">&quot;.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE</span> my_game<span class="hl kwa">.</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Then, outside the <code>my_game</code> instance, still in your own game source file, define your own <em>talk</em> verb, for example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">SYNTAX</span> my_talk_to <span class="hl opt">=</span> talk <span class="hl opt">(</span>act<span class="hl opt">)</span>&#x000A;  <span class="hl kwa">WHERE</span> act <span class="hl kwa">ISA</span> <span class="hl kwb">ACTOR</span>&#x000A;    <span class="hl kwa">ELSE ...</span>&#x000A;&#x000A;<span class="hl kwa">VERB</span> my_talk_to&#x000A;  <span class="hl kwa">DOES</span>&#x000A;    <span class="hl kwa">IF</span> act <span class="hl opt">=</span> mr_smith&#x000A;      <span class="hl kwa">THEN...</span>&#x000A;      <span class="hl kwa">ELSIF...</span>&#x000A;<span class="hl kwa">END VERB.</span>&#x000A;&#x000A;<span class="hl kwa">SYNONYMS</span> t <span class="hl opt">=</span> talk<span class="hl kwa">.</span></code></pre>
-</div>
-</div>
-<div class="olist loweralpha">
-<ol class="loweralpha">
-<li>
-<p>Accessing the library:</p>
-<div class="paragraph">
-<p>Find the verb in the library file <code>lib_verbs.i</code> and make the desired changes to the syntax.
-(If you add or change a parameter, make sure that the verb checks function properly.)</p>
-</div>
-</li>
-</ol>
+<p>This syntax declaration must be written outside of the <code>my_game</code> instance, in the main context of your adventure source code.
+This additional syntax declaration won&#8217;t replace the original syntax for <code>talk_to</code>, defined in the library; it would still be possible for the player to type <span class="play">&gt; <em>talk to man</em></span>, as well as using your newly defined alternative syntaxes.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_adding_your_own_checks_for_library_verbs"><a class="anchor" href="#_adding_your_own_checks_for_library_verbs"></a>18.3. Adding your own checks for library verbs</h3>
+<h3 id="_replacing_syntaxes"><a class="anchor" href="#_replacing_syntaxes"></a>18.3. Replacing Syntaxes</h3>
 <div class="paragraph">
-<p>Sometimes you might need to add an additional check to a library-defined verb.
+<p>Carrying on with the hypothetical <code>talk_to</code> example from the previous section, suppose you wished to replace the original syntax altogether, only allowing player to use your alternative syntax.
+In order to achieve this, you&#8217;ll need to carry out the following steps.</p>
+</div>
+<div class="paragraph">
+<p>In your source adventure, suppress the action associated with the original syntax defined by the library:</p>
+</div>
+<div id="warn.my_game-verbs" class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="title">Re-Defining Verbs on <code>my_game</code>???</div>
+<div class="paragraph">
+<p>We need to check if verbs defined on <code>my_game</code> really work as described here.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Do they?</p>
+</li>
+<li>
+<p><em>Why should</em> they?</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>my_game</code> is just an instance of <code>DEFINITION_BLOCK</code>, which is a <code>location</code> class, which the Hero <em>never enters into</em>; so, why should these verbs come into effect during play if they&#8217;re never in scope?</p>
+</div>
+<div class="paragraph">
+<p>Maybe these texts are referencing older version of the library, which no longer apply to the its later versions.
+We need to test if this actually works, and if it does we need to explain why, otherwise we&#8217;ll need to amend or purge similar examples and instructions from this Manual.</p>
+</div>
+<div class="paragraph">
+<p>(See <a href="https://github.com/AnssiR66/AlanStdLib/issues/115">Issue #115</a> for more info.)</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">THE</span> my_game <span class="hl kwa">ISA</span> DEFINITION_BLOCK&#x000A;  <span class="hl kwa">VERB</span> talk_to&#x000A;    <span class="hl kwa">DOES ONLY</span> <span class="hl str">&quot;To talk to someone, type &quot;</span><span class="hl str">&quot;talk [person]&quot;</span><span class="hl str">&quot;</span>&#x000A;<span class="hl str">               or just &quot;</span><span class="hl str">&quot;t [person]&quot;</span><span class="hl str">&quot;.&quot;</span>&#x000A;  <span class="hl kwa">END VERB.</span>&#x000A;<span class="hl kwa">END THE</span> my_game<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, outside the <code>my_game</code> instance, still in your game source file, define your own <em>talk</em> verb alternative; for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">SYNTAX</span> my_talk_to <span class="hl opt">=</span> talk <span class="hl opt">(</span>act<span class="hl opt">)</span>&#x000A;  <span class="hl kwa">WHERE</span> act <span class="hl kwa">ISA</span> <span class="hl kwb">ACTOR</span>&#x000A;    <span class="hl kwa">ELSE ...</span>&#x000A;&#x000A;<span class="hl kwa">SYNONYMS</span> t <span class="hl opt">=</span> talk<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">VERB</span> my_talk_to&#x000A;  <span class="hl kwa">DOES</span>&#x000A;    <span class="hl kwa">IF</span> act <span class="hl opt">=</span> mr_smith&#x000A;      <span class="hl kwa">THEN...</span>&#x000A;      <span class="hl kwa">ELSIF...</span>&#x000A;<span class="hl kwa">END VERB.</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sec.adding-checks"><a class="anchor" href="#sec.adding-checks"></a>18.4. Adding CHECKs</h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>@CHECK ME: See <a href="#warn.my_game-verbs">the above warning</a> regarding verb-overriding on the <code>my_game</code> instance.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Sometimes you might need to add an additional <code>CHECK</code> to a library-defined verb.
 Add the check to the verb under the <code>my_game</code> instance and not in the library file.</p>
 </div>
 <div class="listingblock">
@@ -5797,21 +5856,47 @@ Add the check to the verb under the <code>my_game</code> instance and not in the
 </div>
 </div>
 <div class="paragraph">
-<p>Note that there is no DOES ONLY part above.
-The default outcome for the verb take would be carried out if the check was passed.</p>
+<p>Note that there is no <code>DOES ONLY</code> part in the above example.
+The default outcome for the <code>eat</code> verb would be carried out on the soup only if the added <code>CHECK</code> passes.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_removing_checks_from_library_verbs"><a class="anchor" href="#_removing_checks_from_library_verbs"></a>18.4. Removing checks from library verbs</h3>
+<h3 id="sec.removing-checks"><a class="anchor" href="#sec.removing-checks"></a>18.5. Removing CHECKs</h3>
 <div class="paragraph">
 <p>This requires accessing the library.
-Go to <code>lib_verbs.i</code>, find the verb you wish to remove a check from and remove the check. (Make sure the behavior of things in your game remains sensible; the library verb checks, after all, are there to ensure that everything functions in a reasonable and rational way.)</p>
+Open <a href="../../StdLib/lib_verbs.i" title="View library source file" target="_blank" rel="noopener"><code>lib_verbs.i</code></a>, find the verb you wish to remove a check from, and remove the target <code>CHECK</code> block.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Make sure that after removing some default CHECKs the behavior of things in your game still remains coherent; after all, the default library verbs' checks are there to ensure that everything functions in a reasonable and consistent way.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_overriding_default_responses_for_library_verbs"><a class="anchor" href="#_overriding_default_responses_for_library_verbs"></a>18.5. Overriding default responses for library verbs</h3>
+<h3 id="sec.overriding-responses"><a class="anchor" href="#sec.overriding-responses"></a>18.6. Overriding Responses</h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>Define the verb outcome with a DOES ONLY section within the my_game instance:</p>
+<p>@CHECK ME: See <a href="#warn.my_game-verbs">the above warning</a> regarding verb-overriding on the <code>my_game</code> instance.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Define the verb outcome with a <code>DOES ONLY</code> section within the <code>my_game</code> instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5820,7 +5905,7 @@ Go to <code>lib_verbs.i</code>, find the verb you wish to remove a check from an
 </div>
 </div>
 <div class="sect2">
-<h3 id="_making_your_own_verbs"><a class="anchor" href="#_making_your_own_verbs"></a>18.6. Making your own verbs</h3>
+<h3 id="sec.custom-verbs"><a class="anchor" href="#sec.custom-verbs"></a>18.7. Custom Verbs</h3>
 <div class="paragraph">
 <p>Declare a new verb in the normal manner instructed in the ALAN manual, outside any instances.</p>
 </div>
@@ -5842,7 +5927,7 @@ Go to <code>lib_verbs.i</code>, find the verb you wish to remove a check from an
 </div>
 </div>
 <div class="sect2">
-<h3 id="sec.restricted-actions"><a class="anchor" href="#sec.restricted-actions"></a>18.7. Restricted actions</h3>
+<h3 id="sec.restricted-actions"><a class="anchor" href="#sec.restricted-actions"></a>18.8. Restricted Actions</h3>
 <div class="paragraph">
 <p>Usually, when you need to restrict a verb from doing what it usually does (= when you want to change the default outcome as defined by the library), you can use a DOES ONLY statement:</p>
 </div>
@@ -6399,7 +6484,7 @@ If/when a dark location is lighted, this description won&#8217;t be shown any lo
 </div>
 <div class="paragraph">
 <p>By default, all verbs work normally, without restrictions.
-See also <a href="#sec.restricted-actions">Sec. 18.7, &#8220;Restricted actions&#8221;</a>.</p>
+See also <a href="#sec.restricted-actions">Sec. 18.8, &#8220;Restricted Actions&#8221;</a>.</p>
 </div>
 </div>
 <div class="sect2">
