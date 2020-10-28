@@ -1,0 +1,29 @@
+////
+********************************************************************************
+*                                                                              *
+*                     ALAN Standard Library User's Manual                      *
+*                                                                              *
+*                  PART Library Messages » Run-Time Messages                   *
+*                                                                              *
+********************************************************************************
+////
+
+
+
+[[ch.runtime-messages]]
+= Run-Time Messages
+
+The library redefines many of the standard messages built into ALAN, changing their original wording to accomodate the library needs, like ensuring correct handling of plural and preventing clashes between first and second person.
+
+Usage of the first person in some default messages (e.g. "`I don't understand.`") is replaced with a passive or impersonal formulation (e.g. "`That was not understood.`").
+
+If you need to change any of these messages in your game, open `lib_messages_runtime.i` and edit the desired message definition(s) therein.
+The `lib_messages_runtime.i` module contains the definitions of _all_ the messages available in ALAN, not just those that were changed; this was done on purpose, in order to facilitate game authors who would like to customize messages.
+
+[source,alan, role="lib"]
+---------------------------------------------
+include::{StdLibInc}/lib_messages_runtime.i[]
+---------------------------------------------
+
+// EOF //
+

@@ -3,7 +3,7 @@
 *                                                                              *
 *                     ALAN Standard Library User's Manual                      *
 *                                                                              *
-*                          Appendix B: Short Examples                          *
+*                           Appendix: Short Examples                           *
 *                                                                              *
 ********************************************************************************
 ////

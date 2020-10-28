@@ -1,3 +1,13 @@
+////
+********************************************************************************
+*                                                                              *
+*                     ALAN Standard Library User's Manual                      *
+*                                                                              *
+*                   PART Getting Started » Library Overview                    *
+*                                                                              *
+********************************************************************************
+////
+
 [[ch.library-overview]]
 = Library Overview
 

@@ -3,7 +3,7 @@
 *                                                                              *
 *                     ALAN Standard Library User's Manual                      *
 *                                                                              *
-*                                  Chapter 9                                   *
+*                    PART Getting Started » Adding Synonyms                    *
 *                                                                              *
 ********************************************************************************
 ////

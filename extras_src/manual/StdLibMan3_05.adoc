@@ -1,0 +1,107 @@
+////
+********************************************************************************
+*                                                                              *
+*                     ALAN Standard Library User's Manual                      *
+*                                                                              *
+*                 PART Library Classes » Working With Classes                  *
+*                                                                              *
+********************************************************************************
+////
+
+[[working-with-classes]]
+= Working With Classes
+
+As we have already seen, it is possible to use classes and subclasses in various contexts in ALAN.
+The library defines a large number of subclasses for actors and objects and locations, as seen in the previous chapters.
+
+You can define or edit a class-specific attribute in three ways.
+
+a. You can give an attribute to a class of your own:
++
+[source,alan]
+------------------------
+EVERY jewelry ISA OBJECT
+  IS expensive.
+END EVERY.
+------------------------
+
+b. You can add an attribute of your own to a predefined class:
++
+Use the ADD TO command to add new attributes for predefined classes.
++
+[source,alan]
+-------------------
+ADD TO EVERY WINDOW
+  IS NOT cleaned.
+END ADD.
+-------------------
+
+c. Changing the attribute of a predefined class.
++
+Use INITIALIZE in the `my_game` instance.
+Here, the game author wants (for some reason) to make all CLOTHING objects not wearable:
++
+[source,alan]
+--------------------------------------------------------------------------------
+THE my_game ISA DEFINITION_BLOCK
+  INITIALIZE
+    FOR EACH c ISA CLOTHING DO
+      MAKE c NOT wearable.
+    END FOR.
+END THE my_game.
+--------------------------------------------------------------------------------
++
+Here, you wouldn't be able to use `ADD TO`, as you cannot add an attribute that has been already defined for a class, even if you change it to its opposite (for example `wearable <> NOT wearable`).
+
+
+
+== Overriding library responses for classes
+
+If you wish to override the library response to a verb within a specific class, use DOES ONLY with the verb:
+
+[source,alan]
+--------------------------------------------------------------------------------
+EVERY cat ISA ACTOR
+  VERB examine
+    DOES ONLY "It's just an ordinary cat."
+  END VERB.
+END EVERY.
+--------------------------------------------------------------------------------
+
+// PAGE 59 //
+
+
+
+This will override the default library message for examine for all CATs in the game.
+
+However, if you wish to change the verb outcome for a class predefined in the library, you should do like below.
+Here, the verb outcome for examine has been modified for all WINDOWs in the game:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE my_game ISA DEFINITION_BLOCK
+  VERB examine
+    CHECK obj <> window
+     ELSE "It's rectangular and transparent, like a window usually is."
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+If you wish to add a verb check for a specific class:
+
+[source,alan]
+--------------------------------------------------------------------------------
+ADD TO EVERY cat
+  VERB catch
+    CHECK nails OF THIS ARE cut
+      ELSE "You might just get scratched."
+  END VERB.
+END ADD.
+--------------------------------------------------------------------------------
+
+Note that there is no DOES/DOES ONLY section here; the check is performed on the cat class only, and if the check is passed, the library outcome of the take verb will be carried out.
+
+
+// PAGE 60 //
+
+

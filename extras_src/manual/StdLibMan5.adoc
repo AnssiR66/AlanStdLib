@@ -2,28 +2,24 @@
 // *                                                                           *
 // *                   ALAN Standard Library User's Manual                     *
 // *                                                                           *
-// *                          PART IV — Library Verbs                          *
+// *                         PART V — Library Messages                         *
 // *                                                                           *
 // *****************************************************************************
 
 
-[[part.library-verbs]]
-= Library Verbs
+[[part.library-messages]]
+= Library Messages
 
 
 [partintro]
 --
-In this part you'll learn about the pre-defined verbs of the library, how to use them efficiently in your adventures, and how to adapt them to your needs.
+In this part we'll present the pre-defined messages defined by the library, how to reuses them, and how to customize them according to your needs.
 --
 
 :leveloffset: +1
 
-include::StdLibMan4_01.adoc[]
+include::StdLibMan5_01.adoc[]
 
-include::StdLibMan4_02.adoc[]
-
-include::StdLibMan4_03.adoc[]
-
-include::StdLibMan4_04.adoc[]
+include::StdLibMan5_02.adoc[]
 
 :leveloffset: -1

@@ -3,11 +3,10 @@
 *                                                                              *
 *                     ALAN Standard Library User's Manual                      *
 *                                                                              *
-*                                 Chapter 11                                   *
+*                    PART Getting Started » The Game Banner                    *
 *                                                                              *
 ********************************************************************************
 ////
-
 
 
 [[ch.game-banner]]

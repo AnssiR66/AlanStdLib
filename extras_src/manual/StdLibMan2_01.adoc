@@ -3,69 +3,21 @@
 *                                                                              *
 *                     ALAN Standard Library User's Manual                      *
 *                                                                              *
-*                   PART II — Library Classes » Introduction                   *
+*                    PART Library Attributes » Introduction                    *
 *                                                                              *
 ********************************************************************************
 ////
 
-
-[[ch.classes-intro]]
+[[ch.attributes-intro]]
 = Introduction
 
-The ALAN language predefines the following eight base classes, which are the foundation of every text adventure:
 
-[[fig.alan-classes]]
-.Predefined classes in the ALAN language.
-image::predefined-classes.svg[ALAN predefined classes, align="center", width='70%']
+[WARNING]
+==========================
+*TBD!* We need to write a general introduction on attributes defined by the library, and how these empower authors to quickly create complex objects without having to use classes.
 
-NOTE: Only the classes shown with a yellow background in the above diagram are inheritable and may be explicitly instantiated; the others (_literal_, _string_ and _integer_, with gray background) are implicitly instantiated by the player's input, when he/she types a string (text within quotes) or a digit.
+This introductory text should precede the chapters presenting the specific attributes, for it serves as a primer for StdLib newbies who have never worked before with library attributes like `scenery`, `readable`, etc.
+==========================
 
-In the following diagram you can see all the additional classes defined by the Standard Library (blue background), and their relation to their core ALAN classes ancestors (yellow background):
-
-
-[[fig.library-classes]]
-.Additional classes defined by the Standard Library.
-image::library-classes.svg[Standard Library classes, align="center", width='100%']
-
-You will notice that some of the library classes stand out for having either a darker or more brilliant blue background.
-The three classes with darker background (`room_object`, `site_object` and `person`) are for internal use, by the library; as an author, you are unlikely to ever need to deal with them, unless you're extending the library, or hacking it.
-As for `definition_block`, the only class with a brilliant blue background, it's a special class which, as you'll learn soon, every adventure must instantiate as `my_game` in order to use the Standard Library.
-
-The remaining library classes have rather intuitive names, hinting what type of game objects can be created from them.
-Bear in mind that, for each of these classes, the library defines specific properties to emulate realistically the object types they represent, and provides specific verbs to act on these objects, as well as ensuring that using inappropriate verbs on them will produce meaningful responses, without breaking the illusion of the simulated world.
-
-////
-@TODO: Provide summary description of each class, via a list:
-
-Inheriting from `object` (12 classes):
-
-- `clothing`
-- `device`
-- `door`
-- `lightsource`
-- `liquid`
-- `listed_container`
-- `sound`
-- `supporter`
-- `weapon`
-- `window`
-- `room_object`
-- `site_object`
-
-Inheriting from `location`:
-
-- `definition_block`
-- `dark_location`
-- `room`
-- `site`
-
-Inheriting from `actor`:
-
-- `person`
-    + `female`
-    + `male`
-
-
-////
 
 // EOF //

@@ -3,7 +3,7 @@
 *                                                                              *
 *                     ALAN Standard Library User's Manual                      *
 *                                                                              *
-*                                 Chapter 14                                   *
+*                   Appendix: Translating to Other Languages                   *
 *                                                                              *
 ********************************************************************************
 ////

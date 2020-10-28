@@ -2,7 +2,7 @@
 :doctitle: Alan Standard Library v{StdLibVer} User's Manual
 :author: Anssi Räisänen
 :revnumber: {StdLibVer}-WIP
-:revdate: 2020-10-25
+:revdate: 2020-10-28
 :lang: en
 :doctype: book
 // TOC Settings:
@@ -50,21 +50,25 @@ Section numbering and max-depth of TOC level are temporarily kept to simplify an
 
 include::StdLibMan0_intro.adoc[]
 
-// Part I -- Getting Started
+// Part I -- Getting Started:
 
 include::StdLibMan1.adoc[]
 
-// Part II -- Library Classes
+// Part II -- Library Attributes:
 
 include::StdLibMan2.adoc[]
 
-// Part III -- Library Verbs
+// Part III -- Library Classes:
 
 include::StdLibMan3.adoc[]
 
-// Part IV -- Library Messages
+// Part IV -- Library Verbs:
 
 include::StdLibMan4.adoc[]
+
+// Part V -- Library Messages:
+
+include::StdLibMan5.adoc[]
 
 // Appendices
 

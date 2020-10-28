@@ -1,0 +1,97 @@
+////
+********************************************************************************
+*                                                                              *
+*                     ALAN Standard Library User's Manual                      *
+*                                                                              *
+*                        PART Verbs » Verbs and Things                         *
+*                                                                              *
+********************************************************************************
+////
+
+
+[[ch.verbs-and-things]]
+= Verbs and Things
+
+In ALAN, "`things`" is the comprehensive term for actors and objects.
+At the library level, many verbs are defined to work with both actors and objects.
+For example, _examine_ works with both.
+Then there are various verbs that only work with one of them.
+For example, _take_ works with objects only (actors cannot be inside a container, not even in the hero container, so they cannot be taken).
+Thus, if you want the hero to be able to take a cat or a bird, you should define them to be objects instead.
+
+Here is a list of transitive verbs that only work with actors:
+
+// 10 items -> 5 columns
+[cols="5*<m",width=75%,float=center,frame=none,grid=none,format=csv]
+|===============================================================================
+ask, ask_for, follow, give, kill, kill_with, say_to, talk, tell, show
+|===============================================================================
+
+while these verbs work with objects only:
+
+// 62 items -> 6 columns + 4 empty items
+[cols="6*<m",width=90%,float=center,frame=none,grid=none,format=csv]
+|===============================================================================
+bite, break, break_with, burn, burn_with, buy, clean, climb, climb_on
+climb_through, close,close_with, consult, cut, cut_with, dig, dive_in, drink
+drive, drop, eat, empty, empty_in, empty_on, examine, exit, extinguish, fill
+fill_with, fire, fire_at, fix, get_off, go_to, jump_in, jump_on, knock, lie_in
+lie_on, lift, light, lock, lock_with, look_in, look_out_of, look_through, open
+open_with, play, pour, pour_in, pour_on, pry, pry_with, put, put_in, put_on
+read, remove, remove_from, take, throw, tie, "", "", "", ""
+|===============================================================================
+
+The following verbs work with both, but have slightly different outcomes:
+
+// 8 items -> 4 columns
+[cols="4*<m",width=75%,float=center,frame=none,grid=none,format=csv]
+|===============================================================================
+kiss, listen, pull, push, push_with, rub, scratch, touch
+|===============================================================================
+
+Lastly, there are some verbs that won't work with either:
+
+// 3 items -> 3 columns
+[cols="3*<m",width=50%,float=center,frame=none,grid=none,format=csv]
+|===============================================================================
+answer, say, write
+|===============================================================================
+
+as these verbs can only be used with quoted text (i.e. string literals):
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _answer "green"_ +
+&gt; _say "hello"_ +
+&gt; _write "The butler looks guilty" in notepad_
+================================================================================
+
+
+Note that none of the library verbs accept locations as direct or indirect objects.
+Thus, the following won't work:
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _examine bedroom_
+================================================================================
+
+In order to make something like this work, you should define a separate bedroom object, present in the bedroom location, which can then be examined or manipulated in any other way that might be required:
+
+// @EXTERNALIZE CODE: bedroom_object
+[source,alan]
+--------------------------------------------------------------------------------
+THE bedroom_object ISA OBJECT AT bedroom
+  NAME bedroom
+  DESCRIPTION "" -- an empty description so that the bedroom_object is
+                 -- not visible in the bedroom
+  VERB examine
+    DOES ONLY DESCRIBE bedroom. -- = show the description of the
+                                --   bedroom location
+  END VERB.
+END THE.
+--------------------------------------------------------------------------------
+
+
+
+// EOF //
+

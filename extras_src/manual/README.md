@@ -35,19 +35,25 @@ Currently the AsciiDoc sources are organized in the following way, but will be c
         * [`StdLibMan1_03.adoc`][man1_3] — _The Game Banner_
         * [`StdLibMan1_04.adoc`][man1_4] — _Adding Synonyms_
         * [`StdLibMan1_05.adoc`][man1_5] — _Default Library Attributes_
-    + [`StdLibMan2.adoc`][man2] — PART II — __Library Classes__
+    + [`StdLibMan3.adoc`][man3] — PART II — __Library Attributes__
         * [`StdLibMan2_01.adoc`][man2_1] — _Introduction_
-        * [`StdLibMan2_02.adoc`][man2_2] — _Locations_
-        * [`StdLibMan2_03.adoc`][man2_3] — _Things_
-        * [`StdLibMan2_04.adoc`][man2_4] — _Actors_
-        * [`StdLibMan2_05.adoc`][man2_5] — _Objects_
-        * [`StdLibMan2_06.adoc`][man2_6] — _Additional THINGs Attributes_
-    + [`StdLibMan3.adoc`][man3] — PART III — __Library Verbs__
-        * [`StdLibMan3_01.adoc`][man3_1] — _Using Verbs and Commands_
+        * [`StdLibMan2_02.adoc`][man2_2] — _Custom Descriptions_
+        * [`StdLibMan2_03.adoc`][man2_3] — (Additional THINGs Attributes)
+    + [`StdLibMan3.adoc`][man3] — PART III — __Library Classes__
+        * [`StdLibMan3_01.adoc`][man3_1] — _Introduction_
+        * [`StdLibMan3_02.adoc`][man3_2] — _Locations_
+        * [`StdLibMan3_03.adoc`][man3_3] — _Actors_
+        * [`StdLibMan3_04.adoc`][man3_4] — _Special Objects_
+        * [`StdLibMan3_05.adoc`][man3_5] — _Working With Classes_
+    + [`StdLibMan4.adoc`][man4] — PART IV — __Library Verbs__
+        * [`StdLibMan4_01.adoc`][man4_1] — _Introduction_
+        * [`StdLibMan4_02.adoc`][man4_2] — _Verbs List_
             - [`StdLibMan-inc_table_verbs.dsv`][inc_verbs] — DSV (delimiter-separated values) data table of library defined verbs.
-    + [`StdLibMan4.adoc`][man4] — PART IV — __Library Messages__
-        * [`StdLibMan4_01.adoc`][man4_1] — _Runtime Messages_
-        * [`StdLibMan4_02.adoc`][man4_2] — _Library Messages_
+        * [`StdLibMan4_03.adoc`][man4_3] — _Verbs and Things_
+        * [`StdLibMan4_04.adoc`][man4_4] — _Working with Verbs_
+    + [`StdLibMan5.adoc`][man5] — PART V — __Library Messages__
+        * [`StdLibMan5_01.adoc`][man5_1] — _Runtime Messages_
+        * [`StdLibMan5_02.adoc`][man5_2] — _Library Messages_
     + [`StdLibManA.adoc`][manA] — __Appendices__
         * [`StdLibManA_01.adoc`][manA_1] — _Translating to Other Languages_
         * [`StdLibManA_02.adoc`][manA_2] — _Short Examples_
@@ -105,16 +111,23 @@ It must be manually fixed, element by element, using the original PDF as a visua
 [man2_1]: ./StdLibMan2_01.adoc
 [man2_2]: ./StdLibMan2_02.adoc
 [man2_3]: ./StdLibMan2_03.adoc
-[man2_4]: ./StdLibMan2_04.adoc
-[man2_5]: ./StdLibMan2_05.adoc
-[man2_6]: ./StdLibMan2_06.adoc
 
 [man3]: ./StdLibMan3.adoc
 [man3_1]: ./StdLibMan3_01.adoc
+[man3_2]: ./StdLibMan3_02.adoc
+[man3_3]: ./StdLibMan3_03.adoc
+[man3_4]: ./StdLibMan3_04.adoc
+[man3_5]: ./StdLibMan3_05.adoc
 
 [man4]: ./StdLibMan4.adoc
 [man4_1]: ./StdLibMan4_01.adoc
 [man4_2]: ./StdLibMan4_02.adoc
+[man4_3]: ./StdLibMan4_03.adoc
+[man4_4]: ./StdLibMan4_04.adoc
+
+[man5]: ./StdLibMan5.adoc
+[man5_1]: ./StdLibMan5_01.adoc
+[man5_2]: ./StdLibMan5_02.adoc
 
 [manA]: ./StdLibManA.adoc
 [manA_1]: ./StdLibManA_01.adoc

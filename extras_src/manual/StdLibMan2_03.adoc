@@ -3,143 +3,152 @@
 *                                                                              *
 *                     ALAN Standard Library User's Manual                      *
 *                                                                              *
-*                      PART II — Library Classes » Things                      *
+*                      PART Library Attributes > [ misc.]                      *
 *                                                                              *
 ********************************************************************************
 ////
 
 
-[[ch.things]]
-= Things
 
-In ALAN, "`things`" is the comprehensive term for actors and objects.
-At the library level, many verbs are defined to work with both actors and objects.
-For example, _examine_ works with both.
-Then there are various verbs that only work with one of them.
-For example, _take_ works with objects only (actors cannot be inside a container, not even in the hero container, so they cannot be taken).
-Thus, if you want the hero to be able to take a cat or a bird, you should define them to be objects instead.
+= (NOT) distant, (NOT) reachable, scenery
 
-Here is a list of transitive verbs that only work with actors:
+Distant/NOT distant is a new attribute in v2.0 and later versions of the library.
+It has been added to be used alongside with the existing reachable/NOT reachable attributes.
+This has proved to be a handy distinction to have at hand.
+It is possible for the hero for example to talk with an NPC (non-player character) that is NOT reachable (for example if the hero is lying down on a bed), but not with one that is distant.
+Similarly, you can throw something at, to or into a NOT reachable instance (for example a basketball into a basket), but not at, to or into a distant one.
+There are also some other individual cases where you can manipulate NOT reachable objects as opposed to distant ones.
+The default responses for NOT reachable and distant objects are a bit different: a NOT reachable object is described to be "out of your reach" but a distant one is "too far away".
+For example the library-defined ceiling object for indoor rooms is NOT reachable ("The ceiling is out of your reach") while the library-defined sky object is distant ("The sky is too far away").
 
-// 10 items -> 5 columns
-[cols="5*<m",width=75%,float=center,frame=none,grid=none,format=csv]
-|===============================================================================
-ask, ask_for, follow, give, kill, kill_with, say_to, talk, tell, show
-|===============================================================================
-
-while these verbs work with objects only:
-
-// 62 items -> 6 columns + 4 empty items
-[cols="6*<m",width=90%,float=center,frame=none,grid=none,format=csv]
-|===============================================================================
-bite, break, break_with, burn, burn_with, buy, clean, climb, climb_on
-climb_through, close,close_with, consult, cut, cut_with, dig, dive_in, drink
-drive, drop, eat, empty, empty_in, empty_on, examine, exit, extinguish, fill
-fill_with, fire, fire_at, fix, get_off, go_to, jump_in, jump_on, knock, lie_in
-lie_on, lift, light, lock, lock_with, look_in, look_out_of, look_through, open
-open_with, play, pour, pour_in, pour_on, pry, pry_with, put, put_in, put_on
-read, remove, remove_from, take, throw, tie, "", "", "", ""
-|===============================================================================
-
-The following verbs work with both, but have slightly different outcomes:
-
-// 8 items -> 4 columns
-[cols="4*<m",width=75%,float=center,frame=none,grid=none,format=csv]
-|===============================================================================
-kiss, listen, pull, push, push_with, rub, scratch, touch
-|===============================================================================
-
-Lastly, there are some verbs that won't work with either:
-
-// 3 items -> 3 columns
-[cols="3*<m",width=50%,float=center,frame=none,grid=none,format=csv]
-|===============================================================================
-answer, say, write
-|===============================================================================
-
-as these verbs can only be used with quoted text (i.e. string literals):
-
-[example,role="gametranscript"]
-================================================================================
-&gt; _answer "green"_ +
-&gt; _say "hello"_ +
-&gt; _write "The butler looks guilty" in notepad_
-================================================================================
-
-
-Note that none of the library verbs accept locations as direct or indirect objects.
-Thus, the following won't work:
-
-[example,role="gametranscript"]
-================================================================================
-&gt; _examine bedroom_
-================================================================================
-
-In order to make something like this work, you should define a separate bedroom object, present in the bedroom location, which can then be examined or manipulated in any other way that might be required:
-
-// @EXTERNALIZE CODE: bedroom_object
 [source,alan]
 --------------------------------------------------------------------------------
-THE bedroom_object ISA OBJECT AT bedroom
-  NAME bedroom
-  DESCRIPTION "" -- an empty description so that the bedroom_object is
-                 -- not visible in the bedroom
-  VERB examine
-    DOES ONLY DESCRIBE bedroom. -- = show the description of the
-                                --   bedroom location
+THE sun ISA OBJECT AT outdoor
+  IS distant.
+END THE.
+--------------------------------------------------------------------------------
+
+(Here, the sun would be present in all outdoor locations in the game.)
+
+In the following, some objects in the location become not reachable when the hero sits down:
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE bedroom ISA ROOM
+  VERB sit
+    DOES ONLY
+      "You sit down on the chair."
+      MAKE hero sitting.
+      MAKE desk NOT reachable.
+      MAKE wardrobe NOT reachable.
+      MAKE bedroom_window NOT reachable.
+  END VERB.
+END THE bedroom.
+--------------------------------------------------------------------------------
+
+You can also implement on a more general level:
+
+// PAGE 56 //
+
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE my_game ISA DEFINITION_BLOCK
+  VERB sit
+    DOES
+      FOR EACH o ISA OBJECT, IS takeable, AT hero
+        DO
+          MAKE o NOT reachable.
+      END FOR.
   END VERB.
 END THE.
 --------------------------------------------------------------------------------
 
+Scenery objects cannot be taken or manipulated.
+The default response for examining or attempting to take them is "The [object] is not important".
+Asking another person for scenery objects won't have a successful result, neither does taking something from a scenery object, even if this something is not scenery.
+Normal objects in scenery objects are not even mentioned by default.
 
-== The two methods for examining things
-
-The library provides two ways for examining things.
-The first one is the traditional `VERB examine DOES ONLY`:
-
-
-.Example: Custom examine response via `VERB DOES ONLY` (from {garden1_alan})
 [source,alan]
-------------------------------------------------
-include::{utf8dir}/garden1.alan[tag=ball_garden]
-------------------------------------------------
+--------------------------------------------------------------------------------
+THE livingroom ISA ROOM
+END THE.
 
+THE flowerpot ISA LISTED_CONTAINER AT livingroom
+  IS scenery.
+END THE.
 
-which will yield
-
+THE ring ISA OBJECT IN flowerpot
+END THE ring.
+--------------------------------------------------------------------------------
 
 [example,role="gametranscript"]
-=====================================================
-include::{utf8dir}/garden1.a3ADocLog[tag=ball_garden]
-=====================================================
+================================================================================
+&gt; _x flowerpot_ +
+The flowerpot is not important.
 
+&gt; _take it_ +
+The flowerpot is not important.
 
-In the example above, it was necessary to use `DOES ONLY`; if we had used `DOES` instead, the default library response for all things would be shown before the custom reponse: [.play]#You notice nothing unusual about the ball. It's a small red ball.#
+&gt; _ask mrs reeves for flowerpot_ +
+The flowerpot is not important.
+================================================================================
 
-
-Another way for examining things is to use the `ex` attribute.
-`Ex` is here short for "`examine`":
-
-
-.Example: Custom examine response via the `ex` attribute (from {garden2_alan})
-[source,alan]
-------------------------------------------------
-include::{utf8dir}/garden2.alan[tag=ball_garden]
-------------------------------------------------
-
-
-which will yield the same response as the first method:
-
+The ring, implemented above, is not mentioned at all, and if you, knowing about its existence only through having implemented it in the code yourself, try to take it, only the simple take verb works; take_from won't:
 
 [example,role="gametranscript"]
-=====================================================
-include::{utf8dir}/garden2.a3ADocLog[tag=ball_garden]
-=====================================================
+================================================================================
+&gt; _take ring from flowerpot_ +
+The flowerpot is not important.
+
+&gt; _take ring_ +
+Taken.
+================================================================================
+
+// @CHANGED: this not was originally inside the trascript, on the right margin;
+//           but it's to complex to handle formatting it.
+
+[NOTE]
+================================================================================
+Note this!
+If you want the player to have the ring, don't declare the flowerpot scenery.
+================================================================================
 
 
-but you notice how the needed formulation is shorter.
-Which of the two methods to use is completely voluntary and up to the game author.
+// PAGE 57 //
+
+Scenery objects are not mentioned or described by default in connection with location descriptions.
+
+[example,role="gametranscript"]
+================================================================================
+&gt; _look_ +
+Livingroom
+
+&gt; _x flowerpot_ +
+The flowerpot is not important.
+================================================================================
+
+
+You have to mention any scenery objects in the location description yourself, so that the player is aware of the existence such things in the location:
+
+
+[source,alan]
+--------------------------------------------------------------------------------
+THE livingroom ISA ROOM
+  DESCRIPTION
+    "You're in a big, cozy living-room. A dinner table
+     stands in the middle, surrounded by six wooden chairs.
+     A lonely flowerpot stands in one of the corners."
+END THE.
+--------------------------------------------------------------------------------
+
+The ring object in the above example won't get mentioned at all if it is not in the location description:
+
+// @FIXME: Looks like part of the text was lost in the original PDF!
+
+Note that actors can be scenery, as well.
+Such actors are not mentioned in the location description by default, and examining them yields the default message "The [actor] is not important.".
 
 
 // EOF //
-
