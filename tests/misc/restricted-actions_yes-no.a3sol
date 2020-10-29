@@ -1,0 +1,48 @@
+; ******************************************************************************
+; *                                                                            *
+; *                          TEST RESTRICTION LEVEL 5                          *
+; *                                                                            *
+; ******************************************************************************
+; Restriction Level 5 is a special level where the player is only allowed to use
+; YES or NO answers. It also changes the restricted actions message to "Please
+; answer YES or NO." for the whole duration of the level.
+; ------------------------------------------------------------------------------
+w
+; This room will preserve Level 5 until we answer the question..
+; ==============================================================================
+;                               Restricted Level 5
+; ==============================================================================
+; All the following commands should fail at Level 5:
+say "hello world"
+shout
+sing
+drop phone
+take phone
+look
+inventory
+score
+about
+; ==============================================================================
+; REPLY YES:                    Restricted Level 0
+; ==============================================================================
+; By answering YES, the room G*d will unlock all actions by switching to level 0
+; (which also restores the previous restricted actions message).
+YES
+look
+inventory
+; The YES/NO verbs had to be customized for this location:
+YES
+NO
+; ==============================================================================
+; REPLY NO:                    Restricted Level 0
+; ==============================================================================
+; We need to first leave the room and re-enter it, ro reset it:
+w
+e
+; By answering NO, the room G*d will block all actions by switching to level 4
+; (which also restores the previous restricted actions message).
+NO
+look
+inventory
+YES
+NO

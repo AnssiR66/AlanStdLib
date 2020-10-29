@@ -10,8 +10,7 @@ THE my_game IsA DEFINITION_BLOCK
   HAS subtitle "An adventure to test StdLib 2.2.0 restricted actions".
   HAS author   "Tristano Ajmone".
   HAS year     2020.
-  HAS version  "1".
-  HAS AlanV    "v3.0beta7".
+  HAS version  "2".
 
 END THE.
 
@@ -33,6 +32,14 @@ EVERY level_room IsA room.
 
 END EVERY level_room.
 
+--------------------------------------------------------------------------------
+-- Verb LEVEL
+--------------------------------------------------------------------------------
+-- Let's add a verb to print the restriction level of the current location.
+-- Of course, this verb isn't blocked by Restrictions Levels!
+
+SYNTAX level = level.
+
 VERB level
   DOES
     "Current restriction level:"
@@ -46,9 +53,10 @@ END VERB level.
 --==============================================================================
 THE Level0 IsA level_room.
   NAME 'Restriction Level 0'
+  HAS Level 0.
   DESCRIPTION
     "In this level all actions are allowed."
-  HAS Level 0.
+  EXIT west TO Level5. -- circular connections, jump to end!
   EXIT east TO Level1.
 END THE Level0.
 --==============================================================================
@@ -58,9 +66,9 @@ END THE Level0.
 --==============================================================================
 THE Level1 IsA level_room.
   NAME 'Restriction Level 1'
+  HAS Level 1.
   DESCRIPTION
     "In this level communication verbs are restricted."
-  HAS Level 1.
   EXIT west TO Level0.
   EXIT east TO Level2.
 END THE Level1.
@@ -71,9 +79,9 @@ END THE Level1.
 --==============================================================================
 THE Level2 IsA level_room.
   NAME 'Restriction Level 2'
+  HAS Level 2.
   DESCRIPTION
     "In this level all action and communication verbs are restricted."
-  HAS Level 2.
   EXIT west TO Level1.
   EXIT east TO Level3.
 END THE Level2.
@@ -84,9 +92,9 @@ END THE Level2.
 --==============================================================================
 THE Level3 IsA level_room.
   NAME 'Restriction Level 3'
+  HAS Level 3.
   DESCRIPTION
     "In this level all in-game verbs are restricted."
-  HAS Level 3.
   EXIT west TO Level2.
   EXIT east TO Level4.
 END THE Level3.
@@ -97,11 +105,95 @@ END THE Level3.
 --==============================================================================
 THE Level4 IsA level_room.
   NAME 'Restriction Level 4'
+  HAS Level 4.
   DESCRIPTION
     "In this level no verbs work, not even out-of-game verbs."
-  HAS Level 4.
   EXIT west TO Level3.
+  EXIT east TO Level5.
 END THE Level4.
+--==============================================================================
+--------------------------------------------------------------------------------
+-- § 1.5 - Restriction Level 5
+--------------------------------------------------------------------------------
+--==============================================================================
+
+-- Level 5 is a special restriction level where only YES/NO answers are allowed;
+-- it also has a different restriction message ("Please answer YES or NO.".).
+-- To test this level we'll have to add a supernatural voice asking a YES/NO
+-- question to the player, and different outcomes based on the player reply:
+
+-- Q: "Are you worthy of using the StdLib?"
+-- YES: Unlock all verbs by witching to Level 0.
+-- NO:  Lock all verbs by witching to Level 4.
+
+-- Exiting and re-entering the room resets it to its initial state.
+
+THE Level5 IsA level_room.
+  NAME 'Restriction Level 5'
+  HAS Level 5.
+  DESCRIPTION
+    DEPENDING ON my_game:restricted_level
+      = 5 THEN
+        "At level 5 you can only answer YES or NO. Also, a special action
+         restriction message is shown at this Level, by the library."
+      = 4 THEN
+        "Since you've enraged the G*d of this room, now He's blocked all actions
+         (the room is currently set to Restriction Level 4)."
+      = 0 THEN
+        "Since the G*d of this room likes you, He's unlocked all actions for you
+         (the room is currently set to Restriction Level 0)."
+      ELSE
+        "**ERROR** Something went wrong!
+         (the room is currently set to Restriction Level"
+        SAY my_game:restricted_level. ")."
+    END DEPEND.
+
+  EXIT west TO Level4.
+  EXIT east TO Level0. -- circular connections, back to start!
+
+  ENTERED
+    SCHEDULE Level5Event AT Level5 AFTER 0.
+
+  VERB yes
+    DOES ONLY
+      IF my_game:restricted_level = 5
+        THEN
+          "Good to hear that!
+           As a sign of my mercy I'll unlock all actions in this room for you."
+          SET my_game:restricted_level TO 0.
+          CANCEL Level5Event.
+        ELSE
+          "Right now, no one is expecting answers from you."
+      END IF.
+  END VERB.
+
+  VERB 'no'
+    DOES ONLY
+      IF my_game:restricted_level = 5
+        THEN
+          "You ugly ignoramus!
+           As a sign of my wrath I shall lock all actions in this room for you."
+          SET my_game:restricted_level TO 4.
+          CANCEL Level5Event.
+        ELSE
+          "Right now, no one is expecting answers from you."
+      END IF.
+  END VERB.
+END THE Level5.
+
+--------------------------------------------------------------------------------
+-- Level 5 Event
+--------------------------------------------------------------------------------
+-- Since this special level is tied to YES/NO answers, we'll need an EVENT that
+-- asks the player a question. It's triggered on entering the location.
+
+EVENT Level5Event
+  IF hero AT Level5 THEN
+    "$pA supernatural voice screams at you:
+     $n""Mortal, are you worthy of using the StdLib?"""
+    SCHEDULE Level5Event AT Level5 AFTER 1.
+  END IF.
+END EVENT.
 
 --=============================================================================
 --\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

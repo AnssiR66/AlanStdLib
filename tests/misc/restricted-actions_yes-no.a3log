@@ -1,0 +1,150 @@
+
+
+Restricted Actions Tests 
+An adventure to test StdLib 2.2.0 restricted actions 
+Version 2. 
+(C) 2020 by Tristano Ajmone. 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta7. 
+Standard Library v2.2.0. 
+All rights reserved. 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Every room in this test has a different level of actions restriction.
+You can debug the current restriction level using the 'level' verb.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Restriction Level 0
+In this level all actions are allowed.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                          TEST RESTRICTION LEVEL 5                          *
+> ; *                                                                            *
+> ; ******************************************************************************
+> ; Restriction Level 5 is a special level where the player is only allowed to use
+> ; YES or NO answers. It also changes the restricted actions message to "Please
+> ; answer YES or NO." for the whole duration of the level.
+> ; ------------------------------------------------------------------------------
+> w
+Restriction Level 5
+At level 5 you can only answer YES or NO. Also, a special action
+restriction message is shown at this Level, by the library. 
+
+A supernatural voice screams at you:
+"Mortal, are you worthy of using the StdLib?"
+
+> ; This room will preserve Level 5 until we answer the question..
+> ; ==============================================================================
+> ;                               Restricted Level 5
+> ; ==============================================================================
+> ; All the following commands should fail at Level 5:
+> say "hello world"
+Please answer YES or NO. 
+
+A supernatural voice screams at you:
+"Mortal, are you worthy of using the StdLib?"
+
+> shout
+Please answer YES or NO. 
+
+A supernatural voice screams at you:
+"Mortal, are you worthy of using the StdLib?"
+
+> sing
+Please answer YES or NO. 
+
+A supernatural voice screams at you:
+"Mortal, are you worthy of using the StdLib?"
+
+> drop phone
+Please answer YES or NO. 
+
+A supernatural voice screams at you:
+"Mortal, are you worthy of using the StdLib?"
+
+> take phone
+Please answer YES or NO. 
+
+A supernatural voice screams at you:
+"Mortal, are you worthy of using the StdLib?"
+
+> look
+Please answer YES or NO. 
+
+A supernatural voice screams at you:
+"Mortal, are you worthy of using the StdLib?"
+
+> inventory
+Please answer YES or NO. 
+
+A supernatural voice screams at you:
+"Mortal, are you worthy of using the StdLib?"
+
+> score
+Please answer YES or NO.
+
+> about
+Please answer YES or NO.
+
+> ; ==============================================================================
+> ; REPLY YES:                    Restricted Level 0
+> ; ==============================================================================
+> ; By answering YES, the room G*d will unlock all actions by switching to level 0
+> ; (which also restores the previous restricted actions message).
+> YES
+Good to hear that! As a sign of my mercy I'll unlock all actions in this
+room for you.
+
+> look
+Restriction Level 5
+Since the G*d of this room likes you, He's unlocked all actions for you
+(the room is currently set to Restriction Level 0).
+
+> inventory
+You are carrying a cell phone.
+
+> ; The YES/NO verbs had to be customized for this location:
+> YES
+Right now, no one is expecting answers from you.
+
+> NO
+Right now, no one is expecting answers from you.
+
+> ; ==============================================================================
+> ; REPLY NO:                    Restricted Level 0
+> ; ==============================================================================
+> ; We need to first leave the room and re-enter it, ro reset it:
+> w
+Restriction Level 4
+In this level no verbs work, not even out-of-game verbs.
+
+> e
+Restriction Level 5
+At level 5 you can only answer YES or NO. Also, a special action
+restriction message is shown at this Level, by the library. 
+
+A supernatural voice screams at you:
+"Mortal, are you worthy of using the StdLib?"
+
+> ; By answering NO, the room G*d will block all actions by switching to level 4
+> ; (which also restores the previous restricted actions message).
+> NO
+You ugly ignoramus! As a sign of my wrath I shall lock all actions in
+this room for you.
+
+> look
+You can't do that.
+
+> inventory
+You can't do that.
+
+> YES
+You can't do that.
+
+> NO
+You can't do that.
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

@@ -11,11 +11,8 @@ The my_game IsA DEFINITION_BLOCK
     year     2020.
     version  "1".
 
-  Has restricted_level 4. -- Lock every verb.
-  Has original_restricted_response "". -- We'll need this later on.
+    restricted_level 5. -- Only allow YES/NO at game start.
 End the.
-
-
 
 -- =============================================================================
 
@@ -49,35 +46,9 @@ The restore_room IsA location.
   Verb 'no'
     Does only
       Set restricted_level of my_game to 0. -- Unlock all verbs.
-      -- Restore original library message for restricted actions:
-      Set my_game:restricted_response to
-          my_game:original_restricted_response.
       Locate hero at room1. -- Move player to the "real" start location.
   End verb.
 End the restore_room.
-
---------------------------------------------------------------------------------
--- Event to Unlock `yes` and `'no'` Verbs
---------------------------------------------------------------------------------
-
--- Since the game starts with Level 4 actions-restrictions (all verbs blocked),
--- in order to enable the `yes` and `'no'` verbs we need to schedule an event
--- to set their correct attribute values.
-
--- The reason we need an event to do this is because restricted actions are
--- handled by a library event running at every turn, which detects any changes
--- to the value of `restricted_level` and enable/disables verbs accordingly.
--- Since events are executed *after* adventure code, whenever we change the
--- value of `restricted_level` we're actually queuing and event, so in order to
--- override the default settings of a restriction level (e.g. unlocking `yes`
--- and `'no'`) we have to do so by scheduling an event that will execute after
--- the default `check_restriction` event, otherwise any restrictions attributes
--- changes done in the main code will be overwritten by the default event.
-
-Event unlock_yes_no
-  Make my_game yes.
-  Make my_game 'no'.
-End event.
 
 -- =============================================================================
 
@@ -93,11 +64,3 @@ End the.
 --------------------------------------------------------------------------------
 Start at restore_room.
 Describe banner.
-
--- Store a copy of the original library message for restricted actions:
-Set original_restricted_response of my_game to restricted_response of my_game.
-
--- Set the message to be show when the player tries to use a disabled verb.
-Set restricted_response of my_game to "Please answer YES or NO.".
-
-Schedule unlock_yes_no after 0.

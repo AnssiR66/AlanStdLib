@@ -39,11 +39,22 @@
 --    +---+-----------------------------------------------------------------+
 --    | 4 | All verbs are disabled, no action whatsoever is possible.       |
 --    +---+-----------------------------------------------------------------+
+--    | 5 | The player can only answer YES or NO.                           |
+--    +---+-----------------------------------------------------------------+
 
 -- Restriction levels are incremental, each level restricts an additional group
 -- of actions compared to the previous one, along a continuum with levels 0 and
 -- 4 at its extremes; at level 0 all actions are enabled, at level 4 they're all
--- blocked. Level 0 is the default restriction level of the library.
+-- blocked.
+
+-- Level 5 is a special level created for YES/NO answers. Only the verbs `yes`
+-- and `'no'` can be used at Level 5. Also, the restricted-actions message is
+-- set to "Please answer YES or NO." for the whole duration of this level, and
+-- then restored to its previous value when switching to another level. This
+-- level is not part of the 0-4 continuum described above; it's an independent
+-- restriction level of its own kind.
+
+-- Level 0 is the default restriction level of the library.
 
 -- The library constantly monitors the `restricted_level` attribute via the
 -- `check_restriction` event, and whenever it detects a change in its value it
@@ -105,15 +116,18 @@
 --   * `previous_restricted_level` (used internally by the library)
 
 -- The former is used by authors to change the restrictions level mid-game, by
--- assigning to the attribute a new value (0-4). The latter is used internally
+-- assigning to the attribute a new value (0-5). The latter is used internally
 -- by the library, in the `check_restriction` EVENT, to detect at every turn if
 -- the value of `restricted_level` has changed, compared to its previous value
 -- stored in previous_restricted_level` (see `check_restriction` event code
 -- below).
 
 ADD TO EVERY definition_block
-  HAS restricted_level 0.           -- Default value: no verbs are restricted.
-  HAS previous_restricted_level 0.  -- Used to detect restriction level changes.
+  HAS
+    restricted_level 0.          -- Default value: no verbs are restricted.
+    previous_restricted_level 0. -- Used to detect restriction level changes.
+    restricted_response_bak "".  -- Used to store copy of `restricted_response`
+                                 -- at Level 5, which changes the message.
 
   CAN about.
   CAN again.
@@ -311,10 +325,12 @@ EVENT check_restriction
   -- ---------------------------------------------------------------------------
   IF restricted_level OF my_game <> previous_restricted_level OF my_game
     THEN
-      -- A change in restriction level was detected. Since restriction levels
-      -- are built on top of each other, in a progressively restricting manner,
-      -- like layers, we first apply all the unrestricted attributes of Level 0,
-      -- and then conditionally apply the required constraints layers.
+      -- A change in restriction level was detected.
+
+      -- Since restriction levels are built on top of each other, in a
+      -- progressively restricting manner, like layers, we first apply all the
+      -- unrestricted attributes of Level 0, and then conditionally apply the
+      -- required constraints layers.
 
       -- ===================
       -- RESTRICTION LEVEL 0
@@ -708,12 +724,38 @@ EVENT check_restriction
           MAKE my_game NOT yes.
       END IF.
 
+      -- ===================
+      -- RESTRICTION LEVEL 5
+      -- ===================
+      -- This is a special restriction level where the player can only answer
+      -- YES or NO. It's kept independent of the other level because it also
+      -- changes the `restricted_response` message to "Please answer YES or NO."
+      -- for the whole duration of the restriction level.
+
+      IF restricted_level OF my_game = 5 THEN
+        -- Store a copy of the current restricted actions message:
+        SET my_game:restricted_response_bak
+         TO my_game:restricted_response.
+        -- Change restricted actions message:
+        SET my_game:restricted_response TO "Please answer YES or NO.".
+        -- Enable only the YES and NO verbs:
+        MAKE my_game 'no'.
+        MAKE my_game yes.
+      ELSIF previous_restricted_level OF my_game = 5 THEN
+        -- If we're switching from Level 5 to another level, then
+        -- restore original restricted actions message:
+        SET my_game:restricted_response
+         TO my_game:restricted_response_bak.
+      END IF.
+
       -- Update attribute for tracking restrictions-changes:
-      SET previous_restricted_level OF my_game TO restricted_level OF my_game.
+      SET my_game:previous_restricted_level
+       TO my_game:restricted_level.
 
     END IF.
 
-  -- Reschedule this event:
+
+  -- Always reschedule this event:
   SCHEDULE check_restriction AFTER 1.
 
 END EVENT.
