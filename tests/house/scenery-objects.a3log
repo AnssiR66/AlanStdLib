@@ -2,10 +2,10 @@
 
 The House 
 A rooms & sites setting for various tests. 
-(C) 2020 by Tristano Ajmone 
-Programmed with the ALAN Interactive Fiction Language v3.0beta7.
-Standard Library v2.2.0 
-Version 1 
+Version 1. 
+(C) 2020 by Tristano Ajmone. 
+Programmed with the ALAN Interactive Fiction Language v3.0beta7. 
+Standard Library v2.2.0. 
 All rights reserved.
 
 
@@ -23,7 +23,7 @@ a postcard, a jar, a bottle, a chips bag, a shopping list and a basket.
 > ; ------------------------------------------------------------------------------
 > n
 The Laundry Room
-This room is in a state of neglect. The kitchen is to the south.
+This room is in a state of neglect. The kitchen is to the south. 
 
 > ; ==============================================================================
 > ; LIGHT BULB: scenery with 'ex'
