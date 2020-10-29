@@ -18,14 +18,19 @@
 --   * Attributes for the start section.
 --   * The banner instance (for the start section).
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --------------------------------------------------------------------------------
+--
+--                     G E N E R A L   A T T R I B U T E S
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
-
--- ==================
--- General attributes
--- ==================
-
--- We define general attributes for every thing ( = object or actor):
+-- We define general attributes for every thing (object and actor):
 
 
 -- tag::default-attributes-thing[]
@@ -136,8 +141,14 @@ THE null_key ISA OBJECT
 END THE.
 
 
+--==============================================================================
+--------------------------------------------------------------------------------
+-- Preset Weight Values
+--------------------------------------------------------------------------------
+--==============================================================================
 
--- Some weight attributes for things:
+-- Some default weight settings for things, mostly used to check if something is
+-- movable.
 
 
 ADD TO EVERY THING
@@ -154,9 +165,51 @@ ADD TO EVERY OBJECT
   HAS weight 5.
 END ADD TO OBJECT.
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--                        C O M M O N   S Y N O N Y M S
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
--- These attributes are mostly used to check if something is movable.
+-- Next, we declare synonyms for some common words so that it will be possible
+-- for the player to type both "put ball in box" and "put ball into box", etc.
 
+SYNONYMS
+  into, inside = 'in'.
+  onto = on.
+  thru = through.
+  using = 'with'.
+
+  -- Some synonyms for the player character:
+
+  me, myself, yourself, self = hero.
+
+
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--           T H E   M Y _ G A M E   D E F I N I T I O N   B L O C K
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
+
+-- @TODO: Add intro text.
+
+-- Here we create the "definition_block" class, to group various definitions.
+-- In the game source file, the author should declare an instance 'my_game'
+-- which belongs to this class.
+
+--------------------------------------------------------------------------------
 
 
 -- An attribute for keeping track of nested locations;
@@ -167,64 +220,16 @@ ADD TO EVERY LOCATION
 END ADD TO.
 
 
-
-
--- Common synonyms
--- ===============
-
-
--- Next, we declare synonyms for some common words so that it will be possible
--- for the player to type commands such as both "put ball in box" and
--- "put ball into box", etc:
-
-
-SYNONYMS
-
-  into, inside = 'in'.
-  onto = on.
-  thru = through.
-  using = 'with'.
-
-  -- Here are some synonyms for the player character:
-
-  me, myself, yourself, self = hero.
-
-
-
-
--- Attributes for the my_game definition block
--- ===========================================
-
--- Here we create the "definition_block" class, to group various definitions.
--- In the game source file, the author should declare an instance 'my_game'
--- which belongs to this class.
-
+--==============================================================================
+--------------------------------------------------------------------------------
+-- my_game Attributes
+--------------------------------------------------------------------------------
+--==============================================================================
 
 
 EVERY definition_block ISA LOCATION
 
-  -- attributes for the start section (banner):
-  -- ==========================================
-
-  -- These will be shown at the start of the game if you add
-  --    DESCRIBE banner.
-  -- after START AT [location].
-
-  HAS    title  "My New Game".
-  HAS subtitle  "".
-  HAS   author  "An ALAN Author".
-  HAS     year  2020.
-  HAS  version  "1".
-  HAS    AlanV  "v3.0 beta7".
-
-  -- The predefined AlanV value is that of the latest Alan release at the time
-  -- the library was last updated. Authors are free to override this with a more
-  -- recent Alan version (or a different one, e.g. a developer snapshot) without
-  -- having to modify the library sources.
-
-  -- ===========================================================================
-
-  -- These three attributes, as well as the 'schedule' statement following them,
+  -- These three attributes, as well as the SCHEDULE statement following them,
   -- are needed for the 'notify' command ('lib_verbs.i'); ignore.
 
   HAS oldscore 0.
@@ -245,91 +250,200 @@ EVERY definition_block ISA LOCATION
   HAS temp_compliant.
 
 
+--==============================================================================
+--------------------------------------------------------------------------------
+-- my_game Initialization
+--------------------------------------------------------------------------------
+--==============================================================================
+
   INITIALIZE
     SCHEDULE check_score AFTER 0.
     SCHEDULE check_restriction AFTER 0.
     SCHEDULE check_darkness AFTER 0.
 
   -- ===========================================================================
+  -- Nest Every Location into my_game
+  -- ===========================================================================
+
+  -- The following code ensures that every location in the adventure (except for
+  -- `my_game` itself and the special `nowhere` location) will become nested
+  -- into the `my_game` location.
+
+  -- Thanks to this, any verb defined on `my_game` will be globally available,
+  -- which is what makes it possible to override a predefined library verb by
+  -- re-defining it on the `my_game` instance --- since `my_game` is always the
+  -- outermost nester of any location, all verbs defined on it will always be in
+  -- scope, anywhere.
 
 
-  -- The my_game instance defined as a meta-location (ignore):
+    FOR EACH l ISA LOCATION
+      DO
+        EXCLUDE nowhere FROM nested OF l.
+        IF COUNT ISA LOCATION, AT l > 0
+          THEN
+            FOR EACH x ISA LOCATION, AT l
+              DO
+                INCLUDE x IN nested OF l.
+            END FOR.
+        END IF.
+    END FOR.
 
-        FOR EACH l ISA LOCATION
-          DO
-            EXCLUDE nowhere FROM nested OF l.
-            IF COUNT ISA LOCATION, AT l > 0
-              THEN
-                FOR EACH x ISA LOCATION, AT l
-                  DO
-                    INCLUDE x IN nested OF l.
-                END FOR.
-            END IF.
-        END FOR.
+    FOR EACH l ISA LOCATION
+      DO
+        IF l <> my_game AND l <> nowhere
+          THEN LOCATE l AT my_game.
+        END IF.
+    END FOR.
 
-        FOR EACH l ISA LOCATION
-          DO
-              IF l <> my_game AND l <> nowhere
-              THEN LOCATE l AT my_game.
-            END IF.
-        END FOR.
+    FOR EACH r1 ISA ROOM
+      DO
+        LOCATE r1 AT indoor.
+    END FOR.
 
-        FOR EACH r1 ISA ROOM
-          DO
-            LOCATE r1 AT indoor.
-        END FOR.
+    FOR EACH s1 ISA SITE
+      DO
+        LOCATE s1 AT outdoor.
+    END FOR.
 
-        FOR EACH s1 ISA SITE
-          DO
-            LOCATE s1 AT outdoor.
-        END FOR.
+    FOR EACH l ISA LOCATION
+      DO
+        IF nested OF l <> {} AND l <> my_game AND l <> nowhere
+        THEN
+          FOR EACH x ISA LOCATION, IN nested OF l
+            DO
+              IF l <> my_game AND x <> my_game
+                THEN LOCATE x AT l.
+              END IF.
+          END FOR.
+        END IF.
+    END FOR.
 
-        FOR EACH l ISA LOCATION
-          DO
-            IF nested OF l <> {} AND l <> my_game AND l <> nowhere
-            THEN
-                    FOR EACH x ISA LOCATION, IN nested OF l
-                DO
-                  IF l <> my_game AND x <> my_game
-                        THEN LOCATE x AT l.
-                  END IF.
-                  END FOR.
-            END IF.
-        END FOR.
+  -- ===========================================================================
+  -- Start Location `visited` and `described`
+  -- ===========================================================================
 
+  -- We ensure that the `visited` and `described` attributes of the starting
+  -- location are correct at the start of the game:
 
-
--- We ensure that the 'visited' and 'described' attributes of the starting location
--- are correct at the start of the game:
-
-    SET visited OF location OF hero TO 1.
-    SET described OF location OF hero TO 1.
+  SET visited OF location OF hero TO 1.
+  SET described OF location OF hero TO 1.
 
 END EVERY definition_block.
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--                        T H E   G A M E   B A N N E R
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
 
--- ===========
--- The Banner:
--- ===========
+-- The Game Banner is an optional library feature for printing information about
+-- the adventure when the game starts. To enable the Banner, you need to add the
+-- `DESCRIBE banner` statement after the `START AT [location]` statement, e.g.:
+
+--    START AT initial_location.
+--    DESCRIBE banner.
+
+-- The information shown in the Banner is controlled via specific attributes
+-- defined on `definition_block`, which authors can override directly inside the
+-- mandatory `my_game` instance declaration. E.g.:
+
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- The my_game IsA definition_block
+--   Has
+--     title    "Beyond the Aleph".
+--     subtitle "A kabbalistic adventure.".
+--     author   "Isaac Luria Ha'ARI".
+--     year     1560.
+--     version  "1".
+--     AlanV    "v3.0 beta7".
+-- End the.
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-- will produce the following Banner:
+
+--     Beyond the Aleph
+--     A kabbalistic adventure.
+--     Version 1.
+--     (C) 1560 by Isaac Luria Ha'ARI.
+--     Programmed with the ALAN Interactive Fiction Language v3.0 beta7.
+--     Standard Library v2.2.0.
+--     All rights reserved.
+
+-- Omitted attributes will fall back on their default values, defined by the
+-- library. Attributes with null values (empty string or 0, depending on the
+-- type) will suppress their related entry from the Banner altogether.
+
+--==============================================================================
+--------------------------------------------------------------------------------
+-- Banner Presets
+--------------------------------------------------------------------------------
+--==============================================================================
+
+-- These are the predefined values for the Game Banner attributes:
+
+ADD TO EVERY definition_block
+  HAS    title  "My New Game".
+  HAS subtitle  "".
+  HAS  version  "1".
+  HAS     year  2020.
+  HAS   author  "An ALAN Author".
+  HAS    AlanV  "v3.0 beta7".
+END ADD TO definition_block.
+
+-- The predefined value of `AlanV` is that of the latest Alan release at the
+-- time the library was last updated. Authors are free to override this with a
+-- more recent Alan version (or a different one, e.g. a developer snapshot)
+-- without having to modify the library sources.
+
+--==============================================================================
+--------------------------------------------------------------------------------
+-- Banner Definition
+--------------------------------------------------------------------------------
+--==============================================================================
 
 THE banner ISA LOCATION
 
   DESCRIPTION
 
-    "$p" STYLE alert. SAY title OF my_game. STYLE normal.
-
-    IF subtitle OF my_game <> ""
-      THEN "$n" SAY subtitle OF my_game.
+    -- Adventure Title:
+    IF my_game:title <> ""
+      THEN "$p" STYLE alert. SAY my_game:title. STYLE normal.
     END IF.
 
-    "$n(C)" SAY year OF my_game. "by" SAY author OF my_game.
-
-    "$nProgrammed with the ALAN Interactive Fiction Language" SAY my_game:AlanV.
-    ".$nStandard Library v2.2.0"
-
-    IF version OF my_game <> "0"
-      THEN "$nVersion" SAY version OF my_game.
+    -- Adventure Subtitle:
+    IF my_game:subtitle <> ""
+      THEN "$n" SAY my_game:subtitle.
     END IF.
+
+    -- Game Version:
+    IF my_game:version <> "0"
+      THEN "$nVersion" SAY my_game:version. "."
+    END IF.
+
+    -- Year and Author:
+    "$n(C)"
+    IF my_game:year <> 0
+      THEN SAY my_game:year.
+    END IF.
+    IF my_game:author <> ""
+      THEN "by" SAY my_game:author.
+    END IF. "."
+
+    -- ALAN Info:
+    "$nProgrammed with the ALAN Interactive Fiction Language"
+    IF my_game:AlanV <> ""
+      THEN SAY my_game:AlanV.
+    END IF. "."
+
+    -- StdLib Info:
+    "$nStandard Library v2.2.0."
+
 
     "$nAll rights reserved."
 
