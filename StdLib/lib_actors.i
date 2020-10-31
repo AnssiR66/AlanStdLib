@@ -12,21 +12,21 @@
 -- This library module contains the code that defines the standard behavior of
 -- actors, as well as some specialized actor sub-classes:
 
---+-----------------------------------------------------------------------------
---| PERSON
---+-----------------------------------------------------------------------------
---| * is able to talk (= 'CAN talk').
---+-----------------------------------------------------------------------------
---| FEMALE
---+-----------------------------------------------------------------------------
---| * A subclass of person (= is able to talk).
---| * Can be referred to with the pronoun 'her'.
---+-----------------------------------------------------------------------------
---| MALE
---+-----------------------------------------------------------------------------
---| * A subclass of person (= is able to talk).
---| * Can be referred to with the pronoun 'him'.
---+-----------------------------------------------------------------------------
+--               +----------------------------------------------+
+--               | PERSON                                       |
+--               +----------------------------------------------+
+--               | * is able to talk (= 'CAN talk').            |
+--               +----------------------------------------------+
+--               | FEMALE                                       |
+--               +----------------------------------------------+
+--               | * A subclass of person (= is able to talk).  |
+--               | * Can be referred to with the pronoun 'her'. |
+--               +----------------------------------------------+
+--               | MALE                                         |
+--               +----------------------------------------------+
+--               | * A subclass of person (= is able to talk).  |
+--               | * Can be referred to with the pronoun 'him'. |
+--               +----------------------------------------------+
 
 -- ACTORS are defined to be `NOT inanimate` CONTAINERS (so that they can, for
 -- example, receive and carry objects).
@@ -85,87 +85,86 @@ ADD TO EVERY ACTOR
 
 
   DEFINITE ARTICLE
-  IF THIS IS NOT named
-    THEN "the"
-    ELSE ""
-  END IF.
+    IF THIS IS NOT named
+      THEN "the"
+      ELSE ""
+    END IF.
 
 
   INDEFINITE ARTICLE
-  IF THIS IS NOT named
-    THEN
-      IF THIS IS NOT plural
-        THEN "a"
-        ELSE "some"
+    IF THIS IS NOT named
+      THEN
+        IF THIS IS NOT plural
+          THEN "a"
+          ELSE "some"
+        END IF.
+      ELSE ""
+    END IF.
+
+  -- If you need "an", you must declare it within the actor instance.
+
+
+  CONTAINER -- So that actors can receive and carry objects.
+    HEADER
+      IF THIS = hero
+        THEN "You are carrying"
+        ELSE
+          SAY THE THIS.
+          IF THIS IS NOT plural
+            THEN "is"
+            ELSE "are"
+          END IF. "carrying"
       END IF.
-    ELSE ""
-  END IF.
 
-  -- if you need "an", you must declare it separately at the actor instance
+    ELSE
+      IF THIS = hero
+        THEN "You are empty-handed."
+        ELSE
+          SAY THE THIS.
+          IF THIS IS NOT plural
+            THEN "is"
+            ELSE "are"
+          END IF. "not carrying anything."
+      END IF.
 
-
-  CONTAINER
-  -- so that actors can receive and carry objects
-  HEADER
-    IF THIS = hero
-      THEN "You are carrying"
-      ELSE
-        SAY THE THIS.
-        IF THIS IS NOT plural
-          THEN "is"
-          ELSE "are"
-        END IF. "carrying"
-    END IF.
-
-  ELSE
-    IF THIS = hero
-      THEN "You are empty-handed."
-      ELSE
-        SAY THE THIS.
-        IF THIS IS NOT plural
-          THEN "is"
-          ELSE "are"
-        END IF. "not carrying anything."
-
-    END IF.
-
-  EXTRACT
-    CHECK THIS IS compliant
-      ELSE
-        "That seems to belong to"
-        SAY THE THIS. "."
+    EXTRACT
+      CHECK THIS IS compliant
+        ELSE "That seems to belong to" SAY THE THIS. "."
+        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        -- NOTE: The above CHECK will interrupt the execution of any verb that
+        --       attempts dislocating an item from a non-compliant actor. When
+        --       the LOCATE statement fails, the verb simply aborts. The above
+        --       message from the ELSE clause will be printed, just before the
+        --       verb aborts executing.
+        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 
   INITIALIZE
 
-  MAKE hero compliant.
-  -- so that the hero can give, drop, etc. carried objects.
+    MAKE hero compliant. -- So the hero can give, drop, etc. carried objects.
 
-  -- all actors will obey this script from the start of the game:
-
-  IF THIS <> hero
-    THEN USE SCRIPT following_hero FOR THIS.
-  END IF.
+    -- All NPC actors will obey this script from the start of the game:
+    IF THIS <> hero
+      THEN USE SCRIPT following_hero FOR THIS.
+    END IF.
 
 
 
   SCRIPT following_hero
-    -- this code will make any actor follow the hero
-    -- if the actor is given the attribute 'following'.
-
+    -- ------------------------------------------------
+    -- This code will make any NPC follow the hero,
+    -- if the actor is given the attribute `following`.
+    -- ------------------------------------------------
     STEP WAIT UNTIL hero NOT HERE
-
-      IF THIS IS following
-        THEN
-          LOCATE THIS AT hero.
-          "$p" SAY THE THIS.
-            IF THIS IS NOT plural
-              THEN "follows you."
-              ELSE "follow you."
-            END IF.
-      END IF.
-
+    IF THIS IS following
+      THEN
+        LOCATE THIS AT hero.
+        "$p" SAY THE THIS. "follow"
+        IF THIS IS NOT plural
+          THEN "$$s"
+        END IF. "you."
+    END IF.
     USE SCRIPT following_hero FOR THIS.
 
 
@@ -174,16 +173,16 @@ ADD TO EVERY ACTOR
     IF THIS IS scenery
       THEN "$$"
     ELSIF THIS IS NOT named
-      THEN
+      THEN "There"
         IF THIS IS NOT plural
-          THEN "There is" SAY AN THIS. "here."
-          ELSE "There are" SAY THIS. "here."
-        END IF.
+          THEN "is" SAY AN THIS.
+          ELSE "are" SAY THIS.
+        END IF. "here."
       ELSE SAY THIS.
         IF THIS IS NOT plural
-          THEN "is here."
-          ELSE "are here."
-        END IF.
+          THEN "is"
+          ELSE "are"
+        END IF. "here."
     END IF.
 
 
@@ -263,7 +262,7 @@ END ADD TO ACTOR.
 --------------------------------------------------------------------------------
 
 EVERY person ISA ACTOR
-      CAN talk.
+  CAN talk.
 
   CONTAINER
     HEADER
@@ -272,8 +271,8 @@ EVERY person ISA ACTOR
         THEN "is"
         ELSE "are"
       END IF. "carrying"
-    ELSE
 
+    ELSE
       SAY THE THIS.
       IF THIS IS NOT plural
         THEN "is"
@@ -285,7 +284,7 @@ EVERY person ISA ACTOR
         ELSE "That seems to belong to"
         SAY THE THIS. "."
 
-END EVERY.
+END EVERY person.
 
 --==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
