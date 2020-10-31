@@ -12,7 +12,19 @@
 [[ch.importing-stdlib]]
 = Importing the Library
 
-[big]_How to import the Standard Library into your ALAN adenture games_#
+[big]#_How to import the Standard Library into your ALAN adenture games_#
+
+.EDITORS' NOTE
+[CAUTION]
+=====================================
+This section needs to be revised entirely; righ now it's just a collection of left-over paragraphs from the original split-up text.
+
+Among the topics that need to be expanded upon, there are:
+
+* [ ] Explain how to keep the library files into their `StdLib/` folder and make them accassible to the adventure via ALAN compiler options.
+
+But the above list is far from complete.
+=====================================
 
 
 When you import the library, there are a couple of extra things you need to add to the code:
@@ -30,11 +42,29 @@ END THE meadow.
 START AT meadow.
 --------------------------------------------------------------------------------
 
+// @FIXME: XREF TO PAGE
+
+The `my_game` is an obligatory instance that you need to declare in any adventure that uses the Standard Library.
+It will be described in more detail on p.78.
+
+
+The `IMPORT` statement imports the main library module into the game code, which in turn imports all the other library modules using `IMPORT` statements.
+
+
 Now, when you run the game, you will find yourself at the meadow location, but you can look, wait, examine yourself, take inventory, try to go in a direction, think, listen, smell, type 'help' for assistance, and many other things.
 
+All the mandatory library files mentioned in <<sec.mandatory-resources>> should be in the same folder as your source code file.
 
-The IMPORT statement imports the library files into the game code.
-The five obligatory library files mentioned on p.1, together with the file 'library.i' that imports them, should be in the same folder as your source code file.
+
+.EDITORS' NOTE (@tajmone)
+[CAUTION]
+=====================================
+Is the paragraph below _really_ needed? If an author has lost the main `library.i` module, he/she probably should download the whole package again, because only G{asterisk}d knows what other integrity problems might be lurkning in the dark, when dealing with such a chaotic regime of assets organization!
+
+After all, it's not as if end users are charged for downloading the StdLib package -- it's free as in _free coffee, beer and crauts_!
+
+If this paragraph is to be kept, I suggest we should ask the mindless user who has lost the **main library module** to chop-off a finger with an axe (Yakuza style), out of respect for all the sweat, tears and blood shed by the StdLib maintainers in the course of time -- of course, that' just my humble opinion, dictated at the peak of frustration for the upcoming mid-Nov. ETA which is getting closer and closer!
+=====================================
 
 
 If you don't have `library.i` in the same folder as the obligatory library files, you should import the obligatory library files in the following way (which is somewhat lengthier):
@@ -54,11 +84,15 @@ IMPORT 'lib_verbs.i'.
 IMPORT 'lib_verbs_restrictions.i'.
 --------------------------------------------------------------------------------
 
-// @FIXME: XREF TO PAGE
 
-`my_game` is an obligatory instance that you have to include in your game source file when using the library.
-It will be described in more detail on p.78.
 
+// @REMOVED: ALAN IDE Screenshot and comments!
+//    The screenshot no longer mirrored the current library modules.
+//    The text also mentioned some old DLLs which are no longer part of the
+//    ALAN interpreter. We're keeping the original text commented out, in case
+//    we decide to create a new screenshot and update the text.
+
+////
 Here is a screenshot of what a typical ALAN project folder might look like:
 
 image::img_folders.jpg[]
@@ -76,6 +110,7 @@ An IFID is a serial number that's assigned to each work of Interactive Fiction.
 Each work has its own unique IFID, giving players, authors, and archivists a universal, unambiguous way to refer to a given game.
 It's the same idea as the ISBN system for books.
 The IFID system is defined by the Treaty of Babel which was created in 2006.
+////
 
 
 // EOF //

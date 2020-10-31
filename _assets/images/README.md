@@ -12,7 +12,6 @@ This folder contains images shared by the various documents of the project.
 
 - [Folder Contents](#folder-contents)
 - [Images Preview and Info](#images-preview-and-info)
-    - [Folders Screenshot](#folders-screenshot)
     - [Library Classes Diagram](#library-classes-diagram)
     - [Predefined Classes Diagram](#predefined-classes-diagram)
 
@@ -24,7 +23,6 @@ This folder contains images shared by the various documents of the project.
 
 The image assets contained in this folder:
 
-- [`img_folders.jpg`][img_folders]
 - [`library-classes.svg`][library-classes]
 - [`predefined-classes.svg`][predefined-classes]
 
@@ -32,15 +30,6 @@ Click on a filename to jump to its description and preview.
 
 
 # Images Preview and Info
-
-## Folders Screenshot
-
-- [`img_folders.jpg`][img_folders.jpg]
-
-This image was extracted from the original PDF edition of the _StdLib Manual v2.0_:
-
-![img_folders.jpg][img_folders.jpg]
-
 
 ## Library Classes Diagram
 
@@ -82,7 +71,6 @@ This image was taken from the assets of the _ALAN Manual_, available at the [Ala
 
 <!-- images links -->
 
-[img_folders.jpg]: ./img_folders.jpg
 [library-classes.svg]: ./library-classes.svg
 [predefined-classes.svg]: ./predefined-classes.svg
 

@@ -68,20 +68,20 @@ Needless to say, a higher degree of freedom always entails a higher burden on th
 
 For this reason the Standard Library was created, to allow authors to start working on their adventures with a predefined set of common <<table.verbs,players commands>> (verbs) and their <<ch.library-messages,default response messages>>, <<fig.library-classes,useful objects classes>> (containers, liquids, weapons, doors, etc.), and a solid infrastructure of rules and relations that binds them neatly together, providing a well organized and realistic environment that should fit most adventures.
 
-'''
-
-// -----------------------------------------------------------------------------
 
 The library defines numerous verbs and commands commonly used in gameplay, such as _examine_, _take_, _drop_, _attack_, etc., along with appropriate checks and default responses to ensure they are used correctly.
-It also defines various global attributes (e.g. `takeable`, `NOT openable`), as well as object and actor attributes and classes (e.g. `CLOTHING`, `WEAPON`, `PERSON`), together with illegal parameter messages (e.g. "`That's not something you can examine`").
+It also defines various global attributes (e.g. `takeable`, `NOT openable`), as well as object and actor attributes and classes (e.g. `CLOTHING`, `WEAPON`, `PERSON`), together with illegal parameter messages (e.g. [.play]#That's not something you can examine#).
 
 The first official version (v1.0) of the ALAN Standard Library was published in 2010.
 Before that, versions 0.x, written by Steve Griffiths, were available for use.
-The writer of the current version is Anssi Räisänen.
+The writer of the current version are Anssi Räisänen and Tristano Ajmone.
 
+[[sec.mandatory-resources]]
+=== Mandatory Resources
 
-The ALAN Standard Library v{StdLibVer} consists of the following source files:
+The ALAN Standard Library v{StdLibVer} consists of the following source files, found in the `StdLib` folder inside the distribution package:
 
+* `COPYING` -- the Artistic License 2.0 file.
 * `library.i` -- the main library file that imports all the other modules:
 ** `lib_actors.i`
 ** `lib_classes.i`
@@ -94,18 +94,16 @@ The ALAN Standard Library v{StdLibVer} consists of the following source files:
 ** `lib_verbs.i`
 ** `lib_verbs_restrictions.i`
 
+These are the files that you obligatory need to include in your source adventure, if you want to use the library.
+Since they are all found in the `StdLib` folder, you might just copy the whole folder into your adventure project.
 
-To import the library in your game, just add the following line to your adventure source file:
-
-[source,alan]
---------------------------------------------------------------------------------
-Import 'library.i'.
---------------------------------------------------------------------------------
+For instructions on how to import the library into your game, refer to <<ch.importing-stdlib>>.
 
 
+[[sec.additional-resources]]
 === Additional Resources
 
-In addition to library modules, the Standard Library distribution package contains some extra files, none of which are necessary for using the library:
+In addition to mandatory library modules, the Standard Library distribution package contains some extra files, none of which are necessary for using the library:
 
 // -----------------------------------------------------------------------------
 // The entries in the following list are defined as attributes that expand to
@@ -155,36 +153,62 @@ We're working on porting both documents (along with _The Alan Cookbook_) to Asci
 ============================
 
 
-
+[[sec.where-to-start]]
 === Where to Start
 
-Some guidelines on how to approach reading this manual, based on your knowledge and experience of the ALAN language, or lack thereof.
+Here are some brief guidelines on how to approach reading this manual, based on your knowledge and experience of the ALAN language, or lack thereof.
 
 
-
+[sec.alan-newbies]
 ==== ALAN Newbies
-
-[big]#_Where to start if you’re a complete newbie to ALAN IF._#
 
 If you've never programmed in ALAN before, it's advisable that you being by studying the _ALAN Manual_ (available on the ALAN website at {AlanWWW}) to get an idea of how the language works in general.
 The _ALAN Manual_ described all the features of the language, whereas this manual focuses only on the features defined in the Standard Library.
-After reading the _ALAN Manual_, read this manual thoroughly, with the following exceptions:
 
 // @FIXME: dead XRef Ch???
 //  	   What is now Ch.10 will be revised soon; also, the library messages have
 //         been moved to 'lib_messages_library.i', so they no longer belong to the
 // 		   'my_game' file/chapter:
-* Read only the early part of Ch??? to get an idea of how that meta-instance is to be used in the game source.
-The later passages in that chapter, listing all possible illegal parameter message attributes and verb check attributes of the `my_game` meta-instance, are meant to serve as a searchable index rather than to be read systematically.
+
+
+.EDITORS' NOTE
+[CAUTION]
+=====================================
+The following paragraph can't be completed until the new sections structure is in place, because we can't yet provide a cross-reference to the chapter or section that will present the `my_game` instance.
+
+Also, the reference in the last sentence was to the original Ch. 10, which used to be a huge chapter dealing with `my_game` and all the message-attributes herein defined -- which have now been moved to an independent library module, as well as to an independent chapter in this manual.
+
+Once the new structure of the book is more defined, we'll be able to revise this whole paragraph as needed.
+
+Refer to original PDF version of the _StdLib Manual_ to retrieve the original context.
+=====================================
+
+
+After reading the _ALAN Manual_, read this manual thoroughly, with the exception of ch??? to get an idea of how the meta-instance `my_game` is to be used in the game source.
+The later passages in that chapter, listing all possible illegal parameter message attributes and verb check attributes of the my_game meta-instance, are meant to serve as a searchable index rather than to be read systematically.
+
 
 
 ==== Standard Library Newbies
 
 [big]#_What to read if you're familiar with ALAN but haven't used the Standard Library_#
 
+.EDITORS' NOTE
+[CAUTION]
+=====================================
+The following paragraph can't be fixed until we have a better picture of the final structure of the revised Manual.
+
+The same applies to this whole sub-section, which can't be written until we're able to provide cross-reference links to the target chapters or sections we'd like to recomend to the reader.
+
+Refer to original PDF version of the _StdLib Manual_ to retrieve the original context.
+=====================================
+
+
 // @FIXME: dead XRef Ch???
 Read through the whole of this library manual carefully, with the exception of Ch???, of which you should read only the early part to understand the significance of using the `my_game` meta-instance in the game source.
 The latter part of that chapter, where the illegal parameter messages and other messages are listed, is meant to be read only cursorily and to be used as a searchable index when needed.
+
+
 
 
 === Typographic Conventions

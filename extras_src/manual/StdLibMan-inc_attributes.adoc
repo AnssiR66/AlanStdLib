@@ -67,5 +67,6 @@ alternative links on the GH Pages website, etc.).
 :lib_messages_runtime: pass:q,a[link:{StdLibDir}/lib_messages_runtime.i[`lib_messages_runtime.i`^,title="View library source file"]]
 :lib_verbs: pass:q,a[link:{StdLibDir}/lib_verbs.i[`lib_verbs.i`^,title="View library source file"]]
 :lib_verbs_restrictions: pass:q,a[link:{StdLibDir}/lib_verbs_restrictions.i[`lib_verbs_restrictions.i`^,title="View library source file"]]
+:COPYING: pass:q,a[link:{StdLibDir}/COPYING[`COPYING`^,title="View library license file"]]
 
 // EOF //

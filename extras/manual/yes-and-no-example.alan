@@ -1,0 +1,66 @@
+--==============================================================================
+-- "'YES' and 'NO' Verbs Example" by Anssi Räisänen, 2020.
+--==============================================================================
+Import 'library.i'. -- ALAN Standard Library v2.2.0
+
+The my_game IsA DEFINITION_BLOCK
+  Has
+    title    "Using the 'YES' and 'NO' Verbs".
+    subtitle "An example on how to use the question verbs.".
+    author   "Anssi Räisänen".
+    year     2020.
+    version  "1".
+
+    restricted_level 5. -- Only allow YES/NO at game start.
+End the.
+
+-- =============================================================================
+
+-- Fake Start Location
+
+-- =============================================================================
+
+-- The `restore_room` is a "fake" start location, where the player is asked
+-- whether he/she wants to restore a previously saved game session, before
+-- entering the actual first room of the adventure, or restoring a game save,
+-- depending on the answer.
+
+
+The restore_room IsA location.
+  Name ''.  -- No name displayed for this room.
+  Description "Do you want to restore a saved game (yes/no?)"
+
+  -- -------------------------------------------------------------------------
+  -- If the player answers YES, tell the interpreter to launch the interface
+  -- for loading saved games. We don't need to change `restricted_level` here,
+  -- because its value will be restored along with the saved game.
+  -- -------------------------------------------------------------------------
+  Verb yes
+    Does only restore.
+  End verb.
+
+  -- ------------------------------------------------------------
+  -- If the player answers NO, just unlock again all verbs and
+  -- move the Hero to the "real" first location of the adventure.
+  -- ------------------------------------------------------------
+  Verb 'no'
+    Does only
+      Set restricted_level of my_game to 0. -- Unlock all verbs.
+      Locate hero at room1. -- Move player to the "real" start location.
+  End verb.
+End the restore_room.
+
+-- =============================================================================
+
+-- Real Initial Game Room
+
+-- =============================================================================
+
+-- `room1` is the first "real" location of the adventure world.
+
+The room1 IsA room
+  Description "This is the first room of the game."
+End the.
+--------------------------------------------------------------------------------
+Start at restore_room.
+Describe banner.
