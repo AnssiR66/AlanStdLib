@@ -319,6 +319,12 @@ END ADD TO definition_block.
 
 EVENT check_restriction
   -- ---------------------------------------------------------------------------
+  -- RESTRICTION LEVEL SAFETY CHECK: Prevent out of range values.
+  -- ---------------------------------------------------------------------------
+  IF restricted_level OF my_game > 5 THEN
+    SET restricted_level OF my_game TO 5.
+  END IF.
+  -- ---------------------------------------------------------------------------
   -- To optimize performance, we compare the current restriction value with the
   -- last value encountered, and if no changes are detected we won't change any
   -- actions-restrictions attributes.
