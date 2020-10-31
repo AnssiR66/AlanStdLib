@@ -51,6 +51,7 @@ Currently the AsciiDoc sources are organized in the following way, but will be c
             - [`StdLibMan-inc_table_verbs.dsv`][inc_verbs] — DSV (delimiter-separated values) data table of library defined verbs.
         * [`StdLibMan4_03.adoc`][man4_3] — _Verbs and Things_
         * [`StdLibMan4_04.adoc`][man4_4] — _Working with Verbs_
+        * [`StdLibMan4_05.adoc`][man4_5] — _Restricted Actions_
     + [`StdLibMan5.adoc`][man5] — PART V — __Library Messages__
         * [`StdLibMan5_01.adoc`][man5_1] — _Runtime Messages_
         * [`StdLibMan5_02.adoc`][man5_2] — _Library Messages_
@@ -124,6 +125,7 @@ It must be manually fixed, element by element, using the original PDF as a visua
 [man4_2]: ./StdLibMan4_02.adoc
 [man4_3]: ./StdLibMan4_03.adoc
 [man4_4]: ./StdLibMan4_04.adoc
+[man4_5]: ./StdLibMan4_05.adoc
 
 [man5]: ./StdLibMan5.adoc
 [man5_1]: ./StdLibMan5_01.adoc

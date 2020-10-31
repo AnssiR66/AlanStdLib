@@ -733,7 +733,7 @@ span.play em,
 <div class="details">
 <span id="author" class="author">Anssi Räisänen</span><br>
 <span id="revnumber">version 2.2.0-WIP,</span>
-<span id="revdate">2020-10-28</span>
+<span id="revdate">2020-10-30</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -871,44 +871,54 @@ span.play em,
 <li><a href="#sec.removing-checks">18.5. Removing CHECKs</a></li>
 <li><a href="#sec.overriding-responses">18.6. Overriding Responses</a></li>
 <li><a href="#sec.custom-verbs">18.7. Custom Verbs</a></li>
-<li><a href="#sec.restricted-actions">18.8. Restricted Actions</a></li>
+</ul>
+</li>
+<li><a href="#ch.restricted-actions">19. Restricted Actions</a>
+<ul class="sectlevel2">
+<li><a href="#sec.restrictions-levels">19.1. Restrictions Levels</a></li>
+<li><a href="#sec.actions-attributes">19.2. Actions Attributes</a></li>
+<li><a href="#sec.restricted-actions-original">19.3. *** ORIGINAL TEXT ***</a>
+<ul class="sectlevel3">
+<li><a href="#_restriction_levels">19.3.1. ** Restriction Levels **</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="#part.library-messages">Library Messages</a>
 <ul class="sectlevel1">
-<li><a href="#ch.runtime-messages">19. Run-Time Messages</a></li>
-<li><a href="#ch.library-messages">20. Library Messages</a>
+<li><a href="#ch.runtime-messages">20. Run-Time Messages</a></li>
+<li><a href="#ch.library-messages">21. Library Messages</a>
 <ul class="sectlevel2">
-<li><a href="#_the_my_game_instance_and_its_attributes">20.1. The my_game instance and its attributes</a></li>
-<li><a href="#_1_attributes_for_the_start_section">20.2. 1. Attributes for the start section</a></li>
-<li><a href="#_2_attributes_for_the_hero">20.3. 2. Attributes for the hero</a></li>
-<li><a href="#_3_attributes_for_locations">20.4. 3. Attributes for locations</a></li>
-<li><a href="#_4_attributes_for_restricted_actions">20.5. 4. Attributes for restricted actions</a></li>
-<li><a href="#_5_illegal_parameter_messages">20.6. 5. Illegal parameter messages</a>
+<li><a href="#_the_my_game_instance_and_its_attributes">21.1. The my_game instance and its attributes</a></li>
+<li><a href="#_1_attributes_for_the_start_section">21.2. 1. Attributes for the start section</a></li>
+<li><a href="#_2_attributes_for_the_hero">21.3. 2. Attributes for the hero</a></li>
+<li><a href="#_3_attributes_for_locations">21.4. 3. Attributes for locations</a></li>
+<li><a href="#_4_attributes_for_restricted_actions">21.5. 4. Attributes for restricted actions</a></li>
+<li><a href="#_5_illegal_parameter_messages">21.6. 5. Illegal parameter messages</a>
 <ul class="sectlevel3">
-<li><a href="#_other_illegal_parameter_messages">20.6.1. Other illegal parameter messages</a></li>
-<li><a href="#_changing_the_illegal_parameter_message_of_a_single_verb">20.6.2. Changing the illegal parameter message of a single verb:</a></li>
+<li><a href="#_other_illegal_parameter_messages">21.6.1. Other illegal parameter messages</a></li>
+<li><a href="#_changing_the_illegal_parameter_message_of_a_single_verb">21.6.2. Changing the illegal parameter message of a single verb:</a></li>
 </ul>
 </li>
-<li><a href="#_6_default_verb_check_messages">20.7. 6. Default verb check messages</a></li>
-<li><a href="#_checks_for_open_closed_and_locked_objects">20.8. Checks for open, closed and locked objects</a></li>
-<li><a href="#_checks_for_not_reachable_and_distant_objects">20.9. Checks for "not reachable" and "distant" objects</a></li>
-<li><a href="#_checks_for_the_hero_sitting_or_lying_down">20.10. Checks for the hero sitting or lying_down</a></li>
-<li><a href="#_other_attribute_checks">20.11. Other attribute checks</a></li>
-<li><a href="#_b_location_and_containment_checks_for_actors_and_objects">20.12. b. location and containment checks for actors and objects</a>
+<li><a href="#_6_default_verb_check_messages">21.7. 6. Default verb check messages</a></li>
+<li><a href="#_checks_for_open_closed_and_locked_objects">21.8. Checks for open, closed and locked objects</a></li>
+<li><a href="#_checks_for_not_reachable_and_distant_objects">21.9. Checks for "not reachable" and "distant" objects</a></li>
+<li><a href="#_checks_for_the_hero_sitting_or_lying_down">21.10. Checks for the hero sitting or lying_down</a></li>
+<li><a href="#_other_attribute_checks">21.11. Other attribute checks</a></li>
+<li><a href="#_b_location_and_containment_checks_for_actors_and_objects">21.12. b. location and containment checks for actors and objects</a>
 <ul class="sectlevel3">
-<li><a href="#_location_and_containment_checks_for_the_hero">20.12.1. Location and containment checks for the hero</a></li>
-<li><a href="#_checking_whether_an_object_is_in_a_container_or_not">20.12.2. Checking whether an object is in a container or not</a></li>
-<li><a href="#_checking_whether_an_object_is_worn_by_the_hero_or_not">20.12.3. Checking whether an object is worn by the hero or not</a></li>
+<li><a href="#_location_and_containment_checks_for_the_hero">21.12.1. Location and containment checks for the hero</a></li>
+<li><a href="#_checking_whether_an_object_is_in_a_container_or_not">21.12.2. Checking whether an object is in a container or not</a></li>
+<li><a href="#_checking_whether_an_object_is_worn_by_the_hero_or_not">21.12.3. Checking whether an object is worn by the hero or not</a></li>
 </ul>
 </li>
-<li><a href="#_c_checking_location_states">20.13. c. checking location states</a></li>
-<li><a href="#_d_logical_checks">20.14. d. logical checks</a></li>
-<li><a href="#_2_prohibiting_the_action_in_ditransitive_verbs_where_both_the_first_and_the_second_parameter_refer_to_the_same_instance">20.15. 2. prohibiting the action in ditransitive verbs where both the first and the second parameter refer to the same instance:</a></li>
-<li><a href="#_e_additional_checks_for_classes">20.16. e. additional checks for classes</a></li>
-<li><a href="#_7_implicit_taking_message">20.17. 7. Implicit taking message</a></li>
+<li><a href="#_c_checking_location_states">21.13. c. checking location states</a></li>
+<li><a href="#_d_logical_checks">21.14. d. logical checks</a></li>
+<li><a href="#_2_prohibiting_the_action_in_ditransitive_verbs_where_both_the_first_and_the_second_parameter_refer_to_the_same_instance">21.15. 2. prohibiting the action in ditransitive verbs where both the first and the second parameter refer to the same instance:</a></li>
+<li><a href="#_e_additional_checks_for_classes">21.16. e. additional checks for classes</a></li>
+<li><a href="#_7_implicit_taking_message">21.17. 7. Implicit taking message</a></li>
 </ul>
 </li>
 </ul>
@@ -1205,6 +1215,7 @@ The latter part of that chapter, where the illegal parameter messages and other 
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
+<div class="title">v2.2.0 Status</div>
 <div class="paragraph">
 <p>This section needs to be rewritten because thanks to syntax highlighting we no longer need to rely on letter casing to pinpoint predefined ALAN keywords.
 (See <a href="https://github.com/AnssiR66/AlanStdLib/issues/86">Issue #86</a>)</p>
@@ -1370,7 +1381,10 @@ The IFID system is defined by the Treaty of Babel which was created in 2006.</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-<strong>TBD!</strong> This chapter still need to be written.
+<div class="title">v2.2.0 Status</div>
+<div class="paragraph">
+<p><strong>TBD!</strong> This chapter still need to be written.</p>
+</div>
 </td>
 </tr>
 </table>
@@ -1597,6 +1611,7 @@ Using any of the attributes listed below for your own purposes doesn&#8217;t nec
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
+<div class="title">v2.2.0 Status</div>
 <div class="paragraph">
 <p><strong>TBD!</strong> We need to write a general introduction on attributes defined by the library, and how these empower authors to quickly create complex objects without having to use classes.</p>
 </div>
@@ -2831,7 +2846,10 @@ For example,</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Add introductory text!
+<div class="title">v2.2.0 Status</div>
+<div class="paragraph">
+<p>This section needs some introductory text!</p>
+</div>
 </td>
 </tr>
 </table>
@@ -4317,7 +4335,10 @@ On the nightstand you see a diary.</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-@FIXME: this sentence in incomplete&#8201;&#8212;&#8201;"even if &#8230;&#8203; What?"
+<div class="title">EDITORS' NOTE</div>
+<div class="paragraph">
+<p>@FIXME: this sentence in incomplete&#8201;&#8212;&#8201;"even if &#8230;&#8203; What?"</p>
+</div>
 </td>
 </tr>
 </table>
@@ -4561,6 +4582,7 @@ Here, the verb outcome for examine has been modified for all WINDOWs in the game
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
+<div class="title">v2.2.0 Status</div>
 <div class="paragraph">
 <p><strong>TBD!</strong> We need to write a general introduction on Library verbs, before dealing with specific verbs or their implementation aspects.</p>
 </div>
@@ -5788,29 +5810,13 @@ In order to achieve this, you&#8217;ll need to carry out the following steps.</p
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-<div class="title">Re-Defining Verbs on <code>my_game</code>???</div>
+<div class="title">EDITORS' NOTE: Verbs on <code>my_game</code></div>
 <div class="paragraph">
-<p>We need to check if verbs defined on <code>my_game</code> really work as described here.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Do they?</p>
-</li>
-<li>
-<p><em>Why should</em> they?</p>
-</li>
-</ul>
+<p>We need to explain that verbs defined on <code>my_game</code> can replace the library-defined verbs because the library, during initialization of <code>DEFINITION_BLOCK</code>, nests every game location into the <code>my_game</code> location, which makes every verb on <code>my_game</code> in scope, at every location.
+(See <a href="https://github.com/AnssiR66/AlanStdLib/issues/115">Issue #115</a> for more info.)</p>
 </div>
 <div class="paragraph">
-<p>The <code>my_game</code> is just an instance of <code>DEFINITION_BLOCK</code>, which is a <code>location</code> class, which the Hero <em>never enters into</em>; so, why should these verbs come into effect during play if they&#8217;re never in scope?</p>
-</div>
-<div class="paragraph">
-<p>Maybe these texts are referencing older version of the library, which no longer apply to the its later versions.
-We need to test if this actually works, and if it does we need to explain why, otherwise we&#8217;ll need to amend or purge similar examples and instructions from this Manual.</p>
-</div>
-<div class="paragraph">
-<p>(See <a href="https://github.com/AnssiR66/AlanStdLib/issues/115">Issue #115</a> for more info.)</p>
+<p>It&#8217;s important that the reader is made aware of this; so we need to decide where this ought to be explained clearly, and then add cross references to it wherever the Manual mentions re-defining a verb on <code>my_game</code> as a mean to override the library&#8217;s default action.</p>
 </div>
 </td>
 </tr>
@@ -5839,6 +5845,7 @@ We need to test if this actually works, and if it does we need to explain why, o
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
+<div class="title">EDITORS' NOTE</div>
 <div class="paragraph">
 <p>@CHECK ME: See <a href="#warn.my_game-verbs">the above warning</a> regarding verb-overriding on the <code>my_game</code> instance.</p>
 </div>
@@ -5866,14 +5873,16 @@ The default outcome for the <code>eat</code> verb would be carried out on the so
 <p>This requires accessing the library.
 Open <a href="../../StdLib/lib_verbs.i" title="View library source file" target="_blank" rel="noopener"><code>lib_verbs.i</code></a>, find the verb you wish to remove a check from, and remove the target <code>CHECK</code> block.</p>
 </div>
-<div class="admonitionblock warning">
+<div class="admonitionblock caution">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-Make sure that after removing some default CHECKs the behavior of things in your game still remains coherent; after all, the default library verbs' checks are there to ensure that everything functions in a reasonable and consistent way.
+<div class="paragraph">
+<p>Make sure that after removing some default CHECKs the behavior of things in your game still remains coherent; after all, the default library verbs' checks are there to ensure that everything functions in a reasonable and consistent way.</p>
+</div>
 </td>
 </tr>
 </table>
@@ -5888,6 +5897,7 @@ Make sure that after removing some default CHECKs the behavior of things in your
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
+<div class="title">EDITORS' NOTE</div>
 <div class="paragraph">
 <p>@CHECK ME: See <a href="#warn.my_game-verbs">the above warning</a> regarding verb-overriding on the <code>my_game</code> instance.</p>
 </div>
@@ -5926,8 +5936,324 @@ Make sure that after removing some default CHECKs the behavior of things in your
 </div>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ch.restricted-actions"><a class="anchor" href="#ch.restricted-actions"></a>19. Restricted Actions</h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="title">v2.2.0 Status</div>
+<div class="paragraph">
+<p>This chapter is being updated to mirror the upcoming v2.2.0 release (See <a href="https://github.com/AnssiR66/AlanStdLib/issues/113" target="_blank" rel="noopener">Issue #113</a>).</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> <a href="#sec.restrictions-levels">Sec. 19.1, &#8220;Restrictions Levels&#8221;</a> is half done; it still needs some practical examples and additional text on how to use the feature.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> <a href="#sec.actions-attributes">Sec. 19.2, &#8220;Actions Attributes&#8221;</a> still needs to be written.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> The <a href="#sec.restricted-actions-original">original text is kept in a sub-section</a>, it needs to be recycled in the new sections and then be deleted.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In some situations, during an adventure, you might need to restrict the actions which the player can carry out.
+For example, if the hero is tied to a chair he shouldn&#8217;t be able to carry out any action that involves physical interaction with his surroundings, but he should be able to carry out any sensory-related actions (e.g. looking, listening, etc.), and the player should still be able to perform out-of-game actions like saving or restoring, etc.</p>
+</div>
+<div class="paragraph">
+<p>The library provides two means to control which actions are available to the player:</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<span class="big red">Restrictions&#160;Levels</span> 
+</td>
+<td class="hdlist2">
+<p>A range of five restricted actions presets acting on entire groups of verbs.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<span class="big red">Actions&#160;Attributes</span> 
+</td>
+<td class="hdlist2">
+<p>Each library verb has a same-named boolean attribute counterpart that can be targeted to enable or disable it at any time.</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Both methods control which verbs should be enabled or disabled by tweaking their corresponding actions attributes.
+The former method is more practical, since it allows to disable or disable entire groups of verbs at once, whereas the latter offers finer granularity, by allowing to target specific verbs.
+The two methods are not mutually exclusive, so they can be used in conjunction.</p>
+</div>
+<div class="paragraph">
+<p>Every library verb has a <code>CHECK</code> that will prevent the action if the corresponding action-restriction attribute is disabled on <code>my_game</code>.
+If the verb is disabled, the action will fail and the <code>restricted_response OF my_game</code> message will be printed instead:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+<div class="paragraph">
+<p>You can&#8217;t do that.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The default message can be changed at any time by re-defining the <code>restricted_response</code> attribute on <code>my_game</code>.
+E.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">Set</span> restricted_response <span class="hl kwa">of</span> my_game <span class="hl kwa">to</span> <span class="hl str">&quot;Not now!&quot;</span><span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example of how the library handles actions restrictions, taken from the actual definition of the <code>talk_to</code> verb:</p>
+</div>
+<div class="listingblock lib">
+<div class="title">Excerpt from the <code>talk_to</code> verb definition in <a href="../../StdLib/lib_verbs.i" title="View library source file" target="_blank" rel="noopener"><code>lib_verbs.i</code></a>.</div>
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">ADD TO EVERY</span> <span class="hl kwb">ACTOR</span>&#x000A;  <span class="hl kwa">VERB</span> talk_to&#x000A;    <span class="hl kwa">CHECK</span> my_game <span class="hl kwa">CAN</span> talk_to&#x000A;      <span class="hl kwa">ELSE SAY</span> restricted_response <span class="hl kwa">OF</span> my_game<span class="hl kwa">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see from the above code excerpt, the <code>talk_to</code> verb has a same-named boolean attribute counterpart on the <code>my_game</code> instance, which is used by the library to determine whether the action is currently enable or not.
+Likewise, every other library verb has a corresponing attribute, bearing the same identifier as the verb, and a similar <code>CHECK</code> to block the action if its disabled.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The action-restriction attributes are defined inside the <a href="../../StdLib/lib_verbs_restrictions.i" title="View library source file" target="_blank" rel="noopener"><code>lib_verbs_restrictions.i</code></a> module.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now that you&#8217;ve greasped the general mechanics behind restricted actions, it&#8217;s time to learn how to use them in your own adventures.</p>
+</div>
 <div class="sect2">
-<h3 id="sec.restricted-actions"><a class="anchor" href="#sec.restricted-actions"></a>18.8. Restricted Actions</h3>
+<h3 id="sec.restrictions-levels"><a class="anchor" href="#sec.restrictions-levels"></a>19.1. Restrictions Levels</h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="title">v2.2.0 Status</div>
+<div class="paragraph">
+<p>This section is half done, it still needs:</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Practical examples and transcripts:</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Include excerpts from <code>yes-and-no-example.alan</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Further text to document the feature.</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Try and reuse as much of <a href="#sec.restricted-actions-original">the original text</a> as possible.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The library provided five <em>actions-restrictions</em> presets, called &#8216;Actions Restrictions Levels&#8217;, which are designed to cover the most common use cases in any adventure.
+Restrictions levels act on entire groups of similar verbs, thus enabling authors to quickly control which <em>types</em> of actions should be blocked at any given time.</p>
+</div>
+<div class="paragraph">
+<p>To change the current restriction level, you only need to change the value of the <code>restricted_level OF my_game</code> attribute, assigning to it the integer value of the desired restriction level (range 0-5).
+E.g.:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">Set</span> restricted_level <span class="hl kwa">of</span> my_game <span class="hl kwa">to</span> <span class="hl num">4</span><span class="hl kwa">.</span> <span class="hl slc">-- block every verb.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The library constantly monitors the value of <code>restricted_level</code> via the <code>check_restriction</code> EVENT, which will detect if its value has changed since the last turn, and act accordingly.</p>
+</div>
+<div class="paragraph">
+<p>The restriction levels are incremental in nature: each level restricts an additional group of actions compared to the previous one, along a continuum with levels 0 and 4 at its extremes&#8201;&#8212;&#8201;at level 0 all actions are enabled, at level 4 they&#8217;re all blocked.</p>
+</div>
+<div class="paragraph">
+<p>Level 5 is a special level created for YES/NO answers.
+Only the verbs <code>yes</code> and <code>'no'</code> can be used at Level 5.
+Furthermore, the <code>restricted_response</code> message is changed to <span class="play">Please answer YES or NO.</span> for the whole duration of this level, and then restored to its previous value when switching to another level.
+This restriction level is not part of the 0-4 continuum described above; it&#8217;s an independent level of its own kind.</p>
+</div>
+<div class="paragraph">
+<p>Level 0 is the default restriction level of the library.</p>
+</div>
+<div class="paragraph">
+<p>The following table summarizes the actions-restrictions outcome of each level:</p>
+</div>
+<table id="table.restrictions-levels" class="tableblock frame-all grid-all fit-content stretch">
+<caption class="title">Table 2. Actions Restrictions Levels</caption>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-middle"><p class="tableblock">Level&#160;0</p></th>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>All verbs are enabled, without restrictions.
+It&#8217;s the default restriction level.</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-middle"><p class="tableblock">Level&#160;1</p></th>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>All verbs involving speech and communication are disabled.</p>
+</div>
+<div class="paragraph">
+<p>Useful for situations in which the hero can&#8217;t talk, either temporarily (e.g. he&#8217;s gagged, underwater, in a noisy place, etc.) or permanently (e.g. he&#8217;s a toddler or an animal).</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-middle"><p class="tableblock">Level&#160;2</p></th>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>All in-game actions are disabled except for mental and sensory acts which don&#8217;t involve physical interaction with the environment.
+Out-of-game actions (gameplay meta verbs) are enabled as usual.</p>
+</div>
+<div class="paragraph">
+<p>Useful for situations in which the hero is physically constrained (e.g. tied to a chair, paralyzed, etc.) or in a situation in which he mustn&#8217;t draw any attention.</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-middle"><p class="tableblock">Level&#160;3</p></th>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Only out-of-game actions are allowed, i.e. gameplay meta verbs like <em>save</em>, <em>restore</em>, <em>score</em>, etc.</p>
+</div>
+<div class="paragraph">
+<p>Useful for cutscenes, where the story is brought forward by turn-based dialogs or narrative during which the hero is prevented from interacting with the story world; or to create a custom restriction level where only a few selected in-game actions are permitted.</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-middle"><p class="tableblock">Level&#160;4</p></th>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>All verbs are disabled, the player can only traverse exits.</p>
+</div>
+<div class="paragraph">
+<p>Mostly used to implement situations in which the player is forced to answer a question (e.g. provide a name for the hero, chose its gender, etc.) via a custom defined verb.
+In order to force the answer, all other actions should be blocked, including meta verbs.</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-middle"><p class="tableblock">Level&#160;5</p></th>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The player can only answer YES or NO.</p>
+</div>
+<div class="paragraph">
+<p>During this level, the <code>restricted_response</code> message changes to:</p>
+</div>
+<div class="exampleblock gametranscript">
+<div class="content">
+Please answer YES or NO.
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="sec.actions-attributes"><a class="anchor" href="#sec.actions-attributes"></a>19.2. Actions Attributes</h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="title">v2.2.0 Status</div>
+<div class="paragraph">
+<p>This section needs to re-written from scratch.</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Try and reuse as much of <a href="#sec.restricted-actions-original">the original text</a> as possible.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Mention the need to use a custom <code>EVENT</code> in order to switch restriction level <em>and</em> tweak the restriction of specific verbs in a same turn.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Create externalized examples and transcripts.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sec.restricted-actions-original"><a class="anchor" href="#sec.restricted-actions-original"></a>19.3. *** ORIGINAL TEXT ***</h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="title">v2.2.0 Status</div>
+<div class="paragraph">
+<p>This section contains the original <em>Manual</em> text.
+We should re-use as much of it as possible, including the code examples, which should be externalized to a real adventure.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="title">EDITORS' NOTE</div>
+<div class="paragraph">
+<p>Beware that some text and examples are incorrect, because they don&#8217;t mention the problems relating to switching restriction level and enabling/disabling specific verbs in a single turn (See <a href="https://github.com/AnssiR66/AlanStdLib/issues/113" target="_blank" rel="noopener">Issue #113</a>).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Usually, when you need to restrict a verb from doing what it usually does (= when you want to change the default outcome as defined by the library), you can use a DOES ONLY statement:</p>
 </div>
@@ -6032,6 +6358,8 @@ Thus the following coding would actually be unnecessary, but it is included here
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">SET</span> restricted_level <span class="hl kwa">OF</span> my_game <span class="hl kwa">TO</span> <span class="hl num">2</span><span class="hl kwa">.</span></code></pre>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_restriction_levels"><a class="anchor" href="#_restriction_levels"></a>19.3.1. ** Restriction Levels **</h4>
 <div class="paragraph">
 <p>The values of this attributes work in the following way:</p>
 </div>
@@ -6248,6 +6576,7 @@ Here is an example with the verb 'drive' which is not included in the library by
 </div>
 </div>
 </div>
+</div>
 <h1 id="part.library-messages" class="sect0"><a class="anchor" href="#part.library-messages"></a>Library Messages</h1>
 <div class="openblock partintro">
 <div class="content">
@@ -6257,7 +6586,7 @@ Here is an example with the verb 'drive' which is not included in the library by
 </div>
 </div>
 <div class="sect1">
-<h2 id="ch.runtime-messages"><a class="anchor" href="#ch.runtime-messages"></a>19. Run-Time Messages</h2>
+<h2 id="ch.runtime-messages"><a class="anchor" href="#ch.runtime-messages"></a>20. Run-Time Messages</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The library redefines many of the standard messages built into ALAN, changing their original wording to accomodate the library needs, like ensuring correct handling of plural and preventing clashes between first and second person.</p>
@@ -6277,10 +6606,10 @@ The <code>lib_messages_runtime.i</code> module contains the definitions of <em>a
 </div>
 </div>
 <div class="sect1">
-<h2 id="ch.library-messages"><a class="anchor" href="#ch.library-messages"></a>20. Library Messages</h2>
+<h2 id="ch.library-messages"><a class="anchor" href="#ch.library-messages"></a>21. Library Messages</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_the_my_game_instance_and_its_attributes"><a class="anchor" href="#_the_my_game_instance_and_its_attributes"></a>20.1. The my_game instance and its attributes</h3>
+<h3 id="_the_my_game_instance_and_its_attributes"><a class="anchor" href="#_the_my_game_instance_and_its_attributes"></a>21.1. The my_game instance and its attributes</h3>
 <div class="paragraph">
 <p><code>My_game</code> is a so called meta-instance that obligatorily has to be included by the author in the game source.
 Without it, the game won&#8217;t compile successfully.
@@ -6350,7 +6679,7 @@ This is done through attributes of the <code>my_game</code> instance.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_1_attributes_for_the_start_section"><a class="anchor" href="#_1_attributes_for_the_start_section"></a>20.2. 1. Attributes for the start section</h3>
+<h3 id="_1_attributes_for_the_start_section"><a class="anchor" href="#_1_attributes_for_the_start_section"></a>21.2. 1. Attributes for the start section</h3>
 <div class="paragraph">
 <p>The following five attributes have been declared for the game start:</p>
 </div>
@@ -6427,7 +6756,7 @@ Version 1</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_2_attributes_for_the_hero"><a class="anchor" href="#_2_attributes_for_the_hero"></a>20.3. 2. Attributes for the hero</h3>
+<h3 id="_2_attributes_for_the_hero"><a class="anchor" href="#_2_attributes_for_the_hero"></a>21.3. 2. Attributes for the hero</h3>
 <div class="listingblock lib">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> hero_worn_header <span class="hl str">&quot;You are wearing&quot;</span>&#x000A;<span class="hl kwa">HAS</span> hero_worn_else   <span class="hl str">&quot;You are not wearing anything.&quot;</span></code></pre>
@@ -6446,7 +6775,7 @@ If the author wishes to have the CLOTHING objects worn by the hero described aft
 </div>
 </div>
 <div class="sect2">
-<h3 id="_3_attributes_for_locations"><a class="anchor" href="#_3_attributes_for_locations"></a>20.4. 3. Attributes for locations</h3>
+<h3 id="_3_attributes_for_locations"><a class="anchor" href="#_3_attributes_for_locations"></a>21.4. 3. Attributes for locations</h3>
 <div class="listingblock lib">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> dark_loc_desc <span class="hl str">&quot;It is pitch black. You can&#39;t see anything at all.&quot;</span></code></pre>
@@ -6468,7 +6797,7 @@ If/when a dark location is lighted, this description won&#8217;t be shown any lo
 </div>
 </div>
 <div class="sect2">
-<h3 id="_4_attributes_for_restricted_actions"><a class="anchor" href="#_4_attributes_for_restricted_actions"></a>20.5. 4. Attributes for restricted actions</h3>
+<h3 id="_4_attributes_for_restricted_actions"><a class="anchor" href="#_4_attributes_for_restricted_actions"></a>21.5. 4. Attributes for restricted actions</h3>
 <div class="listingblock lib">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> restricted_response <span class="hl str">&quot;You can&#39;t do that.&quot;</span></code></pre>
@@ -6484,11 +6813,11 @@ If/when a dark location is lighted, this description won&#8217;t be shown any lo
 </div>
 <div class="paragraph">
 <p>By default, all verbs work normally, without restrictions.
-See also <a href="#sec.restricted-actions">Sec. 18.8, &#8220;Restricted Actions&#8221;</a>.</p>
+See also <a href="#ch.restricted-actions">Ch. 19, <em>Restricted Actions</em></a>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_5_illegal_parameter_messages"><a class="anchor" href="#_5_illegal_parameter_messages"></a>20.6. 5. Illegal parameter messages</h3>
+<h3 id="_5_illegal_parameter_messages"><a class="anchor" href="#_5_illegal_parameter_messages"></a>21.6. 5. Illegal parameter messages</h3>
 <div class="paragraph">
 <p>In this section, all illegal parameter messages used by the library are listed.
 If you wish to change any of these, you can declare them again in the <code>my_game</code> instance.</p>
@@ -6724,7 +7053,7 @@ The verbs <code>kill_with</code>, <code>shoot_with</code> and <code>play_with</c
 </div>
 </div>
 <div class="sect3">
-<h4 id="_other_illegal_parameter_messages"><a class="anchor" href="#_other_illegal_parameter_messages"></a>20.6.1. Other illegal parameter messages</h4>
+<h4 id="_other_illegal_parameter_messages"><a class="anchor" href="#_other_illegal_parameter_messages"></a>21.6.1. Other illegal parameter messages</h4>
 <div class="paragraph">
 <p>The above are the default messages and their variations.
 There are, however, other illegal parameter messages needed at places.
@@ -6793,7 +7122,7 @@ The verbs in which this message is found are <code>empty_in</code>, <code>pour_i
 </div>
 </div>
 <div class="sect3">
-<h4 id="_changing_the_illegal_parameter_message_of_a_single_verb"><a class="anchor" href="#_changing_the_illegal_parameter_message_of_a_single_verb"></a>20.6.2. Changing the illegal parameter message of a single verb:</h4>
+<h4 id="_changing_the_illegal_parameter_message_of_a_single_verb"><a class="anchor" href="#_changing_the_illegal_parameter_message_of_a_single_verb"></a>21.6.2. Changing the illegal parameter message of a single verb:</h4>
 <div class="paragraph">
 <p>The way the illegal parameter messages have been defined in the library, it is not usually possible to affect just one verb at a time.
 Most often, changing a default message will alter the outcome of at least a handful of verbs, because one default message is shared by many verbs.
@@ -6803,7 +7132,7 @@ Anyway, the quickest way to accomplish this task would be to open <code>lib_verb
 </div>
 </div>
 <div class="sect2">
-<h3 id="_6_default_verb_check_messages"><a class="anchor" href="#_6_default_verb_check_messages"></a>20.7. 6. Default verb check messages</h3>
+<h3 id="_6_default_verb_check_messages"><a class="anchor" href="#_6_default_verb_check_messages"></a>21.7. 6. Default verb check messages</h3>
 <div class="paragraph">
 <p>All these check messages can be individually changed by listing them under the my_game instance in your game source file.
 They are also listed in the file <code>mygame_import.i</code> in the library distribution package, for easy modification.
@@ -6927,7 +7256,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 </div>
 <div class="sect2">
-<h3 id="_checks_for_open_closed_and_locked_objects"><a class="anchor" href="#_checks_for_open_closed_and_locked_objects"></a>20.8. Checks for open, closed and locked objects</h3>
+<h3 id="_checks_for_open_closed_and_locked_objects"><a class="anchor" href="#_checks_for_open_closed_and_locked_objects"></a>21.8. Checks for open, closed and locked objects</h3>
 <div class="paragraph">
 <p><code>open</code>, <code>open_with</code>:</p>
 </div>
@@ -6978,7 +7307,7 @@ Checks, on the other hand, are used to ensure that an instance has the proper at
 </div>
 </div>
 <div class="sect2">
-<h3 id="_checks_for_not_reachable_and_distant_objects"><a class="anchor" href="#_checks_for_not_reachable_and_distant_objects"></a>20.9. Checks for "not reachable" and "distant" objects</h3>
+<h3 id="_checks_for_not_reachable_and_distant_objects"><a class="anchor" href="#_checks_for_not_reachable_and_distant_objects"></a>21.9. Checks for "not reachable" and "distant" objects</h3>
 <div class="paragraph">
 <p>A large number of verbs have the following checks:</p>
 </div>
@@ -7019,7 +7348,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_checks_for_the_hero_sitting_or_lying_down"><a class="anchor" href="#_checks_for_the_hero_sitting_or_lying_down"></a>20.10. Checks for the hero sitting or lying_down</h3>
+<h3 id="_checks_for_the_hero_sitting_or_lying_down"><a class="anchor" href="#_checks_for_the_hero_sitting_or_lying_down"></a>21.10. Checks for the hero sitting or lying_down</h3>
 <div class="paragraph">
 <p>Numerous verbs in the library have one of the following checks for sitting:</p>
 </div>
@@ -7046,7 +7375,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_other_attribute_checks"><a class="anchor" href="#_other_attribute_checks"></a>20.11. Other attribute checks</h3>
+<h3 id="_other_attribute_checks"><a class="anchor" href="#_other_attribute_checks"></a>21.11. Other attribute checks</h3>
 <div class="paragraph">
 <p>Checking that the object of the action has the ability to talk; verbs <code>ask</code>, <code>ask_for</code>, <code>say_to</code>, <code>tell</code>:</p>
 </div>
@@ -7169,7 +7498,7 @@ But if the container is distant, the action will fail.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_b_location_and_containment_checks_for_actors_and_objects"><a class="anchor" href="#_b_location_and_containment_checks_for_actors_and_objects"></a>20.12. b. location and containment checks for actors and objects</h3>
+<h3 id="_b_location_and_containment_checks_for_actors_and_objects"><a class="anchor" href="#_b_location_and_containment_checks_for_actors_and_objects"></a>21.12. b. location and containment checks for actors and objects</h3>
 <div class="paragraph">
 <p>Location and containment checks for actors other than the hero (checks for the hero are listed separately below):</p>
 </div>
@@ -7199,7 +7528,7 @@ The following check will verify this:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_location_and_containment_checks_for_the_hero"><a class="anchor" href="#_location_and_containment_checks_for_the_hero"></a>20.12.1. Location and containment checks for the hero</h4>
+<h4 id="_location_and_containment_checks_for_the_hero"><a class="anchor" href="#_location_and_containment_checks_for_the_hero"></a>21.12.1. Location and containment checks for the hero</h4>
 <div class="paragraph">
 <p>The following checks deal with where the hero is or what (s)he is carrying.</p>
 </div>
@@ -7290,7 +7619,7 @@ The following check will verify this:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_checking_whether_an_object_is_in_a_container_or_not"><a class="anchor" href="#_checking_whether_an_object_is_in_a_container_or_not"></a>20.12.2. Checking whether an object is in a container or not</h4>
+<h4 id="_checking_whether_an_object_is_in_a_container_or_not"><a class="anchor" href="#_checking_whether_an_object_is_in_a_container_or_not"></a>21.12.2. Checking whether an object is in a container or not</h4>
 <div class="paragraph">
 <p>When the following check fires, the hero tried to empty the contents of an object into a container that already was contained by the object (e.g. if there is a bottle in a box, and the player types <span class="play">&gt; <em>empty box in bottle</em></span>).
 This applies to the verbs <code>empty_in</code> and <code>pour_in</code>:</p>
@@ -7342,7 +7671,7 @@ This applies to the verbs <code>empty_in</code> and <code>pour_in</code>:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_checking_whether_an_object_is_worn_by_the_hero_or_not"><a class="anchor" href="#_checking_whether_an_object_is_worn_by_the_hero_or_not"></a>20.12.3. Checking whether an object is worn by the hero or not</h4>
+<h4 id="_checking_whether_an_object_is_worn_by_the_hero_or_not"><a class="anchor" href="#_checking_whether_an_object_is_worn_by_the_hero_or_not"></a>21.12.3. Checking whether an object is worn by the hero or not</h4>
 <div class="paragraph">
 <p>You can&#8217;t take off something you&#8217;re not wearing (remove, take_off):</p>
 </div>
@@ -7379,7 +7708,7 @@ It will have to be removed first (<code>drop</code>):</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_c_checking_location_states"><a class="anchor" href="#_c_checking_location_states"></a>20.13. c. checking location states</h3>
+<h3 id="_c_checking_location_states"><a class="anchor" href="#_c_checking_location_states"></a>21.13. c. checking location states</h3>
 <div class="paragraph">
 <p>The following check is found in numerous verbs.
 It prohibits actions requiring seeing when the LOCATION is not lit:</p>
@@ -7391,7 +7720,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_d_logical_checks"><a class="anchor" href="#_d_logical_checks"></a>20.14. d. logical checks</h3>
+<h3 id="_d_logical_checks"><a class="anchor" href="#_d_logical_checks"></a>21.14. d. logical checks</h3>
 <div class="paragraph">
 <p>The checks in this group a) prohibit the action from being directed at the hero, and 2) prohibit the action in ditransitive verbs where both the first and the second parameter refer to the same instance.</p>
 </div>
@@ -7498,7 +7827,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_2_prohibiting_the_action_in_ditransitive_verbs_where_both_the_first_and_the_second_parameter_refer_to_the_same_instance"><a class="anchor" href="#_2_prohibiting_the_action_in_ditransitive_verbs_where_both_the_first_and_the_second_parameter_refer_to_the_same_instance"></a>20.15. 2. prohibiting the action in ditransitive verbs where both the first and the second parameter refer to the same instance:</h3>
+<h3 id="_2_prohibiting_the_action_in_ditransitive_verbs_where_both_the_first_and_the_second_parameter_refer_to_the_same_instance"><a class="anchor" href="#_2_prohibiting_the_action_in_ditransitive_verbs_where_both_the_first_and_the_second_parameter_refer_to_the_same_instance"></a>21.15. 2. prohibiting the action in ditransitive verbs where both the first and the second parameter refer to the same instance:</h3>
 <div class="paragraph">
 <p>The following checks prohibit actions like <span class="play">&gt; <em>cut rope with rope</em></span>, <span class="play">&gt; <em>throw stone at stone</em></span> and <span class="play">&gt; <em>put bottle in bottle</em></span>:</p>
 </div>
@@ -7563,7 +7892,7 @@ It prohibits actions requiring seeing when the LOCATION is not lit:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_e_additional_checks_for_classes"><a class="anchor" href="#_e_additional_checks_for_classes"></a>20.16. e. additional checks for classes</h3>
+<h3 id="_e_additional_checks_for_classes"><a class="anchor" href="#_e_additional_checks_for_classes"></a>21.16. e. additional checks for classes</h3>
 <div class="paragraph">
 <p>Lastly, there are some checks that apply only to a specific class.
 Most of these are found in <code>lib_classes.i</code>.</p>
@@ -7650,7 +7979,7 @@ Most of these are found in <code>lib_classes.i</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_7_implicit_taking_message"><a class="anchor" href="#_7_implicit_taking_message"></a>20.17. 7. Implicit taking message</h3>
+<h3 id="_7_implicit_taking_message"><a class="anchor" href="#_7_implicit_taking_message"></a>21.17. 7. Implicit taking message</h3>
 <div class="listingblock lib">
 <div class="content">
 <pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">HAS</span> implicit_taking_message <span class="hl str">&quot;(taking</span> <span class="hl ipl">$+1</span> <span class="hl str">first)</span><span class="hl esc">$n</span><span class="hl str">&quot;</span><span class="hl kwa">.</span></code></pre>

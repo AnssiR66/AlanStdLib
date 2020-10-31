@@ -740,7 +740,12 @@ THE apple ISA OBJECT
 END THE.
 --------------------------------------------------------------------------------
 
-WARNING: @FIXME: this sentence in incomplete -- "even if ... What?"
+
+.EDITORS' NOTE
+[WARNING]
+=====================================
+@FIXME: this sentence in incomplete -- "even if ... What?"
+=====================================
 
 Note the IN above, even if the `apple` will be described as being _on_ the tray [???].
 Similarly, to implement a book on a table:

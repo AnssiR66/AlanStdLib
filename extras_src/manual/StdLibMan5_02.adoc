@@ -245,7 +245,7 @@ HAS restricted_level 0.
 
 // @FIXME: XRef to PDF page...
 By default, all verbs work normally, without restrictions.
-See also <<sec.restricted-actions>>.
+See also <<ch.restricted-actions>>.
 
 // PAGE 81 //
 

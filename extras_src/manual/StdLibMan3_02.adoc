@@ -583,8 +583,12 @@ This trick will work with both unlit locations and `DARK_LOCATION` instances.
 [[sec.visited-and-described]]
 == Visited and Described
 
+.v2.2.0 Status
+[WARNING]
+=====================================
+This section needs some introductory text!
+=====================================
 
-WARNING: Add introductory text!
 
 // @ADDED SUB-HEADING:
 === visited

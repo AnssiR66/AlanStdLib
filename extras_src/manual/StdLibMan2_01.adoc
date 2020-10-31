@@ -12,6 +12,7 @@
 = Introduction
 
 
+.v2.2.0 Status
 [WARNING]
 ==========================
 *TBD!* We need to write a general introduction on attributes defined by the library, and how these empower authors to quickly create complex objects without having to use classes.
