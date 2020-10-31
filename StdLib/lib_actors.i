@@ -81,7 +81,32 @@ ADD TO EVERY ACTOR
     -- `ask_for` verb according to needs.
 
   IS NOT takeable.
+  IS sex 0. -- Optional value to enforce gender.
+
+    -- Currently the `sex` attribute is only used by the library for the `wear`
+    -- verb on the `clothing` class: if a clothing item has a non-zero `sex`
+    -- value, the hero won't be able to wear it unless he/she has the same `sex`
+    -- value.
 -- end::default-attributes-actor[]
+
+    -- The library doesn't provide any further gender related features for NPCs,
+    -- so it will be up to the author to implement the extra code to handle the
+    -- `sex` attribute on NPCs (e.g. different verb outcomes based on gender,
+    -- etc.).
+
+    -- Authors are free to use any arbitrary values to enforce different genders
+    -- here. The term `sex` is misleading, for this attribute could be used not
+    -- only to differentiate between male and female actors and clothing, but
+    -- also between children and adults; humans and aliens; the various races
+    -- that populate a fantasy world; etc. Since no word was to found that could
+    -- represent all its possible uses, the term `sex` was kept for its brevity
+    -- and intuitiveness.
+
+    -- This was mostly an experimental attribute that was never developed into a
+    -- full-fledged gender support feature across the library. Nevertheless,
+    -- authors are encouraged to exploit this attribute in those adventures that
+    -- require different verbs outcomes and clothes-matching for different
+    -- genders, ages, or creatures races.
 
 
   DEFINITE ARTICLE

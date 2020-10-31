@@ -46,6 +46,7 @@ END THE.
 --==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
 --
 --                    C L O T H I N G   A T T R I B U T E S
 --
@@ -71,49 +72,6 @@ ADD TO EVERY definition_block
 END ADD TO definition_block.
 
 
--- ------------------------
--- Actors' Gender Attribute
--- ------------------------
-
--- @TODO: This should be moved to 'lib_actors.i', where authors might find it
---        more useful, since it's potential applications are not limited to
---        clothing. Here, we should just keep some comments about how the `sex`
---        attribute on clothing is tied to the same attribute on actors (well,
---        just the Hero really).
-
-
--- The `sex` attribute can be used to bound clothing items to specific genders,
--- e.g. male and female clothes. Since its values are arbitrary choices, it can
--- be used to associate clothes to any group of actors, e.g. children vs adults,
--- humans vs aliens, etc.
-
-ADD TO EVERY ACTOR
-  IS sex 0. -- Optional value to enforce gender-specifc clothes.
-END ADD TO.
-
--- The `wear` verb will always check if a clothing item has a `sex` attribute
--- with non-zero value, in which case it will prevent the action if the hero
--- doesn't match the same `sex` value. By default, the `sex` attribute of all
--- actors and clothing items are set to value zero, which disables gender checks
--- in the `wear` verb. In order to enable this feature, authors must assign a
--- non-zero `sex` value to the hero and to all clothing items that the hero can
--- wear.
-
--- The library doesn't provide any further gender related features for NPCs, so
--- it will be up to the author to implement the extra code to handle the `sex`
--- attribute on NPCs (e.g. different verb outcomes based on gender, etc.).
-
--- The identifier `sex` was originally picked to indicate the possiblity of
--- distinguishing male and female clothing, since this attribute is only used by
--- the library in conjunction with wearing clothes, so it was kept mainly for
--- hystorical reasons and to preserve backward compatibility.
--- In hindsight, `gender` would have probably been a better choice.
-
--- Bear in mind that this was mostly an experimental feature that was never
--- developed into a full-fledged gender support feature across the library.
-
-
-
 -------------------------------------------------------------------
 -- Now, we define some common attributes for clothing as well as
 -- how the verbs 'remove', 'undress' and 'wear' (and their synonyms)
@@ -133,8 +91,6 @@ END ADD TO.
 EVERY clothing ISA OBJECT
 
   IS wearable.
-
-  IS sex 0. -- If not zero, restricts wearing to actors with same 'sex' value.
 
   -- Body coverage layered-values, by area:
   IS headcover  0.  -- Head.
@@ -156,7 +112,37 @@ EVERY clothing ISA OBJECT
     -- Items which are 'twopieces' (eg. a bikini) can be worn/removed while
     -- wearing a skirt for, although handled as a single clothing item, they
     -- cover legs and torso via two separate pieces.
+
+  IS sex 0. -- If not zero, restricts wearing to actors with same 'sex' value.
 -- end::default-attributes-clothing[]
+
+-- --------------------------------
+-- Actors & Clothes `sex` Attribute
+-- --------------------------------
+
+-- The `sex` attribute can be used to bind clothing items to specific genders,
+-- e.g. male and female clothes. Since its values are arbitrary choices, it can
+-- be used to associate clothes to any group of actors, e.g. children vs adults,
+-- humans vs aliens, or the different races of creatures that populate a fantasy
+-- world (elves, orcs, trolls, giants, etc.).
+
+-- The `wear` verb will always check if a clothing item has a `sex` attribute
+-- with non-zero value, in which case it will prevent the action if the hero
+-- doesn't match the same `sex` value. By default, the `sex` attribute of all
+-- actors and clothing items are set to value zero, which disables gender checks
+-- in the `wear` verb. In order to enable this feature, authors must assign a
+-- non-zero `sex` value to the hero and to all clothing items that the hero can
+-- wear.
+
+-- The identifier `sex` was originally picked to indicate the possiblity of
+-- distinguishing male and female clothing, since this attribute is only used by
+-- the library in conjunction with wearing clothes, so it was kept mainly for
+-- hystorical reasons and to preserve backward compatibility.
+-- In hindsight, `gender` would have probably been a better choice.
+
+-- Bear in mind that this was mostly an experimental feature that was never
+-- developed into a full-fledged gender support feature across the library.
+
 
   INITIALIZE
 
@@ -175,6 +161,18 @@ EVERY clothing ISA OBJECT
   -- If the clothing item contains something, e.g. a jacket contains a wallet,
   -- the wallet will be mentioned by default when the jacket is examined:
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--                         C L O T H I N G   V E R B S
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
+
   VERB examine
     DOES AFTER
       IF THIS IS NOT OPAQUE
@@ -185,21 +183,23 @@ EVERY clothing ISA OBJECT
       END IF.
   END VERB examine.
 
-  -- ===========================================================================
-  -- Block verbs that could dislocate worn clothing items
-  -- ===========================================================================
+--==============================================================================
+--------------------------------------------------------------------------------
+-- Block verbs that could dislocate worn clothing items
+--------------------------------------------------------------------------------
+--==============================================================================
 
-  -- The following verbs are extended on the 'clothing' class with additional
-  -- CHECKs to prevent displacing worn clothing items from their wearer:
-  --
-  --   * give
-  --   * put_in
-  --   * put_on
-  --   * throw
-  --   * throw_at
-  --   * throw_in
-  --   * throw_to
-  --   * tie_to
+-- The following verbs are extended on the 'clothing' class with additional
+-- CHECKs to prevent displacing worn clothing items from their wearer:
+
+--   * give
+--   * put_in
+--   * put_on
+--   * throw
+--   * throw_at
+--   * throw_in
+--   * throw_to
+--   * tie_to
 
   -- +----------------------------------------------------------------------+
   -- | If you want to prevent NPCs from giving their clothes when asked to, |
@@ -388,9 +388,19 @@ EVERY clothing ISA OBJECT
           END IF.
   END VERB tie_to.
 
-  ------------------------------------------------------------------------------
+
+--==============================================================================
+--------------------------------------------------------------------------------
+-- WEAR & REMOVE
+--------------------------------------------------------------------------------
+--==============================================================================
+
+-- The `wear` and `remove` verbs contain all the code that enforces the layered
+-- clothing system, which is the central feature of the `clothing` class.
+
+--==============================================================================
   VERB wear
-  ------------------------------------------------------------------------------
+--==============================================================================
     CHECK sex OF THIS = sex OF hero OR sex OF THIS = 0
       ELSE SAY check_clothing_sex OF my_game.
     AND THIS IS NOT worn
@@ -526,9 +536,9 @@ EVERY clothing ISA OBJECT
       END IF.
   END VERB wear.
 
-  ------------------------------------------------------------------------------
+--==============================================================================
   VERB remove
-  ------------------------------------------------------------------------------
+--==============================================================================
     CHECK THIS DIRECTLY IN hero AND THIS IS worn
       ELSE SAY my_game:check_obj_in_worn.
     AND CURRENT LOCATION IS lit
