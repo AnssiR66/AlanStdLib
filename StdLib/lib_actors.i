@@ -191,6 +191,16 @@ ADD TO EVERY ACTOR
         END IF. "you."
     END IF.
     USE SCRIPT following_hero FOR THIS.
+    -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    -- WARNING: If you assign a custom script to an NPC, it will automatically
+    --          stop executing the `following_hero` script. This means that:
+    --
+    --          1. The `following` attribute of that actor won't be honored by
+    --             the library while the actor is using your script(s).
+    --          2. Once the custom script terminates, you'll need to manually
+    --             make the actor `USE following_hero` again, if you wish that
+    --             the library will track its `following` status correctly.
+    -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 
