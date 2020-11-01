@@ -11,7 +11,7 @@
 
 -- This library module contains all of the ALAN runtime messages, either adapted
 -- to the library needs, or in their original form. This simplifies the task of
--- customizing the messages to meet the needs of any adventure: to do so, just
+-- customizing the messages to meet the demands of any adventure: to do so, just
 -- edit this file according to needs.
 
 -- To simplify lookup, message definitions have been grouped by category.
@@ -41,7 +41,7 @@ MESSAGE
 
 -- =============================================================================
 
--- LISTING CONTENTS OF CONTAINERS
+-- LISTING CONTAINERS' CONTENTS
 
 -- =============================================================================
 
@@ -60,7 +60,7 @@ MESSAGE
       ELSE "$+1 contain"
     END IF.
 
-  -- The IF blocks in the following group of messages add "(being worn)" after
+  -- The IF blocks in the following group of messages adds "(being worn)" after
   -- every item worn by an actor, when using `LIST actor`. The library uses the
   -- `worn` attribute only for clothing instances, but authors are free to
   -- create custom wearable items (e.g. headphones, VR headset devices, etc.).
