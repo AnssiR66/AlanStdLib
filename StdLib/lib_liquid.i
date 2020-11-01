@@ -18,7 +18,6 @@
 --  * You can fill something with it, and you can pour it somewhere.
 --  * A liquid is by default NOT drinkable.
 
-
 --==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -57,13 +56,18 @@ END THE.
 -- its `allowed` attribute (set type), or have been in that container when the
 -- game started (when the game begins, the library automatically adds every
 -- liquid which is inside a container to its `allowed` set, to ensure that it
--- can be put back in after removal).
+-- can be put back in after removal). The `allowed` attribute approach, enforced
+-- by the library on all its containers, replaces usage of the TAKING keyword,
+-- which is the native way to handle allowed contents in ALAN; this was done in
+-- order to provide a more dynamic way to control which objects can be inserted
+-- into containers, and to let the library handle behind the scenes containers
+-- initialization at game start.
 
--- Various verbs are designed to carry out the action directed at a liquid to
--- its vessel instead (e.g. "take wine" will actually take the wine bottle, or
--- the glass of wine, whichever is the current vessel of the wine). This was
--- done in order to mimic how language is used in real life, in order to provide
--- a more natural game feel and an intuitive commands interface for the player.
+-- Various verbs are designed to carry out an action directed at a liquid on its
+-- vessel instead (e.g. "take wine" will actually take the wine bottle, or the
+-- glass of wine, whichever is the current vessel of the wine). This was done in
+-- order to mimic how language is used in real life, in order to provide a more
+-- natural game feel and an intuitive commands interface for the player.
 
 --==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -90,14 +94,14 @@ EVERY liquid ISA OBJECT
     -- The `vessel` attribute ensures that if a liquid is inside a container,
     -- the verb `take` will automatically take the container instead (if the
     -- container is `takeable`).
-    -- Trying to take a liquid that is in a fixed-in-place container, or a
-    -- liquid outside any container, will yield:
+    -- Trying to take a liquid that is in a fixed-in-place container, or outside
+    -- any container, will yield:
     --
     --    You can't carry [the liquid] around in your bare hands.
     --
     -- The default value `null_vessel` informs the library that the liquid is
     -- not inside any container (e.g. a pool, a lake, the sea, etc.).
-    -- `null_vessel` is a dummy-object default that can be ignored.
+    -- The `null_vessel` is a dummy-object default that can be ignored.
 -- end::default-attributes-liquid[]
 
   CONTAINER
@@ -150,6 +154,22 @@ EVERY liquid ISA OBJECT
 
   SCHEDULE check_vessel AT THIS AFTER 0. -- This event is defined further below.
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--                          L I Q U I D S   V E R B S
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
+
+-- Because of the special nature of liquids, and their relation to vessels, we
+-- need to override some verbs on the `liquid` class in order to customize their
+-- behavior and outcome: ask_for, drop, 'empty', examine, give, look_in, pour,
+-- pour_in, pour_on, put_in, put_on, take, take_from.
 
   VERB examine
     DOES ONLY
@@ -177,6 +197,7 @@ EVERY liquid ISA OBJECT
   END VERB examine.
 
 
+
   VERB look_in
     DOES ONLY
       IF vessel OF THIS <> null_vessel
@@ -197,6 +218,7 @@ EVERY liquid ISA OBJECT
   END VERB look_in.
 
 
+
   VERB take
     CHECK vessel OF THIS NOT IN hero
       ELSE SAY check_obj_not_in_hero2 OF my_game.
@@ -207,6 +229,7 @@ EVERY liquid ISA OBJECT
           "($$" SAY THE vessel OF THIS. "of" SAY THIS. "$$)$nTaken."
       END IF.
   END VERB take.
+
 
 
   VERB take_from
@@ -224,12 +247,13 @@ EVERY liquid ISA OBJECT
   END VERB take_from.
 
 
+
   VERB drop
     DOES ONLY
       LOCATE vessel OF THIS AT hero.
       "($$" SAY THE vessel OF THIS. "of" SAY THIS. "$$)$nDropped."
-
   END VERB drop.
+
 
 
   VERB ask_for
@@ -249,6 +273,7 @@ EVERY liquid ISA OBJECT
         THEN MAKE act NOT compliant.
       END IF.
   END VERB ask_for.
+
 
 
   VERB give
@@ -279,8 +304,8 @@ EVERY liquid ISA OBJECT
       -- NOTE: There's no ELSE statement in this last IF clause, because the
       --       previous `IF THIS NOT IN hero` clause already took care of the
       --       possible alternatives.
-
   END VERB give.
+
 
 
   VERB pour
@@ -315,8 +340,8 @@ EVERY liquid ISA OBJECT
             ELSE "ground."
           END IF.
       END IF.
-
   END VERB pour.
+
 
 
   VERB pour_in
@@ -378,6 +403,7 @@ EVERY liquid ISA OBJECT
   END VERB pour_in.
 
 
+
   VERB pour_on
     WHEN obj
       DOES ONLY
@@ -412,6 +438,7 @@ EVERY liquid ISA OBJECT
           END IF.
         END IF.
   END VERB pour_on.
+
 
 
   VERB put_in
@@ -465,6 +492,7 @@ EVERY liquid ISA OBJECT
   END VERB put_in.
 
 
+
   VERB put_on
     WHEN obj DOES ONLY
       -- >>> implicit take >>>
@@ -486,7 +514,8 @@ EVERY liquid ISA OBJECT
       -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       IF THIS IN hero THEN
         -- i.e. if the liquid wasn't vessel-less, or its vessel not takeable.
-        "You put" SAY THE vessel OF THIS. "of" SAY THIS. "onto" SAY THE surface. "."
+        "You put" SAY THE vessel OF THIS. "of" SAY THIS.
+        "onto" SAY THE surface. "."
         LOCATE vessel OF THIS IN surface.
       END IF.
 
@@ -494,9 +523,13 @@ EVERY liquid ISA OBJECT
       "It is not possible to $v" SAY obj. "onto" SAY THE THIS. "."
   END VERB put_on.
 
+--==============================================================================
+--------------------------------------------------------------------------------
+-- Disabled Verbs
+--------------------------------------------------------------------------------
+--==============================================================================
 
-
-  -- The verbs `'empty'`, `empty_in` and `empty_on` are disabled for liquids,
+  -- The verbs `'empty'`, `empty_in` and `empty_on` are disabled on liquids,
   -- because grammatically incorrect:
 
   VERB 'empty'
@@ -517,9 +550,15 @@ EVERY liquid ISA OBJECT
 END EVERY liquid.
 
 --==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --------------------------------------------------------------------------------
--- Liquid's Events
+--
+--                         L I Q U I D S   E V E N T S
+--
 --------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
 -- This recurrent event uprated at every turn the state of liquids and vessels,
