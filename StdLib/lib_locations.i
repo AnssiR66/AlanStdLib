@@ -41,6 +41,29 @@
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
+-- The `nowhere` location servers a dual purpose:
+
+--   1) Provide authors with a place where they can locate things that need to
+--      be removed from the game stage.
+--   2) Define all the standard directions for traversing EXITs.
+
+-- The ALAN language doesn't provide any predefined directions; it's the job of
+-- the compiler to build a list of all the available directions, by analyzing
+-- the EXIT declarations in the adventure's source code. By declaring all the
+-- default directions on the `nowhere` location, the library ensures that these
+-- will be available in every adventure, no matter how small --- i.e. even if
+-- the adventure doesn't contain any location connected by a given direction
+-- (e.g. north), that direction will still be understood by the parser, since
+-- it's defined at least on the `nowhere` location.
+
+--------------------------------------------------------------------------------
+
+-- Since the `nowhere` location will never be visited by the hero, it's safe to
+-- define all the default directions on a single EXIT, leading to the `nowhere`
+-- location itself. This EXIT serves the sole purpose of informing the compiler
+-- on all the available directions, and it's not intended to be really traversed
+-- by the hero.
+
 THE nowhere ISA LOCATION
   EXIT
     north,
@@ -72,8 +95,9 @@ SYNONYMS
     u  = up.
     d  = down.
 
-
--- Note:
+--------------------------------------------------------------------------------
+-- Usage Notes and Tips
+--------------------------------------------------------------------------------
 
 -- 1) The directions defined above (and their synonyms) are not predefined nor
 --    hardwired in the interpreter, so you can replace them altogether or add
@@ -85,7 +109,7 @@ SYNONYMS
 --
 --    for example:
 --
---    -----------------------------------------
+--    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 --    The pamphlet IsA object
 --       Verb tear
 --         Does only
@@ -93,8 +117,7 @@ SYNONYMS
 --           Locate pamphlet at nowhere.
 --       End verb.
 --    End the.
---    -----------------------------------------
-
+--    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 --==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -112,34 +135,39 @@ SYNONYMS
 
 -- ROOM and SITE are optional location subclasses to quickly implement indoor
 -- and outdoor locations:
---
+
 --  * All ROOMS have a floor, walls and a ceiling.
 --  * All SITES have a ground and a sky.
---
--- Thus, you will be able to define for example
---
+
+-- This enables you to define for example:
+
 --    The kitchen IsA ROOM
---
+
 -- and it will automatically have a floor, walls and a ceiling,
---
+
 -- or:
---
+
 --    The meadow IsA SITE
---
--- and the ground and the sky are automatically found in that location.
---
---
+
+-- and the ground and the sky are automatically present in that location.
+
 -- Of course, you're still able to define locations in the usual way:
---
---    the kitchen isa LOCATION
---
+
+--    The kitchen IsA LOCATION
+
 -- etc., but the floor, walls and ceiling won't be automatically included there.
--- The walls, floor, ceiling, ground and sky are not takeable or movable.
--- This library module also defines the sky to be distant and the ceiling to be
--- out of reach, so that they can't be touched, for example.
 
+-- The library also sets some attributes on the various ROOM- and SITE-objects:
 
--- (We use ALAN's nested locations feature in the following definitions:)
+--   * The walls, floor, ceiling, ground and sky object are `NOT takeable` and
+--     `NOT movable`.
+--   * The sky is `distant` and the ceiling is `NOT reachable`, to prevent the
+--     hero from touching them or manipulating them in other ways.
+
+--------------------------------------------------------------------------------
+
+-- We'll exploit nested locations in various classes definitions, in order to
+-- ensure that their instances will be automatically located at indoor/outdoor.
 
 THE outdoor ISA LOCATION
 END THE outdoor.
@@ -148,22 +176,6 @@ END THE outdoor.
 THE indoor ISA LOCATION
 END THE indoor.
 
-
-ADD TO EVERY LOCATION
-  -- ==========================================
-  -- Used internally for 'room' instances only:
-  -- ==========================================
-  HAS floor_desc "".    --| These can set on any room for custom descriptions of
-  HAS walls_desc "".    --| its walls, floor or ceiling, instead of the default
-  HAS ceiling_desc "".  --| "You notice nothing unusual about the [object]."
-  -- ==========================================
-  -- Used internally for 'site' instances only:
-  -- ==========================================
-  HAS ground_desc "".   --| As above, but for descriptions of ground and sky in
-  HAS sky_desc "".      --| sites instances.
-END ADD TO location.
-
-
 EVERY room ISA LOCATION AT indoor
 END EVERY.
 
@@ -171,33 +183,114 @@ END EVERY.
 EVERY site ISA LOCATION AT outdoor
 END EVERY.
 
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--                    R O O M   &   S I T E   O B J E C T S
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
+
+-- The library adopts a smart trick to implement ROOM- and SITE-objects: there's
+-- only a single instance of each ROOM- and SITE-object, located at the `indoor`
+-- or `outdoor`, respectively. Since every ROOM is nested inside `indoor`, and
+-- every SITE is nested inside `outdoor`, their respective objects will always
+-- be in scope. Every ROOM shares the same `ceiling` instance; every SITE shares
+-- the same `sky` instance; and so on with every other ROOM- and SITE-object.
+
+-- In order to allow authors to override the default description of ROOM- and
+-- SITE-objects, the attributes for their custom description are not defined on
+-- the ROOM- and SITE-objects themselves, but on EVERY location instead.
+
+-- The library then redefines the `examine` verb on every ROOM- and SITE-object,
+-- so that when the hero examines it, its associated description attribute on
+-- the CURRENT LOCATION will be printed, unless it's an empty string, in which
+-- case the default description will be printed.
+
+--==============================================================================
+--------------------------------------------------------------------------------
+--                           R O O M   O B J E C T S
+--------------------------------------------------------------------------------
+--==============================================================================
+
+-- Every ROOM and DARK_ROOM instance has a floor, walls and a ceiling.
 
 EVERY room_object ISA OBJECT AT indoor
 END EVERY.
 
+--------------------------------------------------------------------------------
+-- Customizing Room Objects' Description
+--------------------------------------------------------------------------------
 
-EVERY site_object ISA OBJECT AT outdoor
-END EVERY.
+-- Each ROOM-object has a dedicated string attribute (on the CURRENT LOCATION)
+-- which can be used to override the default description displayed by `examine`
+-- ("You notice nothing unusual about the [object].").
 
+-- These attributes are similar to the `ex` attribute, except that they have
+-- unique identifiers to associate them to their specific ROOM-object
+-- counterparts.
+
+ADD TO EVERY location
+  HAS floor_desc "".
+  HAS walls_desc "".
+  HAS ceiling_desc "".
+END ADD TO location.
+
+--------------------------------------------------------------------------------
+-- Verbs Disabled on All ROOM-Objects
+--------------------------------------------------------------------------------
+
+-- The following actions must be prevented on every room object: look_behind,
+-- look_through, look_under, put_against, put_behind, put_near, put_under.
+
+-- The only exception is when `put_against` is used on the ceiling, which is not
+-- blocked by the verb checks.
+
+ADD TO EVERY room_object
+
+  VERB put_against
+    WHEN bulk
+      CHECK THIS = ceiling
+        ELSE "That's not possible."
+  END VERB put_against.
+
+  VERB put_behind, put_near, put_under
+    WHEN bulk
+      DOES ONLY "That's not possible."
+  END VERB put_behind.
+
+  VERB look_behind, look_through, look_under
+    DOES ONLY "That's not possible."
+  END VERB look_behind.
+
+END ADD TO.
+
+--==============================================================================
+-- FLOOR
+--==============================================================================
 
 THE floor ISA room_object
   IS NOT takeable.
   IS NOT movable.
-  CONTAINER
-    -- to allow 'empty/pour/put something on floor'
+  CONTAINER -- To allow 'empty/pour/put something on floor'.
   DESCRIPTION ""
 
 
-  -- Honor a user-defined `floor_desc`, if present:
   VERB examine
+    -- Honor a user-defined `floor_desc`, if present:
     CHECK floor_desc OF CURRENT LOCATION = ""
       ELSE SAY floor_desc OF CURRENT LOCATION.
   END VERB examine.
 
-
-  -- As we have declared the floor a container, we will disable some verbs
-  -- defined to work with containers:
-
+  -- ----------------------------------
+  -- Disable Container Actions on Floor
+  -- ----------------------------------
+  -- Since we've declared the floor a container, we need to disable
+  -- some verbs that are designed to work with containers:
 
   VERB empty_in, pour_in
     WHEN cont
@@ -228,6 +321,9 @@ THE floor ISA room_object
   END VERB throw_in.
 END THE floor.
 
+--==============================================================================
+-- WALLS
+--==============================================================================
 
 THE wall ISA room_object
   NAME wall NAME walls
@@ -235,46 +331,95 @@ THE wall ISA room_object
   IS NOT movable.
   DESCRIPTION ""
 
-  -- Honor a user-defined `walls_desc`, if present:
   VERB examine
+    -- Honor a user-defined `walls_desc`, if present:
     CHECK walls_desc OF CURRENT LOCATION = ""
       ELSE SAY walls_desc OF CURRENT LOCATION.
   END VERB examine.
 END THE.
 
-
+--==============================================================================
+-- CEILING
+--==============================================================================
 
 THE ceiling ISA room_object
   IS NOT takeable.
   IS NOT reachable.
   DESCRIPTION ""
 
-  -- Honor a user-defined `ceiling_desc`, if present:
   VERB examine
+    -- Honor a user-defined `ceiling_desc`, if present:
     CHECK ceiling_desc OF CURRENT LOCATION = ""
       ELSE SAY ceiling_desc OF CURRENT LOCATION.
   END VERB examine.
 END THE.
 
+--==============================================================================
+--------------------------------------------------------------------------------
+--                           S I T E   O B J E C T S
+--------------------------------------------------------------------------------
+--==============================================================================
 
+-- Every SITE and DARK_SITE instance has a ground and sky.
+
+EVERY site_object ISA OBJECT AT outdoor
+END EVERY.
+
+-- Each SITE-object has a dedicated string attribute (on the CURRENT LOCATION)
+-- which can be used to override the default description displayed by `examine`
+-- ("You notice nothing unusual about the [object].").
+
+-- These attributes are similar to the `ex` attribute, except that they have
+-- unique identifiers to associate them to their specific SITE-object
+-- counterparts.
+
+ADD TO EVERY location
+  HAS ground_desc "".
+  HAS sky_desc "".
+END ADD TO location.
+
+--------------------------------------------------------------------------------
+-- Verbs Disabled on All SITE-Objects
+--------------------------------------------------------------------------------
+
+-- The following actions must be prevented on every site object: look_behind,
+-- look_through, look_under, put_against, put_behind, put_near, put_under.
+
+ADD TO EVERY site_object
+
+  VERB put_against, put_behind, put_near, put_under
+    WHEN bulk
+      DOES ONLY "That's not possible."
+  END VERB put_against.
+
+  VERB look_behind, look_through, look_under
+    DOES ONLY "That's not possible."
+  END VERB look_behind.
+
+END ADD TO.
+
+--==============================================================================
+-- GROUND
+--==============================================================================
 
 THE ground ISA site_object
   IS NOT takeable.
   IS NOT movable.
-  CONTAINER
-    -- to allow 'empty/pour something on ground'
+  CONTAINER -- To allow 'empty/pour something on ground'.
   DESCRIPTION ""
 
 
-  -- Honor a user-defined `ground_desc`, if present:
   VERB examine
+    -- Honor a user-defined `ground_desc`, if present:
     CHECK ground_desc OF CURRENT LOCATION = ""
       ELSE SAY ground_desc OF CURRENT LOCATION.
   END VERB examine.
 
-
-  -- Since we have declared the ground to be a container,
-  -- we'll disable some verbs defined to work with containers:
+  -- -----------------------------------
+  -- Disable Container Actions on Ground
+  -- -----------------------------------
+  -- Since we've declared the ground a container, we need to disable
+  -- some verbs that are designed to work with containers:
 
   VERB empty_in, pour_in
     WHEN cont
@@ -305,79 +450,50 @@ THE ground ISA site_object
   END VERB throw_in.
 END THE ground.
 
-
+--==============================================================================
+-- SKY
+--==============================================================================
 
 THE sky ISA site_object
   IS NOT takeable.
   IS distant.
   DESCRIPTION ""
 
-  -- Honor a user-defined 'sky_desc', if present:
   VERB examine
+    -- Honor a user-defined 'sky_desc', if present:
     CHECK sky_desc OF CURRENT LOCATION = ""
       ELSE SAY sky_desc OF CURRENT LOCATION.
   END VERB examine.
 END THE.
 
+--==============================================================================
+--------------------------------------------------------------------------------
+-- ROOM and SITE-Objects Tips & Tricks
+--------------------------------------------------------------------------------
+--==============================================================================
 
+-- Sometimes it might be better or necessary to override the `examine` verb for
+-- specific ROOM- and SITE-objects --- e.g. to keep all descriptions in the same
+-- code block, for practical reasons; or because examining a ROOM/SITE-object
+-- should execute some complex code that goes beyond just printing a description
+-- message. Here is an example of how this could be done for the `wall` object:
 
--- We still declare some shared behavior for all indoor and outdoor objects:
-
-ADD TO EVERY room_object
-
-  VERB put_against
-    WHEN bulk
-      CHECK THIS = ceiling
-        ELSE "That's not possible."
-  END VERB put_against.
-
-  VERB put_behind, put_near, put_under
-    WHEN bulk
-      DOES ONLY "That's not possible."
-  END VERB put_behind.
-
-  VERB look_behind, look_through, look_under
-    DOES ONLY "That's not possible."
-  END VERB look_behind.
-
-END ADD TO.
-
-
-ADD TO EVERY site_object
-
-  VERB put_against, put_behind, put_near, put_under
-    WHEN bulk
-      DOES ONLY "That's not possible."
-  END VERB put_against.
-
-  VERB look_behind, look_through, look_under
-    DOES ONLY "That's not possible."
-  END VERB look_behind.
-
-END ADD TO.
-
-
--- NOTE: It's often a good idea to modify the 'examine' verb for the above
---       objects. Here is an example for 'wall':
-
---       -----------------------------------------------------------
---       THE my_game ISA DEFINITION_BLOCK
---         ...
---         VERB examine
---           CHECK obj <> wall
---             ELSE
---               IF hero AT kitchen
---                 THEN "The walls are lined with shelves."
---                 ELSIF hero AT livingroom
---                   THEN "The wallpaper has a nice flower pattern."
---                 ELSIF...
---               END IF.
---            ...
---         END VERB examine.
---       END THE my_game.
---       -----------------------------------------------------------
-
-
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- The my_game IsA DEFINITION_BLOCK
+--   ...
+--   VErb examine
+--     Check obj <> wall
+--       Else
+--         If hero at kitchen
+--           Then "The walls are lined with shelves."
+--           ElsIf hero AT living_room
+--             Then "The wallpaper has a nice flower pattern."
+--           ElsIf...
+--         End if.
+--     ...
+--   End verb examine.
+-- End the my_game.
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 --==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -402,7 +518,10 @@ END ADD TO.
 --    * Instead of its description, the `dark_loc_desc` message is printed.
 
 -- Instances of `DARK_LOCATION` will automatically become lit when there's a lit
--- `lightsource` in the location, and turn dark when there aren't any.
+-- `lightsource` in the location, and turn dark when there aren't any, except
+-- when their `forced_lit` attribute is enabled, in which case they will behave
+-- like normal lit locations (the `forced_lit` attribute was introduced to
+-- support day and night cycles in DARK_LOCATIONs).
 
 -- The library takes care of detecting illumination changes and correctly
 -- setting and clearing the `lit` attribute of DARK_LOCATIONs, and will execute
@@ -427,12 +546,12 @@ ADD TO EVERY LOCATION
     -- instances, the `forced_lit` attribute is useful when a `dark_location` is
     -- subject to day an night cycle, to ensure that it won't become dark during
     -- the day. E.g. a forest should always be lit during the day, and dark at
-    -- night if there are no lit lightsources present.
-    -- When a location `IS forced_lit`, the library will not make it dark, so
-    -- an author can set it during the day and unset it during the night.
+    -- night if there are no lit light sources present.
+    -- When a location `IS forced_lit`, the library will not make it dark, so an
+    -- author can set this attribute during the day and unset it at night.
 
-    -- Of course, this attribute could also be handy for custom verbs on normal
-    -- locations.
+    -- Of course, authors could also exploit this attribute in custom defined
+    -- verbs acting on normal locations, if needed.
 
   DESCRIPTION
     CHECK THIS IS lit
@@ -481,7 +600,7 @@ END EVERY dark_location.
 
 --==============================================================================
 --------------------------------------------------------------------------------
--- DARK_ROOM & DARK_SITE
+--                  D A R K _ R O O M   &   D A R K _ S I T E
 --------------------------------------------------------------------------------
 --==============================================================================
 
@@ -498,7 +617,7 @@ END EVERY.
 
 --==============================================================================
 --------------------------------------------------------------------------------
--- Dark Locations' Rules and Events
+--       D A R K   L O C A T I O N S '   R U L E S   A N D   E V E N T S
 --------------------------------------------------------------------------------
 --==============================================================================
 
@@ -560,12 +679,12 @@ END EVENT.
 -- To create a dark location, just define it as an instance of `DARK_LOCATION`,
 -- `DARK_ROOM` or `DARK_SITE`, according to need. Example:
 
--- --------------------------
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- The basement IsA dark_room
 --   Exit up to kitchen.
 --   ...
 -- End the.
--- --------------------------
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 -- Any unlit dark location will automatically be described as:
@@ -581,14 +700,13 @@ END EVENT.
 -- If you add a description to a dark location, this description will be shown
 -- only if/when the location is lit by any means:
 --
--- ---------------------------------------------
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- The basement IsA dark_room
 --   Description
 --     "You can only see Cobwebs and junk here."
 --   Exit up to kitchen.
 -- End the.
--- ---------------------------------------------
-
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 --==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -603,17 +721,29 @@ END EVENT.
 --==============================================================================
 
 -- A location has the value 'visited 0' until the hero visits it for the first
--- time, and the value increases on every subsequent visit. This helps when you
--- need to control if or how many times a location has been visited, and also if
--- you want the location description to be different after the first visit.
+-- time, then the value increases on every subsequent visit. This helps when you
+-- need to control if or how many times a location was visited, and if you want
+-- the location description to change after the first visit, or after any number
+-- of visits.
 
 -- A location has the value 'described 0' before the first location description,
--- and the value increases every time its description is shown.
+-- then the value increases every time its description is shown.
 
 -- This distinction between the two is handy when you want the first-time
--- description of a location to be different from the subsequent ones (even if
+-- description of a location to be different from its subsequent ones (even if
 -- the hero is still in the location for the first time).
 
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- WARNING: The `described` attribute will be increased at each description of
+--          the location, regardless of whether the actual description was shown
+--          or prevented due to the location being unlit. Therefore, authors are
+--          advised to be cautious in their reliance on the `described` counter
+--          for locations that can become dark during the game.
+
+--          We're planning to enforce a more consistent behavior of this feature
+--          in relation to dark locations, in future editions of the library.
+--          For more info, see Issue #100 on the StdLib repository.
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ADD TO EVERY LOCATION
   HAS visited 0.
