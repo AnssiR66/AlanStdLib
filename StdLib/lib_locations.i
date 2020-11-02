@@ -247,14 +247,15 @@ END ADD TO location.
 -- The following actions must be prevented on every room object: look_behind,
 -- look_through, look_under, put_against, put_behind, put_near, put_under.
 
--- The only exception is when `put_against` is used on the ceiling, which is not
--- blocked by the verb checks.
+-- The only exception is when `put_against` is used on `wall`, which is not
+-- blocked by the verb checks, to allow actions like 'put ladder against wall'.
 
 ADD TO EVERY room_object
 
   VERB put_against
     WHEN bulk
-      CHECK THIS = ceiling
+      CHECK THIS <> ceiling
+      AND   THIS <> floor
         ELSE "That's not possible."
   END VERB put_against.
 
