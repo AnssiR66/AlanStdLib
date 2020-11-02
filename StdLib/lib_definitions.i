@@ -12,9 +12,11 @@
 -- This library module defines:
 --
 --   * General attributes.
---   * Some article declarations.
+--   * Indefinite articles.
+--   * Weight attribute presets.
+--   * Scenery objects (suppressing their description).
 --   * Common synonyms.
---   * The definition_block class.
+--   * The DEFINITION_BLOCK class.
 --   * Attributes for the start section.
 --   * The banner instance (for the start section).
 
@@ -30,8 +32,16 @@
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
--- We define general attributes for every thing (object and actor):
+-- We need to define the `plural` attribute on the `entity` class, because it
+-- must also be usable on verb parameters, whose syntax definitions might not be
+-- restricted to things only:
 
+ADD TO EVERY ENTITY
+  IS NOT plural.
+END ADD TO.
+
+
+-- We define general attributes for every thing (object and actor):
 
 -- tag::default-attributes-thing[]
 ADD TO EVERY THING
@@ -82,26 +92,32 @@ ADD TO EVERY THING
   NOT on.
   NOT openable.
   NOT readable.
-  NOT scenery.  -- A scenery has special responses for 'examine' and 'take',
-                -- behaves like a normal object otherwise.
+  NOT scenery. -- Sceneries are mere props (see dedicated section further down).
   NOT wearable.
   NOT writeable.
 
   CAN NOT talk.
 
   IS NOT worn.  -- (for `clothing` instances) it's not worn by any actor.
-    -- -------------------------------------------------------------------------
+    -- ------------------------------------------------------------------------
     -- NOTE: Authors can also use this attribute to implement wearables other
-    --       than clothing (eg. devices, like headphones, a VR headset, etc.).
+    --       than clothing (e.g. devices, like headphones, a VR headset, etc.).
     --       The library ensures that any verbs which could remove a thing from
     --       an actor also set the thing as `NOT worn`, in case authors are
     --       using this attribute outside of the `clothing` class context.
-    -- -------------------------------------------------------------------------
+    -- ------------------------------------------------------------------------
 -- end::default-attributes-thing[]
 
+--==============================================================================
+--------------------------------------------------------------------------------
   INDEFINITE ARTICLE
+--------------------------------------------------------------------------------
+--==============================================================================
 
-    -- Plural nouns must be preceded by "some" (and not by "a" or "an"):
+-- The default indefinite article for singular nouns is "a"; plural nouns will
+-- be preceded by "some".
+
+-- E.g. "There is bottle." and "There are some coins.".
 
     IF THIS IS NOT plural
       THEN "a"
@@ -110,46 +126,36 @@ ADD TO EVERY THING
 
 END ADD TO THING.
 
+-- If you need to use "an", for a singular noun, instead of "a", you'll need to
+-- declare it directly on the instance. E.g.:
 
--- NOTE: If you need to use "an" instead, you should declare it directly on the
---       instance, e.g.:
---
---       ~~~~~~~~~~~~~~~~~~~~~~~~~~
---       THE owl ISA ACTOR AT woods
---         INDEFINITE ARTICLE "an"
---       END THE.
---       ~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- The owl IsA actor at woods
+--   Indefinite article "an"
+-- End the.
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+-- Likewise, if you need a different word instead of "some", you'll have to
+-- provide a custom definition on the instance. E.g.:
 
--- We add the 'plural' attribute to the 'entity' class, because it doesn't apply
--- just to things but also (e.g.) to parameters in syntax statements; ignore.
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- The scissors IsA object in desk_drawer
+--   Indefinite article "a pair of"
+-- End the.
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-ADD TO EVERY ENTITY
-  IS NOT plural.
-END ADD TO.
+-- in order to produce:
 
-
-
--- Some null defaults defined that have been mentioned above:
-
-
-THE null_object ISA OBJECT
-END THE.
-
-
-THE null_key ISA OBJECT
-END THE.
-
+--    The desk drawer contains a pair of scissors.
 
 --==============================================================================
 --------------------------------------------------------------------------------
--- Preset Weight Values
+-- Weight Presets
 --------------------------------------------------------------------------------
 --==============================================================================
 
 -- Some default weight settings for things, mostly used to check if something is
 -- movable.
-
 
 ADD TO EVERY THING
   HAS weight 0.
@@ -164,6 +170,87 @@ END ADD TO ACTOR.
 ADD TO EVERY OBJECT
   HAS weight 5.
 END ADD TO OBJECT.
+
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--                        S C E N E R Y   O B J E C T S
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
+
+-- Any object can be turned into a scenery prop via the `IS scenery` attribute
+-- (previously defined in this module).
+
+-- Sceneries are mainly used to implement those objects which are mentioned in
+-- hand-crafted descriptions of rooms or other objects, for the sake of realism,
+-- or to provide atmosphere, and have a mere scenic purpose. Therefore, scenery
+-- objects don't need a description of their own.
+
+-- The description of scenery objects is suppressed by default:
+
+ADD TO EVERY OBJECT
+  DESCRIPTION
+    CHECK THIS IS NOT scenery
+      ELSE SAY "".
+END ADD.
+
+-- For example, a room description might mention the presence of cobwebs and
+-- other ornamental details whose sole purpose is to add to the room's mood and
+-- atmosphere. Since the player might try to examine these objects, the author
+-- needs to implement them, to prevent a parser response like:
+
+-- For example, a room description might mention the presence of cobwebs, for
+-- the sole purpose of creating a spooky atmosphere. Since the player might try
+-- to examine the cobwebs, the author needs to implement them, to prevent parser
+-- responses like:
+
+--    I don't know the word 'cobwebs'.
+
+-- which would be inconsistent with the room description, and thus break up the
+-- narrative illusion of a coherent world, reminding the player that it's just
+-- a software simulation.
+
+-- The default `examine` response for scenery objects will be:
+
+--    The [object] is not important.
+
+-- unless the author provided a custom description in its `ex` attribute, which
+-- will always be honored by the library. Custom descriptions of sceneries can
+-- be used to further contribute to the room's mood and atmosphere.
+
+-- Furthermore, all actions are prevented on sceneries, producing the above
+-- mentioned message as a result. This way, the player will immediately realize
+-- that it's just a scenic prop, and won't be misled into attempting further
+-- actions on the object (e.g. thinking that he/she's dealing with a 'find the
+-- verb' situation). Every library verb either contains a CHECK blocking the
+-- action on objects that are `scenery`, or an IF statement in the DOES part to
+-- alter its outcome accordingly.
+
+--==============================================================================
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--------------------------------------------------------------------------------
+--
+--             D U M M Y   L I B R A R Y   P L A C E H O L D E R S
+--
+--------------------------------------------------------------------------------
+--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+--==============================================================================
+
+-- Some dummy placeholder objects used as null defaults in various definitions:
+
+THE null_object ISA OBJECT
+END THE.
+
+
+THE null_key ISA OBJECT
+END THE.
 
 --==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -205,15 +292,14 @@ SYNONYMS
 
 -- @TODO: Add intro text.
 
--- Here we create the "definition_block" class, to group various definitions.
--- In the game source file, the author should declare an instance 'my_game'
+-- Here we create the `definition_block` class, to group various definitions.
+-- In the game source file, the author should declare an instance `my_game`
 -- which belongs to this class.
 
 --------------------------------------------------------------------------------
 
-
 -- An attribute for keeping track of nested locations;
--- used internally in the library (ignore).
+-- used internally by the library (ignore).
 
 ADD TO EVERY LOCATION
   HAS nested {nowhere}.
@@ -233,7 +319,7 @@ EVERY definition_block ISA LOCATION
   -- are needed for the 'notify' command ('lib_verbs.i'); ignore.
 
   HAS oldscore 0.
-      -- Records previous score so 'checkscore' event
+      -- Records previous score so `checkscore` event
       -- can compare with the current score
   IS notify_turned_on.
       -- Set by 'notify' verb, records whether
@@ -245,8 +331,10 @@ EVERY definition_block ISA LOCATION
   -- --------------------
   -- Temporary Attributes
   -- --------------------
+
   -- The following attributes are used internally by the Library to temporarily
-  -- store values of attributes which need to be changed and then restored; ignore.
+  -- store values of attributes which need to be changed and then restored.
+
   HAS temp_compliant.
 
 

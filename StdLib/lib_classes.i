@@ -16,84 +16,79 @@
 
 -- Many of these classes are frequently referenced inside the verb definitions
 -- of 'lib_verbs.i', so they should be edited or removed with caution. However,
--- to ease things up, the opening comment of every class mentioned if and where
+-- to ease things up, the opening comments of every class mention if and where
 -- the class is cross-referenced in the other library modules.
+
+-- More library classes definitions can be found in the following modules:
+
+--   * lib_actors.i
+--   * lib_clothing.i
+--   * lib_liquid.i
+--   * lib_locations.i
 
 --------------------------------------------------------------------------------
 --                                .: CONTENTS :.
 --------------------------------------------------------------------------------
 
---+-----------------------------------------------------------------------------
---| DEVICE
---+-----------------------------------------------------------------------------
---| * Is a machine or an electronic device, for example a TV. Can be turned
---|   (= switched) on and off, unless it's broken.
---| * Attributes: 'on' and 'NOT on', 'NOT broken'.
---| * Is described by default as being either on or off when examined.
---+-----------------------------------------------------------------------------
---| DOOR
---+-----------------------------------------------------------------------------
---| * Can be opened, closed, and optionally locked and unlocked.
---| * Is by default 'NOT open', 'NOT lockable'.
---| * All default attributes:
---|   openable, NOT open, NOT lockable, NOT locked; NOT takeable.
---| * Is described by default as being either open or closed when examined.
---+-----------------------------------------------------------------------------
---| LIGHTSOURCE
---+-----------------------------------------------------------------------------
---| * IS natural or NOT natural
---|   (a natural lightsource is for example a match or a torch).
---| * Can be turned on and off, lighted and extinguished (= put out) unless it's
---|   broken. A natural lightsource cannot be turned on or off, it can only be
---|   lighted and extinguished (= put out).
---| * When examined, a lightsource is automatically supplied with a description
---|   of whether it is providing light or not.
---+-----------------------------------------------------------------------------
---| LISTED_CONTAINER
---+-----------------------------------------------------------------------------
---| * Is a container object.
---| * The contents of a listed_container will be listed both after 'look' (= in
---|   the room description), 'look in' and 'examine' (if the container is open).
---|   (The contents of a normal container object are not listed after 'examine'
---|   by default, but only after 'look' (= room description) and 'look in').
---+-----------------------------------------------------------------------------
---| SOUND
---+-----------------------------------------------------------------------------
---| * Can be listened to but not examined, searched, smelled or manipulated.
---| * (Can be turned on and off if desirable.)
---+-----------------------------------------------------------------------------
---| SUPPORTER
---+-----------------------------------------------------------------------------
---| * You can put things on this and you can stand on this.
---| * It's declared a container, so you can take things from it, as well.
---| * Contents of a supporter are listed by default in the room description and
---|   after 'examine'.
---+-----------------------------------------------------------------------------
---| WEAPON
---+-----------------------------------------------------------------------------
---| * IS fireable (e.g. a cannon) or NOT fireable (e.g. a baseball bat).
---+-----------------------------------------------------------------------------
---| WINDOW
---+-----------------------------------------------------------------------------
---| * Can be opened, closed, looked through and out of.
---| * Will be by default described as being either open or closed when examined.
---+-----------------------------------------------------------------------------
+-- The following table presents all the classes defined in this module, with a
+-- brief overview of their features and attributes.
 
-
-
--- @TODO: This scenery snippet shouldn't really be here, for `scenery` is an
---        attribute, not a class. Maybe, we should move it 'lib_definitions.i'.
-
--- By default, suppress the description of scenery objects:
-
-ADD TO EVERY OBJECT
-
-  DESCRIPTION
-    CHECK THIS IS NOT scenery
-      ELSE SAY "".
-
-END ADD.
-
+--+----------------------------------------------------------------------------+
+--| DEVICE                                                                     |
+--+----------------------------------------------------------------------------+
+--| * A machine or electronic device than can be turned/switched ON and OFF,   |
+--|   unless it's broken. E.g. a stove, a TV.                                  |
+--| * Attributes: NOT on, NOT broken.                                          |
+--| * When described, the library mentions whether it's on or off.             |
+--+----------------------------------------------------------------------------+
+--| DOOR                                                                       |
+--+----------------------------------------------------------------------------+
+--| * Doors can be opened and closed, and (optionally) locked and unlocked.    |
+--| * Defaults to: NOT open, NOT lockable.                                     |
+--| * Attributes: openable, NOT open, NOT lockable, NOT locked, NOT takeable.  |
+--| * When described, the library mentions whether it's open or closed.        |
+--+----------------------------------------------------------------------------+
+--| LIGHTSOURCE                                                                |
+--+----------------------------------------------------------------------------+
+--| * A light source can be either `natural` or `NOT natural`.                 |
+--|   (e.g. natural: match, candle, campfire; NOT natural: flashlight).        |
+--| * It can be turned ON and OFF, lighted and extinguished (= put out) unless |
+--|   it's broken. A natural light source cannot be turned on or off, it can   |
+--|   only be lighted and extinguished (= put out).                            |
+--| * When described, the library mentions whether it's providing light or not.|
+--+----------------------------------------------------------------------------+
+--| LISTED_CONTAINER                                                           |
+--+----------------------------------------------------------------------------+
+--| * It's a container object whose contents will be listed both after 'look'  |
+--|   (i.e. in the room description), 'look in' and 'examine', if it's open,   |
+--|   otherwise the library will mention that it's not possible to see what's  |
+--|   inside it because it's closed.                                           |
+--|   Contents of a normal container objects are not listed after 'examine',   |
+--|   but only after 'look' and 'look in'.                                     |
+--+----------------------------------------------------------------------------+
+--| SOUND                                                                      |
+--+----------------------------------------------------------------------------+
+--| * Can be listened to but not examined, searched, smelled or manipulated.   |
+--| * Can be optionally turned ON and OFF, if required.                        |
+--+----------------------------------------------------------------------------+
+--| SUPPORTER                                                                  |
+--+----------------------------------------------------------------------------+
+--| * Supporters are flat surfaces capable of holding objects (e.g. a table).  |
+--| * You can put things on it, and even stand on it.                          |
+--| * It's declared as a container, so you can take things from it, as well.   |
+--| * Its contents are listed in room descriptions and upon examination.       |
+--+----------------------------------------------------------------------------+
+--| WEAPON                                                                     |
+--+----------------------------------------------------------------------------+
+--| * Weapons can be either `fireable` (e.g. guns) or `NOT fireable` (e.g. a   |
+--|   baseball bat, knives, swords).                                           |
+--| * Defaults to: NOT fireable.                                     |
+--+----------------------------------------------------------------------------+
+--| WINDOW                                                                     |
+--+----------------------------------------------------------------------------+
+--| * Windows can be opened, closed, looked through and out of.                |
+--| * When described, the library mentions whether it's open or closed.        |
+--+----------------------------------------------------------------------------+
 
 --==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -128,6 +123,7 @@ EVERY device ISA OBJECT
   END VERB examine.
 
 
+
   VERB turn_on
     CHECK THIS IS NOT on
       ELSE
@@ -160,6 +156,7 @@ EVERY device ISA OBJECT
   END VERB turn_on.
 
 
+
   VERB turn_off
     CHECK THIS IS on
       ELSE
@@ -190,8 +187,8 @@ EVERY device ISA OBJECT
   END VERB turn_off.
 
 
--- The following verb switches a device off if the device is on, and vice versa.
 
+  -- The following verb switches a device OFF if it's ON, and vice versa.
 
   VERB switch
     CHECK CURRENT LOCATION IS lit
@@ -251,17 +248,18 @@ EVERY door ISA OBJECT
 
   HAS otherside null_door.  -- matching door in the other room.
 
+    -- The `null_door` is a just the default dummy-object placeholder (ignore).
+
     -- The the other side of the door in the next room will be automatically
-    -- taken care of by the library, so that its status is updated and shown
-    -- correctly in any room or object descriptions.
-    -- `null_door` is a dummy-object default that can be ignored.
+    -- taken care of by the library, so that its status is updated to match its
+    -- counterpart, as if they were a single object.
 -- end::default-attributes-door[]
 
   INITIALIZE
 
-    -- ensuring that the author didn't forget to declare a locked door closed
-    -- (= NOT open), as well. This is just double-checking, as any door is by
-    -- default closed (= "NOT open") at the start of the game:
+    -- Ensure that the author didn't forget to declare a locked door as closed
+    -- (= NOT open) as well. This is just double-checking, as any door is by
+    -- default `NOT open` at the start of the game:
 
     IF THIS IS locked
       THEN
@@ -270,16 +268,15 @@ EVERY door ISA OBJECT
         END IF.
     END IF.
 
-    -- ensuring that if a door has an otherside attribute declared, this
-    -- otherside will have the original door as its otherside in turn:
+    -- If a door was given an `otherside` door, ensure that the latter points to
+    -- the former in its `otherside` attribute in return:
 
     IF otherside OF THIS <> null_door
       THEN
         SET otherside OF otherside OF THIS TO THIS.
 
-
-      -- next, ensuring that some attributes are correctly assigned to the
-      -- otherside of the door, as well. Only some non-default cases need to be
+      -- Next, ensure that the attributes of the `otherside` door have mirroring
+      -- setting to its counterpart. Only some non-default cases need to be
       -- addressed here:
 
         IF THIS IS NOT openable
@@ -301,29 +298,32 @@ EVERY door ISA OBJECT
     END IF.
 
 
-    -- making the same matching_key open both sides of a door:
+    -- Make the same matching_key open both sides of a door:
 
-    IF otherside OF THIS <> null_door AND matching_key OF THIS <> null_key
+    IF otherside OF THIS <> null_door
+    AND matching_key OF THIS <> null_key
       THEN SET matching_key OF otherside OF THIS TO matching_key OF THIS.
     END IF.
 
 
-  -- If a door is lockable/locked, you should state at the door instance which
-  -- object will unlock it, with the matching_key attribute. For example:
+  -- If a door is lockable/locked, you should state in its instance declaration
+  -- which object will unlock it, via the `matching_key attribute`. E.g.:
 
-  -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  -- THE attic_door ISA DOOR
-  --   HAS matching_key brass_key.
+  -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  -- The attic_door IsA door
+  --   Has matching_key brass_key.
   --   ...
-  -- END THE.
+  -- End the.
   --
-  -- THE brass_key ISA OBJECT AT basement
-  -- END THE.
-  -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  -- The brass_key IsA object at basement
+  -- End the.
+  -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  -- (null_key is a default dummy object that can be ignored.)
-
-
+--==============================================================================
+--------------------------------------------------------------------------------
+--                             D O O R   V E R B S
+--------------------------------------------------------------------------------
+--==============================================================================
 
   VERB examine
     DOES AFTER
@@ -357,10 +357,10 @@ EVERY door ISA OBJECT
   VERB look_behind
     DOES ONLY
       IF THIS IS NOT open
-        THEN "You cannot look behind"
+        THEN "You cannot look behind the"
           IF THIS IS NOT plural
-            THEN "the door - it is closed."
-            ELSE "the doors - they are closed."
+            THEN "door - it is closed."
+            ELSE "doors - they are closed."
           END IF.
         ELSE "You notice nothing special behind the door"
           IF THIS IS NOT plural
@@ -379,8 +379,8 @@ EVERY door ISA OBJECT
           IF THIS IS plural
             THEN "$$s"
           END IF.
-          "is so narrow that you can't
-          see anything of what lies on the other side."
+          "is so narrow that you can't see anything
+           of what lies on the other side."
         ELSE "You notice nothing special under the door"
           IF THIS IS plural
             THEN "$$s."
@@ -399,6 +399,7 @@ EVERY door ISA OBJECT
   END VERB close.
 
 
+
   VERB lock
     DOES
       IF otherside OF THIS <> null_door
@@ -406,6 +407,7 @@ EVERY door ISA OBJECT
           MAKE otherside OF THIS locked.
       END IF.
   END VERB lock.
+
 
 
   VERB open
@@ -417,6 +419,7 @@ EVERY door ISA OBJECT
   END VERB open.
 
 
+
   VERB unlock
     DOES
       IF otherside OF THIS <> null_door
@@ -424,11 +427,10 @@ EVERY door ISA OBJECT
       END IF.
   END VERB unlock.
 
+END EVERY door.
 
-END EVERY.
 
-
--- a default dummy, ignore:
+-- A dummy placeholder used internally for default settings (ignore):
 
 THE null_door ISA DOOR
 END THE.
@@ -599,8 +601,7 @@ EVERY lightsource ISA OBJECT
       END IF.
   END VERB switch.
 
-
-END EVERY.
+END EVERY lightsource.
 
 --==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -682,17 +683,17 @@ EVERY LISTED_CONTAINER ISA OBJECT
 
 
 
--- Note that closed listed_containers are by default opaque and they become "not opaque" when
--- they are opened.
+-- Note that a closed LISTED_CONTAINER is OPAQUE by default,
+-- it becomes NOT OPAQUE when opened.
 
--- In order to support this behavior also on lockable listed_containers,
--- before changing the opaqueness state we need to check that the cointainer is
--- actually in the expected open/close state --- eg, if the player tries to open
--- a locked listed_container for which he doesn't have the matching_key, then
--- the 'open' action will have failed. Similarly, to be on the safe side, we'll
--- also implement this behavior on other verbs that could potentially affect
--- the open/close state of a listed_container (ie, if an author implements
--- them on some class or instance).
+-- In order to support this behavior also on lockable LISTED_CONTAINERs, before
+-- changing the opaqueness state we need to check that the container is actually
+-- in the expected open/close state --- e.g., if the player tries to open a
+-- locked LISTED_CONTAINER for which he doesn't have the matching_key, then the
+-- 'open' action will have failed. Similarly, to be on the safe side, we'll also
+-- implement this behavior on other verbs that could potentially affect the
+-- open/close state of a LISTED_CONTAINER (i.e. if an author implements them on
+-- some class or instance).
 
 
   VERB open
@@ -741,8 +742,7 @@ EVERY LISTED_CONTAINER ISA OBJECT
       END IF.
   END VERB lock_with.
 
-
-END EVERY.
+END EVERY LISTED_CONTAINER.
 
 --==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -761,7 +761,6 @@ END EVERY.
 
 --------------------------------------------------------------------------------
 
-
 -- tag::default-attributes-sound[]
 EVERY sound ISA OBJECT
   IS NOT examinable.
@@ -779,8 +778,7 @@ EVERY sound ISA OBJECT
       "something you can smell."
   END VERB smell.
 
-
-END EVERY.
+END EVERY sound.
 
 --==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -802,10 +800,10 @@ END EVERY.
 
 EVERY supporter ISA OBJECT
 
-
   CONTAINER
     HEADER "On" SAY THE THIS. "you see"
     ELSE "There's nothing on" SAY THE THIS. "."
+
 
 
   VERB examine
@@ -814,7 +812,8 @@ EVERY supporter ISA OBJECT
   END VERB examine.
 
 
-  -- in the following, we disable some verbs that are defined to work with normal containers:
+  -- In the following, we disable some verbs that are defined to work with
+  -- normal containers:
 
 
   VERB look_in
@@ -825,6 +824,7 @@ EVERY supporter ISA OBJECT
       END IF.
       "something you can look into."
   END VERB look_in.
+
 
 
   VERB empty_in, pour_in
@@ -838,10 +838,12 @@ EVERY supporter ISA OBJECT
   END VERB empty_in.
 
 
+
   VERB put_in
     WHEN cont
     DOES ONLY "You can't put anything inside" SAY THE THIS. "."
   END VERB put_in.
+
 
 
   VERB throw_in
@@ -849,8 +851,7 @@ EVERY supporter ISA OBJECT
     DOES ONLY "You can't put anything inside" SAY THE THIS. "."
   END VERB throw_in.
 
-
-END EVERY.
+END EVERY supporter.
 
 --==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -906,6 +907,7 @@ EVERY window ISA OBJECT
   IS NOT takeable.
 -- end::default-attributes-window[]
 
+
   VERB examine
     DOES
       IF THIS IS NOT plural
@@ -920,10 +922,12 @@ EVERY window ISA OBJECT
   END VERB examine.
 
 
+
   VERB look_behind
     DOES ONLY
       "That's not possible."
   END VERB look_behind.
+
 
 
   VERB look_out_of
@@ -933,6 +937,7 @@ EVERY window ISA OBJECT
         ELSE "windows."
       END IF.
   END VERB look_out_of.
+
 
 
   VERB look_through
