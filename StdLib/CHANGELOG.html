@@ -964,6 +964,17 @@ This allows to implement readable objects that can be both examined and read, pr
 <p><strong><span class="red">Honoring Custom <code>ex</code> Description</span></strong>&#8201;&#8212;&#8201;Now a non-empty <code>ex</code> attribute will be always honored when examining a <code>readable</code> object (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/9" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#9</a>), a <code>scenery</code> object (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/99" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#99</a>), and instances of <code>liquid</code> and <code>listed_container</code> (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/37" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#37</a>).</p>
 </li>
 <li>
+<p><strong><span class="red">Restrcited Actions</span></strong>&#8201;&#8212;&#8201;The code for handling restriced actions has been optimized by reducing its size.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><span class="red">New Restriction Level 5 (YES/NO)</span></strong>&#8201;&#8212;&#8201;A new restriction level (<code>restricted_level 5</code>) was added, specifically targeting situations in which the player can only answer YES or NO (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/113" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#113</a>).
+During this level, only the <code>yes</code> and <code>'no'</code> verbs are allowed, and the <code>restricted_response</code> message is automatically changed to &#8220;Please answer YES or NO.&#8221;, and then restored to its preceding value when a restriction level switch occurs.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
 <p><strong><span class="red">Dropped &#8216;verbose&#8217; and &#8216;brief&#8217;</span></strong>&#8201;&#8212;&#8201;The meta-berbs <code>verbose</code> and <code>brief</code> were removed from the library due to <code>brief</code> failing to work as expected, because ALAN resets the <code>VISITS</code> counter every time an attribute of a <code>location</code> instance changes state or value (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/32" title="See original Issue on GitHub" target="_blank" rel="noopener">Issue&nbsp;#32</a>).</p>
 </li>
 </ul>

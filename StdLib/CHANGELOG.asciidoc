@@ -38,6 +38,7 @@ TIP: For each new library release, we provide a list of all the bugs that were f
 :Issue_96: link:https://github.com/AnssiR66/AlanStdLib/issues/96[Issue&nbsp;#96^, title="See original Issue on GitHub"]
 :Issue_99: link:https://github.com/AnssiR66/AlanStdLib/issues/99[Issue&nbsp;#99^, title="See original Issue on GitHub"]
 :Issue_106: link:https://github.com/AnssiR66/AlanStdLib/issues/106[Issue&nbsp;#106^, title="See original Issue on GitHub"]
+:Issue_113: link:https://github.com/AnssiR66/AlanStdLib/issues/113[Issue&nbsp;#113^, title="See original Issue on GitHub"]
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -137,6 +138,13 @@ This allows to implement readable objects that can be both examined and read, pr
 
 * *[red]#Honoring Custom `ex` Description#* --
 Now a non-empty `ex` attribute will be always honored when examining a `readable` object (see {Issue_9}), a `scenery` object (see {Issue_99}), and instances of `liquid` and `listed_container` (see {Issue_37}).
+
+* *[red]#Restrcited Actions#* --
+The code for handling restriced actions has been optimized by reducing its size.
+
+** *[red]#New Restriction Level 5 (YES/NO)#* --
+A new restriction level (`restricted_level 5`) was added, specifically targeting situations in which the player can only answer YES or NO (see {Issue_113}).
+During this level, only the `yes` and ``'no'`` verbs are allowed, and the `restricted_response` message is automatically changed to "`Please answer YES or NO.`", and then restored to its preceding value when a restriction level switch occurs.
 
 * *[red]#Dropped '`verbose`' and '`brief`'#* --
 The meta-berbs `verbose` and `brief` were removed from the library due to `brief` failing to work as expected, because ALAN resets the `VISITS` counter every time an attribute of a `location` instance changes state or value (see {Issue_32}).
