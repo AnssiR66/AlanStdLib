@@ -102,6 +102,14 @@
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
+-- ATTRIBUTES DEFAULTS: NOT on, NOT broken.
+
+-- A `device` is a machine or an electronic device than can be turned/switched
+-- ON and OFF, unless it's broken. E.g. a stove, a TV.
+
+-- After a device has been described, the library will additionally mention its
+-- current ON/OFF status ("[It is|They are] currently [on|off].").
+
 -- This class is not cross-referenced elsewhere in this file nor in any other
 -- library module.
 
@@ -109,22 +117,28 @@
 
 EVERY device ISA OBJECT
 
+--------------------------------------------------------------------------------
+-- EXAMINE DEVICE
+--------------------------------------------------------------------------------
+
   VERB examine
     DOES AFTER
       IF THIS IS NOT plural
         THEN "It is"
         ELSE "They are"
       END IF.
-
+      "currently"
       IF THIS IS on
-        THEN "currently on."
-        ELSE "currently off."
-      END IF.
+        THEN "on"
+        ELSE "off"
+      END IF. "."
   END VERB examine.
 
+--------------------------------------------------------------------------------
+-- TURN ON DEVICE
+--------------------------------------------------------------------------------
 
-
-  VERB turn_on
+  VERB turn_on --> [turn|switch] on (app) | [turn|switch] (app) on
     CHECK THIS IS NOT on
       ELSE
         IF THIS IS NOT plural
@@ -150,14 +164,17 @@ EVERY device ISA OBJECT
         END IF.
     AND THIS IS NOT broken
       ELSE SAY check_obj_not_broken OF my_game.
+
     DOES ONLY
       "You turn on" SAY THE THIS. "."
       MAKE THIS on.
   END VERB turn_on.
 
+--------------------------------------------------------------------------------
+-- TURN OFF DEVICE
+--------------------------------------------------------------------------------
 
-
-  VERB turn_off
+  VERB turn_off --> [turn|switch] off (app) | [turn|switch] (app) off
     CHECK THIS IS on
       ELSE
          IF THIS IS NOT plural
@@ -186,11 +203,16 @@ EVERY device ISA OBJECT
       MAKE THIS NOT on.
   END VERB turn_off.
 
+--------------------------------------------------------------------------------
+-- SWITCH DEVICE
+--------------------------------------------------------------------------------
 
+-- The following verb toggles the device state; i.e. switches it OFF if it's ON,
+-- and vice versa. It was added to provide a "lazy alternative," and to catch
+-- cases where the player forgot to add 'on' or 'off' after the 'switch'
+-- command.
 
-  -- The following verb switches a device OFF if it's ON, and vice versa.
-
-  VERB switch
+  VERB switch --> switch (app)
     CHECK CURRENT LOCATION IS lit
       ELSE SAY check_current_loc_lit OF my_game.
     AND THIS IS reachable AND THIS IS NOT distant
@@ -219,7 +241,7 @@ EVERY device ISA OBJECT
       END IF.
   END VERB switch.
 
-END EVERY.
+END EVERY device.
 
 --==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -232,6 +254,9 @@ END EVERY.
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
+
+-- @TODO: DOOR intro!
+
 
 -- This class is not cross-referenced elsewhere in this file nor in any other
 -- library module.
@@ -447,6 +472,9 @@ END THE.
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
+-- @TODO: LIGHTSOURCE intro! (mention relation to DARK_LOCATION/ROOM/SITE)
+
+
 -- In 'lib_locations.i', `ISA LIGHTSOURCE` expressions are used to define the
 -- behavior of the DARK_LOCATION class.
 
@@ -460,6 +488,10 @@ EVERY lightsource ISA OBJECT
               -- A `NOT natural` light source is, e.g., a flashlight or a lamp.
               -- You cannot switch on or off a natural light source.
 -- end::default-attributes-lightsource[]
+
+--------------------------------------------------------------------------------
+-- EXAMINE LIGHTSOURCE
+--------------------------------------------------------------------------------
 
   VERB examine
     DOES AFTER
@@ -497,6 +529,11 @@ EVERY lightsource ISA OBJECT
       END IF.
   END VERB examine.
 
+--------------------------------------------------------------------------------
+-- LIGHT LIGHTSOURCE
+--------------------------------------------------------------------------------
+
+-- Only unbroken natural light sources can be lighted.
 
   VERB light
     CHECK THIS IS NOT lit
@@ -507,29 +544,43 @@ EVERY lightsource ISA OBJECT
         END IF.
     AND THIS IS NOT broken
       ELSE SAY check_obj_not_broken OF my_game.
+
     DOES ONLY
       IF THIS IS natural
-        THEN "You light" SAY THE THIS. "."
-          MAKE THIS lit.
-        ELSE "You turn on" SAY THE THIS. "."
-          MAKE THIS lit.
+        THEN "You light"
+        ELSE "You turn on"
       END IF.
+      SAY THE THIS. "."
+      MAKE THIS lit.
   END VERB light.
 
+--------------------------------------------------------------------------------
+-- EXTINGUISH LIGHTSOURCE
+--------------------------------------------------------------------------------
 
-  VERB extinguish
+-- Only natural light sources can be extinguished.
+-- If it's lit, it can't be broken; so the `IS NOT broken` CHECK is not needed.
+
+  VERB extinguish --> [extinguish|put out] (obj) | put (obj) out
     CHECK THIS IS lit
       ELSE
         IF THIS IS NOT plural
           THEN SAY check_lightsource_lit_sg OF my_game.
           ELSE SAY check_lightsource_lit_pl OF my_game.
         END IF.
-    DOES ONLY "You extinguish" SAY THE THIS. "."
+
+    DOES ONLY
+      "You extinguish" SAY THE THIS. "."
       MAKE THIS NOT lit.
   END VERB extinguish.
 
+--------------------------------------------------------------------------------
+-- TURN ON LIGHTSOURCE
+--------------------------------------------------------------------------------
 
-  VERB turn_on
+-- Only unbroken artificial light sources can be turned on.
+
+  VERB turn_on --> [turn|switch] on (app) | [turn|switch] (app) on
     CHECK THIS IS NOT natural
       ELSE
         IF THIS IS NOT plural
@@ -544,14 +595,20 @@ EVERY lightsource ISA OBJECT
         END IF.
     AND THIS IS NOT broken
       ELSE SAY check_obj_not_broken OF my_game.
+
     DOES ONLY
       "You turn on" SAY THE THIS. "."
       MAKE THIS lit.
-
   END VERB turn_on.
 
+--------------------------------------------------------------------------------
+-- TURN OFF LIGHTSOURCE
+--------------------------------------------------------------------------------
 
-  VERB turn_off
+-- Only artificial light sources can be turned off.
+-- If it's ON, it can't be broken; so the `IS NOT broken` CHECK is not needed.
+
+  VERB turn_off --> [turn|switch] off (app) | [turn|switch] (app) off
     CHECK THIS IS NOT natural
       ELSE
         IF THIS IS NOT plural
@@ -568,16 +625,18 @@ EVERY lightsource ISA OBJECT
     DOES ONLY
       "You turn off" SAY THE THIS. "."
       MAKE THIS NOT lit.
-
   END VERB turn_off.
 
+--------------------------------------------------------------------------------
+-- SWITCH LIGHTSOURCE
+--------------------------------------------------------------------------------
 
-  -- The `switch` verb toggles the current state of a NOT natural lightsource
-  -- (i.e. turns it ON if it was OFF, and vice-versa). It's a lazy variant,
-  -- intended for when the player forgets, or doesn't bother, to type 'on' or
-  -- 'off' after the 'switch' command.
+-- The following verb toggles the state of an artificial light source; i.e.
+-- switches it OFF if it's ON, and vice versa. It was added to provide a "lazy
+-- alternative," and to catch cases where the player forgot to add 'on' or 'off'
+-- after the 'switch' command.
 
-  VERB switch
+  VERB switch --> switch (app)
     CHECK THIS IS NOT natural
       ELSE
         IF THIS IS NOT plural
@@ -592,15 +651,16 @@ EVERY lightsource ISA OBJECT
         END IF.
     AND THIS IS NOT broken
       ELSE SAY check_obj_not_broken OF my_game.
+
     DOES ONLY
+      "You switch"
       IF THIS IS lit
-        THEN "You switch off" SAY THE THIS. "."
+        THEN "off" SAY THE THIS. "."
           MAKE THIS NOT lit.
-        ELSE "You switch on" SAY THE THIS. "."
+        ELSE "on" SAY THE THIS. "."
           MAKE THIS lit.
       END IF.
   END VERB switch.
-
 END EVERY lightsource.
 
 --==============================================================================
@@ -615,6 +675,9 @@ END EVERY lightsource.
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
+-- @TODO: LISTED_CONTAINER intro!
+
+
 -- In 'lib_verbs.i', this class is cross-referenced in the DOES body of the
 -- take_from verb.
 
@@ -622,8 +685,6 @@ END EVERY lightsource.
 
 EVERY LISTED_CONTAINER ISA OBJECT
   CONTAINER
-
-    --  (ACTORS are separately defined to be containers further below.)
 
   INITIALIZE
 
@@ -638,7 +699,9 @@ EVERY LISTED_CONTAINER ISA OBJECT
         END FOR.
     END FOR.
 
-
+--------------------------------------------------------------------------------
+-- EXAMINE LISTED_CONTAINER
+--------------------------------------------------------------------------------
 
   VERB examine
     DOES ONLY
@@ -655,8 +718,11 @@ EVERY LISTED_CONTAINER ISA OBJECT
       END IF.
   END VERB examine.
 
+--------------------------------------------------------------------------------
+-- LOOK IN LISTED_CONTAINER
+--------------------------------------------------------------------------------
 
-  VERB look_in
+  VERB look_in --> 'look' 'in' (cont)
     DOES ONLY
       IF THIS IS NOT OPAQUE
         THEN LIST THIS.
@@ -668,6 +734,9 @@ EVERY LISTED_CONTAINER ISA OBJECT
       END IF.
   END VERB look_in.
 
+--------------------------------------------------------------------------------
+-- SEARCH LISTED_CONTAINER
+--------------------------------------------------------------------------------
 
   VERB search
     DOES ONLY
@@ -681,7 +750,11 @@ EVERY LISTED_CONTAINER ISA OBJECT
       END IF.
   END VERB search.
 
-
+--==============================================================================
+--------------------------------------------------------------------------------
+-- Opening and Closing LISTED_CONTAINERs
+--------------------------------------------------------------------------------
+--==============================================================================
 
 -- Note that a closed LISTED_CONTAINER is OPAQUE by default,
 -- it becomes NOT OPAQUE when opened.
@@ -695,6 +768,9 @@ EVERY LISTED_CONTAINER ISA OBJECT
 -- open/close state of a LISTED_CONTAINER (i.e. if an author implements them on
 -- some class or instance).
 
+--------------------------------------------------------------------------------
+-- OPEN LISTED_CONTAINER
+--------------------------------------------------------------------------------
 
   VERB open
     DOES
@@ -715,6 +791,9 @@ EVERY LISTED_CONTAINER ISA OBJECT
       END IF.
   END VERB open_with.
 
+--------------------------------------------------------------------------------
+-- CLOSE/LOCK LISTED_CONTAINER
+--------------------------------------------------------------------------------
 
   VERB close, lock
     DOES
@@ -756,6 +835,9 @@ END EVERY LISTED_CONTAINER.
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
+-- @TODO: SOUND intro!
+
+
 -- This class is not cross-referenced elsewhere in this file nor in any other
 -- library module.
 
@@ -768,6 +850,10 @@ EVERY sound ISA OBJECT
   IS NOT reachable.
   IS NOT movable.
 -- end::default-attributes-sound[]
+
+--------------------------------------------------------------------------------
+-- SMELL SOUND
+--------------------------------------------------------------------------------
 
   VERB smell
     DOES ONLY
@@ -792,6 +878,9 @@ END EVERY sound.
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
+-- @TODO: SUPPORTER intro!
+
+
 -- In 'lib_verbs.i', this class is referenced in the syntax definitions, verb
 -- checks and/or definitions of the following verbs: climb_on, get_off, jump_on,
 -- lie_on, put_in, put_on, sit_on, stand_on, take_from.
@@ -804,16 +893,23 @@ EVERY supporter ISA OBJECT
     HEADER "On" SAY THE THIS. "you see"
     ELSE "There's nothing on" SAY THE THIS. "."
 
-
+--------------------------------------------------------------------------------
+-- EXAMINE SUPPORTER
+--------------------------------------------------------------------------------
 
   VERB examine
     DOES
       LIST THIS.
   END VERB examine.
 
+--==============================================================================
+--------------------------------------------------------------------------------
+-- Disabled Verbs
+--------------------------------------------------------------------------------
+--==============================================================================
 
-  -- In the following, we disable some verbs that are defined to work with
-  -- normal containers:
+-- Since supporters are flat surfaces, we need to disable some verbs designed to
+-- act on normal containers:
 
 
   VERB look_in
@@ -865,6 +961,9 @@ END EVERY supporter.
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
+-- @TODO: WEAPON intro!
+
+
 -- In 'lib_verbs.i', this class is referenced in the syntax definitions, verb
 -- checks and/or definitions of the following verbs: attack_with, fire, fire_at,
 -- fire_at_error, kill_with, shoot_with.
@@ -890,15 +989,16 @@ END EVERY.
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
--- This class is not cross-referenced elsewhere in this file nor in any other
--- library module.
+-- @TODO: WINDOW intro!
 
 
 -- You can look out of and through a window.
 -- When examined, a window is described as being either open or closed.
 
---------------------------------------------------------------------------------
+-- This class is not cross-referenced elsewhere in this file nor in any other
+-- library module.
 
+--------------------------------------------------------------------------------
 
 -- tag::default-attributes-window[]
 EVERY window ISA OBJECT

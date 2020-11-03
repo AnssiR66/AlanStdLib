@@ -2815,9 +2815,9 @@ SYNTAX extinguish = extinguish (obj)
         ELSE SAY illegal_parameter_pl OF my_game.
       END IF.
 
-        extinguish = put 'out' (obj).
+        extinguish = put out (obj).
 
-        extinguish = put (obj) 'out'.
+        extinguish = put (obj) out.
 
 
 ADD TO EVERY OBJECT
@@ -4635,12 +4635,11 @@ END ADD TO.
 -- ==============================================================
 
 
-SYNTAX
-  look_in = 'look' 'in' (cont)
-    WHERE cont ISA OBJECT
-      ELSE SAY illegal_parameter_there OF my_game.
-    AND cont ISA CONTAINER
-      ELSE SAY illegal_parameter_there OF my_game.
+SYNTAX look_in = 'look' 'in' (cont)
+  WHERE cont ISA OBJECT
+    ELSE SAY illegal_parameter_there OF my_game.
+  AND cont ISA CONTAINER
+    ELSE SAY illegal_parameter_there OF my_game.
 
 
 ADD TO EVERY OBJECT
@@ -4675,7 +4674,7 @@ END ADD TO.
 -- ==============================================================
 
 
-SYNTAX look_out_of = 'look' 'out' 'of' (obj)
+SYNTAX look_out_of = 'look' out 'of' (obj)
   WHERE obj ISA OBJECT
     ELSE
       IF obj IS NOT plural
@@ -6970,16 +6969,25 @@ END ADD TO.
 
 -- ==============================================================
 
+-- The `switch` verb provides a lazy syntax alternative that allows the player
+-- to omit 'on' or 'off' after the 'switch' command. E.g.
 
--- This is a mere 'switch' verb with no 'on' or 'off' following after it.
--- This verb is defined further in 'classes.i', under 'device' and 'lightsource'.
--- This verb exists just to cover cases where the player forgets to write
--- 'on' or 'off' after 'switch'.
--- If the player types 'switch tv', the tv object will be switched on
--- if it is off, and vice cersa.
--- Below, just the basic syntax is declared.
+--   > switch radio
 
+-- will turn the radio ON if it was OFF, and vice versa.
 
+-- Since only `device` and `lightsource` instances can be turned ON and OFF,
+-- the verb definition below will only print the message:
+
+--    That's not something you can turn off.
+
+-- This verb is overridden on the `device` and `lightsource` class definitions,
+-- in 'lib_classes.i', where proper CHECKs are added for their `on`/`NOT on` and
+-- `lit`/`NOT lit` states, respectively.
+
+-- RELATED VERBS: turn_on, turn_off.
+
+--------------------------------------------------------------------------------
 
 SYNTAX switch = switch (app)      -- app = apparatus, appliance
   WHERE app ISA OBJECT
@@ -7014,7 +7022,7 @@ END ADD TO.
 -- ==============================================================
 
 
------ The syntax for 'switch on' has been declared in the 'turn_on' verb.
+-- The syntax for 'switch on' has been declared in the `turn_on` verb.
 
 
 
@@ -7028,7 +7036,7 @@ END ADD TO.
 -- ==============================================================
 
 
------ The syntax for 'switch off' has been declared in the 'turn_off' verb.
+-- The syntax for 'switch off' has been declared in the `turn_off` verb.
 
 
 
@@ -8258,12 +8266,21 @@ END ADD TO.
 
 -- ==============================================================
 
+-- Only `device` and `lightsource` instances can be turned ON and OFF.
+-- Trying to turn on an ordinary object will produce:
 
------ Only devices and lightsources can be turned on and off. These classes are
------ defined in 'classes.i' with proper checks for 'on' and 'NOT on', 'lit' and 'NOT lit'.
------ Trying to turn on or off an ordinary object will default here to "That's not
------ something you can turn on".
+--    That's not something you can turn on.
 
+-- This verb is overridden on the `device` and `lightsource` class definitions,
+-- in 'lib_classes.i', where proper CHECKs are added for their `on`/`NOT on` and
+-- `lit`/`NOT lit` states, respectively.
+
+-- RELATED VERBS: turn_off, switch.
+
+--------------------------------------------------------------------------------
+
+-- We don't declare 'switch' as a synonym for 'turn', because 'turn' has also
+-- other meanings, e.g. 'turn page', which is incompatible with 'switch page'.
 
 SYNTAX turn_on = turn on (app)
   WHERE app ISA OBJECT
@@ -8273,20 +8290,11 @@ SYNTAX turn_on = turn on (app)
         ELSE SAY illegal_parameter_on_pl OF my_game.
       END IF.
 
-    turn_on = switch on (app).
+        turn_on = switch on (app).
 
-      turn_on = turn (app) on.
+        turn_on = turn (app) on.
 
-      turn_on = switch (app) on.
-
-
-
--- Note that 'switch' is not declared a synonym for 'turn'.
--- This is because 'turn' has also other meanings, for example 'turn page' which is
--- not equal with 'switch page'.
--- A separate 'switch' verb is declared in 'classes.i', classes 'device' and 'lightsource'.
--- This verb merely covers cases where the player forgets (or doesn't bother) to type 'on' or 'off'.
-
+        turn_on = switch (app) on.
 
 
 ADD TO EVERY OBJECT
@@ -8300,7 +8308,6 @@ ADD TO EVERY OBJECT
         ELSE "Those are not"
       END IF.
       "something you can $v on."
-
   END VERB turn_on.
 END ADD TO.
 
@@ -8314,11 +8321,21 @@ END ADD TO.
 
 -- ==============================================================
 
+-- Only `device` and `lightsource` instances can be turned ON and OFF.
+-- Trying to turn off an ordinary object will produce:
 
------ Only devices and lightsources can be turned on and off. These classes
------ are defined in 'classes.i' with proper checks for 'on' and 'NOT on',
------ 'lit' and 'NOT lit'.
+--    That's not something you can turn off.
 
+-- This verb is overridden on the `device` and `lightsource` class definitions,
+-- in 'lib_classes.i', where proper CHECKs are added for their `on`/`NOT on` and
+-- `lit`/`NOT lit` states, respectively.
+
+-- RELATED VERBS: turn_on, switch.
+
+--------------------------------------------------------------------------------
+
+-- We don't declare 'switch' as a synonym for 'turn', because 'turn' has also
+-- other meanings, e.g. 'turn page', which is incompatible with 'switch page'.
 
 SYNTAX turn_off = turn off (app)
   WHERE app ISA OBJECT
@@ -8333,14 +8350,6 @@ SYNTAX turn_off = turn off (app)
         turn_off = turn (app) off.
 
         turn_off = switch (app) off.
-
-
-
--- Note that 'switch' is not declared a synonym for 'turn'.
--- This is because 'turn' has also other meanings, for example 'turn page' which is
--- not equal with 'switch page'.
--- A separate 'switch' verb is declared in 'classes.i', classes 'device' and 'lightsource'.
--- This verb merely covers cases where the player forgets to type 'on' or 'off'.
 
 
 ADD TO EVERY OBJECT
@@ -8978,7 +8987,7 @@ END ADD TO.
 --------------------------------------------------------------------------------
 --==============================================================================
 
--- @TODO: INTRODUCTORY TEXT NEEDED!
+-- @TODO: YES/NO intro!
 
 -- ================================================================
 
