@@ -12,7 +12,16 @@
 -- This library module defines various classes that enable authors to create
 -- complex game objects that mimic their real-life counterparts in a realistic
 -- manner, thanks to dedicated attributes and event, and their class-based verbs
--- variants that enforce behavior consistency.
+-- variants that enforce behavior consistency:
+
+--   * DEVICE
+--   * DOOR
+--   * LIGHTSOURCE
+--   * LISTED_CONTAINER
+--   * SOUND
+--   * SUPPORTER
+--   * WEAPON
+--   * WINDOW
 
 -- Many of these classes are frequently referenced inside the verb definitions
 -- of 'lib_verbs.i', so they should be edited or removed with caution. However,
@@ -25,70 +34,6 @@
 --   * lib_clothing.i
 --   * lib_liquid.i
 --   * lib_locations.i
-
---------------------------------------------------------------------------------
---                                .: CONTENTS :.
---------------------------------------------------------------------------------
-
--- The following table presents all the classes defined in this module, with a
--- brief overview of their features and attributes.
-
---+----------------------------------------------------------------------------+
---| DEVICE                                                                     |
---+----------------------------------------------------------------------------+
---| * A machine or electronic device than can be turned/switched ON and OFF,   |
---|   unless it's broken. E.g. a stove, a TV.                                  |
---| * Attributes: NOT on, NOT broken.                                          |
---| * When described, the library mentions whether it's on or off.             |
---+----------------------------------------------------------------------------+
---| DOOR                                                                       |
---+----------------------------------------------------------------------------+
---| * Doors can be opened and closed, and (optionally) locked and unlocked.    |
---| * Defaults to: NOT open, NOT lockable.                                     |
---| * Attributes: openable, NOT open, NOT lockable, NOT locked, NOT takeable.  |
---| * When described, the library mentions whether it's open or closed.        |
---+----------------------------------------------------------------------------+
---| LIGHTSOURCE                                                                |
---+----------------------------------------------------------------------------+
---| * A light source can be either `natural` or `NOT natural`.                 |
---|   (e.g. natural: match, candle, campfire; NOT natural: flashlight).        |
---| * It can be turned ON and OFF, lighted and extinguished (= put out) unless |
---|   it's broken. A natural light source cannot be turned on or off, it can   |
---|   only be lighted and extinguished (= put out).                            |
---| * When described, the library mentions whether it's providing light or not.|
---+----------------------------------------------------------------------------+
---| LISTED_CONTAINER                                                           |
---+----------------------------------------------------------------------------+
---| * It's a container object whose contents will be listed both after 'look'  |
---|   (i.e. in the room description), 'look in' and 'examine', if it's open,   |
---|   otherwise the library will mention that it's not possible to see what's  |
---|   inside it because it's closed.                                           |
---|   Contents of a normal container objects are not listed after 'examine',   |
---|   but only after 'look' and 'look in'.                                     |
---+----------------------------------------------------------------------------+
---| SOUND                                                                      |
---+----------------------------------------------------------------------------+
---| * Can be listened to but not examined, searched, smelled or manipulated.   |
---| * Can be optionally turned ON and OFF, if required.                        |
---+----------------------------------------------------------------------------+
---| SUPPORTER                                                                  |
---+----------------------------------------------------------------------------+
---| * Supporters are flat surfaces capable of holding objects (e.g. a table).  |
---| * You can put things on it, and even stand on it.                          |
---| * It's declared as a container, so you can take things from it, as well.   |
---| * Its contents are listed in room descriptions and upon examination.       |
---+----------------------------------------------------------------------------+
---| WEAPON                                                                     |
---+----------------------------------------------------------------------------+
---| * Weapons can be either `fireable` (e.g. guns) or `NOT fireable` (e.g. a   |
---|   baseball bat, knives, swords).                                           |
---| * Defaults to: NOT fireable.                                     |
---+----------------------------------------------------------------------------+
---| WINDOW                                                                     |
---+----------------------------------------------------------------------------+
---| * Windows can be opened, closed, looked through and out of.                |
---| * When described, the library mentions whether it's open or closed.        |
---+----------------------------------------------------------------------------+
 
 --==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -107,8 +52,9 @@
 -- A `device` is a machine or an electronic device than can be turned/switched
 -- ON and OFF, unless it's broken. E.g. a stove, a TV.
 
--- After a device has been described, the library will additionally mention its
--- current ON/OFF status ("[It is|They are] currently [on|off].").
+-- After examining a device, the library will additionally mention its current
+-- ON/OFF status ("[It is|They are] currently [on|off].").
+
 
 -- This class is not cross-referenced elsewhere in this file nor in any other
 -- library module.
@@ -259,8 +205,8 @@ END EVERY device.
 
 -- Doors can be opened and closed, and (optionally) locked and unlocked.
 
--- After a door has been described, the library will additionally mention its
--- current status ("[It is|They are] currently [open|closed].").
+-- After examining a door, the library will additionally mention its current
+-- status ("[It is|They are] currently [open|closed].").
 
 
 -- Authors have two options to implement a door across two locations:
@@ -288,6 +234,7 @@ END EVERY device.
 -- a door which can only be opened/closed and locked/unlocked from one side),
 -- because authors can customize each side's behavior independently, since each
 -- side is an instance of its own.
+
 
 -- This class is not cross-referenced elsewhere in this file nor in any other
 -- library module.
@@ -507,8 +454,8 @@ END THE.
 -- locations which are `DARK_LOCATION`, `DARK_ROOM` or `DARK_SITE` instances
 -- (defined in 'lib_lications.i').
 
--- After a light source has been described, the library will additionally
--- mention its status ("[It is|They are] currently [on|off|lit|unlit].").
+-- After examining a light source, the library will additionally mention its
+-- status ("[It is|They are] currently [on|off|lit|unlit].").
 
 -- A light source can be either `natural` or artificial (`NOT natural`); a
 -- distinction affecting which verbs the player can use to control them:
@@ -522,6 +469,7 @@ END THE.
 
 -- Natural light sources Examples: a match, a candle, a campfire.
 -- Artificial light sources Examples: a flashlight, a light bulb, a table lamp.
+
 
 -- In 'lib_locations.i', `ISA LIGHTSOURCE` expressions are used to define the
 -- behavior of the DARK_LOCATION class.
@@ -728,7 +676,13 @@ END EVERY lightsource.
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
--- @TODO: LISTED_CONTAINER intro!
+-- A LISTED_CONTAINER is a container object whose contents will be listed both
+-- after 'look' (i.e. in the room description), 'look in' and 'examine', if it's
+-- open, otherwise the library will mention that it's not possible to see what's
+-- inside it because it's closed.
+
+-- Contents of a normal container objects are not listed after 'examine', but
+-- only after 'look' and 'look in'.
 
 
 -- In 'lib_verbs.i', this class is cross-referenced in the DOES body of the
@@ -888,7 +842,8 @@ END EVERY LISTED_CONTAINER.
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
--- @TODO: SOUND intro!
+-- Sound instances can be listened to, but not examined, searched, smelled or
+-- manipulated in any way.
 
 
 -- This class is not cross-referenced elsewhere in this file nor in any other
@@ -929,7 +884,11 @@ END EVERY sound.
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
--- @TODO: SUPPORTER intro!
+-- A supporters is a flat surface capable of holding objects (e.g. a table):
+
+--   * You can put things on it, and even stand on it.
+--   * It's declared as a container, so you can take things from it, as well.
+--   * Its contents are listed in room descriptions and upon examination.
 
 
 -- In 'lib_verbs.i', this class is referenced in the syntax definitions, verb
@@ -1012,7 +971,19 @@ END EVERY supporter.
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
--- @TODO: WEAPON intro!
+-- ATTRIBUTES DEFAULTS: NOT fireable.
+
+-- Weapons can be either `fireable` (e.g. guns) or `NOT fireable` (e.g. knives,
+-- swords, sticks, or batons).
+
+-- The verbs applying to weapons are defined in 'lib_verbs.i':
+
+--   * fire
+--   * fire_at
+--   * fire_at_error
+--   * attack_with
+--   * kill_with
+--   * shoot_with
 
 
 -- In 'lib_verbs.i', this class is referenced in the syntax definitions, verb
@@ -1038,11 +1009,11 @@ END EVERY.
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
--- @TODO: WINDOW intro!
+-- ATTRIBUTES DEFAULTS: openable, NOT open, NOT takeable.
 
-
--- You can look out of and through a window.
+-- Windows can be opened, closed, looked through and out of.
 -- When examined, a window is described as being either open or closed.
+
 
 -- This class is not cross-referenced elsewhere in this file nor in any other
 -- library module.
