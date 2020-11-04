@@ -1,0 +1,29 @@
+--==============================================================================
+-- "Lightsource Integrity Tests" by Tristano Ajmone.
+--==============================================================================
+Import 'library.i'. -- ALAN Standard Library v2.1
+
+The my_game IsA DEFINITION_BLOCK
+  Has
+    title    "Lightsource Integrity Tests".
+    subtitle "Checking correct behavior of `lightsource` class and verbs.".
+    author   "Tristano Ajmone".
+    year     2020.
+    version  "1".
+End the.
+
+
+The Lab IsA room.
+End the Lab.
+
+The flashlight IsA lightsource at Lab.
+  Is not natural.
+End the.
+
+The candle IsA lightsource at Lab.
+End the.
+
+--------------------------------------------------------------------------------
+Start at Lab.
+Describe banner.
+

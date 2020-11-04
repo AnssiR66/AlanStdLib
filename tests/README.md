@@ -1,8 +1,8 @@
 # Alan StdLib Test Suite
 
-> Required **Alan SDK**: [Alan v3.0 beta6 build 1880][SDK]
+> Required **Alan SDK**: [Alan v3.0 beta7][SDK]
 
-[SDK]: https://www.alanif.se/download-alan-v3/development-snapshots/development-snapshots/build1880 "Go to the download page of this specific Alan SDK release"
+[SDK]: https://www.alanif.se/download-alan-v3/development-kits/development-kits-3-0beta7 "Go to the download page of this specific Alan SDK release"
 
 This directory tree contains test adventures and automated game commands scripts for testing the Library verbs, messages and features. The purpose of these tests is to check that all library messages are displayed correctly, to detect unexpected edge cases and to track the global impact of code changes on library messages.
 
@@ -43,17 +43,19 @@ Contributed by [Tristano Ajmone] to the Alan Standard Library.
 
 Tests are organized in groups, each group is confined in a subfolder of its own, and each belonging to one of two different types of tests:
 
-|        subfolder         |                   type of test                   |
-|--------------------------|--------------------------------------------------|
-| [`/house/`][house]       | Single adventure, multiple tests.                |
-| [`/clothing/`][clothing] | Multiple adventures, one or more tests for each. |
-| [`/misc/`][misc]         | Single adventure, multiple tests.                |
+|         subfolder          |                    test type                     |                     purpose                      |
+|----------------------------|--------------------------------------------------|--------------------------------------------------|
+| [`/clothing/`][clothing]   | Multiple adventures, one or more tests for each. | Test the clothing system.                        |
+| [`/house/`][house]         | Single adventure, multiple tests.                | General purpose tests in a full-fledged context. |
+| [`/integrity/`][integrity] | Multiple adventures, one or more tests for each. | Library integrity checks.                        |
+| [`/liquids/`][liquids]     | Single adventure, multiple tests.                | Test the `liquid` class.                         |
+| [`/misc/`][misc]           | Single adventure, multiple tests.                | Feature-specific tests.                          |
 
 Execution of all tests is controlled by a single batch script:
 
 - [`RUNTESTS.bat`][RUNTESTS]
 
-Inside each tests folder there's also a `TEST_FOLDER.bat` script for running all tests therein independently from the other tests folders. Theses scripts are intended only as an aid to speed up development work, and they are not a replacement fro the main `RUNTESTS.bat` script, which should always be used before commiting changes because it provides better errors reports.
+Inside each tests folder there's also a `TEST_FOLDER.bat` script for running all tests therein independently from the other tests folders. Theses scripts are intended only as an aid to speed up development work, and they are not a replacement fro the main `RUNTESTS.bat` script, which __should always be executed before committing changes__, to ensure that all transcripts are updated to mirror the current state of the library, and because it provides better errors reports.
 
 ## Extra Modules
 
@@ -65,18 +67,21 @@ For more information, see [`DEBUG_MODULE.md`][DEBUG_MODULE].
 
 ## Type1 Tests: Single Adventure, Multiple Tests
 
-|        subfolder         |         adventure          |
-|--------------------------|----------------------------|
-| [`/house/`][house]       | [`house.alan`][house.alan] |
-| [`/clothing/`][clothing] | [`ega.alan`][ega.alan]     |
+|        subfolder         |           adventure            |
+|--------------------------|--------------------------------|
+| [`/clothing/`][clothing] | [`ega.alan`][ega.alan]         |
+| [`/house/`][house]       | [`house.alan`][house.alan]     |
+| [`/liquids/`][liquids]   | [`liquids.alan`][liquids.alan] |
 
-Inside the [`/house/`][house] and [`/clothing/`][clothing] subfolders a single adventure is employed to carry out multiple tests.
+Inside all the above listed subfolders, a single adventure is employed to carry out multiple tests.
+
+> __NOTE__ — The [`RUNTESTS.bat`][RUNTESTS] script supports an unlimited number of test folders of this type. A new subfolder can be added to the list of processed folders by editing the batch script.
 
 ### Files Naming Convention
 
 Since there is only one adventure to run tests against, script tests and log files have no naming constraints, which allows more freedom in organizing them into categories by employing meaningful prefixes.
 
-Although the [`/house/`][house] and [`/clothing/`][clothing] subfolders differ in tests scope, a draft convention of prefixes usage in these folder could the following:
+Although these subfolders differ in their tests scope, a draft convention of prefixes usage in these folders could the following:
 
 |    prefix   |                       description                       |
 |-------------|---------------------------------------------------------|
@@ -95,13 +100,15 @@ Each test script targets specific features in the adventure (a group of verbs/ac
 
 Each single adventure in these subfolders contains a moltitude of locations, actors, furniture and props, devices, etc. They offer a large-scale test environment, which resembles the simulation of a real adventure game. And because there is a single source file to administer in the course of time, more energy can be invested to polish the adventure.
 
-> __NOTE__ — Currently the [`RUNTESTS.bat`][RUNTESTS] script supports an unlimited number of test folders of this type. A new folder can be added by editing the batch script.
 
 ## Type2 Tests: Multiple Adventures, One or More Tests
 
+- [`/integrity/`][integrity]
 - [`/misc/`][misc]
 
 The tests in this folder consist in many small adventures which are usually associated to a single test script, although in some cases there might be more than one test for the same adventure.
+
+> __NOTE__ — The [`RUNTESTS.bat`][RUNTESTS] script supports an unlimited number of test folders of this type. A new subfolder can be added to the list of processed folders by editing the batch script.
 
 ### Files Naming Convention
 
@@ -136,12 +143,6 @@ Some of these smaller adventures are aimed to test edge cases, including purpose
 For these reasons, as well as some other more practical ones, it was deemed useful to split the library tests into two separate group types.
 
 Due to scarce reusability of the tests in the `misc/` subfolder (which usually serve a single test), the time dedicated to polish and beautify them is reduced to the minimal required.
-
-> __NOTE__ — Currently the [`RUNTESTS.bat`][RUNTESTS] script only supports a single folders of this type of test (i.e. `misc/`).
->
-> Since at the present stage there is no need to separate this kind of tests into different folders, it's unlikely that the batch script will be changed to allow multiple folders of this type.
->
-> But if in the future the number of such tests grows beyond manageabilty, adaptments might be made to accomodate further subfoldering.
 
 
 # Setup and System Requirements
@@ -296,13 +297,16 @@ SOFTWARE.
 
 [RUNTESTS]: ./RUNTESTS.bat  "View the batch file source"
 
-[house]: ./house/ "Go to folder"
 [clothing]: ./clothing/ "Go to folder"
+[house]: ./house/ "Go to folder"
+[integrity]: ./integrity/ "Go to folder"
+[liquids]: ./liquids/ "Go to folder"
 [misc]: ./misc/ "Go to folder"
 
-[house.alan]: ./house/house.alan "View adventure source code"
 [ega.alan]:   ./clothing/ega.alan "View adventure source code"
+[house.alan]: ./house/house.alan "View adventure source code"
 [inc_debug]: ./inc_debug.i "View module source code"
+[liquids.alan]: ./liquids/liquids.alan "View adventure source code"
 
 
 [Unlicense]: ./UNLICENSE    "View the full text of the Unlicense terms"

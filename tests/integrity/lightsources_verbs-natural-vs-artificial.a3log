@@ -1,0 +1,124 @@
+
+
+Lightsource Integrity Tests 
+Checking correct behavior of `lightsource` class and verbs. 
+Version 1. 
+(C) 2020 by Tristano Ajmone. 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta7. 
+Standard Library v2.2.0. 
+All rights reserved.
+
+
+Lab
+There is a flashlight and a candle here.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                  TEST NATURAL VS ARTIFICIAL LIGHTSOURCES                   *
+> ; *                                                                            *
+> ; *                      VERBS AFFECTING LIT/UNLIT STATUS                      *
+> ; *                                                                            *
+> ; ******************************************************************************
+> ; Ensure that only the correct verbs can be used with natural and artificial
+> ; light sources.
+> ; ==============================================================================
+> ; NATURAL LIGHT SOURCE: CANDLE
+> ; ==============================================================================
+> ; ------------------------------------------------------------------------------
+> ; ALLOWED VERBS
+> ; ------------------------------------------------------------------------------
+> ; The following verbs can be used with natural light sources:
+> ; VERB `extinguish`
+> extinguish candle
+But the candle is not lit.
+
+> put out candle
+But the candle is not lit.
+
+> put candle out
+But the candle is not lit.
+
+> ; VERB `light`
+> light candle
+You light the candle.
+
+> ; ------------------------------------------------------------------------------
+> ; ILLEGAL VERBS
+> ; ------------------------------------------------------------------------------
+> ; The following verbs can not be used with natural light sources:
+> ; VERB `turn_on`
+> turn on candle
+That's not something you can turn on.
+
+> switch on candle
+That's not something you can switch on.
+
+> ; VERB `turn_off`
+> switch off candle
+That's not something you can switch off.
+
+> turn off candle
+That's not something you can turn off.
+
+> ; ==============================================================================
+> ; ARTIFICIAL LIGHT SOURCE: FLASHLIGHT
+> ; ==============================================================================
+> ; ------------------------------------------------------------------------------
+> ; ALLOWED VERBS
+> ; ------------------------------------------------------------------------------
+> ; The following verbs can be used with artificial light sources:
+> ; VERB `light`
+> light flashlight
+You turn on the flashlight.
+
+> ; VERB `switch`
+> switch flashlight
+You switch off the flashlight.
+
+> switch flashlight
+You switch on the flashlight.
+
+> ; VERB `turn_on`
+> turn on flashlight
+The flashlight is already lit.
+
+> turn flashlight on
+The flashlight is already lit.
+
+> switch on flashlight
+The flashlight is already lit.
+
+> switch flashlight on
+The flashlight is already lit.
+
+> ; VERB `turn_off`
+> turn off flashlight
+You turn off the flashlight.
+
+> turn flashlight off
+But the flashlight is not lit.
+
+> switch off flashlight
+But the flashlight is not lit.
+
+> switch flashlight off
+But the flashlight is not lit.
+
+> ; ------------------------------------------------------------------------------
+> ; ILLEGAL VERBS
+> ; ------------------------------------------------------------------------------
+> ; The following verbs can not be used with natural light sources:
+> ; VERB `extinguish`
+> ; ***BUG!*** The verb is not being blocked! (See #123)
+> extinguish flashlight
+But the flashlight is not lit.
+
+> put out flashlight
+But the flashlight is not lit.
+
+> put flashlight out
+But the flashlight is not lit.
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

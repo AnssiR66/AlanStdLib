@@ -1,0 +1,63 @@
+; ******************************************************************************
+; *                                                                            *
+; *                  TEST NATURAL VS ARTIFICIAL LIGHTSOURCES                   *
+; *                                                                            *
+; *                      VERBS AFFECTING LIT/UNLIT STATUS                      *
+; *                                                                            *
+; ******************************************************************************
+; Ensure that only the correct verbs can be used with natural and artificial
+; light sources.
+; ==============================================================================
+; NATURAL LIGHT SOURCE: CANDLE
+; ==============================================================================
+; ------------------------------------------------------------------------------
+; ALLOWED VERBS
+; ------------------------------------------------------------------------------
+; The following verbs can be used with natural light sources:
+; VERB `extinguish`
+extinguish candle
+put out candle
+put candle out
+; VERB `light`
+light candle
+; ------------------------------------------------------------------------------
+; ILLEGAL VERBS
+; ------------------------------------------------------------------------------
+; The following verbs can not be used with natural light sources:
+; VERB `turn_on`
+turn on candle
+switch on candle
+; VERB `turn_off`
+switch off candle
+turn off candle
+; ==============================================================================
+; ARTIFICIAL LIGHT SOURCE: FLASHLIGHT
+; ==============================================================================
+; ------------------------------------------------------------------------------
+; ALLOWED VERBS
+; ------------------------------------------------------------------------------
+; The following verbs can be used with artificial light sources:
+; VERB `light`
+light flashlight
+; VERB `switch`
+switch flashlight
+switch flashlight
+; VERB `turn_on`
+turn on flashlight
+turn flashlight on
+switch on flashlight
+switch flashlight on
+; VERB `turn_off`
+turn off flashlight
+turn flashlight off
+switch off flashlight
+switch flashlight off
+; ------------------------------------------------------------------------------
+; ILLEGAL VERBS
+; ------------------------------------------------------------------------------
+; The following verbs can not be used with natural light sources:
+; VERB `extinguish`
+; ***BUG!*** The verb is not being blocked! (See #123)
+extinguish flashlight
+put out flashlight
+put flashlight out
