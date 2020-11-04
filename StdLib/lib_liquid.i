@@ -86,7 +86,6 @@ END THE.
 
 --------------------------------------------------------------------------------
 
--- tag::default-attributes-liquid[]
 EVERY liquid ISA OBJECT
 
   HAS vessel null_vessel. -- The liquid is not in a container.
@@ -102,7 +101,6 @@ EVERY liquid ISA OBJECT
     -- The default value `null_vessel` informs the library that the liquid is
     -- not inside any container (e.g. a pool, a lake, the sea, etc.).
     -- The `null_vessel` is a dummy-object default that can be ignored.
--- end::default-attributes-liquid[]
 
   CONTAINER
     HEADER "In" SAY THE THIS. "you see"

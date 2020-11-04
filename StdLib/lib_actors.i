@@ -57,7 +57,6 @@
 
 -- First, we declare some common characteristics for all actors:
 
--- tag::default-attributes-actor[]
 ADD TO EVERY ACTOR
   IS NOT inanimate.
   IS NOT following.
@@ -87,7 +86,6 @@ ADD TO EVERY ACTOR
     -- verb on the `clothing` class: if a clothing item has a non-zero `sex`
     -- value, the hero won't be able to wear it unless he/she has the same `sex`
     -- value.
--- end::default-attributes-actor[]
 
     -- The library doesn't provide any further gender related features for NPCs,
     -- so it will be up to the author to implement the extra code to handle the

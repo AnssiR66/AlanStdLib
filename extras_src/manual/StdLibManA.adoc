@@ -17,8 +17,10 @@ This last part of the book presents various appendices on side topics of the Sta
 
 :leveloffset: +1
 
-include::StdLibManA_01.adoc[]
+include::StdLibManA_attributes.adoc[]
 
-include::StdLibManA_02.adoc[]
+include::StdLibManA_i18n.adoc[]
+
+include::StdLibManA_examples.adoc[]
 
 :leveloffset: -1

@@ -87,7 +87,6 @@ END ADD TO definition_block.
 --    headphones, VR headsets, etc.), therefore the 'worn' state should not be
 --    exclusive to the clothing class.
 
--- tag::default-attributes-clothing[]
 EVERY clothing ISA OBJECT
 
   IS wearable.
@@ -114,7 +113,6 @@ EVERY clothing ISA OBJECT
     -- cover legs and torso via two separate pieces.
 
   IS sex 0. -- If not zero, restricts wearing to actors with same 'sex' value.
--- end::default-attributes-clothing[]
 
 -- --------------------------------
 -- Actors & Clothes `sex` Attribute

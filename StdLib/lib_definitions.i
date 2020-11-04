@@ -43,7 +43,6 @@ END ADD TO.
 
 -- We define general attributes for every thing (object and actor):
 
--- tag::default-attributes-thing[]
 ADD TO EVERY THING
 
   IS examinable.  -- The library declares SOUNDs as not examinable.
@@ -106,7 +105,6 @@ ADD TO EVERY THING
     --       an actor also set the thing as `NOT worn`, in case authors are
     --       using this attribute outside of the `clothing` class context.
     -- ------------------------------------------------------------------------
--- end::default-attributes-thing[]
 
 --==============================================================================
 --------------------------------------------------------------------------------

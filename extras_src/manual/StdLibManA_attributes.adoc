@@ -1,0 +1,28 @@
+////
+********************************************************************************
+*                                                                              *
+*                     ALAN Standard Library User's Manual                      *
+*                                                                              *
+*                     Appendix: Default Library Attributes                     *
+*                                                                              *
+********************************************************************************
+////
+
+[appendix]
+[[app.default-attributes]]
+= Default Library Attributes
+
+.EDITORS' NOTE
+[CAUTION]
+=====================================
+*TBD!* This Appendix will present all the library-defined attributes in a well formatted table, where we could have a column describing how the library uses each attribute, and another mentioning potential uses for the author (all of it with nice cross-reference links, etc.).
+
+It replaces the old "`Default Library Attributes`" chapter, that was deleted from
+Part "`Getting Started`".
+
+See https://github.com/AnssiR66/AlanStdLib/issues/114[Issue #114] for a discussion on library attributes in the _StdLib Manual_, and the proposal to dump this chapter.
+=====================================
+
+
+// EOF //
+

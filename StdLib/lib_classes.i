@@ -263,7 +263,6 @@ END EVERY device.
 
 --------------------------------------------------------------------------------
 
--- tag::default-attributes-door[]
 EVERY door ISA OBJECT
   IS openable.
   IS NOT open.
@@ -278,7 +277,6 @@ EVERY door ISA OBJECT
     -- The the other side of the door in the next room will be automatically
     -- taken care of by the library, so that its status is updated to match its
     -- counterpart, as if they were a single object.
--- end::default-attributes-door[]
 
   INITIALIZE
 
@@ -481,13 +479,11 @@ END THE.
 --------------------------------------------------------------------------------
 
 
--- tag::default-attributes-lightsource[]
 EVERY lightsource ISA OBJECT
   IS NOT lit.
   IS natural. -- A natural light source, e.g. a candle, a match or a torch.
               -- A `NOT natural` light source is, e.g., a flashlight or a lamp.
               -- You cannot switch on or off a natural light source.
--- end::default-attributes-lightsource[]
 
 --------------------------------------------------------------------------------
 -- EXAMINE LIGHTSOURCE
@@ -843,13 +839,11 @@ END EVERY LISTED_CONTAINER.
 
 --------------------------------------------------------------------------------
 
--- tag::default-attributes-sound[]
 EVERY sound ISA OBJECT
   IS NOT examinable.
   IS NOT takeable.
   IS NOT reachable.
   IS NOT movable.
--- end::default-attributes-sound[]
 
 --------------------------------------------------------------------------------
 -- SMELL SOUND
@@ -971,11 +965,9 @@ END EVERY supporter.
 --------------------------------------------------------------------------------
 
 
--- tag::default-attributes-weapon[]
 EVERY weapon ISA OBJECT
   IS NOT fireable.
 END EVERY.
--- end::default-attributes-weapon[]
 
 --==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -1000,12 +992,10 @@ END EVERY.
 
 --------------------------------------------------------------------------------
 
--- tag::default-attributes-window[]
 EVERY window ISA OBJECT
   IS openable.
   IS NOT open.
   IS NOT takeable.
--- end::default-attributes-window[]
 
 
   VERB examine

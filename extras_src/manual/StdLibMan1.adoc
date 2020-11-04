@@ -25,6 +25,4 @@ include::StdLibMan1_03.adoc[]
 
 include::StdLibMan1_04.adoc[]
 
-include::StdLibMan1_05.adoc[]
-
 :leveloffset: -1

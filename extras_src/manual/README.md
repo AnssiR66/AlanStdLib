@@ -56,8 +56,9 @@ Currently the AsciiDoc sources are organized in the following way, but will be c
         * [`StdLibMan5_01.adoc`][man5_1] — _Runtime Messages_
         * [`StdLibMan5_02.adoc`][man5_2] — _Library Messages_
     + [`StdLibManA.adoc`][manA] — __Appendices__
-        * [`StdLibManA_01.adoc`][manA_1] — _Translating to Other Languages_
-        * [`StdLibManA_02.adoc`][manA_2] — _Short Examples_
+        * [`StdLibManA_attributes.adoc`][manA_1] — _Default Library Attributes_
+        * [`StdLibManA_i18n.adoc`][manA_2] — _Translating to Other Languages_
+        * [`StdLibManA_examples.adoc`][manA_2] — _Short Examples_
 
 
 > **NOTE** — The above list might not always reflect the latest status of the actual library sources, because the book is undergoing rapid transformations in view of the upcoming `v2.2.0` release, and I won't be able to update the above list until I've completed reorganizing the various chapters and sections, and their titles.
@@ -132,8 +133,9 @@ It must be manually fixed, element by element, using the original PDF as a visua
 [man5_2]: ./StdLibMan5_02.adoc
 
 [manA]: ./StdLibManA.adoc
-[manA_1]: ./StdLibManA_01.adoc
-[manA_2]: ./StdLibManA_02.adoc
+[manA_1]: ./StdLibManA_attributes.adoc
+[manA_2]: ./StdLibManA_i18n.adoc
+[manA_3]: ./StdLibManA_examples.adoc
 
 [inc_attr]: ./StdLibMan-inc_attributes.adoc "View the source file with custom attributes definitions"
 
