@@ -255,8 +255,39 @@ END EVERY device.
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
--- @TODO: DOOR intro!
+-- ATTRIBUTES DEFAULTS: NOT openable, NOT open, NOT lockable, NOT locked.
 
+-- Doors can be opened and closed, and (optionally) locked and unlocked.
+
+-- After a door has been described, the library will additionally mention its
+-- current status ("[It is|They are] currently [open|closed].").
+
+
+-- Authors have two options to implement a door across two locations:
+
+--  1) Create a single door that is moved between its two belonging locations,
+--     via the ENTERED clauses of each location.
+--  2) Create two door objects, one in each connected location, and link them
+--     together via their `otherside` attribute.
+
+-- The former approach provides the illusion of a door standing between two
+-- locations by making the door follow the hero when he moves across them; what
+-- seems a two-sided door is in reality the same object.
+
+-- The latter solution provides a truly two-sided door, built from two doors
+-- whose attributes are automatically synchronized by the library --- when the
+-- hero locks/unlocks or opens/closes one door, its matching counterpart on the
+-- other side is automatically updated too.
+
+-- The single-door approach can be more practical when both sides of the door
+-- share identical descriptions and/or have custom verbs defining additional
+-- behaviors, because authors would be dealing with a single instance.
+
+-- The`otherside` dual-door approach is a better choice when the two sides of
+-- the door are asymmetrical, having different descriptions and behaviors (e.g.
+-- a door which can only be opened/closed and locked/unlocked from one side),
+-- because authors can customize each side's behavior independently, since each
+-- side is an instance of its own.
 
 -- This class is not cross-referenced elsewhere in this file nor in any other
 -- library module.
@@ -470,8 +501,27 @@ END THE.
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
--- @TODO: LIGHTSOURCE intro! (mention relation to DARK_LOCATION/ROOM/SITE)
+-- ATTRIBUTES DEFAULTS: natural, NOT lit, NOT broken.
 
+-- The `lightsource` class is designed to provides the means to illuminate dark
+-- locations which are `DARK_LOCATION`, `DARK_ROOM` or `DARK_SITE` instances
+-- (defined in 'lib_lications.i').
+
+-- After a light source has been described, the library will additionally
+-- mention its status ("[It is|They are] currently [on|off|lit|unlit].").
+
+-- A light source can be either `natural` or artificial (`NOT natural`); a
+-- distinction affecting which verbs the player can use to control them:
+
+--   * Natural light sources can be lighted and extinguished/put out.
+--     (but not turned/switched ON/OFF)
+--   * Artificial light sources can be turned/switched ON/OFF and lighted.
+--     (but not extinguished/put out)
+
+-- When a light source is `broken`, it can't be turned on or lighted.
+
+-- Natural light sources Examples: a match, a candle, a campfire.
+-- Artificial light sources Examples: a flashlight, a light bulb, a table lamp.
 
 -- In 'lib_locations.i', `ISA LIGHTSOURCE` expressions are used to define the
 -- behavior of the DARK_LOCATION class.
@@ -481,9 +531,7 @@ END THE.
 
 EVERY lightsource ISA OBJECT
   IS NOT lit.
-  IS natural. -- A natural light source, e.g. a candle, a match or a torch.
-              -- A `NOT natural` light source is, e.g., a flashlight or a lamp.
-              -- You cannot switch on or off a natural light source.
+  IS natural.
 
 --------------------------------------------------------------------------------
 -- EXAMINE LIGHTSOURCE
@@ -529,7 +577,7 @@ EVERY lightsource ISA OBJECT
 -- LIGHT LIGHTSOURCE
 --------------------------------------------------------------------------------
 
--- Only unbroken natural light sources can be lighted.
+-- Any type of unbroken light source can be lighted.
 
   VERB light
     CHECK THIS IS NOT lit
@@ -558,7 +606,14 @@ EVERY lightsource ISA OBJECT
 -- If it's lit, it can't be broken; so the `IS NOT broken` CHECK is not needed.
 
   VERB extinguish --> [extinguish|put out] (obj) | put (obj) out
-    CHECK THIS IS lit
+    CHECK THIS IS natural
+      ELSE
+        IF THIS IS NOT plural
+          THEN "That's"
+          ELSE "Those are"
+        END IF.
+        "not something you can extinguish."
+    AND THIS IS lit
       ELSE
         IF THIS IS NOT plural
           THEN SAY check_lightsource_lit_sg OF my_game.
@@ -626,6 +681,8 @@ EVERY lightsource ISA OBJECT
 --------------------------------------------------------------------------------
 -- SWITCH LIGHTSOURCE
 --------------------------------------------------------------------------------
+
+-- Only unbroken artificial light sources can be switched.
 
 -- The following verb toggles the state of an artificial light source; i.e.
 -- switches it OFF if it's ON, and vice versa. It was added to provide a "lazy

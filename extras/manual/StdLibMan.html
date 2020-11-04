@@ -733,7 +733,7 @@ span.play em,
 <div class="details">
 <span id="author" class="author">Anssi Räisänen</span><br>
 <span id="revnumber">version 2.2.0-WIP,</span>
-<span id="revdate">2020-10-30</span>
+<span id="revdate">2020-11-04</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -4008,11 +4008,25 @@ Consequently, <span class="play">&gt; <em>empty bottle</em></span> will work but
 <div class="sect2">
 <h3 id="sec.lightsource"><a class="anchor" href="#sec.lightsource"></a>12.5. LIGHTSOURCE</h3>
 <div class="paragraph">
-<p>LIGHTSOURCE is <code>natural</code> or <code>NOT natural</code> (a natural LIGHTSOURCE is for example a match or a torch).
-It can be turned on and off, lighted and extinguished (= put out) if it is not broken.
-A natural LIGHTSOURCE cannot be turned on or off, it can only be lighted and extinguished (= put out).
-When examined, a LIGHTSOURCE is by default supplied with a description of whether it is providing light or not.
-The default attributes for a LIGHTSOURCE object are: <code>natural</code>, <code>NOT lit</code>.</p>
+<p>A LIGHTSOURCE can be either <code>natural</code> or <code>NOT natural</code>, and will accept different verbs to interact with it, depending on the type:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="red"><strong>Natural light sources</strong></span> (e.g. a match, a candle, a campire) can be lighted and extinguished/put out, if <code>NOT broken</code>.<br>
+But they can&#8217;t be turned/switched on/off.</p>
+</li>
+<li>
+<p><span class="red"><strong>Artificial light sources</strong></span> (e.g. a flashlight, a table lamp) can be turned/switched on/off and lighted, if <code>NOT broken</code>.<br>
+But they can&#8217;t be extinguished/put out.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When a <code>lightsource</code> instance is examined, the library will additionally mention whether it&#8217;s providing light or not.</p>
+</div>
+<div class="paragraph">
+<p>The default attributes for a LIGHTSOURCE object are: <code>natural</code>, <code>NOT lit</code>.</p>
 </div>
 <div class="listingblock">
 <div class="title">Example: Implementing a natural light source (from <a href="cave.alan" title="View example source file" target="_blank" rel="noopener"><code>cave.alan</code></a>)</div>

@@ -449,10 +449,22 @@ Consequently, [.play]#&gt; _empty bottle_# will work but [.play]#&gt; _empty jui
 [[sec.lightsource]]
 == LIGHTSOURCE
 
-LIGHTSOURCE is `natural` or `NOT natural` (a natural LIGHTSOURCE is for example a match or a torch).
-It can be turned on and off, lighted and extinguished (= put out) if it is not broken.
-A natural LIGHTSOURCE cannot be turned on or off, it can only be lighted and extinguished (= put out).
-When examined, a LIGHTSOURCE is by default supplied with a description of whether it is providing light or not.
+A LIGHTSOURCE can be either `natural` or `NOT natural`, and will accept different verbs to interact with it, depending on the type:
+
+
+* [.red]#*Natural light sources*# (e.g. a match, a candle, a campire) can be lighted and extinguished/put out, if `NOT broken`. +
+But they can't be turned/switched on/off.
+
+* [.red]#*Artificial light sources*# (e.g. a flashlight, a table lamp) can be turned/switched on/off and lighted, if `NOT broken`. +
+But they can't be extinguished/put out.
+
+// @TODO: Should mention if lightsources are also mentioned as lit/unlit in the
+//        course of normal descriptions (e.g. location description, or when
+//        listing items inside containers or on top of supporters, etc.).
+//        Is it so? (need to test this)
+
+When a `lightsource` instance is examined, the library will additionally mention whether it's providing light or not.
+
 The default attributes for a LIGHTSOURCE object are: `natural`, `NOT lit`.
 
 // 'torch' -> LIGHTSOURCE (LIT) AT cave:

@@ -50,14 +50,26 @@ You light the candle.
 > turn on candle
 That's not something you can turn on.
 
+> turn candle on
+That's not something you can turn on.
+
 > switch on candle
+That's not something you can switch on.
+
+> switch candle on
 That's not something you can switch on.
 
 > ; VERB `turn_off`
 > switch off candle
 That's not something you can switch off.
 
+> switch candle off
+That's not something you can switch off.
+
 > turn off candle
+That's not something you can turn off.
+
+> turn candle off
 That's not something you can turn off.
 
 > ; ==============================================================================
@@ -109,15 +121,14 @@ But the flashlight is not lit.
 > ; ------------------------------------------------------------------------------
 > ; The following verbs can not be used with natural light sources:
 > ; VERB `extinguish`
-> ; ***BUG!*** The verb is not being blocked! (See #123)
 > extinguish flashlight
-But the flashlight is not lit.
+That's not something you can extinguish.
 
 > put out flashlight
-But the flashlight is not lit.
+That's not something you can extinguish.
 
 > put flashlight out
-But the flashlight is not lit.
+That's not something you can extinguish.
 
 > 
 

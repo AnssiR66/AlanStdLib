@@ -26,10 +26,14 @@ light candle
 ; The following verbs can not be used with natural light sources:
 ; VERB `turn_on`
 turn on candle
+turn candle on
 switch on candle
+switch candle on
 ; VERB `turn_off`
 switch off candle
+switch candle off
 turn off candle
+turn candle off
 ; ==============================================================================
 ; ARTIFICIAL LIGHT SOURCE: FLASHLIGHT
 ; ==============================================================================
@@ -57,7 +61,6 @@ switch flashlight off
 ; ------------------------------------------------------------------------------
 ; The following verbs can not be used with natural light sources:
 ; VERB `extinguish`
-; ***BUG!*** The verb is not being blocked! (See #123)
 extinguish flashlight
 put out flashlight
 put flashlight out
