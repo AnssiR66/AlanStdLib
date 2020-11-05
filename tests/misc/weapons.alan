@@ -1,0 +1,50 @@
+--==============================================================================
+-- "Weapons Vanilla Tests" by Tristano Ajmone.
+--==============================================================================
+IMPORT 'library.i'. -- ALAN Standard Library v2.2.0
+
+The my_game IsA DEFINITION_BLOCK
+  Has
+    title    "Weapons Vanilla Tests".
+    subtitle "Checking behavior the `weapon` class.".
+    author   "Tristano Ajmone".
+    year     2020.
+    version  "1".
+End the.
+
+--==============================================================================
+-- WEAPONS
+--==============================================================================
+
+The camp IsA site.
+  Name 'Training Camp'.
+End the.
+
+The knife IsA weapon in hero.
+End the.
+
+The gun IsA weapon in hero.
+  Is fireable.
+End the.
+
+--==============================================================================
+-- TARGETS
+--==============================================================================
+
+The Bob IsA male at camp.
+End the.
+
+The target IsA thing at camp.
+End the.
+
+--==============================================================================
+-- PROPS
+--==============================================================================
+
+The rubber_duck IsA thing at camp.
+  Name rubber duck.
+End the.
+
+--------------------------------------------------------------------------------
+Start at camp.
+Describe banner.

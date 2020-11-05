@@ -1,0 +1,275 @@
+
+
+Weapons Vanilla Tests 
+Checking behavior the `weapon` class. 
+Version 1. 
+(C) 2020 by Tristano Ajmone. 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta7. 
+Standard Library v2.2.0. 
+All rights reserved.
+
+
+Training Camp
+There is a Bob here.
+
+> ; ******************************************************************************
+> ; *                                                                            *
+> ; *                           WEAPONS VANILLA TESTS                            *
+> ; *                                                                            *
+> ; ******************************************************************************
+> ; ==============================================================================
+> ;
+> 
+
+> ; ==============================================================================
+> ; TEST -> WEAPON
+> ; ==============================================================================
+> ; VERB fire
+> fire knife
+That's not something you can fire.
+
+> ; VERB fire_at
+> fire knife at Bob
+That's not something you can fire.
+
+> fire knife at target
+That's not something you can fire.
+
+> fire knife at sky
+That's not something you can fire.
+
+> fire knife at ground
+That's not something you can fire.
+
+> fire knife at me
+That's not something you can fire.
+
+> fire knife at knife
+That's not something you can fire.
+
+> ; VERB shoot_with
+> shoot Bob with knife
+That's not something you can shoot things with.
+
+> shoot target with knife
+That's not something you can shoot things with.
+
+> shoot sky with knife
+That's not something you can shoot things with.
+
+> shoot ground with knife
+That's not something you can shoot things with.
+
+> shoot me with knife
+That's not something you can shoot things with.
+
+> shoot knife with knife
+That's not something you can shoot things with.
+
+> ; VERB attack_with
+> attack Bob with knife
+Resorting to brute force is not the solution here.
+
+> attack target with knife
+Resorting to brute force is not the solution here.
+
+> attack sky with knife
+The sky is too far away.
+
+> attack ground with knife
+Resorting to brute force is not the solution here.
+
+> attack me with knife
+It doesn't make sense to attack yourself.
+
+> attack knife with knife
+It doesn't make sense to attack something with itself.
+
+> ; VERB kill_with
+> kill Bob with knife
+That would be needlessly brutal.
+
+> kill target with knife
+That's not something you can kill.
+
+> kill sky with knife
+That's not something you can kill.
+
+> kill ground with knife
+That's not something you can kill.
+
+> kill me with knife
+There is no need to be that desperate.
+
+> kill knife with knife
+That's not something you can kill.
+
+> ; ==============================================================================
+> ; TEST -> FIREABLE WEAPON
+> ; ==============================================================================
+> ; VERB fire
+> fire gun
+You fire the gun into the air.
+
+> ; VERB fire_at
+> fire gun at Bob
+Resorting to violence is not the solution here.
+
+> fire gun at target
+Resorting to violence is not the solution here.
+
+> fire gun at sky
+The gun is too far away.
+
+> fire gun at ground
+Resorting to violence is not the solution here.
+
+> fire gun at me
+There is no need to be that desperate.
+
+> fire gun at gun
+It doesn't make sense to fire something at itself.
+
+> ; VERB shoot_with
+> shoot Bob with gun
+That's quite uncalled-for.
+
+> shoot target with gun
+That wouldn't accomplish anything.
+
+> shoot sky with gun
+The sky is too far away.
+
+> shoot ground with gun
+That wouldn't accomplish anything.
+
+> shoot me with gun
+There is no need to be that desperate.
+
+> shoot gun with gun
+It doesn't make sense to shoot something with itself.
+
+> ; VERB attack_with
+> attack Bob with gun
+Resorting to brute force is not the solution here.
+
+> attack target with gun
+Resorting to brute force is not the solution here.
+
+> attack sky with gun
+The sky is too far away.
+
+> attack ground with gun
+Resorting to brute force is not the solution here.
+
+> attack me with gun
+It doesn't make sense to attack yourself.
+
+> attack gun with gun
+It doesn't make sense to attack something with itself.
+
+> ; VERB kill_with
+> kill Bob with gun
+That would be needlessly brutal.
+
+> kill target with gun
+That's not something you can kill.
+
+> kill sky with gun
+That's not something you can kill.
+
+> kill ground with gun
+That's not something you can kill.
+
+> kill me with gun
+There is no need to be that desperate.
+
+> kill gun with gun
+That's not something you can kill.
+
+> ; ==============================================================================
+> ; TEST -> NON-WEAPON
+> ; ==============================================================================
+> ; VERB fire
+> fire rubber duck
+That's not something you can fire.
+
+> ; VERB fire_at
+> fire rubber duck at Bob
+That's not something you can fire.
+
+> fire rubber duck at target
+That's not something you can fire.
+
+> fire rubber duck at sky
+That's not something you can fire.
+
+> fire rubber duck at ground
+That's not something you can fire.
+
+> fire rubber duck at me
+That's not something you can fire.
+
+> fire rubber duck at rubber duck
+That's not something you can fire.
+
+> ; VERB shoot_with
+> shoot Bob with rubber duck
+That's not something you can shoot things with.
+
+> shoot target with rubber duck
+That's not something you can shoot things with.
+
+> shoot sky with rubber duck
+That's not something you can shoot things with.
+
+> shoot ground with rubber duck
+That's not something you can shoot things with.
+
+> shoot me with rubber duck
+That's not something you can shoot things with.
+
+> shoot rubber duck with rubber duck
+That's not something you can shoot things with.
+
+> ; VERB attack_with
+> attack Bob with rubber duck
+That's not something you can attack things with.
+
+> attack target with rubber duck
+That's not something you can attack things with.
+
+> attack sky with rubber duck
+That's not something you can attack things with.
+
+> attack ground with rubber duck
+That's not something you can attack things with.
+
+> attack me with rubber duck
+That's not something you can attack things with.
+
+> attack rubber duck with rubber duck
+That's not something you can attack things with.
+
+> ; VERB kill_with
+> kill Bob with rubber duck
+That's not something you can kill with.
+
+> kill target with rubber duck
+That's not something you can kill.
+
+> kill sky with rubber duck
+That's not something you can kill.
+
+> kill ground with rubber duck
+That's not something you can kill.
+
+> kill me with rubber duck
+That's not something you can kill with.
+
+> kill rubber duck with rubber duck
+That's not something you can kill.
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

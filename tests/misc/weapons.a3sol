@@ -1,0 +1,107 @@
+; ******************************************************************************
+; *                                                                            *
+; *                           WEAPONS VANILLA TESTS                            *
+; *                                                                            *
+; ******************************************************************************
+; ==============================================================================
+;
+
+; ==============================================================================
+; TEST -> WEAPON
+; ==============================================================================
+; VERB fire
+fire knife
+; VERB fire_at
+fire knife at Bob
+fire knife at target
+fire knife at sky
+fire knife at ground
+fire knife at me
+fire knife at knife
+; VERB shoot_with
+shoot Bob with knife
+shoot target with knife
+shoot sky with knife
+shoot ground with knife
+shoot me with knife
+shoot knife with knife
+; VERB attack_with
+attack Bob with knife
+attack target with knife
+attack sky with knife
+attack ground with knife
+attack me with knife
+attack knife with knife
+; VERB kill_with
+kill Bob with knife
+kill target with knife
+kill sky with knife
+kill ground with knife
+kill me with knife
+kill knife with knife
+; ==============================================================================
+; TEST -> FIREABLE WEAPON
+; ==============================================================================
+; VERB fire
+fire gun
+; VERB fire_at
+fire gun at Bob
+fire gun at target
+fire gun at sky
+fire gun at ground
+fire gun at me
+fire gun at gun
+; VERB shoot_with
+shoot Bob with gun
+shoot target with gun
+shoot sky with gun
+shoot ground with gun
+shoot me with gun
+shoot gun with gun
+; VERB attack_with
+attack Bob with gun
+attack target with gun
+attack sky with gun
+attack ground with gun
+attack me with gun
+attack gun with gun
+; VERB kill_with
+kill Bob with gun
+kill target with gun
+kill sky with gun
+kill ground with gun
+kill me with gun
+kill gun with gun
+; ==============================================================================
+; TEST -> NON-WEAPON
+; ==============================================================================
+; VERB fire
+fire rubber duck
+; VERB fire_at
+fire rubber duck at Bob
+fire rubber duck at target
+fire rubber duck at sky
+fire rubber duck at ground
+fire rubber duck at me
+fire rubber duck at rubber duck
+; VERB shoot_with
+shoot Bob with rubber duck
+shoot target with rubber duck
+shoot sky with rubber duck
+shoot ground with rubber duck
+shoot me with rubber duck
+shoot rubber duck with rubber duck
+; VERB attack_with
+attack Bob with rubber duck
+attack target with rubber duck
+attack sky with rubber duck
+attack ground with rubber duck
+attack me with rubber duck
+attack rubber duck with rubber duck
+; VERB kill_with
+kill Bob with rubber duck
+kill target with rubber duck
+kill sky with rubber duck
+kill ground with rubber duck
+kill me with rubber duck
+kill rubber duck with rubber duck

@@ -6327,6 +6327,12 @@ ADD TO EVERY THING
     WHEN target
       CHECK my_game CAN shoot_with
         ELSE SAY restricted_response OF my_game.
+      AND weapon IS fireable
+        ELSE
+          IF weapon IS NOT plural
+            THEN SAY check_obj2_suitable_with_sg OF my_game.
+            ELSE SAY check_obj2_suitable_with_pl OF my_game.
+          END IF.
       AND target IS examinable
         ELSE
           IF target IS NOT plural

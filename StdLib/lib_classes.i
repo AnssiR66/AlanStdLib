@@ -978,12 +978,13 @@ END EVERY supporter.
 
 -- The verbs applying to weapons are defined in 'lib_verbs.i':
 
---   * fire
---   * fire_at
---   * fire_at_error
---   * attack_with
---   * kill_with
---   * shoot_with
+--   * Verbs for fireable weapons only:
+--     * `fire`
+--     * `fire_at`
+--     * `shoot_with`
+--   * Verbs for all weapons types:
+--     * `attack_with`
+--     * `kill_with`
 
 
 -- In 'lib_verbs.i', this class is referenced in the syntax definitions, verb
