@@ -69,14 +69,14 @@
 --    Make my_game NOT shout. -- disable shouting.
 --    Make my_game 'save'.    -- enable saving the game.
 
---  Beware that changes to the value of the `restricted_level` attribute  will
---  become effective *after* all the adventure code of the current turn has run
---  (but before the next turn starts), because the library monitors it within an
---  EVENT, and events are executed after adventure code. This means that code
---  like the following:
+-- Beware that changes to the value of the `restricted_level` attribute  will
+-- become effective *after* all the adventure code of the current turn has run
+-- (but before the next turn starts), because the library monitors it within an
+-- EVENT, and events are executed after adventure code. This means that code
+-- like the following:
 
---      Set my_game:restricted_level to 4. -- Block all verbs.
---      Make my_game 'look'.               -- Enable looking.
+--    Set my_game:restricted_level to 4. -- Block all verbs.
+--    Make my_game 'look'.               -- Enable looking.
 
 -- won't work as expected: all verbs will be blocked at the next turn, including
 -- LOOK. This happens because the change in restriction level will be detected
@@ -88,7 +88,7 @@
 
 -- In order to switch to a given restriction level and enable/disable specific
 -- actions in the same turn, you'll need to create and SCHEDULE a dedicated
--- event to handle the specific verbs, so that it gets queued in the events
+-- EVENT to handle the specific verbs, so that it gets queued in the events
 -- processing queue of the interpreter, and will execute *after* the library
 -- event `check_restriction`.
 
@@ -119,7 +119,7 @@
 -- assigning to the attribute a new value (0-5). The latter is used internally
 -- by the library, in the `check_restriction` EVENT, to detect at every turn if
 -- the value of `restricted_level` has changed, compared to its previous value
--- stored in previous_restricted_level` (see `check_restriction` event code
+-- stored in `previous_restricted_level` (see the `check_restriction` EVENT code
 -- below).
 
 ADD TO EVERY definition_block
