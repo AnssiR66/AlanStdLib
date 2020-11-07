@@ -163,8 +163,6 @@ END VERB credits.
 
 
 
-
-
 -- ==============================================================
 
 
@@ -8744,13 +8742,15 @@ ADD TO EVERY OBJECT
       "You don't have anything to write with."
 
       -- To make it work:
-        -- IF text OF obj = ""
-        -- THEN SET text OF obj TO txt.
-        -- ELSE SET text OF obj TO text OF obj + " " + txt.
-        -- END IF.
 
-      -- "You write ""$$" SAY txt. "$$"" on" SAY THE obj. "."
-        -- MAKE obj readable.
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      -- If text of obj = ""
+      --   Then set text of obj to txt.
+      --   Else set text of obj to text of obj + " " + txt.
+      -- End if.
+      -- "You write ""$$" say txt. "$$"" on" say the obj. "."
+      -- Make obj readable.
+      -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   END VERB write.
 END ADD TO.
@@ -8993,7 +8993,15 @@ END ADD TO.
 --------------------------------------------------------------------------------
 --==============================================================================
 
--- @TODO: YES/NO intro!
+-- The verbs `yes` and `'no'` are two special verbs designed to allow adventures
+-- to force upon the player a question to which he/she must reply with either
+-- YES or NO. The basic verbs definitions, provided here, are just placeholders
+-- for these two verbs, which need to overridden on a dedicated location, where
+-- the Hero will be temporarily moved into, until he answers the question.
+
+-- Furthermore, implementing a YES/NO answers also requires enabling Level 5 of
+-- Actions Restrictions, a dedicated level which blocks all verbs except `yes`
+-- and `'no'`. Instructions and a practical example can be found further down.
 
 -- ================================================================
 
@@ -9032,7 +9040,56 @@ VERB 'no'
   DOES "Really?"
 END VERB 'no'.
 
+--==============================================================================
+--------------------------------------------------------------------------------
+-- YES and NO Usage Instructions & Example
+--------------------------------------------------------------------------------
+--==============================================================================
+
+-- In order to enforce upon the player a question to which he/she must answer
+-- YES or NO, you'll need to:
+
+--   * Move the Hero to a temporary location specifically designed for the
+--     question.
+--   * Enforce actions-restrictions Level 5 (only YES/NO answers allowed).
+--   * Override the `yes` and `'no'` verbs on that location, implementing the
+--     code to carry out the outcomes of both answers.
+--   * Once the player has answered the question, move the Hero back to a real
+--     game location, and restore the default actions-restrictions Level (0).
+
+-- Below is an example of how to implement an adventure that, when it starts, it
+-- asks the player whether he/she wishes to restore a saved game. If the answer
+-- is YES, the player will have to choose a saved game and resume playing it. If
+-- the answer is NO, the player will be transported to the location where the
+-- adventure really begins.
+
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- Import 'library.i'.
+
+-- The my_game IsA definition_block
+--   Has restricted_level 5. -- Only allow YES/NO at game start.
+-- End the.
+
+-- The restore_room IsA location.
+--   Name ''.  -- No name displayed for this room.
+--   Description "Do you want to restore a saved game (yes/no?)"
+
+--   Verb yes             -- If the player answers YES:
+--     Does only restore. -- Tell interpreter to restore a saved game.
+--   End verb.
+
+--   Verb 'no'            -- If the player answers NO:
+--     Does only
+--       Set restricted_level of my_game to 0. -- Unlock all verbs.
+--       Locate hero at room1. -- Move player to "real" game location.
+--   End verb.
+-- End the restore_room.
+
+-- The room1 IsA room -- The first "real" location of the adventure world.
+-- End the.
+
+-- Start at restore_room.
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 -- end of file.
-
-

@@ -41,63 +41,67 @@ ADD TO EVERY ENTITY
 END ADD TO.
 
 
--- We define general attributes for every thing (object and actor):
+-- We define general attributes for every thing (object and actor).
+-- For convenience, related attributes are grouped together:
 
 ADD TO EVERY THING
 
-  IS examinable.  -- The library declares SOUNDs as not examinable.
-     inanimate.   -- Actors are NOT inanimate.
-     movable.     -- To allow pushing, pulling, lifting, etc.
-     open.        -- = not closed.
-     reachable.   -- See also `distant` below
-     takeable.    -- You'll have to define which objects are NOT takeable.
-                  -- By default, the floor, walls, ceiling, ground and sky
-                  -- objects are not takeable. The same goes for all doors,
-                  -- windows, sounds, liquids without a vessel, and actors.
+  CAN NOT talk. -- Only PERSON actors (MALE/FEMALE) can talk by default.
+  IS inanimate. -- Only actors are NOT inanimate.
 
-  HAS allowed {null_object}.
-    -- Container objects only take what is allowed for them to take;
-    -- this applies to verbs empty_in, pour_in, put_in and throw_in.
-    -- `null_object` is a default dummy-object that can be ignored.
+  NOT on.      -- Some classes can be ON/OFF (device, lightsource).
+  NOT broken.  -- Some actions are prevented on broken items.
+  NOT scenery. -- Sceneries are mere props (see dedicated section further down).
 
-  HAS ex "".  -- An alternative way of providing responses to ">x [thing]",
-              -- instead of `VERB examine DOES ONLY...`
-              -- See the library manual for more info.
+  NOT edible.    -- Verb `eat` only works on a edible object.
+  NOT drinkable. -- Verb `drink` only works on a drinkable `liquid`.
 
-  HAS matching_key null_key.
-    -- All lockable doors need a matching key to lock/unlock them.
-    -- This attribute is being added to every thing, instead of just to doors,
-    -- to enable matching keys to be implemented on other lockable objects too,
-    -- e.g. for treasure chests, etc.
-    -- `null_key` is a default dummy-object that can be ignored.
+  NOT fireable.  -- A `weapon` instance might be a firearm.
 
-  HAS text "".
+  IS examinable. -- The library declares SOUNDs as not examinable.
+  HAS ex "".     -- An alternative way of providing `examine` responses,
+                 -- instead of `VERB examine DOES ONLY...`
 
-  NOT broken.
-  NOT distant.
-    -- Usage: you can talk to `not reachable` actors, but not to `distant` ones.
-    -- You can also throw things in, to or at `not reachable` targets but not to
-    -- `distant` ones.
+  IS movable.  -- To allow pushing, pulling, lifting, etc.
+  IS takeable. -- You'll have to define which objects are NOT takeable.
+
+    -- By default, the floor, walls, ceiling, ground and sky objects are not
+    -- takeable. The same goes for all actors, doors, windows, sounds, and
+    -- liquids without a vessel.
+
+  IS reachable. -- You can talk to `not reachable` actors, but not to `distant`
+  NOT distant.  -- ones. You can also throw things in, to or at `not reachable`
+                -- targets but not to `distant` ones.
+
     -- Default response for `not reachable` things:
     --    The [thing] is out of your reach.
     -- Default response for `distant` things:
     --    The [thing] is too far away.
 
-  NOT drinkable.
-  NOT edible.
-  NOT fireable. -- Can (not) be used as a firearm.
-  NOT lockable.
+  HAS allowed {null_object}. -- Set of instances allowed in container.
+
+    -- Container objects only take what is allowed for them to take;
+    -- this applies to verbs empty_in, pour_in, put_in and throw_in.
+    -- The `null_object` is a default dummy placeholder (ignore).
+
+  IS open.      -- i.e. not closed.
   NOT locked.
-  NOT on.
-  NOT openable.
-  NOT readable.
-  NOT scenery. -- Sceneries are mere props (see dedicated section further down).
-  NOT wearable.
-  NOT writeable.
+  NOT openable. -- Can't be opened/closed.
+  NOT lockable. -- Can't be locked/unlocked.
+  HAS matching_key null_key. -- i.e. doesn't have an associated key, by default.
 
-  CAN NOT talk.
+    -- All lockable doors need a matching key to lock/unlock them.
+    -- This attribute is being added to every thing, instead of just to doors,
+    -- to enable matching keys to be implemented on other lockable objects too,
+    -- e.g. a treasure chests, a detonator key switch, etc.
+    -- The `null_key` is a default dummy placeholder (ignore).
 
-  IS NOT worn.  -- (for `clothing` instances) it's not worn by any actor.
+  NOT readable.  -- Anything can be made readable and writable.
+  NOT writeable. -- The `write` verbs only works on `writable` things.
+  HAS text "".   -- Holds the readable text; null by default.
+
+  NOT wearable. -- Only `clothing` instances are wearable, by default.
+  NOT worn.     -- (for `clothing` instances) it's not worn by any actor.
     -- ------------------------------------------------------------------------
     -- NOTE: Authors can also use this attribute to implement wearables other
     --       than clothing (e.g. devices, like headphones, a VR headset, etc.).
@@ -152,8 +156,11 @@ END ADD TO THING.
 --------------------------------------------------------------------------------
 --==============================================================================
 
--- Some default weight settings for things, mostly used to check if something is
--- movable.
+-- Some default weight settings for things, used by the library to check if
+-- something is movable.
+
+-- The library-defined threshold is 50: the verbs `take`, `take_from` and `lift`
+-- will not work on objects heavier than 49.
 
 ADD TO EVERY THING
   HAS weight 0.
@@ -288,28 +295,46 @@ SYNONYMS
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
--- @TODO: Add intro text.
+-- Here we define the `definition_block`, a special singleton class which every
+-- adventure must instantiate as the `my_game` meta-instance. The library needs
+-- the `my_game` instance because it's specifically referenced by the library
+-- code for various purposes:
 
--- Here we create the `definition_block` class, to group various definitions.
--- In the game source file, the author should declare an instance `my_game`
--- which belongs to this class.
+--   * Library messages attributes (defined in 'lib_messages_library.i').
+--   * Actions restrictions attributes (defined in 'lib_verbs_restrictions.i').
+--   * Attributes for library settings, game info, and temporary variables.
+
+-- The `definition_block` class is further extended by other library modules,
+-- which add more attributes, required for other features. In order to keep the
+-- various library features in independent modules, the definition of this class
+-- was spread across different source files.
+
+-- Authors are able to override on `my_game` the library defaults defined on the
+-- `definition_block`. Furthermore, the `my_game` is a location that, during
+-- initialization, becomes the nesting location of every other game location
+-- (see INITIALIZE, below), which allows authors to override library verbs with
+-- any VERB defined on `my_game`, since it will always be in scope.
+
+-- There should only be a single `definition_block` instance in an adventure,
+-- and it must be named `my_game`. Without the `my_game` instance, the adventure
+-- won't compile. Multiple `definition_block` instances could compromise the
+-- code integrity of an adventure, because the `definition_block` initialization
+-- is designed to target the `my_game` instance specifically.
 
 --------------------------------------------------------------------------------
 
--- An attribute for keeping track of nested locations;
+-- An attribute for keeping track of nested locations during initialization;
 -- used internally by the library (ignore).
 
 ADD TO EVERY LOCATION
   HAS nested {nowhere}.
 END ADD TO.
 
-
 --==============================================================================
 --------------------------------------------------------------------------------
 -- my_game Attributes
 --------------------------------------------------------------------------------
 --==============================================================================
-
 
 EVERY definition_block ISA LOCATION
 
@@ -529,7 +554,6 @@ THE banner ISA LOCATION
 
     -- StdLib Info:
     "$nStandard Library v2.2.0."
-
 
     "$nAll rights reserved."
 
