@@ -5,8 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<meta name="author" content="Tristano Ajmone">
-<title>The Clothing Guide</title>
+<title>ALAN StdLib Clothing Guide</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -733,9 +732,9 @@ span.play em,
 <h1>The Clothing Guide</h1>
 <div class="details">
 <span id="author" class="author">Tristano Ajmone</span><br>
-<span id="email" class="email"><a href="mailto:tajmone@gmail.com">tajmone@gmail.com</a></span><br>
-<span id="revnumber">version 2,</span>
-<span id="revdate">2019-05-05</span>
+<span id="revnumber"> StdLib 2.2.0-RC,</span>
+<span id="revdate">2020-11-08</span>
+<br><span id="revremark">ALAN 3.0beta7</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -743,7 +742,7 @@ span.play em,
 <li><a href="#_introduction">Introduction</a></li>
 <li><a href="#_the_clothing_class">The Clothing Class</a>
 <ul class="sectlevel2">
-<li><a href="#_body_coverage_attributes">Body Coverage Attributes</a></li>
+<li><a href="#_body_coverage_attributes">Body-Coverage Attributes</a></li>
 </ul>
 </li>
 <li><a href="#_practical_examples">Practical Examples</a>
@@ -759,22 +758,46 @@ span.play em,
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>An introductory reference guide to using the Standard Library clothing features and undestanding the coverage attributes of the <code>clothing</code> class, and how to set their values in clothes istances.</p>
+<p>How to use the new clothing system of StdLib v2.2.0-RC.</p>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
 <div class="paragraph">
-<p>This document is currently undergoing adaptation from the old clothing system to the new one.
-The text needs to be revised, and since there is no fixed-values <em>Clothing Table</em> in the new system, we need to provide on or more arbitrary examples of layers enumerations so that the reader can refer to them along the tutorial.</p>
+<p>An tutorial on how to use the Standard Library clothing features and understand the coverage attributes of the <code>clothing</code> class, and how to set their values in clothes instances.</p>
 </div>
-</td>
-</tr>
-</table>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><span class="big red"><strong>The Clothing System Has Changed</strong></span></p>
+</div>
+<div class="paragraph">
+<p>The clothing system has been thoroughly revised in v2.2.0-RC of the library:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>worn</code> entity and the <code>wearing</code> Set have been dropped and replaced by the <code>worn</code> boolean attribute, making the clothing system easier to work with.</p>
+</li>
+<li>
+<p>The body-coverage attributes are no longer constrained to fixed values, and can now be assigned arbitrary values, so the old <em>Clothing Table</em> is no longer needed.</p>
+</li>
+<li>
+<p>There&#8217;s a new <code>facecover</code> body-coverage attribute.</p>
+</li>
+<li>
+<p>Two optional attributes were added to handle special clothing items:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>blockslegs</code>&#8201;&#8212;&#8201;used for <em>skirts</em> and <em>coats</em>, which don&#8217;t prevent accessing legsware.</p>
+</li>
+<li>
+<p><code>twopieces</code>&#8201;&#8212;&#8201;used for items covering legs and torso with two separate pieces that should be handled as a single item, e.g. a <em>bikini</em>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -782,10 +805,10 @@ The text needs to be revised, and since there is no fixed-values <em>Clothing Ta
 <h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Standard Library adds some useful classes and verbs for handling clothing to allow the main character to wear and disrobe clothes in a layered manner&#8201;&#8212;&#8201;i.e. to prevent putting on or removing a clothing item when a worn item of a higher layer stands in the way (e.g. wearing socks on top of shoes).</p>
+<p>The Standard Library adds some useful classes and verbs for handling clothing to allow the main character to wear and disrobe clothes in a layered manner&#8201;&#8212;&#8201;i.e. to prevent putting on or removing a clothing item when a worn item of a higher layer stands in the way (e.g. wearing socks on top of shoes, or wearing/removing them without first removing the shoes).</p>
 </div>
 <div class="paragraph">
-<p>Optionally, the library also allows to assign a <code>sex</code> value to clothes, in order to prevent the main character from wearing clothes that don&#8217;t match his/her own <code>sex</code> value.</p>
+<p>Optionally, the library also allows to assign a <code>sex</code> value to clothes, in order to prevent the main character from wearing clothes that don&#8217;t match his/her own gender (i.e. the <code>sex</code> value of the Hero).</p>
 </div>
 <div class="paragraph">
 <p>This document explores these features and provides some examples on how to implement clothing in your own adventures.</p>
@@ -799,9 +822,9 @@ The text needs to be revised, and since there is no fixed-values <em>Clothing Ta
 <p>The library defines the <code>clothing</code> class for clothing items, which adds to its instances some special attributes:</p>
 </div>
 <div class="listingblock lib">
-<div class="title">Predefined attributes of <code>clothing</code> class&#8201;&#8212;&#8201;defined in <code>lib_classes.i</code></div>
+<div class="title">Predefined attributes of the <code>clothing</code> class&#8201;&#8212;&#8201;defined in <code>lib_clothing.i</code></div>
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">EVERY</span> clothing <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span>&#x000A;&#x000A;  <span class="hl kwa">IS</span> wearable<span class="hl kwa">.</span>&#x000A;&#x000A;  <span class="hl kwa">IS</span> sex <span class="hl num">0</span><span class="hl kwa">.</span> <span class="hl slc">-- If not zero, restricts wearing to actors with same &#39;sex&#39; value.</span>&#x000A;&#x000A;  <span class="hl slc">-- Body coverage layered-values, by area:</span>&#x000A;  <span class="hl kwa">IS</span> headcover  <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Head.</span>&#x000A;  <span class="hl kwa">IS</span> facecover  <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Face.</span>&#x000A;  <span class="hl kwa">IS</span> handscover <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Hands.</span>&#x000A;  <span class="hl kwa">IS</span> feetcover  <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Feet.</span>&#x000A;  <span class="hl kwa">IS</span> topcover   <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Chest and arms.</span>&#x000A;  <span class="hl kwa">IS</span> botcover   <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Pelvis and legs.</span>&#x000A;&#x000A;  <span class="hl slc">-- Attributes for special clothing (skirts, coats, bikinis, etc.):</span>&#x000A;&#x000A;  <span class="hl kwa">IS</span> blockslegs<span class="hl kwa">.</span>&#x000A;  <span class="hl slc">-- i.e. the item prevents wearing/removing legsware from the layers below</span>&#x000A;  <span class="hl slc">-- (skirts and coats are &#39;NOT blockslegs&#39;).</span>&#x000A;&#x000A;  <span class="hl kwa">IS NOT</span> twopieces<span class="hl kwa">.</span>&#x000A;  <span class="hl slc">-- For items covering legs + torso (&#39;topcover&#39; &amp; &#39;botcover&#39; &lt;&gt; 0) that should</span>&#x000A;  <span class="hl slc">-- be treated as a single piece (e.g. a one-piece swimming suite).</span>&#x000A;  <span class="hl slc">-- Items which are &#39;twopieces&#39; (eg. a bikini) can be worn/removed while</span>&#x000A;  <span class="hl slc">-- wearing a skirt for, although handled as a single clothing item, they cover</span>&#x000A;  <span class="hl slc">-- legs and torso via two separate pieces.</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">EVERY</span> clothing <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span>&#x000A;&#x000A;  <span class="hl kwa">IS</span> wearable<span class="hl kwa">.</span>&#x000A;&#x000A;  <span class="hl slc">-- Body coverage layered-values, by area:</span>&#x000A;  <span class="hl kwa">IS</span> headcover  <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Head.</span>&#x000A;  <span class="hl kwa">IS</span> facecover  <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Face.</span>&#x000A;  <span class="hl kwa">IS</span> handscover <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Hands.</span>&#x000A;  <span class="hl kwa">IS</span> feetcover  <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Feet.</span>&#x000A;  <span class="hl kwa">IS</span> topcover   <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Chest and arms.</span>&#x000A;  <span class="hl kwa">IS</span> botcover   <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Pelvis and legs.</span>&#x000A;&#x000A;  <span class="hl slc">-- Attributes for special clothing (skirts, coats, bikinis, etc.):</span>&#x000A;&#x000A;  <span class="hl kwa">IS</span> blockslegs<span class="hl kwa">.</span>&#x000A;    <span class="hl slc">-- i.e. the item prevents wearing/removing legsware from the layers below</span>&#x000A;    <span class="hl slc">-- (skirts and coats are &#39;NOT blockslegs&#39;).</span>&#x000A;&#x000A;  <span class="hl kwa">IS NOT</span> twopieces<span class="hl kwa">.</span>&#x000A;    <span class="hl slc">-- For items covering legs + torso (&#39;topcover&#39; &amp; &#39;botcover&#39; &lt;&gt; 0) that</span>&#x000A;    <span class="hl slc">-- should be treated as a single piece (e.g. a one-piece swimming suite).</span>&#x000A;    <span class="hl slc">-- Items which are &#39;twopieces&#39; (eg. a bikini) can be worn/removed while</span>&#x000A;    <span class="hl slc">-- wearing a skirt for, although handled as a single clothing item, they</span>&#x000A;    <span class="hl slc">-- cover legs and torso via two separate pieces.</span>&#x000A;&#x000A;  <span class="hl kwa">IS</span> sex <span class="hl num">0</span><span class="hl kwa">.</span> <span class="hl slc">-- If not zero, restricts wearing to actors with same &#39;sex&#39; value.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -810,20 +833,20 @@ The text needs to be revised, and since there is no fixed-values <em>Clothing Ta
 <div class="listingblock lib">
 <div class="title">The <code>worn</code> attribute on <code>THING</code>&#8201;&#8212;&#8201;defined in <code>lib_definitions.i</code></div>
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">ADD TO EVERY</span> <span class="hl kwb">THING</span>&#x000A;  <span class="hl kwa">...</span>&#x000A;  <span class="hl kwa">IS NOT</span> worn<span class="hl kwa">.</span>&#x000A;    <span class="hl slc">-- (for &#39;clothing&#39; instances) it&#39;s not worn by any actor.</span>&#x000A;    <span class="hl slc">-- -------------------------------------------------------------------------</span>&#x000A;    <span class="hl slc">-- NOTE: Authors can also use this attribute to implement wearables other</span>&#x000A;    <span class="hl slc">--       than clothing (eg. devices, like headphones, a VR headset, etc.).</span>&#x000A;    <span class="hl slc">--       The library ensures that any verbs which could remove a thing from</span>&#x000A;    <span class="hl slc">--       an actor also set the thing as &#39;NOT worn&#39;, in case authors are</span>&#x000A;    <span class="hl slc">--       using this attribute outside of the &#39;clothing&#39; class context.</span>&#x000A;    <span class="hl slc">-- -------------------------------------------------------------------------</span></code></pre>
+<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">ADD TO EVERY</span> <span class="hl kwb">THING</span>&#x000A;  <span class="hl kwa">...</span>&#x000A;  <span class="hl kwa">NOT</span> wearable<span class="hl kwa">.</span> <span class="hl slc">-- Only `clothing` instances are wearable, by default.</span>&#x000A;  <span class="hl kwa">NOT</span> worn<span class="hl kwa">.</span>     <span class="hl slc">-- (for `clothing` instances) it&#39;s not worn by any actor.</span>&#x000A;    <span class="hl slc">-- ------------------------------------------------------------------------</span>&#x000A;    <span class="hl slc">-- NOTE: Authors can also use this attribute to implement wearables other</span>&#x000A;    <span class="hl slc">--       than clothing (e.g. devices, like headphones, a VR headset, etc.).</span>&#x000A;    <span class="hl slc">--       The library ensures that any verbs which could remove a thing from</span>&#x000A;    <span class="hl slc">--       an actor also set the thing as `NOT worn`, in case authors are</span>&#x000A;    <span class="hl slc">--       using this attribute outside of the `clothing` class context.</span>&#x000A;    <span class="hl slc">-- ------------------------------------------------------------------------</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>We shall now look into these attributes and how they can be used to personalize clothing in your adventures.</p>
 </div>
 <div class="sect2">
-<h3 id="_body_coverage_attributes"><a class="anchor" href="#_body_coverage_attributes"></a>Body Coverage Attributes</h3>
+<h3 id="_body_coverage_attributes"><a class="anchor" href="#_body_coverage_attributes"></a>Body-Coverage Attributes</h3>
 <div class="paragraph">
-<p>By default, all new clothing instances will have all body coverage attributes set to zero.
-When you create new clothing items, you need to assign to them some arbitrary body coverage values that are consistent throughout your adventure.</p>
+<p>By default, every new clothing instance will have its body-coverage attributes set to zero.
+When you create new clothing items, you need to assign to them some arbitrary body-coverage values that are consistent throughout your adventure.</p>
 </div>
 <div class="paragraph">
-<p>The body coverage values of a clothing item indicate:</p>
+<p>The body-coverage values of a clothing item indicate:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -838,44 +861,15 @@ When you create new clothing items, you need to assign to them some arbitrary bo
 <div class="paragraph">
 <p>The body area is indicated by the attribute name, where a value of zero indicates that the clothing item doesn&#8217;t affect that area at all.
 The layer of interest is indicated by the value itself, where higher values indicate higher layers (i.e. further away from the skin).
-Layer values are integer numbers, and authors are free to chose arbitrary layers values without constraints&#8201;&#8212;&#8201;i.e. you are not obliged to assign layers in consecutive order, you can for example start from layer 5, and assing to every next layer the value of the previous one plus 3.</p>
+Layer values are integer numbers, and authors are free to chose arbitrary layers values, without constraints&#8201;&#8212;&#8201;i.e. you are not obliged to assign layers in consecutive order, you can for example start from layer 5, and assign to every next layer the value of its previous layer plus 3.</p>
 </div>
 <div class="paragraph">
-<p>Leaving gaps between layers is actually a good strategy, for if you later on realize that you need to assign a new layer to accomodate new clothing items in intermediate layers (e.g. a jumper that goes on top of a shirt and below a coat) you can use the unassigned layers for it.</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>These must be expanded upon, broken in smaller senteces and provide examples, to make it simpler for the reader.</p>
-</div>
-</td>
-</tr>
-</table>
+<p>Leaving gaps between layers is actually a good strategy, because if later on you realize that you need to assign a new layer to accommodate new clothing items in intermediate layers (e.g. a jumper that goes on top of a shirt and below a coat) you can use an unassigned layer value, without having to renumber all the assigned layer values.</p>
 </div>
 <div class="paragraph">
 <p>Some body areas can take multiple layers of clothes, but each body layer can only be wearing one item at the time.
 For example, the hero can be wearing over his chest a vest, a shirt and a sweater, for each one of them occupies a different layer in the <code>topcover</code> area (e.g. 1, 2 and 3).
-But he can&#8217;t wear a sweater and a pullover at the same time, for they both occupy the same area and layer (<code>topcover 3</code>).</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>The paragraph above only made sense in reference to the old <em>Clothing Table</em>, which had fixed values.
-I&#8217;ll need to add an example at the start of the tutorial, to provide references to an arbitrary layer numbering system that the reader can related to.</p>
-</div>
-</td>
-</tr>
-</table>
+But he can&#8217;t wear a sweater and a pullover at the same time, if these two items were both assigned the same body-area layer (e.g. <code>topcover 3</code>).</p>
 </div>
 <div class="paragraph">
 <p>Although he might put on trousers even if he isn&#8217;t wearing any underpants, he can neither put on nor remove underpants while wearing trousers, because the latter prevent access to the layer occupied by the former.
@@ -892,6 +886,20 @@ In other words, while the library doesn&#8217;t impose wearing clothes on each l
 <div class="sectionbody">
 <div class="paragraph">
 <p>Now let&#8217;s dive into some practical examples of how to use clothing, from simple to complex.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This tutorial hasn&#8217;t been completed yet! Only a simple example is provided for the time being.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="sect2">
 <h3 id="_simple_clothing"><a class="anchor" href="#_simple_clothing"></a>Simple Clothing</h3>
@@ -910,7 +918,7 @@ Here&#8217;s the adventure outline:</p>
 <div class="content">
 <div class="paragraph">
 <p>The Hero is a waiter in his one-bedroom flat who must take a shower, get dressed and rush to work.
-He won&#8217;t be able to take a shower if he&#8217;s wearing or carrying clothes, and he won&#8217;t be allowed to leave the flat unless dressed.
+He won&#8217;t be able to take a shower if he&#8217;s wearing or carrying clothes, and he won&#8217;t be allowed to leave the flat unless he&#8217;s dressed.
 The adventure ends when he leaves the flat.</p>
 </div>
 </div>
@@ -973,8 +981,8 @@ We&#8217;ll create it as an object and add to it the <code>take</code> verb.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The actual <code>Check</code> only needs to verify that the uniform is <code>not in hero</code>, for the action is to be prevented regarless of wether the clothing item is being carried or worn&#8201;&#8212;&#8201;the whole idea is that it shouldn&#8217;t get wet.
-If the check condition is violated, we then resort to an <code>If</code> statement in order to produce an appropriate response depending on wether the uniform <code>is worn</code> or just carried (<code>else</code>) by the Hero.</p>
+<p>The actual <code>Check</code> only needs to verify that the uniform is <code>not in hero</code>, for the action is to be prevented regardless of whether the clothing item is being carried or worn&#8201;&#8212;&#8201;the whole idea is that it shouldn&#8217;t get wet.
+If the check condition is violated, we then resort to an <code>If</code> statement in order to produce an appropriate response depending on whether the uniform <code>is worn</code> or just carried (<code>else</code>) by the Hero.</p>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s compile our draft adventure to test that it&#8217;s behaving as expected.</p>
@@ -1089,10 +1097,10 @@ Edit the <code>bedroom</code> code as follows:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>In this context we could have omitted <code>directly</code> and use just <code>Check uniform in hero</code> instead, since there are no carriable containers in the game.</p>
+<p>In this context we could have omitted <code>directly</code> and use just <code>Check uniform in hero</code> instead, since in this game there are no containers which the hero might be carrying.</p>
 </div>
 <div class="paragraph">
-<p>Acutally, it would have been sufficient to just <code>Check uniform is worn</code>, since there are no other actors in this game it&#8217;s implicit that only the Hero could be wearing it&#8201;&#8212;&#8201;but, hey, this is a tutorial!</p>
+<p>Actually, it would have been sufficient to just <code>Check uniform is worn</code>, since there are no other actors in this game it&#8217;s implicit that only the Hero could be wearing it&#8201;&#8212;&#8201;but, hey, this is a tutorial!</p>
 </div>
 </td>
 </tr>
@@ -1174,15 +1182,33 @@ You dart out of your flat and make it to the restaurant just in time.<br></p>
 <div class="paragraph">
 <p>Here&#8217;s an example of how common clothing can be mapped to layer values in an adventure.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Unlike with previous editions of the library, the clothing table presented below is merely an arbitrary example of how clothing layers could be organized, but it&#8217;s no longer the only way to assign layers to clothing items.</p>
+</div>
+<div class="paragraph">
+<p>We chose to replicate in this table the original layering values of the old <em>Clothing Table</em>, just because end users are familiar with it, and as a reminder that the new layering system is backward compatible with adventures created for previous versions of the library v2.x.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. Common Clothes Examples</caption>
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 15%;">
-<col style="width: 15%;">
-<col style="width: 15%;">
-<col style="width: 15%;">
-<col style="width: 15%;">
+<col style="width: 21.7391%;">
+<col style="width: 13.0434%;">
+<col style="width: 13.0434%;">
+<col style="width: 13.0434%;">
+<col style="width: 13.0434%;">
+<col style="width: 13.0434%;">
+<col style="width: 13.0439%;">
 </colgroup>
 <thead>
 <tr>
@@ -1192,12 +1218,14 @@ You dart out of your flat and make it to the restaurant just in time.<br></p>
 <th class="tableblock halign-center valign-top">botcover</th>
 <th class="tableblock halign-center valign-top">footcover</th>
 <th class="tableblock halign-center valign-top">handcover</th>
+<th class="tableblock halign-center valign-top">facecover</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">hat</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>2</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
@@ -1210,12 +1238,14 @@ You dart out of your flat and make it to the restaurant just in time.<br></p>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">undies/panties</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>2</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 </tr>
@@ -1226,11 +1256,13 @@ You dart out of your flat and make it to the restaurant just in time.<br></p>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>4</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">blouse/shirt/T-shirt</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>8</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
@@ -1242,12 +1274,14 @@ You dart out of your flat and make it to the restaurant just in time.<br></p>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>32</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">skirt</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>32</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 </tr>
@@ -1258,11 +1292,13 @@ You dart out of your flat and make it to the restaurant just in time.<br></p>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>16</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">sweater/pullover</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>16</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
@@ -1274,12 +1310,14 @@ You dart out of your flat and make it to the restaurant just in time.<br></p>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">coat</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>64</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>64</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 </tr>
@@ -1290,13 +1328,15 @@ You dart out of your flat and make it to the restaurant just in time.<br></p>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>2</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">tights/pantiehose</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tights/pantyhose</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>8</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>2</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 </tr>
 <tr>
@@ -1306,6 +1346,7 @@ You dart out of your flat and make it to the restaurant just in time.<br></p>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>4</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">gloves</p></td>
@@ -1314,22 +1355,23 @@ You dart out of your flat and make it to the restaurant just in time.<br></p>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>2</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
 <p>Of course, every adventure is different, so you&#8217;ll need to work out your own layering system to cover the needs of your adventure.
-Some adventure genres might envolve more clothing items (and therefore, layers) than others&#8201;&#8212;&#8201;e.g. in the <em>fantasy</em> genre you might need dedicated layers for armors, cloaks, magic garnments (talismans, etc.).</p>
+Some adventure genres might involve more clothing items (and therefore, layers) than others&#8201;&#8212;&#8201;e.g. in the <em>fantasy</em> genre you might need dedicated layers for armors, cloaks, magic garments, talismans, etc.</p>
 </div>
 <div class="paragraph">
-<p>It&#8217;s strongly reccomended that you do layout a clothing table like the above, so you can use it as a lookup reference when creating new clothing items.</p>
+<p>It&#8217;s strongly recommended that you do layout a clothing table like the above, so you can use it as a lookup reference when creating new clothing items.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 2<br>
+ StdLib 2.2.0-RC<br>
 </div>
 </div>
 </body>
