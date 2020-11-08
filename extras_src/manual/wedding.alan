@@ -1,9 +1,19 @@
+-- ALAN Standard Library v2.2.0                                    ALAN 3.0beta7
+--==============================================================================
+
+-- "The Wedding" by Anssi Räisänen and Tristano Ajmone, 2020.
+
+-- An example of how to implement a game in which the hero and another NPC are
+-- both wearing tuxedos.
+
+--==============================================================================
 Import 'library.i'.
 
 The my_game IsA definition_block
+  Has title  "The Wedding".
+      author "Anssi Räisänen and Tristano Ajmone".
 End the.
-
-
+--------------------------------------------------------------------------------
 The hero IsA actor
 End the.
 
@@ -90,5 +100,6 @@ The sams_tuxedo IsA clothing in sam
 -- tag::tuxedos[]
 End the.
 -- end::tuxedos[]
-
+--------------------------------------------------------------------------------
 Start at restaurant.
+Describe banner.

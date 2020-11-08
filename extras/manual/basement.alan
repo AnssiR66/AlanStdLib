@@ -1,7 +1,21 @@
-Import 'library.i'.
-The my_game IsA definition_block
-End the.
+-- ALAN Standard Library v2.2.0                                    ALAN 3.0beta7
+--==============================================================================
 
+-- "The Basement" by Anssi Räisänen, 2020.
+
+-- An example of how to implement a dark place using the `lit` attribute on
+-- ordinary locations, and add an external light switch by which the hero can
+-- control its illumination.
+
+--==============================================================================
+
+Import 'library.i'.
+
+The my_game IsA definition_block
+  Has title  "The Basement".
+      author "Anssi Räisänen".
+End the.
+--------------------------------------------------------------------------------
 The stairs_top IsA room
   Name 'At the top of the stairs'
   Exit down to basement.
@@ -43,5 +57,6 @@ End the basement.
 The torch IsA lightsource in Hero.
   Is not natural.
 End the.
-
+--------------------------------------------------------------------------------
 Start at stairs_top.
+Describe banner.

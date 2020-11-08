@@ -1,7 +1,20 @@
-Import 'library.i'.
-The my_game IsA definition_block
-End the.
+-- ALAN Standard Library v2.2.0                                    ALAN 3.0beta7
+--==============================================================================
 
+-- "The Living Room" by Anssi Räisänen, 2020.
+
+-- An example of how to override the default descriptions of a ROOM's floor,
+-- walls and ceiling objects, and further change them mid-game as a result of
+-- some player action..
+
+--==============================================================================
+Import 'library.i'.
+
+The my_game IsA definition_block
+  Has title  "The Living Room".
+      author "Anssi Räisänen".
+End the.
+--------------------------------------------------------------------------------
 -- tag::livingroom[]
 The livingroom IsA room
   Has floor_desc   "There is an exquisite white carpet on the floor.".
@@ -27,5 +40,6 @@ End the carpet.
 The trapdoor IsA door
 End the trapdoor.
 -- end::trapdoor[]
-
+--------------------------------------------------------------------------------
 Start at livingroom.
+Describe banner.

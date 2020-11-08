@@ -1,17 +1,18 @@
+-- ALAN Standard Library v2.2.0                                    ALAN 3.0beta7
 --==============================================================================
 
--- The Cave
+-- "The Cave" by Tristano Ajmone, 2020.
+
+-- An example of how to implement a DARK_ROOM illuminated by a LIGHTSOURCE.
 
 --==============================================================================
--- Code excerpts from this adventure are quoted in the examples of the following
--- sections of the StdLib Manual:
---
---   * §11.1.4. LIGHTSOURCE
---------------------------------------------------------------------------------
 Import 'library.i'.
-The my_game IsA definition_block
-End the.
 
+The my_game IsA definition_block
+  Has title  "The Cave".
+      author "Tristano Ajmone".
+End the.
+--------------------------------------------------------------------------------
 The cave IsA dark_room.
   Is lit. -- Starts off as lit, by the torch.
   Description
@@ -32,9 +33,9 @@ Event wind_gust
   "$pA sudden gust of wind extinguishes the torch."
   make torch not lit.
 End Event.
-
 --------------------------------------------------------------------------------
 Start at cave.
+Describe banner.
 "This example shows how to implement a DARK_LOCATION and LIGHTSOURCE objects.
  $nThe cave is a DARK_ROOM, it start off as `lit` due to the presence of the
  lit torch."

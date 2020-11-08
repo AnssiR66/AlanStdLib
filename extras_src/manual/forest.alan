@@ -1,21 +1,18 @@
+-- ALAN Standard Library v2.2.0                                    ALAN 3.0beta7
 --==============================================================================
 
--- "The Forest" -- A `forced_lit` `DARK_LOCATION` example
+-- "The Forest" by Tristano Ajmone, 2020.
+
+-- A demonstration of how to use the `forced_lit` attribute of `DARK_LOCATION`
+-- instances to simulate the day and night cycle.
 
 --==============================================================================
--- Code excerpts from this adventure are quoted in the examples of the following
--- sections of the StdLib Manual:
---
---   * §8.2.2. DARK_LOCATION -> Forced-Lit Locations
---------------------------------------------------------------------------------
 Import 'library.i'.
 
 The my_game IsA definition_block
   Has
-    title    "The Forest".
-    subtitle "A forced_lit DARK_LOCATION example.".
-    author   "Tristano Ajmone".
-    year     2020.
+    title  "The Forest".
+    author "Tristano Ajmone".
 End the.
 --------------------------------------------------------------------------------
 -- tag::forced-lit-example[]

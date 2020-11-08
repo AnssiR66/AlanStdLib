@@ -1,15 +1,19 @@
+-- ALAN Standard Library v2.2.0                                    ALAN 3.0beta7
 --==============================================================================
--- "'YES' and 'NO' Verbs Example" by Anssi Räisänen, 2020.
+
+-- "YES and NO Example" by Anssi Räisänen, 2020.
+
+-- An example of how to use the YES and 'NO' question verbs and their associated
+-- Actions-Restriction Level 5.
+
 --==============================================================================
-Import 'library.i'. -- ALAN Standard Library v2.2.0
+Import 'library.i'.
 
 The my_game IsA DEFINITION_BLOCK
   Has
     title    "Using the 'YES' and 'NO' Verbs".
-    subtitle "An example on how to use the question verbs.".
+    subtitle "An example of how to use the question verbs.".
     author   "Anssi Räisänen".
-    year     2020.
-    version  "1".
 
     restricted_level 5. -- Only allow YES/NO at game start.
 End the.

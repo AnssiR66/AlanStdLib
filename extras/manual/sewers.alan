@@ -1,21 +1,17 @@
+-- ALAN Standard Library v2.2.0                                    ALAN 3.0beta7
 --==============================================================================
 
--- The Sewers
+-- "The Sewers" by Tristano Ajmone, 2020.
+
+-- A short DARK_LOCATION example.
 
 --==============================================================================
--- Code excerpts from this adventure are quoted in the examples of the following
--- sections of the StdLib Manual:
---
---   * §
---------------------------------------------------------------------------------
 Import 'library.i'.
 
 The my_game IsA definition_block
-  Has
-    title    "The Sewers".
-    subtitle "A short DARK_LOCATION example.".
-    author   "Tristano Ajmone".
-    year     2020.
+  Has title    "The Sewers".
+      subtitle "A short DARK_LOCATION example.".
+      author   "Tristano Ajmone".
 End the.
 --------------------------------------------------------------------------------
 The alley IsA site.
