@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<title>Changelog for ALAN Standard Library v2.2.0</title>
+<title>Changelog for ALAN Standard Library v2.2.0-RC</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -729,7 +729,7 @@ span.play em,
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Changelog for ALAN Standard Library v2.2.0</h1>
+<h1>Changelog for ALAN Standard Library v2.2.0-RC</h1>
 <div class="details">
 <span id="author" class="author">Anssi Räisänen</span><br>
 <span id="email" class="email">&lt;<a href="mailto:anssir66@hotmail.com">anssir66@hotmail.com</a>&gt;</span><br>
@@ -737,7 +737,7 @@ span.play em,
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_v2_2_02020">v2.2.0&#8201;&#8212;&#8201;2020</a>
+<li><a href="#_v2_2_0_rcnov_2020">v2.2.0-RC&#8201;&#8212;&#8201;Nov. 2020</a>
 <ul class="sectlevel2">
 <li><a href="#_stdlib_changes">StdLib Changes</a></li>
 <li><a href="#_bug_fixes">Bug Fixes</a></li>
@@ -769,10 +769,37 @@ For each new library release, we provide a list of all the bugs that were fixed,
 </div>
 </div>
 <div class="sect1">
-<h2 id="_v2_2_02020"><a class="anchor" href="#_v2_2_02020"></a>v2.2.0&#8201;&#8212;&#8201;2020</h2>
+<h2 id="_v2_2_0_rcnov_2020"><a class="anchor" href="#_v2_2_0_rcnov_2020"></a>v2.2.0-RC&#8201;&#8212;&#8201;Nov. 2020</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Version <code>2.2.0</code> marks an important turning point for the Standard Library, introducing many new changes, not only in the library code but also in its development workflow and its documentation:</p>
+<p>The <code>v2.2.0-RC</code> update is a special <em>Release Candidate</em> of the upcoming <code>v2.2.0</code> release.</p>
+</div>
+<div class="paragraph">
+<p>We thought it would be a good idea to come up with an update to the Standard Library for Christmas, so that users who wished to take advantage of the season holidays to create a new text-adventure might enjoy the new features and improvement that have been in the working for over two years.</p>
+</div>
+<div class="paragraph">
+<p>Since we weren&#8217;t able to ultimate the <code>v2.2.0</code> release in due time, we decided that a candidate release would be better than no update at all; so we agreed that we&#8217;d come up with a polished pre-release by mid-November, to allow the news of the update to reach all the ALAN userbase before the holidays began, and to provide authors enough time to study the new library features and changes, before starting to code their adventures.</p>
+</div>
+<div class="paragraph">
+<p>Version <code>2.2.0</code> will mark an important turning point for the Standard Library, introducing many new changes, not only in the library code but also in its development workflow and its documentation.</p>
+</div>
+<div class="paragraph">
+<p>This is the provisional list of changes for the upcoming <code>v2.2.0</code>, as found in <code>v2.2.0-RC</code>.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Since this is a <em>Release Candidate</em>, the final <code>2.2.0</code> release might contain further features changes and updates that could break backward compatibility with <code>v2.2.0-RC</code>.
+The features of the <em>Release Candidate</em> are provisional, and not intended to fully represent the upcoming <code>2.2.0</code> release.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="ulist">
 <ul>
@@ -788,7 +815,7 @@ The new GitHub repository is now the official channel for the StdLib development
 </div>
 </li>
 <li>
-<p><strong><span class="red">AsciiDoc Documentation</span></strong>&#8201;&#8212;&#8201;All library documentation has been ported to AsciiDoc, a powerful syntax for managing documentation in text-based source files which can be version controlled via Git, thus greatly simplifying collaborative editing on the documentation.
+<p><strong><span class="red">AsciiDoc Documentation</span></strong>&#8201;&#8212;&#8201;All library documentation is being ported to AsciiDoc, a powerful syntax for managing documentation in text-based source files which can be version controlled via Git, thus greatly simplifying collaborative editing on the documentation.
 AsciiDoc is a format-agnostic syntax, meaning that the same source documents can now be converted (i.e. <em>built</em>) to numerous ouput formats, including HTML, PDF, and many others.</p>
 <div class="paragraph">
 <p>The new documentation is now built using Asciidoctor.

@@ -1,4 +1,4 @@
-:StdLibVer: 2.2.0
+:StdLibVer: 2.2.0-RC
 :doctitle: Changelog for ALAN Standard Library v{StdLibVer}
 :author: Anssi Räisänen
 :email: <anssir66@hotmail.com>
@@ -42,9 +42,24 @@ TIP: For each new library release, we provide a list of all the bugs that were f
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-== v2.2.0 -- 2020
+== v2.2.0-RC -- Nov. 2020
 
-Version `2.2.0` marks an important turning point for the Standard Library, introducing many new changes, not only in the library code but also in its development workflow and its documentation:
+The `v2.2.0-RC` update is a special _Release Candidate_ of the upcoming `v2.2.0` release.
+
+We thought it would be a good idea to come up with an update to the Standard Library for Christmas, so that users who wished to take advantage of the season holidays to create a new text-adventure might enjoy the new features and improvement that have been in the working for over two years.
+
+Since we weren't able to ultimate the `v2.2.0` release in due time, we decided that a candidate release would be better than no update at all; so we agreed that we'd come up with a polished pre-release by mid-November, to allow the news of the update to reach all the ALAN userbase before the holidays began, and to provide authors enough time to study the new library features and changes, before starting to code their adventures.
+
+Version `2.2.0` will mark an important turning point for the Standard Library, introducing many new changes, not only in the library code but also in its development workflow and its documentation.
+
+This is the provisional list of changes for the upcoming `v2.2.0`, as found in `v2.2.0-RC`.
+
+[WARNING]
+=====================
+Since this is a _Release Candidate_, the final `2.2.0` release might contain further features changes and updates that could break backward compatibility with `v2.2.0-RC`.
+The features of the _Release Candidate_ are provisional, and not intended to fully represent the upcoming `2.2.0` release.
+=====================
+
 
 * *[red]#GitHub Hosting#* --
 Development of the Standard Library has now moved to GitHub, allowing collaborative participation to the project via Git.
@@ -53,7 +68,7 @@ The new GitHub repository is now the official channel for the StdLib development
 ** link:https://github.com/AnssiR66/AlanStdLib[github.com/AnssiR66/AlanStdLib^, title="Visit the Standard Library repository on GitHub"]
 
 * *[red]#AsciiDoc Documentation#* --
-All library documentation has been ported to AsciiDoc, a powerful syntax for managing documentation in text-based source files which can be version controlled via Git, thus greatly simplifying collaborative editing on the documentation.
+All library documentation is being ported to AsciiDoc, a powerful syntax for managing documentation in text-based source files which can be version controlled via Git, thus greatly simplifying collaborative editing on the documentation.
 AsciiDoc is a format-agnostic syntax, meaning that the same source documents can now be converted (i.e. _built_) to numerous ouput formats, including HTML, PDF, and many others.
 +
 The new documentation is now built using Asciidoctor.
