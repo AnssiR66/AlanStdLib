@@ -22,17 +22,17 @@ Here, the hero must go from room1 north to room2 and eat an apple to win the gam
 
 .Short Example #1: {short_example1_alan}
 [source,alan]
--------------------------------------------------
-include::{utf8dir}/short-example1.alan[tag=shown]
--------------------------------------------------
+-------------------------------------------------------------
+include::./short-example1.alan[encoding=iso-8859-1,tag=shown]
+-------------------------------------------------------------
 
 This game wouldn't actually need the library at all; it would be even shorter to code:
 
 .Short Example #1, without StdLib: {short_example1_nolib_alan}
 [source,alan]
---------------------------------------------------------
-include::{utf8dir}/short-example1_no-lib.alan[tag=shown]
---------------------------------------------------------
+--------------------------------------------------------------------
+include::./short-example1_no-lib.alan[encoding=iso-8859-1,tag=shown]
+--------------------------------------------------------------------
 
 In this latter case, though, the player wouldn't for example be able to examine him-/herself, trying to go any other direction, take inventory, try various things with the apple, quit properly, etc.
 
@@ -44,9 +44,9 @@ Here, the player must get a candy from the kitchen and give it to a crying child
 
 .Short Example #2: {short_example2_alan}
 [source,alan]
--------------------------------------------------
-include::{utf8dir}/short-example2.alan[tag=shown]
--------------------------------------------------
+-------------------------------------------------------------
+include::./short-example2.alan[encoding=iso-8859-1,tag=shown]
+-------------------------------------------------------------
 
 Examples 3-4 below show mainly different variations of the `my_game` instance and not complete games:
 
@@ -56,9 +56,9 @@ In this example of defining the `my_game` instance, the author has changed the d
 In addition, the author has added a check and a response of his/her own to `take`:
 
 [source,alan]
---------------------------------------------------
-include::{utf8dir}/_short-example3.alan[tag=shown]
---------------------------------------------------
+--------------------------------------------------------------
+include::./_short-example3.alan[encoding=iso-8859-1,tag=shown]
+--------------------------------------------------------------
 
 
 == Example 4
@@ -66,9 +66,9 @@ include::{utf8dir}/_short-example3.alan[tag=shown]
 Here, the author uses the automatic formulation for the game title, author, and other information:
 
 [source,alan]
---------------------------------------------------
-include::{utf8dir}/_short-example4.alan[tag=shown]
---------------------------------------------------
+--------------------------------------------------------------
+include::./_short-example4.alan[encoding=iso-8859-1,tag=shown]
+--------------------------------------------------------------
 
 
 [[sec.short-example.5]]
@@ -77,9 +77,9 @@ include::{utf8dir}/_short-example4.alan[tag=shown]
 Here, the game author has added a check of his own to the library-defined drink verb and changed an illegal parameter message for the verbs look_behind, look_in, and look_under:
 
 [source,alan]
---------------------------------------------------
-include::{utf8dir}/_short-example5.alan[tag=shown]
---------------------------------------------------
+--------------------------------------------------------------
+include::./_short-example5.alan[encoding=iso-8859-1,tag=shown]
+--------------------------------------------------------------
 
 
 == Example 6
@@ -89,9 +89,9 @@ This code reintroduces the situation used in example 1, with a locked door and t
 
 .Short Example #6: {short_example6_alan}
 [source,alan]
--------------------------------------------------
-include::{utf8dir}/short-example6.alan[tag=shown]
--------------------------------------------------
+-------------------------------------------------------------
+include::./short-example6.alan[encoding=iso-8859-1,tag=shown]
+-------------------------------------------------------------
 
 // PAGE 111 //
 

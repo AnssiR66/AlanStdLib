@@ -21,7 +21,6 @@ alternative links on the GH Pages website, etc.).
 
 // Directories Paths
 // =================
-:StdLibInc: {utf8dir}/../StdLib
 :StdLibDir: ../../StdLib
 :ExtrasDir: ../../extras
 

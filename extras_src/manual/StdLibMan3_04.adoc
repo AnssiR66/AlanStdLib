@@ -192,15 +192,15 @@ The following excerpts from {wedding_alan} demonstrate how to implement a game i
 .Example: Implementing same-named clothing items (from {wedding_alan})
 [source,alan]
 --------------------------------------------
-include::{utf8dir}/wedding.alan[tag=tuxedos]
+include::./wedding.alan[encoding=iso-8859-1,tag=tuxedos]
 --------------------------------------------
 
 By adding `your`/`my` and `his`/`'sam''s'` before `tuxedo` in the `NAME` clauses, we've ensured that the player will be able to target any tuxedo in his commands:
 
 [example,role="gametranscript"]
-=================================================
-include::{utf8dir}/wedding.a3ADocLog[tag=tuxedos]
-=================================================
+=========================================================
+include::./wedding.a3log[encoding=iso-8859-1,tag=tuxedos]
+=========================================================
 
 
 // @ADDED:
@@ -218,15 +218,15 @@ For example:
 .Example: Basic device implementation (from {lab1_alan})
 [source,alan]
 ----------------------------------------------
-include::{utf8dir}/lab1.alan[tag=thingummyjig]
+include::./lab1.alan[encoding=iso-8859-1,tag=thingummyjig]
 ----------------------------------------------
 
 yields by default
 
 [example,role="gametranscript"]
-===================================================
-include::{utf8dir}/lab1.a3ADocLog[tag=thingummyjig]
-===================================================
+===========================================================
+include::./lab1.a3log[encoding=iso-8859-1,tag=thingummyjig]
+===========================================================
 
 
 Using the `ex` attribute, you can define a bit more personal response than [.play]#You notice nothing unusual...#:
@@ -235,16 +235,16 @@ Using the `ex` attribute, you can define a bit more personal response than [.pla
 .Example: Custom device description (from {lab2_alan})
 [source,alan]
 ----------------------------------------------
-include::{utf8dir}/lab2.alan[tag=thingummyjig]
+include::./lab2.alan[encoding=iso-8859-1,tag=thingummyjig]
 ----------------------------------------------
 
 yields
 
 
 [example,role="gametranscript"]
-===================================================
-include::{utf8dir}/lab2.a3ADocLog[tag=thingummyjig]
-===================================================
+===========================================================
+include::./lab2.a3log[encoding=iso-8859-1,tag=thingummyjig]
+===========================================================
 
 
 // @FIXME: Rephrase next 2 paragraphs:
@@ -285,7 +285,7 @@ A DOOR is described by default as being either open or closed when examined.
 .Example: Basic door implementation (from {garden1_alan})
 [source,alan]
 -----------------------------------------------
-include::{utf8dir}/garden1.alan[tag=front_door]
+include::./garden1.alan[encoding=iso-8859-1,tag=front_door]
 -----------------------------------------------
 
 
@@ -293,9 +293,9 @@ would yield by default:
 
 
 [example,role="gametranscript"]
-====================================================
-include::{utf8dir}/garden1.a3ADocLog[tag=front_door]
-====================================================
+============================================================
+include::./garden1.a3log[encoding=iso-8859-1,tag=front_door]
+============================================================
 
 
 Adding an `ex` attribute for the front door, you can change the default.
@@ -304,7 +304,7 @@ Adding
 .Example: Custom door description (from {garden2_alan})
 [source,alan]
 -----------------------------------------------
-include::{utf8dir}/garden2.alan[tag=front_door]
+include::./garden2.alan[encoding=iso-8859-1,tag=front_door]
 -----------------------------------------------
 
 
@@ -312,9 +312,9 @@ will yield
 
 
 [example,role="gametranscript"]
-====================================================
-include::{utf8dir}/garden2.a3ADocLog[tag=front_door]
-====================================================
+============================================================
+include::./garden2.a3log[encoding=iso-8859-1,tag=front_door]
+============================================================
 
 
 If you add a response of your own to the examine verb of a DOOR, the default description of it being either open or closed won't show automatically.
@@ -471,32 +471,32 @@ The default attributes for a LIGHTSOURCE object are: `natural`, `NOT lit`.
 
 .Example: Implementing a natural light source (from {cave_alan})
 [source,alan]
----------------------------------------------------
-include::{utf8dir}/cave.alan[tag=lightsource_torch]
----------------------------------------------------
+---------------------------------------------------------------
+include::./cave.alan[encoding=iso-8859-1,tag=lightsource_torch]
+---------------------------------------------------------------
 
 // 'lamp' -> LIGHTSOURCE (NOT natural) AT lab:
 
 .Example: Implementing an artificial light source (from {lab1_alan})
 [source,alan]
---------------------------------------------------
-include::{utf8dir}/lab1.alan[tag=lightsource_lamp]
---------------------------------------------------
+--------------------------------------------------------------
+include::./lab1.alan[encoding=iso-8859-1,tag=lightsource_lamp]
+--------------------------------------------------------------
 
 
 Examining for example these instances in-game would yield
 
 [example,role="gametranscript"]
-========================================================
-include::{utf8dir}/cave.a3ADocLog[tag=lightsource_torch]
-========================================================
+================================================================
+include::./cave.a3log[encoding=iso-8859-1,tag=lightsource_torch]
+================================================================
 
 and
 
 [example,role="gametranscript"]
-=======================================================
-include::{utf8dir}/lab1.a3ADocLog[tag=lightsource_lamp]
-=======================================================
+===============================================================
+include::./lab1.a3log[encoding=iso-8859-1,tag=lightsource_lamp]
+===============================================================
 
 
 (The opposites of the above messages would be [.play]#It is currently not lit.# and [.play]#It is currently on.#, respectively.)
@@ -507,16 +507,16 @@ If you add a specific examine response for either, you can use the `ex` attribut
 
 .Example: Customizing the examine response of light sources (from {lab2_alan})
 [source,alan]
---------------------------------------------------
-include::{utf8dir}/lab2.alan[tag=lightsource_lamp]
---------------------------------------------------
+--------------------------------------------------------------
+include::./lab2.alan[encoding=iso-8859-1,tag=lightsource_lamp]
+--------------------------------------------------------------
 
 which yields
 
 [example,role="gametranscript"]
-=======================================================
-include::{utf8dir}/lab2.a3ADocLog[tag=lightsource_lamp]
-=======================================================
+===============================================================
+include::./lab2.a3log[encoding=iso-8859-1,tag=lightsource_lamp]
+===============================================================
 
 Using `VERB examine DOES ONLY…` you'll have to add manually the mention about the instance being on or off, for example:
 

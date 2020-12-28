@@ -19,12 +19,6 @@
 extras_src/manual/*.a3log
 extras_src/tutorials/*.a3log
 
-# UTF-8 converted Alan files (for Asciidoctor inclusion):
-_assets/utf8/**/*.a3log
-_assets/utf8/**/*.a3ADocLog
-_assets/utf8/**/*.alan
-_assets/utf8/**/*.i
-
 ## =============
 ## AlanIDE Files
 ## =============

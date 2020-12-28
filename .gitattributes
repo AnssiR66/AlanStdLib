@@ -17,8 +17,6 @@
 *.alan   Alan
 *.i      Alan
 *.ifid   text linguist-generated=true
-# UTF-8 converted Alan sources for Asciidoctor inclusion:
-*.utf8_alan    text linguist-generated=true
 
 ## Alan Story-Files
 ###################

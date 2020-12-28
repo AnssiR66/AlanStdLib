@@ -25,7 +25,6 @@ export invoker="manual/html-build.sh"   # Used by some external scripts
 printBanner "Build Misc. StdLib Docs to HTML"
 
 outDir=./
-utfDir="utf8/manual"
 
 for sourcefile in ./*.asciidoc ; do
 adoc2html $sourcefile

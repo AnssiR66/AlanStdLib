@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# _build-funcs.sh         v2.3.0 | 2020/10/09 | by Tristano Ajmone, MIT License.
+# _build-funcs.sh         v2.4.0 | 2020/12/28 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                        DOCUMENTATION BUILD FUNCTIONS                         #
@@ -14,8 +14,7 @@
 # | normalizeEOL       | file          | Enforce CRLF EOL on Windows OS. |
 # | compile            | file, options | Compile an Alan adventure.      |
 # | runCommandsScripts | storyfile     | Run ".a3sol" files -> ".a3log". |
-# | alan2utf8          | file          | Create UTF-8 from ISO-8859-1.   |
-# | a3logSanitize      | file          | ".a3log" -> ".a3ADocLog".       |
+# | a3logSanitize      | file          | Reformat ".a3log" to AsciiDoc   |
 # | adoc2html          | file          | Conv AsciiDoc -> HTML.          |
 # | deployAlan         | file          | Strip and deploy ".alan" files. |
 # +--------------------+---------------+---------------------------------+
@@ -50,7 +49,6 @@ outBasePath="../extras"
 # - $AlanCompileOpts -> Alan compiler options
 # - $ADocDir         -> path to Asciidoctor assets
 # - $HamlDir         -> path to Haml templates
-# - $utfBasePath     -> path to UTF-8 converted ALAN files
 
 # ******************************************************************************
 # *                                                                            *
@@ -121,42 +119,21 @@ function runCommandsScripts {
 # *                                                                            *
 # ******************************************************************************
 
-function alan2utf8 {
-	# ============================================================================
-	# Create an UTF-8 coverted copy of an ISO-8859-1 Alan file (adventure,
-	# commands script or transcript) inside $utfDir, to allow its inclusion in
-	# AsciiDoc documents, because Asciidoctor won't handle ISO-8859-1 files. See:
-	#
-	#  https://github.com/asciidoctor/asciidoctor/issues/3248
-	# ----------------------------------------------------------------------------
-	# Parameters:
-	# - $1: the input ISO-8859-1 file to convert.
-	# Required Env Vars:
-	# - $utfDir: path to the base folder for all UTF-8 converted files.
-	# ============================================================================
-	outfile="$utfDir/$(basename $1)"
-	printSeparator
-	echo -e "\e[90mSOURCE FILE: \e[93m$1"
-	echo -e "\e[90mDESTINATION: \e[34m$outfile"
-	iconv -f ISO-8859-1 -t UTF-8 $1 > $outfile
-}
-
 function a3logSanitize {
 	# ============================================================================
-	# Takes a game transcript input file $1 "<filename>.a3log" and converts it to
-	# "<filename>.a3ADocLog", a well formatted AsciiDoc example block.
+	# Takes a game transcript input file $1 "<filename>.a3log" and passes it to
+	# a SED filter that applies substitutions to turn it into a well formatted
+	# AsciiDoc example block.
 	# ----------------------------------------------------------------------------
 	# Parameters:
-	# - $1: the input transcript file.
+	# - $1: the target transcript file.
 	# Required scripts:
 	# - ./sanitize_a3log.sed
 	# ============================================================================
-	outfile="${1%.*}.a3ADocLog"
 	printSeparator
-	echo -e "\e[90mSOURCE FILE: \e[93m$1"
-	echo -e "\e[90mDESTINATION: \e[34m$outfile"
-	sed -E --file=$ScriptsDir/sanitize_a3log.sed $1 > $outfile
-	normalizeEOL $outfile
+	echo -e "\e[90mSANITIZE: \e[93m$1"
+	sed -i -E --file=$ScriptsDir/sanitize_a3log.sed $1
+	normalizeEOL $1
 }
 
 function adoc2html {
@@ -183,7 +160,6 @@ function adoc2html {
 		-a source-highlighter=highlight \
 		-a docinfodir=$ADocDir \
 		-a docinfo@=shared-head \
-		-a utf8dir=$utfDir \
 		-a data-uri \
 			$1
 }

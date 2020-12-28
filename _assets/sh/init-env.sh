@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# _assets/sh/init-env.sh                v1.2.1 | 2020/10/19 | by Tristano Ajmone
+# _assets/sh/init-env.sh                v1.2.2 | 2020/12/28 | by Tristano Ajmone
 # ==============================================================================
 # Released into the Public Domain (https://unlicense.org)
 # ------------------------------------------------------------------------------
@@ -100,10 +100,6 @@ export ADocDir="$RepoRoot/_assets/adoc"
 export HamlDir="$ADocDir/haml"
 
 
-# /extras_src/utf8/ -> $utfBasePath
-# =================================
-export utfBasePath="$RepoRoot/_assets/utf8"
-
 ## PRINT REPORT
 ###############
 arr="\e[32;1m->\e[34;1m"
@@ -114,7 +110,6 @@ echo -e "\e[33;1m   \$ImagesDir   $arr ${ImagesDir#$RepoRoot}/"
 echo -e "\e[33;1m   \$StdLibDir   $arr ${StdLibDir#$RepoRoot}/"
 echo -e "\e[33;1m   \$ADocDir     $arr ${ADocDir#$RepoRoot}/"
 echo -e "\e[33;1m   \$HamlDir     $arr ${HamlDir#$RepoRoot}/"
-echo -e "\e[33;1m   \$utfBasePath $arr ${utfBasePath#$RepoRoot}/"
 echo -e "\e[32;1m$HyphensLine"
 # ==============================================================================
 # Export Env-Vars for Custom Options

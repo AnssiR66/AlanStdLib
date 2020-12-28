@@ -23,18 +23,18 @@ Let's being by illustrating the first approach, i.e. the classical way of re-def
 
 .Example: Custom examine response via `VERB DOES ONLY` (from {garden1_alan})
 [source,alan]
-------------------------------------------------
-include::{utf8dir}/garden1.alan[tag=ball_garden]
-------------------------------------------------
+------------------------------------------------------------
+include::./garden1.alan[encoding=iso-8859-1,tag=ball_garden]
+------------------------------------------------------------
 
 
 which will yield
 
 
 [example,role="gametranscript"]
-=====================================================
-include::{utf8dir}/garden1.a3ADocLog[tag=ball_garden]
-=====================================================
+=============================================================
+include::./garden1.a3log[encoding=iso-8859-1,tag=ball_garden]
+=============================================================
 
 
 In the example above, it was necessary to use `DOES ONLY`; if we had used `DOES` instead, the default library response for all things would be shown before the custom reponse: [.play]#You notice nothing unusual about the ball. It's a small red ball.#
@@ -47,7 +47,7 @@ Another way for examining things is to use the `ex` attribute.
 .Example: Custom examine response via the `ex` attribute (from {garden2_alan})
 [source,alan]
 ------------------------------------------------
-include::{utf8dir}/garden2.alan[tag=ball_garden]
+include::./garden2.alan[encoding=iso-8859-1,tag=ball_garden]
 ------------------------------------------------
 
 
@@ -55,9 +55,9 @@ which will yield the same response as the first method:
 
 
 [example,role="gametranscript"]
-=====================================================
-include::{utf8dir}/garden2.a3ADocLog[tag=ball_garden]
-=====================================================
+=============================================================
+include::./garden2.a3log[encoding=iso-8859-1,tag=ball_garden]
+=============================================================
 
 
 but you notice how the needed formulation is shorter.

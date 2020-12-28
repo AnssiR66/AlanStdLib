@@ -69,8 +69,8 @@ span.play,
     // -------------------------------------------------------------------------
     // The styles below target ADoc elements automatically handled by the update
     // script that processes game transcripts and detects user input and comment
-    // input lines, and styles them accordingly via sed manipulations.
-    // (found in "*.a3ADocLog" files)
+    // input lines, and styles them accordingly via SED manipulations.
+    // (found in "*.a3log" files)
     // -------------------------------------------------------------------------
     span.comment {
         // Comments in user input are styled via:  #[comment]; some text#

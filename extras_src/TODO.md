@@ -49,13 +49,9 @@ For example:
 
 Where the `/tutorials/` folder will host _The Clothing Guide_ and its examples, and any other future tutorials.
 
-We also need to mirror the above structure in the temporary folders for Alan sources and their intermediate UTF-8 versions:
+...
 
-- `utf8/tutorials/`
-- `utf8/StdLib-Manual/`
-- `utf8/Cookbook/`
-
-The current `update.sh` script need to be broken into a common script with all the functions and helpers to build any document folder, and the actual files to build each folder:
+The current `update.sh` script needs to be broken into a common script with all the functions and helpers to build any document folder, and the actual files to build each folder:
 
 |           file          |                       description                        |
 |-------------------------|----------------------------------------------------------|

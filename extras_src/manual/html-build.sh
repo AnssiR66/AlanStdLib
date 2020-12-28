@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# manual/html-build.sh    v0.0.4 | 2020/10/19 | by Tristano Ajmone, MIT License.
+# manual/html-build.sh    v0.1.0 | 2020/12/28 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                           BUILD STDLIB MANUAL HTML                           #
@@ -26,7 +26,6 @@ export invoker="manual/html-build.sh"   # Used by some external scripts
 printBanner "Build StdLib Manual HTML"
 
 outDir=../../extras/manual
-utfDir="$utfBasePath/manual"
 
 for sourcefile in ./*.asciidoc ; do
 adoc2html $sourcefile

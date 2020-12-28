@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# extras_src/update.sh    v2.1.2 | 2020/10/19 | by Tristano Ajmone, MIT License.
+# extras_src/update.sh    v2.2.1 | 2020/12/28 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                          BUILD STDLIB EXTRAS FOLDER                          #
@@ -10,12 +10,8 @@
 
 foldersList="manual tutorials"
 
-# The script will begin by creating in "./utf8/StdLib/" an UTF-8 encoded version
-# of all the StdLib sources, to ensure that all documents will be including
-# up-to-date library snippets.
-
-# Then the script will build, compile, convert and/or process the following type
-# of contents in the source folders "extras_src/<foldername>/":
+# The script will build, compile, convert and/or process the following type of
+# contents in the source folders "extras_src/<foldername>/":
 #
 #  -- Alan example adventures
 #  -- Adventures command scripts
@@ -57,11 +53,6 @@ done
 foldersTot=$counter
 
 ################################################################################
-#                       CONVERT LIBRARY SOURCE TO UTF-8                        #
-################################################################################
-source ./stdlib2utf8.sh
-
-################################################################################
 #                           FOLDERS-PROCESSING LOOP                            #
 ################################################################################
 
@@ -72,7 +63,6 @@ for dirName in $foldersList; do
 	# Define Source & Destination folders:
 	outDir="$outBasePath/$dirName" # destination folder for HTML docs and examples
 	srcDir="$srcBasePath/$dirName" # path of AsciiDoc sources and Alan examples
-	utfDir="$utfBasePath/$dirName" # path of UTF-8 converted Alan files
 	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	printHeading1 "Processing Folder $counter/$foldersTot: \"$dirName\""
 
@@ -116,30 +106,12 @@ for dirName in $foldersList; do
 	# ============================================================================
 
 	# ----------------------------------------------------------------------------
-	printHeading3 "Create UTF-8 Version of Alan Sources and Transcripts"
-	# ----------------------------------------------------------------------------
-
-	echo -e "Because Asciidoctor can't handle inclusion of external files in ISO-8859-1"
-	echo -e "econding, we need to create UTF-8 versions of them."
-
-	rm -rf $utfDir
-	mkdir  $utfDir
-	touch  $utfDir/.gitkeep
-
-	for sourcefile in $srcDir/*.{alan,i,a3log} ; do
-		alan2utf8 $sourcefile
-		if [ $? -ne 0 ] ; then
-			printAborting ; exit 1
-		fi
-	done
-
-	# ----------------------------------------------------------------------------
 	printHeading3 "Sanitize Game Transcripts"
 	# ----------------------------------------------------------------------------
 
 	echo -e "Reformat game transcripts from verbatim to AsciiDoc example blocks."
 
-	for transcript in $utfDir/*.a3log ; do
+	for transcript in $srcDir/*.a3log ; do
 		a3logSanitize $transcript
 		if [ $? -ne 0 ] ; then
 			printAborting ; exit 1
