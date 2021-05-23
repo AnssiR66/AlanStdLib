@@ -1,7 +1,7 @@
-// "_hl-adoc-template.scss"             v1.0.0 | 2019/03/25 | by Tristano Ajmone
+// "_hl-adoc-template.scss"             v2.0.0 | 2021/05/23 | by Tristano Ajmone
 // *****************************************************************************
 // *                                                                           *
-// *                 Highlight Theme Template for Asciidoctor                  *
+// *               Highlight 4.1 Theme Template for Asciidoctor                *
 // *                                                                           *
 // *****************************************************************************
 // A reusable variables-based '@import' template to quickly define Highlight
@@ -91,14 +91,14 @@ $ref_lang:       "lang"       !default;
             color: $HL-Number;
         }
         &.esc {
-            // Escape sequences 
+            // Escape sequences
             color: $HL-Escape;
         }
         &.ipl {
-            // Interpolation sequences 
+            // Interpolation sequences
             color: $HL-Interpolation;
         }
-        &.str {
+        &.sng {
             // Strings
             color: $HL-String;
         }
@@ -121,7 +121,7 @@ $ref_lang:       "lang"       !default;
             font-style: italic;
         }
         &.lin {
-            // Line numbers 
+            // Line numbers
             color: $HL-LineNum;
         }
         &.opt {
@@ -133,7 +133,7 @@ $ref_lang:       "lang"       !default;
         // ---------------------
         &.kwa, &.kwb, &.kwc, &.kwd, &.kwe, &.kwf {
             // font-weight: bold;
-        }   
+        }
         &.kwa {
             // Keywords group 1
             color: $HL-Keywords1;
