@@ -177,7 +177,7 @@ In order to display correctly non Ascii characters, the following file extension
 
 These extensions where arbitrarily chosen in order to allow associating them to [ISO-8859-1] encoding without affecting common extensions like "`.log`" or "`.sol`", which are used in other contexts. The "`.a3`" prefix is intended to provide an intuitive association with Alan, and at the same time make hese extensions unique to this context.
 
-For more information, see the [Sublime-Alan documentation] on how these extensions are implemented in the [Alan package] for Sublime-Text, which adds syntax support for them along with some useful features.
+For more information, see the [Sublime Alan IF documentation] on how these extensions are implemented in the [Alan package] for Sublime Text, which adds syntax support for them along with some useful features.
 
 
 # How to Run the Tests
@@ -314,8 +314,8 @@ SOFTWARE.
 
 <!-- Sublime-Alan -->
 
-[Sublime-Alan documentation]: https://github.com/tajmone/sublime-alan#transcipt-and-solution-syntaxes "Go to Sublime-Alan documentation on Alan Solution and Transcript files"
-[Alan package]: https://github.com/tajmone/sublime-alan "Go to the Sublime-Alan project, a package that adds Alan syntax support to Sublime Text"
+[Sublime Alan IF documentation]: https://github.com/tajmone/sublime-alan-if#transcipt-and-solution-syntaxes "Go to Sublime Alan IF documentation on Alan Solution and Transcript files"
+[Alan package]: https://github.com/tajmone/sublime-alan-if "Go to the Sublime Alan IF project, a package that adds Alan syntax support to Sublime Text"
 
 
 <!-- EOF -->
