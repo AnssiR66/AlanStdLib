@@ -19,6 +19,9 @@
 extras_src/manual/*.a3log
 extras_src/tutorials/*.a3log
 
+# Test-generated transcript:
+/tests/misc/meta-verbs.a3t
+
 ## =============
 ## AlanIDE Files
 ## =============

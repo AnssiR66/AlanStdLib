@@ -1,6 +1,17 @@
 --==============================================================================
 -- "Meta Verbs Tests" by Tristano Ajmone, 2020.
 --==============================================================================
+
+-- +-----------------------------------------------------------------+
+-- | * * * * * * * * * * *  W A R N I N G !!!  * * * * * * * * * * * |
+-- +-----------------------------------------------------------------+
+-- |  Don't create a same-named solution file for this adventure,    |
+-- |  because one of the solutions contains a `script` command that  |
+-- |  leads to the creation of a `meta-verbs.a3t` transcript file    |
+-- |  that would interfere with the test-generated transcript.       |
+-- |  Always add something else to the basename of the solution.     |
+-- +-----------------------------------------------------------------+
+
 OPTION WIDTH 82.
 
 IMPORT 'library.i'. -- ALAN Standard Library v2.2.0
