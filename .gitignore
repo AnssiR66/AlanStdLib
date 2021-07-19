@@ -16,8 +16,8 @@
 ###################################
 
 # Game transcripts:
-extras_src/manual/*.a3log
-extras_src/tutorials/*.a3log
+extras_src/manual/*.a3t
+extras_src/tutorials/*.a3t
 
 # Test-generated transcript:
 /tests/misc/meta-verbs.a3t

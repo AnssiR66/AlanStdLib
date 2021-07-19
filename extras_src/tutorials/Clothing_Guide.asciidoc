@@ -172,8 +172,8 @@ Now let's dive into some practical examples of how to use clothing, from simple 
 === Simple Clothing
 
 :adv-source:  clothing-01-simple.alan
-:adv-transc1: clothing-01-simple__play1.a3log
-:adv-transc2: clothing-01-simple__play2.a3log
+:adv-transc1: clothing-01-simple__play1.a3t
+:adv-transc2: clothing-01-simple__play2.a3t
 
 * link:{adv-source}[`{adv-source}`]
 
@@ -246,9 +246,9 @@ include::./{adv-transc1}[encoding=iso-8859-1]
 ////
 *VERBATIM TRANSCRIPT* -- We could also include the unsanitized version of the game transcript, in case it relied on monospace fonts (eg. debguggin):
 
-...............................................................
-include::./clothing-01-simple__play1.a3log[encoding=iso-8859-1]
-...............................................................
+.............................................................
+include::./clothing-01-simple__play1.a3t[encoding=iso-8859-1]
+.............................................................
 
 But we'd need to give it some CSS styling though.
 

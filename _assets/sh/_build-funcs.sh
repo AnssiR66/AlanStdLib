@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# _build-funcs.sh         v2.4.0 | 2020/12/28 | by Tristano Ajmone, MIT License.
+# _build-funcs.sh         v3.0.0 | 2021/07/19 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                        DOCUMENTATION BUILD FUNCTIONS                         #
@@ -13,8 +13,8 @@
 # +--------------------+---------------+---------------------------------+
 # | normalizeEOL       | file          | Enforce CRLF EOL on Windows OS. |
 # | compile            | file, options | Compile an Alan adventure.      |
-# | runCommandsScripts | storyfile     | Run ".a3sol" files -> ".a3log". |
-# | a3logSanitize      | file          | Reformat ".a3log" to AsciiDoc   |
+# | runCommandsScripts | storyfile     | Run ".a3s" files -> ".a3t".     |
+# | a3logSanitize      | file          | Reformat ".a3t" to AsciiDoc     |
 # | adoc2html          | file          | Conv AsciiDoc -> HTML.          |
 # | deployAlan         | file          | Strip and deploy ".alan" files. |
 # +--------------------+---------------+---------------------------------+
@@ -97,17 +97,17 @@ function compile {
 function runCommandsScripts {
 	# ============================================================================
 	# Given a target Alan adventure "<advname>.a3c", execute it against every
-	# command script in the folder with a filename matching "<advname>*.a3sol" and
-	# save the game transcript to "<advname>*.a3log".
+	# command script in the folder with a filename matching "<advname>*.a3s" and
+	# save the game transcript to "<advname>*.a3t".
 	# ----------------------------------------------------------------------------
 	# Parameters:
 	# - $1: the target Alan adventure (".a3c").
 	# ============================================================================
-	scriptsPattern="${1%.*}*.a3sol"
+	scriptsPattern="${1%.*}*.a3s"
 	printSeparator
 	echo -e "\e[90mADVENTURE: \e[93m$1"
 	for script in $scriptsPattern ; do
-		transcript="${script%.*}.a3log"
+		transcript="${script%.*}.a3t"
 		echo -e "\e[90mPLAY WITH: \e[94m$script"
 		arun.exe -r $1 < $script > $transcript
 	done
@@ -121,8 +121,8 @@ function runCommandsScripts {
 
 function a3logSanitize {
 	# ============================================================================
-	# Takes a game transcript input file $1 "<filename>.a3log" and passes it to
-	# a SED filter that applies substitutions to turn it into a well formatted
+	# Take a game transcript input file $1 "<filename>.a3t" and pass it to a
+	# SED filter that applies substitutions to turn it into a well formatted
 	# AsciiDoc example block.
 	# ----------------------------------------------------------------------------
 	# Parameters:

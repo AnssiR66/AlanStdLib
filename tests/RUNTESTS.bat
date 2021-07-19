@@ -1,4 +1,4 @@
-:: "RUNTESTS.bat"                       v4.0.0 | 2020/11/04 | by Tristano Ajmone
+:: "RUNTESTS.bat"                       v5.0.0 | 2021/07/19 | by Tristano Ajmone
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                                                                            ::
 ::                      ALAN STANDARD LIBRARY TEST SUITE                      ::
@@ -292,7 +292,7 @@ EXIT /B
 :: -----------------------------------------------------------------------------
 :CountScripts
 
-FOR %%i IN (%~1\*.a3sol) DO (
+FOR %%i IN (%~1\*.a3s) DO (
     SET /A _TST_TOT_=!_TST_TOT_! +1
     ECHO   !_TST_TOT_!. %_YELLOW_%%%i%_GRAY_%
 )
@@ -305,7 +305,7 @@ EXIT /B
 :CleanupFolder
 
 CALL :DeleteFile %~1\*.a3c
-CALL :DeleteFile %~1\*.a3log
+CALL :DeleteFile %~1\*.a3t
 CALL :DeleteFile %~1\*.ifid
 CALL :DeleteFile %~1\*.log
 EXIT /B
@@ -381,7 +381,7 @@ EXIT /B
 :: =============================================================================
 :: PARAMETERS:
 :: %1 -- the adventure to test.
-:: %2 -- the ".a3sol" commands-script to test the adventure with.
+:: %2 -- the ".a3s" commands-script to test the adventure with.
 :: -----------------------------------------------------------------------------
 :TestTitle
 
@@ -401,7 +401,7 @@ IF "!ADV_SINGLE[%TMPC%]DIR!" == "" GOTO :EndLoopTest1
 SET /A _ADV_EXE_=!_ADV_EXE_! +1
 SET ADV_BIN=%_MAGENTA_%!ADV_SINGLE[%TMPC%]DIR!\%_YELLOW_%!ADV_SINGLE[%TMPC%]ADV!.a3c%_BLUE_%
 PUSHD !ADV_SINGLE[%TMPC%]DIR!
-FOR %%i IN (*.a3sol) DO (
+FOR %%i IN (*.a3s) DO (
     CALL :TestTitle "!ADV_BIN!" "%%i"
     CALL :ExecuteTest !ADV_SINGLE[%TMPC%]ADV! "%%i"
 )
@@ -415,7 +415,7 @@ EXIT /B
 :: =============================================================================
 :: PARAMETERS: none.
 ::
-:: On every "<adventure>.a3c" file run the scripts matching "<adventure>*.a3sol".
+:: On every "<adventure>.a3c" file run the scripts matching "<adventure>*.a3s".
 :: -----------------------------------------------------------------------------
 :TestMultiAdv
 
@@ -441,7 +441,7 @@ EXIT /B
 :: -----------------------------------------------------------------------------
 :MultipleScripts
 
-FOR %%i IN (%~n1*.a3sol) DO (
+FOR %%i IN (%~n1*.a3s) DO (
     SET ADV_BIN=%_MAGENTA_%%ADV_PATH%%ADV_MULTIPLE_DIR%\%_YELLOW_%%~n1.a3c%_BLUE_%
     CALL :TestTitle "!ADV_BIN!" "%%i"
     CALL :ExecuteTest %1 "%%i"
@@ -452,7 +452,7 @@ EXIT /B
 :: =============================================================================
 :: PARAMETERS:
 :: %1 -- the adventure to test.
-:: %2 -- the ".a3sol" commands-script to test the adventure with.
+:: %2 -- the ".a3s" commands-script to test the adventure with.
 :: -----------------------------------------------------------------------------
 :ExecuteTest
 
@@ -461,7 +461,7 @@ EXIT /B
 ::       or that it's not a 0Kb file! Should improve this!
 :: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ECHO %_RED_%
-CALL arun.exe -r %1 < %2 > %~n2.a3log ^
+CALL arun.exe -r %1 < %2 > %~n2.a3t ^
     && (
     SET /A _TST_EXE_=!_TST_EXE_! +1
     ECHO %_BG_GREEN_%
@@ -469,7 +469,7 @@ CALL arun.exe -r %1 < %2 > %~n2.a3log ^
     ECHO  TRANSCRIPT SAVED TO DISK^^!^^!^^!
     ECHO -----------------------------
     ECHO %_RESET_COLORS_%%_WHITE_%
-    ECHO Test transcript saved to "%_GREEN_%%~n2.a3log%_WHITE_%".
+    ECHO Test transcript saved to "%_GREEN_%%~n2.a3t%_WHITE_%".
     ) || (
     SET /A _ERR_=%_ERR_% +1
     ECHO %_BG_RED_%
@@ -478,7 +478,7 @@ CALL arun.exe -r %1 < %2 > %~n2.a3log ^
     ECHO ~~~~~~~~~~~~~~~~~~~~~~~~~~~
     ECHO %_RESET_COLORS_%%_WHITE_%
     ECHO Something went wrong with the script "%_RED_%%~2%_WHITE_%".
-    ECHO The transcription log might be incomplete or missing: "%_RED_%%~n2.a3log%_WHITE_%".
+    ECHO The transcription log might be incomplete or missing: "%_RED_%%~n2.a3t%_WHITE_%".
 )
 ECHO %_RESET_COLORS_%
 EXIT /B

@@ -26,9 +26,9 @@
 
 ## Adventures Solutions & Transcripts
 #####################################
-*.a3sol   text linguist-detectable=false
-*.a3log   text linguist-generated=true
-*.log     text linguist-generated=true
+*.a3s   text linguist-detectable=false
+*.a3t   text linguist-generated=true
+*.log   text linguist-generated=true
 
 ## AlanIDE Files
 ################

@@ -143,8 +143,8 @@ But to reduce clutter in the "`extras/`" folder, we should move source and inter
         * [x] AsciiDoc documents (in its root)
 - [x] Create `extras_src/alan/` folder and:
     + [x] Move there Alan sources (because they contain region tags, we'll created a copy without them in `extras/`, via sed).
-    + [x] Move there commands scripts (`.a3sol`).
-    + [x] ignore `.a3log` files (no need to version control them).
+    + [x] Move there commands scripts (`.a3s`).
+    + [x] ignore `.a3t` files (no need to version control them).
 - [x] ~~Create `extras_src/alan/utf8/` folder (ignored) to host all converted files.~~ (_**dropped in Dec. 2020**: no longer needed_)
 - [x] Adapt build scripts to work accordingly.
 
@@ -155,12 +155,12 @@ Now to update the contents of `extras/` we'll need to run `extras_src/update.sh`
 - [x] __AsciiDoc Toolchain__:
     + [x] __Bash Script__ — `extras_src/update.sh` to update the contents of `extras/` folder; we need to switch to a shell script (because we need the iconv tool) that will:
         * [x] Compile all adventures
-        * [x] Run all commands scripts (`*.a3sol`) and save the transcripts (`*.a3log`).
+        * [x] Run all commands scripts (`*.a3s`) and save the transcripts (`*.a3t`).
         * [x] ~~Convert all ISO-8859-1 files to UTF8 in a temporary ignored folder: `extras_src/alan/utf8/`.~~ (_**dropped in Dec. 2020**: no longer needed_)
         * [x] Convert all docs to HTML5.
         * [x] __Process with SED__:
             - [x]  __`*.alan` files__ — strip away AsciiDoc region-tag comment lines in copy of sources inside `extras/`.
-            - [x]  __`*.a3log` files__ —  to create a version suitable for `example` blocks (instead of verbatim):
+            - [x]  __`*.a3t` files__ —  to create a version suitable for `example` blocks (instead of verbatim):
                 + [x]  Add ` +` at end of non-orphan lines.
                 + [x]  Subst. occurences of special chars with their ADoc attribute or HTML entiry equivalent — e.g. `*` with `{asterisk}` or `&ast;`.
                 + [x]  Player input lines:
@@ -222,7 +222,7 @@ Here are the various tasks list for shifting to the new clothing system, largely
 
 ## Tests
 
-- [x] Create `tests/clothing/DEV.bat` script to run tests only with solution files with name pattern `DEV_*.a3sol`.
+- [x] Create `tests/clothing/DEV.bat` script to run tests only with solution files with name pattern `DEV_*.a3s`.
 - [x] Add tests to track tweaked clothing features.
 - [x] __EGA__ — Tweak `ega.alan` test adventure to reflect changes in the library code and/or provide better testing material:
     + [x] __DBG VERB__ — Tweak it to work with the new clothing system and attributes (verb now moved to `tests/inc_debug.i`):
@@ -505,16 +505,16 @@ In these verbs the action either is always carried out or it's carried out in so
 [testsclothing]: ./tests/clothing/ "Navigate to folder"
 [ega.alan]: ./tests/clothing/ega.alan "View source"
 [DEV.bat]: ./tests/clothing/DEV.bat "View source"
-[DEV_init.a3log]: ./tests/clothing/DEV_init.a3log "View source"
-[DEV_init.a3sol]: ./tests/clothing/DEV_init.a3sol "View source"
-[DEV_skirts.a3log]: ./tests/clothing/DEV_skirts.a3log "View source"
-[DEV_skirts.a3sol]: ./tests/clothing/DEV_skirts.a3sol "View source"
-[DEV_wear_remove.a3log]: ./tests/clothing/DEV_wear_remove.a3log "View source"
-[DEV_wear_remove.a3sol]: ./tests/clothing/DEV_wear_remove.a3sol "View source"
-[DEV_inventory.a3log]: ./tests/clothing/DEV_inventory.a3log "View source"
-[DEV_inventory.a3sol]: ./tests/clothing/DEV_inventory.a3sol "View source"
-[DEV_manipulation.a3log]: ./tests/clothing/DEV_manipulation.a3log "View source"
-[DEV_manipulation.a3sol]: ./tests/clothing/DEV_manipulation.a3sol "View source"
+[DEV_init.a3t]: ./tests/clothing/DEV_init.a3t "View source"
+[DEV_init.a3s]: ./tests/clothing/DEV_init.a3s "View source"
+[DEV_skirts.a3t]: ./tests/clothing/DEV_skirts.a3t "View source"
+[DEV_skirts.a3s]: ./tests/clothing/DEV_skirts.a3s "View source"
+[DEV_wear_remove.a3t]: ./tests/clothing/DEV_wear_remove.a3t "View source"
+[DEV_wear_remove.a3s]: ./tests/clothing/DEV_wear_remove.a3s "View source"
+[DEV_inventory.a3t]: ./tests/clothing/DEV_inventory.a3t "View source"
+[DEV_inventory.a3s]: ./tests/clothing/DEV_inventory.a3s "View source"
+[DEV_manipulation.a3t]: ./tests/clothing/DEV_manipulation.a3t "View source"
+[DEV_manipulation.a3s]: ./tests/clothing/DEV_manipulation.a3s "View source"
 
 <!-- Alan Builds -->
 

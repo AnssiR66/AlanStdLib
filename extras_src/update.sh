@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# extras_src/update.sh    v2.2.1 | 2020/12/28 | by Tristano Ajmone, MIT License.
+# extras_src/update.sh    v3.0.0 | 2021/07/19 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                          BUILD STDLIB EXTRAS FOLDER                          #
@@ -74,7 +74,7 @@ for dirName in $foldersList; do
 	printHeading3 "Compile Adventures"
 	# ----------------------------------------------------------------------------
 	pushd "$srcDir" > /dev/null
-	rm -f *.a3c *.a3log
+	rm -f *.a3c *.a3t
 	for sourcefile in *.alan ; do
 		compile $sourcefile
 		if [ $? -ne 0 ] ; then
@@ -111,7 +111,7 @@ for dirName in $foldersList; do
 
 	echo -e "Reformat game transcripts from verbatim to AsciiDoc example blocks."
 
-	for transcript in $srcDir/*.a3log ; do
+	for transcript in $srcDir/*.a3t ; do
 		a3logSanitize $transcript
 		if [ $? -ne 0 ] ; then
 			printAborting ; exit 1

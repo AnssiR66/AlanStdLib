@@ -14,7 +14,7 @@ root = true
 ; Skip encoding validation because of EClint's buggy support of this feature,
 ; leading to false positive error reports. (See #73)
 
-[*.{alan,i,a3sol}]
+[*.{alan,i,a3s}]
 indent_style = space
 indent_size = unset
 charset = unset

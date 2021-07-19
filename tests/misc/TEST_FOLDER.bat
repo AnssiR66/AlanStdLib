@@ -1,4 +1,4 @@
-:: "tests/misc/TEST_FOLDER.bat"         v1.1.1 | 2020/10/21 | by Tristano Ajmone
+:: "tests/misc/TEST_FOLDER.bat"         v2.0.0 | 2021/07/19 | by Tristano Ajmone
 :: -----------------------------------------------------------------------------
 :: MULTIPLE ADVENTURES -- Run all tests in the folder.
 :: -----------------------------------------------------------------------------
@@ -8,7 +8,7 @@ CHCP 28591 > nul
 
 :: Delete old files:
 DEL *.a3c   2> nul
-DEL *.a3log 2> nul
+DEL *.a3t   2> nul
 DEL *.ifid  2> nul
 DEL *.log   2> nul
 
@@ -23,7 +23,7 @@ EXIT /B
 :CompileTest
 CALL alan.exe -import ..\..\StdLib\ %1  > nul 2>&1 ^
   && (
-    FOR %%i IN (%~n1*.a3sol) DO CALL :ExecTest %~n1.a3c %%i
+    FOR %%i IN (%~n1*.a3s) DO CALL :ExecTest %~n1.a3c %%i
   ) || (
     ECHO ^*^* COMPILATION FAILED ^*^*
   )
@@ -31,5 +31,5 @@ EXIT /B
 
 :ExecTest
 ECHO TEST WITH: %2
-CALL arun.exe -r %~n1.a3c < %2 > %~n2.a3log
+CALL arun.exe -r %~n1.a3c < %2 > %~n2.a3t
 EXIT /B

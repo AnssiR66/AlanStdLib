@@ -114,22 +114,22 @@ The tests in this folder consist in many small adventures which are usually asso
 
 To allow multiple adventures to share the same folder, and to associate each test script and log file to a specific adventure, some constraints are imposed on adventures and scripts filenames.
 
-The pattern "`<filename>*.a3sol`" allows to associate multiple commands scripts to each adventure, so that different tests can be carried out on a single adventure. In case of a single test file, it should be simply named "`<filename>.a3sol`", to keep associations simple.
+The pattern "`<filename>*.a3s`" allows to associate multiple commands scripts to each adventure, so that different tests can be carried out on a single adventure. In case of a single test file, it should be simply named "`<filename>.a3s`", to keep associations simple.
 
 Here is an example of how multiple test files work:
 
-|         input file         |        output file         |
-|----------------------------|----------------------------|
-| `actors.alan`              | `actors.a3c`               |
-| `actors.a3sol`             | `actors.a3log`             |
-| `actors_advanced.a3sol`    | `actors_advanced.a3log`    |
-| `actors_compliance.a3sol`  | `actors_compliance.a3log`  |
-| `actors_named.a3sol`       | `actors_named.a3log`       |
-| `restricted-actions.alan`  | `restricted-actions.a3c`   |
-| `restricted-actions.a3sol` | `restricted-actions.a3log` |
+|         input file        |       output file        |
+|---------------------------|--------------------------|
+| `actors.alan`             | `actors.a3c`             |
+| `actors.a3s`              | `actors.a3t`             |
+| `actors_advanced.a3s`     | `actors_advanced.a3t`    |
+| `actors_compliance.a3s`   | `actors_compliance.a3t`  |
+| `actors_named.a3s`        | `actors_named.a3t`       |
+| `restricted-actions.alan` | `restricted-actions.a3c` |
+| `restricted-actions.a3s`  | `restricted-actions.a3t` |
 
 
-Beware that you should not create adventures whose name is the initial part of another adventure's name (e.g. "`actors.alan`" and "`actors_two.alan`) for the commands scripts of the latter would be executed also for the former, because they would match the partern `actors*.a3sol`.
+Beware that you should not create adventures whose name is the initial part of another adventure's name (e.g. "`actors.alan`" and "`actors_two.alan`) for the commands scripts of the latter would be executed also for the former, because they would match the partern `actors*.a3s`.
 
 
 ### Tests Features
@@ -170,14 +170,18 @@ Both "`alan.exe`" and "`arun.exe`" can be found inside the Alan SDK (Development
 
 ## Scripts Encoding
 
-In order to display correctly non Ascii characters, the following file extensions should be associated with ISO-8859-1 encoding in your editor:
+In order to display correctly non ASCII characters, the following file extensions should be associated with ISO-8859-1 encoding in your editor:
 
-- "`.a3sol`" — "solution" files (aka "commands scripts).
-- "`.a3log`" — game transcripts.
+- `.a3s` — "solution" files (aka "commands scripts").
+- `.a3t` — game transcripts.
 
-These extensions where arbitrarily chosen in order to allow associating them to [ISO-8859-1] encoding without affecting common extensions like "`.log`" or "`.sol`", which are used in other contexts. The "`.a3`" prefix is intended to provide an intuitive association with Alan, and at the same time make hese extensions unique to this context.
+These are the new official extensions adopted by ARun for solution files and transcripts.
+They were introduced to allow associating them to [ISO-8859-1] encoding without affecting common extensions like "`.log`" or "`.sol`", which are used in other contexts and associated to other encodings.
+The "`.a3`" prefix provides an intuitive association with Alan&nbsp;3, and at the same time makes these extensions unique.
 
-For more information, see the [Sublime Alan IF documentation] on how these extensions are implemented in the [Alan package] for Sublime Text, which adds syntax support for them along with some useful features.
+For more information on the introduction of the new "`.a3s`" and "`.a3t`" extension, see [alan-if/alan#2].
+
+See also the [Sublime Alan IF documentation] on how these extensions are implemented in the [Alan package] for Sublime Text, which adds syntax support for them along with some useful features.
 
 
 # How to Run the Tests
@@ -193,8 +197,8 @@ You can launch either via CMD it or from File Explorer.
 The test suite system is simple. For every "`*.alan`" file found in the subfolders of this directory, the "[`RUNTESTS.bat`][RUNTESTS]" batch script will:
 
 1. Compile "`<filename>.alan`" to "`<filename>.a3c`".
-2. Play the compiled adventure against all the commands scripts (`*.a3sol`) associated to it (according to the tests type of its folder).
-3. Save the play session transcript to "`<commandscript>.a3log`" (i.e. same name as the used command script, but with `.a3log` extension).
+2. Play the compiled adventure against all the commands scripts (`*.a3s`) associated to it (according to the tests type of its folder).
+3. Save the play session transcript to "`<commandscript>.a3t`" (i.e. same name as the used command script, but with `.a3t` extension).
 4. Print a statistics and errors report on the terminal screen.
 
 The final report is very useful for it informs about the total number of adventures found, compiled and tested, and the total number of test scripts found and executed.
@@ -213,9 +217,9 @@ The contents of this folder fall under different license terms, as explained bel
 
 - [`./UNLICENSE`][Unlicense]
 
-All the Alan source files ("`*.alan`" and "`*.i`") and test script files ("`*.a3sol`") contributed by [Tristano Ajmone] to this folder are released into the public domain via the Unlicense.
+All the Alan source files ("`*.alan`" and "`*.i`") and test script files ("`*.a3s`") contributed by [Tristano Ajmone] to this folder are released into the public domain via the Unlicense.
 
-For both practical and aesthetical reasons, I avoided adding author and license to the test script files ("`*.a3sol`"); the above statement shall suffice to declare them public domain.
+For both practical and aesthetical reasons, I avoided adding author and license to the test script files ("`*.a3s`"); the above statement shall suffice to declare them public domain.
 
 ### The Unlicense
 
@@ -311,11 +315,13 @@ SOFTWARE.
 
 [Unlicense]: ./UNLICENSE    "View the full text of the Unlicense terms"
 
-
 <!-- Sublime-Alan -->
 
 [Sublime Alan IF documentation]: https://github.com/tajmone/sublime-alan-if#transcipt-and-solution-syntaxes "Go to Sublime Alan IF documentation on Alan Solution and Transcript files"
 [Alan package]: https://github.com/tajmone/sublime-alan-if "Go to the Sublime Alan IF project, a package that adds Alan syntax support to Sublime Text"
 
+<!-- Issues -->
+
+[alan-if/alan#2]: https://github.com/alan-if/alan/issues/2 "View Issue #2 at ALAN repository on GitHub"
 
 <!-- EOF -->

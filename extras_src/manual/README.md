@@ -73,7 +73,7 @@ We try to keep the number of source adventures and transcripts down to the minim
 During conversion, these source adventures will be stripped of all the comment lines for AsciiDoc tag regions and then copied to the `extras/manual/` folder, so that end users can access the source code of the Manual examples — except for adventures with filenames starting with `_` (see below).
 
 Because the Manual often illustrates multiple ways to do the same thing, separate files are required to host these variations (otherwise the Alan compiler will complain about instances being defined multiple times).
-Therefore, some adventures will have variations in the form `<adventure1>.alan`,  `<adventure2>.alan`, etc. (for as many variations as required), along with their associated `<adventureX>.a3log` files.
+Therefore, some adventures will have variations in the form `<adventure1>.alan`,  `<adventure2>.alan`, etc. (for as many variations as required), along with their associated `<adventureX>.a3t` files.
 
 ## Internal Examples
 
