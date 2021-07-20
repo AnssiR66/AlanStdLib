@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# "build-svg.sh"                               v1.0.1 | 2020/10/19 | Dia v0.97.2
+# "build-svg.sh"                                 v2.0.0 | 2021/07/20 | Dia v0.97
 # ------------------------------------------------------------------------------
 # Written by Tristano Ajmone, released into the public domain via Unlicense:
 #    http://unlicense.org/
@@ -15,7 +15,7 @@ printBanner "Build and Deploy SVG Diagrams"
 printHeading1 "Converting Dia Diagrams to SVG"
 
 for diaSrc in ./*.dia ; do
-	dia -n -t svg $diaSrc
+	dia -n -t cairo-svg $diaSrc
 done
 # ------------------------------------------------------------------------------
 printHeading1 "Optimizing SVG Diagrams"
