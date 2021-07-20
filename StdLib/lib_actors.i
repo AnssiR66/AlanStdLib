@@ -234,7 +234,7 @@ ADD TO EVERY ACTOR
                 THEN "is"
                 ELSE "are"
               END IF. "carrying"
-              FOR EACH carried_item ISA object, IS NOT worn, DIRECTLY IN THIS
+              FOR EACH carried_item IsA object, IS NOT worn, DIRECTLY IN THIS
                 DO
                   SAY AN carried_item.
                   DECREASE my_game:temp_cnt.
@@ -294,7 +294,7 @@ END ADD TO ACTOR.
 
 --------------------------------------------------------------------------------
 
-EVERY person ISA ACTOR
+EVERY person IsA ACTOR
   CAN talk.
 
   CONTAINER
@@ -343,12 +343,12 @@ END EVERY person.
 
 --------------------------------------------------------------------------------
 
-EVERY female ISA PERSON
+EVERY female IsA PERSON
   PRONOUN her
 END EVERY.
 
 
-EVERY male ISA PERSON
+EVERY male IsA PERSON
   PRONOUN him
 END EVERY.
 

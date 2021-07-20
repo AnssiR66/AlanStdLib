@@ -321,15 +321,15 @@ EVENT check_restriction
   -- ---------------------------------------------------------------------------
   -- RESTRICTION LEVEL SAFETY CHECK: Prevent out of range values.
   -- ---------------------------------------------------------------------------
-  IF restricted_level OF my_game > 5 THEN
-    SET restricted_level OF my_game TO 5.
+  IF my_game:restricted_level > 5 THEN
+    SET my_game:restricted_level TO 5.
   END IF.
   -- ---------------------------------------------------------------------------
   -- To optimize performance, we compare the current restriction value with the
   -- last value encountered, and if no changes are detected we won't change any
   -- actions-restrictions attributes.
   -- ---------------------------------------------------------------------------
-  IF restricted_level OF my_game <> previous_restricted_level OF my_game
+  IF my_game:restricted_level <> my_game:previous_restricted_level
     THEN
       -- A change in restriction level was detected.
 
@@ -521,7 +521,7 @@ EVENT check_restriction
       -- ===================
       -- This level restricts all communication verbs.
 
-      IF restricted_level OF my_game >= 1
+      IF my_game:restricted_level >= 1
         THEN
           MAKE my_game NOT 'say'.
           MAKE my_game NOT answer.
@@ -545,7 +545,7 @@ EVENT check_restriction
       -- It doesn't affect out-of-game verbs (i.e. meta verbs, or  extradiegetic
       -- actions, like saving, restoring, etc.).
 
-      IF restricted_level OF my_game >= 2
+      IF my_game:restricted_level >= 2
         THEN
           MAKE my_game NOT attack.
           MAKE my_game NOT attack_with.
@@ -676,7 +676,7 @@ EVENT check_restriction
       -- ===================
       -- This level further restricts any verb which isn't an out-of-game action.
 
-      IF restricted_level OF my_game >= 3
+      IF my_game:restricted_level >= 3
         THEN
           MAKE my_game NOT examine.
           MAKE my_game NOT i.
@@ -709,7 +709,7 @@ EVENT check_restriction
       -- This last level further restricts out-of-game actions (extradiegetic).
       -- All verbs are disabled at this level, no action whatsoever is possible.
 
-      IF restricted_level OF my_game >= 4
+      IF my_game:restricted_level >= 4
         THEN
           MAKE my_game NOT about.
           MAKE my_game NOT again.
@@ -738,7 +738,7 @@ EVENT check_restriction
       -- changes the `restricted_response` message to "Please answer YES or NO."
       -- for the whole duration of the restriction level.
 
-      IF restricted_level OF my_game = 5 THEN
+      IF my_game:restricted_level = 5 THEN
         -- Store a copy of the current restricted actions message:
         SET my_game:restricted_response_bak
          TO my_game:restricted_response.
@@ -747,7 +747,7 @@ EVENT check_restriction
         -- Enable only the YES and NO verbs:
         MAKE my_game 'no'.
         MAKE my_game yes.
-      ELSIF previous_restricted_level OF my_game = 5 THEN
+      ELSIF my_game:previous_restricted_level = 5 THEN
         -- If we're switching from Level 5 to another level, then
         -- restore original restricted actions message:
         SET my_game:restricted_response

@@ -66,20 +66,20 @@ MESSAGE
   -- create custom wearable items (e.g. headphones, VR headset devices, etc.).
 
   CONTAINS_COMMA: "$01"
-    IF parameter1 ISA thing THEN
+    IF parameter1 IsA thing THEN
       IF parameter1 IS worn
         THEN "(being worn)"
       END IF.
     END IF.
     "$$,"
   CONTAINS_AND: "$01"
-    IF parameter1 ISA thing THEN
+    IF parameter1 IsA thing THEN
       IF parameter1 IS worn
         THEN "(being worn)"
       END IF.
     END IF.  "and"
   CONTAINS_END: "$01"
-    IF parameter1 ISA thing THEN
+    IF parameter1 IsA thing THEN
       IF parameter1 IS worn
         THEN "(being worn)"
       END IF.

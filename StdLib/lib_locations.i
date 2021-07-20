@@ -64,7 +64,7 @@
 -- on all the available directions, and it's not intended to be really traversed
 -- by the hero.
 
-THE nowhere ISA LOCATION
+THE nowhere IsA LOCATION
   EXIT
     north,
     south,
@@ -169,18 +169,18 @@ SYNONYMS
 -- We'll exploit nested locations in various classes definitions, in order to
 -- ensure that their instances will be automatically located at indoor/outdoor.
 
-THE outdoor ISA LOCATION
+THE outdoor IsA LOCATION
 END THE outdoor.
 
 
-THE indoor ISA LOCATION
+THE indoor IsA LOCATION
 END THE indoor.
 
-EVERY room ISA LOCATION AT indoor
+EVERY room IsA LOCATION AT indoor
 END EVERY.
 
 
-EVERY site ISA LOCATION AT outdoor
+EVERY site IsA LOCATION AT outdoor
 END EVERY.
 
 --==============================================================================
@@ -219,7 +219,7 @@ END EVERY.
 
 -- Every ROOM and DARK_ROOM instance has a floor, walls and a ceiling.
 
-EVERY room_object ISA OBJECT AT indoor
+EVERY room_object IsA OBJECT AT indoor
 END EVERY.
 
 --------------------------------------------------------------------------------
@@ -274,7 +274,7 @@ END ADD TO.
 -- FLOOR
 --==============================================================================
 
-THE floor ISA room_object
+THE floor IsA room_object
   IS NOT takeable.
   IS NOT movable.
   CONTAINER -- To allow 'empty/pour/put something on floor'.
@@ -326,7 +326,7 @@ END THE floor.
 -- WALLS
 --==============================================================================
 
-THE wall ISA room_object
+THE wall IsA room_object
   NAME wall NAME walls
   IS NOT takeable.
   IS NOT movable.
@@ -343,7 +343,7 @@ END THE.
 -- CEILING
 --==============================================================================
 
-THE ceiling ISA room_object
+THE ceiling IsA room_object
   IS NOT takeable.
   IS NOT reachable.
   DESCRIPTION ""
@@ -363,7 +363,7 @@ END THE.
 
 -- Every SITE and DARK_SITE instance has a ground and sky.
 
-EVERY site_object ISA OBJECT AT outdoor
+EVERY site_object IsA OBJECT AT outdoor
 END EVERY.
 
 -- Each SITE-object has a dedicated string attribute (on the CURRENT LOCATION)
@@ -403,7 +403,7 @@ END ADD TO.
 -- GROUND
 --==============================================================================
 
-THE ground ISA site_object
+THE ground IsA site_object
   IS NOT takeable.
   IS NOT movable.
   CONTAINER -- To allow 'empty/pour something on ground'.
@@ -455,7 +455,7 @@ END THE ground.
 -- SKY
 --==============================================================================
 
-THE sky ISA site_object
+THE sky IsA site_object
   IS NOT takeable.
   IS distant.
   DESCRIPTION ""
@@ -556,7 +556,7 @@ ADD TO EVERY LOCATION
 
   DESCRIPTION
     CHECK THIS IS lit
-      ELSE SAY dark_loc_desc OF my_game.
+      ELSE SAY my_game:dark_loc_desc.
 END ADD TO.
 
 -- The `lit` attribute is defined on LOCATION, and authors can use it to create
@@ -570,7 +570,7 @@ END ADD TO.
 -- `dark_loc_desc` message instead of describing the location, if it's unlit.
 
 
-EVERY dark_location ISA LOCATION
+EVERY dark_location IsA LOCATION
   IS NOT lit.
 
   -- These ENTERED statements take care of the dark location being correctly lit
@@ -579,7 +579,7 @@ EVERY dark_location ISA LOCATION
 
   ENTERED
 
-    IF COUNT ISA LIGHTSOURCE, IS lit, HERE > 0
+    IF COUNT IsA LIGHTSOURCE, IS lit, HERE > 0
     AND THIS IS NOT lit
       THEN MAKE THIS lit.
         IF CURRENT ACTOR <> hero
@@ -587,14 +587,14 @@ EVERY dark_location ISA LOCATION
         END IF.
     END IF.
 
-    IF COUNT ISA LIGHTSOURCE, IS lit, HERE = 0
+    IF COUNT IsA LIGHTSOURCE, IS lit, HERE = 0
       THEN MAKE THIS NOT lit.
     END IF.
 
 
   DESCRIPTION
     CHECK THIS IS lit
-      ELSE SAY dark_loc_desc OF my_game.
+      ELSE SAY my_game:dark_loc_desc.
 
 END EVERY dark_location.
 
@@ -610,10 +610,10 @@ END EVERY dark_location.
 -- instances will automatically have a floor, ceiling and walls; and dark sites
 -- will have a ground and sky.
 
-EVERY dark_room ISA dark_location AT indoor.
+EVERY dark_room IsA dark_location AT indoor.
 END EVERY.
 
-EVERY dark_site ISA dark_location AT outdoor.
+EVERY dark_site IsA dark_location AT outdoor.
 END EVERY.
 
 --==============================================================================
@@ -625,9 +625,9 @@ END EVERY.
 -- ------------------------------------------------------
 -- Ensure a DARK_LOCATION is lit if there's light_source:
 -- ------------------------------------------------------
-WHEN  location OF hero ISA dark_location
+WHEN  location OF hero IsA dark_location
   AND location OF hero IS NOT lit
-  AND COUNT ISA lightsource, IS lit, AT hero > 0
+  AND COUNT IsA lightsource, IS lit, AT hero > 0
 THEN MAKE location OF hero lit.
   SCHEDULE light_on AT hero AFTER 0.
 
@@ -640,16 +640,16 @@ END EVENT.
 -- --------------------------------------------------------------
 -- Ensure a DARK_LOCATION is unlit if there are no light_sources:
 -- --------------------------------------------------------------
-WHEN location OF hero ISA dark_location
+WHEN  location OF hero IsA dark_location
   AND location OF hero IS NOT forced_lit
   AND location OF hero IS lit
-  AND COUNT ISA lightsource, IS lit, AT hero = 0
+  AND COUNT IsA lightsource, IS lit, AT hero = 0
 THEN MAKE location OF hero NOT lit.
   SCHEDULE light_off AT hero AFTER 0.
 
 
 EVENT light_off
-  SAY light_goes_off OF my_game.
+  SAY my_game:light_goes_off.
 END EVENT.
 
 
@@ -661,9 +661,9 @@ END EVENT.
 -- `definition_block` instance ("lib_definitions.i").
 
 EVENT check_darkness
-  FOR EACH dl ISA dark_location, IS lit, IS NOT forced_lit
+  FOR EACH dl IsA dark_location, IS lit, IS NOT forced_lit
   DO
-    IF COUNT ISA LIGHTSOURCE, AT dl = 0
+    IF COUNT IsA LIGHTSOURCE, AT dl = 0
       THEN MAKE dl NOT lit.
     END IF.
   END FOR.

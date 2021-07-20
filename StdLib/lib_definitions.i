@@ -250,11 +250,11 @@ END ADD.
 
 -- Some dummy placeholder objects used as null defaults in various definitions:
 
-THE null_object ISA OBJECT
+THE null_object IsA OBJECT
 END THE.
 
 
-THE null_key ISA OBJECT
+THE null_key IsA OBJECT
 END THE.
 
 --==============================================================================
@@ -336,7 +336,7 @@ END ADD TO.
 --------------------------------------------------------------------------------
 --==============================================================================
 
-EVERY definition_block ISA LOCATION
+EVERY definition_block IsA LOCATION
 
   -- These three attributes, as well as the SCHEDULE statement following them,
   -- are needed for the 'notify' command ('lib_verbs.i'); ignore.
@@ -387,40 +387,40 @@ EVERY definition_block ISA LOCATION
   -- scope, anywhere.
 
 
-    FOR EACH l ISA LOCATION
+    FOR EACH l IsA LOCATION
       DO
         EXCLUDE nowhere FROM nested OF l.
-        IF COUNT ISA LOCATION, AT l > 0
+        IF COUNT IsA LOCATION, AT l > 0
           THEN
-            FOR EACH x ISA LOCATION, AT l
+            FOR EACH x IsA LOCATION, AT l
               DO
                 INCLUDE x IN nested OF l.
             END FOR.
         END IF.
     END FOR.
 
-    FOR EACH l ISA LOCATION
+    FOR EACH l IsA LOCATION
       DO
         IF l <> my_game AND l <> nowhere
           THEN LOCATE l AT my_game.
         END IF.
     END FOR.
 
-    FOR EACH r1 ISA ROOM
+    FOR EACH r1 IsA ROOM
       DO
         LOCATE r1 AT indoor.
     END FOR.
 
-    FOR EACH s1 ISA SITE
+    FOR EACH s1 IsA SITE
       DO
         LOCATE s1 AT outdoor.
     END FOR.
 
-    FOR EACH l ISA LOCATION
+    FOR EACH l IsA LOCATION
       DO
         IF nested OF l <> {} AND l <> my_game AND l <> nowhere
         THEN
-          FOR EACH x ISA LOCATION, IN nested OF l
+          FOR EACH x IsA LOCATION, IN nested OF l
             DO
               IF l <> my_game AND x <> my_game
                 THEN LOCATE x AT l.
@@ -518,7 +518,7 @@ END ADD TO definition_block.
 --------------------------------------------------------------------------------
 --==============================================================================
 
-THE banner ISA LOCATION
+THE banner IsA LOCATION
 
   DESCRIPTION
 

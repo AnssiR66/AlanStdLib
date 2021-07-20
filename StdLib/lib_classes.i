@@ -61,7 +61,7 @@
 
 --------------------------------------------------------------------------------
 
-EVERY device ISA OBJECT
+EVERY device IsA OBJECT
 
 --------------------------------------------------------------------------------
 -- EXAMINE DEVICE
@@ -88,28 +88,28 @@ EVERY device ISA OBJECT
     CHECK THIS IS NOT on
       ELSE
         IF THIS IS NOT plural
-          THEN SAY check_device_not_on_sg OF my_game.
-          ELSE SAY check_device_not_on_pl OF my_game.
+          THEN SAY my_game:check_device_not_on_sg.
+          ELSE SAY my_game:check_device_not_on_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND THIS IS reachable AND THIS IS NOT distant
       ELSE
         IF THIS IS NOT reachable
           THEN
             IF THIS IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF THIS IS distant
           THEN
             IF THIS IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
     AND THIS IS NOT broken
-      ELSE SAY check_obj_not_broken OF my_game.
+      ELSE SAY my_game:check_obj_not_broken.
 
     DOES ONLY
       "You turn on" SAY THE THIS. "."
@@ -124,24 +124,24 @@ EVERY device ISA OBJECT
     CHECK THIS IS on
       ELSE
          IF THIS IS NOT plural
-          THEN SAY check_device_on_sg OF my_game.
-          ELSE SAY check_device_on_pl OF my_game.
+          THEN SAY my_game:check_device_on_sg.
+          ELSE SAY my_game:check_device_on_pl.
          END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND THIS IS reachable AND THIS IS NOT distant
       ELSE
         IF THIS IS NOT reachable
           THEN
             IF THIS IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF THIS IS distant
           THEN
             IF THIS IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
     DOES ONLY
@@ -160,24 +160,24 @@ EVERY device ISA OBJECT
 
   VERB switch --> switch (app)
     CHECK CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND THIS IS reachable AND THIS IS NOT distant
       ELSE
         IF THIS IS NOT reachable
           THEN
             IF THIS IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF THIS IS distant
           THEN
             IF THIS IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
     AND THIS IS NOT broken
-      ELSE SAY check_obj_not_broken OF my_game.
+      ELSE SAY my_game:check_obj_not_broken.
     DOES ONLY
       IF THIS IS on
         THEN "You switch off" SAY THE THIS. "."
@@ -241,7 +241,7 @@ END EVERY device.
 
 --------------------------------------------------------------------------------
 
-EVERY door ISA OBJECT
+EVERY door IsA OBJECT
   IS openable.
   IS NOT open.
   IS NOT lockable.
@@ -433,7 +433,7 @@ END EVERY door.
 
 -- A dummy placeholder used internally for default settings (ignore):
 
-THE null_door ISA DOOR
+THE null_door IsA DOOR
 END THE.
 
 --==============================================================================
@@ -471,13 +471,13 @@ END THE.
 -- Artificial light sources Examples: a flashlight, a light bulb, a table lamp.
 
 
--- In 'lib_locations.i', `ISA LIGHTSOURCE` expressions are used to define the
+-- In 'lib_locations.i', `IsA LIGHTSOURCE` expressions are used to define the
 -- behavior of the DARK_LOCATION class.
 
 --------------------------------------------------------------------------------
 
 
-EVERY lightsource ISA OBJECT
+EVERY lightsource IsA OBJECT
   IS NOT lit.
   IS natural.
 
@@ -531,11 +531,11 @@ EVERY lightsource ISA OBJECT
     CHECK THIS IS NOT lit
       ELSE
         IF THIS IS NOT plural
-          THEN SAY check_lightsource_not_lit_sg OF my_game.
-          ELSE SAY check_lightsource_not_lit_pl OF my_game.
+          THEN SAY my_game:check_lightsource_not_lit_sg.
+          ELSE SAY my_game:check_lightsource_not_lit_pl.
         END IF.
     AND THIS IS NOT broken
-      ELSE SAY check_obj_not_broken OF my_game.
+      ELSE SAY my_game:check_obj_not_broken.
 
     DOES ONLY
       IF THIS IS natural
@@ -564,8 +564,8 @@ EVERY lightsource ISA OBJECT
     AND THIS IS lit
       ELSE
         IF THIS IS NOT plural
-          THEN SAY check_lightsource_lit_sg OF my_game.
-          ELSE SAY check_lightsource_lit_pl OF my_game.
+          THEN SAY my_game:check_lightsource_lit_sg.
+          ELSE SAY my_game:check_lightsource_lit_pl.
         END IF.
 
     DOES ONLY
@@ -583,17 +583,17 @@ EVERY lightsource ISA OBJECT
     CHECK THIS IS NOT natural
       ELSE
         IF THIS IS NOT plural
-          THEN SAY check_obj_suitable_on_sg OF my_game.
-          ELSE SAY check_obj_suitable_on_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_on_sg.
+          ELSE SAY my_game:check_obj_suitable_on_pl.
         END IF.
     AND THIS IS NOT lit
       ELSE
         IF THIS IS NOT plural
-          THEN SAY check_lightsource_not_lit_sg OF my_game.
-          ELSE SAY check_lightsource_not_lit_pl OF my_game.
+          THEN SAY my_game:check_lightsource_not_lit_sg.
+          ELSE SAY my_game:check_lightsource_not_lit_pl.
         END IF.
     AND THIS IS NOT broken
-      ELSE SAY check_obj_not_broken OF my_game.
+      ELSE SAY my_game:check_obj_not_broken.
 
     DOES ONLY
       "You turn on" SAY THE THIS. "."
@@ -611,14 +611,14 @@ EVERY lightsource ISA OBJECT
     CHECK THIS IS NOT natural
       ELSE
         IF THIS IS NOT plural
-          THEN SAY check_obj_suitable_off_sg OF my_game.
-          ELSE SAY check_obj_suitable_off_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_off_sg.
+          ELSE SAY my_game:check_obj_suitable_off_pl.
         END IF.
     AND THIS IS lit
       ELSE
         IF THIS IS NOT plural
-          THEN SAY check_lightsource_lit_sg OF my_game.
-          ELSE SAY check_lightsource_lit_sg OF my_game.
+          THEN SAY my_game:check_lightsource_lit_sg.
+          ELSE SAY my_game:check_lightsource_lit_sg.
         END IF.
 
     DOES ONLY
@@ -641,17 +641,17 @@ EVERY lightsource ISA OBJECT
     CHECK THIS IS NOT natural
       ELSE
         IF THIS IS NOT plural
-          THEN SAY check_lightsource_switchable_sg OF my_game.
-          ELSE SAY check_lightsource_switchable_pl OF my_game.
+          THEN SAY my_game:check_lightsource_switchable_sg.
+          ELSE SAY my_game:check_lightsource_switchable_pl.
         END IF.
     AND THIS IS reachable
       ELSE
         IF THIS IS NOT plural
-          THEN SAY check_obj_reachable_sg OF my_game.
-          ELSE SAY check_obj_reachable_pl OF my_game.
+          THEN SAY my_game:check_obj_reachable_sg.
+          ELSE SAY my_game:check_obj_reachable_pl.
         END IF.
     AND THIS IS NOT broken
-      ELSE SAY check_obj_not_broken OF my_game.
+      ELSE SAY my_game:check_obj_not_broken.
 
     DOES ONLY
       "You switch"
@@ -690,7 +690,7 @@ END EVERY lightsource.
 
 --------------------------------------------------------------------------------
 
-EVERY LISTED_CONTAINER ISA OBJECT
+EVERY LISTED_CONTAINER IsA OBJECT
   CONTAINER
 
   INITIALIZE
@@ -698,9 +698,9 @@ EVERY LISTED_CONTAINER ISA OBJECT
   -- Every object that's inside a LISTED_CONTAINER at the beginning of the game
   -- will be allowed back in that container, by default, after being taken out:
 
-    FOR EACH lc ISA LISTED_CONTAINER
+    FOR EACH lc IsA LISTED_CONTAINER
       DO
-        FOR EACH o ISA OBJECT, DIRECTLY IN lc
+        FOR EACH o IsA OBJECT, DIRECTLY IN lc
           DO
             INCLUDE o IN allowed OF lc.
         END FOR.
@@ -851,7 +851,7 @@ END EVERY LISTED_CONTAINER.
 
 --------------------------------------------------------------------------------
 
-EVERY sound ISA OBJECT
+EVERY sound IsA OBJECT
   IS NOT examinable.
   IS NOT takeable.
   IS NOT reachable.
@@ -897,7 +897,7 @@ END EVERY sound.
 
 --------------------------------------------------------------------------------
 
-EVERY supporter ISA OBJECT
+EVERY supporter IsA OBJECT
 
   CONTAINER
     HEADER "On" SAY THE THIS. "you see"
@@ -994,7 +994,7 @@ END EVERY supporter.
 --------------------------------------------------------------------------------
 
 
-EVERY weapon ISA OBJECT
+EVERY weapon IsA OBJECT
   IS NOT fireable.
 END EVERY.
 
@@ -1021,7 +1021,7 @@ END EVERY.
 
 --------------------------------------------------------------------------------
 
-EVERY window ISA OBJECT
+EVERY window IsA OBJECT
   IS openable.
   IS NOT open.
   IS NOT takeable.

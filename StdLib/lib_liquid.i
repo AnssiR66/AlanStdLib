@@ -33,7 +33,7 @@
 -- Every liquid is associated to a containing vessel via the `vessel` reference
 -- attribute; if no vessel is specified, the default `null_vessel` will be used:
 
-THE null_vessel ISA OBJECT
+THE null_vessel IsA OBJECT
   CONTAINER
 END THE.
 
@@ -81,12 +81,12 @@ END THE.
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --==============================================================================
 
--- In 'lib_verbs.i', `ISA LIQUID` expressions are used in the syntax definitions
+-- In 'lib_verbs.i', `IsA LIQUID` expressions are used in the syntax definitions
 -- of the following verbs: dive_in, drink, sip, swim_in.
 
 --------------------------------------------------------------------------------
 
-EVERY liquid ISA OBJECT
+EVERY liquid IsA OBJECT
 
   HAS vessel null_vessel. -- The liquid is not in a container.
 
@@ -116,9 +116,9 @@ EVERY liquid ISA OBJECT
   -- Every object found in a liquid, for example a fish in a pond of water,
   -- will be allowed back in that liquid once taken out of there:
 
-    FOR EACH liq ISA LIQUID
+    FOR EACH liq IsA LIQUID
       DO
-        FOR EACH o ISA OBJECT, DIRECTLY IN liq
+        FOR EACH o IsA OBJECT, DIRECTLY IN liq
           DO
             INCLUDE o IN allowed OF liq.
         END FOR.
@@ -128,9 +128,9 @@ EVERY liquid ISA OBJECT
   -- Every liquid in a container at the start of the game
   -- will have that container as its vessel:
 
-    FOR EACH lc ISA LISTED_CONTAINER
+    FOR EACH lc IsA LISTED_CONTAINER
       DO
-        FOR EACH lq ISA LIQUID, DIRECTLY IN lc
+        FOR EACH lq IsA LIQUID, DIRECTLY IN lc
           DO
             SET vessel OF lq TO lc.
         END FOR.
@@ -219,7 +219,7 @@ EVERY liquid ISA OBJECT
 
   VERB take
     CHECK vessel OF THIS NOT IN hero
-      ELSE SAY check_obj_not_in_hero2 OF my_game.
+      ELSE SAY my_game:check_obj_not_in_hero2.
     DOES ONLY
       IF vessel OF THIS = null_vessel OR vessel OF THIS IS NOT takeable
         THEN "You can't carry" SAY THE THIS. "around in your bare hands."
@@ -233,7 +233,7 @@ EVERY liquid ISA OBJECT
   VERB take_from
      WHEN obj
     CHECK holder <> vessel OF THIS
-      ELSE SAY check_liquid_vessel_not_cont OF my_game.
+      ELSE SAY my_game:check_liquid_vessel_not_cont.
       -- the above is triggered when the player types for example
       -- >take juice from bottle   -- (when the juice is in the bottle)
     DOES ONLY
@@ -347,12 +347,12 @@ EVERY liquid ISA OBJECT
       CHECK obj NOT DIRECTLY IN cont
         AND obj NOT IN cont
           ELSE
-            IF cont ISA SUPPORTER
-              THEN SAY check_cont_not_supporter OF my_game.
+            IF cont IsA SUPPORTER
+              THEN SAY my_game:check_cont_not_supporter.
               ELSE
                 IF obj IS NOT plural
-                  THEN SAY check_obj_not_in_cont_sg OF my_game.
-                  ELSE SAY check_obj_not_in_cont_pl OF my_game.
+                  THEN SAY my_game:check_obj_not_in_cont_sg.
+                  ELSE SAY my_game:check_obj_not_in_cont_pl.
                 END IF.
             END IF.
 
@@ -428,7 +428,7 @@ EVERY liquid ISA OBJECT
             THEN LOCATE THIS AT hero.
               "You pour" SAY THE THIS. "on" SAY THE surface. "."
               SET vessel OF THIS TO null_vessel.
-            ELSIF surface ISA SUPPORTER
+            ELSIF surface IsA SUPPORTER
               THEN LOCATE THIS IN surface.
                 "You pour" SAY THE THIS. "on" SAY THE surface. "."
                 SET vessel OF THIS TO null_vessel.
@@ -567,13 +567,13 @@ END EVERY liquid.
 --     the `vessel` of the latter.
 
 EVENT check_vessel
-  FOR EACH liq ISA LIQUID, DIRECTLY AT CURRENT LOCATION DO
+  FOR EACH liq IsA LIQUID, DIRECTLY AT CURRENT LOCATION DO
     SET vessel OF liq TO null_vessel.
   END FOR.
   SCHEDULE check_vessel AFTER 1.
 
-  FOR EACH lc ISA LISTED_CONTAINER DO
-    FOR EACH liq ISA LIQUID, DIRECTLY IN lc
+  FOR EACH lc IsA LISTED_CONTAINER DO
+    FOR EACH liq IsA LIQUID, DIRECTLY IN lc
       DO SET vessel OF liq TO lc.
     END FOR.
   END FOR.

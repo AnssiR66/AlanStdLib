@@ -39,7 +39,7 @@
 
 -- The default dummy clothing object, used internally by the library. (Ignore!)
 
-THE null_clothing ISA CLOTHING
+THE null_clothing IsA CLOTHING
 END THE.
 
 
@@ -87,7 +87,7 @@ END ADD TO definition_block.
 --    headphones, VR headsets, etc.), therefore the 'worn' state should not be
 --    exclusive to the clothing class.
 
-EVERY clothing ISA OBJECT
+EVERY clothing IsA OBJECT
 
   IS wearable.
 
@@ -148,7 +148,7 @@ EVERY clothing ISA OBJECT
     -- allowed to be put back into its original containing clothing once taken
     -- out from it:
 
-    FOR EACH o ISA OBJECT, DIRECTLY IN THIS
+    FOR EACH o IsA OBJECT, DIRECTLY IN THIS
       DO INCLUDE o IN allowed OF THIS.
     END FOR.
 
@@ -175,7 +175,7 @@ EVERY clothing ISA OBJECT
     DOES AFTER
       IF THIS IS NOT OPAQUE
         THEN
-          IF COUNT ISA OBJECT, DIRECTLY IN THIS > 0
+          IF COUNT IsA OBJECT, DIRECTLY IN THIS > 0
             THEN LIST THIS.
           END IF.
       END IF.
@@ -400,7 +400,7 @@ EVERY clothing ISA OBJECT
   VERB wear
 --==============================================================================
     CHECK sex OF THIS = sex OF hero OR sex OF THIS = 0
-      ELSE SAY check_clothing_sex OF my_game.
+      ELSE SAY my_game:check_clothing_sex.
     AND THIS IS NOT worn
       ELSE
         IF THIS IN hero
@@ -540,7 +540,7 @@ EVERY clothing ISA OBJECT
     CHECK THIS DIRECTLY IN hero AND THIS IS worn
       ELSE SAY my_game:check_obj_in_worn.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
 
     DOES ONLY
       --------------------------------------------------------------------

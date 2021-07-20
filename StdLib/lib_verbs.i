@@ -101,7 +101,7 @@ SYNTAX about = about.
 
 META VERB about
   CHECK my_game CAN about
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     "This is a text adventure, also called interactive fiction, which means
      that what goes on in the story depends on what you type at the prompt.
@@ -140,7 +140,7 @@ SYNTAX credits = credits.
 
 META VERB credits
   CHECK my_game CAN credits
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     "The author retains the copyright to this game.
     $pThis game was written using the ALAN Adventure Language. ALAN is
@@ -179,7 +179,7 @@ SYNTAX hint = hint.
 
 META VERB hint
   CHECK my_game CAN hint
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
 
   DOES
     "Unfortunately hints are not available in this game."
@@ -221,7 +221,7 @@ SYNTAX notify = notify.
 
 META VERB notify
   CHECK my_game CAN notify
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     IF my_game HAS notify_turned_on
       THEN MAKE my_game NOT notify_turned_on.
@@ -236,7 +236,7 @@ END VERB notify.
 
 META VERB notify_on
   CHECK my_game CAN notify_on
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     IF my_game HAS notify_turned_on
       THEN "Score notification is already enabled."
@@ -249,7 +249,7 @@ END VERB notify_on.
 
 META VERB notify_off
   CHECK my_game CAN notify_off
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     IF my_game HAS notify_turned_on
       THEN MAKE my_game NOT notify_turned_on.
@@ -273,13 +273,13 @@ END VERB notify_off.
 -- displayed, unless the player has disabled it via the `notify` verbs.
 
 EVENT check_score
-  IF oldscore OF my_game < score
+  IF my_game:oldscore < score
     THEN
       IF my_game HAS notify_turned_on
         THEN
           -- ie: the player wants to see score msgs
-          "$p(Your score has just gone up by" SAY (score - oldscore OF my_game).
-          IF (score - oldscore OF my_game) = 1
+          "$p(Your score has just gone up by" SAY (score - my_game:oldscore).
+          IF (score - my_game:oldscore) = 1
             THEN "point.)"
             ELSE "points.)"
           END IF.
@@ -291,7 +291,7 @@ EVENT check_score
           END IF.
       END IF.
 
-      SET oldscore OF my_game TO score.
+      SET my_game:oldscore TO score.
   END IF.
   -- run the 'check_score' event again next turn:
   SCHEDULE check_score AT hero AFTER 1.
@@ -329,7 +329,7 @@ SYNTAX 'quit' = 'quit'.
 
 META VERB 'quit'
   CHECK my_game CAN 'quit'
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     QUIT.
 END VERB 'quit'.
@@ -350,7 +350,7 @@ SYNTAX 'restart' = 'restart'.
 
 META VERB 'restart'
   CHECK my_game CAN 'restart'
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     RESTART.
 END VERB 'restart'.
@@ -371,7 +371,7 @@ SYNTAX 'restore' = 'restore'.
 
 META VERB 'restore'
   CHECK my_game CAN 'restore'
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     RESTORE.
 END VERB 'restore'.
@@ -392,7 +392,7 @@ SYNTAX 'save' = 'save'.
 
 META VERB 'save'
   CHECK my_game CAN 'save'
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     SAVE.
 END VERB 'save'.
@@ -413,7 +413,7 @@ SYNTAX 'score' = 'score'.
 
 META VERB 'score'
   CHECK my_game CAN 'score'
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     SCORE.
     -- If you wish to disable the scoring system, comment out
@@ -441,7 +441,7 @@ SYNTAX 'script'    = 'script'.
 
 META VERB 'script'
   CHECK my_game CAN 'script'
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
 
     "You can turn file transcription on and off using the SCRIPT ON/OFF command
@@ -459,7 +459,7 @@ END VERB 'script'.
 
 META VERB script_on
   CHECK my_game CAN script_on
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     TRANSCRIPT ON.
     "Transcripting turned on."
@@ -468,7 +468,7 @@ END VERB script_on.
 
 META VERB script_off
   CHECK my_game CAN script_off
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     TRANSCRIPT OFF.
     "Transcripting turned off."
@@ -505,7 +505,7 @@ SYNTAX again = again.
 
 VERB again
   CHECK my_game CAN again
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     "[The AGAIN command is not supported in this game. As a workaround, try using
      the 'up' and 'down' arrow keys to scroll through your previous commands.]"
@@ -525,14 +525,14 @@ END VERB again.
 SYNONYMS reply = answer.
 
 SYNTAX answer = answer (topic)
-  WHERE topic ISA STRING
-    ELSE SAY illegal_parameter_string OF my_game.
+  WHERE topic IsA STRING
+    ELSE SAY my_game:illegal_parameter_string.
 
 
 ADD TO EVERY STRING
   VERB answer
     CHECK my_game CAN answer
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     DOES
       "What was the question?"
     END VERB answer.
@@ -553,17 +553,17 @@ END ADD TO.
 
 
 SYNTAX ask = ask (act) about (topic)!
-  WHERE act ISA ACTOR
+  WHERE act IsA ACTOR
     ELSE
   IF act IS NOT plural
-    THEN SAY illegal_parameter_talk_sg OF my_game.
-    ELSE SAY illegal_parameter_talk_pl OF my_game.
+    THEN SAY my_game:illegal_parameter_talk_sg.
+    ELSE SAY my_game:illegal_parameter_talk_pl.
   END IF.
-  AND topic ISA THING
+  AND topic IsA THING
     ELSE
   IF topic IS NOT plural
-    THEN SAY illegal_parameter_about_sg OF my_game.
-    ELSE SAY illegal_parameter_about_pl OF my_game.
+    THEN SAY my_game:illegal_parameter_about_sg.
+    ELSE SAY my_game:illegal_parameter_about_pl.
   END IF.
 
         ask = enquire (act) about (topic)!.
@@ -581,20 +581,20 @@ ADD TO EVERY ACTOR
   VERB ask
     WHEN act
       CHECK my_game CAN ask
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND act <> hero
-        ELSE SAY check_obj_not_hero1 OF my_game.
+        ELSE SAY my_game:check_obj_not_hero1.
       AND act CAN talk
         ELSE
           IF act IS NOT plural
-            THEN SAY check_act_can_talk_sg OF my_game.
-            ELSE SAY check_act_can_talk_pl OF my_game.
+            THEN SAY my_game:check_act_can_talk_sg.
+            ELSE SAY my_game:check_act_can_talk_pl.
           END IF.
       AND act IS NOT distant
         ELSE
           IF act IS NOT plural
-            THEN SAY check_obj_not_distant_sg OF my_game.
-            ELSE SAY check_obj_not_distant_pl OF my_game.
+            THEN SAY my_game:check_obj_not_distant_sg.
+            ELSE SAY my_game:check_obj_not_distant_pl.
           END IF.
 
       DOES
@@ -614,17 +614,17 @@ END ADD TO.
 
 
 SYNTAX ask_for = ask (act) 'for' (obj)
-  WHERE act ISA ACTOR
+  WHERE act IsA ACTOR
     ELSE
       IF act IS NOT plural
-        THEN SAY illegal_parameter_talk_sg OF my_game.
-        ELSE SAY illegal_parameter_talk_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_talk_sg.
+        ELSE SAY my_game:illegal_parameter_talk_pl.
       END IF.
-  AND obj ISA OBJECT
+  AND obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_for_sg OF my_game.
-        ELSE SAY illegal_parameter_for_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_for_sg.
+        ELSE SAY my_game:illegal_parameter_for_pl.
       END IF.
 
 
@@ -632,50 +632,50 @@ ADD TO EVERY ACTOR
   VERB ask_for
     WHEN act
       CHECK my_game CAN ask_for
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND act <> hero
-        ELSE SAY check_obj_not_hero1 OF my_game.
+        ELSE SAY my_game:check_obj_not_hero1.
       AND act CAN talk
         ELSE
           IF act IS NOT plural
-            THEN SAY check_act_can_talk_sg OF my_game.
-            ELSE SAY check_act_can_talk_pl OF my_game.
+            THEN SAY my_game:check_act_can_talk_sg.
+            ELSE SAY my_game:check_act_can_talk_pl.
           END IF.
       AND obj IS examinable
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj2_suitable_for_sg OF my_game.
-            ELSE SAY check_obj2_suitable_for_pl OF my_game.
+            THEN SAY my_game:check_obj2_suitable_for_sg.
+            ELSE SAY my_game:check_obj2_suitable_for_pl.
           END IF.
       AND obj NOT IN hero
-        ELSE SAY check_obj2_not_in_hero3 OF my_game.
+        ELSE SAY my_game:check_obj2_not_in_hero3.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND act IS NOT distant
         ELSE
           IF act IS NOT plural
-            THEN SAY check_obj_not_distant_sg OF my_game.
-            ELSE SAY check_obj_not_distant_pl OF my_game.
+            THEN SAY my_game:check_obj_not_distant_sg.
+            ELSE SAY my_game:check_obj_not_distant_pl.
           END IF.
       AND obj IS takeable
-        ELSE SAY check_obj2_takeable2 OF my_game.
+        ELSE SAY my_game:check_obj2_takeable2.
 
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
-            THEN SAY check_obj_reachable_ask OF my_game.
+            THEN SAY my_game:check_obj_reachable_ask.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
       AND obj IS NOT scenery
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj2_not_scenery_sg OF my_game.
-            ELSE SAY check_obj2_not_scenery_pl OF my_game.
+            THEN SAY my_game:check_obj2_not_scenery_sg.
+            ELSE SAY my_game:check_obj2_not_scenery_pl.
           END IF.
 
       DOES
@@ -704,7 +704,7 @@ END ADD TO.
 
 
 SYNTAX ask_for_error = ask 'for' (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE "Please use the formulation ASK PERSON FOR THING
           to ask somebody for something."
 
@@ -733,26 +733,26 @@ END ADD TO.
 SYNONYMS beat, fight, hit, punch = attack.
 
 SYNTAX attack = attack (target)
-  WHERE target ISA THING
+  WHERE target IsA THING
     ELSE
       IF target IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY THING
   VERB attack
     CHECK my_game CAN attack
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND target IS examinable
       ELSE
         IF target IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND target <> hero
-      ELSE SAY check_obj_not_hero1 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero1.
     AND target NOT IN hero
       ELSE
         IF target IS NOT worn
@@ -760,26 +760,26 @@ ADD TO EVERY THING
           ELSE SAY my_game:check_obj_not_in_worn2.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND target IS reachable AND target IS NOT distant
       ELSE
         IF target IS NOT reachable
           THEN
             IF target IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF target IS distant
           THEN
             IF target IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
     AND hero IS NOT sitting
-      ELSE SAY check_hero_not_sitting2 OF my_game.
+      ELSE SAY my_game:check_hero_not_sitting2.
     AND hero IS NOT lying_down
-      ELSE SAY check_hero_not_lying_down2 OF my_game.
+      ELSE SAY my_game:check_hero_not_lying_down2.
 
     DOES
       "Resorting to brute force is not the solution here."
@@ -798,17 +798,17 @@ END ADD TO.
 
 
 SYNTAX attack_with = attack (target) 'with' (weapon)
-  WHERE target ISA THING
+  WHERE target IsA THING
     ELSE
       IF target IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND weapon ISA WEAPON
+  AND weapon IsA WEAPON
     ELSE
       IF weapon IS NOT plural
-        THEN SAY illegal_parameter2_with_sg OF my_game.
-        ELSE SAY illegal_parameter2_with_pl OF my_game.
+        THEN SAY my_game:illegal_parameter2_with_sg.
+        ELSE SAY my_game:illegal_parameter2_with_pl.
       END IF.
 
 
@@ -817,17 +817,17 @@ ADD TO EVERY THING
   VERB attack_with
     WHEN target
       CHECK my_game CAN attack_with
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND target IS examinable
         ELSE
           IF target IS NOT plural
-            THEN SAY check_obj_suitable_sg OF my_game.
-            ELSE SAY check_obj_suitable_pl OF my_game.
+            THEN SAY my_game:check_obj_suitable_sg.
+            ELSE SAY my_game:check_obj_suitable_pl.
           END IF.
       AND target <> weapon
-        ELSE SAY check_obj_not_obj2_with OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_with.
       AND target <> hero
-        ELSE SAY check_obj_not_hero1 OF my_game.
+        ELSE SAY my_game:check_obj_not_hero1.
       AND target NOT IN hero
         ELSE
           IF target IS NOT worn
@@ -835,26 +835,26 @@ ADD TO EVERY THING
             ELSE SAY my_game:check_obj_not_in_worn2.
           END IF.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND target IS reachable AND target IS NOT distant
         ELSE
           IF target IS NOT reachable
             THEN
               IF target IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF target IS distant
             THEN
               IF target IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
       AND hero IS NOT sitting
-        ELSE SAY check_hero_not_sitting2 OF my_game.
+        ELSE SAY my_game:check_hero_not_sitting2.
       AND hero IS NOT lying_down
-        ELSE SAY check_hero_not_lying_down2 OF my_game.
+        ELSE SAY my_game:check_hero_not_lying_down2.
 
     DOES
       "Resorting to brute force is not the solution here."
@@ -875,11 +875,11 @@ END ADD TO.
 SYNONYMS chew = bite.
 
 SYNTAX bite = bite (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
@@ -887,37 +887,37 @@ SYNTAX bite = bite (obj)
 ADD TO EVERY OBJECT
   VERB bite
     CHECK my_game CAN bite
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS edible
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND obj IS takeable
-      ELSE SAY check_obj_takeable OF my_game.
+      ELSE SAY my_game:check_obj_takeable.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS NOT distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
     DOES
       -- >>> implicit take >>>
       IF obj NOT DIRECTLY IN hero
-        THEN SAY implicit_taking_message OF my_game.
+        THEN SAY my_game:implicit_taking_message.
              LOCATE obj IN hero.
       END IF.
       -- <<< implicit take <<<
@@ -949,39 +949,39 @@ END ADD TO.
 SYNONYMS destroy = break.
 
 SYNTAX break = break (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB break
     CHECK my_game CAN break
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -1002,17 +1002,17 @@ END ADD TO.
 
 
 SYNTAX break_with = break (obj) 'with' (instr)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND instr ISA OBJECT
+  AND instr IsA OBJECT
     ELSE
       IF instr IS NOT plural
-        THEN SAY illegal_parameter2_with_sg OF my_game.
-        ELSE SAY illegal_parameter2_with_pl OF my_game.
+        THEN SAY my_game:illegal_parameter2_with_sg.
+        ELSE SAY my_game:illegal_parameter2_with_pl.
       END IF.
 
 
@@ -1020,38 +1020,38 @@ ADD TO EVERY OBJECT
   VERB break_with
     WHEN obj
       CHECK my_game CAN break_with
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj IS examinable
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_suitable_sg OF my_game.
-            ELSE SAY check_obj_suitable_pl OF my_game.
+            THEN SAY my_game:check_obj_suitable_sg.
+            ELSE SAY my_game:check_obj_suitable_pl.
           END IF.
       AND instr IS examinable
         ELSE
           IF instr IS NOT plural
-            THEN SAY check_obj2_suitable_with_sg OF my_game.
-            ELSE SAY check_obj2_suitable_with_pl OF my_game.
+            THEN SAY my_game:check_obj2_suitable_with_sg.
+            ELSE SAY my_game:check_obj2_suitable_with_pl.
           END IF.
       AND obj <> instr
-        ELSE SAY check_obj_not_obj2_with OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_with.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND instr IN hero
-        ELSE SAY check_obj2_in_hero OF my_game.
+        ELSE SAY my_game:check_obj2_in_hero.
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
 
@@ -1073,26 +1073,26 @@ END ADD TO.
 
 
 SYNTAX burn = burn (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB burn
     CHECK my_game CAN burn
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
 
     DOES
       "You must state what you want to burn" SAY THE obj. "with."
@@ -1111,17 +1111,17 @@ END ADD TO.
 
 
 SYNTAX burn_with = burn (obj) 'with' (instr)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND instr ISA OBJECT
+  AND instr IsA OBJECT
     ELSE
       IF instr IS NOT plural
-        THEN SAY illegal_parameter2_with_sg OF my_game.
-        ELSE SAY illegal_parameter2_with_pl OF my_game.
+        THEN SAY my_game:illegal_parameter2_with_sg.
+        ELSE SAY my_game:illegal_parameter2_with_pl.
       END IF.
 
 
@@ -1129,38 +1129,38 @@ ADD TO EVERY OBJECT
   VERB burn_with
     WHEN obj
       CHECK my_game CAN burn_with
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj IS examinable
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_suitable_sg OF my_game.
-            ELSE SAY check_obj_suitable_pl OF my_game.
+            THEN SAY my_game:check_obj_suitable_sg.
+            ELSE SAY my_game:check_obj_suitable_pl.
           END IF.
       AND instr IS examinable
         ELSE
           IF instr IS NOT plural
-            THEN SAY check_obj2_suitable_with_sg OF my_game.
-            ELSE SAY check_obj2_suitable_with_pl OF my_game.
+            THEN SAY my_game:check_obj2_suitable_with_sg.
+            ELSE SAY my_game:check_obj2_suitable_with_pl.
           END IF.
       AND obj <> instr
-        ELSE SAY check_obj_not_obj2_with OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_with.
       AND instr IN hero
-        ELSE SAY check_obj2_in_hero OF my_game.
+        ELSE SAY my_game:check_obj2_in_hero.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
 
@@ -1183,23 +1183,23 @@ END ADD TO.
 SYNONYMS purchase = buy.
 
 SYNTAX buy = buy (item)
-  WHERE item ISA OBJECT
+  WHERE item IsA OBJECT
     ELSE
       IF item IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB buy
     CHECK my_game CAN buy
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND item IS examinable
       ELSE
         IF item IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
 
     DOES
@@ -1223,32 +1223,32 @@ END ADD TO.
 
 
 SYNTAX catch = catch (obj)
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY THING
   VERB catch
     CHECK my_game CAN catch
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND obj <> hero
-      ELSE SAY check_obj_not_hero1 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero1.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND hero IS NOT sitting
-      ELSE SAY check_hero_not_sitting2 OF my_game.
+      ELSE SAY my_game:check_hero_not_sitting2.
     AND hero IS NOT lying_down
-      ELSE SAY check_hero_not_lying_down2 OF my_game.
+      ELSE SAY my_game:check_hero_not_lying_down2.
 
     DOES
       IF obj IS NOT plural
@@ -1275,11 +1275,11 @@ END ADD TO.
 SYNONYMS wipe, polish = clean.
 
 SYNTAX clean = clean (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
@@ -1287,28 +1287,28 @@ SYNTAX clean = clean (obj)
 ADD TO EVERY OBJECT
   VERB clean
     CHECK my_game CAN clean
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -1329,11 +1329,11 @@ END ADD TO.
 
 
 SYNTAX climb = climb (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
@@ -1341,34 +1341,34 @@ SYNTAX climb = climb (obj)
 ADD TO EVERY OBJECT
   VERB climb
     CHECK my_game CAN climb
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
     AND hero IS NOT sitting
-      ELSE SAY check_hero_not_sitting3 OF my_game.
+      ELSE SAY my_game:check_hero_not_sitting3.
     AND hero IS NOT lying_down
-      ELSE SAY check_hero_not_lying_down3 OF my_game.
+      ELSE SAY my_game:check_hero_not_lying_down3.
 
     DOES
       IF obj IS NOT plural
@@ -1391,39 +1391,39 @@ END ADD TO.
 
 
 SYNTAX climb_on = climb on (surface)
-  WHERE surface ISA SUPPORTER
+  WHERE surface IsA SUPPORTER
     ELSE
       IF surface IS NOT plural
-        THEN SAY illegal_parameter_on_sg OF my_game.
-        ELSE SAY illegal_parameter_on_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_on_sg.
+        ELSE SAY my_game:illegal_parameter_on_pl.
       END IF.
 
 
 ADD TO EVERY SUPPORTER
   VERB climb_on
     CHECK my_game CAN climb_on
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND surface IS reachable AND surface IS NOT distant
       ELSE
         IF surface IS NOT reachable
           THEN
             IF surface IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF surface IS NOT distant
           THEN
             IF surface IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
     AND hero IS NOT sitting
-      ELSE SAY check_hero_not_sitting3 OF my_game.
+      ELSE SAY my_game:check_hero_not_sitting3.
     AND hero IS NOT lying_down
-      ELSE SAY check_hero_not_lying_down3 OF my_game.
+      ELSE SAY my_game:check_hero_not_lying_down3.
 
     DOES
       IF surface IS NOT plural
@@ -1446,45 +1446,45 @@ END ADD TO.
 
 
 SYNTAX climb_through = climb through (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB climb_through
     CHECK my_game CAN climb_through
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
     AND hero IS NOT sitting
-      ELSE SAY check_hero_not_sitting3 OF my_game.
+      ELSE SAY my_game:check_hero_not_sitting3.
     AND hero IS NOT lying_down
-      ELSE SAY check_hero_not_lying_down3 OF my_game.
+      ELSE SAY my_game:check_hero_not_lying_down3.
 
     DOES
       IF obj IS NOT plural
@@ -1509,46 +1509,46 @@ END ADD TO.
 SYNONYMS shut = close.
 
 SYNTAX close = close (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB close
     CHECK my_game CAN close
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS openable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
     AND obj IS open
           ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_open1_sg OF my_game.
-          ELSE SAY check_obj_open1_pl OF my_game.
+          THEN SAY my_game:check_obj_open1_sg.
+          ELSE SAY my_game:check_obj_open1_pl.
         END IF.
 
     DOES
@@ -1569,17 +1569,17 @@ END ADD TO.
 
 
 SYNTAX close_with = close (obj) 'with' (instr)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND instr ISA OBJECT
+  AND instr IsA OBJECT
     ELSE
       IF instr IS NOT plural
-        THEN SAY illegal_parameter2_with_sg OF my_game.
-        ELSE SAY illegal_parameter2_with_pl OF my_game.
+        THEN SAY my_game:illegal_parameter2_with_sg.
+        ELSE SAY my_game:illegal_parameter2_with_pl.
       END IF.
 
 
@@ -1587,45 +1587,45 @@ ADD TO EVERY OBJECT
   VERB close_with
     WHEN obj
       CHECK my_game CAN close_with
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj IS openable
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_suitable_sg OF my_game.
-            ELSE SAY check_obj_suitable_pl OF my_game.
+            THEN SAY my_game:check_obj_suitable_sg.
+            ELSE SAY my_game:check_obj_suitable_pl.
           END IF.
       AND instr IS examinable
         ELSE
           IF instr IS NOT plural
-            THEN SAY check_obj2_suitable_with_sg OF my_game.
-            ELSE SAY check_obj2_suitable_with_pl OF my_game.
+            THEN SAY my_game:check_obj2_suitable_with_sg.
+            ELSE SAY my_game:check_obj2_suitable_with_pl.
           END IF.
       AND obj <> instr
-        ELSE SAY check_obj_not_obj2_with OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_with.
       AND instr IN hero
-        ELSE SAY check_obj2_in_hero OF my_game.
+        ELSE SAY my_game:check_obj2_in_hero.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
         END IF.
       AND obj IS open
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_open1_sg OF my_game.
-            ELSE SAY check_obj_open1_pl OF my_game.
+            THEN SAY my_game:check_obj_open1_sg.
+            ELSE SAY my_game:check_obj_open1_pl.
           END IF.
 
       DOES
@@ -1645,18 +1645,18 @@ END ADD TO.
 
 
 SYNTAX consult = consult (source) about (topic)!
-  WHERE source ISA OBJECT
+  WHERE source IsA OBJECT
     -- you can only consult an inanimate source, not a person.
     ELSE
       IF source IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND topic ISA THING
+  AND topic IsA THING
     ELSE
       IF topic IS NOT plural
-        THEN SAY illegal_parameter_consult_sg OF my_game.
-        ELSE SAY illegal_parameter_consult_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_consult_sg.
+        ELSE SAY my_game:illegal_parameter_consult_pl.
       END IF.
 
   consult = 'look' 'up' (topic) 'in' (source).
@@ -1666,28 +1666,28 @@ ADD TO EVERY THING
   VERB consult
     WHEN source
       CHECK my_game CAN consult
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND source IS examinable
         ELSE
           IF source IS NOT plural
-            THEN SAY check_obj_suitable_sg OF my_game.
-            ELSE SAY check_obj_suitable_pl OF my_game.
+            THEN SAY my_game:check_obj_suitable_sg.
+            ELSE SAY my_game:check_obj_suitable_pl.
           END IF.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND source IS reachable AND source IS NOT distant
         ELSE
           IF source IS NOT reachable
             THEN
               IF source IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF source IS distant
             THEN
               IF source IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
 
@@ -1701,7 +1701,7 @@ END ADD TO.
 
 
 SYNTAX consult_error = consult (source)
-  WHERE source ISA THING
+  WHERE source IsA THING
     ELSE "To consult something, please use the formulation CONSULT THING ABOUT
           PERSON/THING."
 
@@ -1726,26 +1726,26 @@ END ADD TO.
 
 
 SYNTAX cut = cut (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB cut
     CHECK my_game CAN cut
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
 
     DOES "You need to specify what you want to cut" SAY THE obj. "with."
   END VERB cut.
@@ -1763,17 +1763,17 @@ END ADD TO.
 
 
 SYNTAX cut_with = cut (obj) 'with' (instr)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND instr ISA OBJECT
+  AND instr IsA OBJECT
     ELSE
       IF instr IS NOT plural
-        THEN SAY illegal_parameter2_with_sg OF my_game.
-        ELSE SAY illegal_parameter2_with_pl OF my_game.
+        THEN SAY my_game:illegal_parameter2_with_sg.
+        ELSE SAY my_game:illegal_parameter2_with_pl.
       END IF.
 
 
@@ -1781,38 +1781,38 @@ ADD TO EVERY OBJECT
   VERB cut_with
     WHEN obj
       CHECK my_game CAN cut_with
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj <> instr
-        ELSE SAY check_obj_not_obj2_with OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_with.
       AND obj IS examinable
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_suitable_sg OF my_game.
-            ELSE SAY check_obj_suitable_pl OF my_game.
+            THEN SAY my_game:check_obj_suitable_sg.
+            ELSE SAY my_game:check_obj_suitable_pl.
           END IF.
       AND instr IS examinable
         ELSE
           IF instr IS NOT plural
-            THEN SAY check_obj2_suitable_with_sg OF my_game.
-            ELSE SAY check_obj2_suitable_with_pl OF my_game.
+            THEN SAY my_game:check_obj2_suitable_with_sg.
+            ELSE SAY my_game:check_obj2_suitable_with_pl.
           END IF.
       AND instr IN hero
-        ELSE SAY check_obj2_in_hero OF my_game.
+        ELSE SAY my_game:check_obj2_in_hero.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
 
@@ -1837,13 +1837,13 @@ SYNTAX dance = dance.
 
 VERB dance
   CHECK my_game CAN dance
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   AND CURRENT LOCATION IS lit
-    ELSE SAY check_current_loc_lit OF my_game.
+    ELSE SAY my_game:check_current_loc_lit.
   AND hero IS NOT sitting
-    ELSE SAY check_hero_not_sitting1 OF my_game.
+    ELSE SAY my_game:check_hero_not_sitting1.
   AND hero IS NOT lying_down
-    ELSE SAY check_hero_not_lying_down1 OF my_game.
+    ELSE SAY my_game:check_hero_not_lying_down1.
 
   DOES
     "How about a waltz?"
@@ -1861,39 +1861,39 @@ END VERB dance.
 
 
 SYNTAX dig = dig (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB dig
     CHECK my_game CAN dig
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
     AND hero IS NOT sitting
-      ELSE SAY check_hero_not_sitting2 OF my_game.
+      ELSE SAY my_game:check_hero_not_sitting2.
     AND hero IS NOT lying_down
-      ELSE SAY check_hero_not_lying_down2 OF my_game.
+      ELSE SAY my_game:check_hero_not_lying_down2.
 
     DOES
       "There is nothing suitable to dig here."
@@ -1916,13 +1916,13 @@ SYNTAX dive = dive.
 
 VERB dive
   CHECK my_game CAN dive
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   AND CURRENT LOCATION IS lit
-    ELSE SAY check_current_loc_lit OF my_game.
+    ELSE SAY my_game:check_current_loc_lit.
   AND hero IS NOT sitting
-    ELSE SAY check_hero_not_sitting3 OF my_game.
+    ELSE SAY my_game:check_hero_not_sitting3.
   AND hero IS NOT lying_down
-    ELSE SAY check_hero_not_lying_down3 OF my_game.
+    ELSE SAY my_game:check_hero_not_lying_down3.
 
   DOES
     "There is no water suitable for swimming here."
@@ -1940,32 +1940,32 @@ END VERB dive.
 
 
 SYNTAX dive_in = dive 'in' (liq)
-  WHERE liq ISA LIQUID    -- see 'classes.i'
+  WHERE liq IsA LIQUID    -- see 'classes.i'
     ELSE
       IF liq IS NOT plural
-        THEN SAY illegal_parameter_in_sg OF my_game.
-        ELSE SAY illegal_parameter_in_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_in_sg.
+        ELSE SAY my_game:illegal_parameter_in_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB dive_in
     CHECK my_game CAN dive_in
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND hero IS NOT sitting
-      ELSE SAY check_hero_not_sitting3 OF my_game.
+      ELSE SAY my_game:check_hero_not_sitting3.
     AND hero IS NOT lying_down
-      ELSE SAY check_hero_not_lying_down3 OF my_game.
+      ELSE SAY my_game:check_hero_not_lying_down3.
     -- notice that, unlike 'swim_in', it is possible to dive in a
     -- not reachable object (for example from a clifftop into a river)
     -- but not to a distant object:
     AND liq IS NOT distant
       ELSE
         IF liq IS NOT plural
-          THEN SAY check_obj_not_distant_sg OF my_game.
-          ELSE SAY check_obj_not_distant_pl OF my_game.
+          THEN SAY my_game:check_obj_not_distant_sg.
+          ELSE SAY my_game:check_obj_not_distant_pl.
         END IF.
 
     DOES
@@ -1989,39 +1989,39 @@ END ADD TO.
 
 
 SYNTAX drink = drink (liq)
-  WHERE liq ISA LIQUID    -- see 'classes.i'
+  WHERE liq IsA LIQUID    -- see 'classes.i'
     ELSE
       IF liq IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY LIQUID
   VERB drink
     CHECK my_game CAN drink
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND liq IS drinkable
       ELSE
         IF liq IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND liq IS reachable AND liq IS NOT distant
       ELSE
         IF liq IS NOT reachable
           THEN
             IF liq IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF liq IS distant
           THEN
             IF liq IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -2073,43 +2073,43 @@ END ADD TO.
 
 
 SYNTAX drive = drive (vehicle)
-  WHERE vehicle ISA OBJECT
+  WHERE vehicle IsA OBJECT
     ELSE
       IF vehicle IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB drive
     CHECK my_game CAN drive
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND vehicle IS examinable
       ELSE
         IF vehicle IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND vehicle IS reachable AND vehicle IS NOT distant
       ELSE
         IF vehicle IS NOT reachable
           THEN
             IF vehicle IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF vehicle IS distant
           THEN
             IF vehicle IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
     AND hero IS NOT lying_down
-      ELSE SAY check_hero_not_lying_down3 OF my_game.
+      ELSE SAY my_game:check_hero_not_lying_down3.
 
     DOES
       IF vehicle IS NOT plural
@@ -2145,11 +2145,11 @@ END VERB drive_error.
 SYNONYMS discard, dump, reject = drop.
 
 SYNTAX drop = drop (obj)*
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
         drop = put (obj) * down.
@@ -2160,11 +2160,11 @@ SYNTAX drop = drop (obj)*
 ADD TO EVERY OBJECT
   VERB drop
     CHECK my_game CAN drop
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IN hero
-      ELSE SAY check_obj_in_hero OF my_game.
+      ELSE SAY my_game:check_obj_in_hero.
     AND obj IS NOT worn -- protect non-clothing wearables
-      ELSE SAY check_obj_not_in_worn3 OF my_game.
+      ELSE SAY my_game:check_obj_not_in_worn3.
 
     DOES
       LOCATE obj HERE.
@@ -2184,48 +2184,48 @@ END ADD TO.
 
 
 SYNTAX eat = eat (food)
-  WHERE food ISA OBJECT
+  WHERE food IsA OBJECT
     ELSE
       IF food IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB eat
     CHECK my_game CAN eat
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND food IS edible
       ELSE
         IF food IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND food IS takeable
-      ELSE SAY check_obj_takeable OF my_game.
+      ELSE SAY my_game:check_obj_takeable.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND food IS reachable AND food IS NOT distant
       ELSE
         IF food IS NOT reachable
           THEN
             IF food IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF food IS distant
           THEN
             IF food IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
     DOES
       -- >>> implicit take >>>
       IF food NOT DIRECTLY IN hero
-        THEN SAY implicit_taking_message OF my_game.
+        THEN SAY my_game:implicit_taking_message.
              LOCATE food IN hero.
       END IF.
       -- <<< implicit take <<<
@@ -2259,68 +2259,68 @@ END ADD.
 
 
 SYNTAX 'empty' = 'empty' (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND obj ISA CONTAINER
+  AND obj IsA CONTAINER
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
   pour = pour (obj)
-    WHERE obj ISA OBJECT
+    WHERE obj IsA OBJECT
       ELSE
         IF obj IS NOT plural
-          THEN SAY illegal_parameter_sg OF my_game.
-          ELSE SAY illegal_parameter_pl OF my_game.
+          THEN SAY my_game:illegal_parameter_sg.
+          ELSE SAY my_game:illegal_parameter_pl.
         END IF.
-    AND obj ISA CONTAINER
+    AND obj IsA CONTAINER
       ELSE
         IF obj IS NOT plural
-          THEN SAY illegal_parameter_sg OF my_game.
-          ELSE SAY illegal_parameter_pl OF my_game.
+          THEN SAY my_game:illegal_parameter_sg.
+          ELSE SAY my_game:illegal_parameter_pl.
         END IF.
 
 
 ADD TO EVERY OBJECT
   VERB 'empty', pour
     CHECK my_game CAN 'empty' AND my_game CAN pour
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS takeable
-      ELSE SAY check_obj_takeable OF my_game.
+      ELSE SAY my_game:check_obj_takeable.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
     AND obj IS open
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_open2_sg OF my_game.
-          ELSE SAY check_obj_open2_pl OF my_game.
+          THEN SAY my_game:check_obj_open2_sg.
+          ELSE SAY my_game:check_obj_open2_pl.
         END IF.
 
     DOES
       -- >>> implicit take >>>
       IF obj NOT DIRECTLY IN hero
-        THEN SAY implicit_taking_message OF my_game.
+        THEN SAY my_game:implicit_taking_message.
              LOCATE obj IN hero.
       END IF.
       -- <<< implicit take <<<
@@ -2329,7 +2329,7 @@ ADD TO EVERY OBJECT
       -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
       --       the verb would simply abort, and this code never be executed.
       -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      IF COUNT ISA OBJECT, DIRECTLY IN obj = 0
+      IF COUNT IsA OBJECT, DIRECTLY IN obj = 0
         THEN "There is nothing in" SAY THE obj. "."
         ELSE
           "You $v the contents of" SAY THE obj.
@@ -2356,50 +2356,50 @@ END ADD TO.
 
 
 SYNTAX empty_in = 'empty' (obj) 'in' (cont)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND obj ISA CONTAINER
+  AND obj IsA CONTAINER
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND cont ISA OBJECT
+  AND cont IsA OBJECT
     ELSE
-      IF cont ISA ACTOR
-        THEN SAY illegal_parameter_act OF my_game.
-        ELSE SAY illegal_parameter2_there OF my_game.
+      IF cont IsA ACTOR
+        THEN SAY my_game:illegal_parameter_act.
+        ELSE SAY my_game:illegal_parameter2_there.
       END IF.
-  AND cont ISA CONTAINER
-    ELSE SAY illegal_parameter2_there OF my_game.
+  AND cont IsA CONTAINER
+    ELSE SAY my_game:illegal_parameter2_there.
 
 
 
 pour_in = pour (obj) 'in' (cont)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND obj ISA CONTAINER
+  AND obj IsA CONTAINER
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND cont ISA OBJECT
+  AND cont IsA OBJECT
     ELSE
-      IF cont ISA ACTOR
-        THEN SAY illegal_parameter_act OF my_game.
-        ELSE SAY illegal_parameter2_there OF my_game.
+      IF cont IsA ACTOR
+        THEN SAY my_game:illegal_parameter_act.
+        ELSE SAY my_game:illegal_parameter2_there.
       END IF.
-  AND cont ISA CONTAINER
-    ELSE SAY illegal_parameter2_there OF my_game.
+  AND cont IsA CONTAINER
+    ELSE SAY my_game:illegal_parameter2_there.
 
 
 
@@ -2408,28 +2408,28 @@ ADD TO EVERY OBJECT
   VERB empty_in, pour_in
     WHEN obj
       CHECK my_game CAN empty_in AND my_game CAN pour_in
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj <> cont
-        ELSE SAY check_obj_not_obj2_in OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_in.
       AND obj IS takeable
-        ELSE SAY check_obj_takeable OF my_game.
+        ELSE SAY my_game:check_obj_takeable.
       AND cont NOT IN obj
-        ELSE SAY check_cont_not_in_obj OF my_game.
+        ELSE SAY my_game:check_cont_not_in_obj.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
       AND cont IS reachable AND cont IS NOT distant
@@ -2437,39 +2437,39 @@ ADD TO EVERY OBJECT
           IF cont IS NOT reachable
             THEN
               IF cont IS NOT plural
-                THEN SAY check_obj2_reachable_sg OF my_game.
-                ELSE SAY check_obj2_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj2_reachable_sg.
+                ELSE SAY my_game:check_obj2_reachable_pl.
               END IF.
           ELSIF cont IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj2_not_distant_sg OF my_game.
-                ELSE SAY check_obj2_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj2_not_distant_sg.
+                ELSE SAY my_game:check_obj2_not_distant_pl.
               END IF.
           END IF.
       AND obj IN allowed OF cont
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_allowed_in_sg OF my_game.
-            ELSE SAY check_obj_allowed_in_pl OF my_game.
+            THEN SAY my_game:check_obj_allowed_in_sg.
+            ELSE SAY my_game:check_obj_allowed_in_pl.
           END IF.
       AND obj IS open
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_open2_sg OF my_game.
-            ELSE SAY check_obj_open2_pl OF my_game.
+            THEN SAY my_game:check_obj_open2_sg.
+            ELSE SAY my_game:check_obj_open2_pl.
           END IF.
       AND cont IS open
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj2_open_sg OF my_game.
-            ELSE SAY check_obj2_open_pl OF my_game.
+            THEN SAY my_game:check_obj2_open_sg.
+            ELSE SAY my_game:check_obj2_open_pl.
           END IF.
 
       DOES
       -- >>> implicit take >>>
       IF obj NOT DIRECTLY IN hero
-        THEN SAY implicit_taking_message OF my_game.
+        THEN SAY my_game:implicit_taking_message.
              LOCATE obj IN hero.
       END IF.
       -- <<< implicit take <<<
@@ -2478,7 +2478,7 @@ ADD TO EVERY OBJECT
       -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
       --       the verb would simply abort, and this code never be executed.
       -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      IF COUNT ISA OBJECT, DIRECTLY IN obj = 0
+      IF COUNT IsA OBJECT, DIRECTLY IN obj = 0
         THEN "There is nothing in" SAY THE obj. "."
         ELSE
           EMPTY obj IN cont.
@@ -2501,66 +2501,66 @@ END ADD TO.
 
 
 SYNTAX empty_on = 'empty' (obj) on (surface)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND obj ISA CONTAINER
+  AND obj IsA CONTAINER
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND surface ISA THING
-    ELSE SAY illegal_parameter2_there OF my_game.
-  AND surface ISA CONTAINER
-    ELSE SAY illegal_parameter2_there OF my_game.
+  AND surface IsA THING
+    ELSE SAY my_game:illegal_parameter2_there.
+  AND surface IsA CONTAINER
+    ELSE SAY my_game:illegal_parameter2_there.
 
   pour_on = pour (obj) on (surface)
-    WHERE obj ISA OBJECT
+    WHERE obj IsA OBJECT
       ELSE
         IF obj IS NOT plural
-          THEN SAY illegal_parameter_sg OF my_game.
-          ELSE SAY illegal_parameter_pl OF my_game.
+          THEN SAY my_game:illegal_parameter_sg.
+          ELSE SAY my_game:illegal_parameter_pl.
         END IF.
-    AND obj ISA CONTAINER
+    AND obj IsA CONTAINER
       ELSE
         IF obj IS NOT plural
-          THEN SAY illegal_parameter_sg OF my_game.
-          ELSE SAY illegal_parameter_pl OF my_game.
+          THEN SAY my_game:illegal_parameter_sg.
+          ELSE SAY my_game:illegal_parameter_pl.
         END IF.
-    AND surface ISA OBJECT
-      ELSE SAY illegal_parameter2_there OF my_game.
-    AND surface ISA CONTAINER
-      ELSE SAY illegal_parameter2_there OF my_game.
+    AND surface IsA OBJECT
+      ELSE SAY my_game:illegal_parameter2_there.
+    AND surface IsA CONTAINER
+      ELSE SAY my_game:illegal_parameter2_there.
 
 
 ADD TO EVERY THING
   VERB empty_on, pour_on
     WHEN obj
       CHECK my_game CAN empty_on AND my_game CAN pour_on
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj <> surface
-        ELSE SAY check_obj_not_obj2_on OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_on.
       AND obj IS takeable
-        ELSE SAY check_obj_takeable OF my_game.
+        ELSE SAY my_game:check_obj_takeable.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
       AND surface IS reachable AND surface IS NOT distant
@@ -2568,27 +2568,27 @@ ADD TO EVERY THING
           IF surface IS NOT reachable
             THEN
               IF surface IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF surface IS distant
             THEN
               IF surface IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
       AND obj IS open
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_open2_sg OF my_game.
-            ELSE SAY check_obj_open2_pl OF my_game.
+            THEN SAY my_game:check_obj_open2_sg.
+            ELSE SAY my_game:check_obj_open2_pl.
           END IF.
 
       DOES
         -- >>> implicit take >>>
         IF obj NOT DIRECTLY IN hero
-          THEN SAY implicit_taking_message OF my_game.
+          THEN SAY my_game:implicit_taking_message.
                LOCATE obj IN hero.
         END IF.
         -- <<< implicit take <<<
@@ -2597,7 +2597,7 @@ ADD TO EVERY THING
         -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
         --       the verb would simply abort, and this code never be executed.
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        IF COUNT ISA OBJECT, DIRECTLY IN obj = 0
+        IF COUNT IsA OBJECT, DIRECTLY IN obj = 0
           THEN "There is nothing in" SAY THE obj. "."
           ELSE
             IF surface = floor OR surface = ground
@@ -2628,11 +2628,11 @@ END ADD TO.
 
 
 SYNTAX enter = enter (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
@@ -2640,11 +2640,11 @@ SYNTAX enter = enter (obj)
 ADD TO EVERY OBJECT
   VERB enter
     CHECK my_game CAN enter
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND hero IS NOT sitting
-      ELSE SAY check_hero_not_sitting2 OF my_game.
+      ELSE SAY my_game:check_hero_not_sitting2.
     AND hero IS NOT lying_down
-      ELSE SAY check_hero_not_lying_down2 OF my_game.
+      ELSE SAY my_game:check_hero_not_lying_down2.
 
     DOES
       IF obj IS NOT plural
@@ -2680,11 +2680,11 @@ END VERB enter_error.
 SYNONYMS 'check', inspect, observe, x = examine.
 
 SYNTAX examine = examine (obj)
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_examine_sg OF my_game.
-        ELSE SAY illegal_parameter_examine_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_examine_sg.
+        ELSE SAY my_game:illegal_parameter_examine_pl.
       END IF.
 
 
@@ -2697,15 +2697,15 @@ SYNTAX examine = examine (obj)
 ADD TO EVERY THING
   VERB examine
     CHECK my_game CAN examine
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_examine_sg OF my_game.
-          ELSE SAY check_obj_suitable_examine_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_examine_sg.
+          ELSE SAY my_game:check_obj_suitable_examine_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
 
     DOES
       IF ex OF obj <> "" -- honor the custom description, if present:
@@ -2726,8 +2726,8 @@ ADD TO EVERY THING
         END IF.
       ELSIF obj IS scenery THEN
         IF obj IS NOT PLURAL
-          THEN SAY check_obj_not_scenery_sg OF my_game.
-          ELSE SAY check_obj_not_scenery_pl OF my_game.
+          THEN SAY my_game:check_obj_not_scenery_sg.
+          ELSE SAY my_game:check_obj_not_scenery_pl.
         END IF.
       ELSE -- Default examine behaviour:
         "You notice nothing unusual about"
@@ -2757,11 +2757,11 @@ END ADD TO.
 
 
 SYNTAX 'exit' = 'exit' (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
@@ -2769,7 +2769,7 @@ SYNTAX 'exit' = 'exit' (obj)
 ADD TO EVERY OBJECT
   VERB 'exit'
     CHECK my_game CAN 'exit'
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
 
     DOES
       IF obj IS NOT plural
@@ -2806,11 +2806,11 @@ END VERB exit_error.
 SYNONYMS quench = extinguish.
 
 SYNTAX extinguish = extinguish (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
         extinguish = put out (obj).
@@ -2821,26 +2821,26 @@ SYNTAX extinguish = extinguish (obj)
 ADD TO EVERY OBJECT
   VERB extinguish
     CHECK my_game CAN extinguish
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -2865,32 +2865,32 @@ END ADD TO.
 
 
 SYNTAX fill = fill (cont)
-  WHERE cont ISA OBJECT
+  WHERE cont IsA OBJECT
     ELSE
       IF cont IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND cont ISA CONTAINER
+  AND cont IsA CONTAINER
     ELSE
       IF cont IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB fill
     CHECK my_game CAN fill
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND cont IS examinable
       ELSE
         IF cont IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
 
     DOES
       "You have to say what you want to fill" SAY THE cont. "with."
@@ -2909,23 +2909,23 @@ END ADD TO.
 
 
 SYNTAX fill_with = fill (cont) 'with' (substance)
-  WHERE cont ISA OBJECT
+  WHERE cont IsA OBJECT
     ELSE
       IF cont IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND cont ISA CONTAINER
+  AND cont IsA CONTAINER
     ELSE
       IF cont IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND substance ISA OBJECT
+  AND substance IsA OBJECT
     ELSE
       IF substance IS NOT plural
-        THEN SAY illegal_parameter2_with_sg OF my_game.
-        ELSE SAY illegal_parameter2_with_pl OF my_game.
+        THEN SAY my_game:illegal_parameter2_with_sg.
+        ELSE SAY my_game:illegal_parameter2_with_pl.
       END IF.
 
 
@@ -2933,34 +2933,34 @@ ADD TO EVERY OBJECT
   VERB fill_with
     WHEN cont
       CHECK my_game CAN fill_with
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND cont <> substance
-        ELSE SAY check_obj_not_obj2_with OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_with.
       AND substance IS examinable
         ELSE
           IF substance IS NOT plural
-            THEN SAY check_obj2_suitable_with_sg OF my_game.
-            ELSE SAY check_obj2_suitable_with_pl OF my_game.
+            THEN SAY my_game:check_obj2_suitable_with_sg.
+            ELSE SAY my_game:check_obj2_suitable_with_pl.
           END IF.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND substance NOT IN cont
-        ELSE SAY check_obj_not_in_cont2 OF my_game.
+        ELSE SAY my_game:check_obj_not_in_cont2.
       AND substance IS takeable
-        ELSE SAY check_obj2_takeable1 OF my_game.
+        ELSE SAY my_game:check_obj2_takeable1.
       AND cont IS reachable AND cont IS NOT distant
         ELSE
           IF cont IS NOT reachable
             THEN
               IF cont IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF cont IS distant
             THEN
               IF cont IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game. "."
-                ELSE SAY check_obj_not_distant_pl OF my_game. "."
+                THEN SAY my_game:check_obj_not_distant_sg. "."
+                ELSE SAY my_game:check_obj_not_distant_pl. "."
               END IF.
           END IF.
       AND substance IS reachable AND substance IS NOT distant
@@ -2968,14 +2968,14 @@ ADD TO EVERY OBJECT
           IF substance IS NOT reachable
             THEN
               IF substance IS NOT plural
-                THEN SAY check_obj2_reachable_sg OF my_game.
-                ELSE SAY check_obj2_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj2_reachable_sg.
+                ELSE SAY my_game:check_obj2_reachable_pl.
               END IF.
           ELSIF substance IS distant
             THEN
               IF substance IS NOT plural
-                THEN SAY check_obj2_not_distant_sg OF my_game. "."
-                ELSE SAY check_obj2_not_distant_pl OF my_game. "."
+                THEN SAY my_game:check_obj2_not_distant_sg. "."
+                ELSE SAY my_game:check_obj2_not_distant_pl. "."
               END IF.
           END IF.
 
@@ -2999,27 +2999,27 @@ END ADD TO.
 SYNONYMS 'locate' = find.
 
 SYNTAX find = find (obj)!
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY THING
   VERB find
     CHECK my_game CAN find
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj <> hero
-      ELSE SAY check_obj_not_hero4 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero4.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj NOT AT hero
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_not_at_hero_sg OF my_game.
-          ELSE SAY check_obj_not_at_hero_pl OF my_game.
+          THEN SAY my_game:check_obj_not_at_hero_sg.
+          ELSE SAY my_game:check_obj_not_at_hero_pl.
         END IF.
 
     DOES
@@ -3039,26 +3039,26 @@ END ADD TO.
 
 
 SYNTAX fire = fire (weapon)
-  WHERE weapon ISA WEAPON
+  WHERE weapon IsA WEAPON
     ELSE
       IF weapon IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY WEAPON
   VERB fire
     CHECK my_game CAN fire
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND weapon IS fireable
       ELSE
         IF weapon IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
 
     DOES
       "You fire" SAY THE weapon. "into the air."
@@ -3077,14 +3077,14 @@ END ADD TO.
 
 
 SYNTAX fire_at = fire (weapon) 'at' (target)
-  WHERE weapon ISA WEAPON
+  WHERE weapon IsA WEAPON
     ELSE
       IF weapon IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND target ISA THING
-    ELSE SAY illegal_parameter_at OF my_game.
+  AND target IsA THING
+    ELSE SAY my_game:illegal_parameter_at.
 
 
 
@@ -3092,28 +3092,28 @@ ADD TO EVERY WEAPON
   VERB fire_at
     WHEN weapon
       CHECK my_game CAN fire_at
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND weapon IS fireable
         ELSE
           IF weapon IS NOT plural
-            THEN SAY check_obj_suitable_sg OF my_game.
-            ELSE SAY check_obj_suitable_pl OF my_game.
+            THEN SAY my_game:check_obj_suitable_sg.
+            ELSE SAY my_game:check_obj_suitable_pl.
           END IF.
       AND target IS examinable
-        ELSE SAY check_obj_suitable_at OF my_game.
+        ELSE SAY my_game:check_obj_suitable_at.
       AND weapon <> target
-        ELSE SAY check_obj_not_obj2_at OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_at.
       AND target <> hero
-        ELSE SAY check_obj_not_hero2 OF my_game.
+        ELSE SAY my_game:check_obj_not_hero2.
       AND target IS NOT distant
         -- note that it is possible to fire at a "not reachable" target
         ELSE
           IF target IS NOT plural
-            THEN SAY check_obj_not_distant_sg OF my_game.
-            ELSE SAY check_obj_not_distant_pl OF my_game.
+            THEN SAY my_game:check_obj_not_distant_sg.
+            ELSE SAY my_game:check_obj_not_distant_pl.
           END IF.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
 
       DOES
         "Resorting to violence is not the solution here."
@@ -3125,22 +3125,22 @@ END ADD TO.
 
 
 SYNTAX fire_at_error = fire 'at' (target)
-  WHERE target ISA THING
+  WHERE target IsA THING
     ELSE
       IF target IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY THING
   VERB fire_at_error
-    CHECK COUNT ISA WEAPON, IS fireable, DIRECTLY IN hero > 0
-      ELSE SAY check_count_weapon_in_hero OF my_game.
+    CHECK COUNT IsA WEAPON, IS fireable, DIRECTLY IN hero > 0
+      ELSE SAY my_game:check_count_weapon_in_hero.
     AND target <> hero
-      ELSE SAY check_obj_not_hero2 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero2.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
 
     DOES
       "Resorting to violence is not the solution here."
@@ -3161,39 +3161,39 @@ END ADD TO.
 SYNONYMS mend, repair = fix.
 
 SYNTAX fix = fix (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB fix
     CHECK my_game CAN fix
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS broken
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_broken_sg OF my_game.
-          ELSE SAY check_obj_broken_pl OF my_game.
+          THEN SAY my_game:check_obj_broken_sg.
+          ELSE SAY my_game:check_obj_broken_pl.
         END IF.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -3214,34 +3214,34 @@ END ADD TO.
 
 
 SYNTAX follow = follow (act)!
-  WHERE act ISA ACTOR
+  WHERE act IsA ACTOR
     ELSE
       IF act IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY THING
   VERB follow
     CHECK my_game CAN follow
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND act <> hero
-      ELSE SAY check_obj_not_hero1 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero1.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND act NOT AT hero
       ELSE
         IF act IS NOT plural
-          THEN SAY check_obj_not_at_hero_sg OF my_game.
-          ELSE SAY check_obj_not_at_hero_pl OF my_game.
+          THEN SAY my_game:check_obj_not_at_hero_sg.
+          ELSE SAY my_game:check_obj_not_at_hero_pl.
         END IF.
     AND hero IS NOT sitting
-      ELSE SAY check_hero_not_sitting2 OF my_game.
+      ELSE SAY my_game:check_hero_not_sitting2.
     AND hero IS NOT lying_down
-      ELSE SAY check_hero_not_lying_down2 OF my_game.
+      ELSE SAY my_game:check_hero_not_lying_down2.
     AND act NEAR hero
-      ELSE SAY check_act_near_hero OF my_game.
+      ELSE SAY my_game:check_act_near_hero.
 
     DOES
       LOCATE hero AT act.
@@ -3263,41 +3263,41 @@ END ADD TO.
 SYNONYMS release = free.
 
 SYNTAX free = free (obj)
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY THING
   VERB free
     CHECK my_game CAN free
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND obj <> hero
-      ELSE SAY check_obj_not_hero5 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero5.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -3321,17 +3321,17 @@ END ADD TO.
 
 
 SYNTAX get_off = get off (surface)
-  WHERE surface ISA SUPPORTER
+  WHERE surface IsA SUPPORTER
     ELSE
       IF surface IS NOT plural
-        THEN SAY illegal_parameter_off_sg OF my_game.
-        ELSE SAY illegal_parameter_off_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_off_sg.
+        ELSE SAY my_game:illegal_parameter_off_pl.
       END IF.
 
 ADD TO EVERY SUPPORTER
   VERB get_off
     CHECK my_game CAN get_off
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
 
     DOES
       IF hero IS sitting OR hero IS lying_down
@@ -3358,7 +3358,7 @@ SYNTAX get_up = get up.
 
 VERB get_up
   CHECK my_game CAN get_up
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
 
   DOES
     IF hero IS sitting
@@ -3387,13 +3387,13 @@ END VERB get_up.
 SYNONYMS hand, offer = give.
 
 SYNTAX give = 'give' (obj) 'to' (recipient)
-  WHERE obj ISA OBJECT
-    ELSE SAY illegal_parameter_obj OF my_game.
-  AND recipient ISA ACTOR
+  WHERE obj IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_obj.
+  AND recipient IsA ACTOR
     ELSE
       IF recipient IS NOT plural
-        THEN SAY illegal_parameter2_to_sg OF my_game.
-        ELSE SAY illegal_parameter2_to_pl OF my_game.
+        THEN SAY my_game:illegal_parameter2_to_sg.
+        ELSE SAY my_game:illegal_parameter2_to_pl.
       END IF.
 
 
@@ -3402,34 +3402,34 @@ ADD TO EVERY OBJECT
   VERB give
     WHEN obj
       CHECK my_game CAN give
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj IS takeable
-        ELSE SAY check_obj_takeable OF my_game.
+        ELSE SAY my_game:check_obj_takeable.
       AND obj <> recipient
-        ELSE SAY check_obj_not_obj2_to OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_to.
       AND recipient <> hero
-        ELSE SAY check_obj2_not_hero3 OF my_game.
+        ELSE SAY my_game:check_obj2_not_hero3.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND obj NOT IN recipient
         ELSE
           IF recipient IS NOT plural
-            THEN SAY check_obj_not_in_act_sg OF my_game.
-            ELSE SAY check_obj_not_in_act_pl OF my_game.
+            THEN SAY my_game:check_obj_not_in_act_sg.
+            ELSE SAY my_game:check_obj_not_in_act_pl.
           END IF.
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
       AND recipient IS reachable AND recipient IS NOT distant
@@ -3437,21 +3437,21 @@ ADD TO EVERY OBJECT
           IF recipient IS NOT reachable
             THEN
               IF recipient IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF recipient IS distant
             THEN
               IF recipient IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
 
       DOES
         -- >>> implicit take >>>
         IF obj NOT DIRECTLY IN hero
-          THEN SAY implicit_taking_message OF my_game.
+          THEN SAY my_game:implicit_taking_message.
                LOCATE obj IN hero.
         END IF.
         -- <<< implicit take <<<
@@ -3503,41 +3503,41 @@ SYNTAX go_to = 'to' (dest)!
   -- by ALAN, and ignored by the parser, players will be able to successfully
   -- type 'go to [dest]' --- it will be parsed as 'to [dest]'.
   -- -------------------------------------------------------------------------
-  WHERE dest ISA THING
-    ELSE SAY illegal_parameter_go OF my_game.
+  WHERE dest IsA THING
+    ELSE SAY my_game:illegal_parameter_go.
 
 
 ADD TO EVERY THING
   VERB go_to
     CHECK my_game CAN go_to
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND dest <> hero
-      ELSE SAY check_obj_not_hero4 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero4.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND hero IS NOT sitting
-      ELSE SAY check_hero_not_sitting3 OF my_game.
+      ELSE SAY my_game:check_hero_not_sitting3.
     AND hero IS NOT lying_down
-      ELSE SAY check_hero_not_lying_down3 OF my_game.
+      ELSE SAY my_game:check_hero_not_lying_down3.
     AND dest NOT AT hero
       ELSE
         IF dest IS NOT plural
-          THEN SAY check_obj_not_at_hero_sg OF my_game.
-          ELSE SAY check_obj_not_at_hero_pl OF my_game.
+          THEN SAY my_game:check_obj_not_at_hero_sg.
+          ELSE SAY my_game:check_obj_not_at_hero_pl.
         END IF.
     AND dest IS reachable AND dest IS NOT distant
       ELSE
         IF dest IS NOT reachable
           THEN
             IF dest IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF dest IS distant
           THEN
             IF dest IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -3565,7 +3565,7 @@ SYNTAX i = i.
 
 VERB i
   CHECK my_game CAN i
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
 
   DOES
     -- ------------------
@@ -3624,11 +3624,11 @@ SYNTAX jump = jump.
 
 VERB jump
   CHECK my_game CAN jump
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   AND hero IS NOT sitting
-    ELSE SAY check_hero_not_sitting1 OF my_game.
+    ELSE SAY my_game:check_hero_not_sitting1.
   AND hero IS NOT lying_down
-    ELSE SAY check_hero_not_lying_down1 OF my_game.
+    ELSE SAY my_game:check_hero_not_lying_down1.
 
   DOES
     "You jump on the spot, to no avail."
@@ -3646,17 +3646,17 @@ END VERB jump.
 
 
 SYNTAX jump_in = jump 'in' (cont)
-  WHERE cont ISA OBJECT
+  WHERE cont IsA OBJECT
     ELSE
       IF cont IS NOT plural
-        THEN SAY illegal_parameter_in_sg OF my_game.
-        ELSE SAY illegal_parameter_in_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_in_sg.
+        ELSE SAY my_game:illegal_parameter_in_pl.
       END IF.
-  AND cont ISA CONTAINER
+  AND cont IsA CONTAINER
     ELSE
       IF cont IS NOT plural
-        THEN SAY illegal_parameter_in_sg OF my_game.
-        ELSE SAY illegal_parameter_in_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_in_sg.
+        ELSE SAY my_game:illegal_parameter_in_pl.
       END IF.
 
 
@@ -3664,28 +3664,28 @@ SYNTAX jump_in = jump 'in' (cont)
 ADD TO EVERY OBJECT
   VERB jump_in
     CHECK my_game CAN jump_in
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND cont IS reachable AND cont IS NOT distant
       ELSE
         IF cont IS NOT reachable
           THEN
             IF cont IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF cont IS distant
           THEN
             IF cont IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
     AND hero IS NOT sitting
-      ELSE SAY check_hero_not_sitting1 OF my_game.
+      ELSE SAY my_game:check_hero_not_sitting1.
     AND hero IS NOT lying_down
-      ELSE SAY check_hero_not_lying_down1 OF my_game.
+      ELSE SAY my_game:check_hero_not_lying_down1.
 
     DOES
       IF cont IS NOT plural
@@ -3708,24 +3708,24 @@ END ADD TO.
 
 
 SYNTAX jump_on = jump on (surface)
-  WHERE surface ISA SUPPORTER
+  WHERE surface IsA SUPPORTER
     ELSE
       IF surface IS NOT plural
-        THEN SAY illegal_parameter_on_sg OF my_game.
-        ELSE SAY illegal_parameter_on_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_on_sg.
+        ELSE SAY my_game:illegal_parameter_on_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB jump_on
     CHECK my_game CAN jump_on
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND hero IS NOT sitting
-      ELSE SAY check_hero_not_sitting1 OF my_game.
+      ELSE SAY my_game:check_hero_not_sitting1.
     AND hero IS NOT lying_down
-      ELSE SAY check_hero_not_lying_down1 OF my_game.
+      ELSE SAY my_game:check_hero_not_lying_down1.
 
     DOES
       IF surface IS NOT plural
@@ -3749,26 +3749,26 @@ END ADD TO.
 
 
 SYNTAX kick = kick (target)
-  WHERE target ISA THING
+  WHERE target IsA THING
     ELSE
       IF target IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY THING
   VERB kick
     CHECK my_game CAN kick
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND target IS examinable
       ELSE
         IF target IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND target <> hero
-      ELSE SAY check_obj_not_hero1 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero1.
     AND target NOT IN hero
       ELSE
         IF target IS NOT worn
@@ -3776,20 +3776,20 @@ ADD TO EVERY THING
           ELSE SAY my_game:check_obj_not_in_worn2.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND target IS reachable AND target IS NOT distant
       ELSE
         IF target IS NOT reachable
           THEN
             IF target IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF target IS distant
           THEN
             IF target IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -3810,28 +3810,28 @@ END ADD TO.
 
 
 SYNTAX kill = kill (victim)
-  WHERE victim ISA ACTOR
+  WHERE victim IsA ACTOR
     ELSE
       IF victim IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY ACTOR
   VERB kill
     CHECK my_game CAN kill
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND victim IS examinable
       ELSE
         IF victim IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND victim <> hero
-      ELSE SAY check_obj_not_hero2 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero2.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
 
     DOES "You have to state what you want to kill" SAY THE victim. "with."
 
@@ -3850,17 +3850,17 @@ END ADD TO.
 
 
 SYNTAX kill_with = kill (victim) 'with' (weapon)
-  WHERE victim ISA ACTOR
+  WHERE victim IsA ACTOR
     ELSE
       IF victim IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND weapon ISA WEAPON
+  AND weapon IsA WEAPON
     ELSE
       IF weapon IS NOT plural
-        THEN SAY illegal_parameter_with_sg OF my_game.
-        ELSE SAY illegal_parameter_with_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_with_sg.
+        ELSE SAY my_game:illegal_parameter_with_pl.
       END IF.
 
 
@@ -3868,18 +3868,18 @@ ADD TO EVERY ACTOR
   VERB kill_with
     WHEN victim
       CHECK my_game CAN kill_with
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND victim <> hero
-        ELSE SAY check_obj_not_hero2 OF my_game.
+        ELSE SAY my_game:check_obj_not_hero2.
       AND weapon IN hero
-        ELSE SAY check_obj2_in_hero OF my_game.
+        ELSE SAY my_game:check_obj2_in_hero.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND victim IS NOT distant
         ELSE
           IF victim IS NOT plural
-            THEN SAY check_obj_not_distant_sg OF my_game.
-            ELSE SAY check_obj_not_distant_pl OF my_game.
+            THEN SAY my_game:check_obj_not_distant_sg.
+            ELSE SAY my_game:check_obj_not_distant_pl.
           END IF.
 
       DOES
@@ -3902,46 +3902,46 @@ END ADD TO.
 SYNONYMS hug, embrace = kiss.
 
 SYNTAX kiss = kiss (obj)
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY THING
   VERB kiss
     CHECK my_game CAN kiss
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND obj <> hero
-      ELSE SAY check_obj_not_hero6 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero6.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
     DOES
-      IF obj ISA ACTOR
+      IF obj IsA ACTOR
         THEN SAY THE obj. "avoids your advances."
         ELSE "Nothing would be achieved by that."
       END IF.
@@ -3961,11 +3961,11 @@ END ADD TO.
 
 
 SYNTAX knock = knock on (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_on_sg OF my_game.
-        ELSE SAY illegal_parameter_on_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_on_sg.
+        ELSE SAY my_game:illegal_parameter_on_pl.
       END IF.
 
        knock = knock (obj).
@@ -3974,28 +3974,28 @@ SYNTAX knock = knock on (obj)
 ADD TO EVERY OBJECT
   VERB knock
     CHECK my_game CAN knock
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_on_sg OF my_game.
-          ELSE SAY check_obj_suitable_on_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_on_sg.
+          ELSE SAY my_game:check_obj_suitable_on_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -4035,9 +4035,9 @@ SYNTAX lie_down = lie 'down'.
 
 VERB lie_down
   CHECK my_game CAN lie_down
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   AND hero IS NOT lying_down
-    ELSE SAY check_hero_not_lying_down4 OF my_game.
+    ELSE SAY my_game:check_hero_not_lying_down4.
 
   DOES
     "There's no need to lie down right now."
@@ -4070,17 +4070,17 @@ END VERB lie_down.
 
 
 SYNTAX lie_in = lie 'in' (cont)
-  WHERE cont ISA OBJECT
+  WHERE cont IsA OBJECT
     ELSE
       IF cont IS NOT plural
-        THEN SAY illegal_parameter_in_sg OF my_game.
-        ELSE SAY illegal_parameter_in_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_in_sg.
+        ELSE SAY my_game:illegal_parameter_in_pl.
       END IF.
-  AND cont ISA CONTAINER
+  AND cont IsA CONTAINER
     ELSE
       IF cont IS NOT plural
-        THEN SAY illegal_parameter_in_sg OF my_game.
-        ELSE SAY illegal_parameter_in_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_in_sg.
+        ELSE SAY my_game:illegal_parameter_in_pl.
       END IF.
 
        lie_in = lie 'down' 'in' (cont).
@@ -4089,31 +4089,31 @@ SYNTAX lie_in = lie 'in' (cont)
 ADD TO EVERY OBJECT
   VERB lie_in
     CHECK my_game CAN lie_in
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND hero IS NOT lying_down
-      ELSE SAY check_hero_not_lying_down4 OF my_game.
+      ELSE SAY my_game:check_hero_not_lying_down4.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND cont IS reachable AND cont IS NOT distant
       ELSE
         IF cont IS NOT reachable
           THEN
             IF cont IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF cont IS distant
           THEN
             IF cont IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
     DOES
       "There's no need to lie down in" SAY THE cont. "."
       -- If you need this to work, make a nested location
-      -- (for example THE in_bed ISA LOCATION AT bedroom; etc.)
+      -- (for example THE in_bed IsA LOCATION AT bedroom; etc.)
       -- Remember to: MAKE hero lying_down.
       -- Presently, an actor cannot be located inside a container object.
 
@@ -4143,11 +4143,11 @@ END ADD TO.
 
 
 SYNTAX lie_on = lie on (surface)
-  WHERE surface ISA SUPPORTER
+  WHERE surface IsA SUPPORTER
     ELSE
       IF surface IS NOT plural
-        THEN SAY illegal_parameter_on_sg OF my_game.
-        ELSE SAY illegal_parameter_on_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_on_sg.
+        ELSE SAY my_game:illegal_parameter_on_pl.
       END IF.
 
        lie_on = lie 'down' on (surface).
@@ -4156,31 +4156,31 @@ SYNTAX lie_on = lie on (surface)
 ADD TO EVERY OBJECT
   VERB lie_on
     CHECK my_game CAN lie_on
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND hero IS NOT lying_down
-      ELSE SAY check_hero_not_lying_down4 OF my_game.
+      ELSE SAY my_game:check_hero_not_lying_down4.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND surface IS reachable AND surface IS NOT distant
       ELSE
         IF surface IS NOT reachable
           THEN
             IF surface IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF surface IS distant
           THEN
             IF surface IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
     DOES
       "There's no need to lie down on" SAY THE surface. "."
       -- If you need this to work, make a nested location
-      -- (for example THE on_bed ISA LOCATION AT bedroom; etc.)
+      -- (for example THE on_bed IsA LOCATION AT bedroom; etc.)
       -- Remember to: MAKE hero lying_down.
       -- Presently, an actor cannot be located inside a container object
       -- or on a supporter.
@@ -4214,50 +4214,50 @@ END ADD TO.
 SYNONYMS raise = lift.
 
 SYNTAX lift = lift (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB lift
     CHECK my_game CAN lift
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj NOT IN hero
-      ELSE SAY check_obj_not_in_hero1 OF my_game.
+      ELSE SAY my_game:check_obj_not_in_hero1.
     AND obj IS movable
-      ELSE SAY check_obj_movable OF my_game.
+      ELSE SAY my_game:check_obj_movable.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
     AND weight OF obj < 50
       ELSE
         IF obj IS NOT PLURAL
-          THEN SAY check_obj_weight_sg OF my_game.
-          ELSE SAY check_obj_weight_pl OF my_game.
+          THEN SAY my_game:check_obj_weight_sg.
+          ELSE SAY my_game:check_obj_weight_pl.
         END IF.
 
     DOES
@@ -4278,37 +4278,37 @@ END ADD TO.
 
 
 SYNTAX light = light (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB light
     CHECK my_game CAN light
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -4341,7 +4341,7 @@ SYNTAX listen0 = listen.
 
 VERB listen0
   CHECK my_game CAN listen0
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     "You hear nothing unusual."
 END VERB listen0.
@@ -4358,25 +4358,25 @@ END VERB listen0.
 
 
 SYNTAX listen = listen 'to' (obj)!
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_to_sg OF my_game.
-        ELSE SAY illegal_parameter_to_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_to_sg.
+        ELSE SAY my_game:illegal_parameter_to_pl.
       END IF.
 
 
 ADD TO EVERY THING
   VERB listen
     CHECK my_game CAN listen
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj <> hero
-      ELSE SAY check_obj_not_hero1 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero1.
 
     DOES
       IF hero AT obj
         THEN
-          IF obj ISA ACTOR
+          IF obj IsA ACTOR
             THEN SAY THE obj.
               IF obj IS NOT PLURAL
                 THEN "is"
@@ -4404,46 +4404,46 @@ END ADD TO.
 
 
 SYNTAX lock = lock (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB lock
     CHECK my_game CAN lock
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS lockable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
     AND obj IS NOT locked
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_not_locked_sg OF my_game.
-          ELSE SAY check_obj_not_locked_pl OF my_game.
+          THEN SAY my_game:check_obj_not_locked_sg.
+          ELSE SAY my_game:check_obj_not_locked_pl.
       END IF.
 
     DOES
@@ -4476,17 +4476,17 @@ END ADD TO.
 
 
 SYNTAX lock_with = lock (obj) 'with' (key)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND key ISA OBJECT
+  AND key IsA OBJECT
     ELSE
       IF key IS NOT plural
-        THEN SAY illegal_parameter2_with_sg OF my_game.
-        ELSE SAY illegal_parameter2_with_pl OF my_game.
+        THEN SAY my_game:illegal_parameter2_with_sg.
+        ELSE SAY my_game:illegal_parameter2_with_pl.
       END IF.
 
 
@@ -4494,48 +4494,48 @@ ADD TO EVERY OBJECT
   VERB lock_with
     WHEN obj
       CHECK my_game CAN lock_with
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj IS lockable
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_suitable_sg OF my_game.
-            ELSE SAY check_obj_suitable_pl OF my_game.
+            THEN SAY my_game:check_obj_suitable_sg.
+            ELSE SAY my_game:check_obj_suitable_pl.
           END IF.
       AND key IS examinable
         ELSE
           IF key IS NOT plural
-            THEN SAY check_obj2_suitable_with_sg OF my_game.
-            ELSE SAY check_obj2_suitable_with_pl OF my_game.
+            THEN SAY my_game:check_obj2_suitable_with_sg.
+            ELSE SAY my_game:check_obj2_suitable_with_pl.
           END IF.
       AND obj <> key
-        ELSE SAY check_obj_not_obj2_with OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_with.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND obj IS NOT locked
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_not_locked_sg OF my_game.
-            ELSE SAY check_obj_not_locked_pl OF my_game.
+            THEN SAY my_game:check_obj_not_locked_sg.
+            ELSE SAY my_game:check_obj_not_locked_pl.
           END IF.
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
       AND key IN hero
-        ELSE SAY check_obj2_in_hero OF my_game.
+        ELSE SAY my_game:check_obj2_in_hero.
       AND key = matching_key OF obj
-        ELSE SAY check_door_matching_key OF my_game.
+        ELSE SAY my_game:check_door_matching_key.
 
       DOES
         MAKE obj locked. "You"
@@ -4566,7 +4566,7 @@ SYNTAX 'look' = 'look'.
 
 VERB 'look'
   CHECK my_game CAN 'look'
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     INCREASE described OF CURRENT LOCATION.
     -- see 'locations.i', attribute 'described'.
@@ -4597,20 +4597,20 @@ END VERB 'look'.
 
 
 SYNTAX look_behind = 'look' behind (bulk)
-  WHERE bulk ISA THING
-    ELSE SAY illegal_parameter_there OF my_game.
+  WHERE bulk IsA THING
+    ELSE SAY my_game:illegal_parameter_there.
 
 
 ADD TO EVERY THING
   VERB look_behind
     CHECK my_game CAN look_behind
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND bulk IS examinable
-      ELSE SAY check_obj_suitable_there OF my_game.
+      ELSE SAY my_game:check_obj_suitable_there.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND bulk <> hero
-      ELSE SAY check_obj_not_hero7 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero7.
 
     DOES
       IF bulk IN hero
@@ -4634,25 +4634,25 @@ END ADD TO.
 
 
 SYNTAX look_in = 'look' 'in' (cont)
-  WHERE cont ISA OBJECT
-    ELSE SAY illegal_parameter_there OF my_game.
-  AND cont ISA CONTAINER
-    ELSE SAY illegal_parameter_there OF my_game.
+  WHERE cont IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_there.
+  AND cont IsA CONTAINER
+    ELSE SAY my_game:illegal_parameter_there.
 
 
 ADD TO EVERY OBJECT
   VERB look_in
     CHECK my_game CAN look_in
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND cont IS examinable
-      ELSE SAY check_obj_suitable_there OF my_game.
+      ELSE SAY my_game:check_obj_suitable_there.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND cont IS open
       ELSE
         IF cont IS NOT plural
-          THEN SAY check_obj_open2_sg OF my_game.
-          ELSE SAY check_obj_open2_pl OF my_game.
+          THEN SAY my_game:check_obj_open2_sg.
+          ELSE SAY my_game:check_obj_open2_pl.
         END IF.
 
     DOES
@@ -4673,11 +4673,11 @@ END ADD TO.
 
 
 SYNTAX look_out_of = 'look' out 'of' (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_look_out_sg OF my_game.
-        ELSE SAY illegal_parameter_look_out_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_look_out_sg.
+        ELSE SAY my_game:illegal_parameter_look_out_pl.
       END IF.
 
 
@@ -4685,15 +4685,15 @@ SYNTAX look_out_of = 'look' out 'of' (obj)
 ADD TO EVERY OBJECT
   VERB look_out_of
     CHECK my_game CAN look_out_of
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_look_out_sg OF my_game.
-          ELSE SAY check_obj_suitable_look_out_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_look_out_sg.
+          ELSE SAY my_game:check_obj_suitable_look_out_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
 
     DOES
       IF obj IS NOT plural
@@ -4717,19 +4717,19 @@ END ADD TO.
 
 
 SYNTAX look_through = 'look' through (bulk)
-  WHERE bulk ISA OBJECT
-    ELSE SAY illegal_parameter_look_through OF my_game.
+  WHERE bulk IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_look_through.
 
 
 
 ADD TO EVERY OBJECT
   VERB look_through
     CHECK my_game CAN look_through
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND bulk IS examinable
-      ELSE SAY check_obj_suitable_look_through OF my_game.
+      ELSE SAY my_game:check_obj_suitable_look_through.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
 
     DOES
       "You can't see through" SAY THE bulk. "."
@@ -4749,21 +4749,21 @@ END ADD TO.
 
 
 SYNTAX look_under = 'look' under (bulk)
-  WHERE bulk ISA THING
-    ELSE SAY illegal_parameter_there OF my_game.
+  WHERE bulk IsA THING
+    ELSE SAY my_game:illegal_parameter_there.
 
 
 
 ADD TO EVERY THING
   VERB look_under
     CHECK my_game CAN look_under
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND bulk IS examinable
-      ELSE SAY check_obj_suitable_there OF my_game.
+      ELSE SAY my_game:check_obj_suitable_there.
     AND bulk <> hero
-      ELSE SAY check_obj_not_hero8 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero8.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
 
     DOES
       "You notice nothing unusual under" SAY THE bulk. "."
@@ -4787,7 +4787,7 @@ SYNTAX look_up = 'look' up.
 
 VERB look_up
   CHECK my_game CAN look_up
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES "Looking up, you see nothing unusual."
 END VERB look_up.
 
@@ -4803,46 +4803,46 @@ END VERB look_up.
 
 
 SYNTAX open = open (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB open
     CHECK my_game CAN open
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS openable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
     AND obj IS NOT open
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_not_open_sg OF my_game.
-          ELSE SAY check_obj_not_open_pl OF my_game.
+          THEN SAY my_game:check_obj_not_open_sg.
+          ELSE SAY my_game:check_obj_not_open_pl.
         END IF.
 
     DOES
@@ -4875,17 +4875,17 @@ END ADD TO.
 
 
 SYNTAX open_with = open (obj) 'with' (instr)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND instr ISA OBJECT
+  AND instr IsA OBJECT
     ELSE
       IF instr IS NOT plural
-        THEN SAY illegal_parameter2_with_sg OF my_game.
-        ELSE SAY illegal_parameter2_with_pl OF my_game.
+        THEN SAY my_game:illegal_parameter2_with_sg.
+        ELSE SAY my_game:illegal_parameter2_with_pl.
       END IF.
 
 
@@ -4894,45 +4894,45 @@ ADD TO EVERY OBJECT
   VERB open_with
     WHEN obj
       CHECK my_game CAN open_with
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj IS openable
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_suitable_sg OF my_game.
-            ELSE SAY check_obj_suitable_pl OF my_game.
+            THEN SAY my_game:check_obj_suitable_sg.
+            ELSE SAY my_game:check_obj_suitable_pl.
           END IF.
       AND instr IS examinable
         ELSE
           IF instr IS NOT plural
-            THEN SAY check_obj2_suitable_with_sg OF my_game.
-            ELSE SAY check_obj2_suitable_with_pl OF my_game.
+            THEN SAY my_game:check_obj2_suitable_with_sg.
+            ELSE SAY my_game:check_obj2_suitable_with_pl.
           END IF.
       AND obj <> instr
-        ELSE SAY check_obj_not_obj2_with OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_with.
           AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
       AND instr IN hero
-        ELSE SAY check_obj2_in_hero OF my_game.
+        ELSE SAY my_game:check_obj2_in_hero.
       AND obj IS NOT open
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_not_open_sg OF my_game.
-            ELSE SAY check_obj_not_open_pl OF my_game.
+            THEN SAY my_game:check_obj_not_open_sg.
+            ELSE SAY my_game:check_obj_not_open_pl.
           END IF.
 
       DOES
@@ -4967,39 +4967,39 @@ END ADD TO.
 
 
 SYNTAX 'play' = 'play' (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB 'play'
     CHECK my_game CAN 'play'
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_with_sg OF my_game.
-          ELSE SAY check_obj_suitable_with_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_with_sg.
+          ELSE SAY my_game:check_obj_suitable_with_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -5025,11 +5025,11 @@ END ADD TO.
 
 
 SYNTAX play_with = 'play' 'with' (obj)
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_with_sg OF my_game.
-        ELSE SAY illegal_parameter_with_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_with_sg.
+        ELSE SAY my_game:illegal_parameter_with_pl.
       END IF.
 
 
@@ -5037,30 +5037,30 @@ SYNTAX play_with = 'play' 'with' (obj)
 ADD TO EVERY THING
   VERB play_with
     CHECK my_game CAN play_with
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_with_sg OF my_game.
-          ELSE SAY check_obj_suitable_with_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_with_sg.
+          ELSE SAY my_game:check_obj_suitable_with_pl.
         END IF.
     AND obj <> hero
-      ELSE SAY check_obj_not_hero6 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero6.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -5102,7 +5102,7 @@ SYNTAX pray = pray.
 
 VERB pray
   CHECK my_game CAN pray
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES "Your prayers don't seem to help right now."
 END VERB pray.
 
@@ -5118,26 +5118,26 @@ END VERB pray.
 
 
 SYNTAX pry = pry (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB pry
     CHECK my_game CAN pry
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
 
     DOES "You must state what you want to pry" SAY THE obj. "with."
 
@@ -5156,17 +5156,17 @@ END ADD TO.
 
 
 SYNTAX pry_with = pry (obj) 'with' (instr)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND instr ISA OBJECT
+  AND instr IsA OBJECT
     ELSE
       IF instr IS NOT plural
-        THEN SAY illegal_parameter2_with_sg OF my_game.
-        ELSE SAY illegal_parameter2_with_pl OF my_game.
+        THEN SAY my_game:illegal_parameter2_with_sg.
+        ELSE SAY my_game:illegal_parameter2_with_pl.
       END IF.
 
 
@@ -5174,38 +5174,38 @@ ADD TO EVERY OBJECT
   VERB pry_with
     WHEN obj
       CHECK my_game CAN pry_with
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj IS examinable
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_suitable_sg OF my_game.
-            ELSE SAY check_obj_suitable_pl OF my_game.
+            THEN SAY my_game:check_obj_suitable_sg.
+            ELSE SAY my_game:check_obj_suitable_pl.
           END IF.
       AND instr IS examinable
         ELSE
           IF instr IS NOT plural
-            THEN SAY check_obj2_suitable_with_sg OF my_game.
-            ELSE SAY check_obj2_suitable_with_pl OF my_game.
+            THEN SAY my_game:check_obj2_suitable_with_sg.
+            ELSE SAY my_game:check_obj2_suitable_with_pl.
           END IF.
       AND obj <> instr
-        ELSE SAY check_obj_not_obj2_with OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_with.
       AND instr IN hero
-        ELSE SAY check_obj2_in_hero OF my_game.
+        ELSE SAY my_game:check_obj2_in_hero.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
 
@@ -5226,39 +5226,39 @@ END ADD TO.
 
 
 SYNTAX pull = pull (obj)
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB pull
     CHECK my_game CAN pull
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS movable
-      ELSE SAY check_obj_movable OF my_game.
+      ELSE SAY my_game:check_obj_movable.
     AND obj <> hero
-      ELSE SAY check_obj_not_hero1 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero1.
     AND obj IS inanimate
-      ELSE SAY check_obj_inanimate1 OF my_game.
+      ELSE SAY my_game:check_obj_inanimate1.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -5282,39 +5282,39 @@ END ADD TO.
 SYNONYMS press = push.
 
 SYNTAX push = push (obj)
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY THING
   VERB push
     CHECK my_game CAN push
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS movable
-          ELSE SAY check_obj_movable OF my_game.
+          ELSE SAY my_game:check_obj_movable.
     AND obj <> hero
-      ELSE SAY check_obj_not_hero1 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero1.
     AND obj IS inanimate
-      ELSE SAY check_obj_inanimate1 OF my_game.
+      ELSE SAY my_game:check_obj_inanimate1.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -5336,52 +5336,52 @@ END ADD TO.
 
 
 SYNTAX push_with = push (obj) 'with' (instr)
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND instr ISA OBJECT
-    ELSE SAY illegal_parameter2_with_sg OF my_game.
+  AND instr IsA OBJECT
+    ELSE SAY my_game:illegal_parameter2_with_sg.
 
 
 ADD TO EVERY THING
   VERB push_with
     WHEN obj
       CHECK my_game CAN push_with
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj IS movable
-        ELSE SAY check_obj_movable OF my_game.
+        ELSE SAY my_game:check_obj_movable.
       AND obj <> instr
-        ELSE SAY check_obj_not_obj2_with OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_with.
       AND instr IS examinable
         ELSE
           IF instr IS NOT plural
-            THEN SAY check_obj2_suitable_with_sg OF my_game.
-            ELSE SAY check_obj2_suitable_with_pl OF my_game.
+            THEN SAY my_game:check_obj2_suitable_with_sg.
+            ELSE SAY my_game:check_obj2_suitable_with_pl.
           END IF.
       AND instr IN hero
-        ELSE SAY check_obj2_in_hero OF my_game.
+        ELSE SAY my_game:check_obj2_in_hero.
       AND obj <> hero
-        ELSE SAY check_obj_not_hero1 OF my_game.
+        ELSE SAY my_game:check_obj_not_hero1.
       AND obj IS inanimate
-        ELSE SAY check_obj_inanimate1 OF my_game.
+        ELSE SAY my_game:check_obj_inanimate1.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
 
@@ -5405,19 +5405,19 @@ END ADD TO.
 SYNONYMS lay, place = put.
 
 SYNTAX put = put (obj)
-  WHERE obj ISA OBJECT
-    ELSE SAY illegal_parameter_obj OF my_game.
+  WHERE obj IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_obj.
 
 
 
 ADD TO EVERY OBJECT
   VERB put
     CHECK my_game CAN put
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IN HERO
-      ELSE SAY check_obj_in_hero OF my_game.
+      ELSE SAY my_game:check_obj_in_hero.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
 
     DOES
       "You must state where you want to put"
@@ -5455,16 +5455,16 @@ END ADD TO.
 
 
 SYNTAX put_in = put (obj) 'in' (cont)
-  WHERE obj ISA OBJECT
-    ELSE SAY illegal_parameter_obj OF my_game.
-  AND cont ISA OBJECT
+  WHERE obj IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_obj.
+  AND cont IsA OBJECT
     ELSE
-      IF cont ISA ACTOR
-        THEN SAY illegal_parameter_act OF my_game.
-        ELSE SAY illegal_parameter2_there OF my_game.
+      IF cont IsA ACTOR
+        THEN SAY my_game:illegal_parameter_act.
+        ELSE SAY my_game:illegal_parameter2_there.
       END IF.
-  AND cont ISA CONTAINER
-    ELSE SAY illegal_parameter2_there OF my_game.
+  AND cont IsA CONTAINER
+    ELSE SAY my_game:illegal_parameter2_there.
 
 
   put_in = insert (obj) 'in' (cont).
@@ -5474,36 +5474,36 @@ ADD TO EVERY OBJECT
   VERB put_in
     WHEN obj
       CHECK my_game CAN put_in
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj <> cont
-        ELSE SAY check_obj_not_obj2_in OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_in.
       AND obj IS takeable
-        ELSE SAY check_obj_takeable OF my_game.
+        ELSE SAY my_game:check_obj_takeable.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
       AND obj NOT IN cont
         ELSE
-          IF cont ISA SUPPORTER
-            THEN SAY check_cont_not_supporter OF my_game.
+          IF cont IsA SUPPORTER
+            THEN SAY my_game:check_cont_not_supporter.
             ELSE
               IF obj IS NOT plural
-                THEN SAY check_obj_not_in_cont_sg OF my_game.
-                ELSE SAY check_obj_not_in_cont_pl OF my_game.
+                THEN SAY my_game:check_obj_not_in_cont_sg.
+                ELSE SAY my_game:check_obj_not_in_cont_pl.
               END IF.
           END IF.
       AND cont IS reachable AND cont IS NOT distant
@@ -5511,27 +5511,27 @@ ADD TO EVERY OBJECT
           IF cont IS NOT reachable
             THEN
               IF cont IS NOT plural
-                THEN SAY check_obj2_reachable_sg OF my_game.
-                ELSE SAY check_obj2_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj2_reachable_sg.
+                ELSE SAY my_game:check_obj2_reachable_pl.
               END IF.
           ELSIF cont IS distant
             THEN
               IF cont IS NOT plural
-                THEN SAY check_obj2_not_distant_sg OF my_game.
-                ELSE SAY check_obj2_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj2_not_distant_sg.
+                ELSE SAY my_game:check_obj2_not_distant_pl.
               END IF.
           END IF.
       AND obj IN allowed OF cont
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_allowed_in_sg OF my_game.
-            ELSE SAY check_obj_allowed_in_pl OF my_game.
+            THEN SAY my_game:check_obj_allowed_in_sg.
+            ELSE SAY my_game:check_obj_allowed_in_pl.
           END IF.
       AND cont IS open
         ELSE
           IF cont IS NOT plural
-            THEN SAY check_obj2_open_sg OF my_game.
-            ELSE SAY check_obj2_open_pl OF my_game.
+            THEN SAY my_game:check_obj2_open_sg.
+            ELSE SAY my_game:check_obj2_open_pl.
           END IF.
 
       DOES
@@ -5555,34 +5555,34 @@ END ADD TO.
 
 
 SYNTAX put_against = put (obj) against (bulk)
-  WHERE obj ISA OBJECT
-    ELSE SAY illegal_parameter_obj OF my_game.
-  AND bulk ISA THING
-    ELSE SAY illegal_parameter2_there OF my_game.
+  WHERE obj IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_obj.
+  AND bulk IsA THING
+    ELSE SAY my_game:illegal_parameter2_there.
 
 
 
 SYNTAX put_behind = put (obj) behind (bulk)
-  WHERE obj ISA OBJECT
-    ELSE SAY illegal_parameter_obj OF my_game.
-  AND bulk ISA THING
-    ELSE SAY illegal_parameter2_there OF my_game.
+  WHERE obj IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_obj.
+  AND bulk IsA THING
+    ELSE SAY my_game:illegal_parameter2_there.
 
 
 
 SYNTAX put_near = put (obj) 'near' (bulk)
-  WHERE obj ISA OBJECT
-    ELSE SAY illegal_parameter_obj OF my_game.
-  AND bulk ISA THING
-    ELSE SAY illegal_parameter2_there OF my_game.
+  WHERE obj IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_obj.
+  AND bulk IsA THING
+    ELSE SAY my_game:illegal_parameter2_there.
 
 
 
 SYNTAX put_under = put (obj) under (bulk)
-  WHERE obj ISA OBJECT
-    ELSE SAY illegal_parameter_obj OF my_game.
-  AND bulk ISA THING
-    ELSE SAY illegal_parameter2_there OF my_game.
+  WHERE obj IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_obj.
+  AND bulk IsA THING
+    ELSE SAY my_game:illegal_parameter2_there.
 
 
 
@@ -5591,30 +5591,30 @@ ADD TO EVERY OBJECT
     WHEN obj
       CHECK my_game CAN put_against AND my_game CAN put_behind
       AND my_game CAN put_near AND my_game CAN put_under
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND bulk NOT IN hero
-        ELSE SAY check_obj2_not_in_hero2 OF my_game.
+        ELSE SAY my_game:check_obj2_not_in_hero2.
       AND obj <> bulk
-        ELSE SAY check_obj_not_obj2_put OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_put.
       AND obj IS takeable
-        ELSE SAY check_obj_takeable OF my_game.
+        ELSE SAY my_game:check_obj_takeable.
       AND bulk <> hero
-        ELSE SAY check_obj2_not_hero2 OF my_game.
+        ELSE SAY my_game:check_obj2_not_hero2.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
       AND bulk IS reachable AND bulk IS NOT distant
@@ -5622,14 +5622,14 @@ ADD TO EVERY OBJECT
           IF bulk IS NOT reachable
             THEN
               IF bulk IS NOT plural
-                THEN SAY check_obj2_reachable_sg OF my_game.
-                ELSE SAY check_obj2_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj2_reachable_sg.
+                ELSE SAY my_game:check_obj2_reachable_pl.
               END IF.
           ELSIF bulk IS distant
             THEN
               IF bulk IS NOT plural
-                THEN SAY check_obj2_not_distant_sg OF my_game.
-                ELSE SAY check_obj2_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj2_not_distant_sg.
+                ELSE SAY my_game:check_obj2_not_distant_pl.
               END IF.
           END IF.
 
@@ -5660,10 +5660,10 @@ END ADD TO.
 
 
 SYNTAX put_on = put (obj) on (surface)
-  WHERE obj ISA OBJECT
-    ELSE SAY illegal_parameter_obj OF my_game.
-  AND surface ISA SUPPORTER
-    ELSE SAY illegal_parameter2_there OF my_game.
+  WHERE obj IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_obj.
+  AND surface IsA SUPPORTER
+    ELSE SAY my_game:illegal_parameter2_there.
 
 
 
@@ -5671,32 +5671,32 @@ ADD TO EVERY OBJECT
   VERB put_on
     WHEN obj
       CHECK my_game CAN put_on
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj <> surface
-        ELSE SAY check_obj_not_obj2_on OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_on.
       AND obj IS takeable
-        ELSE SAY check_obj_takeable OF my_game.
+        ELSE SAY my_game:check_obj_takeable.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND obj NOT IN surface
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_not_on_surface_sg OF my_game.
-            ELSE SAY check_obj_not_on_surface_pl OF my_game.
+            THEN SAY my_game:check_obj_not_on_surface_sg.
+            ELSE SAY my_game:check_obj_not_on_surface_pl.
           END IF.
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
       AND surface IS reachable AND surface IS NOT distant
@@ -5704,21 +5704,21 @@ ADD TO EVERY OBJECT
           IF surface IS NOT reachable
             THEN
               IF surface IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF surface IS distant
             THEN
               IF surface IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
 
       DOES
         -- >>> implicit take >>>
         IF obj NOT DIRECTLY IN hero
-          THEN SAY implicit_taking_message OF my_game.
+          THEN SAY my_game:implicit_taking_message.
                LOCATE obj IN hero.
         END IF.
         -- <<< implicit take <<<
@@ -5763,31 +5763,31 @@ END ADD TO.
 
 
 SYNTAX read = read (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB read
     CHECK my_game CAN read
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS readable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS NOT distant
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_not_distant_sg OF my_game.
-          ELSE SAY check_obj_not_distant_pl OF my_game.
+          THEN SAY my_game:check_obj_not_distant_sg.
+          ELSE SAY my_game:check_obj_not_distant_pl.
         END IF.
 
     DOES
@@ -5819,11 +5819,11 @@ END ADD TO.
 -- this verb only works with clothing (see 'classes.i').
 
 SYNTAX remove = remove (obj)
-    WHERE obj ISA OBJECT
+    WHERE obj IsA OBJECT
       ELSE
         IF obj IS NOT plural
-          THEN SAY illegal_parameter_sg OF my_game. "since you're not wearing it."
-          ELSE SAY illegal_parameter_pl OF my_game. "since you're not wearing them."
+          THEN SAY my_game:illegal_parameter_sg. "since you're not wearing it."
+          ELSE SAY my_game:illegal_parameter_pl. "since you're not wearing them."
         END IF.
 
        remove = take off (obj).
@@ -5834,7 +5834,7 @@ SYNTAX remove = remove (obj)
 ADD TO EVERY OBJECT
   VERB remove
     CHECK my_game CAN remove
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
 
     DOES
       IF obj IS NOT plural
@@ -5877,43 +5877,43 @@ END ADD TO.
 SYNONYMS massage = rub.
 
 SYNTAX rub = rub (obj)
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY THING
   VERB rub
     CHECK my_game CAN rub
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND obj <> hero
-      ELSE SAY check_obj_not_hero6 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero6.
     AND obj IS inanimate
-      ELSE SAY check_obj_inanimate2 OF my_game.
+      ELSE SAY my_game:check_obj_inanimate2.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -5935,14 +5935,14 @@ END ADD TO.
 
 
 SYNTAX 'say' = 'say' (topic)
-  WHERE topic ISA STRING
-    ELSE SAY illegal_parameter_string OF my_game.
+  WHERE topic IsA STRING
+    ELSE SAY my_game:illegal_parameter_string.
 
 
 ADD TO EVERY STRING
   VERB 'say'
     CHECK my_game CAN 'say'
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
 
     DOES
       "Nothing happens."
@@ -5963,13 +5963,13 @@ END ADD TO.
 
 
 SYNTAX say_to = 'say' (topic) 'to' (act)
-  WHERE topic ISA STRING
-    ELSE SAY illegal_parameter_string OF my_game.
-  AND act ISA ACTOR
+  WHERE topic IsA STRING
+    ELSE SAY my_game:illegal_parameter_string.
+  AND act IsA ACTOR
     ELSE
       IF act IS NOT plural
-        THEN SAY illegal_parameter_talk_sg OF my_game.
-        ELSE SAY illegal_parameter_talk_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_talk_sg.
+        ELSE SAY my_game:illegal_parameter_talk_pl.
       END IF.
 
 
@@ -5977,20 +5977,20 @@ ADD TO EVERY ACTOR
   VERB say_to
     WHEN act
       CHECK my_game CAN say_to
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND act <> hero
-        ELSE SAY check_obj2_not_hero1 OF my_game.
+        ELSE SAY my_game:check_obj2_not_hero1.
       AND act CAN talk
         ELSE
           IF act IS NOT plural
-            THEN SAY check_act_can_talk_sg OF my_game.
-            ELSE SAY check_act_can_talk_pl OF my_game.
+            THEN SAY my_game:check_act_can_talk_sg.
+            ELSE SAY my_game:check_act_can_talk_pl.
           END IF.
       AND act IS NOT distant
         ELSE
           IF act IS NOT plural
-            THEN SAY check_obj_not_distant_sg OF my_game.
-            ELSE SAY check_obj_not_distant_pl OF my_game.
+            THEN SAY my_game:check_obj_not_distant_sg.
+            ELSE SAY my_game:check_obj_not_distant_pl.
           END IF.
 
     DOES
@@ -6016,43 +6016,43 @@ END ADD TO.
 
 
 SYNTAX scratch = scratch (obj)
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY THING
   VERB scratch
     CHECK my_game CAN scratch
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND obj <> hero
-      ELSE SAY check_obj_not_hero3 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero3.
     AND obj IS inanimate
-      ELSE SAY check_obj_inanimate1 OF my_game.
+      ELSE SAY my_game:check_obj_inanimate1.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -6074,37 +6074,37 @@ END ADD TO.
 
 
 SYNTAX search = search (obj)
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY THING
   VERB search
     CHECK my_game CAN search
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj <> hero
       ELSE LIST hero.
     AND obj IS inanimate
-      ELSE SAY check_obj_inanimate1 OF my_game.
+      ELSE SAY my_game:check_obj_inanimate1.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -6126,26 +6126,26 @@ END ADD TO.
 
 
 SYNTAX sell = sell (item)
-  WHERE item ISA OBJECT
+  WHERE item IsA OBJECT
     ELSE
       IF item IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB sell
     CHECK my_game CAN sell
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND item IS examinable
       ELSE
         IF item IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
 
     DOES
       "There's nobody here who would be interested in buying" SAY THE item. "."
@@ -6168,11 +6168,11 @@ END ADD TO.
 
 
 SYNTAX shake = shake (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
@@ -6180,30 +6180,30 @@ SYNTAX shake = shake (obj)
 ADD TO EVERY OBJECT
   VERB shake
     CHECK my_game CAN shake
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND obj IS movable
-      ELSE SAY check_obj_movable OF my_game.
+      ELSE SAY my_game:check_obj_movable.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -6230,11 +6230,11 @@ END ADD TO.
 
 
 SYNTAX shoot = shoot (target)
-  WHERE target ISA THING
+  WHERE target IsA THING
     ELSE
       IF target IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
          shoot = shoot 'at' (target).
@@ -6243,17 +6243,17 @@ SYNTAX shoot = shoot (target)
 ADD TO EVERY THING
     VERB shoot
     CHECK my_game CAN shoot
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND target IS examinable
       ELSE
         IF target IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND target <> hero
-      ELSE SAY check_obj_not_hero2 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero2.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND target NOT IN hero
       ELSE
         IF target IS NOT worn
@@ -6263,12 +6263,12 @@ ADD TO EVERY THING
     AND target IS NOT distant
       ELSE
         IF target IS NOT plural
-          THEN SAY check_obj_not_distant_sg OF my_game.
-          ELSE SAY check_obj_not_distant_pl OF my_game.
+          THEN SAY my_game:check_obj_not_distant_sg.
+          ELSE SAY my_game:check_obj_not_distant_pl.
         END IF.
 
     DOES
-      IF target ISA ACTOR
+      IF target IsA ACTOR
         THEN "That's quite uncalled-for."
         ELSE "That wouldn't accomplish anything."
       END IF.
@@ -6303,17 +6303,17 @@ END VERB shoot_error.
 
 
 SYNTAX shoot_with = shoot (target) 'with' (weapon)
-    WHERE target ISA THING
+    WHERE target IsA THING
       ELSE
         IF target IS NOT plural
-          THEN SAY illegal_parameter_sg OF my_game.
-          ELSE SAY illegal_parameter_pl OF my_game.
+          THEN SAY my_game:illegal_parameter_sg.
+          ELSE SAY my_game:illegal_parameter_pl.
         END IF.
-    AND weapon ISA WEAPON
+    AND weapon IsA WEAPON
       ELSE
         IF weapon IS NOT plural
-          THEN SAY illegal_parameter2_with_sg OF my_game.
-          ELSE SAY illegal_parameter2_with_pl OF my_game.
+          THEN SAY my_game:illegal_parameter2_with_sg.
+          ELSE SAY my_game:illegal_parameter2_with_pl.
         END IF.
 
    shoot_with = shoot (weapon) 'at' (target).
@@ -6324,25 +6324,25 @@ ADD TO EVERY THING
   VERB shoot_with
     WHEN target
       CHECK my_game CAN shoot_with
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND weapon IS fireable
         ELSE
           IF weapon IS NOT plural
-            THEN SAY check_obj2_suitable_with_sg OF my_game.
-            ELSE SAY check_obj2_suitable_with_pl OF my_game.
+            THEN SAY my_game:check_obj2_suitable_with_sg.
+            ELSE SAY my_game:check_obj2_suitable_with_pl.
           END IF.
       AND target IS examinable
         ELSE
           IF target IS NOT plural
-            THEN SAY check_obj_suitable_sg OF my_game.
-            ELSE SAY check_obj_suitable_pl OF my_game.
+            THEN SAY my_game:check_obj_suitable_sg.
+            ELSE SAY my_game:check_obj_suitable_pl.
           END IF.
       AND target <> hero
-        ELSE SAY check_obj_not_hero2 OF my_game.
+        ELSE SAY my_game:check_obj_not_hero2.
       AND target <> weapon
-        ELSE SAY check_obj_not_obj2_with OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_with.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND target NOT IN hero
         ELSE
           IF target IS NOT worn
@@ -6352,12 +6352,12 @@ ADD TO EVERY THING
       AND target IS NOT distant
         ELSE
           IF target IS NOT plural
-            THEN SAY check_obj_not_distant_sg OF my_game.
-            ELSE SAY check_obj_not_distant_pl OF my_game.
+            THEN SAY my_game:check_obj_not_distant_sg.
+            ELSE SAY my_game:check_obj_not_distant_pl.
           END IF.
 
     DOES
-      IF target ISA ACTOR
+      IF target IsA ACTOR
         THEN "That's quite uncalled-for."
         ELSE "That wouldn't accomplish anything."
       END IF.
@@ -6383,7 +6383,7 @@ SYNTAX shout = shout.
 
 VERB shout
   CHECK my_game CAN shout
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
     DOES
         "Nothing results from your $ving."
 END VERB shout.
@@ -6402,17 +6402,17 @@ END VERB shout.
 SYNONYMS reveal = 'show'.
 
 SYNTAX 'show' = 'show' (obj) 'to' (act)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND act ISA ACTOR
+  AND act IsA ACTOR
     ELSE
       IF act IS NOT plural
-        THEN SAY illegal_parameter2_to_sg OF my_game.
-        ELSE SAY illegal_parameter2_to_pl OF my_game.
+        THEN SAY my_game:illegal_parameter2_to_sg.
+        ELSE SAY my_game:illegal_parameter2_to_pl.
       END IF.
 
 
@@ -6420,18 +6420,18 @@ ADD TO EVERY OBJECT
   VERB 'show'
     WHEN obj
       CHECK my_game CAN 'show'
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND act <> hero
-        ELSE SAY check_obj2_not_hero1 OF my_game.
+        ELSE SAY my_game:check_obj2_not_hero1.
       AND obj IN hero
-        ELSE SAY check_obj_in_hero OF my_game.
+        ELSE SAY my_game:check_obj_in_hero.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND act IS NOT distant
         ELSE
           IF act IS NOT plural
-            THEN SAY check_obj2_not_distant_sg OF my_game.
-            ELSE SAY check_obj2_not_distant_pl OF my_game.
+            THEN SAY my_game:check_obj2_not_distant_sg.
+            ELSE SAY my_game:check_obj2_not_distant_pl.
           END IF.
     DOES
       SAY THE act.
@@ -6462,7 +6462,7 @@ SYNTAX sing = sing.
 
 VERB sing
   CHECK my_game CAN sing
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     "You $v a little tune."
 END VERB sing.
@@ -6479,39 +6479,39 @@ END VERB sing.
 
 
 SYNTAX sip = sip (liq)
-  WHERE liq ISA LIQUID
+  WHERE liq IsA LIQUID
     ELSE
       IF liq IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY LIQUID
   VERB sip
     CHECK my_game CAN sip
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND liq IS drinkable
       ELSE
         IF liq IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND liq IS reachable AND liq IS NOT distant
       ELSE
         IF liq IS NOT reachable
           THEN
             IF liq IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF liq IS distant
           THEN
             IF liq IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -6570,9 +6570,9 @@ SYNTAX sit = sit.
 
 VERB sit
   CHECK my_game CAN sit
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   AND hero IS NOT sitting
-    ELSE SAY check_hero_not_sitting4 OF my_game.
+    ELSE SAY my_game:check_hero_not_sitting4.
 
   DOES
     "You feel no urge to sit down at present."
@@ -6606,35 +6606,35 @@ END VERB sit.
 
 
 SYNTAX sit_on = sit on (surface)
-  WHERE surface ISA SUPPORTER
+  WHERE surface IsA SUPPORTER
     ELSE
       IF surface IS NOT plural
-        THEN SAY illegal_parameter_on_sg OF my_game.
-        ELSE SAY illegal_parameter_on_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_on_sg.
+        ELSE SAY my_game:illegal_parameter_on_pl.
       END IF.
 
 
 ADD TO EVERY SUPPORTER
   VERB sit_on
     CHECK my_game CAN sit_on
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND hero IS NOT sitting
-      ELSE SAY check_hero_not_sitting4 OF my_game.
+      ELSE SAY my_game:check_hero_not_sitting4.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND surface IS reachable AND surface IS NOT distant
       ELSE
         IF surface IS NOT reachable
           THEN
             IF surface IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF surface IS distant
           THEN
             IF surface IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -6683,7 +6683,7 @@ SYNTAX sleep = sleep.
 
 VERB sleep
   CHECK my_game CAN sleep
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     "There's no need to $v right now."
 END VERB sleep.
@@ -6704,7 +6704,7 @@ SYNTAX smell0 = smell.
 
 VERB smell0
   CHECK my_game CAN smell0
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     "You smell nothing unusual."
 END VERB smell0.
@@ -6721,18 +6721,18 @@ END VERB smell0.
 
 
 SYNTAX smell = smell (odour)
-  WHERE odour ISA THING
+  WHERE odour IsA THING
     ELSE
       IF odour IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY THING
   VERB smell
     CHECK my_game CAN smell
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     DOES
       "You smell nothing unusual."
   END VERB smell.
@@ -6750,39 +6750,39 @@ END ADD TO.
 
 
 SYNTAX squeeze = squeeze (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY THING
   VERB squeeze
     CHECK my_game CAN squeeze
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -6810,7 +6810,7 @@ SYNTAX stand = stand.
 
 VERB stand
   CHECK my_game CAN stand
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     IF hero IS sitting OR hero IS lying_down
       THEN "You get up."
@@ -6832,11 +6832,11 @@ END VERB stand.
 
 
 SYNTAX stand_on = stand on (surface)
-  WHERE surface ISA SUPPORTER
+  WHERE surface IsA SUPPORTER
     ELSE
       IF surface IS NOT plural
-        THEN SAY illegal_parameter_on_sg OF my_game.
-        ELSE SAY illegal_parameter_on_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_on_sg.
+        ELSE SAY my_game:illegal_parameter_on_pl.
       END IF.
 
         stand_on = get on (surface).
@@ -6845,22 +6845,22 @@ SYNTAX stand_on = stand on (surface)
 ADD TO EVERY SUPPORTER
   VERB stand_on
     CHECK my_game CAN stand_on
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND surface IS reachable AND surface IS NOT distant
       ELSE
         IF surface IS NOT reachable
           THEN
             IF surface IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF surface IS distant
           THEN
             IF surface IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -6895,13 +6895,13 @@ SYNTAX swim = swim.
 
 VERB swim
   CHECK my_game CAN swim
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   AND hero IS NOT sitting
-    ELSE SAY check_hero_not_sitting1 OF my_game.
+    ELSE SAY my_game:check_hero_not_sitting1.
   AND hero IS NOT lying_down
-    ELSE SAY check_hero_not_lying_down1 OF my_game.
+    ELSE SAY my_game:check_hero_not_lying_down1.
   AND CURRENT LOCATION IS lit
-    ELSE SAY check_current_loc_lit OF my_game.
+    ELSE SAY my_game:check_current_loc_lit.
   DOES
     "There is no water suitable for swimming here."
 END VERB swim.
@@ -6918,11 +6918,11 @@ END VERB swim.
 
 
 SYNTAX swim_in = swim 'in' (liq)
-  WHERE liq ISA LIQUID
+  WHERE liq IsA LIQUID
     ELSE
       IF liq IS NOT plural
-        THEN SAY illegal_parameter_in_sg OF my_game.
-        ELSE SAY illegal_parameter_in_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_in_sg.
+        ELSE SAY my_game:illegal_parameter_in_pl.
       END IF.
 
 
@@ -6930,26 +6930,26 @@ SYNTAX swim_in = swim 'in' (liq)
 ADD TO EVERY OBJECT
   VERB swim_in
     CHECK my_game CAN swim_in
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND hero IS NOT sitting
-      ELSE SAY check_hero_not_sitting3 OF my_game.
+      ELSE SAY my_game:check_hero_not_sitting3.
     AND hero IS NOT lying_down
-      ELSE SAY check_hero_not_lying_down3 OF my_game.
+      ELSE SAY my_game:check_hero_not_lying_down3.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND liq IS reachable AND liq IS NOT distant
       ELSE
         IF liq IS NOT reachable
           THEN
             IF liq IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF liq IS distant
           THEN
             IF liq IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -6994,18 +6994,18 @@ END ADD TO.
 --------------------------------------------------------------------------------
 
 SYNTAX switch = switch (app)      -- app = apparatus, appliance
-  WHERE app ISA OBJECT
+  WHERE app IsA OBJECT
     ELSE
       IF app IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB switch
     CHECK my_game CAN switch
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     DOES
       IF app IS NOT plural
         THEN "That's not"
@@ -7057,11 +7057,11 @@ END ADD TO.
 SYNONYMS carry, grab, hold, obtain = take.
 
 SYNTAX take = take (obj)
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
         take = get (obj).
@@ -7074,58 +7074,58 @@ SYNTAX take = take (obj)
 ADD TO EVERY THING
   VERB take
     CHECK my_game CAN take
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND obj <> hero
-      ELSE SAY check_obj_not_hero1 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero1.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS NOT scenery
       ELSE
         IF THIS IS NOT plural
-          THEN SAY check_obj_not_scenery_sg OF my_game.
-          ELSE SAY check_obj_not_scenery_pl OF my_game.
+          THEN SAY my_game:check_obj_not_scenery_sg.
+          ELSE SAY my_game:check_obj_not_scenery_pl.
         END IF.
     AND obj IS movable
-      ELSE SAY check_obj_movable OF my_game.
+      ELSE SAY my_game:check_obj_movable.
     AND obj IS takeable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND obj NOT DIRECTLY IN hero
       -- i.e. the object to be taken is not carried by the hero already
-      ELSE SAY check_obj_not_in_hero2 OF my_game.
+      ELSE SAY my_game:check_obj_not_in_hero2.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
     AND weight Of obj < 50
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_weight_sg OF my_game.
-          ELSE SAY check_obj_weight_pl OF my_game.
+          THEN SAY my_game:check_obj_weight_sg.
+          ELSE SAY my_game:check_obj_weight_pl.
         END IF.
 
     DOES
-      IF obj ISA ACTOR
+      IF obj IsA ACTOR
         THEN SAY THE obj. "would probably object to that."
       -- actors are not prohibited from being taken in the checks; this is to
       -- allow for example a dog to be picked up, or a bird to be taken out of
@@ -7154,23 +7154,23 @@ END ADD TO.
 
 
 SYNTAX take_from = 'take' (obj) 'from' (holder)
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND holder ISA THING
+  AND holder IsA THING
     ELSE
       IF holder IS NOT plural
-        THEN SAY illegal_parameter2_from_sg OF my_game.
-        ELSE SAY illegal_parameter2_from_pl OF my_game.
+        THEN SAY my_game:illegal_parameter2_from_sg.
+        ELSE SAY my_game:illegal_parameter2_from_pl.
       END IF.
-  AND holder ISA CONTAINER
+  AND holder IsA CONTAINER
     ELSE
       IF holder IS NOT plural
-        THEN SAY illegal_parameter2_from_sg OF my_game.
-        ELSE SAY illegal_parameter2_from_pl OF my_game.
+        THEN SAY my_game:illegal_parameter2_from_sg.
+        ELSE SAY my_game:illegal_parameter2_from_pl.
       END IF.
 
         take_from = remove (obj)* 'from' (holder).
@@ -7182,90 +7182,90 @@ ADD TO EVERY THING
   VERB take_from
     WHEN obj
       CHECK my_game CAN take_from
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj <> hero
-        ELSE SAY check_obj_not_hero1 OF my_game.
+        ELSE SAY my_game:check_obj_not_hero1.
       AND holder <> hero
-        ELSE SAY check_obj2_not_hero1 OF my_game.
+        ELSE SAY my_game:check_obj2_not_hero1.
       AND obj NOT DIRECTLY IN hero
-        ELSE  SAY check_obj_not_in_hero2 OF my_game.
+        ELSE  SAY my_game:check_obj_not_in_hero2.
       AND obj <> holder
-        ELSE SAY check_obj_not_obj2_from OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_from.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND obj IS NOT scenery
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_not_scenery_sg OF my_game.
-            ELSE SAY check_obj_not_scenery_pl OF my_game.
+            THEN SAY my_game:check_obj_not_scenery_sg.
+            ELSE SAY my_game:check_obj_not_scenery_pl.
           END IF.
       AND holder IS NOT scenery
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj2_not_scenery_sg OF my_game.
-            ELSE SAY check_obj2_not_scenery_pl OF my_game.
+            THEN SAY my_game:check_obj2_not_scenery_sg.
+            ELSE SAY my_game:check_obj2_not_scenery_pl.
           END IF.
       AND obj IS movable
-        ELSE SAY check_obj_movable OF my_game.
+        ELSE SAY my_game:check_obj_movable.
       AND obj IS takeable
             ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_suitable_sg OF my_game.
-            ELSE SAY check_obj_suitable_pl OF my_game.
+            THEN SAY my_game:check_obj_suitable_sg.
+            ELSE SAY my_game:check_obj_suitable_pl.
           END IF.
       AND holder IS reachable AND holder IS NOT distant
         ELSE
           IF holder IS NOT reachable
             THEN
               IF holder IS NOT plural
-                THEN SAY check_obj2_reachable_sg OF my_game.
-                ELSE SAY check_obj2_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj2_reachable_sg.
+                ELSE SAY my_game:check_obj2_reachable_pl.
               END IF.
           ELSIF holder IS distant
             THEN
               IF holder IS NOT plural
-                THEN SAY check_obj2_not_distant_sg OF my_game.
-                ELSE SAY check_obj2_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj2_not_distant_sg.
+                ELSE SAY my_game:check_obj2_not_distant_pl.
               END IF.
           END IF.
       AND weight Of obj < 50
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_weight_sg OF my_game.
-            ELSE SAY check_obj_weight_pl OF my_game.
+            THEN SAY my_game:check_obj_weight_sg.
+            ELSE SAY my_game:check_obj_weight_pl.
           END IF.
       AND obj IN holder
         ELSE
           IF holder IS inanimate
             THEN
-              IF holder ISA SUPPORTER
+              IF holder IsA SUPPORTER
                 THEN
                   IF obj IS NOT plural
-                    THEN SAY check_obj_on_surface_sg OF my_game.
-                    ELSE SAY check_obj_on_surface_pl OF my_game.
+                    THEN SAY my_game:check_obj_on_surface_sg.
+                    ELSE SAY my_game:check_obj_on_surface_pl.
                   END IF.
                 ELSE
                   IF obj IS NOT plural
-                    THEN SAY check_obj_in_cont_sg OF my_game.
-                    ELSE SAY check_obj_in_cont_pl OF my_game.
+                    THEN SAY my_game:check_obj_in_cont_sg.
+                    ELSE SAY my_game:check_obj_in_cont_pl.
                   END IF.
               END IF.
             ELSE
               IF holder IS NOT plural
-                THEN SAY check_obj_in_act_sg OF my_game.
-                ELSE SAY check_obj_in_act_pl OF my_game.
+                THEN SAY my_game:check_obj_in_act_sg.
+                ELSE SAY my_game:check_obj_in_act_pl.
               END IF.
           END IF.
 
     DOES
-      IF obj ISA ACTOR
+      IF obj IsA ACTOR
         THEN SAY THE obj. "would probably object to that."
           -- actors are not prohibited from being taken in the checks; this is to
           -- allow for example a dog to be picked up, or a bird to be taken out of
           -- a cage, etc.
-      ELSIF obj ISA OBJECT
+      ELSIF obj IsA OBJECT
         THEN
-          IF holder ISA LISTED_CONTAINER AND holder IS NOT open
+          IF holder IsA LISTED_CONTAINER AND holder IS NOT open
             THEN "You can't;" SAY THE holder.
               IF holder IS NOT plural
                 THEN "is"
@@ -7300,7 +7300,7 @@ SYNTAX talk = talk.
 
 VERB talk
   CHECK my_game CAN talk
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     "To talk to somebody, you can ASK PERSON ABOUT THING
      or TELL PERSON ABOUT THING."
@@ -7318,18 +7318,18 @@ END VERB talk.
 
 
 SYNTAX talk_to = talk 'to' (act)
-  WHERE act ISA ACTOR
+  WHERE act IsA ACTOR
     ELSE
       IF act IS NOT plural
-        THEN SAY illegal_parameter_to_sg OF my_game.
-        ELSE SAY illegal_parameter_to_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_to_sg.
+        ELSE SAY my_game:illegal_parameter_to_pl.
       END IF.
 
 
 ADD TO EVERY ACTOR
   VERB talk_to
     CHECK my_game CAN talk_to
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     DOES
       "To talk to somebody, you can ASK PERSON ABOUT THING or
        TELL PERSON ABOUT THING."
@@ -7350,45 +7350,45 @@ END ADD TO.
 SYNONYMS lick = taste.
 
 SYNTAX taste = taste (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB taste
     CHECK my_game CAN taste
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND obj IS edible OR obj IS drinkable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -7412,39 +7412,39 @@ END ADD TO.
 SYNONYMS rip = tear.
 
 SYNTAX tear = tear (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB tear
     CHECK my_game CAN tear
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -7468,17 +7468,17 @@ END ADD TO.
 SYNONYMS enlighten, inform = tell.
 
 SYNTAX tell = tell (act) about (topic)!
-  WHERE act ISA ACTOR
+  WHERE act IsA ACTOR
     ELSE
       IF act IS NOT plural
-            THEN SAY illegal_parameter_talk_sg OF my_game.
-        ELSE SAY illegal_parameter_talk_pl OF my_game.
+            THEN SAY my_game:illegal_parameter_talk_sg.
+        ELSE SAY my_game:illegal_parameter_talk_pl.
       END IF.
-  AND topic ISA THING
+  AND topic IsA THING
     ELSE
       IF topic IS NOT plural
-        THEN SAY illegal_parameter_about_sg OF my_game.
-        ELSE SAY illegal_parameter_about_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_about_sg.
+        ELSE SAY my_game:illegal_parameter_about_pl.
       END IF.
 
 
@@ -7486,20 +7486,20 @@ ADD TO EVERY ACTOR
   VERB tell
     WHEN act
       CHECK my_game CAN tell
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND act <> hero
-        ELSE SAY check_obj_not_hero1 OF my_game.
+        ELSE SAY my_game:check_obj_not_hero1.
       AND act CAN talk
         ELSE
           IF act IS NOT plural
-            THEN SAY check_act_can_talk_sg OF my_game.
-            ELSE SAY check_act_can_talk_pl OF my_game.
+            THEN SAY my_game:check_act_can_talk_sg.
+            ELSE SAY my_game:check_act_can_talk_pl.
           END IF.
       AND act IS NOT distant
         ELSE
           IF act IS NOT plural
-            THEN SAY check_obj_not_distant_sg OF my_game.
-            ELSE SAY check_obj_not_distant_pl OF my_game.
+            THEN SAY my_game:check_obj_not_distant_sg.
+            ELSE SAY my_game:check_obj_not_distant_pl.
           END IF.
 
     DOES
@@ -7531,7 +7531,7 @@ SYNTAX think = think.
 
 VERB think
   CHECK my_game CAN think
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     "Nothing helpful comes to your mind."
 END VERB think.
@@ -7548,18 +7548,18 @@ END VERB think.
 
 
 SYNTAX think_about = think about (topic)!
-  WHERE topic ISA THING
+  WHERE topic IsA THING
     ELSE
       IF topic IS NOT plural
-        THEN SAY illegal_parameter_about_sg OF my_game.
-        ELSE SAY illegal_parameter_about_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_about_sg.
+        ELSE SAY my_game:illegal_parameter_about_pl.
       END IF.
 
 
 ADD TO EVERY THING
   VERB think_about
     CHECK my_game CAN think_about
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     DOES
       "Nothing helpful comes to your mind."
     END VERB think_about.
@@ -7577,45 +7577,45 @@ END ADD TO.
 
 
 SYNTAX throw = throw (projectile)
-  WHERE projectile ISA OBJECT
-    ELSE SAY illegal_parameter_obj OF my_game.
+  WHERE projectile IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_obj.
 
 
 
 ADD TO EVERY OBJECT
   VERB throw
     CHECK my_game CAN throw
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND projectile IS examinable
       ELSE
         IF projectile IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND projectile IS takeable
-      ELSE SAY check_obj_takeable OF my_game.
+      ELSE SAY my_game:check_obj_takeable.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND projectile IS reachable AND projectile IS NOT distant
       ELSE
         IF projectile IS NOT reachable
           THEN
             IF projectile IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF projectile IS distant
           THEN
             IF projectile IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
     DOES
       -- >>> implicit take >>>
       IF projectile NOT DIRECTLY IN hero
-        THEN SAY implicit_taking_message OF my_game.
+        THEN SAY my_game:implicit_taking_message.
              LOCATE projectile IN hero.
       END IF.
       -- <<< implicit take <<<
@@ -7657,10 +7657,10 @@ END ADD TO.
 
 
 SYNTAX throw_at = throw (projectile) 'at' (target)
-  WHERE projectile ISA OBJECT
-    ELSE SAY illegal_parameter_obj OF my_game.
-  AND target ISA THING
-    ELSE SAY illegal_parameter_at OF my_game.
+  WHERE projectile IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_obj.
+  AND target IsA THING
+    ELSE SAY my_game:illegal_parameter_at.
 
 
 
@@ -7668,19 +7668,19 @@ ADD TO EVERY OBJECT
   VERB throw_at
     WHEN projectile
       CHECK my_game CAN throw_at
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND projectile IS examinable
         ELSE
           IF projectile IS NOT plural
-            THEN SAY check_obj_suitable_sg OF my_game.
-            ELSE SAY check_obj_suitable_pl OF my_game.
+            THEN SAY my_game:check_obj_suitable_sg.
+            ELSE SAY my_game:check_obj_suitable_pl.
           END IF.
       AND projectile IS takeable
-        ELSE SAY check_obj_takeable OF my_game.
+        ELSE SAY my_game:check_obj_takeable.
       AND target IS examinable
-        ELSE SAY check_obj_suitable_at OF my_game.
+        ELSE SAY my_game:check_obj_suitable_at.
       AND projectile <> target
-        ELSE SAY check_obj_not_obj2_at OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_at.
       AND target NOT IN hero
         ELSE
           IF target IS NOT worn
@@ -7688,36 +7688,36 @@ ADD TO EVERY OBJECT
             ELSE SAY my_game:check_obj_not_in_worn2.
           END IF.
       AND target <> hero
-        ELSE SAY check_obj2_not_hero1 OF my_game.
+        ELSE SAY my_game:check_obj2_not_hero1.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND projectile IS reachable AND projectile IS NOT distant
         ELSE
           IF projectile IS NOT reachable
             THEN
               IF projectile IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF projectile IS distant
             THEN
               IF projectile IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
       AND target IS NOT distant
         -- it is possible to throw something at an (otherwise) not reachable target
         ELSE
           IF target IS NOT plural
-            THEN SAY check_obj2_not_distant_sg OF my_game.
-            ELSE SAY check_obj2_not_distant_pl OF my_game.
+            THEN SAY my_game:check_obj2_not_distant_sg.
+            ELSE SAY my_game:check_obj2_not_distant_pl.
           END IF.
 
     DOES
       -- >>> implicit take >>>
       IF projectile NOT DIRECTLY IN hero
-        THEN SAY implicit_taking_message OF my_game.
+        THEN SAY my_game:implicit_taking_message.
              LOCATE projectile IN hero.
       END IF.
       -- <<< implicit take <<<
@@ -7782,53 +7782,53 @@ END ADD TO.
 
 
 SYNTAX throw_to = throw (projectile) 'to' (recipient)
-  WHERE projectile ISA OBJECT
-    ELSE SAY illegal_parameter_obj OF my_game.
-  AND recipient ISA ACTOR
-    ELSE SAY illegal_parameter2_there OF my_game.
+  WHERE projectile IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_obj.
+  AND recipient IsA ACTOR
+    ELSE SAY my_game:illegal_parameter2_there.
 
 
 ADD TO EVERY OBJECT
   VERB throw_to
     WHEN projectile
       CHECK my_game CAN throw_to
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND projectile IS examinable
         ELSE
           IF projectile IS NOT plural
-            THEN SAY check_obj_suitable_sg OF my_game.
-            ELSE SAY check_obj_suitable_pl OF my_game.
+            THEN SAY my_game:check_obj_suitable_sg.
+            ELSE SAY my_game:check_obj_suitable_pl.
           END IF.
       AND projectile IS takeable
-        ELSE SAY check_obj_takeable OF my_game.
+        ELSE SAY my_game:check_obj_takeable.
       AND recipient IS examinable
-        ELSE SAY check_obj_suitable_at OF my_game.
+        ELSE SAY my_game:check_obj_suitable_at.
       AND projectile <> recipient
-        ELSE SAY check_obj_not_obj2_to OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_to.
       AND recipient <> hero
-        ELSE SAY check_obj2_not_hero1 OF my_game.
+        ELSE SAY my_game:check_obj2_not_hero1.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND projectile IS reachable AND projectile IS NOT distant
         ELSE
           IF projectile IS NOT reachable
             THEN
               IF projectile IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF projectile IS distant
             THEN
               IF projectile IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
       AND recipient IS NOT distant
         ELSE
           IF recipient IS NOT plural
-            THEN SAY check_obj2_not_distant_sg OF my_game.
-            ELSE SAY check_obj2_not_distant_pl OF my_game.
+            THEN SAY my_game:check_obj2_not_distant_sg.
+            ELSE SAY my_game:check_obj2_not_distant_pl.
           END IF.
 
     DOES
@@ -7850,37 +7850,37 @@ END ADD TO.
 
 
 SYNTAX throw_in = throw (projectile) 'in' (cont)
-  WHERE projectile ISA OBJECT
-    ELSE SAY illegal_parameter_obj OF my_game.
-  AND cont ISA OBJECT
+  WHERE projectile IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_obj.
+  AND cont IsA OBJECT
     ELSE
-      IF cont ISA ACTOR
-        THEN SAY illegal_parameter_act OF my_game.
-        ELSE SAY illegal_parameter2_there OF my_game.
+      IF cont IsA ACTOR
+        THEN SAY my_game:illegal_parameter_act.
+        ELSE SAY my_game:illegal_parameter2_there.
       END IF.
-  AND cont ISA CONTAINER
-    ELSE SAY illegal_parameter2_there OF my_game.
+  AND cont IsA CONTAINER
+    ELSE SAY my_game:illegal_parameter2_there.
 
 
 ADD TO EVERY OBJECT
   VERB throw_in
     WHEN projectile
       CHECK my_game CAN throw_in
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND projectile IS examinable
         ELSE
           IF projectile IS NOT plural
-            THEN SAY check_obj_suitable_sg OF my_game.
-            ELSE SAY check_obj_suitable_pl OF my_game.
+            THEN SAY my_game:check_obj_suitable_sg.
+            ELSE SAY my_game:check_obj_suitable_pl.
           END IF.
       AND projectile IS takeable
-        ELSE SAY check_obj_takeable OF my_game.
+        ELSE SAY my_game:check_obj_takeable.
       AND cont IS examinable
-        ELSE SAY check_obj2_suitable_there OF my_game.
+        ELSE SAY my_game:check_obj2_suitable_there.
       AND projectile <> cont
-        ELSE SAY check_obj_not_obj2_in OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_in.
       AND cont <> hero
-        ELSE SAY check_obj2_not_hero1 OF my_game.
+        ELSE SAY my_game:check_obj2_not_hero1.
       AND cont NOT IN hero
         ELSE
           IF cont IS NOT worn
@@ -7888,45 +7888,45 @@ ADD TO EVERY OBJECT
             ELSE SAY my_game:check_obj_not_in_worn2.
           END IF.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND projectile NOT IN cont
         ELSE
           IF projectile IS NOT plural
-            THEN SAY check_obj_not_in_cont_sg OF my_game.
-            ELSE SAY check_obj_not_in_cont_pl OF my_game.
+            THEN SAY my_game:check_obj_not_in_cont_sg.
+            ELSE SAY my_game:check_obj_not_in_cont_pl.
           END IF.
       AND projectile IS reachable AND projectile IS NOT distant
         ELSE
           IF projectile IS NOT reachable
             THEN
               IF projectile IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF projectile IS distant
             THEN
               IF projectile IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
       AND cont IS NOT distant
         ELSE
           IF cont IS NOT plural
-            THEN SAY check_obj2_not_distant_sg OF my_game.
-            ELSE SAY check_obj2_not_distant_pl OF my_game.
+            THEN SAY my_game:check_obj2_not_distant_sg.
+            ELSE SAY my_game:check_obj2_not_distant_pl.
           END IF.
       AND projectile IN allowed OF cont
         ELSE
           IF projectile IS NOT plural
-            THEN SAY check_obj_allowed_in_sg OF my_game.
-            ELSE SAY check_obj_allowed_in_pl OF my_game.
+            THEN SAY my_game:check_obj_allowed_in_sg.
+            ELSE SAY my_game:check_obj_allowed_in_pl.
           END IF.
       AND cont IS open
         ELSE
           IF cont IS NOT plural
-            THEN SAY check_obj2_open_sg OF my_game.
-            ELSE SAY check_obj2_open_pl OF my_game.
+            THEN SAY my_game:check_obj2_open_sg.
+            ELSE SAY my_game:check_obj2_open_pl.
           END IF.
 
     DOES
@@ -7953,26 +7953,26 @@ END ADD TO.
 
 
 SYNTAX tie = tie (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB tie
     CHECK my_game CAN tie
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
 
     DOES
       "You must state where you want to tie" SAY THE obj. "."
@@ -7992,10 +7992,10 @@ END ADD TO.
 
 
 SYNTAX tie_to = tie (obj) 'to' (target)
-  WHERE obj ISA OBJECT
-    ELSE SAY illegal_parameter_obj OF my_game.
-  AND target ISA THING
-    ELSE SAY illegal_parameter_obj OF my_game.
+  WHERE obj IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_obj.
+  AND target IsA THING
+    ELSE SAY my_game:illegal_parameter_obj.
 
 
 
@@ -8003,34 +8003,34 @@ ADD TO EVERY THING
   VERB tie_to
     WHEN obj
       CHECK my_game CAN tie_to
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj IS examinable
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_suitable_sg OF my_game.
-            ELSE SAY check_obj_suitable_pl OF my_game.
+            THEN SAY my_game:check_obj_suitable_sg.
+            ELSE SAY my_game:check_obj_suitable_pl.
           END IF.
       AND target IS examinable
-        ELSE SAY check_obj2_suitable_there OF my_game.
+        ELSE SAY my_game:check_obj2_suitable_there.
       AND obj <> target
-        ELSE SAY check_obj_not_obj2_to OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_to.
       AND obj IS takeable
-        ELSE SAY check_obj_takeable OF my_game.
+        ELSE SAY my_game:check_obj_takeable.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
       AND target IS reachable AND target IS NOT distant
@@ -8038,14 +8038,14 @@ ADD TO EVERY THING
           IF target IS NOT reachable
             THEN
               IF target IS NOT plural
-                THEN SAY check_obj2_reachable_sg OF my_game.
-                ELSE SAY check_obj2_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj2_reachable_sg.
+                ELSE SAY my_game:check_obj2_reachable_pl.
               END IF.
           ELSIF target IS distant
             THEN
               IF target IS NOT plural
-                THEN SAY check_obj2_not_distant_sg OF my_game.
-                ELSE SAY check_obj2_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj2_not_distant_sg.
+                ELSE SAY my_game:check_obj2_not_distant_pl.
               END IF.
           END IF.
 
@@ -8069,45 +8069,45 @@ END ADD TO.
 SYNONYMS feel = touch.
 
 SYNTAX touch = touch (obj)
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY THING
   VERB touch
     CHECK my_game CAN touch
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
     AND obj <> hero
-      ELSE SAY check_obj_not_hero3 OF my_game.
+      ELSE SAY my_game:check_obj_not_hero3.
     AND obj IS inanimate
-      ELSE SAY check_obj_inanimate2 OF my_game.
+      ELSE SAY my_game:check_obj_inanimate2.
 
     DOES
       "You feel nothing unexpected."
@@ -8127,17 +8127,17 @@ END ADD TO.
 
 
 SYNTAX touch_with = touch (obj) 'with' (instr)
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND instr ISA OBJECT
+  AND instr IsA OBJECT
     ELSE
       IF instr IS NOT plural
-        THEN SAY illegal_parameter2_with_sg OF my_game.
-        ELSE SAY illegal_parameter2_with_pl OF my_game.
+        THEN SAY my_game:illegal_parameter2_with_sg.
+        ELSE SAY my_game:illegal_parameter2_with_pl.
       END IF.
 
 
@@ -8145,42 +8145,42 @@ ADD TO EVERY THING
   VERB touch_with
     WHEN obj
       CHECK my_game CAN touch_with
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj IS examinable
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_suitable_sg OF my_game.
-            ELSE SAY check_obj_suitable_pl OF my_game.
+            THEN SAY my_game:check_obj_suitable_sg.
+            ELSE SAY my_game:check_obj_suitable_pl.
           END IF.
       AND instr IS examinable
         ELSE
           IF instr IS NOT plural
-            THEN SAY check_obj2_suitable_with_sg OF my_game.
-            ELSE SAY check_obj2_suitable_with_pl OF my_game.
+            THEN SAY my_game:check_obj2_suitable_with_sg.
+            ELSE SAY my_game:check_obj2_suitable_with_pl.
         END IF.
       AND obj <> instr
-        ELSE SAY check_obj_not_obj2_with OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_with.
       AND instr <> hero
-        ELSE SAY check_obj2_not_hero1 OF my_game.
+        ELSE SAY my_game:check_obj2_not_hero1.
       AND instr IN hero
-        ELSE SAY check_obj2_in_hero OF my_game.
+        ELSE SAY my_game:check_obj2_in_hero.
       AND obj IS inanimate
-        ELSE SAY check_obj_inanimate2 OF my_game.
+        ELSE SAY my_game:check_obj_inanimate2.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
 
@@ -8202,15 +8202,15 @@ END ADD TO.
 
 
 SYNTAX turn = turn (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF my_game CAN NOT turn
         THEN
           "The verb '$v' is not in your vocabulary."
         ELSE
           IF obj IS NOT plural
-            THEN SAY illegal_parameter_sg OF my_game.
-            ELSE SAY illegal_parameter_pl OF my_game.
+            THEN SAY my_game:illegal_parameter_sg.
+            ELSE SAY my_game:illegal_parameter_pl.
           END IF.
       END IF.
 
@@ -8220,34 +8220,34 @@ SYNTAX turn = turn (obj)
 ADD TO EVERY OBJECT
   VERB turn
     CHECK my_game CAN turn
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS examinable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND obj IS movable
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -8287,11 +8287,11 @@ END ADD TO.
 -- other meanings, e.g. 'turn page', which is incompatible with 'switch page'.
 
 SYNTAX turn_on = turn on (app)
-  WHERE app ISA OBJECT
+  WHERE app IsA OBJECT
     ELSE
       IF app IS NOT plural
-        THEN SAY illegal_parameter_on_sg OF my_game.
-        ELSE SAY illegal_parameter_on_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_on_sg.
+        ELSE SAY my_game:illegal_parameter_on_pl.
       END IF.
 
         turn_on = switch on (app).
@@ -8304,7 +8304,7 @@ SYNTAX turn_on = turn on (app)
 ADD TO EVERY OBJECT
   VERB turn_on
     CHECK my_game CAN turn_on
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
 
     DOES
       IF app IS NOT plural
@@ -8342,11 +8342,11 @@ END ADD TO.
 -- other meanings, e.g. 'turn page', which is incompatible with 'switch page'.
 
 SYNTAX turn_off = turn off (app)
-  WHERE app ISA OBJECT
+  WHERE app IsA OBJECT
     ELSE
       IF app IS NOT plural
-        THEN SAY illegal_parameter_off_sg OF my_game.
-        ELSE SAY illegal_parameter_off_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_off_sg.
+        ELSE SAY my_game:illegal_parameter_off_pl.
       END IF.
 
         turn_off = switch off (app).
@@ -8359,7 +8359,7 @@ SYNTAX turn_off = turn off (app)
 ADD TO EVERY OBJECT
   VERB turn_off
     CHECK my_game CAN turn_off
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     DOES
       IF app IS NOT plural
         THEN "That's not"
@@ -8385,9 +8385,9 @@ SYNTAX undress = undress.
 
 VERB undress
   CHECK my_game CAN undress
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   AND CURRENT LOCATION IS lit
-    ELSE SAY check_current_loc_lit OF my_game.
+    ELSE SAY my_game:check_current_loc_lit.
 
   DOES
     "You don't feel like undressing is a good idea right now."
@@ -8419,46 +8419,46 @@ END VERB undress.
 
 
 SYNTAX unlock = unlock (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
 
 ADD TO EVERY OBJECT
   VERB unlock
     CHECK my_game CAN unlock
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS lockable
           ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_suitable_sg OF my_game.
-          ELSE SAY check_obj_suitable_pl OF my_game.
+          THEN SAY my_game:check_obj_suitable_sg.
+          ELSE SAY my_game:check_obj_suitable_pl.
         END IF.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
     AND obj IS locked
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_locked_sg OF my_game.
-          ELSE SAY check_obj_locked_pl OF my_game.
+          THEN SAY my_game:check_obj_locked_sg.
+          ELSE SAY my_game:check_obj_locked_pl.
         END IF.
 
     DOES
@@ -8484,62 +8484,62 @@ END ADD TO.
 
 
 SYNTAX unlock_with = unlock (obj) 'with' (key)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
-  AND key ISA OBJECT
-    ELSE SAY illegal_parameter_with_sg OF my_game. "."
+  AND key IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_with_sg. "."
 
 
 ADD TO EVERY OBJECT
   VERB unlock_with
     WHEN obj
       CHECK my_game CAN unlock_with
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj IS lockable
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_suitable_sg OF my_game.
-            ELSE SAY check_obj_suitable_pl OF my_game.
+            THEN SAY my_game:check_obj_suitable_sg.
+            ELSE SAY my_game:check_obj_suitable_pl.
           END IF.
       AND key IS examinable
         ELSE
           IF key IS NOT plural
-            THEN SAY check_obj2_suitable_with_sg OF my_game.
-            ELSE SAY check_obj2_suitable_with_pl OF my_game.
+            THEN SAY my_game:check_obj2_suitable_with_sg.
+            ELSE SAY my_game:check_obj2_suitable_with_pl.
           END IF.
       AND key IN hero
-        ELSE SAY check_obj2_in_hero OF my_game.
+        ELSE SAY my_game:check_obj2_in_hero.
       AND obj <> key
-        ELSE SAY check_obj_not_obj2_with OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_with.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
       AND obj IS locked
         ELSE
           IF obj IS NOT plural
-            THEN SAY check_obj_locked_sg OF my_game.
-            ELSE SAY check_obj_locked_pl OF my_game.
+            THEN SAY my_game:check_obj_locked_sg.
+            ELSE SAY my_game:check_obj_locked_pl.
           END IF.
       AND key = matching_key OF obj
-        ELSE SAY check_door_matching_key OF my_game.
+        ELSE SAY my_game:check_door_matching_key.
 
     DOES
       MAKE obj NOT locked.
@@ -8560,15 +8560,15 @@ END ADD TO.
 
 
 SYNTAX 'use' = 'use' (obj)
-  WHERE obj ISA OBJECT
-    ELSE SAY illegal_parameter_obj OF my_game.
+  WHERE obj IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_obj.
 
 
 
 ADD TO EVERY OBJECT
   VERB 'use'
     CHECK my_game CAN 'use'
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
 
     DOES
       "Please be more specific. How do you intend to use"
@@ -8592,19 +8592,19 @@ END ADD TO.
 
 
 SYNTAX use_with = 'use' (obj) 'with' (instr)
-  WHERE obj ISA OBJECT
-    ELSE SAY illegal_parameter_obj OF my_game.
-  AND instr ISA OBJECT
-    ELSE SAY illegal_parameter_obj OF my_game.
+  WHERE obj IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_obj.
+  AND instr IsA OBJECT
+    ELSE SAY my_game:illegal_parameter_obj.
 
 
 ADD TO EVERY OBJECT
   VERB use_with
     WHEN obj
       CHECK my_game CAN use_with
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj <> instr
-        ELSE SAY check_obj_not_obj2_with OF my_game.
+        ELSE SAY my_game:check_obj_not_obj2_with.
 
     DOES
       "Please be more specific. How do you intend to use them together?"
@@ -8630,7 +8630,7 @@ SYNTAX 'wait' = 'wait'.
 
 VERB 'wait'
   CHECK my_game CAN 'wait'
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     "Time passes..."
 END VERB 'wait'.
@@ -8648,11 +8648,11 @@ END VERB 'wait'.
 
 
 SYNTAX wear = wear (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_sg OF my_game.
-        ELSE SAY illegal_parameter_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_sg.
+        ELSE SAY my_game:illegal_parameter_pl.
       END IF.
 
          wear = put on (obj).
@@ -8663,24 +8663,24 @@ SYNTAX wear = wear (obj)
 ADD TO EVERY OBJECT
   VERB wear
     CHECK my_game CAN wear
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj IS takeable
-      ELSE SAY check_obj_takeable OF my_game.
+      ELSE SAY my_game:check_obj_takeable.
     AND CURRENT LOCATION IS lit
-      ELSE SAY check_current_loc_lit OF my_game.
+      ELSE SAY my_game:check_current_loc_lit.
     AND obj IS reachable AND obj IS NOT distant
       ELSE
         IF obj IS NOT reachable
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_reachable_sg OF my_game.
-              ELSE SAY check_obj_reachable_pl OF my_game.
+              THEN SAY my_game:check_obj_reachable_sg.
+              ELSE SAY my_game:check_obj_reachable_pl.
             END IF.
         ELSIF obj IS distant
           THEN
             IF obj IS NOT plural
-              THEN SAY check_obj_not_distant_sg OF my_game.
-              ELSE SAY check_obj_not_distant_pl OF my_game.
+              THEN SAY my_game:check_obj_not_distant_sg.
+              ELSE SAY my_game:check_obj_not_distant_pl.
             END IF.
         END IF.
 
@@ -8705,10 +8705,10 @@ END ADD TO.
 
 
 SYNTAX write = write (txt) on (obj)
-  WHERE txt ISA STRING
-    ELSE SAY illegal_parameter_string OF my_game.
-  AND obj ISA OBJECT
-    ELSE SAY illegal_parameter2_there OF my_game.
+  WHERE txt IsA STRING
+    ELSE SAY my_game:illegal_parameter_string.
+  AND obj IsA OBJECT
+    ELSE SAY my_game:illegal_parameter2_there.
 
        write = write (txt) 'in' (obj).
 
@@ -8717,24 +8717,24 @@ ADD TO EVERY OBJECT
   VERB write
     WHEN obj
       CHECK my_game CAN write
-        ELSE SAY restricted_response OF my_game.
+        ELSE SAY my_game:restricted_response.
       AND obj IS writeable
-        ELSE SAY check_obj_writeable OF my_game.
+        ELSE SAY my_game:check_obj_writeable.
       AND CURRENT LOCATION IS lit
-        ELSE SAY check_current_loc_lit OF my_game.
+        ELSE SAY my_game:check_current_loc_lit.
       AND obj IS reachable AND obj IS NOT distant
         ELSE
           IF obj IS NOT reachable
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_reachable_sg OF my_game.
-                ELSE SAY check_obj_reachable_pl OF my_game.
+                THEN SAY my_game:check_obj_reachable_sg.
+                ELSE SAY my_game:check_obj_reachable_pl.
               END IF.
           ELSIF obj IS distant
             THEN
               IF obj IS NOT plural
-                THEN SAY check_obj_not_distant_sg OF my_game.
-                ELSE SAY check_obj_not_distant_pl OF my_game.
+                THEN SAY my_game:check_obj_not_distant_sg.
+                ELSE SAY my_game:check_obj_not_distant_pl.
               END IF.
           END IF.
 
@@ -8761,7 +8761,7 @@ END ADD TO.
 
 
 SYNTAX write_error1 = write on (obj)
-  WHERE obj ISA OBJECT
+  WHERE obj IsA OBJECT
     ELSE "Please use the formulation WRITE ""TEXT"" ON (IN) OBJECT
           to write something."
 
@@ -8783,7 +8783,7 @@ END VERB write_error2.
 
 
 SYNTAX write_error3 = write (txt)
-  WHERE txt ISA STRING
+  WHERE txt IsA STRING
     ELSE "Please use the formulation WRITE ""TEXT"" ON (IN) OBJECT
           to write something."
 
@@ -8838,7 +8838,7 @@ SYNTAX what_am_i = what am i.
 
 VERB what_am_i
   CHECK my_game CAN what_am_i
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     "Maybe examining yourself might help."
 END VERB what_am_i.
@@ -8855,11 +8855,11 @@ END VERB what_am_i.
 
 
 SYNTAX what_is = what 'is' (obj)!
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_what_sg OF my_game.
-        ELSE SAY illegal_parameter_what_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_what_sg.
+        ELSE SAY my_game:illegal_parameter_what_pl.
       END IF.
 
   what_is = what 'are' (obj)!.
@@ -8868,7 +8868,7 @@ SYNTAX what_is = what 'is' (obj)!
 ADD TO EVERY THING
   VERB what_is
     CHECK my_game CAN what_is
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     DOES
       "You'll have to find it out yourself."
   END VERB what_is.
@@ -8890,7 +8890,7 @@ SYNTAX where_am_i = 'where' am i.
 
 VERB where_am_i
   CHECK my_game CAN where_am_i
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     LOOK.
 END VERB where_am_i.
@@ -8907,11 +8907,11 @@ END VERB where_am_i.
 
 
 SYNTAX where_is = 'where' 'is' (obj)!
-  WHERE obj ISA THING
+  WHERE obj IsA THING
     ELSE
       IF obj IS NOT plural
-        THEN SAY illegal_parameter_what_sg OF my_game.
-        ELSE SAY illegal_parameter_what_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_what_sg.
+        ELSE SAY my_game:illegal_parameter_what_pl.
       END IF.
 
   where_is = 'where' 'are' (obj)!.
@@ -8920,12 +8920,12 @@ SYNTAX where_is = 'where' 'is' (obj)!
 ADD TO EVERY THING
   VERB where_is
     CHECK my_game CAN where_is
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     AND obj NOT AT hero
       ELSE
         IF obj IS NOT plural
-          THEN SAY check_obj_not_at_hero_sg OF my_game.
-          ELSE SAY check_obj_not_at_hero_pl OF my_game.
+          THEN SAY my_game:check_obj_not_at_hero_sg.
+          ELSE SAY my_game:check_obj_not_at_hero_pl.
         END IF.
     DOES
       "You'll have to find it out yourself."
@@ -8948,7 +8948,7 @@ SYNTAX who_am_i = who am i.
 
 VERB who_am_i
   CHECK my_game CAN who_am_i
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES
     "Maybe examining yourself might help."
 END VERB who_am_i.
@@ -8965,11 +8965,11 @@ END VERB who_am_i.
 
 
 SYNTAX who_is = who 'is' (act)!
-  WHERE act ISA ACTOR
+  WHERE act IsA ACTOR
     ELSE
       IF act IS NOT plural
-        THEN SAY illegal_parameter_who_sg OF my_game.
-        ELSE SAY illegal_parameter_who_pl OF my_game.
+        THEN SAY my_game:illegal_parameter_who_sg.
+        ELSE SAY my_game:illegal_parameter_who_pl.
       END IF.
 
         who_is = who 'are' (act)!.
@@ -8978,7 +8978,7 @@ SYNTAX who_is = who 'is' (act)!
 ADD TO EVERY ACTOR
   VERB who_is
     CHECK my_game CAN who_is
-      ELSE SAY restricted_response OF my_game.
+      ELSE SAY my_game:restricted_response.
     DOES
       "You'll have to find it out yourself."
   END VERB who_is.
@@ -9017,7 +9017,7 @@ SYNTAX yes = yes.
 
 VERB yes
   CHECK my_game CAN yes
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES "Really?"
 END VERB yes.
 
@@ -9036,7 +9036,7 @@ SYNTAX 'no' = 'no'.
 
 VERB 'no'
   CHECK my_game CAN 'no'
-    ELSE SAY restricted_response OF my_game.
+    ELSE SAY my_game:restricted_response.
   DOES "Really?"
 END VERB 'no'.
 
