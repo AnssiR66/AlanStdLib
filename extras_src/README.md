@@ -70,6 +70,8 @@ For every source documentation folder `<foldername>` (defined in `$foldersList`)
 4. __Build HTML Docs__ — Convert every `*.asciidoc` document inside the source folder into a standalone HTML file in the destination folder `../extras/<foldername>/`.
 5. __Sanitize Alan Sources__ — Take every Alan source adventure whose name doesn't start with underscore (i.e. `$srcDir/[^_]*.alan`), strip away all [AsciiDoc region-tag comment lines], and copy it to the destination folder. In other words, underscored adventures are for internal documentation use _only_, while the others are (_also_) real examples for end users.
 
+For more info, see the _[Dynamic Examples]_ article on the ALAN Docs Wiki.
+
 ## Automation Benefits
 
 Being able to use tagged regions comments in Alan sources and transcripts facilitates selectively including parts of the code and transcripts, without having to worry about if line positions shift around in them.
@@ -77,6 +79,8 @@ Being able to use tagged regions comments in Alan sources and transcripts facili
 The automation toolchain help maintaining always up to date the code and transcript shown in the documentation, for it will always mirror the actual code found in the examples sources, and the output of a real game session, since the transcripts are regenerated from a freshly compiled adventure each time.
 
 So, even if the Library code changes, these changes will always be reflected into the documentation, without manual efforts. This is definitely worth the effort of setting up a slightly complex toolchain.
+
+We call this technique "[Dynamic Examples]".
 
 # System Requirements
 
@@ -134,5 +138,9 @@ Once Ruby is installed on your system, open a shell and type:
 
 [AsciiDoc region-tag comment lines]: https://asciidoctor.org/docs/user-manual/#by-tagged-regions "Read about tagged regions in Asciidoctor documentation"
 [predefined Asciidoctor attribute for replacement]: https://asciidoctor.org/docs/user-manual/#charref-attributes  "Read Asciidoctor documentation on 'Predefined Attributes for Character Replacements'"
+
+<!-- Wiki -->
+
+[Dynamic Examples]: https://github.com/alan-if/alan-docs/wiki/Dynamic-Examples "Wiki Page: Dynamic Examples"
 
 <!-- EOF -->
