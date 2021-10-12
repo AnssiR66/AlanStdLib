@@ -1,9 +1,9 @@
-Import 'library.i'.
+ï»¿Import 'library.i'.
 The my_game IsA definition_block
 End the.
 
 --------------------------------------------------------------------------------
--- §8.2. SITE: Implementing an outdoor location
+-- Â§8.2. SITE: Implementing an outdoor location
 --------------------------------------------------------------------------------
 -- tag::outdoor-example[]
 -- tag::change-descs[]
@@ -19,7 +19,7 @@ End the.
 -- end::change-descs[]
 
 --------------------------------------------------------------------------------
--- §8.2. SITE: Changing descriptions of site-objects mid-game
+-- Â§8.2. SITE: Changing descriptions of site-objects mid-game
 --------------------------------------------------------------------------------
 -- tag::change-descs[]
 Event nightfall

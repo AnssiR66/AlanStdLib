@@ -4,7 +4,7 @@ Meta Verbs Tests
 Testing out-of-game commands (meta verbs). 
 Version 1. 
 (C) 2020 by Tristano Ajmone. 
-Programmed with the ALAN Interactive Fiction Language v3.0beta7. 
+Programmed with the ALAN Interactive Fiction Language v3.0beta8. 
 Standard Library v2.2.0. 
 All rights reserved.
 
@@ -30,7 +30,7 @@ NORTH of the lab is a restroom.
 Hanging high on the wall there is a scoreboard. There is an orange, an avocado, a 
 banana, a fig and an apple here. 
 
-/// TICK (turn N° 1) ///
+/// TICK (turn NÂ° 1) ///
 
 > look
 Alan Library Test Laboratory
@@ -39,7 +39,7 @@ NORTH of the lab is a restroom.
 Hanging high on the wall there is a scoreboard. There is an orange, an avocado, a 
 banana, a fig and an apple here. 
 
-/// TICK (turn N° 2) ///
+/// TICK (turn NÂ° 2) ///
 
 > ; ==============================================================================
 > ; TICKS/TURNS TRACKING
@@ -52,7 +52,7 @@ banana, a fig and an apple here.
 > ; Now that sending and empty command line counts a turn:
 > 
 
-/// TICK (turn N° 3) ///
+/// TICK (turn NÂ° 3) ///
 
 > ; ----------------------
 > ; WRONG COMMANDS & TICKS
@@ -115,7 +115,7 @@ You have scored 0 points out of 670.
 > examine the scoreboard
 The scoreboard displays 0 points. 
 
-/// TICK (turn N° 4) ///
+/// TICK (turn NÂ° 4) ///
 
 > ; ------------------------------------------------------------------------------
 > ; TEST Notify Commands
@@ -130,7 +130,7 @@ You eat all of the avocado.
 
 (You can use the NOTIFY command to disable score change messages.) 
 
-/// TICK (turn N° 5) ///
+/// TICK (turn NÂ° 5) ///
 
 > ; Now the instructions shouldn't appear:
 > eat the orange
@@ -139,7 +139,7 @@ You eat all of the orange.
 
 (Your score has just gone up by 1 point.) 
 
-/// TICK (turn N° 6) ///
+/// TICK (turn NÂ° 6) ///
 
 > ; --------------------------
 > ; DISABLE SCORE NOTIFICATION
@@ -152,12 +152,12 @@ command again.)
 (taking the apple first)
 You eat all of the apple. 
 
-/// TICK (turn N° 7) ///
+/// TICK (turn NÂ° 7) ///
 
 > examine the scoreboard
 The scoreboard displays 668 points. 
 
-/// TICK (turn N° 8) ///
+/// TICK (turn NÂ° 8) ///
 
 > ; -------------------------
 > ; ENABLE SCORE NOTIFICATION
@@ -169,7 +169,7 @@ again.)
 > examine the banana
 Sometimes a banana is just a banana. 
 
-/// TICK (turn N° 9) ///
+/// TICK (turn NÂ° 9) ///
 
 > eat it
 (taking the banana first)
@@ -177,12 +177,12 @@ You eat all of the banana.
 
 (Your score has just gone up by 1 point.) 
 
-/// TICK (turn N° 10) ///
+/// TICK (turn NÂ° 10) ///
 
 > examine the scoreboard
 The scoreboard displays 669 points. 
 
-/// TICK (turn N° 11) ///
+/// TICK (turn NÂ° 11) ///
 
 > ; -------------------------
 > ; TOGGLE SCORE NOTIFICATION
@@ -195,12 +195,12 @@ command again.)
 (taking the fig first)
 You eat all of the fig. 
 
-/// TICK (turn N° 12) ///
+/// TICK (turn NÂ° 12) ///
 
 > examine the scoreboard
 The scoreboard displays 670 points. 
 
-/// TICK (turn N° 13) ///
+/// TICK (turn NÂ° 13) ///
 
 > notify
 Score notification is now enabled. (You can turn it off using the NOTIFY command 
@@ -259,12 +259,12 @@ The lab is shrouded in the hum of high-tech hardware processing the StdLib.
 NORTH of the lab is a restroom.
 Hanging high on the wall there is a scoreboard. 
 
-/// TICK (turn N° 14) ///
+/// TICK (turn NÂ° 14) ///
 
 > inventory
 You are empty-handed. 
 
-/// TICK (turn N° 15) ///
+/// TICK (turn NÂ° 15) ///
 
 > script off
 Transcripting turned off.
@@ -288,12 +288,12 @@ NORTH of the lab is a restroom.
 Hanging high on the wall there is a scoreboard. There is an orange, an avocado, a 
 banana, a fig and an apple here. 
 
-/// TICK (turn N° 4) ///
+/// TICK (turn NÂ° 4) ///
 
 This apple is so tempting ... A small sticker mentions that it was picked in the
 Gan Eden. 
 
-/// TICK (turn N° 5) ///
+/// TICK (turn NÂ° 5) ///
 
 > ; ==============================================================================
 > ; RESTART THE GAME
@@ -307,7 +307,7 @@ You eat all of the apple.
 
 (You can use the NOTIFY command to disable score change messages.) 
 
-/// TICK (turn N° 6) ///
+/// TICK (turn NÂ° 6) ///
 
 > restart
 
@@ -318,7 +318,7 @@ Meta Verbs Tests
 Testing out-of-game commands (meta verbs). 
 Version 1. 
 (C) 2020 by Tristano Ajmone. 
-Programmed with the ALAN Interactive Fiction Language v3.0beta7. 
+Programmed with the ALAN Interactive Fiction Language v3.0beta8. 
 Standard Library v2.2.0. 
 All rights reserved.
 
@@ -349,7 +349,7 @@ banana, a fig and an apple here.
 This apple is so tempting ... A small sticker mentions that it was picked in the
 Gan Eden. 
 
-/// TICK (turn N° 1) ///
+/// TICK (turn NÂ° 1) ///
 
 > ; ------------------------------------------------------------------------------
 > ; TEST 'SAVE_MISSING': restore a non-existing file
@@ -390,7 +390,7 @@ Meta Verbs Tests
 Testing out-of-game commands (meta verbs). 
 Version 1. 
 (C) 2020 by Tristano Ajmone. 
-Programmed with the ALAN Interactive Fiction Language v3.0beta7. 
+Programmed with the ALAN Interactive Fiction Language v3.0beta8. 
 Standard Library v2.2.0. 
 All rights reserved.
 

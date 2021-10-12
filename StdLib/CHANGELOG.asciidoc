@@ -52,6 +52,9 @@ The new GitHub repository is now the official channel for the StdLib development
 
 ** link:https://github.com/AnssiR66/AlanStdLib[github.com/AnssiR66/AlanStdLib^, title="Visit the Standard Library repository on GitHub"]
 
+* *[red]#UTF-8 Encoding#* --
+ALAN 3.0beta8 introduced support for UTF-8 encoded ALAN sources and scripts, so the StdLib now is encoded in UTF-8 (with BOM).
+
 * *[red]#AsciiDoc Documentation#* --
 All library documentation has been ported to AsciiDoc, a powerful syntax for managing documentation in text-based source files which can be version controlled via Git, thus greatly simplifying collaborative editing on the documentation.
 AsciiDoc is a format-agnostic syntax, meaning that the same source documents can now be converted (i.e. _built_) to numerous ouput formats, including HTML, PDF, and many others.

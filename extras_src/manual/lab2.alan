@@ -1,4 +1,4 @@
-Import 'library.i'.
+ï»¿Import 'library.i'.
 The my_game IsA definition_block
 End the.
 
@@ -8,11 +8,11 @@ End the.
 
 -- =============================================================================
 -- This room location is IMPLICITLY used in the following examples:
---    * §6.1.2. DEVICE
+--    * Â§6.1.2. DEVICE
 The lab IsA room.
 End the.
 --------------------------------------------------------------------------------
--- §6.1.2. DEVICE
+-- Â§6.1.2. DEVICE
 --------------------------------------------------------------------------------
 -- tag::thingummyjig[]
 The thingummyjig IsA device at lab
@@ -20,7 +20,7 @@ The thingummyjig IsA device at lab
 End the.
 -- end::thingummyjig[]
 --------------------------------------------------------------------------------
--- §6.1.5. LIGHTSOURCE
+-- Â§6.1.5. LIGHTSOURCE
 --------------------------------------------------------------------------------
 -- tag::lightsource_lamp[]
 The lamp IsA lightsource at lab

@@ -184,9 +184,9 @@ So, we'll need to implement:
 Let's start by implementing the bedroom.
 
 [source,alan,role=tutorial]
--------------------------------------------------------
-include::{adv-source}[encoding=iso-8859-1,tag=step_one]
--------------------------------------------------------
+-----------------------------------
+include::{adv-source}[tag=step_one]
+-----------------------------------
 
 // ** UNIFORM **
 
@@ -197,9 +197,9 @@ Also, we'll treat the uniform as a single clothing item, for the purpose here is
 When the game starts, the Hero will be in his bedroom, naked, so we'll just place the uniform lying around in the bedroom.
 
 [source,alan,role=tutorial]
-------------------------------------------------------
-include::{adv-source}[encoding=iso-8859-1,tag=uniform]
-------------------------------------------------------
+----------------------------------
+include::{adv-source}[tag=uniform]
+----------------------------------
 
 // ** SHOWER **
 
@@ -207,16 +207,16 @@ Now it's time to implement the shower.
 We'll create it as an object and add to it the `take` verb.
 
 [source,alan,role=tutorial]
------------------------------------------------------
-include::{adv-source}[encoding=iso-8859-1,tag=shower]
------------------------------------------------------
+---------------------------------
+include::{adv-source}[tag=shower]
+---------------------------------
 
 Its implementation is quite straightforward, so here we'll only comment on the `Check` that prevents taking a shower while carrying/wearing the uniform:
 
 [source,alan,role=tutorial,indent=0]
------------------------------------------------------------
-include::{adv-source}[encoding=iso-8859-1,tag=shower_check]
------------------------------------------------------------
+---------------------------------------
+include::{adv-source}[tag=shower_check]
+---------------------------------------
 
 The actual `Check` only needs to verify that the uniform is `not in hero`, for the action is to be prevented regarless of wether the clothing item is being carried or worn -- the whole idea is that it shouldn't get wet.
 If the check condition is violated, we then resort to an `If` statement in order to produce an appropriate response depending on wether the uniform `is worn` or just carried (`else`) by the Hero.
@@ -225,15 +225,15 @@ If the check condition is violated, we then resort to an `If` statement in order
 Let's compile our draft adventure to test that it's behaving as expected.
 
 [example,role="gametranscript"]
-=============================================
-include::./{adv-transc1}[encoding=iso-8859-1]
-=============================================
+==========================
+include::./{adv-transc1}[]
+==========================
 
 ////
 *VERBATIM TRANSCRIPT* -- We could also include the unsanitized version of the game transcript, in case it relied on monospace fonts (eg. debgugging):
 
 .............................................................
-include::./clothing-01-simple__play1.a3t[encoding=iso-8859-1]
+include::./clothing-01-simple__play1.a3t[]
 .............................................................
 
 But we'd need to give it some CSS styling though.
@@ -247,16 +247,16 @@ Everything works fine with the shower, so let's carry on and implement the bedro
 Edit the `bedroom` code as follows:
 
 [source,alan,role=tutorial]
------------------------------------------------------------
-include::{adv-source}[encoding=iso-8859-1,tag=bedroom_exit]
------------------------------------------------------------
+---------------------------------------
+include::{adv-source}[tag=bedroom_exit]
+---------------------------------------
 
 Here we used `Check uniform directly in hero and uniform is worn` to make sure the Hero doesn't leave the flat without wearing his uniform:
 
 [source,alan,role=tutorial,indent=0]
----------------------------------------------------------
-include::{adv-source}[encoding=iso-8859-1,tag=exit_check]
----------------------------------------------------------
+-------------------------------------
+include::{adv-source}[tag=exit_check]
+-------------------------------------
 
 This being the logical succession for checking if an actor is wearing a specific clothing item:
 
@@ -276,9 +276,9 @@ Acutally, it would have been sufficient to just `Check uniform is worn`, since t
 Let's compile the final adventure to test that everything is working as expected.
 
 [example,role="gametranscript"]
-=============================================
-include::./{adv-transc2}[encoding=iso-8859-1]
-=============================================
+==========================
+include::./{adv-transc2}[]
+==========================
 
 Here ends our first tutorial on how to implement very simple clothing.
 
@@ -297,9 +297,9 @@ We'll be focusing just on the various types of clothes, so to keep things simple
 Let's start by laying down the basic adventure structure, and create a bedroom location:
 
 [source,alan,role=tutorial]
--------------------------------------------------------
-include::{adv-source}[encoding=iso-8859-1,tag=step_one]
--------------------------------------------------------
+-----------------------------------
+include::{adv-source}[tag=step_one]
+-----------------------------------
 
 The next step is about deciding how to asign the various layers to clothes types; the number of layers involved depends on which clothes we're going to create in the actual game.
 The best approach is to do some initial brainstorming on the various types of clothes that we'd like to use.

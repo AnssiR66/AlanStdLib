@@ -9,17 +9,27 @@ root = true
 #                               ALAN RELATED FILES
 # ==============================================================================
 
-# Common settings for non-generated Alan files
-# ============================================
-; Skip encoding validation because of EClint's buggy support of this feature,
-; leading to false positive error reports. (See #73)
-
+# ALAN sources and solution files (edited):
 [*.{alan,i,a3s}]
+charset = utf-8-bom
+end_of_line = unset
 indent_style = space
 indent_size = unset
-charset = unset
 trim_trailing_whitespace = true
 insert_final_newline = true
+
+# ALAN transcripts (generated:
+[*.a3t]
+charset = utf-8
+end_of_line = unset
+indent_style = space
+indent_size = unset
+trim_trailing_whitespace = unset
+insert_final_newline = unset
+; exceptions:
+[tests/misc/meta-verbs.a3t]
+charset = utf-8-bom
+
 
 # ==============================================================================
 #                             ASCIIDOCTOR TOOLCHAIN
@@ -39,6 +49,17 @@ insert_final_newline = true
 # ==============================================================================
 #                                GENERIC SETTINGS
 # ==============================================================================
+
+## Ruby
+#######
+[{*.rb,*.gemspec,*.rake,Rakefile,rakefile}]
+indent_size = 2
+indent_style = space
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
 
 ## Repository Configurations
 ############################

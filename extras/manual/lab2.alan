@@ -1,4 +1,4 @@
-Import 'library.i'.
+ï»¿Import 'library.i'.
 The my_game IsA definition_block
 End the.
 
@@ -8,17 +8,17 @@ End the.
 
 -- =============================================================================
 -- This room location is IMPLICITLY used in the following examples:
---    * §6.1.2. DEVICE
+--    * Â§6.1.2. DEVICE
 The lab IsA room.
 End the.
 --------------------------------------------------------------------------------
--- §6.1.2. DEVICE
+-- Â§6.1.2. DEVICE
 --------------------------------------------------------------------------------
 The thingummyjig IsA device at lab
   Has ex "It's full of knobs and buttons.".
 End the.
 --------------------------------------------------------------------------------
--- §6.1.5. LIGHTSOURCE
+-- Â§6.1.5. LIGHTSOURCE
 --------------------------------------------------------------------------------
 The lamp IsA lightsource at lab
   Is not natural.

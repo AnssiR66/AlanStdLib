@@ -1,4 +1,4 @@
---==============================================================================
+﻿--==============================================================================
 -- "Emporium Giorgio Alani" by Tristano Ajmone, 2020.
 --==============================================================================
 -- A small adventure for testing the StdLib's clothing functionality and the
@@ -21,7 +21,7 @@ THE my_game IsA DEFINITION_BLOCK
   HAS author   "Tristano Ajmone".
   HAS year     2020.
   HAS version  "1".
-  HAS AlanV    "v3.0beta7".
+  HAS AlanV    "v3.0beta8".
 
 END THE.
 

@@ -1,7 +1,7 @@
--- ALAN Standard Library v2.2.0                                    ALAN 3.0beta7
+Ôªø-- ALAN Standard Library v2.2.0                                    ALAN 3.0beta8
 --==============================================================================
 
--- "The Living Room" by Anssi R‰is‰nen, 2020.
+-- "The Living Room" by Anssi R√§is√§nen, 2020.
 
 -- An example of how to override the default descriptions of a ROOM's floor,
 -- walls and ceiling objects, and further change them mid-game as a result of
@@ -12,7 +12,7 @@ Import 'library.i'.
 
 The my_game IsA definition_block
   Has title  "The Living Room".
-      author "Anssi R‰is‰nen".
+      author "Anssi R√§is√§nen".
 End the.
 --------------------------------------------------------------------------------
 -- tag::livingroom[]

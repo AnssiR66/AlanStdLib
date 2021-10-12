@@ -4,18 +4,18 @@ Liquid Tests
 Testing liquids behavior. 
 Version 1. 
 (C) 2020 by Tristano Ajmone. 
-Programmed with the ALAN Interactive Fiction Language v3.0 beta7. 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta8. 
 Standard Library v2.2.0. 
 All rights reserved. 
 
 Welcome to the ALAN StdLib's "Liquids Test Laboratory," a private
-research facility founded by Anssi Räisänen with funds from the
+research facility founded by Anssi RÃ¤isÃ¤nen with funds from the
 "International ALAN Foundation" and from IF-tycoon Thomas Nilefalk.
 
 
 Liquids Test Laboratory
 There is a table here. On the table you see a can, a bottle and a jar. 
-Anssi Räisänen is here, waiting to assist you.
+Anssi RÃ¤isÃ¤nen is here, waiting to assist you.
 
 > ; ******************************************************************************
 > ; *                                                                            *

@@ -1,7 +1,7 @@
--- ALAN Standard Library v2.2.0                                    ALAN 3.0beta7
+Ôªø-- ALAN Standard Library v2.2.0                                    ALAN 3.0beta8
 --==============================================================================
 
--- "The Garden 2" by Anssi R‰is‰nen, 2020.
+-- "The Garden 2" by Anssi R√§is√§nen, 2020.
 
 -- An example of how to to customize an object's description via its `ex`
 -- attribute.
@@ -11,7 +11,7 @@ Import 'library.i'.
 
 The my_game IsA definition_block
   Has title  "The Garden 2".
-      author "Anssi R‰is‰nen".
+      author "Anssi R√§is√§nen".
 End the.
 --------------------------------------------------------------------------------
 The garden IsA site.

@@ -1,4 +1,4 @@
---==============================================================================
+Ôªø--==============================================================================
 -- "Liquid Tests" by Tristano Ajmone, 2020.
 --==============================================================================
 IMPORT 'library.i'. -- ALAN Standard Library v2.2.0
@@ -45,18 +45,18 @@ END THE.
 -- We'll need some NPCs to test dislocating objects possessed by actors.
 
 --------------------------------------------------------------------------------
--- Anssi R‰is‰nen
+-- Anssi R√§is√§nen
 --------------------------------------------------------------------------------
 -- Anssi will be providing insights into the tests by answering questions about
 -- the various game objects (ask_about topic).
 
 THE Anssi IsA male AT liqlab.
   NAME Anssi. NAME Ansi. -- (allow misspellings)
-  NAME Anssi R‰is‰nen.
+  NAME Anssi R√§is√§nen.
   NAME Anssi Raisanen.
   IS named.
-  DESCRIPTION "$nAnssi R‰is‰nen is here, waiting to assist you."
-  HAS ex "He's Anssi R‰is‰nen, the mastermind behind the ALAN Standard Library.".
+  DESCRIPTION "$nAnssi R√§is√§nen is here, waiting to assist you."
+  HAS ex "He's Anssi R√§is√§nen, the mastermind behind the ALAN Standard Library.".
   IS following.
 
   VERB ask
@@ -187,5 +187,5 @@ END THE.
 START At liqlab.
 DESCRIBE banner.
 "$pWelcome to the ALAN StdLib's ""Liquids Test Laboratory,"" a private research
- facility founded by Anssi R‰is‰nen with funds from the ""International ALAN
+ facility founded by Anssi R√§is√§nen with funds from the ""International ALAN
  Foundation"" and from IF-tycoon Thomas Nilefalk."

@@ -1,4 +1,4 @@
---------------------------------------------------------------------------------
+﻿--------------------------------------------------------------------------------
 -- A reimplementation of "short-example1.alan" without the Standard Library.
 
 -- In this version, though, the player wouldn't be able to examine him-/herself,

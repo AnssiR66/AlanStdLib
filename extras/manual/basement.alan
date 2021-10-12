@@ -1,7 +1,7 @@
--- ALAN Standard Library v2.2.0                                    ALAN 3.0beta7
+Ôªø-- ALAN Standard Library v2.2.0                                    ALAN 3.0beta8
 --==============================================================================
 
--- "The Basement" by Anssi R‰is‰nen, 2020.
+-- "The Basement" by Anssi R√§is√§nen, 2020.
 
 -- An example of how to implement a dark place using the `lit` attribute on
 -- ordinary locations, and add an external light switch by which the hero can
@@ -13,7 +13,7 @@ Import 'library.i'.
 
 The my_game IsA definition_block
   Has title  "The Basement".
-      author "Anssi R‰is‰nen".
+      author "Anssi R√§is√§nen".
 End the.
 --------------------------------------------------------------------------------
 The stairs_top IsA room

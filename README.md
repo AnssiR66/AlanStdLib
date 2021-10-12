@@ -1,8 +1,13 @@
-# ALAN Standard Library v2.2
+# ALAN Standard Library v2.2.0
 
 The Standard Library for [ALAN] Interactive Fiction Language.
 
 By [Anssi Räisänen], [Artistic License 2.0].
+
+> Required **Alan SDK**: [Alan v3.0 beta8][SDK] (or higher)
+
+[SDK]: https://www.alanif.se/download-alan-v3/development-kits/development-kits-3-0beta8 "Go to the download page of this specific Alan SDK release"
+
 
 -----
 
@@ -11,6 +16,12 @@ By [Anssi Räisänen], [Artistic License 2.0].
 <!-- MarkdownTOC autolink="true" bracket="round" autoanchor="false" lowercase="only_ascii" uri_encoding="true" levels="1,2,3" -->
 
 - [Project Contents](#project-contents)
+- [System Requirements](#system-requirements)
+    - [Alan SDK](#alan-sdk)
+    - [Ruby](#ruby)
+    - [Rake](#rake)
+- [Project Settings](#project-settings)
+    - [ALAN Sources and Scripts Encoding](#alan-sources-and-scripts-encoding)
 
 <!-- /MarkdownTOC -->
 
@@ -35,15 +46,102 @@ The idea is to provide ALAN authors with a clean StdLib distribution, without th
 
 Exclusion of files and folders from the generated Zip archives is controlled by the `export-ignore` rules defined inside the [`.gitattributes`][.gitattributes] file.
 
+# System Requirements
+
+In order to fully build this project you'll need the following tools:
+
+- __[Alan SDK](#alan-sdk)__ (command line)
+- __[Ruby 3](#ruby)__ — and the following Ruby gems:
+    + __[Rake](#rake)__
+    + __[Asciidoctor]__
+
+## Alan SDK
+
+To use the **Standard Library** in your adventures you'll need [Alan v3.0 beta8][SDK], or a later version.
+
+To contribute to this repository you'll need the exact version of the command line [Alan SDK]  (Software Development Kit) indicated in the repository and make sure that both the Alan compiler and the ARun interpreter binaries are reachable through the system PATH.
+
+> **NOTE** — We're working on an alternative solution that will delegate to Rake the task of downloading and updating the required SDK binaries (according to OS) and add them to a dedicated repository folder (ignore by Git) in order to make this project independent from any global SDK setup.
+> In the meantime, you'll need to setup the SDK binaries manually.
+
+## Ruby
+
+You'll need Ruby version 3.
+
+Windows users should use [RubyInstaller], which can also be installed as a [Chocolatey Ruby package] using the [Chocolatey GUI] package manager, which simplifies keeping it always up to date.
+
+## Rake
+
+Rake is now part of the official Ruby distribution, but in some Ruby versions (e.g. [Ruby for Windows]) Rake is included as a precompiled binary instead of a gem, so to ensure you're always using the latest Rake version you can install it as a gem via:
+
+    $ gem install rake
+
+Before installing it, Ruby will warn you that by installing Rake as a gem you'll be overriding the native Rake binary, just confirm and proceed — you can always roll back to using the native Rake binary by uninstalling the gem version, via:
+
+    $ gem uninstall rake
+
+
+# Project Settings
+
+Info on how to correctly setup your working environment to work with this repository.
+
+## ALAN Sources and Scripts Encoding
+
+In order to work correctly with the ALAN sources in this repository, their solution and transcript files, the following file extensions need to be opened with the correct encoding in your editor:
+
+|   ext.  |  encoding |                 file type                  |
+|---------|-----------|--------------------------------------------|
+| `.a3s`  | UTF-8 BOM | "solution" files (aka "commands scripts"). |
+| `.a3t`  | UTF-8     | game transcripts.                          |
+| `.alan` | UTF-8 BOM | ALAN source files.                         |
+| `.i`    | UTF-8 BOM | ALAN included source files.                |
+
+
+If your editor supports [EditorConfig] (either natively or via a third party plug-in), then it should automatically pick-up the project settings from our `.editoconfig` setting, so you won't need to do anything.
+In all other cases, ensure that your editors handles the above extensions with the correct encoding.
+
+The "`.a3s`" and "`.a3t`" file extensions are the new official extensions adopted by ARun for solution files and transcripts.
+The `.a3` segment in their suffix provides an intuitive association with Alan&nbsp;3, and at the same time makes these extensions unique.
+They were originally introduced to allow associating ALAN scripts to [ISO-8859-1] encoding without affecting common extensions like "`.log`" or "`.sol`", which are used in other contexts and associated to other encodings.
+
+Now that ALAN supports UTF-8 encoded sources and scripts, we've opted to adopt UTF-8 with BOM for all ALAN sources, in order to ensure that editors will correctly auto-detect their encoding (e.g. in case the editor associates these extensions primarily with ISO-8859-1 encoding).
+This means that you can still safely associate ALAN files to the ISO/Latin-1 encoding by default, in order to be able to work with old source adventures, yet also be able to autodetect UTF-8 encoded files thanks to the presence of a BOM (otherwise the editor has no way to determine the encoding when the files contain only ASCII characters).
+
+As for generated transcripts, we use UTF-8 (without BOM) encoding, since ARun won't add a BOM, and also because these are always auto-generated and not intended for editing.
+
+For more information on the introduction of the new "`.a3s`" and "`.a3t`" extension, see [alan-if/alan#2].
+
+See also the [Sublime Alan IF documentation] on how these extensions are implemented in the [Alan package] for Sublime Text, which adds syntax support for them along with some useful features.
 
 
 <!-----------------------------------------------------------------------------
                                REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
-[ALAN]: https://www.alanif.se/ "Visit ALAN website"
 
 [Artistic License 2.0]: ./StdLib/COPYING "View the full license file"
+
+[ISO-8859-1]: https://en.wikipedia.org/wiki/ISO/IEC_8859-1 "Read Wikipedia's page on ISO-8859-1"
+
+<!-- ALAN Links -->
+
+[ALAN]: https://www.alanif.se/ "Visit ALAN website"
+[Alan SDK]: https://www.alanif.se/download-alan-v3/development-kits "Go to the Alan SDK section of the Alan website"
+
+<!-- 3rd party tools -->
+
+[Asciidoctor]: https://github.com/asciidoctor/asciidoctor
+[Chocolatey GUI]: https://community.chocolatey.org/packages/ChocolateyGUI
+[Chocolatey Ruby package]: https://community.chocolatey.org/packages/ruby
+[EditorConfig]: https://editorconfig.org "Visit EditorConfig website"
+[Rake]: https://ruby.github.io/rake/ "Visit Rake website"
+[Ruby for Windows]: https://rubyinstaller.org
+[RubyInstaller]: https://rubyinstaller.org
+
+<!-- Sublime-Alan -->
+
+[Sublime Alan IF documentation]: https://github.com/tajmone/sublime-alan-if#transcipt-and-solution-syntaxes "Go to Sublime Alan IF documentation on Alan Solution and Transcript files"
+[Alan package]: https://github.com/tajmone/sublime-alan-if "Go to the Sublime Alan IF project, a package that adds Alan syntax support to Sublime Text"
 
 <!-- project folders -->
 
@@ -58,8 +156,13 @@ Exclusion of files and folders from the generated Zip archives is controlled by 
 
 [.gitattributes]: ./.gitattributes "View the contents of '.gitattributes'"
 
+<!-- Issues -->
+
+[alan-if/alan#2]: https://github.com/alan-if/alan/issues/2 "View Issue #2 at ALAN repository on GitHub"
+
 <!-- people -->
 
 [Anssi Räisänen]: https://github.com/AnssiR66 "View Anssi Räisänen's GitHub profile"
+
 
 <!-- EOF -->

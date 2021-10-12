@@ -1,4 +1,4 @@
-The bedroom IsA location
+﻿The bedroom IsA location
   Description "This is your bedroom.
                Your bathroom is to the north."
   Exit north to bathroom.

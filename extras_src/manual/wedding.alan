@@ -1,7 +1,7 @@
--- ALAN Standard Library v2.2.0                                    ALAN 3.0beta7
+Ôªø-- ALAN Standard Library v2.2.0                                    ALAN 3.0beta8
 --==============================================================================
 
--- "The Wedding" by Anssi R‰is‰nen and Tristano Ajmone, 2020.
+-- "The Wedding" by Anssi R√§is√§nen and Tristano Ajmone, 2020.
 
 -- An example of how to implement a game in which the hero and another NPC are
 -- both wearing tuxedos.
@@ -11,7 +11,7 @@ Import 'library.i'.
 
 The my_game IsA definition_block
   Has title  "The Wedding".
-      author "Anssi R‰is‰nen and Tristano Ajmone".
+      author "Anssi R√§is√§nen and Tristano Ajmone".
 End the.
 --------------------------------------------------------------------------------
 The hero IsA actor

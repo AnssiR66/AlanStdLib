@@ -1,4 +1,4 @@
--- mygame_import.i
+﻿-- mygame_import.i
 
 -- An auxiliary game source file for ALAN Standard Library v2.1.
 

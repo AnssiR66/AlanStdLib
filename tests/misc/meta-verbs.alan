@@ -1,4 +1,4 @@
---==============================================================================
+﻿--==============================================================================
 -- "Meta Verbs Tests" by Tristano Ajmone, 2020.
 --==============================================================================
 
@@ -24,7 +24,7 @@ THE my_game IsA DEFINITION_BLOCK
   HAS author   "Tristano Ajmone".
   HAS year     2020.
   HAS version  "1".
-  HAS AlanV    "v3.0beta7".
+  HAS AlanV    "v3.0beta8".
 
 END THE.
 
@@ -184,7 +184,7 @@ ADD TO EVERY DEFINITION_BLOCK
 END ADD.
 
 EVENT ticker
-  "$p/// TICK (turn N�" SAY my_game:cnt. "$$) ///"
+  "$p/// TICK (turn N°" SAY my_game:cnt. "$$) ///"
   SET my_game:cnt TO my_game:cnt +1.
   SCHEDULE ticker AT hero AFTER 1.
 END EVENT.

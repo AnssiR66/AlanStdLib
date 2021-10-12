@@ -1,5 +1,5 @@
-; ------------------------------------------------------------------------------
-; ง8.2.2. DARK_LOCATION -> Basic Usage Example
+๏ปฟ; ------------------------------------------------------------------------------
+; ยง8.2.2. DARK_LOCATION -> Basic Usage Example
 ; ------------------------------------------------------------------------------
 ; tag::dark-location-example1[]
 down
@@ -8,7 +8,7 @@ inventory
 x flashlight
 ; end::dark-location-example1[]
 ; ------------------------------------------------------------------------------
-; ง8.2.2. DARK_LOCATION -> Basic Usage Example -> Light source goes on
+; ยง8.2.2. DARK_LOCATION -> Basic Usage Example -> Light source goes on
 ; ------------------------------------------------------------------------------
 ; tag::dark-location-example2[]
 switch on flashlight
@@ -16,14 +16,14 @@ look
 x flashlight
 ; end::dark-location-example2[]
 ; ------------------------------------------------------------------------------
-; ง8.2.2. DARK_LOCATION -> Basic Usage Example -> Light source goes off
+; ยง8.2.2. DARK_LOCATION -> Basic Usage Example -> Light source goes off
 ; ------------------------------------------------------------------------------
 ; tag::dark-location-example3[]
 switch off flashlight
 x flashlight
 ; end::dark-location-example3[]
 ; ------------------------------------------------------------------------------
-; ง8.2.2. DARK_LOCATION -> Basic Usage Example -> Entering with lit lightsource
+; ยง8.2.2. DARK_LOCATION -> Basic Usage Example -> Entering with lit lightsource
 ; ------------------------------------------------------------------------------
 restart
 

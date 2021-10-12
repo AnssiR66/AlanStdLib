@@ -1,9 +1,9 @@
-Import 'library.i'.
+ï»¿Import 'library.i'.
 The my_game IsA definition_block
 End the.
 
 --------------------------------------------------------------------------------
--- §8.2. SITE: Implementing an outdoor location
+-- Â§8.2. SITE: Implementing an outdoor location
 --------------------------------------------------------------------------------
 The meadow IsA site
   Description "Green grass, tall trees and the big sky above you.
@@ -13,7 +13,7 @@ End the.
 
 
 --------------------------------------------------------------------------------
--- §8.2. SITE: Changing descriptions of site-objects mid-game
+-- Â§8.2. SITE: Changing descriptions of site-objects mid-game
 --------------------------------------------------------------------------------
 Event nightfall
   "$nIt's getting late. The sun sets rapidly, night has fallen."

@@ -1,4 +1,4 @@
--- lib_definitions.i          | ALAN Standard Library v2.2.0-WIP | ALAN 3.0beta7
+﻿-- lib_definitions.i          | ALAN Standard Library v2.2.0-WIP | ALAN 3.0beta8
 --+============================================================================+
 --|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//////////////////////////////////////|
 --++--------------------------------------------------------------------------++
@@ -472,7 +472,7 @@ END EVERY definition_block.
 --     author   "Isaac Luria Ha'ARI".
 --     year     1560.
 --     version  "1".
---     AlanV    "v3.0 beta7".
+--     AlanV    "v3.0 beta8".
 -- End the.
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -482,7 +482,7 @@ END EVERY definition_block.
 --     A kabbalistic adventure.
 --     Version 1.
 --     (C) 1560 by Isaac Luria Ha'ARI.
---     Programmed with the ALAN Interactive Fiction Language v3.0 beta7.
+--     Programmed with the ALAN Interactive Fiction Language v3.0 beta8.
 --     Standard Library v2.2.0.
 --     All rights reserved.
 
@@ -504,7 +504,7 @@ ADD TO EVERY definition_block
   HAS  version  "1".
   HAS     year  2020.
   HAS   author  "An ALAN Author".
-  HAS    AlanV  "v3.0 beta7".
+  HAS    AlanV  "v3.0 beta8".
 END ADD TO definition_block.
 
 -- The predefined value of `AlanV` is that of the latest Alan release at the
