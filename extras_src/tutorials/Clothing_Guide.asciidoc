@@ -1,6 +1,6 @@
 = The Clothing Guide
 Tristano Ajmone <tajmone@gmail.com>
-v2, 2019-05-05
+v3, 2021-10-12
 :lang: en
 // TOC Settings:
 :toc: left
@@ -21,20 +21,6 @@ v2, 2019-05-05
 :source-highlighter: highlight
 
 
-////
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-** ALAN CODE THEMES **
-
-Listing blocks for Alan code can have different color themes (via 'role') to
-help the reader distinguish which code belongs to what:
-
--- Default (no role)
--- Library code: 'role=lib'
--- Tutorial code: 'role=tutorial'
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-////
-
-
 // *****************************************************************************
 // *                                                                           *
 // *                            Document Preamble                              *
@@ -46,7 +32,7 @@ An introductory reference guide to using the Standard Library clothing features 
 [WARNING]
 ==============================================================
 This document is currently undergoing adaptation from the old clothing system to the new one.
-The text needs to be revised, and since there is no fixed-values _Clothing Table_ in the new system, we need to provide on or more arbitrary examples of layers enumerations so that the reader can refer to them along the tutorial.
+The text needs to be revised, and since there is no fixed-values _Clothing Table_ in the new system, we need to provide one or more arbitrary examples of layers enumerations so that the reader can refer to them along the tutorial.
 ==============================================================
 
 
@@ -244,7 +230,7 @@ include::./{adv-transc1}[encoding=iso-8859-1]
 =============================================
 
 ////
-*VERBATIM TRANSCRIPT* -- We could also include the unsanitized version of the game transcript, in case it relied on monospace fonts (eg. debguggin):
+*VERBATIM TRANSCRIPT* -- We could also include the unsanitized version of the game transcript, in case it relied on monospace fonts (eg. debgugging):
 
 .............................................................
 include::./clothing-01-simple__play1.a3t[encoding=iso-8859-1]
@@ -295,6 +281,38 @@ include::./{adv-transc2}[encoding=iso-8859-1]
 =============================================
 
 Here ends our first tutorial on how to implement very simple clothing.
+
+=== Intermediate Clothing
+
+:adv-source:  clothing-02-intermediate.alan
+:adv-transc1: clothing-02-intermediate__play1.a3ADocLog
+:adv-transc2: clothing-02-intermediate__play2.a3ADocLog
+
+* link:{adv-source}[`{adv-source}`]
+
+In this example we're going to explore how to implement layered clothes.
+We'll be focusing just on the various types of clothes, so to keep things simple we'll just create a room with different types of clothing items lying around on the floor.
+
+// ** BEDROOM **
+Let's start by laying down the basic adventure structure, and create a bedroom location:
+
+[source,alan,role=tutorial]
+-------------------------------------------------------
+include::{adv-source}[encoding=iso-8859-1,tag=step_one]
+-------------------------------------------------------
+
+The next step is about deciding how to asign the various layers to clothes types; the number of layers involved depends on which clothes we're going to create in the actual game.
+The best approach is to do some initial brainstorming on the various types of clothes that we'd like to use.
+
+
+* *Underwear* -- Garnments in direct contact with the skin (socks, underpants, vest).
+* *Outer clothing* -- The first layer of outer garnments when the person is dressed (trousers, shirt, shoes, hat).
+
+////
+* *XXXX* -- YYYYYYY.
+////
+
+WARNING: To be continued!
 
 
 == Clothing Table Example

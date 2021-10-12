@@ -1,0 +1,20 @@
+//// W I P   W A R N I N G ! ! ////////////////////////////////
+---------------------------------------------------------------
+This is the source example for section "Intermediate Clothing",
+which is not yet completed. So the example is still incomplete.
+---------------------------------------------------------------
+///////////////////////////////////////////////////////////////
+
+-- tag::all[]
+-- tag::step_one[]
+Import 'library.i'.
+
+The my_game IsA DEFINITION_BLOCK
+End the.
+
+The bedroom IsA room.
+End the bedroom.
+
+Start at bedroom.
+-- end::step_one[]
+-- end::all[]
