@@ -20,6 +20,7 @@ By [Anssi Räisänen], [Artistic License 2.0].
     - [Alan SDK](#alan-sdk)
     - [Ruby](#ruby)
     - [Rake](#rake)
+    - [Rouge](#rouge)
 - [Project Settings](#project-settings)
     - [ALAN Sources and Scripts Encoding](#alan-sources-and-scripts-encoding)
 
@@ -80,6 +81,11 @@ Before installing it, Ruby will warn you that by installing Rake as a gem you'll
 
     $ gem uninstall rake
 
+## Rouge
+
+You also need to install the [Rouge] gem, which is used for syntax highlighting the documentation.
+
+    $ gem uninstall rouge
 
 # Project Settings
 
@@ -135,6 +141,7 @@ See also the [Sublime Alan IF documentation] on how these extensions are impleme
 [Chocolatey Ruby package]: https://community.chocolatey.org/packages/ruby
 [EditorConfig]: https://editorconfig.org "Visit EditorConfig website"
 [Rake]: https://ruby.github.io/rake/ "Visit Rake website"
+[Rouge]: https://github.com/rouge-ruby/rouge "Visit Rouge repository"
 [Ruby for Windows]: https://rubyinstaller.org
 [RubyInstaller]: https://rubyinstaller.org
 

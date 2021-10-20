@@ -1,0 +1,297 @@
+<style>
+/* Alan Code Notation Mockup */
+.listingblock.alan pre {
+  color: #333333;
+  background: #F8F8F8;
+}
+
+/* Shell/CMD */
+div.literalblock.shell pre {
+  background-color: #0C0C0C;
+  color: #F2F2F2;
+}
+div.literalblock.shell pre .conum {
+  background: #FFF945 !important;
+  color: #0C0C0C !important;
+}
+
+/* Game Transcripts & Player input and output */
+span.play {
+  display: inline-block;
+  font-size: 0.9375em;
+  font-style: normal !important;
+  padding: 0.1em 0.5ex;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  line-height: 1.45;
+  text-rendering: optimizeSpeed;
+  word-wrap: break-word;
+}
+
+span.play,
+.exampleblock.gametranscript > .content {
+  background: #F7FDFF;
+  color: #0089B6;
+  border-color: #CCF2FF;
+}
+span.play span.comment,
+.exampleblock.gametranscript > .content span.comment {
+  color: #BCBCBC;
+}
+span.play em,
+.exampleblock.gametranscript > .content em {
+  color: #D90000;
+}
+
+/* Commentary Blocks */
+div.openblock.commentary {
+  padding-left: 6em;
+}
+
+/* Inline Highlighting */
+span.green {
+  background-color: #A3FF8A;
+}
+
+/* Highlight Theme for Alan -- based on "github.com style" for highlight.js, by Vasily Polovnyov */
+.listingblock code[data-lang=alan]::before {
+  color: #A09F93;
+}
+
+.listingblock pre[class~=rouge][lang=alan] {
+  background-color: #F8F8F8;
+  border-radius: 4px;
+  border: 1px solid #F8F8F8;
+}
+.listingblock pre[class~=rouge][lang=alan] > code {
+  color: #333333;
+  font-family: inherit;
+  font-size: inherit;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span {
+  font-style: normal;
+  font-weight: normal;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span > .conum[data-value] {
+  background: black !important;
+  color: white !important;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.m {
+  color: #333333;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.lin {
+  color: #999988;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.n {
+  color: #333333;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.o {
+  color: #333333;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.p {
+  color: #990000;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.dl {
+  color: #008080;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.s2 {
+  color: #008080;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.s1 {
+  color: #008080;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.se {
+  color: #FF980B;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.si {
+  color: #D572F1;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.c1 {
+  color: #999988;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.cm {
+  color: #999988;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.kr {
+  color: #990000;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.nb {
+  color: #000080;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.nx {
+  color: #000080;
+}
+.listingblock pre[class~=rouge][lang=alan] > code mark {
+  background-color: #CCFF00;
+  background-image: linear-gradient(to right, #CCFF00 0%, #F5FF87 100%);
+}
+.listingblock pre[class~=rouge][lang=alan] > code span.green {
+  background-color: #A3FF8A;
+  background-image: linear-gradient(to right, #A3FF8A 0%, rgba(163, 255, 138, 0.5) 100%);
+}
+
+/* Rouge Theme for Alan Library -- Base16 Eighties, by Chris Kempson */
+.listingblock.lib code[data-lang=alan]::before {
+  color: #A09F93;
+}
+
+.listingblock.lib pre[class~=rouge][lang=alan] {
+  background-color: #2D2D2D;
+  border-radius: 4px;
+  border: 1px solid #A09F93;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code {
+  color: #D3D0C8;
+  font-family: inherit;
+  font-size: inherit;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span {
+  font-style: normal;
+  font-weight: normal;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span > .conum[data-value] {
+  background: white !important;
+  color: black !important;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.m {
+  color: #F99157;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.lin {
+  color: #747369;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.n {
+  color: #D3D0C8;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.o {
+  color: #D3D0C8;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.p {
+  color: #F2777A;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.dl {
+  color: #008080;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.s2 {
+  color: #99CC99;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.s1 {
+  color: #99CC99;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.se {
+  color: #F99157;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.si {
+  color: #D27B53;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.c1 {
+  color: #999988;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.cm {
+  color: #999988;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.kr {
+  color: #F2777A;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.nb {
+  color: #FFCC66;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.nx {
+  color: #6699CC;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code mark {
+  background-color: #CCFF00;
+  background-image: linear-gradient(to right, #CCFF00 0%, #F5FF87 100%);
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code span.green {
+  background-color: #A3FF8A;
+  background-image: linear-gradient(to right, #A3FF8A 0%, rgba(163, 255, 138, 0.5) 100%);
+}
+
+/* Rouge Theme for Alan tutorial -- Base16 Google, by Seth Wright */
+.listingblock.tutorial code[data-lang=alan]::before {
+  color: #A09F93;
+}
+
+.listingblock.tutorial pre[class~=rouge][lang=alan] {
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  border: 1px solid #E0E0E0;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code {
+  color: #373B41;
+  font-family: inherit;
+  font-size: inherit;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span {
+  font-style: normal;
+  font-weight: normal;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span > .conum[data-value] {
+  background: black !important;
+  color: white !important;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.m {
+  color: #373B41;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.lin {
+  color: #C5C8C6;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.n {
+  color: #373B41;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.o {
+  color: #373B41;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.p {
+  color: #CC342B;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.dl {
+  color: #198844;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.s2 {
+  color: #198844;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.s1 {
+  color: #198844;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.se {
+  color: #F96A38;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.si {
+  color: #3971ED;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.c1 {
+  color: #969896;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.cm {
+  color: #969896;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.kr {
+  color: #CC342B;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.nb {
+  color: #FBA922;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.nx {
+  color: #3971ED;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code mark {
+  background-color: #F5FF87;
+  background-image: none;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code span.green {
+  background-color: #dbf8e6;
+  background-image: none;
+}
+
+/* BNF */
+pre[lang=bnf] {
+  background: #FFEBD6;
+}
+pre[lang=bnf] > code.language-bnf[data-lang=bnf] {
+  color: #492E11;
+  background: #FFEBD6;
+}
+
+/*# sourceMappingURL=rouge.css.map */
+</style>

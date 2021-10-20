@@ -17,8 +17,6 @@ v3, 2021-10-12
 :linkattrs: true
 :reproducible: true
 :sectanchors:
-// Highlight settings;
-:source-highlighter: highlight
 
 
 // *****************************************************************************

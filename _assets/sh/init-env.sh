@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# _assets/sh/init-env.sh                v1.2.2 | 2020/12/28 | by Tristano Ajmone
+# _assets/sh/init-env.sh                v2.0.0 | 2021/10/20 | by Tristano Ajmone
 # ==============================================================================
 # Released into the Public Domain (https://unlicense.org)
 # ------------------------------------------------------------------------------
@@ -91,13 +91,9 @@ export ImagesDir="$RepoRoot/_assets/images"
 # ======================
 export StdLibDir="$RepoRoot/StdLib"
 
-# /_assets/adoc/ -> $ADocDir
+# /_assets/rouge/ -> $RougeDir
 # =========================
-export ADocDir="$RepoRoot/_assets/adoc"
-
-# /_assets/adoc/haml/ -> $HamlDir
-# ==============================
-export HamlDir="$ADocDir/haml"
+export RougeDir="$RepoRoot/_assets/rouge"
 
 
 ## PRINT REPORT
@@ -108,7 +104,7 @@ echo -e "\e[33;1m   \$RepoRoot    $arr /"
 echo -e "\e[33;1m   \$ScriptsDir  $arr ${ScriptsDir#$RepoRoot}/"
 echo -e "\e[33;1m   \$ImagesDir   $arr ${ImagesDir#$RepoRoot}/"
 echo -e "\e[33;1m   \$StdLibDir   $arr ${StdLibDir#$RepoRoot}/"
-echo -e "\e[33;1m   \$ADocDir     $arr ${ADocDir#$RepoRoot}/"
+echo -e "\e[33;1m   \$RougeDir    $arr ${RougeDir#$RepoRoot}/"
 echo -e "\e[33;1m   \$HamlDir     $arr ${HamlDir#$RepoRoot}/"
 echo -e "\e[32;1m$HyphensLine"
 # ==============================================================================

@@ -439,15 +439,190 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-/* Custom styles for Alan StdLib */
-/* FiraCode font (with ligatures) */
-@font-face {
-  font-family: "Fira Code";
-  src: url("https://unpkg.com/firacode/distr/eot/FiraCode-Regular.eot");
-  src: url("https://unpkg.com/firacode/distr/eot/FiraCode-Regular.eot") format("embedded-opentype"), url("https://unpkg.com/firacode/distr/woff2/FiraCode-Regular.woff2") format("woff2"), url("https://unpkg.com/firacode/distr/woff/FiraCode-Regular.woff") format("woff"), url("https://unpkg.com/firacode/distr/ttf/FiraCode-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge {
+  color: #faf6e4;
+  background-color: #122b3b;
 }
+pre.rouge .gl {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+pre.rouge .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cm, pre.rouge .cpf, pre.rouge .c1, pre.rouge .cs {
+  color: #6c8b9f;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+pre.rouge .err {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+pre.rouge .gr {
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .k, pre.rouge .kd, pre.rouge .kv {
+  color: #f6dd62;
+  font-weight: bold;
+}
+pre.rouge .o, pre.rouge .ow {
+  color: #4df4ff;
+  font-weight: bold;
+}
+pre.rouge .p, pre.rouge .pi {
+  color: #4df4ff;
+}
+pre.rouge .gd {
+  color: #cc0000;
+}
+pre.rouge .gi {
+  color: #b2fd6d;
+}
+pre.rouge .ge {
+  font-style: italic;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gt {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+pre.rouge .kc {
+  color: #f696db;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #ffb000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #ffb000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #ffb000;
+  font-weight: bold;
+}
+pre.rouge .gh {
+  color: #ffb000;
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #ffb000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+pre.rouge .nc {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+pre.rouge .nd {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+pre.rouge .bp {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+pre.rouge .ne {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #ffb000;
+  font-weight: bold;
+}
+pre.rouge .nt {
+  color: #ffb000;
+  font-weight: bold;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mf, pre.rouge .mh, pre.rouge .mi, pre.rouge .il, pre.rouge .mo, pre.rouge .mx {
+  color: #f696db;
+  font-weight: bold;
+}
+pre.rouge .ld {
+  color: #f696db;
+  font-weight: bold;
+}
+pre.rouge .ss {
+  color: #f696db;
+  font-weight: bold;
+}
+pre.rouge .s, pre.rouge .sb, pre.rouge .dl, pre.rouge .sd, pre.rouge .s2, pre.rouge .sh, pre.rouge .sx, pre.rouge .sr, pre.rouge .s1 {
+  color: #fff0a6;
+  font-weight: bold;
+}
+pre.rouge .sa {
+  color: #f6dd62;
+  font-weight: bold;
+}
+pre.rouge .se {
+  color: #4df4ff;
+  font-weight: bold;
+}
+pre.rouge .sc {
+  color: #4df4ff;
+  font-weight: bold;
+}
+pre.rouge .si {
+  color: #4df4ff;
+  font-weight: bold;
+}
+pre.rouge .nb {
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #BBBBBB;
+}
+pre.rouge .go {
+  color: #BBBBBB;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #a8e1fe;
+}
+pre.rouge .py {
+  color: #a8e1fe;
+}
+pre.rouge .na {
+  color: #a8e1fe;
+}
+pre.rouge .nv, pre.rouge .vc, pre.rouge .vg, pre.rouge .vi, pre.rouge .vm {
+  color: #a8e1fe;
+  font-weight: bold;
+}
+</style>
+<style>
+/* Alan Code Notation Mockup */
+.listingblock.alan pre {
+  color: #333333;
+  background: #F8F8F8;
+}
+
 /* Shell/CMD */
 div.literalblock.shell pre {
   background-color: #0C0C0C;
@@ -479,254 +654,264 @@ span.play,
 }
 span.play span.comment,
 .exampleblock.gametranscript > .content span.comment {
-  color: #bcbcbc;
+  color: #BCBCBC;
 }
 span.play em,
 .exampleblock.gametranscript > .content em {
-  color: #d90000;
+  color: #D90000;
 }
 
-/* Highlight Default Theme: Base16 Eighties */
-.listingblock code[data-lang]::before {
-  color: #a09f93;
+/* Commentary Blocks */
+div.openblock.commentary {
+  padding-left: 6em;
 }
 
-.listingblock pre[class=highlight][lang] {
-  background-color: #2d2d2d;
-  border-radius: 4px;
-  border: 1px solid #a09f93;
-}
-.listingblock pre[class=highlight][lang] > code {
-  color: #d3d0c8;
-  font-family: Consolas, Monaco, "Courier New", Courier, monospace;
-  font-size: 1em;
-}
-.listingblock pre[class=highlight][lang] .hl {
-  color: #d3d0c8;
-}
-.listingblock pre[class=highlight][lang] .hl.num {
-  color: #f99157;
-}
-.listingblock pre[class=highlight][lang] .hl.esc {
-  color: #f99157;
-}
-.listingblock pre[class=highlight][lang] .hl.ipl {
-  color: #d27b53;
-}
-.listingblock pre[class=highlight][lang] .hl.sng {
-  color: #99cc99;
-}
-.listingblock pre[class=highlight][lang] .hl.ppc {
-  color: #cc99cc;
-}
-.listingblock pre[class=highlight][lang] .hl.pps {
-  color: #66cccc;
-}
-.listingblock pre[class=highlight][lang] .hl.com {
-  color: #a09f93;
-  font-style: italic;
-}
-.listingblock pre[class=highlight][lang] .hl.slc {
-  color: #a09f93;
-  font-style: italic;
-}
-.listingblock pre[class=highlight][lang] .hl.lin {
-  color: #747369;
-}
-.listingblock pre[class=highlight][lang] .hl.opt {
-  color: #d3d0c8;
-}
-.listingblock pre[class=highlight][lang] .hl.kwa {
-  color: #f2777a;
-}
-.listingblock pre[class=highlight][lang] .hl.kwb {
-  color: #ffcc66;
-}
-.listingblock pre[class=highlight][lang] .hl.kwc {
-  color: #6699cc;
-}
-.listingblock pre[class=highlight][lang] .hl.kwd {
-  color: #cc99cc;
-}
-.listingblock pre[class=highlight][lang] .hl.kwde {
-  color: #66cccc;
-}
-.listingblock pre[class=highlight][lang] .hl.kwf {
-  color: #d27b53;
+/* Inline Highlighting */
+span.green {
+  background-color: #A3FF8A;
 }
 
 /* Highlight Theme for Alan -- based on "github.com style" for highlight.js, by Vasily Polovnyov */
 .listingblock code[data-lang=alan]::before {
-  color: #a09f93;
+  color: #A09F93;
 }
 
-.listingblock pre[class=highlight][lang=alan] {
+.listingblock pre[class~=rouge][lang=alan] {
   background-color: #F8F8F8;
   border-radius: 4px;
   border: 1px solid #F8F8F8;
 }
-.listingblock pre[class=highlight][lang=alan] > code {
-  color: #333;
-  font-family: "Fira Code", Monaco, "Courier New", Courier, monospace;
+.listingblock pre[class~=rouge][lang=alan] > code {
+  color: #333333;
+  font-family: inherit;
   font-size: inherit;
 }
-.listingblock pre[class=highlight][lang=alan] .hl {
-  color: #333;
+.listingblock pre[class~=rouge][lang=alan] > code > span {
+  font-style: normal;
+  font-weight: normal;
 }
-.listingblock pre[class=highlight][lang=alan] .hl.num {
-  color: #333;
+.listingblock pre[class~=rouge][lang=alan] > code > span > .conum[data-value] {
+  background: black !important;
+  color: white !important;
 }
-.listingblock pre[class=highlight][lang=alan] .hl.esc {
-  color: #ff980b;
+.listingblock pre[class~=rouge][lang=alan] > code > span.m {
+  color: #333333;
 }
-.listingblock pre[class=highlight][lang=alan] .hl.ipl {
-  color: #d572f1;
+.listingblock pre[class~=rouge][lang=alan] > code > span.lin {
+  color: #999988;
 }
-.listingblock pre[class=highlight][lang=alan] .hl.sng {
-  color: #008080;
+.listingblock pre[class~=rouge][lang=alan] > code > span.n {
+  color: #333333;
 }
-.listingblock pre[class=highlight][lang=alan] .hl.slc {
-  color: #998;
+.listingblock pre[class~=rouge][lang=alan] > code > span.o {
+  color: #333333;
 }
-.listingblock pre[class=highlight][lang=alan] .hl.lin {
-  color: #998;
-}
-.listingblock pre[class=highlight][lang=alan] .hl.opt {
-  color: #333;
-}
-.listingblock pre[class=highlight][lang=alan] .hl.kwa {
+.listingblock pre[class~=rouge][lang=alan] > code > span.p {
   color: #990000;
 }
-.listingblock pre[class=highlight][lang=alan] .hl.kwb {
+.listingblock pre[class~=rouge][lang=alan] > code > span.dl {
+  color: #008080;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.s2 {
+  color: #008080;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.s1 {
+  color: #008080;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.se {
+  color: #FF980B;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.si {
+  color: #D572F1;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.c1 {
+  color: #999988;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.cm {
+  color: #999988;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.kr {
+  color: #990000;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.nb {
   color: #000080;
 }
-.listingblock pre[class=highlight][lang=alan] .hl.kwc {
+.listingblock pre[class~=rouge][lang=alan] > code > span.nx {
   color: #000080;
 }
-.listingblock pre[class=highlight][lang=alan] mark {
-  background-color: #ccff00;
-  background-image: linear-gradient(to right, #ccff00 0%, #f5ff87 100%);
+.listingblock pre[class~=rouge][lang=alan] > code mark {
+  background-color: #CCFF00;
+  background-image: linear-gradient(to right, #CCFF00 0%, #F5FF87 100%);
 }
-.listingblock pre[class=highlight][lang=alan] span.green {
-  background-color: #a3ff8a;
-  background-image: linear-gradient(to right, #a3ff8a 0%, rgba(163, 255, 138, 0.5) 100%);
+.listingblock pre[class~=rouge][lang=alan] > code span.green {
+  background-color: #A3FF8A;
+  background-image: linear-gradient(to right, #A3FF8A 0%, rgba(163, 255, 138, 0.5) 100%);
 }
 
-/* Highlight Theme for Alan Library -- Base16 Eighties, by Chris Kempson */
+/* Rouge Theme for Alan Library -- Base16 Eighties, by Chris Kempson */
 .listingblock.lib code[data-lang=alan]::before {
-  color: #a09f93;
+  color: #A09F93;
 }
 
-.listingblock.lib pre[class=highlight][lang=alan] {
-  background-color: #2d2d2d;
+.listingblock.lib pre[class~=rouge][lang=alan] {
+  background-color: #2D2D2D;
   border-radius: 4px;
-  border: 1px solid #a09f93;
+  border: 1px solid #A09F93;
 }
-.listingblock.lib pre[class=highlight][lang=alan] > code {
-  color: #d3d0c8;
-  font-family: "Fira Code", Monaco, "Courier New", Courier, monospace;
+.listingblock.lib pre[class~=rouge][lang=alan] > code {
+  color: #D3D0C8;
+  font-family: inherit;
   font-size: inherit;
 }
-.listingblock.lib pre[class=highlight][lang=alan] .hl {
-  color: #d3d0c8;
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span {
+  font-style: normal;
+  font-weight: normal;
 }
-.listingblock.lib pre[class=highlight][lang=alan] .hl.num {
-  color: #f99157;
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span > .conum[data-value] {
+  background: white !important;
+  color: black !important;
 }
-.listingblock.lib pre[class=highlight][lang=alan] .hl.esc {
-  color: #f99157;
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.m {
+  color: #F99157;
 }
-.listingblock.lib pre[class=highlight][lang=alan] .hl.ipl {
-  color: #d27b53;
-}
-.listingblock.lib pre[class=highlight][lang=alan] .hl.sng {
-  color: #99cc99;
-}
-.listingblock.lib pre[class=highlight][lang=alan] .hl.slc {
-  color: #a09f93;
-}
-.listingblock.lib pre[class=highlight][lang=alan] .hl.lin {
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.lin {
   color: #747369;
 }
-.listingblock.lib pre[class=highlight][lang=alan] .hl.opt {
-  color: #d3d0c8;
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.n {
+  color: #D3D0C8;
 }
-.listingblock.lib pre[class=highlight][lang=alan] .hl.kwa {
-  color: #f2777a;
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.o {
+  color: #D3D0C8;
 }
-.listingblock.lib pre[class=highlight][lang=alan] .hl.kwb {
-  color: #ffcc66;
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.p {
+  color: #F2777A;
 }
-.listingblock.lib pre[class=highlight][lang=alan] .hl.kwc {
-  color: #6699cc;
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.dl {
+  color: #008080;
 }
-.listingblock.lib pre[class=highlight][lang=alan] mark {
-  background-color: #ccff00;
-  background-image: linear-gradient(to right, #ccff00 0%, #f5ff87 100%);
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.s2 {
+  color: #99CC99;
 }
-.listingblock.lib pre[class=highlight][lang=alan] span.green {
-  background-color: #a3ff8a;
-  background-image: linear-gradient(to right, #a3ff8a 0%, rgba(163, 255, 138, 0.5) 100%);
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.s1 {
+  color: #99CC99;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.se {
+  color: #F99157;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.si {
+  color: #D27B53;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.c1 {
+  color: #999988;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.cm {
+  color: #999988;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.kr {
+  color: #F2777A;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.nb {
+  color: #FFCC66;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.nx {
+  color: #6699CC;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code mark {
+  background-color: #CCFF00;
+  background-image: linear-gradient(to right, #CCFF00 0%, #F5FF87 100%);
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code span.green {
+  background-color: #A3FF8A;
+  background-image: linear-gradient(to right, #A3FF8A 0%, rgba(163, 255, 138, 0.5) 100%);
 }
 
-/* Highlight Theme for Alan tutorial -- Base16 Google, by  Seth Wright */
+/* Rouge Theme for Alan tutorial -- Base16 Google, by Seth Wright */
 .listingblock.tutorial code[data-lang=alan]::before {
-  color: #a09f93;
+  color: #A09F93;
 }
 
-.listingblock.tutorial pre[class=highlight][lang=alan] {
-  background-color: #ffffff;
+.listingblock.tutorial pre[class~=rouge][lang=alan] {
+  background-color: #FFFFFF;
   border-radius: 4px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #E0E0E0;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] > code {
-  color: #373b41;
-  font-family: "Fira Code", Monaco, "Courier New", Courier, monospace;
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code {
+  color: #373B41;
+  font-family: inherit;
   font-size: inherit;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl {
-  color: #373b41;
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span {
+  font-style: normal;
+  font-weight: normal;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.num {
-  color: #373b41;
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span > .conum[data-value] {
+  background: black !important;
+  color: white !important;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.esc {
-  color: #F96A38;
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.m {
+  color: #373B41;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.ipl {
-  color: #3971ED;
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.lin {
+  color: #C5C8C6;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.sng {
-  color: #198844;
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.n {
+  color: #373B41;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.slc {
-  color: #969896;
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.o {
+  color: #373B41;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.lin {
-  color: #c5c8c6;
-}
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.opt {
-  color: #373b41;
-}
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.kwa {
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.p {
   color: #CC342B;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.kwb {
-  color: #FBA922;
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.dl {
+  color: #198844;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.kwc {
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.s2 {
+  color: #198844;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.s1 {
+  color: #198844;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.se {
+  color: #F96A38;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.si {
   color: #3971ED;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] mark {
-  background-color: #f5ff87;
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.c1 {
+  color: #969896;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.cm {
+  color: #969896;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.kr {
+  color: #CC342B;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.nb {
+  color: #FBA922;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.nx {
+  color: #3971ED;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code mark {
+  background-color: #F5FF87;
   background-image: none;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] span.green {
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code span.green {
   background-color: #dbf8e6;
   background-image: none;
 }
 
-/*# sourceMappingURL=styles.css.map */
+/* BNF */
+pre[lang=bnf] {
+  background: #FFEBD6;
+}
+pre[lang=bnf] > code.language-bnf[data-lang=bnf] {
+  color: #492E11;
+  background: #FFEBD6;
+}
+
+/*# sourceMappingURL=rouge.css.map */
 </style>
 </head>
 <body class="article toc2 toc-left">
@@ -803,7 +988,32 @@ The text needs to be revised, and since there is no fixed-values <em>Clothing Ta
 <div class="listingblock lib">
 <div class="title">Predefined attributes of <code>clothing</code> class&#8201;&#8212;&#8201;defined in <code>lib_classes.i</code></div>
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">EVERY</span> clothing <span class="hl kwa">ISA</span> <span class="hl kwb">OBJECT</span>&#x000A;&#x000A;  <span class="hl kwa">IS</span> wearable<span class="hl kwa">.</span>&#x000A;&#x000A;  <span class="hl kwa">IS</span> sex <span class="hl num">0</span><span class="hl kwa">.</span> <span class="hl slc">-- If not zero, restricts wearing to actors with same &#39;sex&#39; value.</span>&#x000A;&#x000A;  <span class="hl slc">-- Body coverage layered-values, by area:</span>&#x000A;  <span class="hl kwa">IS</span> headcover  <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Head.</span>&#x000A;  <span class="hl kwa">IS</span> facecover  <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Face.</span>&#x000A;  <span class="hl kwa">IS</span> handscover <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Hands.</span>&#x000A;  <span class="hl kwa">IS</span> feetcover  <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Feet.</span>&#x000A;  <span class="hl kwa">IS</span> topcover   <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Chest and arms.</span>&#x000A;  <span class="hl kwa">IS</span> botcover   <span class="hl num">0</span><span class="hl kwa">.</span>  <span class="hl slc">-- Pelvis and legs.</span>&#x000A;&#x000A;  <span class="hl slc">-- Attributes for special clothing (skirts, coats, bikinis, etc.):</span>&#x000A;&#x000A;  <span class="hl kwa">IS</span> blockslegs<span class="hl kwa">.</span>&#x000A;  <span class="hl slc">-- i.e. the item prevents wearing/removing legsware from the layers below</span>&#x000A;  <span class="hl slc">-- (skirts and coats are &#39;NOT blockslegs&#39;).</span>&#x000A;&#x000A;  <span class="hl kwa">IS NOT</span> twopieces<span class="hl kwa">.</span>&#x000A;  <span class="hl slc">-- For items covering legs + torso (&#39;topcover&#39; &amp; &#39;botcover&#39; &lt;&gt; 0) that should</span>&#x000A;  <span class="hl slc">-- be treated as a single piece (e.g. a one-piece swimming suite).</span>&#x000A;  <span class="hl slc">-- Items which are &#39;twopieces&#39; (eg. a bikini) can be worn/removed while</span>&#x000A;  <span class="hl slc">-- wearing a skirt for, although handled as a single clothing item, they cover</span>&#x000A;  <span class="hl slc">-- legs and torso via two separate pieces.</span></code></pre>
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">EVERY</span><span class="w"> </span><span class="n">clothing</span><span class="w"> </span><span class="kr">ISA</span><span class="w"> </span><span class="nb">OBJECT</span><span class="w">
+
+  </span><span class="kr">IS</span><span class="w"> </span><span class="n">wearable</span><span class="p">.</span><span class="w">
+
+  </span><span class="kr">IS</span><span class="w"> </span><span class="n">sex</span><span class="w"> </span><span class="m">0</span><span class="p">.</span><span class="w"> </span><span class="c1">-- If not zero, restricts wearing to actors with same 'sex' value.</span><span class="w">
+
+  </span><span class="c1">-- Body coverage layered-values, by area:</span><span class="w">
+  </span><span class="kr">IS</span><span class="w"> </span><span class="n">headcover</span><span class="w">  </span><span class="m">0</span><span class="p">.</span><span class="w">  </span><span class="c1">-- Head.</span><span class="w">
+  </span><span class="kr">IS</span><span class="w"> </span><span class="n">facecover</span><span class="w">  </span><span class="m">0</span><span class="p">.</span><span class="w">  </span><span class="c1">-- Face.</span><span class="w">
+  </span><span class="kr">IS</span><span class="w"> </span><span class="n">handscover</span><span class="w"> </span><span class="m">0</span><span class="p">.</span><span class="w">  </span><span class="c1">-- Hands.</span><span class="w">
+  </span><span class="kr">IS</span><span class="w"> </span><span class="n">feetcover</span><span class="w">  </span><span class="m">0</span><span class="p">.</span><span class="w">  </span><span class="c1">-- Feet.</span><span class="w">
+  </span><span class="kr">IS</span><span class="w"> </span><span class="n">topcover</span><span class="w">   </span><span class="m">0</span><span class="p">.</span><span class="w">  </span><span class="c1">-- Chest and arms.</span><span class="w">
+  </span><span class="kr">IS</span><span class="w"> </span><span class="n">botcover</span><span class="w">   </span><span class="m">0</span><span class="p">.</span><span class="w">  </span><span class="c1">-- Pelvis and legs.</span><span class="w">
+
+  </span><span class="c1">-- Attributes for special clothing (skirts, coats, bikinis, etc.):</span><span class="w">
+
+  </span><span class="kr">IS</span><span class="w"> </span><span class="n">blockslegs</span><span class="p">.</span><span class="w">
+  </span><span class="c1">-- i.e. the item prevents wearing/removing legsware from the layers below</span><span class="w">
+  </span><span class="c1">-- (skirts and coats are 'NOT blockslegs').</span><span class="w">
+
+  </span><span class="kr">IS</span><span class="w"> </span><span class="kr">NOT</span><span class="w"> </span><span class="n">twopieces</span><span class="p">.</span><span class="w">
+  </span><span class="c1">-- For items covering legs + torso ('topcover' &amp; 'botcover' &lt;&gt; 0) that should</span><span class="w">
+  </span><span class="c1">-- be treated as a single piece (e.g. a one-piece swimming suite).</span><span class="w">
+  </span><span class="c1">-- Items which are 'twopieces' (eg. a bikini) can be worn/removed while</span><span class="w">
+  </span><span class="c1">-- wearing a skirt for, although handled as a single clothing item, they cover</span><span class="w">
+  </span><span class="c1">-- legs and torso via two separate pieces.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -812,7 +1022,17 @@ The text needs to be revised, and since there is no fixed-values <em>Clothing Ta
 <div class="listingblock lib">
 <div class="title">The <code>worn</code> attribute on <code>THING</code>&#8201;&#8212;&#8201;defined in <code>lib_definitions.i</code></div>
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">ADD TO EVERY</span> <span class="hl kwb">THING</span>&#x000A;  <span class="hl kwa">...</span>&#x000A;  <span class="hl kwa">IS NOT</span> worn<span class="hl kwa">.</span>&#x000A;    <span class="hl slc">-- (for &#39;clothing&#39; instances) it&#39;s not worn by any actor.</span>&#x000A;    <span class="hl slc">-- -------------------------------------------------------------------------</span>&#x000A;    <span class="hl slc">-- NOTE: Authors can also use this attribute to implement wearables other</span>&#x000A;    <span class="hl slc">--       than clothing (eg. devices, like headphones, a VR headset, etc.).</span>&#x000A;    <span class="hl slc">--       The library ensures that any verbs which could remove a thing from</span>&#x000A;    <span class="hl slc">--       an actor also set the thing as &#39;NOT worn&#39;, in case authors are</span>&#x000A;    <span class="hl slc">--       using this attribute outside of the &#39;clothing&#39; class context.</span>&#x000A;    <span class="hl slc">-- -------------------------------------------------------------------------</span></code></pre>
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">ADD</span><span class="w"> </span><span class="kr">TO</span><span class="w"> </span><span class="kr">EVERY</span><span class="w"> </span><span class="nb">THING</span><span class="w">
+  </span><span class="p">...</span><span class="w">
+  </span><span class="kr">IS</span><span class="w"> </span><span class="kr">NOT</span><span class="w"> </span><span class="n">worn</span><span class="p">.</span><span class="w">
+    </span><span class="c1">-- (for 'clothing' instances) it's not worn by any actor.</span><span class="w">
+    </span><span class="c1">-- -------------------------------------------------------------------------</span><span class="w">
+    </span><span class="c1">-- NOTE: Authors can also use this attribute to implement wearables other</span><span class="w">
+    </span><span class="c1">--       than clothing (eg. devices, like headphones, a VR headset, etc.).</span><span class="w">
+    </span><span class="c1">--       The library ensures that any verbs which could remove a thing from</span><span class="w">
+    </span><span class="c1">--       an actor also set the thing as 'NOT worn', in case authors are</span><span class="w">
+    </span><span class="c1">--       using this attribute outside of the 'clothing' class context.</span><span class="w">
+    </span><span class="c1">-- -------------------------------------------------------------------------</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -941,7 +1161,19 @@ The adventure ends when he leaves the flat.</p>
 </div>
 <div class="listingblock tutorial">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">Import</span> &#39;library.i&#39;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> my_game <span class="hl kwa">IsA</span> DEFINITION_BLOCK&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> bedroom <span class="hl kwa">IsA</span> room<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Description</span>&#x000A;    <span class="hl sng">&quot;The exit is west.&quot;</span>&#x000A;<span class="hl kwa">End the</span> bedroom<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">Start at</span> bedroom<span class="hl kwa">.</span>&#x000A;<span class="hl sng">&quot;You&#39;re late for work!</span><span class="hl esc">$n</span><span class="hl sng">Quickly, take a shower,</span>&#x000A;<span class="hl sng"> wear that uniform an leave the flat...&quot;</span></code></pre>
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">Import</span><span class="w"> </span><span class="dl">'</span><span class="s1">library.i</span><span class="dl">'</span><span class="p">.</span><span class="w">
+
+</span><span class="kr">The</span><span class="w"> </span><span class="n">my_game</span><span class="w"> </span><span class="kr">IsA</span><span class="w"> </span><span class="n">DEFINITION_BLOCK</span><span class="w">
+</span><span class="kr">End</span><span class="w"> </span><span class="kr">the</span><span class="p">.</span><span class="w">
+
+</span><span class="kr">The</span><span class="w"> </span><span class="n">bedroom</span><span class="w"> </span><span class="kr">IsA</span><span class="w"> </span><span class="n">room</span><span class="p">.</span><span class="w">
+  </span><span class="kr">Description</span><span class="w">
+    </span><span class="dl">"</span><span class="s2">The exit is west.</span><span class="dl">"</span><span class="w">
+</span><span class="kr">End</span><span class="w"> </span><span class="kr">the</span><span class="w"> </span><span class="n">bedroom</span><span class="p">.</span><span class="w">
+
+</span><span class="kr">Start</span><span class="w"> </span><span class="kr">at</span><span class="w"> </span><span class="n">bedroom</span><span class="p">.</span><span class="w">
+</span><span class="dl">"</span><span class="s2">You're late for work!</span><span class="se">$n</span><span class="s2">Quickly, take a shower,
+ wear that uniform an leave the flat...</span><span class="dl">"</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -954,7 +1186,13 @@ Also, we&#8217;ll treat the uniform as a single clothing item, for the purpose h
 </div>
 <div class="listingblock tutorial">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> uniform <span class="hl kwa">IsA</span> clothing <span class="hl kwa">at</span> bedroom<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Has</span> ex <span class="hl sng">&quot;It&#39;s your waiter uniform, spotless as usual.&quot;</span><span class="hl kwa">.</span>&#x000A;  <span class="hl slc">-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>&#x000A;  <span class="hl slc">-- No need to worry about layer coverage attributes here.</span>&#x000A;  <span class="hl slc">-- We&#39;ll stick to the default values (all layers = zero).</span>&#x000A;  <span class="hl slc">-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>&#x000A;<span class="hl kwa">End the</span> uniform<span class="hl kwa">.</span></code></pre>
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">The</span><span class="w"> </span><span class="n">uniform</span><span class="w"> </span><span class="kr">IsA</span><span class="w"> </span><span class="n">clothing</span><span class="w"> </span><span class="kr">at</span><span class="w"> </span><span class="n">bedroom</span><span class="p">.</span><span class="w">
+  </span><span class="kr">Has</span><span class="w"> </span><span class="n">ex</span><span class="w"> </span><span class="dl">"</span><span class="s2">It's your waiter uniform, spotless as usual.</span><span class="dl">"</span><span class="p">.</span><span class="w">
+  </span><span class="c1">-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><span class="w">
+  </span><span class="c1">-- No need to worry about layer coverage attributes here.</span><span class="w">
+  </span><span class="c1">-- We'll stick to the default values (all layers = zero).</span><span class="w">
+  </span><span class="c1">-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><span class="w">
+</span><span class="kr">End</span><span class="w"> </span><span class="kr">the</span><span class="w"> </span><span class="n">uniform</span><span class="p">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -963,7 +1201,26 @@ We&#8217;ll create it as an object and add to it the <code>take</code> verb.</p>
 </div>
 <div class="listingblock tutorial">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> shower <span class="hl kwa">IsA</span> <span class="hl kwb">object</span> <span class="hl kwa">at</span> bedroom<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Name</span> shower stall<span class="hl kwa">. Name</span> shower<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Is not</span> taken<span class="hl kwa">.</span> <span class="hl slc">-- i.e. the Hero hasn&#39;t yet taken his shower.</span>&#x000A;&#x000A;  <span class="hl kwa">Verb</span> take&#x000A;    <span class="hl kwa">Check this is not</span> taken&#x000A;      <span class="hl kwa">else</span> <span class="hl sng">&quot;There&#39;s no time left for a second shower.&quot;</span>&#x000A;    <span class="hl kwa">And</span> uniform <span class="hl kwa">not in</span> <span class="hl kwc">hero</span>&#x000A;      <span class="hl kwa">else</span> <span class="hl sng">&quot;You should&quot;</span>&#x000A;        <span class="hl kwa">If</span> uniform <span class="hl kwa">is</span> worn <span class="hl kwa">then</span>&#x000A;          <span class="hl sng">&quot;remove&quot;</span>&#x000A;        <span class="hl kwa">else</span>&#x000A;          <span class="hl sng">&quot;drop&quot;</span>&#x000A;        <span class="hl kwa">end if.</span>&#x000A;        <span class="hl sng">&quot;your uniform first!&quot;</span>&#x000A;    <span class="hl kwa">Does only</span>&#x000A;      <span class="hl sng">&quot;You take a quick shower.&quot;</span>&#x000A;      <span class="hl kwa">Make this</span> taken<span class="hl kwa">.</span> <span class="hl slc">-- the Hero has showered.</span>&#x000A;  <span class="hl kwa">End verb.</span>&#x000A;<span class="hl kwa">End the</span> shower<span class="hl kwa">.</span></code></pre>
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">The</span><span class="w"> </span><span class="n">shower</span><span class="w"> </span><span class="kr">IsA</span><span class="w"> </span><span class="nb">object</span><span class="w"> </span><span class="kr">at</span><span class="w"> </span><span class="n">bedroom</span><span class="p">.</span><span class="w">
+  </span><span class="kr">Name</span><span class="w"> </span><span class="n">shower</span><span class="w"> </span><span class="n">stall</span><span class="p">.</span><span class="w"> </span><span class="kr">Name</span><span class="w"> </span><span class="n">shower</span><span class="p">.</span><span class="w">
+  </span><span class="kr">Is</span><span class="w"> </span><span class="kr">not</span><span class="w"> </span><span class="n">taken</span><span class="p">.</span><span class="w"> </span><span class="c1">-- i.e. the Hero hasn't yet taken his shower.</span><span class="w">
+
+  </span><span class="kr">Verb</span><span class="w"> </span><span class="n">take</span><span class="w">
+    </span><span class="kr">Check</span><span class="w"> </span><span class="kr">this</span><span class="w"> </span><span class="kr">is</span><span class="w"> </span><span class="kr">not</span><span class="w"> </span><span class="n">taken</span><span class="w">
+      </span><span class="kr">else</span><span class="w"> </span><span class="dl">"</span><span class="s2">There's no time left for a second shower.</span><span class="dl">"</span><span class="w">
+    </span><span class="kr">And</span><span class="w"> </span><span class="n">uniform</span><span class="w"> </span><span class="kr">not</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nx">hero</span><span class="w">
+      </span><span class="kr">else</span><span class="w"> </span><span class="dl">"</span><span class="s2">You should</span><span class="dl">"</span><span class="w">
+        </span><span class="kr">If</span><span class="w"> </span><span class="n">uniform</span><span class="w"> </span><span class="kr">is</span><span class="w"> </span><span class="n">worn</span><span class="w"> </span><span class="kr">then</span><span class="w">
+          </span><span class="dl">"</span><span class="s2">remove</span><span class="dl">"</span><span class="w">
+        </span><span class="kr">else</span><span class="w">
+          </span><span class="dl">"</span><span class="s2">drop</span><span class="dl">"</span><span class="w">
+        </span><span class="kr">end</span><span class="w"> </span><span class="kr">if</span><span class="p">.</span><span class="w">
+        </span><span class="dl">"</span><span class="s2">your uniform first!</span><span class="dl">"</span><span class="w">
+    </span><span class="kr">Does</span><span class="w"> </span><span class="kr">only</span><span class="w">
+      </span><span class="dl">"</span><span class="s2">You take a quick shower.</span><span class="dl">"</span><span class="w">
+      </span><span class="kr">Make</span><span class="w"> </span><span class="kr">this</span><span class="w"> </span><span class="n">taken</span><span class="p">.</span><span class="w"> </span><span class="c1">-- the Hero has showered.</span><span class="w">
+  </span><span class="kr">End</span><span class="w"> </span><span class="kr">verb</span><span class="p">.</span><span class="w">
+</span><span class="kr">End</span><span class="w"> </span><span class="kr">the</span><span class="w"> </span><span class="n">shower</span><span class="p">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -971,7 +1228,14 @@ We&#8217;ll create it as an object and add to it the <code>take</code> verb.</p>
 </div>
 <div class="listingblock tutorial">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">And</span> uniform <span class="hl kwa">not in</span> <span class="hl kwc">hero</span>&#x000A;  <span class="hl kwa">else</span> <span class="hl sng">&quot;You should&quot;</span>&#x000A;    <span class="hl kwa">If</span> uniform <span class="hl kwa">is</span> worn <span class="hl kwa">then</span>&#x000A;      <span class="hl sng">&quot;remove&quot;</span>&#x000A;    <span class="hl kwa">else</span>&#x000A;      <span class="hl sng">&quot;drop&quot;</span>&#x000A;    <span class="hl kwa">end if.</span>&#x000A;    <span class="hl sng">&quot;your uniform first!&quot;</span></code></pre>
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">And</span><span class="w"> </span><span class="n">uniform</span><span class="w"> </span><span class="kr">not</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nx">hero</span><span class="w">
+  </span><span class="kr">else</span><span class="w"> </span><span class="dl">"</span><span class="s2">You should</span><span class="dl">"</span><span class="w">
+    </span><span class="kr">If</span><span class="w"> </span><span class="n">uniform</span><span class="w"> </span><span class="kr">is</span><span class="w"> </span><span class="n">worn</span><span class="w"> </span><span class="kr">then</span><span class="w">
+      </span><span class="dl">"</span><span class="s2">remove</span><span class="dl">"</span><span class="w">
+    </span><span class="kr">else</span><span class="w">
+      </span><span class="dl">"</span><span class="s2">drop</span><span class="dl">"</span><span class="w">
+    </span><span class="kr">end</span><span class="w"> </span><span class="kr">if</span><span class="p">.</span><span class="w">
+    </span><span class="dl">"</span><span class="s2">your uniform first!</span><span class="dl">"</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1049,7 +1313,21 @@ Edit the <code>bedroom</code> code as follows:</p>
 </div>
 <div class="listingblock tutorial">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">The</span> bedroom <span class="hl kwa">IsA</span> room<span class="hl kwa">.</span>&#x000A;  <span class="hl kwa">Description</span>&#x000A;    <span class="hl sng">&quot;The exit is west.&quot;</span>&#x000A;&#x000A;  <span class="hl kwa">Exit</span> west<span class="hl kwa">,</span> leave <span class="hl kwa">to</span> bedroom <span class="hl slc">-- also allow using &#39;leave&#39; to exit!</span>&#x000A;    <span class="hl kwa">Check</span> uniform <span class="hl kwa">directly in</span> <span class="hl kwc">hero</span> <span class="hl kwa">and</span> uniform <span class="hl kwa">is</span> worn&#x000A;      <span class="hl kwa">else</span> <span class="hl sng">&quot;You can&#39;t leave the house naked!&quot;</span>&#x000A;    <span class="hl kwa">And</span> shower <span class="hl kwa">is</span> taken&#x000A;      <span class="hl kwa">else</span> <span class="hl sng">&quot;Being late is no excuse for not taking a shower!&quot;</span>&#x000A;    <span class="hl kwa">Does</span>&#x000A;      <span class="hl sng">&quot;You dart out of your flat and make it to</span>&#x000A;<span class="hl sng">       the restaurant just in time.</span>&#x000A;<span class="hl sng"></span>       <span class="hl esc">$p</span><span class="hl sng">*** You&#39;ve won! ***&quot;</span> <span class="hl kwa">Quit.</span>&#x000A;  <span class="hl kwa">End exit.</span>&#x000A;<span class="hl kwa">End the</span> bedroom<span class="hl kwa">.</span></code></pre>
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">The</span><span class="w"> </span><span class="n">bedroom</span><span class="w"> </span><span class="kr">IsA</span><span class="w"> </span><span class="n">room</span><span class="p">.</span><span class="w">
+  </span><span class="kr">Description</span><span class="w">
+    </span><span class="dl">"</span><span class="s2">The exit is west.</span><span class="dl">"</span><span class="w">
+
+  </span><span class="kr">Exit</span><span class="w"> </span><span class="n">west</span><span class="p">,</span><span class="w"> </span><span class="n">leave</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="n">bedroom</span><span class="w"> </span><span class="c1">-- also allow using 'leave' to exit!</span><span class="w">
+    </span><span class="kr">Check</span><span class="w"> </span><span class="n">uniform</span><span class="w"> </span><span class="kr">directly</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nx">hero</span><span class="w"> </span><span class="kr">and</span><span class="w"> </span><span class="n">uniform</span><span class="w"> </span><span class="kr">is</span><span class="w"> </span><span class="n">worn</span><span class="w">
+      </span><span class="kr">else</span><span class="w"> </span><span class="dl">"</span><span class="s2">You can't leave the house naked!</span><span class="dl">"</span><span class="w">
+    </span><span class="kr">And</span><span class="w"> </span><span class="n">shower</span><span class="w"> </span><span class="kr">is</span><span class="w"> </span><span class="n">taken</span><span class="w">
+      </span><span class="kr">else</span><span class="w"> </span><span class="dl">"</span><span class="s2">Being late is no excuse for not taking a shower!</span><span class="dl">"</span><span class="w">
+    </span><span class="kr">Does</span><span class="w">
+      </span><span class="dl">"</span><span class="s2">You dart out of your flat and make it to
+       the restaurant just in time.
+       </span><span class="se">$p</span><span class="s2">*** You've won! ***</span><span class="dl">"</span><span class="w"> </span><span class="kr">Quit</span><span class="p">.</span><span class="w">
+  </span><span class="kr">End</span><span class="w"> </span><span class="kr">exit</span><span class="p">.</span><span class="w">
+</span><span class="kr">End</span><span class="w"> </span><span class="kr">the</span><span class="w"> </span><span class="n">bedroom</span><span class="p">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1057,7 +1335,8 @@ Edit the <code>bedroom</code> code as follows:</p>
 </div>
 <div class="listingblock tutorial">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">Check</span> uniform <span class="hl kwa">directly in</span> <span class="hl kwc">hero</span> <span class="hl kwa">and</span> uniform <span class="hl kwa">is</span> worn&#x000A;  <span class="hl kwa">else</span> <span class="hl sng">&quot;You can&#39;t leave the house naked!&quot;</span></code></pre>
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">Check</span><span class="w"> </span><span class="n">uniform</span><span class="w"> </span><span class="kr">directly</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nx">hero</span><span class="w"> </span><span class="kr">and</span><span class="w"> </span><span class="n">uniform</span><span class="w"> </span><span class="kr">is</span><span class="w"> </span><span class="n">worn</span><span class="w">
+  </span><span class="kr">else</span><span class="w"> </span><span class="dl">"</span><span class="s2">You can't leave the house naked!</span><span class="dl">"</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1186,7 +1465,15 @@ We&#8217;ll be focusing just on the various types of clothes, so to keep things 
 </div>
 <div class="listingblock tutorial">
 <div class="content">
-<pre class="highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="hl kwa">Import</span> &#39;library.i&#39;<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> my_game <span class="hl kwa">IsA</span> DEFINITION_BLOCK&#x000A;<span class="hl kwa">End the.</span>&#x000A;&#x000A;<span class="hl kwa">The</span> bedroom <span class="hl kwa">IsA</span> room<span class="hl kwa">.</span>&#x000A;<span class="hl kwa">End the</span> bedroom<span class="hl kwa">.</span>&#x000A;&#x000A;<span class="hl kwa">Start at</span> bedroom<span class="hl kwa">.</span></code></pre>
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">Import</span><span class="w"> </span><span class="dl">'</span><span class="s1">library.i</span><span class="dl">'</span><span class="p">.</span><span class="w">
+
+</span><span class="kr">The</span><span class="w"> </span><span class="n">my_game</span><span class="w"> </span><span class="kr">IsA</span><span class="w"> </span><span class="n">DEFINITION_BLOCK</span><span class="w">
+</span><span class="kr">End</span><span class="w"> </span><span class="kr">the</span><span class="p">.</span><span class="w">
+
+</span><span class="kr">The</span><span class="w"> </span><span class="n">bedroom</span><span class="w"> </span><span class="kr">IsA</span><span class="w"> </span><span class="n">room</span><span class="p">.</span><span class="w">
+</span><span class="kr">End</span><span class="w"> </span><span class="kr">the</span><span class="w"> </span><span class="n">bedroom</span><span class="p">.</span><span class="w">
+
+</span><span class="kr">Start</span><span class="w"> </span><span class="kr">at</span><span class="w"> </span><span class="n">bedroom</span><span class="p">.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">

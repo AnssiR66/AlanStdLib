@@ -223,7 +223,7 @@ This section needs to be rewritten because thanks to syntax highlighting we no l
 (See link:https://github.com/AnssiR66/AlanStdLib/issues/86[Issue #86])
 
 * [ ] _StdLib Manual_ examples will adopt prose-casing.
-** [ ] Create new Highlight syntax for ALAN + StdLib, to highlight predefined library elements in a different color.
+** [ ] Create new Rouge syntax for ALAN + StdLib, to highlight predefined library elements in a different color.
 *** [ ] Update the text of this section accordingly.
 * [ ] _StdLib_ source excerpts will be shown in a darker theme, and with uppercase keywords (the library follows its own styling conventions).
 ================================

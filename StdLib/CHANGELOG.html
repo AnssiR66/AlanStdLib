@@ -438,15 +438,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-/* Custom styles for Alan StdLib */
-/* FiraCode font (with ligatures) */
-@font-face {
-  font-family: "Fira Code";
-  src: url("https://unpkg.com/firacode/distr/eot/FiraCode-Regular.eot");
-  src: url("https://unpkg.com/firacode/distr/eot/FiraCode-Regular.eot") format("embedded-opentype"), url("https://unpkg.com/firacode/distr/woff2/FiraCode-Regular.woff2") format("woff2"), url("https://unpkg.com/firacode/distr/woff/FiraCode-Regular.woff") format("woff"), url("https://unpkg.com/firacode/distr/ttf/FiraCode-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
+/* Alan Code Notation Mockup */
+.listingblock.alan pre {
+  color: #333333;
+  background: #F8F8F8;
 }
+
 /* Shell/CMD */
 div.literalblock.shell pre {
   background-color: #0C0C0C;
@@ -478,254 +475,264 @@ span.play,
 }
 span.play span.comment,
 .exampleblock.gametranscript > .content span.comment {
-  color: #bcbcbc;
+  color: #BCBCBC;
 }
 span.play em,
 .exampleblock.gametranscript > .content em {
-  color: #d90000;
+  color: #D90000;
 }
 
-/* Highlight Default Theme: Base16 Eighties */
-.listingblock code[data-lang]::before {
-  color: #a09f93;
+/* Commentary Blocks */
+div.openblock.commentary {
+  padding-left: 6em;
 }
 
-.listingblock pre[class=highlight][lang] {
-  background-color: #2d2d2d;
-  border-radius: 4px;
-  border: 1px solid #a09f93;
-}
-.listingblock pre[class=highlight][lang] > code {
-  color: #d3d0c8;
-  font-family: Consolas, Monaco, "Courier New", Courier, monospace;
-  font-size: 1em;
-}
-.listingblock pre[class=highlight][lang] .hl {
-  color: #d3d0c8;
-}
-.listingblock pre[class=highlight][lang] .hl.num {
-  color: #f99157;
-}
-.listingblock pre[class=highlight][lang] .hl.esc {
-  color: #f99157;
-}
-.listingblock pre[class=highlight][lang] .hl.ipl {
-  color: #d27b53;
-}
-.listingblock pre[class=highlight][lang] .hl.sng {
-  color: #99cc99;
-}
-.listingblock pre[class=highlight][lang] .hl.ppc {
-  color: #cc99cc;
-}
-.listingblock pre[class=highlight][lang] .hl.pps {
-  color: #66cccc;
-}
-.listingblock pre[class=highlight][lang] .hl.com {
-  color: #a09f93;
-  font-style: italic;
-}
-.listingblock pre[class=highlight][lang] .hl.slc {
-  color: #a09f93;
-  font-style: italic;
-}
-.listingblock pre[class=highlight][lang] .hl.lin {
-  color: #747369;
-}
-.listingblock pre[class=highlight][lang] .hl.opt {
-  color: #d3d0c8;
-}
-.listingblock pre[class=highlight][lang] .hl.kwa {
-  color: #f2777a;
-}
-.listingblock pre[class=highlight][lang] .hl.kwb {
-  color: #ffcc66;
-}
-.listingblock pre[class=highlight][lang] .hl.kwc {
-  color: #6699cc;
-}
-.listingblock pre[class=highlight][lang] .hl.kwd {
-  color: #cc99cc;
-}
-.listingblock pre[class=highlight][lang] .hl.kwde {
-  color: #66cccc;
-}
-.listingblock pre[class=highlight][lang] .hl.kwf {
-  color: #d27b53;
+/* Inline Highlighting */
+span.green {
+  background-color: #A3FF8A;
 }
 
 /* Highlight Theme for Alan -- based on "github.com style" for highlight.js, by Vasily Polovnyov */
 .listingblock code[data-lang=alan]::before {
-  color: #a09f93;
+  color: #A09F93;
 }
 
-.listingblock pre[class=highlight][lang=alan] {
+.listingblock pre[class~=rouge][lang=alan] {
   background-color: #F8F8F8;
   border-radius: 4px;
   border: 1px solid #F8F8F8;
 }
-.listingblock pre[class=highlight][lang=alan] > code {
-  color: #333;
-  font-family: "Fira Code", Monaco, "Courier New", Courier, monospace;
+.listingblock pre[class~=rouge][lang=alan] > code {
+  color: #333333;
+  font-family: inherit;
   font-size: inherit;
 }
-.listingblock pre[class=highlight][lang=alan] .hl {
-  color: #333;
+.listingblock pre[class~=rouge][lang=alan] > code > span {
+  font-style: normal;
+  font-weight: normal;
 }
-.listingblock pre[class=highlight][lang=alan] .hl.num {
-  color: #333;
+.listingblock pre[class~=rouge][lang=alan] > code > span > .conum[data-value] {
+  background: black !important;
+  color: white !important;
 }
-.listingblock pre[class=highlight][lang=alan] .hl.esc {
-  color: #ff980b;
+.listingblock pre[class~=rouge][lang=alan] > code > span.m {
+  color: #333333;
 }
-.listingblock pre[class=highlight][lang=alan] .hl.ipl {
-  color: #d572f1;
+.listingblock pre[class~=rouge][lang=alan] > code > span.lin {
+  color: #999988;
 }
-.listingblock pre[class=highlight][lang=alan] .hl.sng {
-  color: #008080;
+.listingblock pre[class~=rouge][lang=alan] > code > span.n {
+  color: #333333;
 }
-.listingblock pre[class=highlight][lang=alan] .hl.slc {
-  color: #998;
+.listingblock pre[class~=rouge][lang=alan] > code > span.o {
+  color: #333333;
 }
-.listingblock pre[class=highlight][lang=alan] .hl.lin {
-  color: #998;
-}
-.listingblock pre[class=highlight][lang=alan] .hl.opt {
-  color: #333;
-}
-.listingblock pre[class=highlight][lang=alan] .hl.kwa {
+.listingblock pre[class~=rouge][lang=alan] > code > span.p {
   color: #990000;
 }
-.listingblock pre[class=highlight][lang=alan] .hl.kwb {
+.listingblock pre[class~=rouge][lang=alan] > code > span.dl {
+  color: #008080;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.s2 {
+  color: #008080;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.s1 {
+  color: #008080;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.se {
+  color: #FF980B;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.si {
+  color: #D572F1;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.c1 {
+  color: #999988;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.cm {
+  color: #999988;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.kr {
+  color: #990000;
+}
+.listingblock pre[class~=rouge][lang=alan] > code > span.nb {
   color: #000080;
 }
-.listingblock pre[class=highlight][lang=alan] .hl.kwc {
+.listingblock pre[class~=rouge][lang=alan] > code > span.nx {
   color: #000080;
 }
-.listingblock pre[class=highlight][lang=alan] mark {
-  background-color: #ccff00;
-  background-image: linear-gradient(to right, #ccff00 0%, #f5ff87 100%);
+.listingblock pre[class~=rouge][lang=alan] > code mark {
+  background-color: #CCFF00;
+  background-image: linear-gradient(to right, #CCFF00 0%, #F5FF87 100%);
 }
-.listingblock pre[class=highlight][lang=alan] span.green {
-  background-color: #a3ff8a;
-  background-image: linear-gradient(to right, #a3ff8a 0%, rgba(163, 255, 138, 0.5) 100%);
+.listingblock pre[class~=rouge][lang=alan] > code span.green {
+  background-color: #A3FF8A;
+  background-image: linear-gradient(to right, #A3FF8A 0%, rgba(163, 255, 138, 0.5) 100%);
 }
 
-/* Highlight Theme for Alan Library -- Base16 Eighties, by Chris Kempson */
+/* Rouge Theme for Alan Library -- Base16 Eighties, by Chris Kempson */
 .listingblock.lib code[data-lang=alan]::before {
-  color: #a09f93;
+  color: #A09F93;
 }
 
-.listingblock.lib pre[class=highlight][lang=alan] {
-  background-color: #2d2d2d;
+.listingblock.lib pre[class~=rouge][lang=alan] {
+  background-color: #2D2D2D;
   border-radius: 4px;
-  border: 1px solid #a09f93;
+  border: 1px solid #A09F93;
 }
-.listingblock.lib pre[class=highlight][lang=alan] > code {
-  color: #d3d0c8;
-  font-family: "Fira Code", Monaco, "Courier New", Courier, monospace;
+.listingblock.lib pre[class~=rouge][lang=alan] > code {
+  color: #D3D0C8;
+  font-family: inherit;
   font-size: inherit;
 }
-.listingblock.lib pre[class=highlight][lang=alan] .hl {
-  color: #d3d0c8;
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span {
+  font-style: normal;
+  font-weight: normal;
 }
-.listingblock.lib pre[class=highlight][lang=alan] .hl.num {
-  color: #f99157;
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span > .conum[data-value] {
+  background: white !important;
+  color: black !important;
 }
-.listingblock.lib pre[class=highlight][lang=alan] .hl.esc {
-  color: #f99157;
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.m {
+  color: #F99157;
 }
-.listingblock.lib pre[class=highlight][lang=alan] .hl.ipl {
-  color: #d27b53;
-}
-.listingblock.lib pre[class=highlight][lang=alan] .hl.sng {
-  color: #99cc99;
-}
-.listingblock.lib pre[class=highlight][lang=alan] .hl.slc {
-  color: #a09f93;
-}
-.listingblock.lib pre[class=highlight][lang=alan] .hl.lin {
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.lin {
   color: #747369;
 }
-.listingblock.lib pre[class=highlight][lang=alan] .hl.opt {
-  color: #d3d0c8;
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.n {
+  color: #D3D0C8;
 }
-.listingblock.lib pre[class=highlight][lang=alan] .hl.kwa {
-  color: #f2777a;
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.o {
+  color: #D3D0C8;
 }
-.listingblock.lib pre[class=highlight][lang=alan] .hl.kwb {
-  color: #ffcc66;
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.p {
+  color: #F2777A;
 }
-.listingblock.lib pre[class=highlight][lang=alan] .hl.kwc {
-  color: #6699cc;
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.dl {
+  color: #008080;
 }
-.listingblock.lib pre[class=highlight][lang=alan] mark {
-  background-color: #ccff00;
-  background-image: linear-gradient(to right, #ccff00 0%, #f5ff87 100%);
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.s2 {
+  color: #99CC99;
 }
-.listingblock.lib pre[class=highlight][lang=alan] span.green {
-  background-color: #a3ff8a;
-  background-image: linear-gradient(to right, #a3ff8a 0%, rgba(163, 255, 138, 0.5) 100%);
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.s1 {
+  color: #99CC99;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.se {
+  color: #F99157;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.si {
+  color: #D27B53;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.c1 {
+  color: #999988;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.cm {
+  color: #999988;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.kr {
+  color: #F2777A;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.nb {
+  color: #FFCC66;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code > span.nx {
+  color: #6699CC;
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code mark {
+  background-color: #CCFF00;
+  background-image: linear-gradient(to right, #CCFF00 0%, #F5FF87 100%);
+}
+.listingblock.lib pre[class~=rouge][lang=alan] > code span.green {
+  background-color: #A3FF8A;
+  background-image: linear-gradient(to right, #A3FF8A 0%, rgba(163, 255, 138, 0.5) 100%);
 }
 
-/* Highlight Theme for Alan tutorial -- Base16 Google, by  Seth Wright */
+/* Rouge Theme for Alan tutorial -- Base16 Google, by Seth Wright */
 .listingblock.tutorial code[data-lang=alan]::before {
-  color: #a09f93;
+  color: #A09F93;
 }
 
-.listingblock.tutorial pre[class=highlight][lang=alan] {
-  background-color: #ffffff;
+.listingblock.tutorial pre[class~=rouge][lang=alan] {
+  background-color: #FFFFFF;
   border-radius: 4px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #E0E0E0;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] > code {
-  color: #373b41;
-  font-family: "Fira Code", Monaco, "Courier New", Courier, monospace;
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code {
+  color: #373B41;
+  font-family: inherit;
   font-size: inherit;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl {
-  color: #373b41;
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span {
+  font-style: normal;
+  font-weight: normal;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.num {
-  color: #373b41;
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span > .conum[data-value] {
+  background: black !important;
+  color: white !important;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.esc {
-  color: #F96A38;
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.m {
+  color: #373B41;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.ipl {
-  color: #3971ED;
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.lin {
+  color: #C5C8C6;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.sng {
-  color: #198844;
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.n {
+  color: #373B41;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.slc {
-  color: #969896;
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.o {
+  color: #373B41;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.lin {
-  color: #c5c8c6;
-}
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.opt {
-  color: #373b41;
-}
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.kwa {
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.p {
   color: #CC342B;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.kwb {
-  color: #FBA922;
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.dl {
+  color: #198844;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] .hl.kwc {
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.s2 {
+  color: #198844;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.s1 {
+  color: #198844;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.se {
+  color: #F96A38;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.si {
   color: #3971ED;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] mark {
-  background-color: #f5ff87;
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.c1 {
+  color: #969896;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.cm {
+  color: #969896;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.kr {
+  color: #CC342B;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.nb {
+  color: #FBA922;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code > span.nx {
+  color: #3971ED;
+}
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code mark {
+  background-color: #F5FF87;
   background-image: none;
 }
-.listingblock.tutorial pre[class=highlight][lang=alan] span.green {
+.listingblock.tutorial pre[class~=rouge][lang=alan] > code span.green {
   background-color: #dbf8e6;
   background-image: none;
 }
 
-/*# sourceMappingURL=styles.css.map */
+/* BNF */
+pre[lang=bnf] {
+  background: #FFEBD6;
+}
+pre[lang=bnf] > code.language-bnf[data-lang=bnf] {
+  color: #492E11;
+  background: #FFEBD6;
+}
+
+/*# sourceMappingURL=rouge.css.map */
 </style>
 </head>
 <body class="article toc2 toc-left">

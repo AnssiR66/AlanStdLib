@@ -15,8 +15,6 @@ This directory contains the source files and assets required to build the docume
     - [Toolchain Details](#toolchain-details)
     - [Automation Benefits](#automation-benefits)
 - [System Requirements](#system-requirements)
-    - [Installing Ruby on Windows](#installing-ruby-on-windows)
-    - [Installing Asciidoctor](#installing-asciidoctor)
 
 <!-- /MarkdownTOC -->
 
@@ -65,7 +63,7 @@ For every source documentation folder `<foldername>` (defined in `$foldersList`)
     - Convert special characters (that could be interpreted as formatting) into its [predefined Asciidoctor attribute for replacement] equivalent (or its HTML entity equivalent, if no attribute is available).
     - Preserve hard line-breaks by adding ` +` at end-of-line, where required.
     - Style player input in emphasis.
-    - Style comments in player input (`;`) via `#[comment]`..`#`.
+    - Style comments in player input (`;`) via `[.comment]#`..`#`.
     - Hide region tags in player input via ADoc comments.
 4. __Build HTML Docs__ — Convert every `*.asciidoc` document inside the source folder into a standalone HTML file in the destination folder `../extras/<foldername>/`.
 5. __Sanitize Alan Sources__ — Take every Alan source adventure whose name doesn't start with underscore (i.e. `$srcDir/[^_]*.alan`), strip away all [AsciiDoc region-tag comment lines], and copy it to the destination folder. In other words, underscored adventures are for internal documentation use _only_, while the others are (_also_) real examples for end users.
@@ -87,18 +85,9 @@ We call this technique "[Dynamic Examples]".
 To build the document from AsciiDoc to HTML you'll need to install the following tools:
 
 - Bash for Windows
-- [Highlight]
-- [Ruby] + [Asciidoctor]
+- [Ruby] + [Asciidoctor] + [Rouge]
 
-## Installing Ruby on Windows
-
-If you're using Windows, you should install Ruby via [RubyInstaller], which is also available as a [Chocolatey package][Choco Ruby] (see [Chocolatey] and [Chocolatey GUI]).
-
-## Installing Asciidoctor
-
-Once Ruby is installed on your system, open a shell and type:
-
-    gem install asciidoctor
+For details on how to install the above dependencies, see the main README file.
 
 <!-----------------------------------------------------------------------------
                                REFERENCE LINKS
@@ -118,10 +107,6 @@ Once Ruby is installed on your system, open a shell and type:
 
 <!-- project files -->
 
-[docinfo]: ./adoc/docinfo.html
-[rb]: ./adoc/highlight-treeprocessor_mod.rb
-
-
 <!-- dependencies -->
 
 [Chocolatey GUI]: https://chocolatey.org/packages/ChocolateyGUI
@@ -132,7 +117,7 @@ Once Ruby is installed on your system, open a shell and type:
 [Choco Ruby]: https://chocolatey.org/packages/ruby
 
 [Asciidoctor]: https://github.com/asciidoctor/asciidoctor#installation
-[Highlight]: http://www.andre-simon.de/zip/download.php
+[Rouge]: https://github.com/rouge-ruby/rouge "Visit Rouge repository"
 
 <!-- Asciidoctor -->
 

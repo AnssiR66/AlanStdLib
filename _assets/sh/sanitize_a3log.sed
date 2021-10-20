@@ -1,4 +1,4 @@
-# "sanitize_a3log.sed"                  v0.0.2 | 2019/04/09 | by Tristano Ajmone
+# "sanitize_a3log.sed"                  v0.0.3 | 2021/10/20 | by Tristano Ajmone
 # ******************************************************************************
 # *                                                                            *
 # *                         Sanitize Alan Transcripts                          *
@@ -41,7 +41,7 @@
 			# ---------------------
 			# Player Input Comments
 			# ---------------------
-			s/(>[^;]+)(;.*)$/\1[comment]#\2#/
+			s/(>[^;]+)(;.*)$/\1[.comment]#\2#/
 		}
 		# -----------------
 		# fix '>' to '&gt;'

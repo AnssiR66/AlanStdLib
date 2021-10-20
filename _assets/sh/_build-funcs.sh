@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# _build-funcs.sh         v3.0.0 | 2021/07/19 | by Tristano Ajmone, MIT License.
+# _build-funcs.sh         v4.0.0 | 2021/10/20 | by Tristano Ajmone, MIT License.
 ################################################################################
 #                                                                              #
 #                        DOCUMENTATION BUILD FUNCTIONS                         #
@@ -47,8 +47,7 @@ outBasePath="../extras"
 # This script expects the following settings env-vars to be defined elsewhere:
 #
 # - $AlanCompileOpts -> Alan compiler options
-# - $ADocDir         -> path to Asciidoctor assets
-# - $HamlDir         -> path to Haml templates
+# - $RougeDir        -> path to Rouge assets (Asciidoctor highlighter)
 
 # ******************************************************************************
 # *                                                                            *
@@ -138,15 +137,14 @@ function a3logSanitize {
 
 function adoc2html {
 	# ============================================================================
-	# Convert file $1 from AsciiDoc to HTML via Asciidoctor. Requires Highlight
-	# for syntax highlighting code. Custom CSS via docinfo file.
+	# Convert file $1 from AsciiDoc to HTML via Asciidoctor. Requires Rouge for
+	# syntax highlighting code. Custom CSS via docinfo file.
 	# ----------------------------------------------------------------------------
 	# Parameters:
 	# - $1: the input AsciiDOc file to convert.
 	# Required Env Vars:
 	# - $outDir: path of output directory.
-	# - $HamlDir: path to Haml templates.
-	# - $ADocDir: path to Asciidoctor custom extensions.
+	# - $RougeDir: path to Asciidoctor docinfo and custom extensions for Rouge.
 	# ============================================================================
 	printSeparator
 	echo -e "\e[90mCONVERTING: \e[93m$1"
@@ -154,12 +152,12 @@ function adoc2html {
 		--verbose \
 		--safe-mode unsafe \
 		--destination-dir $outDir \
-		--template-dir $HamlDir \
-		--require $ADocDir/highlight-treeprocessor_mod.rb \
-		-a imagesdir=$ImagesDir \
-		-a source-highlighter=highlight \
-		-a docinfodir=$ADocDir \
+		--require $RougeDir/custom-rouge-adapter.rb \
+		-a source-highlighter=rouge \
+		-a rouge-style=thankful_eyes \
+		-a docinfodir=$RougeDir \
 		-a docinfo@=shared-head \
+		-a imagesdir=$ImagesDir \
 		-a data-uri \
 			$1
 }
