@@ -1,4 +1,4 @@
-=begin "Rakefile" v0.0.1 | 2021/10/12 | by Tristano Ajmone
+=begin "Rakefile" v0.0.2 | 2021/10/20 | by Tristano Ajmone
 ================================================================================
 This is an initial Rakefile draft for Alan-StdLib.
 
@@ -13,6 +13,8 @@ require './_assets/rake/globals.rb'
 require './_assets/rake/alan.rb'
 # require './_assets/rake/asciidoc.rb'
 
+# Absolute path to StdLib for ALAN '-include' option:
+$alan_include = "#{$repo_root}/StdLib"
 
 ## Tasks
 ########

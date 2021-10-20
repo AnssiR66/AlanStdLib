@@ -1,7 +1,5 @@
-=begin "alan.rb" | 2021/10/12 | by Tristano Ajmone | MIT License
+=begin "alan.rb" v0.4.0 | 2021/10/20 | by Tristano Ajmone | MIT License
 ================================================================================
-Adapted from "alan.rb" v0.3.1 (2021/09/20) from the ALAN i18n repository
-
 Some custom Rake helper methods for automating common Alan SDK operations that
 we use across different Alan projects.
 Require ALAN SDK >= Beta8 and UFT-8 encoded sources and solutions.
@@ -71,19 +69,40 @@ def CreateTranscriptingTasksFromFolder(target_task, target_folder, dependencies)
 end
 
 
-## Rules
-########
+## Rake Rules
+#############
+
+## Compile ALAN Adventures
+##########################
+
+# To allow this to work with different repositories, the path for the '-include'
+# option (if any) is stored in the global variable '$alan_include', which each
+# project can optionally define in its main Rakefile.
+#
+# '$alan_include' can contain an absolute or relative path.
+#
+# This is a temporary solution with limited use coverage, e.g. it won't work
+# in projects using different libraries or requiring multiple include paths
+# (e.g. for other extensions). Until a better solution is found, complex repos
+# will have to use 'Import' statements with relative paths to work around this
+# limitation, e.g.
+#
+#   Import '../path/somefile.i'.
+#
+# Instead of:
+#
+#   Import 'somefile.i'.
 
 rule ".a3c" => ".alan" do |t|
-  lib_dir = "#{$repo_root}/StdLib"
   adv_src = t.source.pathmap("%f")
   adv_dir = t.source.pathmap("%d")
+  inc_opt = " -include #{$alan_include}" unless !$alan_include
 
   TaskHeader("Compiling: #{t.source}")
 
   cd "#{$repo_root}/#{adv_dir}"
   begin
-    alan_cmd = "alan -include #{lib_dir} #{adv_src}"
+    alan_cmd = "alan#{inc_opt} #{adv_src}"
     puts alan_cmd
     stdout, stderr, status = Open3.capture3(alan_cmd)
     raise unless status.success?
