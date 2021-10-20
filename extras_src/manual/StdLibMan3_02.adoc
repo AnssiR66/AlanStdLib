@@ -116,9 +116,9 @@ and the player will be presented with your custom descriptions for the living ro
 
 
 [example,role="gametranscript"]
-=========================================
-include::./livingroom.a3t[tag=livingroom]
-=========================================
+==============================================
+include::./livingroom.a3t-adoc[tag=livingroom]
+==============================================
 
 
 [NOTE]
@@ -131,15 +131,15 @@ You can even change the description of a room's floor, walls or ceiling mid-game
 
 .Example: Changing room-objects description mid-game (from {livingroom_alan})
 [source,alan]
-------------------------------------------------
+----------------------------------------
 include::./livingroom.alan[tag=trapdoor]
-------------------------------------------------
+----------------------------------------
 
 
 [example,role="gametranscript"]
-=======================================
-include::./livingroom.a3t[tag=trapdoor]
-=======================================
+============================================
+include::./livingroom.a3t-adoc[tag=trapdoor]
+============================================
 
 
 [[sec.site]]
@@ -179,9 +179,9 @@ include::./meadow.alan[tag=change-descs]
 
 
 [example,role="gametranscript"]
-=======================================
-include::./meadow.a3t[tag=change-descs]
-=======================================
+============================================
+include::./meadow.a3t-adoc[tag=change-descs]
+============================================
 
 
 [NOTE]
@@ -363,23 +363,23 @@ As you can see in the following transcript, while the basement location is `NOT 
 
 
 [example,role="gametranscript"]
-=================================================
-include::./basement.a3t[tag=unlit-room-example-1]
-=================================================
+======================================================
+include::./basement.a3t-adoc[tag=unlit-room-example-1]
+======================================================
 
 Attempting to use a light source has no effect on this type of dark location:
 
 [example,role="gametranscript"]
-=================================================
-include::./basement.a3t[tag=unlit-room-example-2]
-=================================================
+======================================================
+include::./basement.a3t-adoc[tag=unlit-room-example-2]
+======================================================
 
 By returning upstairs and turning on the light switch the basement becomes `lit`, and the room's normal behavior is restored:
 
 [example,role="gametranscript"]
-=================================================
-include::./basement.a3t[tag=unlit-room-example-3]
-=================================================
+======================================================
+include::./basement.a3t-adoc[tag=unlit-room-example-3]
+======================================================
 
 
 The same mechanism could be extended so that a single light switch toggles the illumination state of more than just a single location, by ensuring that the `turn_on` verb will affect the `lit` attributes of all the target locations.
@@ -461,9 +461,9 @@ When the hero enters the sewer tunnels, they'll be dark by default, so the locat
 
 
 [example,role="gametranscript"]
-=================================================
-include::./sewers.a3t[tag=dark-location-example1]
-=================================================
+======================================================
+include::./sewers.a3t-adoc[tag=dark-location-example1]
+======================================================
 
 In darkness, you can check your inventory, but you can't manipulate things other than turn on a `lightsource` and drop items you're carrying.
 You can traverse exits normally, and use verbs that don't require seeing, such as _smell_, _listen_, _think_, and similar.
@@ -476,25 +476,25 @@ When the hero switches on the flashlight, the location will automatically become
 
 
 [example,role="gametranscript"]
-=================================================
-include::./sewers.a3t[tag=dark-location-example2]
-=================================================
+======================================================
+include::./sewers.a3t-adoc[tag=dark-location-example2]
+======================================================
 
 Of course, switching off the flashlight will make the location dark again, since there are no other light sources in this location:
 
 
 [example,role="gametranscript"]
-=================================================
-include::./sewers.a3t[tag=dark-location-example3]
-=================================================
+======================================================
+include::./sewers.a3t-adoc[tag=dark-location-example3]
+======================================================
 
 As a final note, the hero could also switch on the flashlight _before_ entering the sewer tunnels, so they won't be dark to start with:
 
 
 [example,role="gametranscript"]
-=================================================
-include::./sewers.a3t[tag=dark-location-example4]
-=================================================
+======================================================
+include::./sewers.a3t-adoc[tag=dark-location-example4]
+======================================================
 
 
 
@@ -539,9 +539,9 @@ As you can see from the following transcript, the forest only behaves as a `DARK
 
 
 [example,role="gametranscript"]
-==============================================
-include::./forest.a3t[tag=forced-lit-example1]
-==============================================
+===================================================
+include::./forest.a3t-adoc[tag=forced-lit-example1]
+===================================================
 
 
 === Dual Location Approach

@@ -181,9 +181,9 @@ Both "`alan.exe`" and "`arun.exe`" can be found inside the Alan SDK (Development
 
 # How to Run the Tests
 
-The test suite is automated via Rake, which you can invoke via the command line.
+The test suite is automated via [Rake], which you can invoke via the command line by typing `rake`.
 
-To run/update the tests just type in your terminal:
+To run/update only the tests (i.e. without updating the documentation), type in your terminal:
 
     rake tests
 
@@ -262,8 +262,9 @@ For more information, please refer to <http://unlicense.org/>
                                REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
-
 [Tristano Ajmone]: https://github.com/tajmone "Visit Tristano Ajmone's profile on GitHub"
+
+[Rake]: https://ruby.github.io/rake/ "Visit Rake website"
 
 <!-- project files -->
 

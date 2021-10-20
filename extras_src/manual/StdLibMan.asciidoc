@@ -17,15 +17,16 @@
 :section-refsig: Sec.
 :appendix-refsig: App.
 // Misc Settings:
+:data-uri: true
 :experimental: true
 :icons: font
 :linkattrs: true
 :reproducible: true
 :sectanchors:
-// TEMP:
-:docinfodir: ../adoc
+// REPO ENV:
 :docinfo: shared-head
-
+:docinfodir: ../../_assets/rouge
+:imagesdir: ../../_assets/images
 // CUSTOM ATTRIBUTES DEFINITIONS:
 include::StdLibMan-inc_attributes.adoc[]
 

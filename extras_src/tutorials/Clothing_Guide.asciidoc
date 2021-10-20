@@ -12,11 +12,16 @@ v3, 2021-10-12
 :xrefstyle: short
 :section-refsig: Sect.
 // Misc Settings:
+:data-uri: true
 :experimental: true
 :icons: font
 :linkattrs: true
 :reproducible: true
 :sectanchors:
+// REPO ENV:
+:docinfo: shared-head
+:docinfodir: ../../_assets/rouge
+:imagesdir: ../../_assets/images
 
 
 // *****************************************************************************
@@ -156,8 +161,8 @@ Now let's dive into some practical examples of how to use clothing, from simple 
 === Simple Clothing
 
 :adv-source:  clothing-01-simple.alan
-:adv-transc1: clothing-01-simple__play1.a3t
-:adv-transc2: clothing-01-simple__play2.a3t
+:adv-transc1: clothing-01-simple__play1.a3t-adoc
+:adv-transc2: clothing-01-simple__play2.a3t-adoc
 
 * link:{adv-source}[`{adv-source}`]
 
@@ -231,7 +236,7 @@ include::./{adv-transc1}[]
 *VERBATIM TRANSCRIPT* -- We could also include the unsanitized version of the game transcript, in case it relied on monospace fonts (eg. debgugging):
 
 .............................................................
-include::./clothing-01-simple__play1.a3t[]
+include::./clothing-01-simple__play1.a3t-adoc[]
 .............................................................
 
 But we'd need to give it some CSS styling though.

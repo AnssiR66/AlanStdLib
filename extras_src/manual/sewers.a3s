@@ -1,30 +1,28 @@
-﻿; ------------------------------------------------------------------------------
-; §8.2.2. DARK_LOCATION -> Basic Usage Example
-; ------------------------------------------------------------------------------
+﻿; /// §8.2.2. DARK_LOCATION -> Basic Usage Example ///
+
 ; tag::dark-location-example1[]
 down
 look
 inventory
 x flashlight
 ; end::dark-location-example1[]
-; ------------------------------------------------------------------------------
-; §8.2.2. DARK_LOCATION -> Basic Usage Example -> Light source goes on
-; ------------------------------------------------------------------------------
+
+; /// §8.2.2. DARK_LOCATION -> Basic Use Ex. -> Light source goes on ///
+
 ; tag::dark-location-example2[]
 switch on flashlight
 look
 x flashlight
 ; end::dark-location-example2[]
-; ------------------------------------------------------------------------------
-; §8.2.2. DARK_LOCATION -> Basic Usage Example -> Light source goes off
-; ------------------------------------------------------------------------------
+
+; /// §8.2.2. DARK_LOCATION -> Basic Use Ex. -> Light source goes off ///
+
 ; tag::dark-location-example3[]
 switch off flashlight
 x flashlight
 ; end::dark-location-example3[]
-; ------------------------------------------------------------------------------
-; §8.2.2. DARK_LOCATION -> Basic Usage Example -> Entering with lit lightsource
-; ------------------------------------------------------------------------------
+; /// §8.2.2. DARK_LOCATION -> Basic Use Ex. -> Entering w/ lit light ///
+
 restart
 
 ; tag::dark-location-example4[]

@@ -32,9 +32,9 @@ which will yield
 
 
 [example,role="gametranscript"]
-=======================================
-include::./garden1.a3t[tag=ball_garden]
-=======================================
+============================================
+include::./garden1.a3t-adoc[tag=ball_garden]
+============================================
 
 
 In the example above, it was necessary to use `DOES ONLY`; if we had used `DOES` instead, the default library response for all things would be shown before the custom reponse: [.play]#You notice nothing unusual about the ball. It's a small red ball.#
@@ -55,9 +55,9 @@ which will yield the same response as the first method:
 
 
 [example,role="gametranscript"]
-=======================================
-include::./garden2.a3t[tag=ball_garden]
-=======================================
+============================================
+include::./garden2.a3t-adoc[tag=ball_garden]
+============================================
 
 
 but you notice how the needed formulation is shorter.

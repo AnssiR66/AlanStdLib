@@ -198,9 +198,9 @@ include::./wedding.alan[tag=tuxedos]
 By adding `your`/`my` and `his`/`'sam''s'` before `tuxedo` in the `NAME` clauses, we've ensured that the player will be able to target any tuxedo in his commands:
 
 [example,role="gametranscript"]
-===================================
-include::./wedding.a3t[tag=tuxedos]
-===================================
+========================================
+include::./wedding.a3t-adoc[tag=tuxedos]
+========================================
 
 
 // @ADDED:
@@ -224,9 +224,9 @@ include::./lab1.alan[tag=thingummyjig]
 yields by default
 
 [example,role="gametranscript"]
-=====================================
-include::./lab1.a3t[tag=thingummyjig]
-=====================================
+==========================================
+include::./lab1.a3t-adoc[tag=thingummyjig]
+==========================================
 
 
 Using the `ex` attribute, you can define a bit more personal response than [.play]#You notice nothing unusual...#:
@@ -242,9 +242,9 @@ yields
 
 
 [example,role="gametranscript"]
-=====================================
-include::./lab2.a3t[tag=thingummyjig]
-=====================================
+==========================================
+include::./lab2.a3t-adoc[tag=thingummyjig]
+==========================================
 
 
 // @FIXME: Rephrase next 2 paragraphs:
@@ -293,9 +293,9 @@ would yield by default:
 
 
 [example,role="gametranscript"]
-======================================
-include::./garden1.a3t[tag=front_door]
-======================================
+===========================================
+include::./garden1.a3t-adoc[tag=front_door]
+===========================================
 
 
 Adding an `ex` attribute for the front door, you can change the default.
@@ -312,9 +312,9 @@ will yield
 
 
 [example,role="gametranscript"]
-======================================
-include::./garden2.a3t[tag=front_door]
-======================================
+===========================================
+include::./garden2.a3t-adoc[tag=front_door]
+===========================================
 
 
 If you add a response of your own to the examine verb of a DOOR, the default description of it being either open or closed won't show automatically.
@@ -487,16 +487,16 @@ include::./lab1.alan[tag=lightsource_lamp]
 Examining for example these instances in-game would yield
 
 [example,role="gametranscript"]
-==========================================
-include::./cave.a3t[tag=lightsource_torch]
-==========================================
+===============================================
+include::./cave.a3t-adoc[tag=lightsource_torch]
+===============================================
 
 and
 
 [example,role="gametranscript"]
-=========================================
-include::./lab1.a3t[tag=lightsource_lamp]
-=========================================
+==============================================
+include::./lab1.a3t-adoc[tag=lightsource_lamp]
+==============================================
 
 
 (The opposites of the above messages would be [.play]#It is currently not lit.# and [.play]#It is currently on.#, respectively.)
@@ -514,9 +514,9 @@ include::./lab2.alan[tag=lightsource_lamp]
 which yields
 
 [example,role="gametranscript"]
-=========================================
-include::./lab2.a3t[tag=lightsource_lamp]
-=========================================
+==============================================
+include::./lab2.a3t-adoc[tag=lightsource_lamp]
+==============================================
 
 Using `VERB examine DOES ONLY…` you'll have to add manually the mention about the instance being on or off, for example:
 

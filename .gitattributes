@@ -42,6 +42,7 @@
 ## Asciidoctor
 ##############
 *.adoc       text
+*.asc        text
 *.asciidoc   text
 *.csv        text
 *.dsv        text
@@ -144,20 +145,23 @@ LICENSE      text
 # Zip archives downloadable from GitHub (releases and download button).
 # End users only interested in the actual Library will get just the needed files.
 
-## Git files/folders
-####################
-/.git/          export-ignore
-.gitattributes  export-ignore
-.gitconfig      export-ignore
-.gitignore      export-ignore
-.gitmodules     export-ignore
+## Repo Settings etc.
+#####################
+/.git/           export-ignore
+.editorconfig    export-ignore
+.gitattributes   export-ignore
+.gitconfig       export-ignore
+.gitignore       export-ignore
+.gitmodules      export-ignore
+.travis.yml      export-ignore
+Rakefile         export-ignore
 
 ## Developer folders
 #####################
-/_assets/        export-ignore
-/_assets_src/    export-ignore
-/extras_src/     export-ignore
-/tests/          export-ignore
+/_assets/       export-ignore
+/_assets_src/   export-ignore
+/extras_src/    export-ignore
+/tests/         export-ignore
 
 ## Build Scripts
 ################
@@ -166,9 +170,9 @@ LICENSE      text
 
 ## Developer and source documents
 #################################
-# Docs destined to end uesers will be converted to HTML.
-*.md         export-ignore
-*.asciidoc   export-ignore
+# Docs destined to end users will be converted to HTML.
 *.adoc       export-ignore
+*.asciidoc   export-ignore
+*.md         export-ignore
 
 # EOF #

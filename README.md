@@ -16,6 +16,7 @@ By [Anssi Räisänen], [Artistic License 2.0].
 <!-- MarkdownTOC autolink="true" bracket="round" autoanchor="false" lowercase="only_ascii" uri_encoding="true" levels="1,2,3" -->
 
 - [Project Contents](#project-contents)
+- [Building Instructions](#building-instructions)
 - [System Requirements](#system-requirements)
     - [Alan SDK](#alan-sdk)
     - [Ruby](#ruby)
@@ -46,6 +47,48 @@ Entries marked as _excluded_ indicate developers' material which will be exclude
 The idea is to provide ALAN authors with a clean StdLib distribution, without the AsciiDoc sources, the test suite, repository configurations files, build scripts, etc. — just the material required to use the StdLib in their adventures.
 
 Exclusion of files and folders from the generated Zip archives is controlled by the `export-ignore` rules defined inside the [`.gitattributes`][.gitattributes] file.
+
+
+# Building Instructions
+
+The repository uses [Rake] to manage the toolchain.
+Rake is a cross platform tool that will only build inexistent or outdate files, tracking assets dependencies.
+
+To build the entire repository, open a terminal (CMD, Bash, etc.) in any folder inside the repository directory tree and type:
+
+    rake
+
+That's all you really need to know to use Rake.
+If you haven't used Rake before, here are some common tips:
+
+To delete all intermediate generated files:
+
+    rake clean
+
+To delete all generated files:
+
+    rake clobber
+
+To update only the documentation and its examples:
+
+    rake docs
+
+To update only the test suite:
+
+    rake tests
+
+To forcefully rebuild the whole toolchain, or a specific task, just add `-B` after the command, e.g.:
+
+    rake -B
+    rake tests -B
+    rake doc -B
+
+To list the main tasks available for this repository:
+
+    rake -T
+
+For other options, see `rake -h` and consult the official [Rake] documentation.
+
 
 # System Requirements
 

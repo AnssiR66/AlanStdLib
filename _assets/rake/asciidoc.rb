@@ -1,4 +1,4 @@
-=begin "asciidoc.rb" v0.2.0| 2021/09/10 | by Tristano Ajmone | MIT License
+=begin "asciidoc.rb" v0.2.1| 2021/10/26 | by Tristano Ajmone | MIT License
 ================================================================================
 Some custom Rake helper methods for automating common Asciidoctor operations
 that we use across different documentation projects.
@@ -10,28 +10,73 @@ $rouge_dir = "#{$repo_root}/_assets/rouge"
 require 'asciidoctor'
 require "#{$rouge_dir}/custom-rouge-adapter.rb"
 
-def CreateAsciiDocHTMLTasksFromFolder(target_task, target_folder, dependencies)
+def AsciidoctorConvertHTML(source_file)
+  # ----------------------------------------------------------------------------
+  # Converts an ADoc file to HTML using Asciidoctor.
+  #
+  # This method always assumes Rouge as the syntax highlighter; it doesn't yet
+  # support passing custom options or attributes (TBD).
+  # ----------------------------------------------------------------------------
+  TaskHeader("Converting to HTML: #{source_file}")
+  src_dir = source_file.pathmap("%d")
+  src_file = source_file.pathmap("%f")
+  adoc_opts = <<-HEREDOC
+    --failure-level WARN \
+    --verbose \
+    --timings \
+    --safe-mode unsafe \
+    --require #{$rouge_dir}/custom-rouge-adapter.rb \
+    -a source-highlighter=rouge \
+    -a rouge-style=thankful_eyes \
+    -a docinfodir=#{$rouge_dir} \
+    -a docinfo@=shared-head \
+    -a data-uri \
+    #{src_file}
+  HEREDOC
+
+  cd "#{$repo_root}/#{src_dir}"
+  begin
+    stdout, stderr, status = Open3.capture3("asciidoctor #{adoc_opts}")
+    puts stderr if status.success? # Even success is logged to STDERR!
+    raise unless status.success?
+  rescue
+    rake_msg = our_msg = "Asciidoctor conversion failed: #{source_file}"
+    out_file = src_file.ext('.html')
+    if File.file?(out_file)
+      our_msg = "Asciidoctor reported some problems during conversion.\n" \
+        "The generated HTML file should not be considered safe to deploy."
+
+      # Since we're invoking Asciidoctor with failure-level WARN, if the HTML
+      # file was created we must set its modification time to 00:00:00 to trick
+      # Rake into seeing it as an outdated target. (we're not 100% sure whether
+      # it was re-created or it's the HTML from a previous run, but we're 100%
+      # sure that it's outdated.)
+      SetFileTimeToZero(out_file)
+    end
+    PrintTaskFailureMessage(our_msg, stderr)
+    # Abort Rake execution with error description:
+    raise rake_msg
+  ensure
+    cd $repo_root, verbose: false
+  end
+end
+
+def CreateAsciiDocHTMLTasksFromFolder(target_task, target_folder, dependencies = nil)
+  # ----------------------------------------------------------------------------
+  # Give a 'target_task', a 'target_folder' and a list of 'dependencies', create
+  # a file task to convert every '.asciidoc' file to HTML with 'dependencies' as
+  # its prerequisites.
+  #
+  # This method always assumes Rouge as the syntax highlighter; it doesn't yet
+  # support passing custom options or attributes (TBD).
+  # ----------------------------------------------------------------------------
   adoc_sources = FileList["#{target_folder}/*.asciidoc"].each do |adoc_fpath|
-    doc_src = adoc_fpath.pathmap("%f")
     html_fpath = adoc_fpath.ext('.html')
     task target_task => html_fpath
     file html_fpath => adoc_fpath
-    file html_fpath => dependencies
+    file html_fpath => dependencies if dependencies
     file html_fpath do
-      TaskHeader("Converting Document: #{adoc_fpath}")
-
-      cd "#{$repo_root}/#{target_folder}"
-      Asciidoctor.convert_file \
-        "#{doc_src}",
-        backend: :html5,
-        safe: :unsafe,
-        attributes: {
-          'source-highlighter' => 'rouge',
-          'rouge-style' => 'thankful_eyes',
-          'docinfodir' => $rouge_dir,
-          'docinfo' => 'shared-head'
-        }
-      cd $repo_root, verbose: false
+      AsciidoctorConvertHTML(adoc_fpath)
     end
   end
 end
