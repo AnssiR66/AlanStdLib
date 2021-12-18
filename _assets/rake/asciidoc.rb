@@ -1,39 +1,18 @@
-=begin "asciidoc.rb" v0.2.1| 2021/10/26 | by Tristano Ajmone | MIT License
+=begin "asciidoc.rb" v0.3.0| 2021/12/18 | by Tristano Ajmone | MIT License
 ================================================================================
 Some custom Rake helper methods for automating common Asciidoctor operations
 that we use across different documentation projects.
 ================================================================================
 =end
 
-$rouge_dir = "#{$repo_root}/_assets/rouge"
-
 require 'asciidoctor'
-require "#{$rouge_dir}/custom-rouge-adapter.rb"
 
-def AsciidoctorConvertHTML(source_file)
-  # ----------------------------------------------------------------------------
-  # Converts an ADoc file to HTML using Asciidoctor.
-  #
-  # This method always assumes Rouge as the syntax highlighter; it doesn't yet
-  # support passing custom options or attributes (TBD).
+def AsciidoctorConvert(source_file, adoc_opts = "")
   # ----------------------------------------------------------------------------
   TaskHeader("Converting to HTML: #{source_file}")
   src_dir = source_file.pathmap("%d")
   src_file = source_file.pathmap("%f")
-  adoc_opts = <<-HEREDOC
-    --failure-level WARN \
-    --verbose \
-    --timings \
-    --safe-mode unsafe \
-    --require #{$rouge_dir}/custom-rouge-adapter.rb \
-    -a source-highlighter=rouge \
-    -a rouge-style=thankful_eyes \
-    -a docinfodir=#{$rouge_dir} \
-    -a docinfo@=shared-head \
-    -a data-uri \
-    #{src_file}
-  HEREDOC
-
+  adoc_opts = adoc_opts.chomp + " #{src_file}"
   cd "#{$repo_root}/#{src_dir}"
   begin
     stdout, stderr, status = Open3.capture3("asciidoctor #{adoc_opts}")
@@ -61,14 +40,14 @@ def AsciidoctorConvertHTML(source_file)
   end
 end
 
-def CreateAsciiDocHTMLTasksFromFolder(target_task, target_folder, dependencies = nil)
+def CreateAsciiDocHTMLTasksFromFolder(target_task,
+                                      target_folder,
+                                      dependencies = nil,
+                                      adoc_opts = "")
   # ----------------------------------------------------------------------------
   # Give a 'target_task', a 'target_folder' and a list of 'dependencies', create
   # a file task to convert every '.asciidoc' file to HTML with 'dependencies' as
-  # its prerequisites.
-  #
-  # This method always assumes Rouge as the syntax highlighter; it doesn't yet
-  # support passing custom options or attributes (TBD).
+  # its prerequisites and 'adoc_opts' as Asciidoctor invocations options.
   # ----------------------------------------------------------------------------
   adoc_sources = FileList["#{target_folder}/*.asciidoc"].each do |adoc_fpath|
     html_fpath = adoc_fpath.ext('.html')
@@ -76,7 +55,7 @@ def CreateAsciiDocHTMLTasksFromFolder(target_task, target_folder, dependencies =
     file html_fpath => adoc_fpath
     file html_fpath => dependencies if dependencies
     file html_fpath do
-      AsciidoctorConvertHTML(adoc_fpath)
+      AsciidoctorConvert(adoc_fpath, adoc_opts)
     end
   end
 end
