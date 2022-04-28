@@ -1,0 +1,106 @@
+﻿--==============================================================================
+-- Advanced test for checking that instances of ROOM/DARK_ROOM and
+-- SITE/DARK_SITE that were located by the author AT locations other than
+-- INDOOR and OUTDOOR (respectively) are correctly restored to their natural
+-- location at INDOOR and OUTDOOR after DEFINITION_BLOCK initialization moves
+-- them into 'my_game'.
+--==============================================================================
+Import 'library.i'.
+
+The my_game IsA DEFINITION_BLOCK
+  Has
+    title    "DEFINITION_BLOCK Integrity Test".
+    subtitle "Test initialization of misplaced ROOMs and SITEs.".
+    author   "Tristano Ajmone".
+    year     2022.
+    version  "1".
+End the.
+
+
+-- ============================
+-- Region A
+-- ============================
+
+The 'Region A' IsA location.
+End the.
+
+The 'Room A' IsA ROOM at 'Region A'.
+End the.
+
+The 'Dark Room A' IsA DARK_ROOM at 'Region A'.
+End the.
+
+The 'Site A' IsA SITE at 'Region A'.
+End the.
+
+The 'Dark Site A' IsA DARK_SITE at 'Region A'.
+End the.
+
+-- ============================
+-- Region B
+-- ============================
+
+The 'Region B' IsA location.
+End the.
+
+The 'Room B' IsA ROOM at 'Region B'.
+End the.
+
+The 'Dark Room B' IsA DARK_ROOM at 'Region B'.
+End the.
+
+The 'Site B' IsA SITE at 'Region B'.
+End the.
+
+The 'Dark Site B' IsA DARK_SITE at 'Region B'.
+End the.
+
+
+--==============================================================================
+--                               T E S T   V E R B
+--==============================================================================
+
+Verb test does
+  -- ============================
+  -- Nested Regions and Locations
+  -- ============================
+  "$p* Checking that 'Region A' is directly at my_game:"
+  If 'Region A' directly at my_game
+    then "PASSED!"
+    else "FAILED!"
+  End if.
+  "$p* Checking that 'Room A' is directly at indoor:"
+  If 'Room A' directly at indoor
+    then "PASSED!"
+    else "FAILED!"
+  End if.
+  "$p* Checking that 'Dark Room A' is directly at indoor:"
+  If 'Dark Room A' directly at indoor
+    then "PASSED!"
+    else "FAILED!"
+  End if.
+  "$p* Checking that 'Site A' is directly at outdoor:"
+  If 'Site A' directly at outdoor
+    then "PASSED!"
+    else "FAILED!"
+  End if.
+  "$p* Checking that 'Dark Site A' is directly at outdoor:"
+  If 'Dark Site A' directly at outdoor
+    then "PASSED!"
+    else "FAILED!"
+  End if.
+End verb test.
+
+--------------------------------------------------------------------------------
+Start at 'Room A'.
+Describe banner.
+
+"$pAuthor should not locate ROOM/DARK_ROOM and SITE/DARK_SITE instances at
+   custom locations (e.g. wrapping regions of difference parts of the map)
+   because these depend on being AT INDOOR/OUTDOOR (respectively) in order for
+   room/site props to work, and the INDOOR/OUTDOOR locations can't be at
+   multiple locations at once.
+
+$pThis adventure tests whether ROOM/DARK_ROOM and SITE/DARK_SITE instances
+  nesting are correctly restored to being AT INDOOR/OUTDOOR (respectively) after
+  the DEFINITION_BLOCK initialization.$p"

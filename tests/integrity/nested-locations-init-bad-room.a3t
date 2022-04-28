@@ -1,0 +1,39 @@
+
+
+DEFINITION_BLOCK Integrity Test 
+Test initialization of misplaced ROOMs and SITEs. 
+Version 1. 
+(C) 2022 by Tristano Ajmone. 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta8. 
+Standard Library v2.2.0. 
+All rights reserved. 
+
+Author should not locate ROOM/DARK_ROOM and SITE/DARK_SITE instances at
+custom locations (e.g. wrapping regions of difference parts of the map)
+because these depend on being AT INDOOR/OUTDOOR (respectively) in order
+for room/site props to work, and the INDOOR/OUTDOOR locations can't be at
+multiple locations at once.
+
+This adventure tests whether ROOM/DARK_ROOM and SITE/DARK_SITE instances
+nesting are correctly restored to being AT INDOOR/OUTDOOR (respectively)
+after the DEFINITION_BLOCK initialization.
+
+
+
+Room A
+
+> test
+
+* Checking that 'Region A' is directly at my_game: PASSED! 
+
+* Checking that 'Room A' is directly at indoor: PASSED! 
+
+* Checking that 'Dark Room A' is directly at indoor: PASSED! 
+
+* Checking that 'Site A' is directly at outdoor: PASSED! 
+
+* Checking that 'Dark Site A' is directly at outdoor: PASSED!
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

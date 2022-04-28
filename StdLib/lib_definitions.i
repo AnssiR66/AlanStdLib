@@ -412,11 +412,26 @@ EVERY definition_block IsA LOCATION
         END IF.
     END FOR.
 
--- @FIXME: The following step should probably be done last, since step 4
---         would roll back any changes done here based on the track record
---         created at step 1!!!
+    -- 3) Restore original order of locations nesting:
+    FOR EACH loc IsA LOCATION
+      DO
+        IF nested OF loc <> {} AND loc <> my_game AND loc <> nowhere
+        THEN
+          FOR EACH subloc IsA LOCATION, IN nested OF loc
+            DO
+-- @FIXME: The following doesn't seem right!
+--      1. The 'IF loc <> my_game' check was already done above!
+--      2. It should probably be:
+--            IF subloc <> my_game AND subloc <> nowhere
+--         because these two should not be nested anywhere!
+              IF loc <> my_game AND subloc <> my_game
+                THEN LOCATE subloc AT loc.
+              END IF.
+          END FOR.
+        END IF.
+    END FOR.
 
-    -- 3) Ensure that room and site instances are directly AT indoor/outdoor,
+    -- 4) Ensure that room and site instances are directly AT indoor/outdoor,
     --    respectively, otherwise room and site props won't work:
     FOR EACH r1 IsA ROOM
       DO
@@ -436,25 +451,6 @@ EVERY definition_block IsA LOCATION
     FOR EACH s2 IsA DARK_SITE
       DO
         LOCATE s2 AT outdoor.
-    END FOR.
-
-    -- 4) Restore original order of locations nesting:
-    FOR EACH loc IsA LOCATION
-      DO
-        IF nested OF loc <> {} AND loc <> my_game AND loc <> nowhere
-        THEN
-          FOR EACH subloc IsA LOCATION, IN nested OF loc
-            DO
--- @FIXME: The following doesn't seem right!
---      1. The 'IF loc <> my_game' check was already done above!
---      2. It should probably be:
---            IF subloc <> my_game AND subloc <> nowhere
---         because these two should not be nested anywhere!
-              IF loc <> my_game AND subloc <> my_game
-                THEN LOCATE subloc AT loc.
-              END IF.
-          END FOR.
-        END IF.
     END FOR.
 
     -- =========================================================================
