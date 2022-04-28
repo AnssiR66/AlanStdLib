@@ -389,15 +389,10 @@ EVERY definition_block IsA LOCATION
     -- 1) Keep a track record of which locations were nested where:
     FOR EACH loc IsA LOCATION
       DO
--- @CHECKME: Not sure why this is needed! In any case, if we keep this we
---           should also EXCLUDE `my_game` FROM nested OF loc???
-        EXCLUDE nowhere FROM nested OF loc.
+        EXCLUDE nowhere FROM nested OF loc. -- remove default "dummy" entry.
         IF COUNT IsA LOCATION, AT loc > 0
           THEN
--- @FIXME: The following should filter via 'IsA LOCATION, DIRECTLY AT loc'
---         since it would avoid spurious entries (and relocations) for
---         locations that are INDERICTLY AT loc!!!
-            FOR EACH subloc IsA LOCATION, AT loc
+            FOR EACH subloc IsA LOCATION, DIRECTLY AT loc
               DO
                 INCLUDE subloc IN nested OF loc.
             END FOR.

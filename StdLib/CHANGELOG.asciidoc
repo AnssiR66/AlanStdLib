@@ -152,6 +152,10 @@ During this level, only the `yes` and ``'no'`` verbs are allowed, and the `restr
 * *[red]#Dropped '`verbose`' and '`brief`'#* --
 The meta-berbs `verbose` and `brief` were removed from the library due to `brief` failing to work as expected, because ALAN resets the `VISITS` counter every time an attribute of a `location` instance changes state or value (see {Issue_32}).
 
+* *[red]#Adventure Initialization#* --
+Polished the `DEFINITION_BLOCK` initialization code that handles initialization of nested location by moving them into the `my_game` instance, and solved a potential bug that could affect edge cases where an author had located `ROOM` and `SITE` instances into locations other than `indoor` and `outdoor`, respectively.
+The initialization code now correctly ensures that all `ROOM`/`DARK_ROOM` and `SITE`/`DARK_SITE` instances are relocated at `indoor` and `outdoor`, respectively, after game initialization.
+
 // * *[red]#XXXXXXXXXXX#* --
 
 
