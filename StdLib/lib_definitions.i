@@ -372,43 +372,60 @@ EVERY definition_block IsA LOCATION
     SCHEDULE check_restriction AFTER 0.
     SCHEDULE check_darkness AFTER 0.
 
-  -- ===========================================================================
-  -- Nest Every Location into my_game
-  -- ===========================================================================
+    -- =========================================================================
+    -- Nest Every Location into my_game
+    -- =========================================================================
 
-  -- The following code ensures that every location in the adventure (except for
-  -- `my_game` itself and the special `nowhere` location) will become nested
-  -- into the `my_game` location.
+    -- The following code ensures that every location in the adventure
+    -- (except for `my_game` itself and the special `nowhere` location) will
+    -- become nested into the `my_game` location.
 
-  -- Thanks to this, any verb defined on `my_game` will be globally available,
-  -- which is what makes it possible to override a predefined library verb by
-  -- re-defining it on the `my_game` instance --- since `my_game` is always the
-  -- outermost nester of any location, all verbs defined on it will always be in
-  -- scope, anywhere.
+    -- Thanks to this, any verb defined on `my_game` will be globally available,
+    -- which is what makes it possible to override a predefined library verb by
+    -- re-defining it on the `my_game` instance -- since `my_game` is always
+    -- the outermost nester of any location, all verbs defined on it will
+    -- always be in scope, anywhere.
 
-
-    FOR EACH l IsA LOCATION
+    -- 1) Keep a track record of which locations were nested where:
+    FOR EACH loc IsA LOCATION
       DO
-        EXCLUDE nowhere FROM nested OF l.
-        IF COUNT IsA LOCATION, AT l > 0
+-- @CHECKME: Not sure why this is needed! In any case, if we keep this we
+--           should also EXCLUDE `my_game` FROM nested OF loc???
+        EXCLUDE nowhere FROM nested OF loc.
+        IF COUNT IsA LOCATION, AT loc > 0
           THEN
-            FOR EACH x IsA LOCATION, AT l
+-- @FIXME: The following should filter via 'IsA LOCATION, DIRECTLY AT loc'
+--         since it would avoid spurious entries (and relocations) for
+--         locations that are INDERICTLY AT loc!!!
+            FOR EACH subloc IsA LOCATION, AT loc
               DO
-                INCLUDE x IN nested OF l.
+                INCLUDE subloc IN nested OF loc.
             END FOR.
         END IF.
     END FOR.
 
-    FOR EACH l IsA LOCATION
+    -- 2) Move every location into the `my_game` location:
+    FOR EACH loc IsA LOCATION
       DO
-        IF l <> my_game AND l <> nowhere
-          THEN LOCATE l AT my_game.
+        IF loc <> my_game AND loc <> nowhere
+          THEN LOCATE loc AT my_game.
         END IF.
     END FOR.
 
+-- @FIXME: The following step should probably be done last, since step 4
+--         would roll back any changes done here based on the track record
+--         created at step 1!!!
+
+    -- 3) Ensure that room and site instances are directly AT indoor/outdoor,
+    --    respectively, otherwise room and site props won't work:
     FOR EACH r1 IsA ROOM
       DO
         LOCATE r1 AT indoor.
+    END FOR.
+
+    FOR EACH r2 IsA DARK_ROOM
+      DO
+        LOCATE r2 AT indoor.
     END FOR.
 
     FOR EACH s1 IsA SITE
@@ -416,28 +433,39 @@ EVERY definition_block IsA LOCATION
         LOCATE s1 AT outdoor.
     END FOR.
 
-    FOR EACH l IsA LOCATION
+    FOR EACH s2 IsA DARK_SITE
       DO
-        IF nested OF l <> {} AND l <> my_game AND l <> nowhere
+        LOCATE s2 AT outdoor.
+    END FOR.
+
+    -- 4) Restore original order of locations nesting:
+    FOR EACH loc IsA LOCATION
+      DO
+        IF nested OF loc <> {} AND loc <> my_game AND loc <> nowhere
         THEN
-          FOR EACH x IsA LOCATION, IN nested OF l
+          FOR EACH subloc IsA LOCATION, IN nested OF loc
             DO
-              IF l <> my_game AND x <> my_game
-                THEN LOCATE x AT l.
+-- @FIXME: The following doesn't seem right!
+--      1. The 'IF loc <> my_game' check was already done above!
+--      2. It should probably be:
+--            IF subloc <> my_game AND subloc <> nowhere
+--         because these two should not be nested anywhere!
+              IF loc <> my_game AND subloc <> my_game
+                THEN LOCATE subloc AT loc.
               END IF.
           END FOR.
         END IF.
     END FOR.
 
-  -- ===========================================================================
-  -- Start Location `visited` and `described`
-  -- ===========================================================================
+    -- =========================================================================
+    -- Start Location `visited` and `described`
+    -- =========================================================================
 
-  -- We ensure that the `visited` and `described` attributes of the starting
-  -- location are correct at the start of the game:
+    -- We ensure that the `visited` and `described` attributes of the starting
+    -- location are correct at the start of the game:
 
-  SET visited OF location OF hero TO 1.
-  SET described OF location OF hero TO 1.
+      SET visited OF location OF hero TO 1.
+      SET described OF location OF hero TO 1.
 
 END EVERY definition_block.
 
