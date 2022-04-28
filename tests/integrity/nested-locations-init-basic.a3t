@@ -1,0 +1,44 @@
+
+
+DEFINITION_BLOCK Integrity Test 
+Test nested-locations initialization. 
+Version 1. 
+(C) 2022 by Tristano Ajmone. 
+Programmed with the ALAN Interactive Fiction Language v3.0 beta8. 
+Standard Library v2.2.0. 
+All rights reserved. 
+
+This adventure tests whether locations' nesting are correctly preserved
+after the DEFINITION_BLOCK initialization.
+
+
+
+A Room
+
+> test
+
+* Checking that 'Region A' is directly at my_game: PASSED! 
+
+* Checking that 'Loc A' is directly at 'Region A': PASSED! 
+
+* Checking that 'Region B' is directly at 'Region A': PASSED! 
+
+* Checking that 'Region B' is indirectly at my_game: PASSED! 
+
+* Checking that 'Loc B' is directly at 'Region B': PASSED! 
+
+* Checking that indoor is directly at my_game: PASSED! 
+
+* Checking that 'A Room' is directly at indoor: PASSED! 
+
+* Checking that 'A Dark Room' is directly at indoor: PASSED! 
+
+* Checking that outdoor is directly at my_game: PASSED! 
+
+* Checking that 'A Site' is directly at outdoor: PASSED! 
+
+* Checking that 'A Dark Site' is directly at outdoor: PASSED!
+
+> 
+
+Do you want to RESTART, RESTORE, QUIT or UNDO? 

@@ -1,0 +1,126 @@
+﻿--==============================================================================
+-- Basic test for checking that nested locations are correctly restored after
+-- DEFINITION_BLOCK initialization moves them into 'my_game'.
+--==============================================================================
+Import 'library.i'.
+
+The my_game IsA DEFINITION_BLOCK
+  Has
+    title    "DEFINITION_BLOCK Integrity Test".
+    subtitle "Test nested-locations initialization.".
+    author   "Tristano Ajmone".
+    year     2022.
+    version  "1".
+End the.
+
+
+-- ============================
+-- Nested Regions and Locations
+-- ============================
+
+The 'Region A' IsA location.
+End the.
+
+The 'Loc A' IsA location at 'Region A'.
+End the.
+
+The 'Region B' IsA location at 'Region A'.
+End the.
+
+The 'Loc B' IsA location at 'Region B'.
+End the.
+
+
+-- ===============
+-- Rooms and Sites
+-- ===============
+
+-- Rooms and sites shouldn't be nested in custom regions!
+
+The 'A Room' IsA ROOM.
+End the.
+
+The 'A Dark Room' IsA DARK_ROOM.
+End the.
+
+The 'A Site' IsA SITE.
+End the.
+
+The 'A Dark Site' IsA DARK_SITE.
+End the.
+
+
+--==============================================================================
+--                               T E S T   V E R B
+--==============================================================================
+
+Verb test does
+  -- ============================
+  -- Nested Regions and Locations
+  -- ============================
+  "$p* Checking that 'Region A' is directly at my_game:"
+  If 'Region A' directly at my_game
+    then "PASSED!"
+    else "FAILED!"
+  End if.
+  "$p* Checking that 'Loc A' is directly at 'Region A':"
+  If 'Loc A' directly at 'Region A'
+    then "PASSED!"
+    else "FAILED!"
+  End if.
+  "$p* Checking that 'Region B' is directly at 'Region A':"
+  If 'Region B' directly at 'Region A'
+    then "PASSED!"
+    else "FAILED!"
+  End if.
+  "$p* Checking that 'Region B' is indirectly at my_game:"
+  If 'Region B' indirectly at my_game
+    then "PASSED!"
+    else "FAILED!"
+  End if.
+  "$p* Checking that 'Loc B' is directly at 'Region B':"
+  If 'Loc B' directly at 'Region B'
+    then "PASSED!"
+    else "FAILED!"
+  End if.
+  -- ===============
+  -- Rooms and Sites
+  -- ===============
+  "$p* Checking that indoor is directly at my_game:"
+  If indoor directly at my_game
+    then "PASSED!"
+    else "FAILED!"
+  End if.
+  "$p* Checking that 'A Room' is directly at indoor:"
+  If 'A Room' directly at indoor
+    then "PASSED!"
+    else "FAILED!"
+  End if.
+  "$p* Checking that 'A Dark Room' is directly at indoor:"
+  If 'A Dark Room' directly at indoor
+    then "PASSED!"
+    else "FAILED!"
+  End if.
+  "$p* Checking that outdoor is directly at my_game:"
+  If outdoor directly at my_game
+    then "PASSED!"
+    else "FAILED!"
+  End if.
+  "$p* Checking that 'A Site' is directly at outdoor:"
+  If 'A Site' directly at outdoor
+    then "PASSED!"
+    else "FAILED!"
+  End if.
+  "$p* Checking that 'A Dark Site' is directly at outdoor:"
+  If 'A Dark Site' directly at outdoor
+    then "PASSED!"
+    else "FAILED!"
+  End if.
+End verb test.
+
+--------------------------------------------------------------------------------
+Start at 'A Room'.
+Describe banner.
+
+"$pThis adventure tests whether locations' nesting are correctly
+   preserved after the DEFINITION_BLOCK initialization.$p"
