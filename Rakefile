@@ -1,4 +1,4 @@
-=begin "Rakefile" v0.2.0 | 2021/12/18 | by Tristano Ajmone
+=begin "Rakefile" v0.2.1 | 2022/04/29 | by Tristano Ajmone
 ================================================================================
 This is the Rakefile for the Alan-StdLib repository.
 
@@ -106,7 +106,7 @@ task :lib_docs => CreateAsciiDocHTMLTasksFromFolder(:lib_docs,'StdLib', nil, ADO
 task :manual => [:man_doc, :man_examples]
 
 task :man_doc
-MAN_DEPS = STDLIB_SOURCES + FileList['extras_src/manual/*.a3s'].ext('.a3t-adoc')
+MAN_DEPS = STDLIB_SOURCES + FileList['extras_src/manual/*.a3s'].ext('.a3t-adoc') + FileList['extras_src/manual/*.adoc']
 
 CreateADocTranscriptingTasksFromFolder(:man_doc,'extras_src/manual', STDLIB_SOURCES)
 CreateAsciiDocHTMLTasksFromFolder(:man_doc,'extras_src/manual', MAN_DEPS, ADOC_OPTS)
