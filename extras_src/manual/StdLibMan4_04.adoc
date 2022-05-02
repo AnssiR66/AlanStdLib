@@ -1,11 +1,11 @@
 ////
-********************************************************************************
-*                                                                              *
-*                     ALAN Standard Library User's Manual                      *
-*                                                                              *
-*                   PART Library Verbs » Working with Verbs                    *
-*                                                                              *
-********************************************************************************
+******************************************************************************
+*                                                                            *
+*                    ALAN Standard Library User's Manual                     *
+*                                                                            *
+*                  PART Library Verbs » Working with Verbs                   *
+*                                                                            *
+******************************************************************************
 ////
 
 
@@ -16,10 +16,10 @@ The library defines numerous verbs that can be readily used in-game with any obj
 For example, if you implement
 
 [source,alan]
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 THE ball ISA OBJECT AT garden
 END THE ball.
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 the library enables you to [.play]#&gt; _examine ball_#, [.play]#&gt; _take ball_#, [.play]#&gt; _throw ball_#, [.play]#&gt; _kick ball_#, etc.
 (with more or less successful default outcomes, depending on the verb) without your having to code anything specific to make this possible.
@@ -60,9 +60,9 @@ You can look the verb up in the <<table.verbs,Verbs Table>> found in this manual
 In this case, the default syntax of `talk_to` is:
 
 [source,alan, role="lib"]
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 SYNTAX talk_to = talk 'to' (act)
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 enabling commands like:
 
@@ -95,10 +95,10 @@ In other words, being able to mention the character with whom to talk, directly 
 The easiest way to accomplish this is by providing an additional syntax for `talk_to` in your game source file:
 
 [source,alan]
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 SYNTAX  talk_to = talk (act).
         talk_to = t (act).
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 This syntax declaration must be written outside of the `my_game` instance, in the main context of your adventure source code.
 This additional syntax declaration won't replace the original syntax for `talk_to`, defined in the library; it would still be possible for the player to type [.play]#&gt; _talk to man_#, as well as using your newly defined alternative syntaxes.
@@ -114,22 +114,22 @@ In your source adventure, suppress the action associated with the original synta
 [[warn.my_game-verbs]]
 [WARNING]
 .EDITORS' NOTE: Verbs on `my_game`
-================================================================================
+==============================================================================
 We need to explain that verbs defined on `my_game` can replace the library-defined verbs because the library, during initialization of `DEFINITION_BLOCK`, nests every game location into the `my_game` location, which makes every verb on `my_game` in scope, at every location.
-(See link:https://github.com/AnssiR66/AlanStdLib/issues/115[Issue #115] for more info.)
+(See {Issue115} for more info.)
 
 It's important that the reader is made aware of this; so we need to decide where this ought to be explained clearly, and then add cross references to it wherever the Manual mentions re-defining a verb on `my_game` as a mean to override the library's default action.
-================================================================================
+==============================================================================
 
 [source,alan]
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 THE my_game ISA DEFINITION_BLOCK
   VERB talk_to
     DOES ONLY "To talk to someone, type ""talk [person]""
                or just ""t [person]""."
   END VERB.
 END THE my_game.
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 // PAGE 66 //
 
@@ -137,7 +137,7 @@ END THE my_game.
 Then, outside the `my_game` instance, still in your game source file, define your own _talk_ verb alternative; for example:
 
 [source,alan]
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 SYNTAX my_talk_to = talk (act)
   WHERE act ISA ACTOR
     ELSE ...
@@ -150,7 +150,7 @@ VERB my_talk_to
       THEN...
       ELSIF...
 END VERB.
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 
 
@@ -169,7 +169,7 @@ Sometimes you might need to add an additional `CHECK` to a library-defined verb.
 Add the check to the verb under the `my_game` instance and not in the library file.
 
 [source,alan]
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 THE soup ISA OBJECT AT kitchen
   IS edible.
   IS NOT hot.
@@ -179,7 +179,7 @@ THE soup ISA OBJECT AT kitchen
       ELSE "You must warm the soup first."
   END VERB.
 END THE soup.
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 Note that there is no `DOES ONLY` part in the above example.
 The default outcome for the `eat` verb would be carried out on the soup only if the added `CHECK` passes.
@@ -214,13 +214,13 @@ Make sure that after removing some default CHECKs the behavior of things in your
 Define the verb outcome with a `DOES ONLY` section within the `my_game` instance:
 
 [source,alan]
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 THE my_game ISA DEFINITION_BLOCK
   VERB examine
     DOES ONLY "Nothing special."
   END VERB.
 END THE.
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 
 
@@ -232,13 +232,13 @@ Declare a new verb in the normal manner instructed in the ALAN manual, outside a
 To create a verb that works globally and doesn't apply to any objects or actors:
 
 [source,alan]
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 SYNTAX test = test.
 
 VERB test
   DOES "Test successful."
 END VERB.
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 // PAGE 68 //
 
@@ -247,7 +247,7 @@ END VERB.
 Here is an example of creating a verb that applies to all objects in the game:
 
 [source,alan]
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 SYNTAX test = test (obj)
   WHERE obj ISA OBJECT
     ELSE "That's not something you can test."
@@ -257,7 +257,7 @@ ADD TO EVERY OBJECT
     DOES "You test" SAY THE obj. "successfully."
   END VERB.
 END ADD.
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 
 // EOF //

@@ -1,79 +1,116 @@
 ////
-********************************************************************************
-*                                                                              *
-*                     ALAN Standard Library User's Manual                      *
-*                                                                              *
-*                       PART Verbs » Restricted Actions                        *
-*                                                                              *
-********************************************************************************
+******************************************************************************
+*                                                                            *
+*                    ALAN Standard Library User's Manual                     *
+*                                                                            *
+*                      PART Verbs » Restricted Actions                       *
+*                                                                            *
+******************************************************************************
 ////
 
 
 [[ch.restricted-actions]]
 = Restricted Actions
 
+.Section Status
+******************************************************************************
+This chapter is being updated to mirror the upcoming v2.2.0 release (See {Issue113}).
+
+* [ ] <<sec.action-attributes>> needs to be completed.
+* [ ] <<sec.restrictions-levels>> is half done; it still needs some practical examples and additional text on how to use the feature.
+* [ ] The <<sec.restricted-actions-original,original text is kept in a sub-section>>, it needs to be recycled in the new sections and then be deleted.
+* [ ] *Fix Contents* -- these problems need to be addressed:
+** [ ] Provide dynamic examples and ship their sources in package.
+******************************************************************************
+
+In the course of an adventure you might need to temporarily restrict which actions the player can carry out in specific situations.
+For example, if the hero is tied to a chair he shouldn't be able to carry out any action that involves physical interaction with his surroundings, but he should be able to carry out any sensory-related actions (e.g. looking, listening, etc.), and the player should still be able to perform out-of-game actions like saving, restoring, etc.
+
+.EDITORS' NOTE
+[CAUTION]
+=====================================
+*TBD!* Mention that `DOES ONLY` can't be used in such cases, since it's a permanent solution.
+Maybe provide an example?
+=====================================
+
+
+The library provides two means to dynamically control restriction of verbs execution:
+
+[horizontal]
+[.big.red]#Action{nbsp}Attributes# ::
+Each library verb has a same-named boolean attribute counterpart that can be targeted to enable or disable it at any time.
+
+[.big.red]#Restriction{nbsp}Levels# ::
+A range of six restricted actions presets acting on entire groups of verbs.
+
+
+Both methods control which verbs should be enabled or disabled by tweaking their corresponding action-attributes.
+The latter method is more practical, since it allows to enable or disable entire groups of similar verbs at once, whereas the former offers finer control by allowing to target specific verbs, one by one.
+Depending on the specific context, you'll be using one method or the other -- whichever is more convenient -- but beware: <<warning-restricted-event, you can't use both during a same turn>>.
+
+
+[[sec.action-attributes]]
+== Action Attributes
+
 .v2.2.0 Status
 [WARNING]
 =====================================
-:Issue113: https://github.com/AnssiR66/AlanStdLib/issues/113[Issue #113^]
-This chapter is being updated to mirror the upcoming v2.2.0 release (See {Issue113}).
+This section needs to re-written from scratch.
 
-* [ ] <<sec.restrictions-levels>> is half done; it still needs some practical examples and additional text on how to use the feature.
-* [ ] <<sec.actions-attributes>> still needs to be written.
-* [ ] The <<sec.restricted-actions-original,original text is kept in a sub-section>>, it needs to be recycled in the new sections and then be deleted.
+* [ ] Try and reuse as much of <<sec.restricted-actions-original,the original text>> as possible.
+* [ ] Mention the need to use a custom `EVENT` in order to switch restriction level _and_ tweak the restriction of specific verbs in a same turn.
+* [ ] Create externalized examples and transcripts.
 =====================================
 
-In some situations, during an adventure, you might need to restrict the actions which the player can carry out.
-For example, if the hero is tied to a chair he shouldn't be able to carry out any action that involves physical interaction with his surroundings, but he should be able to carry out any sensory-related actions (e.g. looking, listening, etc.), and the player should still be able to perform out-of-game actions like saving or restoring, etc.
+Here's how action-restriction attributes work in a nutshell:
 
-The library provides two means to control which actions are available to the player:
-
-[horizontal]
-[.big.red]#Restrictions{nbsp}Levels# ::
-A range of five restricted actions presets acting on entire groups of verbs.
-
-[.big.red]#Actions{nbsp}Attributes# ::
-Each library verb has a same-named boolean attribute counterpart that can be targeted to enable or disable it at any time.
+* For each library-defined verb the library also defines on the `my_game` instance a corresponding boolean attribute with the same identifier as the verb, this attribute can be targeted to enable or disable (i.e. _restrict_) the action of its verb at any time, with immediate effect.
+* To enforce these action-restriction attributes, every library-defined verb comes with a `CHECK` that will prevent the action if the corresponding restriction attribute is disabled on `my_game`, printing the `restricted_response OF my_game` message instead (by default: [.play]#You can't do that.#).
+* By default, no actions are restricted by the library.
 
 
-Both methods control which verbs should be enabled or disabled by tweaking their corresponding actions attributes.
-The former method is more practical, since it allows to disable or disable entire groups of verbs at once, whereas the latter offers finer granularity, by allowing to target specific verbs.
-The two methods are not mutually exclusive, so they can be used in conjunction.
+Let's now expand on the above points and take a closer look at their implementation details.
+Here's an example of how the library handles actions-restrictions, taken from the actual definition of the `talk_to` verb:
 
-Every library verb has a `CHECK` that will prevent the action if the corresponding action-restriction attribute is disabled on `my_game`.
-If the verb is disabled, the action will fail and the `restricted_response OF my_game` message will be printed instead:
+.Excerpt from the `talk_to` verb definition in {lib_verbs}.
+[source,alan, role="lib"]
+-------------------------------------------
+ADD TO EVERY ACTOR
+  VERB talk_to
+    CHECK my_game CAN talk_to
+      ELSE SAY my_game:restricted_response.
+-------------------------------------------
+
+As you can see from the above code excerpt, the `talk_to` verb has a same-named boolean attribute counterpart on the `my_game` instance, which is used by the library to determine whether the action is currently enabled or not, via a simple CHECK.
+Likewise, every other library verb has a corresponding attribute, bearing the same identifier as the verb, and a similar `CHECK` to block the action if it's disabled.
+Since the same pattern is applied to all library verbs, once you know the identifier of a verb you also know what its corresponding restriction attribute is called.
+
+TIP: The action-restriction attributes are defined inside the {lib_verbs_restrictions} module as attributes of the `definition_block` class (of which `my_game` is an instance).
+
+Furthermore, you can see from the above code that the message printed when a restricted action fails the CHECK is taken from the `restricted_response OF my_game` string attribute, which by default is defined as:
 
 [example,role="gametranscript"]
 ===============================
 You can't do that.
 ===============================
 
-The default message can be changed at any time by re-defining the `restricted_response` attribute on `my_game`.
+This default message can be changed at any time (even mid-game) by re-defining the string value of the `restricted_response` attribute on `my_game`.
 E.g.:
 
 [source,alan]
---------------------------------------------------------------------------------
+-------------------------------------------------
 Set restricted_response of my_game to "Not now!".
---------------------------------------------------------------------------------
+-------------------------------------------------
 
+* * *
 
-Here's an example of how the library handles actions restrictions, taken from the actual definition of the `talk_to` verb:
+Now that you've grasped the general mechanics behind restricted actions, it's time to learn how to use them in your own adventures.
 
-.Excerpt from the `talk_to` verb definition in {lib_verbs}.
-[source,alan, role="lib"]
---------------------------------------------------------------------------------
-ADD TO EVERY ACTOR
-  VERB talk_to
-    CHECK my_game CAN talk_to
-      ELSE SAY restricted_response OF my_game.
---------------------------------------------------------------------------------
-
-As you can see from the above code excerpt, the `talk_to` verb has a same-named boolean attribute counterpart on the `my_game` instance, which is used by the library to determine whether the action is currently enable or not.
-Likewise, every other library verb has a corresponing attribute, bearing the same identifier as the verb, and a similar `CHECK` to block the action if its disabled.
-
-TIP: The action-restriction attributes are defined inside the {lib_verbs_restrictions} module.
-
-Now that you've greasped the general mechanics behind restricted actions, it's time to learn how to use them in your own adventures.
+.EDITORS' NOTE
+[CAUTION]
+=====================================
+*TBD!* Add practical examples on how to use restriction-attributes!
+=====================================
 
 
 
@@ -92,25 +129,37 @@ This section is half done, it still needs:
 =====================================
 
 
-The library provided five _actions-restrictions_ presets, called '`Actions Restrictions Levels`', which are designed to cover the most common use cases in any adventure.
+The library provided six _actions-restrictions_ presets -- called '`Actions-Restrictions Levels`' -- which are designed to cover the most common use cases in any adventure.
 Restrictions levels act on entire groups of similar verbs, thus enabling authors to quickly control which _types_ of actions should be blocked at any given time.
 
 To change the current restriction level, you only need to change the value of the `restricted_level OF my_game` attribute, assigning to it the integer value of the desired restriction level (range 0-5).
 E.g.:
 
 [source,alan]
---------------------------------------------------------------------------------
+----------------------------------------------------------
 Set restricted_level of my_game to 4. -- block every verb.
---------------------------------------------------------------------------------
+----------------------------------------------------------
+
+// @NOTE: "has changed since the last turn" ... is it really so?
+//        I'm not sure whether EVENTs might be triggered more than one during
+//        a same turn, e.g. due to RULEs being triggered, etc.
 
 The library constantly monitors the value of `restricted_level` via the `check_restriction` EVENT, which will detect if its value has changed since the last turn, and act accordingly.
 
+.Restriction-Levels Reset all Restriction-Attributes
+[[warning-restricted-event, Restricion-Levels Warning]]
+[WARNING]
+=====================================
+Restriction-levels are enforced via the `check_restriction` EVENT, which will be executed _after_ player input as been processed in the current turn.
+This means that if you tweak the `restricted_level of my_game` value to enforce a given preset configuration of restricted actions, and then tweak some action-restriction VERB attributes, the latter changes will be lost when the `check_restriction` EVENT is triggered, since the event will _reset all_ action-restriction attributes.
+(For more info, see {Issue113}).
+=====================================
 
 The restriction levels are incremental in nature: each level restricts an additional group of actions compared to the previous one, along a continuum with levels 0 and 4 at its extremes -- at level 0 all actions are enabled, at level 4 they're all blocked.
 
 Level 5 is a special level created for YES/NO answers.
 Only the verbs `yes` and `'no'` can be used at Level 5.
-Furthermore, the `restricted_response` message is changed to [.play]#Please answer YES or NO.# for the whole duration of this level, and then restored to its previous value when switching to another level.
+Furthermore, the `restricted_response` message is changed to [.play]#Please answer YES or NO.# for the whole duration of this restriction level, and then restored to its previous value when switching to another level.
 This restriction level is not part of the 0-4 continuum described above; it's an independent level of its own kind.
 
 Level 0 is the default restriction level of the library.
@@ -119,9 +168,9 @@ The following table summarizes the actions-restrictions outcome of each level:
 
 
 [[table.restrictions-levels]]
-.Actions Restrictions Levels
-[%autowidth.stretch,cols="<.^h,<.<a"]
-|===============================================================================
+.Actions-Restrictions Levels
+[%autowidth.stretch,cols="<.^h,<.<a",stripes=odd]
+|=============================================================================
 | Level{nbsp}0 |
 All verbs are enabled, without restrictions.
 It's the default restriction level.
@@ -155,26 +204,12 @@ During this level, the `restricted_response` message changes to:
 
 [example,role="gametranscript"]
 Please answer YES or NO.
-|===============================================================================
-
-
-[[sec.actions-attributes]]
-== Actions Attributes
-
-.v2.2.0 Status
-[WARNING]
-=====================================
-This section needs to re-written from scratch.
-
-* [ ] Try and reuse as much of <<sec.restricted-actions-original,the original text>> as possible.
-* [ ] Mention the need to use a custom `EVENT` in order to switch restriction level _and_ tweak the restriction of specific verbs in a same turn.
-* [ ] Create externalized examples and transcripts.
-=====================================
+|=============================================================================
 
 
 
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 [[sec.restricted-actions-original]]
 == {asterisk}{asterisk}{asterisk} ORIGINAL TEXT {asterisk}{asterisk}{asterisk}
@@ -193,11 +228,15 @@ Beware that some text and examples are incorrect, because they don't mention the
 =====================================
 
 
+.Restriction-Attributes vs DOES ONLY
+************************************
+This piece of the original _Manual_ mentions the difference between blocking a verb via `DOES ONLY` and using restriction-attributes.
+************************************
 
 Usually, when you need to restrict a verb from doing what it usually does (= when you want to change the default outcome as defined by the library), you can use a DOES ONLY statement:
 
 [source,alan]
---------------------------------------------------------------------------------
+-------------------------------------------------------------
 THE book ISA OBJECT IN table
   DESCRIPTION ""
 
@@ -205,14 +244,20 @@ THE book ISA OBJECT IN table
     DOES ONLY "It's a thick, heavy book with leather covers."
   END VERB.
 END THE book.
---------------------------------------------------------------------------------
+-------------------------------------------------------------
+
+// @NOTE: It would also prevents the `xDesc` attribute being shown.
+//        The example doesn't really make much sense, since using
+//        'xDesc' would be more idiomatic and practical here.
+//        Maybe a different verb would be a better example.
 
 (Using DOES ONLY here prevents the default examine response "You notice nothing unusual about the book." from being shown.)
+
 
 or
 
 [source,alan]
---------------------------------------------------------------------------------
+--------------------------------------------
 THE basement ISA ROOM
   DESCRIPTION "..."
 
@@ -220,7 +265,7 @@ THE basement ISA ROOM
     DOES ONLY "The ceiling is too low here."
   END VERB.
 END THE basement.
---------------------------------------------------------------------------------
+--------------------------------------------
 
 // PAGE 69 //
 
@@ -235,22 +280,30 @@ For these situations, the library offers a way to restrict several verbs at once
 Look at the list of all library-defined verbs on p. 61-.
 Now, there is a library-defined attribute for each and every verb -- CAN [verb].
 
+.Using Restriction-Attributes on my_game
+****************************************
+Here the original _Manual_ mentions how to customize restriction-attributes from the game onset by blocking actions on the `my_game` definition.
+
+WARNING: Need to check that these are actually preserved -- i.e. that the restrictions EVENT doesn't actually trigger on first turn, overriding them.
+I think it doesn't (it only triggers if the restriction level value has changed), but it's worth keeping in mind that these instructions will only work if the restriction level is not changed from its default value!
+****************************************
+
 If you want to disable any action or actions from the start of a game, you can declare for example
 
 [source,alan]
---------------------------------------------------------------------------------
+--------------------------------
 THE my_game ISA DEFINITION_BLOCK
   CAN NOT jump.
   CAN NOT dance.
   CAN NOT sing.
 END THE my_game.
---------------------------------------------------------------------------------
+--------------------------------
 
 and it won't be possible to jump, dance or sing in the game.
 The above is a shorter way to disable verbs than
 
 [source,alan]
---------------------------------------------------------------------------------
+----------------------------------
 THE my_game ISA DEFINITION_BLOCK
   VERB jump
     DOES ONLY "You can't do that."
@@ -264,25 +317,28 @@ THE my_game ISA DEFINITION_BLOCK
     DOES ONLY "You can't do that."
   END VERB.
 END THE my_game.
---------------------------------------------------------------------------------
+----------------------------------
 
 A list of all such attributes, corresponding to all implemented library verbs and commands, would start like this:
 
-// @TODO: Check why 'again' is stropped? shouldn't need to be!
+// @NOTE: 'again' doesn't need stropping! and it's no longer stropped now.
 
 [source,alan]
---------------------------------------------------------------------------------
+-------------
 CAN about.
 CAN 'again'.
 CAN answer.
 CAN ask.
 CAN ask_for.
 CAN attack.
---------------------------------------------------------------------------------
+-------------
 
 // PAGE 70 //
 
-
+.Changing Restricted Actions Message
+****************************************
+Here the original docs mention how to tweak the default message, which has already been covered; but it also mentions how to redefine it for the whole adventure, directly on `my_game`, which I haven't mentioned yet!
+****************************************
 
 Notice how this list corresponds to the list of verbs on pp. 61-65, so it is not repeated fully here.
 
@@ -290,29 +346,37 @@ The outcome message for restricted verbs like the above is defined by the instan
 The default message is "You can't do that." but it can be easily edited:
 
 [source,alan]
---------------------------------------------------------------------------------
+-----------------------------------------------------------
 THE my_game ISA DEFINITION_BLOCK
   HAS restricted_response "That's not possible presently.".
 END THE my_game.
---------------------------------------------------------------------------------
+-----------------------------------------------------------
 
 or
 
 [source,alan]
---------------------------------------------------------------------------------
+------------------------------------------------
 THE my_game ISA DEFINITION_BLOCK
   HAS restricted_response "But you're tied up!".
 END THE my_game.
---------------------------------------------------------------------------------
+------------------------------------------------
 
 and so on.
+
+.Example: Hero is Tied to Chair
+****************************************
+Here's the original example on implementing a situation where the Hero can't move.
+
+It covers both attempting it via attributes only -- to prove how cumbersome it would be -- and how using restriction-levels is more practical.
+****************************************
+
 Now, let's again think about the situation where the hero is tied into a chair and cannot move.
 This kind of situation requires disabling a rather large number of verbs: attack, eat, take, drop, throw, put, along with numerous other ones.
 One could do it like this:
 
 
 [source,alan]
---------------------------------------------------------------------------------
+------------------------------------------------------------------
 EVENT tied_up
   "Suddenly you're interrupted. A couple of crooks enter the room,
    grab hold of you, push you into a chair, gag you and tie you
@@ -325,7 +389,7 @@ EVENT tied_up
   MAKE my_game NOT burn_with.
   ...
 END EVENT.
---------------------------------------------------------------------------------
+------------------------------------------------------------------
 
 but we quickly understand that such a list would grow very long.
 That's why the library offers the option of disabling groups of verbs at once, through a specific attribute of the my_game instance: HAS restricted_level, which by default is 0.
@@ -336,20 +400,27 @@ Thus the following coding would actually be unnecessary, but it is included here
 
 
 [source,alan]
---------------------------------------------------------------------------------
+--------------------------------
 THE my_game ISA DEFINITION_BLOCK
   HAS restricted_level 0.
 END THE my_game.
---------------------------------------------------------------------------------
+--------------------------------
 
 To change the level of restriction, do for example like this:
 
 [source,alan]
---------------------------------------------------------------------------------
+-------------------------------------
 SET restricted_level OF my_game TO 2.
---------------------------------------------------------------------------------
+-------------------------------------
+
+
 
 === {asterisk}{asterisk} Restriction Levels {asterisk}{asterisk}
+
+.Description of Restriction-Levels
+****************************************
+Need to compare this to the new docs, since right now I've only provided a summary table, but the text below might contain useful insights that need to be preserved.
+****************************************
 
 The values of this attributes work in the following way:
 
@@ -380,7 +451,7 @@ _Allowed actions_: `about`, `again`, `credits`, `examine`, `hint`, `inventory`, 
 If you anyway want an individual action verb to work additionally, you can for example do like this:
 +
 [source,alan]
---------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 EVENT tied_up
   "Suddenly your investigations are interrupted.
    A couple of crooks enter the room, grab hold of you, push
@@ -388,8 +459,13 @@ EVENT tied_up
    You cannot move your arms or legs."
   SET restricted_level OF my_game TO 2. -- all action verbs will be disabled
   MAKE my_game rub.                     -- but 'rub' will work
+  -- ***** WON'T WORK!!! *********************************
+  -- This example doesn't take into account the fact that
+  -- the restriction event will override the tweaked value
+  -- of the `rub` restriction (#113),
+  -- *****************************************************
 END EVENT.
---------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 +
 Then, you can for example examine, look, listen, wait etc. but also [.play]#&gt; _rub the strings together_# to make them loosen and open.
 +
@@ -410,15 +486,20 @@ Let's say that you might wish to make a game where only the look, examine and us
 Then, you should code
 +
 [source,alan]
---------------------------------------------------------------------------------
+--------------------------------
 THE my_game ISA DEFINITION_BLOCK
   HAS restricted_level 3.
   CAN 'look'.
   CAN examine.
   CAN 'use'.
   CAN use_with.
+  -- ***** WON'T WORK!!! *********************************
+  -- This example doesn't take into account the fact that
+  -- the restriction event will override the tweaked value
+  -- of the `rub` restriction (#113),
+  -- *****************************************************
 END THE.
---------------------------------------------------------------------------------
+--------------------------------
 
 e. `HAS restricted_level 4.`
 +
@@ -430,20 +511,30 @@ _Allowed actions_: none.
 This level of restriction comes in handy mostly in situations where you want to the game to ask the player about something that has only limited alternative replies, for example
 +
 [example,role="gametranscript"]
-================================================================================
+=============================================
 Do you want to restore a saved game (yes/no?)
 &gt;
-================================================================================
+=============================================
 +
 To only allow yes and no to work above, do like this:
 (Let's imagine the question above is presented at the start of the game, before anything else happens.)
 +
 [source,alan]
---------------------------------------------------------------------------------
+-------------------------------------------------------------
+-- *****************************************************
+-- This example would need to be fixed, since we now have
+-- the new dedicated Level 5 for this!
+-- *****************************************************
+
 THE my_game ISA DEFINITION_BLOCK
   HAS restricted_level 4. -- all possible verbs disabled
   CAN yes. CAN 'no'.      -- but 'yes' and 'no' work
   HAS restricted_response "Please answer 'yes' or 'no'."
+  -- ***** WON'T WORK!!! *********************************
+  -- This example doesn't take into account the fact that
+  -- the restriction event will override the tweaked value
+  -- of the `rub` restriction (#113),
+  -- *****************************************************
 END THE.
 
 THE restore_room ISA LOCATION
@@ -468,13 +559,14 @@ THE room1 ISA LOCATION
 END THE.
 
 START AT restore_room.
---------------------------------------------------------------------------------
+-------------------------------------------------------------
 +
 Let's say for example that you want to implement the Loud Room from Zork 1.
 There, anything you type is repeated:
 +
+.Example: Zork 1 "Loud Room"
 [example,role="gametranscript"]
-================================================================================
+===============================
 &gt; _x me_ +
 x x...
 
@@ -486,25 +578,25 @@ help help...
 
 &gt; _quit_ +
 quit quit...
-================================================================================
+===============================
 +
 You can achieve this by implementing
 +
 [source,alan]
---------------------------------------------------------------------------------
+------------------------------------------------------
 THE loud_room ISA ROOM
   ENTERED
     SET restricted_level OF my_game TO 4.
     SET restricted_message OF my_game TO "\$v \$v...".
 END THE.
---------------------------------------------------------------------------------
+------------------------------------------------------
 +
 There are a couple of important things to remember with this restriction level.
 Firstly, the exits (north, east, etc.) can not be disabled through these attributes.
 You must edit the exit messages manually for each situation or location where you restrict the allowed actions.
 +
 [source,alan]
---------------------------------------------------------------------------------
+-------------------------------
 THE loud_room ISA ROOM
   IS loud.
   EXIT east TO corridor
@@ -512,19 +604,19 @@ THE loud_room ISA ROOM
       ELSE "east east..."
   END EXIT.
 END THE.
---------------------------------------------------------------------------------
+-------------------------------
 +
 Secondly, runtime messages are triggered in the normal way (for example "You can't see any such thing.") and if you want to also disable them in one way or another, you have to edit the messages in the lib_messages file.
 For example, to achieve the Loud Room effect above:
 +
 [source,alan]
---------------------------------------------------------------------------------
+----------------------------------------
 MESSAGE NO_SUCH:
   IF restricted_level OF my_game = 3
     THEN "\$v \$v..."
     ELSE "You can't see any such thing."
 END IF.
---------------------------------------------------------------------------------
+----------------------------------------
 +
 and the same applies to all other messages that might come into question.
 +
@@ -532,7 +624,7 @@ NOTE: If you conjure up any verbs of your own and wish to disable them at some p
 Here is an example with the verb 'drive' which is not included in the library by default:
 +
 [source,alan]
---------------------------------------------------------------------------------
+------------------------------------------------------------------
 THE my_game ISA DEFINITION_BLOCK
   CAN drive.
 END THE.
@@ -542,8 +634,13 @@ EVENT tied_up
    and you cannot move your arms or legs at all."
   SET restricted_level OF my_game TO 2.
   MAKE my_game NOT drive. -- 'drive' being a verb you have defined
+  -- ***** WON'T WORK!!! *********************************
+  -- This example doesn't take into account the fact that
+  -- the restriction event will override the tweaked value
+  -- of the `rub` restriction (#113),
+  -- *****************************************************
 END EVENT.
---------------------------------------------------------------------------------
+------------------------------------------------------------------
 +
 You should also remember to make any self-implemented verb to work again after the restriction doesn't apply any longer.
 +
@@ -552,19 +649,19 @@ If you have defined a lot of verbs of your own in a game, you can do like this:
 First, declare the "CAN [verb]" attributes for your own verbs:
 +
 [source,alan]
---------------------------------------------------------------------------------
+--------------------------------
 THE my_game ISA DEFINITION_BLOCK
   CAN drive.
   CAN recall.
   CAN ride.
   CAN type.
 END THE.
---------------------------------------------------------------------------------
+--------------------------------
 +
 Then, define when they will be restricted:
 +
 [source,alan]
---------------------------------------------------------------------------------
+-------------------------------------------------------------
 WHEN restricted_level OF my_game > 1
   -- three of the above are action verbs, so we restrict them
   -- when the restricted_level is 2 or higher
@@ -579,17 +676,26 @@ WHEN restricted_level OF my_game > 2
     -- recall is similar to examine, think, listen, etc.
     -- so we'll cancel it together with those verbs
     -- only (level 3 and higher)
---------------------------------------------------------------------------------
+    -- ***** WON'T WORK??? *********************************
+    -- This example doesn't take into account the fact that
+    -- the restriction event will override the tweaked value
+    -- of the `rub` restriction (#113).
+    -- It will most likely fail to work because the WHEN rule
+    -- might be executed before the restriction EVENT, but
+    -- I'm not 100% sure, need to check and mention this case
+    -- in the new docs.
+    -- *****************************************************
+-------------------------------------------------------------
 +
 To make these verbs work again, define:
 +
 [source,alan]
---------------------------------------------------------------------------------
+--------------------
 MAKE my_game drive.
 MAKE my_game recall.
 MAKE my_game ride.
 MAKE my_game type.
---------------------------------------------------------------------------------
+--------------------
 +
 etc.
 

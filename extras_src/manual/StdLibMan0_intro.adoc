@@ -210,7 +210,6 @@ The latter part of that chapter, where the illegal parameter messages and other 
 
 
 
-
 === Typographic Conventions
 
 
@@ -220,7 +219,7 @@ The latter part of that chapter, where the illegal parameter messages and other 
 [WARNING]
 ================================
 This section needs to be rewritten because thanks to syntax highlighting we no longer need to rely on letter casing to pinpoint predefined ALAN keywords.
-(See link:https://github.com/AnssiR66/AlanStdLib/issues/86[Issue #86])
+(See {Issue86})
 
 * [ ] _StdLib Manual_ examples will adopt prose-casing.
 ** [ ] Create new Rouge syntax for ALAN + StdLib, to highlight predefined library elements in a different color.

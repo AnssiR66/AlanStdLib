@@ -1,11 +1,11 @@
 ////
-********************************************************************************
-*                                                                              *
-*                     ALAN Standard Library User's Manual                      *
-*                                                                              *
-*                    PART Library Classes » Special Objects                    *
-*                                                                              *
-********************************************************************************
+******************************************************************************
+*                                                                            *
+*                    ALAN Standard Library User's Manual                     *
+*                                                                            *
+*                   PART Library Classes » Special Objects                   *
+*                                                                            *
+******************************************************************************
 ////
 
 
@@ -36,6 +36,20 @@ For scenery objects, use the attribute `scenery`.
 // @ADDED:
 [[sec.clothing]]
 == CLOTHING
+
+.Section Status
+******************************************************************************
+This chapter still refers to the old clothing system, it needs to be entirely revised to match the new codebase!
+
+////
+* [ ] XXXXX.
+* [ ] *Fix Contents* -- xxx
+* [ ] *Outdated Features* -- text should mirror latest library status:
+** [ ] YYYYY.
+* [ ] Externalize examples and transcripts to dynamic code:
+** [ ] `xxx.alan`.
+////
+******************************************************************************
 
 `CLOTHING` is a piece of clothing the hero or an NPC wears.
 As far as the hero is concerned, clothes are prevented from being worn in an illogical order, for example you cannot put on a shirt if you are already wearing a jacket, and so forth.

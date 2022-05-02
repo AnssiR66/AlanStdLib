@@ -68,4 +68,18 @@ alternative links on the GH Pages website, etc.).
 :lib_verbs_restrictions: pass:q,a[link:{StdLibDir}/lib_verbs_restrictions.i[`lib_verbs_restrictions.i`^,title="View library source file"]]
 :COPYING: pass:q,a[link:{StdLibDir}/COPYING[`COPYING`^,title="View library license file"]]
 
+// Links to repository Issues
+// ==========================
+:Issue86: https://github.com/AnssiR66/AlanStdLib/issues/86[Issue #86^, title="Issue #86 — Examples Sources Letter Casing"]
+:Issue113: https://github.com/AnssiR66/AlanStdLib/issues/113[Issue #113^, title="Issue #113 — Actions-Restrictions Not Working As Expected"]
+:Issue114: https://github.com/AnssiR66/AlanStdLib/issues/114[Issue #114^, title="Issue #114 — New 'Library Attributes' Part"]
+:Issue115: https://github.com/AnssiR66/AlanStdLib/issues/115[Issue #115^, title="Issue #115 — Document Overriding Verbs on 'my_game'"]
+:Issue118: https://github.com/AnssiR66/AlanStdLib/issues/118[Issue #118^, title="Issue #118 — Potential Issues With NPCs Following Hero"]
+
+
+////
+:IssueXYZ: https://github.com/AnssiR66/AlanStdLib/issues/XYZ[Issue #XYZ^, title="Issue #XYZ — ZZZZZZZZZZZZZZZZ"]
+////
+
+
 // EOF //

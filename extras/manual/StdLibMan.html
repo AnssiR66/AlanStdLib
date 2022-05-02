@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.16">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="author" content="Anssi Räisänen">
 <title>Alan Standard Library v2.2.0 User&#8217;s Manual</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -193,7 +194,8 @@ body.toc2.toc-right{padding-left:0;padding-right:20em}}
 #content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
 details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
 details{margin-left:1.25rem}
-details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;-webkit-tap-highlight-color:transparent}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
 details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
 details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
 details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
@@ -235,9 +237,8 @@ pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
 table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
 table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
 table.linenotable td.code{padding-left:.75em}
-table.linenotable td.linenos{border-right:1px solid;opacity:.35;padding-right:.5em}
-pre.pygments .lineno{border-right:1px solid;opacity:.35;display:inline-block;margin-right:.75em}
-pre.pygments .lineno::before{content:"";margin-right:-.125em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
 .quoteblock{margin:0 1em 1.25em 1.5em;display:table}
 .quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
 .quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
@@ -274,7 +275,7 @@ table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-c
 table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
 table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
 table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
-table.stripes-all tr,table.stripes-odd tr:nth-of-type(odd),table.stripes-even tr:nth-of-type(even),table.stripes-hover tr:hover{background:#f8f8f7}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
 th.halign-left,td.halign-left{text-align:left}
 th.halign-right,td.halign-right{text-align:right}
 th.halign-center,td.halign-center{text-align:center}
@@ -290,10 +291,11 @@ ol{margin-left:1.75em}
 ul li ol{margin-left:1.5em}
 dl dd{margin-left:1.125em}
 dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
-ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
 ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
 ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
 ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
 ul.checklist>li>p:first-child{margin-left:-1em}
 ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
 ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
@@ -336,8 +338,6 @@ sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
 #footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
 #footnotes .footnote:last-of-type{margin-bottom:0}
 #content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
-.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
-.gist .file-data>table td.line-data{width:99%}
 div.unbreakable{page-break-inside:avoid}
 .big{font-size:larger}
 .small{font-size:smaller}
@@ -1057,8 +1057,8 @@ pre[lang=bnf] > code.language-bnf[data-lang=bnf] {
 </li>
 <li><a href="#ch.restricted-actions">18. Restricted Actions</a>
 <ul class="sectlevel2">
-<li><a href="#sec.restrictions-levels">18.1. Restrictions Levels</a></li>
-<li><a href="#sec.actions-attributes">18.2. Actions Attributes</a></li>
+<li><a href="#sec.action-attributes">18.1. Action Attributes</a></li>
+<li><a href="#sec.restrictions-levels">18.2. Restrictions Levels</a></li>
 <li><a href="#sec.restricted-actions-original">18.3. *** ORIGINAL TEXT ***</a>
 <ul class="sectlevel3">
 <li><a href="#_restriction_levels">18.3.1. ** Restriction Levels **</a></li>
@@ -1445,7 +1445,7 @@ The latter part of that chapter, where the illegal parameter messages and other 
 <div class="title">v2.2.0 Status</div>
 <div class="paragraph">
 <p>This section needs to be rewritten because thanks to syntax highlighting we no longer need to rely on letter casing to pinpoint predefined ALAN keywords.
-(See <a href="https://github.com/AnssiR66/AlanStdLib/issues/86">Issue #86</a>)</p>
+(See <a href="https://github.com/AnssiR66/AlanStdLib/issues/86" title="Issue #86 — Examples Sources Letter Casing" target="_blank" rel="noopener">Issue #86</a>)</p>
 </div>
 <div class="ulist checklist">
 <ul class="checklist">
@@ -1695,6 +1695,22 @@ It will be described in more detail on p.78.</p>
 </div>
 <div class="paragraph">
 <p>The following attributes should be added to the my_game instance, for example:</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="title">EDITORS' NOTE</div>
+<div class="paragraph">
+<p><strong>TBD!</strong> The following example doesn&#8217;t mention the new banner attributes!
+Also worth adding a cross-reference to the Banner section of the manual.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3740,6 +3756,21 @@ All things other than ACTORs are inanimate.</p>
 </div>
 <div class="sect3">
 <h4 id="sec.following"><a class="anchor" href="#sec.following"></a>11.2.2. following</h4>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="title">EDITORS' NOTE</div>
+<div class="paragraph">
+<p><strong>TBD!</strong> Need to mention problem of the following SCRIPT terminating if a custom SCRIPT is executed on an NPC (see <a href="https://github.com/AnssiR66/AlanStdLib/issues/118" title="Issue #118 — Potential Issues With NPCs Following Hero" target="_blank" rel="noopener">Issue #118</a>).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">IS</span><span class="w"> </span><span class="kr">NOT</span><span class="w"> </span><span class="n">following</span><span class="p">.</span></code></pre>
@@ -4201,6 +4232,14 @@ For scenery objects, use the attribute <code>scenery</code>.</p>
 </div>
 <div class="sect2">
 <h3 id="sec.clothing"><a class="anchor" href="#sec.clothing"></a>12.1. CLOTHING</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Section Status</div>
+<div class="paragraph">
+<p>This chapter still refers to the old clothing system, it needs to be entirely revised to match the new codebase!</p>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p><code>CLOTHING</code> is a piece of clothing the hero or an NPC wears.
 As far as the hero is concerned, clothes are prevented from being worn in an illogical order, for example you cannot put on a shirt if you are already wearing a jacket, and so forth.
@@ -6768,7 +6807,7 @@ In order to achieve this, you&#8217;ll need to carry out the following steps.</p
 <div class="title">EDITORS' NOTE: Verbs on <code>my_game</code></div>
 <div class="paragraph">
 <p>We need to explain that verbs defined on <code>my_game</code> can replace the library-defined verbs because the library, during initialization of <code>DEFINITION_BLOCK</code>, nests every game location into the <code>my_game</code> location, which makes every verb on <code>my_game</code> in scope, at every location.
-(See <a href="https://github.com/AnssiR66/AlanStdLib/issues/115">Issue #115</a> for more info.)</p>
+(See <a href="https://github.com/AnssiR66/AlanStdLib/issues/115" title="Issue #115 — Document Overriding Verbs on 'my_game'" target="_blank" rel="noopener">Issue #115</a> for more info.)</p>
 </div>
 <div class="paragraph">
 <p>It&#8217;s important that the reader is made aware of this; so we need to decide where this ought to be explained clearly, and then add cross references to it wherever the Manual mentions re-defining a verb on <code>my_game</code> as a mean to override the library&#8217;s default action.</p>
@@ -6936,6 +6975,87 @@ Open <a href="../../StdLib/lib_verbs.i" title="View library source file" target=
 <div class="sect1">
 <h2 id="ch.restricted-actions"><a class="anchor" href="#ch.restricted-actions"></a>18. Restricted Actions</h2>
 <div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Section Status</div>
+<div class="paragraph">
+<p>This chapter is being updated to mirror the upcoming v2.2.0 release (See <a href="https://github.com/AnssiR66/AlanStdLib/issues/113" title="Issue #113 — Actions-Restrictions Not Working As Expected" target="_blank" rel="noopener">Issue #113</a>).</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> <a href="#sec.action-attributes">Sec. 18.1, &#8220;Action Attributes&#8221;</a> needs to be completed.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> <a href="#sec.restrictions-levels">Sec. 18.2, &#8220;Restrictions Levels&#8221;</a> is half done; it still needs some practical examples and additional text on how to use the feature.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> The <a href="#sec.restricted-actions-original">original text is kept in a sub-section</a>, it needs to be recycled in the new sections and then be deleted.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> <strong>Fix Contents</strong>&#8201;&#8212;&#8201;these problems need to be addressed:</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Provide dynamic examples and ship their sources in package.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>In the course of an adventure you might need to temporarily restrict which actions the player can carry out in specific situations.
+For example, if the hero is tied to a chair he shouldn&#8217;t be able to carry out any action that involves physical interaction with his surroundings, but he should be able to carry out any sensory-related actions (e.g. looking, listening, etc.), and the player should still be able to perform out-of-game actions like saving, restoring, etc.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="title">EDITORS' NOTE</div>
+<div class="paragraph">
+<p><strong>TBD!</strong> Mention that <code>DOES ONLY</code> can&#8217;t be used in such cases, since it&#8217;s a permanent solution.
+Maybe provide an example?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The library provides two means to dynamically control restriction of verbs execution:</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<span class="big red">Action&#160;Attributes</span> 
+</td>
+<td class="hdlist2">
+<p>Each library verb has a same-named boolean attribute counterpart that can be targeted to enable or disable it at any time.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<span class="big red">Restriction&#160;Levels</span> 
+</td>
+<td class="hdlist2">
+<p>A range of six restricted actions presets acting on entire groups of verbs.</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Both methods control which verbs should be enabled or disabled by tweaking their corresponding action-attributes.
+The latter method is more practical, since it allows to enable or disable entire groups of similar verbs at once, whereas the former offers finer control by allowing to target specific verbs, one by one.
+Depending on the specific context, you&#8217;ll be using one method or the other&#8201;&#8212;&#8201;whichever is more convenient&#8201;&#8212;&#8201;but beware: <a href="#warning-restricted-event">you can&#8217;t use both during a same turn</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="sec.action-attributes"><a class="anchor" href="#sec.action-attributes"></a>18.1. Action Attributes</h3>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -6945,18 +7065,18 @@ Open <a href="../../StdLib/lib_verbs.i" title="View library source file" target=
 <td class="content">
 <div class="title">v2.2.0 Status</div>
 <div class="paragraph">
-<p>This chapter is being updated to mirror the upcoming v2.2.0 release (See <a href="https://github.com/AnssiR66/AlanStdLib/issues/113" target="_blank" rel="noopener">Issue #113</a>).</p>
+<p>This section needs to re-written from scratch.</p>
 </div>
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-square-o"></i> <a href="#sec.restrictions-levels">Sec. 18.1, &#8220;Restrictions Levels&#8221;</a> is half done; it still needs some practical examples and additional text on how to use the feature.</p>
+<p><i class="fa fa-square-o"></i> Try and reuse as much of <a href="#sec.restricted-actions-original">the original text</a> as possible.</p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> <a href="#sec.actions-attributes">Sec. 18.2, &#8220;Actions Attributes&#8221;</a> still needs to be written.</p>
+<p><i class="fa fa-square-o"></i> Mention the need to use a custom <code>EVENT</code> in order to switch restriction level <em>and</em> tweak the restriction of specific verbs in a same turn.</p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> The <a href="#sec.restricted-actions-original">original text is kept in a sub-section</a>, it needs to be recycled in the new sections and then be deleted.</p>
+<p><i class="fa fa-square-o"></i> Create externalized examples and transcripts.</p>
 </li>
 </ul>
 </div>
@@ -6965,40 +7085,53 @@ Open <a href="../../StdLib/lib_verbs.i" title="View library source file" target=
 </table>
 </div>
 <div class="paragraph">
-<p>In some situations, during an adventure, you might need to restrict the actions which the player can carry out.
-For example, if the hero is tied to a chair he shouldn&#8217;t be able to carry out any action that involves physical interaction with his surroundings, but he should be able to carry out any sensory-related actions (e.g. looking, listening, etc.), and the player should still be able to perform out-of-game actions like saving or restoring, etc.</p>
+<p>Here&#8217;s how action-restriction attributes work in a nutshell:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>For each library-defined verb the library also defines on the <code>my_game</code> instance a corresponding boolean attribute with the same identifier as the verb, this attribute can be targeted to enable or disable (i.e. <em>restrict</em>) the action of its verb at any time, with immediate effect.</p>
+</li>
+<li>
+<p>To enforce these action-restriction attributes, every library-defined verb comes with a <code>CHECK</code> that will prevent the action if the corresponding restriction attribute is disabled on <code>my_game</code>, printing the <code>restricted_response OF my_game</code> message instead (by default: <span class="play">You can&#8217;t do that.</span>).</p>
+</li>
+<li>
+<p>By default, no actions are restricted by the library.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>The library provides two means to control which actions are available to the player:</p>
+<p>Let&#8217;s now expand on the above points and take a closer look at their implementation details.
+Here&#8217;s an example of how the library handles actions-restrictions, taken from the actual definition of the <code>talk_to</code> verb:</p>
 </div>
-<div class="hdlist">
+<div class="listingblock lib">
+<div class="title">Excerpt from the <code>talk_to</code> verb definition in <a href="../../StdLib/lib_verbs.i" title="View library source file" target="_blank" rel="noopener"><code>lib_verbs.i</code></a>.</div>
+<div class="content">
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">ADD</span><span class="w"> </span><span class="kr">TO</span><span class="w"> </span><span class="kr">EVERY</span><span class="w"> </span><span class="nb">ACTOR</span><span class="w">
+  </span><span class="kr">VERB</span><span class="w"> </span><span class="n">talk_to</span><span class="w">
+    </span><span class="kr">CHECK</span><span class="w"> </span><span class="n">my_game</span><span class="w"> </span><span class="kr">CAN</span><span class="w"> </span><span class="n">talk_to</span><span class="w">
+      </span><span class="kr">ELSE</span><span class="w"> </span><span class="kr">SAY</span><span class="w"> </span><span class="n">my_game</span><span class="p">:</span><span class="n">restricted_response</span><span class="p">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see from the above code excerpt, the <code>talk_to</code> verb has a same-named boolean attribute counterpart on the <code>my_game</code> instance, which is used by the library to determine whether the action is currently enabled or not, via a simple CHECK.
+Likewise, every other library verb has a corresponding attribute, bearing the same identifier as the verb, and a similar <code>CHECK</code> to block the action if it&#8217;s disabled.
+Since the same pattern is applied to all library verbs, once you know the identifier of a verb you also know what its corresponding restriction attribute is called.</p>
+</div>
+<div class="admonitionblock tip">
 <table>
 <tr>
-<td class="hdlist1">
-<span class="big red">Restrictions&#160;Levels</span> 
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
 </td>
-<td class="hdlist2">
-<p>A range of five restricted actions presets acting on entire groups of verbs.</p>
-</td>
-</tr>
-<tr>
-<td class="hdlist1">
-<span class="big red">Actions&#160;Attributes</span> 
-</td>
-<td class="hdlist2">
-<p>Each library verb has a same-named boolean attribute counterpart that can be targeted to enable or disable it at any time.</p>
+<td class="content">
+The action-restriction attributes are defined inside the <a href="../../StdLib/lib_verbs_restrictions.i" title="View library source file" target="_blank" rel="noopener"><code>lib_verbs_restrictions.i</code></a> module as attributes of the <code>definition_block</code> class (of which <code>my_game</code> is an instance).
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Both methods control which verbs should be enabled or disabled by tweaking their corresponding actions attributes.
-The former method is more practical, since it allows to disable or disable entire groups of verbs at once, whereas the latter offers finer granularity, by allowing to target specific verbs.
-The two methods are not mutually exclusive, so they can be used in conjunction.</p>
-</div>
-<div class="paragraph">
-<p>Every library verb has a <code>CHECK</code> that will prevent the action if the corresponding action-restriction attribute is disabled on <code>my_game</code>.
-If the verb is disabled, the action will fail and the <code>restricted_response OF my_game</code> message will be printed instead:</p>
+<p>Furthermore, you can see from the above code that the message printed when a restricted action fails the CHECK is taken from the <code>restricted_response OF my_game</code> string attribute, which by default is defined as:</p>
 </div>
 <div class="exampleblock gametranscript">
 <div class="content">
@@ -7008,7 +7141,7 @@ If the verb is disabled, the action will fail and the <code>restricted_response 
 </div>
 </div>
 <div class="paragraph">
-<p>The default message can be changed at any time by re-defining the <code>restricted_response</code> attribute on <code>my_game</code>.
+<p>This default message can be changed at any time (even mid-game) by re-defining the string value of the <code>restricted_response</code> attribute on <code>my_game</code>.
 E.g.:</p>
 </div>
 <div class="listingblock">
@@ -7016,39 +7149,28 @@ E.g.:</p>
 <pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">Set</span><span class="w"> </span><span class="n">restricted_response</span><span class="w"> </span><span class="kr">of</span><span class="w"> </span><span class="n">my_game</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="dl">"</span><span class="s2">Not now!</span><span class="dl">"</span><span class="p">.</span></code></pre>
 </div>
 </div>
+<hr>
 <div class="paragraph">
-<p>Here&#8217;s an example of how the library handles actions restrictions, taken from the actual definition of the <code>talk_to</code> verb:</p>
+<p>Now that you&#8217;ve grasped the general mechanics behind restricted actions, it&#8217;s time to learn how to use them in your own adventures.</p>
 </div>
-<div class="listingblock lib">
-<div class="title">Excerpt from the <code>talk_to</code> verb definition in <a href="../../StdLib/lib_verbs.i" title="View library source file" target="_blank" rel="noopener"><code>lib_verbs.i</code></a>.</div>
-<div class="content">
-<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">ADD</span><span class="w"> </span><span class="kr">TO</span><span class="w"> </span><span class="kr">EVERY</span><span class="w"> </span><span class="nb">ACTOR</span><span class="w">
-  </span><span class="kr">VERB</span><span class="w"> </span><span class="n">talk_to</span><span class="w">
-    </span><span class="kr">CHECK</span><span class="w"> </span><span class="n">my_game</span><span class="w"> </span><span class="kr">CAN</span><span class="w"> </span><span class="n">talk_to</span><span class="w">
-      </span><span class="kr">ELSE</span><span class="w"> </span><span class="kr">SAY</span><span class="w"> </span><span class="n">restricted_response</span><span class="w"> </span><span class="kr">OF</span><span class="w"> </span><span class="n">my_game</span><span class="p">.</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>As you can see from the above code excerpt, the <code>talk_to</code> verb has a same-named boolean attribute counterpart on the <code>my_game</code> instance, which is used by the library to determine whether the action is currently enable or not.
-Likewise, every other library verb has a corresponing attribute, bearing the same identifier as the verb, and a similar <code>CHECK</code> to block the action if its disabled.</p>
-</div>
-<div class="admonitionblock tip">
+<div class="admonitionblock caution">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-The action-restriction attributes are defined inside the <a href="../../StdLib/lib_verbs_restrictions.i" title="View library source file" target="_blank" rel="noopener"><code>lib_verbs_restrictions.i</code></a> module.
+<div class="title">EDITORS' NOTE</div>
+<div class="paragraph">
+<p><strong>TBD!</strong> Add practical examples on how to use restriction-attributes!</p>
+</div>
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Now that you&#8217;ve greasped the general mechanics behind restricted actions, it&#8217;s time to learn how to use them in your own adventures.</p>
 </div>
 <div class="sect2">
-<h3 id="sec.restrictions-levels"><a class="anchor" href="#sec.restrictions-levels"></a>18.1. Restrictions Levels</h3>
+<h3 id="sec.restrictions-levels"><a class="anchor" href="#sec.restrictions-levels"></a>18.2. Restrictions Levels</h3>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -7089,7 +7211,7 @@ The action-restriction attributes are defined inside the <a href="../../StdLib/l
 </table>
 </div>
 <div class="paragraph">
-<p>The library provided five <em>actions-restrictions</em> presets, called &#8216;Actions Restrictions Levels&#8217;, which are designed to cover the most common use cases in any adventure.
+<p>The library provided six <em>actions-restrictions</em> presets&#8201;&#8212;&#8201;called &#8216;Actions-Restrictions Levels&#8217;&#8201;&#8212;&#8201;which are designed to cover the most common use cases in any adventure.
 Restrictions levels act on entire groups of similar verbs, thus enabling authors to quickly control which <em>types</em> of actions should be blocked at any given time.</p>
 </div>
 <div class="paragraph">
@@ -7104,13 +7226,30 @@ E.g.:</p>
 <div class="paragraph">
 <p>The library constantly monitors the value of <code>restricted_level</code> via the <code>check_restriction</code> EVENT, which will detect if its value has changed since the last turn, and act accordingly.</p>
 </div>
+<div id="warning-restricted-event" class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="title">Restriction-Levels Reset all Restriction-Attributes</div>
+<div class="paragraph">
+<p>Restriction-levels are enforced via the <code>check_restriction</code> EVENT, which will be executed <em>after</em> player input as been processed in the current turn.
+This means that if you tweak the <code>restricted_level of my_game</code> value to enforce a given preset configuration of restricted actions, and then tweak some action-restriction VERB attributes, the latter changes will be lost when the <code>check_restriction</code> EVENT is triggered, since the event will <em>reset all</em> action-restriction attributes.
+(For more info, see <a href="https://github.com/AnssiR66/AlanStdLib/issues/113" title="Issue #113 — Actions-Restrictions Not Working As Expected" target="_blank" rel="noopener">Issue #113</a>).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>The restriction levels are incremental in nature: each level restricts an additional group of actions compared to the previous one, along a continuum with levels 0 and 4 at its extremes&#8201;&#8212;&#8201;at level 0 all actions are enabled, at level 4 they&#8217;re all blocked.</p>
 </div>
 <div class="paragraph">
 <p>Level 5 is a special level created for YES/NO answers.
 Only the verbs <code>yes</code> and <code>'no'</code> can be used at Level 5.
-Furthermore, the <code>restricted_response</code> message is changed to <span class="play">Please answer YES or NO.</span> for the whole duration of this level, and then restored to its previous value when switching to another level.
+Furthermore, the <code>restricted_response</code> message is changed to <span class="play">Please answer YES or NO.</span> for the whole duration of this restriction level, and then restored to its previous value when switching to another level.
 This restriction level is not part of the 0-4 continuum described above; it&#8217;s an independent level of its own kind.</p>
 </div>
 <div class="paragraph">
@@ -7119,8 +7258,8 @@ This restriction level is not part of the 0-4 continuum described above; it&#821
 <div class="paragraph">
 <p>The following table summarizes the actions-restrictions outcome of each level:</p>
 </div>
-<table id="table.restrictions-levels" class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 2. Actions Restrictions Levels</caption>
+<table id="table.restrictions-levels" class="tableblock frame-all grid-all stripes-odd fit-content stretch">
+<caption class="title">Table 2. Actions-Restrictions Levels</caption>
 <colgroup>
 <col>
 <col>
@@ -7189,37 +7328,6 @@ Please answer YES or NO.
 </table>
 </div>
 <div class="sect2">
-<h3 id="sec.actions-attributes"><a class="anchor" href="#sec.actions-attributes"></a>18.2. Actions Attributes</h3>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="title">v2.2.0 Status</div>
-<div class="paragraph">
-<p>This section needs to re-written from scratch.</p>
-</div>
-<div class="ulist checklist">
-<ul class="checklist">
-<li>
-<p><i class="fa fa-square-o"></i> Try and reuse as much of <a href="#sec.restricted-actions-original">the original text</a> as possible.</p>
-</li>
-<li>
-<p><i class="fa fa-square-o"></i> Mention the need to use a custom <code>EVENT</code> in order to switch restriction level <em>and</em> tweak the restriction of specific verbs in a same turn.</p>
-</li>
-<li>
-<p><i class="fa fa-square-o"></i> Create externalized examples and transcripts.</p>
-</li>
-</ul>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
 <h3 id="sec.restricted-actions-original"><a class="anchor" href="#sec.restricted-actions-original"></a>18.3. *** ORIGINAL TEXT ***</h3>
 <div class="admonitionblock warning">
 <table>
@@ -7246,11 +7354,19 @@ We should re-use as much of it as possible, including the code examples, which s
 <td class="content">
 <div class="title">EDITORS' NOTE</div>
 <div class="paragraph">
-<p>Beware that some text and examples are incorrect, because they don&#8217;t mention the problems relating to switching restriction level and enabling/disabling specific verbs in a single turn (See <a href="https://github.com/AnssiR66/AlanStdLib/issues/113" target="_blank" rel="noopener">Issue #113</a>).</p>
+<p>Beware that some text and examples are incorrect, because they don&#8217;t mention the problems relating to switching restriction level and enabling/disabling specific verbs in a single turn (See <a href="https://github.com/AnssiR66/AlanStdLib/issues/113" title="Issue #113 — Actions-Restrictions Not Working As Expected" target="_blank" rel="noopener">Issue #113</a>).</p>
 </div>
 </td>
 </tr>
 </table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Restriction-Attributes vs DOES ONLY</div>
+<div class="paragraph">
+<p>This piece of the original <em>Manual</em> mentions the difference between blocking a verb via <code>DOES ONLY</code> and using restriction-attributes.</p>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Usually, when you need to restrict a verb from doing what it usually does (= when you want to change the default outcome as defined by the library), you can use a DOES ONLY statement:</p>
@@ -7293,6 +7409,27 @@ Then, actions like examine, listen or think might still work, but actions like a
 For these situations, the library offers a way to restrict several verbs at once.
 Look at the list of all library-defined verbs on p. 61-.
 Now, there is a library-defined attribute for each and every verb&#8201;&#8212;&#8201;CAN [verb].</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Using Restriction-Attributes on my_game</div>
+<div class="paragraph">
+<p>Here the original <em>Manual</em> mentions how to customize restriction-attributes from the game onset by blocking actions on the <code>my_game</code> definition.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Need to check that these are actually preserved&#8201;&#8212;&#8201;i.e. that the restrictions EVENT doesn&#8217;t actually trigger on first turn, overriding them.
+I think it doesn&#8217;t (it only triggers if the restriction level value has changed), but it&#8217;s worth keeping in mind that these instructions will only work if the restriction level is not changed from its default value!
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>If you want to disable any action or actions from the start of a game, you can declare for example</p>
@@ -7340,6 +7477,14 @@ The above is a shorter way to disable verbs than</p>
 </span><span class="kr">CAN</span><span class="w"> </span><span class="n">attack</span><span class="p">.</span></code></pre>
 </div>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Changing Restricted Actions Message</div>
+<div class="paragraph">
+<p>Here the original docs mention how to tweak the default message, which has already been covered; but it also mentions how to redefine it for the whole adventure, directly on <code>my_game</code>, which I haven&#8217;t mentioned yet!</p>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>Notice how this list corresponds to the list of verbs on pp. 61-65, so it is not repeated fully here.</p>
 </div>
@@ -7365,8 +7510,21 @@ The default message is "You can&#8217;t do that." but it can be easily edited:</
 </div>
 </div>
 <div class="paragraph">
-<p>and so on.
-Now, let&#8217;s again think about the situation where the hero is tied into a chair and cannot move.
+<p>and so on.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Example: Hero is Tied to Chair</div>
+<div class="paragraph">
+<p>Here&#8217;s the original example on implementing a situation where the Hero can&#8217;t move.</p>
+</div>
+<div class="paragraph">
+<p>It covers both attempting it via attributes only&#8201;&#8212;&#8201;to prove how cumbersome it would be&#8201;&#8212;&#8201;and how using restriction-levels is more practical.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, let&#8217;s again think about the situation where the hero is tied into a chair and cannot move.
 This kind of situation requires disabling a rather large number of verbs: attack, eat, take, drop, throw, put, along with numerous other ones.
 One could do it like this:</p>
 </div>
@@ -7408,6 +7566,14 @@ Thus the following coding would actually be unnecessary, but it is included here
 </div>
 <div class="sect3">
 <h4 id="_restriction_levels"><a class="anchor" href="#_restriction_levels"></a>18.3.1. ** Restriction Levels **</h4>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Description of Restriction-Levels</div>
+<div class="paragraph">
+<p>Need to compare this to the new docs, since right now I&#8217;ve only provided a summary table, but the text below might contain useful insights that need to be preserved.</p>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>The values of this attributes work in the following way:</p>
 </div>
@@ -7457,6 +7623,11 @@ Sensory verbs and "passive" action verbs like look, examine, smell, listen, thin
    You cannot move your arms or legs.</span><span class="dl">"</span><span class="w">
   </span><span class="kr">SET</span><span class="w"> </span><span class="n">restricted_level</span><span class="w"> </span><span class="kr">OF</span><span class="w"> </span><span class="n">my_game</span><span class="w"> </span><span class="kr">TO</span><span class="w"> </span><span class="m">2</span><span class="p">.</span><span class="w"> </span><span class="c1">-- all action verbs will be disabled</span><span class="w">
   </span><span class="kr">MAKE</span><span class="w"> </span><span class="n">my_game</span><span class="w"> </span><span class="n">rub</span><span class="p">.</span><span class="w">                     </span><span class="c1">-- but 'rub' will work</span><span class="w">
+  </span><span class="c1">-- ***** WON'T WORK!!! *********************************</span><span class="w">
+  </span><span class="c1">-- This example doesn't take into account the fact that</span><span class="w">
+  </span><span class="c1">-- the restriction event will override the tweaked value</span><span class="w">
+  </span><span class="c1">-- of the `rub` restriction (#113),</span><span class="w">
+  </span><span class="c1">-- *****************************************************</span><span class="w">
 </span><span class="kr">END</span><span class="w"> </span><span class="kr">EVENT</span><span class="p">.</span></code></pre>
 </div>
 </div>
@@ -7493,6 +7664,11 @@ Only meta verbs like save, quit, restore and about work.</p>
   </span><span class="kr">CAN</span><span class="w"> </span><span class="n">examine</span><span class="p">.</span><span class="w">
   </span><span class="kr">CAN</span><span class="w"> </span><span class="n">'use'</span><span class="p">.</span><span class="w">
   </span><span class="kr">CAN</span><span class="w"> </span><span class="n">use_with</span><span class="p">.</span><span class="w">
+  </span><span class="c1">-- ***** WON'T WORK!!! *********************************</span><span class="w">
+  </span><span class="c1">-- This example doesn't take into account the fact that</span><span class="w">
+  </span><span class="c1">-- the restriction event will override the tweaked value</span><span class="w">
+  </span><span class="c1">-- of the `rub` restriction (#113),</span><span class="w">
+  </span><span class="c1">-- *****************************************************</span><span class="w">
 </span><span class="kr">END</span><span class="w"> </span><span class="kr">THE</span><span class="p">.</span></code></pre>
 </div>
 </div>
@@ -7523,10 +7699,20 @@ It is not usually recommended to use this strict disabling of verbs, but this op
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">THE</span><span class="w"> </span><span class="n">my_game</span><span class="w"> </span><span class="kr">ISA</span><span class="w"> </span><span class="n">DEFINITION_BLOCK</span><span class="w">
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="c1">-- *****************************************************</span><span class="w">
+</span><span class="c1">-- This example would need to be fixed, since we now have</span><span class="w">
+</span><span class="c1">-- the new dedicated Level 5 for this!</span><span class="w">
+</span><span class="c1">-- *****************************************************</span><span class="w">
+
+</span><span class="kr">THE</span><span class="w"> </span><span class="n">my_game</span><span class="w"> </span><span class="kr">ISA</span><span class="w"> </span><span class="n">DEFINITION_BLOCK</span><span class="w">
   </span><span class="kr">HAS</span><span class="w"> </span><span class="n">restricted_level</span><span class="w"> </span><span class="m">4</span><span class="p">.</span><span class="w"> </span><span class="c1">-- all possible verbs disabled</span><span class="w">
   </span><span class="kr">CAN</span><span class="w"> </span><span class="n">yes</span><span class="p">.</span><span class="w"> </span><span class="kr">CAN</span><span class="w"> </span><span class="n">'no'</span><span class="p">.</span><span class="w">      </span><span class="c1">-- but 'yes' and 'no' work</span><span class="w">
   </span><span class="kr">HAS</span><span class="w"> </span><span class="n">restricted_response</span><span class="w"> </span><span class="dl">"</span><span class="s2">Please answer 'yes' or 'no'.</span><span class="dl">"</span><span class="w">
+  </span><span class="c1">-- ***** WON'T WORK!!! *********************************</span><span class="w">
+  </span><span class="c1">-- This example doesn't take into account the fact that</span><span class="w">
+  </span><span class="c1">-- the restriction event will override the tweaked value</span><span class="w">
+  </span><span class="c1">-- of the `rub` restriction (#113),</span><span class="w">
+  </span><span class="c1">-- *****************************************************</span><span class="w">
 </span><span class="kr">END</span><span class="w"> </span><span class="kr">THE</span><span class="p">.</span><span class="w">
 
 </span><span class="kr">THE</span><span class="w"> </span><span class="n">restore_room</span><span class="w"> </span><span class="kr">ISA</span><span class="w"> </span><span class="nb">LOCATION</span><span class="w">
@@ -7558,6 +7744,7 @@ It is not usually recommended to use this strict disabling of verbs, but this op
 There, anything you type is repeated:</p>
 </div>
 <div class="exampleblock gametranscript">
+<div class="title">Example 1. Example: Zork 1 "Loud Room"</div>
 <div class="content">
 <div class="paragraph">
 <p>&gt; <em>x me</em><br>
@@ -7645,6 +7832,11 @@ Here is an example with the verb 'drive' which is not included in the library by
    and you cannot move your arms or legs at all.</span><span class="dl">"</span><span class="w">
   </span><span class="kr">SET</span><span class="w"> </span><span class="n">restricted_level</span><span class="w"> </span><span class="kr">OF</span><span class="w"> </span><span class="n">my_game</span><span class="w"> </span><span class="kr">TO</span><span class="w"> </span><span class="m">2</span><span class="p">.</span><span class="w">
   </span><span class="kr">MAKE</span><span class="w"> </span><span class="n">my_game</span><span class="w"> </span><span class="kr">NOT</span><span class="w"> </span><span class="n">drive</span><span class="p">.</span><span class="w"> </span><span class="c1">-- 'drive' being a verb you have defined</span><span class="w">
+  </span><span class="c1">-- ***** WON'T WORK!!! *********************************</span><span class="w">
+  </span><span class="c1">-- This example doesn't take into account the fact that</span><span class="w">
+  </span><span class="c1">-- the restriction event will override the tweaked value</span><span class="w">
+  </span><span class="c1">-- of the `rub` restriction (#113),</span><span class="w">
+  </span><span class="c1">-- *****************************************************</span><span class="w">
 </span><span class="kr">END</span><span class="w"> </span><span class="kr">EVENT</span><span class="p">.</span></code></pre>
 </div>
 </div>
@@ -7685,7 +7877,16 @@ Here is an example with the verb 'drive' which is not included in the library by
     </span><span class="kr">MAKE</span><span class="w"> </span><span class="n">my_game</span><span class="w"> </span><span class="kr">NOT</span><span class="w"> </span><span class="n">recall</span><span class="p">.</span><span class="w">
     </span><span class="c1">-- recall is similar to examine, think, listen, etc.</span><span class="w">
     </span><span class="c1">-- so we'll cancel it together with those verbs</span><span class="w">
-    </span><span class="c1">-- only (level 3 and higher)</span></code></pre>
+    </span><span class="c1">-- only (level 3 and higher)</span><span class="w">
+    </span><span class="c1">-- ***** WON'T WORK??? *********************************</span><span class="w">
+    </span><span class="c1">-- This example doesn't take into account the fact that</span><span class="w">
+    </span><span class="c1">-- the restriction event will override the tweaked value</span><span class="w">
+    </span><span class="c1">-- of the `rub` restriction (#113).</span><span class="w">
+    </span><span class="c1">-- It will most likely fail to work because the WHEN rule</span><span class="w">
+    </span><span class="c1">-- might be executed before the restriction EVENT, but</span><span class="w">
+    </span><span class="c1">-- I'm not 100% sure, need to check and mention this case</span><span class="w">
+    </span><span class="c1">-- in the new docs.</span><span class="w">
+    </span><span class="c1">-- *****************************************************</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8019,6 +8220,30 @@ This is done through attributes of the <code>my_game</code> instance.</p>
 </div>
 <div class="sect2">
 <h3 id="_1_attributes_for_the_start_section"><a class="anchor" href="#_1_attributes_for_the_start_section"></a>20.2. 1. Attributes for the start section</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Section Status</div>
+<div class="paragraph">
+<p>The contents of this sections no longer mirror the current library code.</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> New Banner attributes are missing.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Library messages are now defined in the new <a href="../../StdLib/lib_messages_library.i" title="View library source file" target="_blank" rel="noopener"><code>lib_messages_library.i</code></a> module.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> The way messages are grouped has changed.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Some messages were renamed, so we need to check every reference in this chapter.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>The following five attributes have been declared for the game start:</p>
 </div>
@@ -8032,12 +8257,12 @@ This is done through attributes of the <code>my_game</code> instance.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If you set the version value to "0" (zero), the version line won&#8217;t be shown at all in the game banner.
+<p>If you set the version value to &#8220;0&#8221; (zero), the version line won&#8217;t be shown at all in the game banner.
 Note also that the version number is in quotes.
 This enables any kind of textual input to describe the current version, for example version "beta0.1", and so on.</p>
 </div>
 <div class="paragraph">
-<p>If the subtitle line remains an empty quote (""), like above, it won&#8217;t show in the banner.</p>
+<p>If the subtitle line remains an empty quote (<code>""</code>), like above, it won&#8217;t show in the banner.</p>
 </div>
 <div class="paragraph">
 <p>Now, you can modify the default attributes for example in a following way:</p>
@@ -8120,6 +8345,21 @@ Version 1</p>
 If no specific CLOTHING is defined for the hero in the game, these messages won&#8217;t show at any time.
 By default, these messages show at <span class="play">&gt; <em>inventory</em></span>.
 If the author wishes to have the CLOTHING objects worn by the hero described after <span class="play">&gt; <em>examine me</em></span>, the examine verb for the hero should be defined this way:</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="title">v2.2.0 Status: Old Clothing-system</div>
+<div class="paragraph">
+<p>The following examples still uses the old clothing system with the <code>worn</code> ENTITY!</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9459,7 +9699,7 @@ Moreover, you should add the following check to each affected verb:</p>
 Part &#8220;Getting Started&#8221;.</p>
 </div>
 <div class="paragraph">
-<p>See <a href="https://github.com/AnssiR66/AlanStdLib/issues/114">Issue #114</a> for a discussion on library attributes in the <em>StdLib Manual</em>, and the proposal to dump this chapter.</p>
+<p>See <a href="https://github.com/AnssiR66/AlanStdLib/issues/114" title="Issue #114 — New 'Library Attributes' Part" target="_blank" rel="noopener">Issue #114</a> for a discussion on library attributes in the <em>StdLib Manual</em>, and the proposal to dump this chapter.</p>
 </div>
 </td>
 </tr>

@@ -1,11 +1,11 @@
 ////
-********************************************************************************
-*                                                                              *
-*                     ALAN Standard Library User's Manual                      *
-*                                                                              *
-*                     Appendix: Default Library Attributes                     *
-*                                                                              *
-********************************************************************************
+******************************************************************************
+*                                                                            *
+*                    ALAN Standard Library User's Manual                     *
+*                                                                            *
+*                    Appendix: Default Library Attributes                    *
+*                                                                            *
+******************************************************************************
 ////
 
 [appendix]
@@ -20,7 +20,7 @@
 It replaces the old "`Default Library Attributes`" chapter, that was deleted from
 Part "`Getting Started`".
 
-See https://github.com/AnssiR66/AlanStdLib/issues/114[Issue #114] for a discussion on library attributes in the _StdLib Manual_, and the proposal to dump this chapter.
+See {Issue114} for a discussion on library attributes in the _StdLib Manual_, and the proposal to dump this chapter.
 =====================================
 
 
