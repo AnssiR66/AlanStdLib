@@ -757,7 +757,7 @@ ADD TO EVERY THING
       ELSE
         IF target IS NOT worn
           THEN SAY my_game:check_obj_not_in_hero1.
-          ELSE SAY my_game:check_obj_not_in_worn2.
+          ELSE SAY my_game:check_obj_not_worn_by_hero2.
         END IF.
     AND CURRENT LOCATION IS lit
       ELSE SAY my_game:check_current_loc_lit.
@@ -832,7 +832,7 @@ ADD TO EVERY THING
         ELSE
           IF target IS NOT worn
             THEN SAY my_game:check_obj_not_in_hero1.
-            ELSE SAY my_game:check_obj_not_in_worn2.
+            ELSE SAY my_game:check_obj_not_worn_by_hero2.
           END IF.
       AND CURRENT LOCATION IS lit
         ELSE SAY my_game:check_current_loc_lit.
@@ -2164,7 +2164,7 @@ ADD TO EVERY OBJECT
     AND obj IN hero
       ELSE SAY my_game:check_obj_in_hero.
     AND obj IS NOT worn -- protect non-clothing wearables
-      ELSE SAY my_game:check_obj_not_in_worn3.
+      ELSE SAY my_game:check_obj_not_worn_by_hero3.
 
     DOES
       LOCATE obj HERE.
@@ -3773,7 +3773,7 @@ ADD TO EVERY THING
       ELSE
         IF target IS NOT worn
           THEN SAY my_game:check_obj_not_in_hero1.
-          ELSE SAY my_game:check_obj_not_in_worn2.
+          ELSE SAY my_game:check_obj_not_worn_by_hero2.
         END IF.
     AND CURRENT LOCATION IS lit
       ELSE SAY my_game:check_current_loc_lit.
@@ -6258,7 +6258,7 @@ ADD TO EVERY THING
       ELSE
         IF target IS NOT worn
           THEN SAY my_game:check_obj_not_in_hero1.
-          ELSE SAY my_game:check_obj_not_in_worn2.
+          ELSE SAY my_game:check_obj_not_worn_by_hero2.
         END IF.
     AND target IS NOT distant
       ELSE
@@ -6347,7 +6347,7 @@ ADD TO EVERY THING
         ELSE
           IF target IS NOT worn
             THEN SAY my_game:check_obj_not_in_hero1.
-            ELSE SAY my_game:check_obj_not_in_worn2.
+            ELSE SAY my_game:check_obj_not_worn_by_hero2.
           END IF.
       AND target IS NOT distant
         ELSE
@@ -7685,7 +7685,7 @@ ADD TO EVERY OBJECT
         ELSE
           IF target IS NOT worn
             THEN SAY my_game:check_obj_not_in_hero1.
-            ELSE SAY my_game:check_obj_not_in_worn2.
+            ELSE SAY my_game:check_obj_not_worn_by_hero2.
           END IF.
       AND target <> hero
         ELSE SAY my_game:check_obj2_not_hero1.
@@ -7885,7 +7885,7 @@ ADD TO EVERY OBJECT
         ELSE
           IF cont IS NOT worn
             THEN SAY my_game:check_obj_not_in_hero1.
-            ELSE SAY my_game:check_obj_not_in_worn2.
+            ELSE SAY my_game:check_obj_not_worn_by_hero2.
           END IF.
       AND CURRENT LOCATION IS lit
         ELSE SAY my_game:check_current_loc_lit.

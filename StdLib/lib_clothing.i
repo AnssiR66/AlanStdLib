@@ -225,7 +225,7 @@ EVERY clothing IsA OBJECT
       CHECK obj IS NOT worn
         ELSE
           IF obj IN hero
-            THEN SAY my_game:check_obj_not_in_worn3.
+            THEN SAY my_game:check_obj_not_worn_by_hero3.
             ELSE
               IF obj IS NOT plural
                 --       "Currently $+1 [is/are] worn by"
@@ -246,7 +246,7 @@ EVERY clothing IsA OBJECT
       CHECK obj IS NOT worn
         ELSE
           IF obj IN hero
-            THEN SAY my_game:check_obj_not_in_worn3.
+            THEN SAY my_game:check_obj_not_worn_by_hero3.
             ELSE
               IF obj IS NOT plural
                 --       "Currently $+1 [is/are] worn by"
@@ -267,7 +267,7 @@ EVERY clothing IsA OBJECT
       CHECK obj IS NOT worn
         ELSE
           IF obj IN hero
-            THEN SAY my_game:check_obj_not_in_worn3.
+            THEN SAY my_game:check_obj_not_worn_by_hero3.
             ELSE
               IF obj IS NOT plural
                 --       "Currently $+1 [is/are] worn by"
@@ -287,7 +287,7 @@ EVERY clothing IsA OBJECT
     CHECK projectile IS NOT worn
       ELSE
         IF projectile IN hero
-          THEN SAY my_game:check_obj_not_in_worn3.
+          THEN SAY my_game:check_obj_not_worn_by_hero3.
           ELSE
             IF projectile IS NOT plural
               --       "Currently $+1 [is/are] worn by"
@@ -308,7 +308,7 @@ EVERY clothing IsA OBJECT
       CHECK projectile IS NOT worn
         ELSE
           IF projectile IN hero
-            THEN SAY my_game:check_obj_not_in_worn3.
+            THEN SAY my_game:check_obj_not_worn_by_hero3.
             ELSE
               IF projectile IS NOT plural
                 --       "Currently $+1 [is/are] worn by"
@@ -329,7 +329,7 @@ EVERY clothing IsA OBJECT
       CHECK projectile IS NOT worn
         ELSE
           IF projectile IN hero
-            THEN SAY my_game:check_obj_not_in_worn3.
+            THEN SAY my_game:check_obj_not_worn_by_hero3.
             ELSE
               IF projectile IS NOT plural
                 --       "Currently $+1 [is/are] worn by"
@@ -350,7 +350,7 @@ EVERY clothing IsA OBJECT
       CHECK projectile IS NOT worn
         ELSE
           IF projectile IN hero
-            THEN SAY my_game:check_obj_not_in_worn3.
+            THEN SAY my_game:check_obj_not_worn_by_hero3.
             ELSE
               IF projectile IS NOT plural
                 --       "Currently $+1 [is/are] worn by"
@@ -371,7 +371,7 @@ EVERY clothing IsA OBJECT
       CHECK obj IS NOT worn
         ELSE
           IF obj IN hero
-            THEN SAY my_game:check_obj_not_in_worn3.
+            THEN SAY my_game:check_obj_not_worn_by_hero3.
             ELSE
               IF obj IS NOT plural
                 --       "Currently $+1 [is/are] worn by"
@@ -405,7 +405,7 @@ EVERY clothing IsA OBJECT
       ELSE
         IF THIS IN hero
           --      "You are already wearing $+1."
-          THEN SAY my_game:check_obj_not_in_worn1.
+          THEN SAY my_game:check_obj_not_worn_by_hero1.
           ELSE
             IF THIS IS NOT plural
               --      "Currently $+1 [is/are] worn by""
@@ -538,7 +538,7 @@ EVERY clothing IsA OBJECT
   VERB remove
 --==============================================================================
     CHECK THIS DIRECTLY IN hero AND THIS IS worn
-      ELSE SAY my_game:check_obj_in_worn.
+      ELSE SAY my_game:check_obj_worn_by_hero.
     AND CURRENT LOCATION IS lit
       ELSE SAY my_game:check_current_loc_lit.
 

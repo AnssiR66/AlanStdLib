@@ -1065,9 +1065,9 @@ HAS check_obj_not_on_surface_pl "$+1 are already on $+2.".
 You can't take off something you're not wearing (remove, take_off):
 
 [source,alan, role="lib"]
-------------------------------------------------------------------------------
-HAS check_obj_in_worn "You are not wearing $+1.".
-------------------------------------------------------------------------------
+------------------------------------------------------
+HAS check_obj_worn_by_hero "You are not wearing $+1.".
+------------------------------------------------------
 
 // PAGE 94 //
 
@@ -1075,16 +1075,16 @@ HAS check_obj_in_worn "You are not wearing $+1.".
 The following check is for cases when the hero tries to put on something (s)he is already wearing (`put_on`, `wear`):
 
 [source,alan, role="lib"]
-------------------------------------------------------------------------------
-HAS check_obj_not_in_worn1 "You are already wearing $+1.".
-------------------------------------------------------------------------------
+---------------------------------------------------------------
+HAS check_obj_not_worn_by_hero1 "You are already wearing $+1.".
+---------------------------------------------------------------
 
 Here, the action is stopped if the hero tries to attack, kick or shoot something (s)he's wearing (`attack`, `attack_with`, `kick`, `shoot`, `shoot_with`):
 
 [source,alan, role="lib"]
 ------------------------------------------------------------------------------
-HAS check_obj_not_in_worn2 "It doesn't make sense to $v something you're
-                            wearing.".
+HAS check_obj_not_worn_by_hero2 "It doesn't make sense to $v
+                                 something you're wearing.".
 ------------------------------------------------------------------------------
 
 Lastly, it's not possible to drop a piece of CLOTHING if it is worn.
@@ -1092,7 +1092,7 @@ It will have to be removed first (`drop`):
 
 [source,alan, role="lib"]
 ------------------------------------------------------------------------------
-HAS check_obj_not_in_worn3: "You'll have to take off $+1 first."
+HAS check_obj_not_worn_by_hero3: "You'll have to take off $+1 first."
 ------------------------------------------------------------------------------
 
 

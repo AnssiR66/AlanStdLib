@@ -389,11 +389,13 @@ THE my_game ISA DEFINITION_BLOCK
   -- checking whether an object is worn or not:
   ---------------------------------------------
 
-  HAS check_obj_in_worn       "You are not wearing $+1.".                       -- remove, take_off ('classes.i')
-  HAS check_obj_not_in_worn1  "You are already wearing $+1.".                   -- put_on, wear ('classes.i')
-  HAS check_obj_not_in_worn2  "It doesn't make sense to $v something you're wearing.". -- attack, attack_with, kick, shoot, shoot_with
-  HAS check_obj_not_in_worn3  "You'll have to take off $+1 first.".             -- drop
+  HAS check_obj_worn_by_hero       "You are not wearing $+1.".                       -- remove, take_off ('classes.i')
+  HAS check_obj_not_worn_by_hero1  "You are already wearing $+1.".                   -- put_on, wear ('classes.i')
+  HAS check_obj_not_worn_by_hero2  "It doesn't make sense to $v something you're wearing.". -- attack, attack_with, kick, shoot, shoot_with
+  HAS check_obj_not_worn_by_hero3  "You'll have to take off $+1 first.".             -- drop
 
+  HAS check_obj1_not_worn_by_NPC_sg "Currently $+1 is worn by".
+  HAS check_obj1_not_worn_by_NPC_pl "Currently $+1 are worn by".
 
   -- c) checking location states
   ------------------------------

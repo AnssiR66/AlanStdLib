@@ -341,10 +341,10 @@ HAS check_obj_not_on_surface_pl "$+1 are already on $+2.".
 -- Checking Whether an Object Is Worn or Not
 --------------------------------------------------------------------------------
 
-HAS check_obj_in_worn      "You are not wearing $+1.".
-HAS check_obj_not_in_worn1 "You are already wearing $+1.".
-HAS check_obj_not_in_worn2 "It doesn't make sense to $v something you're wearing.".
-HAS check_obj_not_in_worn3 "You'll have to take off $+1 first.".
+HAS check_obj_worn_by_hero      "You are not wearing $+1.".
+HAS check_obj_not_worn_by_hero1 "You are already wearing $+1.".
+HAS check_obj_not_worn_by_hero2 "It doesn't make sense to $v something you're wearing.".
+HAS check_obj_not_worn_by_hero3 "You'll have to take off $+1 first.".
 
 HAS check_obj1_not_worn_by_NPC_sg "Currently $+1 is worn by".
 HAS check_obj1_not_worn_by_NPC_pl "Currently $+1 are worn by".
