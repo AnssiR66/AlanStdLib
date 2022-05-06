@@ -688,7 +688,10 @@ ADD TO EVERY ACTOR
         -- It is only possible to get something from an NPC
         -- if the NPC is 'compliant'.
         LOCATE obj IN hero.
-        MAKE obj NOT worn. -- for non-clothing wearables.
+        -- >>> wearables safeguard >>>
+        MAKE obj NOT worn.
+        SET wearer OF obj TO nobody.
+        -- <<< wearables safeguard <<<
         SAY THE act. "gives" SAY THE obj. "to you."
         -- Now let's restore act to its original state of compliance:
         IF my_game IS NOT temp_compliant
@@ -3461,9 +3464,11 @@ ADD TO EVERY OBJECT
         --       the verb would simply abort, and this code never be executed.
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         LOCATE obj IN recipient.
+        -- >>> wearables safeguard >>>
+        MAKE obj NOT worn.
+        SET wearer OF obj TO nobody.
+        -- <<< wearables safeguard <<<
         "You give" SAY THE obj. "to" SAY THE recipient. "."
-        MAKE obj NOT worn. -- for non-clothing wearables.
-
   END VERB give.
 END ADD TO.
 
@@ -5535,8 +5540,11 @@ ADD TO EVERY OBJECT
           END IF.
 
       DOES
-        MAKE obj NOT worn. -- for non-clothing wearables.
         LOCATE obj IN cont.
+        -- >>> wearables safeguard >>>
+        MAKE obj NOT worn.
+        SET wearer OF obj TO nobody.
+        -- <<< wearables safeguard <<<
         "You put" SAY THE obj. "into" SAY THE cont. "."
 
   END VERB put_in.
@@ -5733,8 +5741,10 @@ ADD TO EVERY OBJECT
         END IF.
 
         "You put" SAY THE obj. "on" SAY THE surface. "."
-        MAKE obj NOT worn. -- for non-clothing wearables.
-
+        -- >>> wearables safeguard >>>
+        MAKE obj NOT worn.
+        SET wearer OF obj TO nobody.
+        -- <<< wearables safeguard <<<
   END VERB put_on.
 END ADD TO.
 
@@ -7132,7 +7142,10 @@ ADD TO EVERY THING
       -- a cage, etc.
       ELSIF obj IsA OBJECT THEN
         LOCATE obj IN hero.
-        MAKE obj NOT worn. -- for non-clothing wearables.
+        -- >>> wearables safeguard >>>
+        MAKE obj NOT worn.
+        SET wearer OF obj TO nobody.
+        -- <<< wearables safeguard <<<
         "Taken."
       END IF.
 
@@ -7639,8 +7652,10 @@ ADD TO EVERY OBJECT
 
       "nearby."
       LOCATE projectile AT hero.
-      MAKE projectile NOT worn. -- for non-clothing wearables.
-
+      -- >>> wearables safeguard >>>
+      MAKE projectile NOT worn.
+      SET wearer OF projectile TO nobody.
+      -- <<< wearables safeguard <<<
   END VERB throw.
 END ADD TO.
 
@@ -7726,7 +7741,11 @@ ADD TO EVERY OBJECT
       -- NOTE: If the implicit-take action failed due to an EXTRACT clause,
       --       the verb would simply abort, and this code never be executed.
       -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      MAKE projectile NOT worn. -- for non-clothing wearables.
+
+      -- >>> wearables safeguard >>>
+      MAKE projectile NOT worn.
+      SET wearer OF projectile TO nobody.
+      -- <<< wearables safeguard <<<
 
       IF target IS inanimate
         THEN
@@ -8399,8 +8418,9 @@ VERB undress
     --     "You remove all the items you were wearing."
     --     FOR EACH worncl IsA clothing, DIRECTLY IN hero, IS worn
     --       DO
-    --         MAKE worncl NOT worn.
     --         LOCATE worncl AT CURRENT LOCATION.
+    --         MAKE worncl NOT worn.
+    --         SET wearer OF worncl TO nobody.
     --     END FOR.
     --   ELSE "You're not wearing anything you can remove."
     -- END IF.

@@ -33,7 +33,7 @@ wear balaclava
 ; VALUELESS ITEMS (ORNAMENTALS)
 ; ==============================================================================
 ; Some small items, like watches, necklaces, etc., might be created without any
-; coverage values at all, so they can be freely worn reagardless of other items.
+; coverage values at all, so they can be freely worn regardless of other items.
 examine watch
 DBG_CLOTHES watch
 wear it

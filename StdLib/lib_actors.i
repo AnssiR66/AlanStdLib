@@ -43,6 +43,23 @@
 
 
 --==============================================================================
+--------------------------------------------------------------------------------
+--                  T H E   N O B O D Y   D U M M Y   A C T O R
+--------------------------------------------------------------------------------
+--==============================================================================
+
+-- This is a dummy actor placeholder used on the `wearer` attribute to indicate
+-- that an item is not being worn.
+
+THE nobody IsA actor AT nowhere
+  IS named. -- prevent printing "the nobody" in actual references.
+  PRONOUN it
+END THE.
+
+-- The library only uses it for clothing, but authors can also use it in their
+-- custom code whenever they need an null ACTOR value for a reference attribute.
+
+--==============================================================================
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 --------------------------------------------------------------------------------
@@ -162,6 +179,11 @@ ADD TO EVERY ACTOR
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+  --============================================================================
+  ------------------------------------------------------------------------------
+  --                  A C T O R S   I N I T I A L I Z A T I O N
+  ------------------------------------------------------------------------------
+  --============================================================================
 
   INITIALIZE
 
@@ -172,7 +194,22 @@ ADD TO EVERY ACTOR
       THEN USE SCRIPT following_hero FOR THIS.
     END IF.
 
+  --============================================================================
+  --                  I N I T I A L I Z E   W O R N   I T E M S
+  --============================================================================
 
+  -- To simplify game authoring, the library allows to define items which are
+  -- worn at game start by simply setting to `IS WORN` a wearable item located
+  -- IN an actor, without having to set its `wearer` attribute.
+
+  -- Therefore, the following code will take care of correctly setting the
+  -- `wearer` attribute of any worn items.
+
+  FOR EACH act IsA actor DO
+    FOR EACH item IsA object, IS worn, DIRECTLY IN act
+      DO SET wearer OF item TO act.
+    END FOR.
+  END FOR.
 
   SCRIPT following_hero
     -- ------------------------------------------------

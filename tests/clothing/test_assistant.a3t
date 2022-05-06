@@ -3,7 +3,7 @@
 Emporium Giorgio Alani 
 An adventure to test clothing. 
 Version 1. 
-(C) 2020 by Tristano Ajmone. 
+(C) 2022 by Tristano Ajmone. 
 Programmed with the ALAN Interactive Fiction Language v3.0beta8. 
 Standard Library v2.2.0. 
 All rights reserved. 
@@ -24,14 +24,14 @@ fashion consumerism.
 > ; *                                                                            *
 > ; ******************************************************************************
 > ; In the Emporium Alan the hero is met by a personal assistant who follows him
-> ; everywere he goes into the store, except for the dressing room and when he
+> ; everywhere he goes into the store, except for the dressing room and when he
 > ; leaves the emporium. This test if for checking that the assistant automation
 > ; is working as expected...
 > north
 As you move toward the doors they automagically slide open before you.
 
 Emporium Alani Main Hall
-This luxurious hall is the crossroad to the various clothing departments
+This luxurious hall is the crossroads to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
 fashion temple and back into the world of mortal souls. There is a 
 trashcan here. Behind a desk stands the emporium manager. There is your
@@ -45,7 +45,7 @@ and a pair of fashion boots.
 > ; TEST FOLLOWING
 > ; ==============================================================================
 > east
-Mensware Department
+Menswear Department
 Everything a man would ever dream wearing can be found here. There is a 
 T-shirt, a black shirt, a red shirt and a men's coat here. 
 
@@ -53,7 +53,7 @@ The assistant follows you.
 
 > west
 Emporium Alani Main Hall
-This luxurious hall is the crossroad to the various clothing departments
+This luxurious hall is the crossroads to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
 fashion temple and back into the world of mortal souls. There is a 
 trashcan here. Behind a desk stands the emporium manager. 
@@ -76,14 +76,14 @@ You're standing in front of the Giorgio Alani Emporium entrance.
 As you move toward the doors they automagically slide open before you.
 
 Emporium Alani Main Hall
-This luxurious hall is the crossroad to the various clothing departments
+This luxurious hall is the crossroads to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
 fashion temple and back into the world of mortal souls. There is a 
 trashcan here. Behind a desk stands the emporium manager. There is your
 personal assistant here.
 
 > east
-Mensware Department
+Menswear Department
 Everything a man would ever dream wearing can be found here. There is a 
 T-shirt, a black shirt, a red shirt and a men's coat here. 
 
@@ -102,14 +102,14 @@ here.
 
 > ; But resume following when we leave...
 > southeast
-Mensware Department
+Menswear Department
 Everything a man would ever dream wearing can be found here. There is a 
 T-shirt, a black shirt, a red shirt and a men's coat here. There is your
 personal assistant here.
 
 > west
 Emporium Alani Main Hall
-This luxurious hall is the crossroad to the various clothing departments
+This luxurious hall is the crossroads to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
 fashion temple and back into the world of mortal souls. There is a 
 trashcan here. Behind a desk stands the emporium manager. 
@@ -117,7 +117,7 @@ trashcan here. Behind a desk stands the emporium manager.
 The assistant follows you.
 
 > west
-Womensware Department
+Womenswear Department
 No woman's fashion dreams could be left unfulfilled by the clothes in
 this department. 
 
@@ -126,7 +126,7 @@ The assistant follows you.
 > ; ------------------------------------------------------------------------------
 > ; Chasing The Customer
 > ; ------------------------------------------------------------------------------
-> ; Since the Dressing Room is at the center of the store, when the hero exits it
+> ; Since the Dressing Room is at the centre of the store, when the hero exits it
 > ; to a different room than the one he entered from, the assistant will be left
 > ; in the original room and she'll have to cross the store to catch up...
 > northeast
@@ -137,16 +137,16 @@ pair of dungarees, a skirt, a pair of white pantyhose and a pair of jeans
 here.
 
 > southeast
-Mensware Department
+Menswear Department
 Everything a man would ever dream wearing can be found here. There is a 
 T-shirt, a black shirt, a red shirt and a men's coat here. The assistant
-comes running into the room, all the way from the womensware dept., where
+comes running into the room, all the way from the womenswear dept., where
 you left her.
 
 > ; And restore following us again...
 > west
 Emporium Alani Main Hall
-This luxurious hall is the crossroad to the various clothing departments
+This luxurious hall is the crossroads to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
 fashion temple and back into the world of mortal souls. There is a 
 trashcan here. Behind a desk stands the emporium manager. 

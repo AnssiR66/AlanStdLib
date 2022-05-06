@@ -4,7 +4,7 @@
 ; *                                                                            *
 ; ******************************************************************************
 ; In the Emporium Alan the hero is met by a personal assistant who follows him
-; everywere he goes into the store, except for the dressing room and when he
+; everywhere he goes into the store, except for the dressing room and when he
 ; leaves the emporium. This test if for checking that the assistant automation
 ; is working as expected...
 north
@@ -34,7 +34,7 @@ west
 ; ------------------------------------------------------------------------------
 ; Chasing The Customer
 ; ------------------------------------------------------------------------------
-; Since the Dressing Room is at the center of the store, when the hero exits it
+; Since the Dressing Room is at the centre of the store, when the hero exits it
 ; to a different room than the one he entered from, the assistant will be left
 ; in the original room and she'll have to cross the store to catch up...
 northeast

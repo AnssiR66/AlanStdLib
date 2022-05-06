@@ -3,7 +3,7 @@
 Emporium Giorgio Alani 
 An adventure to test clothing. 
 Version 1. 
-(C) 2020 by Tristano Ajmone. 
+(C) 2022 by Tristano Ajmone. 
 Programmed with the ALAN Interactive Fiction Language v3.0beta8. 
 Standard Library v2.2.0. 
 All rights reserved. 
@@ -30,13 +30,13 @@ fashion consumerism.
 > ; system, but with more freedom and added features.
 > ;
 > ; The 'IS NOT blockslegs' attribute allows to create clothing items that don't
-> ; prevent wearing/removing lower garnments that cover only legs (ie. not torso).
+> ; prevent wearing/removing lower garments that cover only legs (ie. not torso).
 > ; This allows to simulate realistically coats and skirts.
 > ;
 > ; The `IS twopieces` attribute allows creating clothing items which, although
-> ; they do cover both legs and torso, they'll be considered as two-pieces, ie.
+> ; they do cover both legs and torso, they'll be considered as two-pieces, i.e.
 > ; in the wearing/removing checks for 'blockslegs' they'll be treated as if it
-> ; only covered the legs. This allows realistically similuating clohtes like a
+> ; only covered the legs. This allows realistically simulating clothes like a
 > ; bikini, which is handled as a single item, but being conceptually 2-pieces, it
 > ; should be wearable while wearing a skirt or coat.
 > ; ------------------------------------------------------------------------------
@@ -45,14 +45,14 @@ fashion consumerism.
 As you move toward the doors they automagically slide open before you.
 
 Emporium Alani Main Hall
-This luxurious hall is the crossroad to the various clothing departments
+This luxurious hall is the crossroads to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
 fashion temple and back into the world of mortal souls. There is a 
 trashcan here. Behind a desk stands the emporium manager. There is your
 personal assistant here.
 
 > east
-Mensware Department
+Menswear Department
 Everything a man would ever dream wearing can be found here. There is a 
 T-shirt, a black shirt, a red shirt and a men's coat here. 
 
@@ -69,7 +69,7 @@ Taken.
 
 > west
 Emporium Alani Main Hall
-This luxurious hall is the crossroad to the various clothing departments
+This luxurious hall is the crossroads to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
 fashion temple and back into the world of mortal souls. There is a 
 trashcan here. Behind a desk stands the emporium manager. 
@@ -77,7 +77,7 @@ trashcan here. Behind a desk stands the emporium manager.
 The assistant follows you.
 
 > west
-Womensware Department
+Womenswear Department
 No woman's fashion dreams could be left unfulfilled by the clothes in
 this department. 
 
@@ -113,16 +113,18 @@ You remove all the items you were wearing.
 > ; ==============================================================================
 > DBG_CLOTHES skirt
 'skirt' VALUES: | botcover: 32 | NOT blockslegs | 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > ; ------------------------------------------------------------------------------
 > ; W/ SKIRT -> WEAR/REMOVE-> PANTYHOSE
 > ; ------------------------------------------------------------------------------
 > ; A worn skirt should not prevent wearing pantyhose and other lower legs-only
-> ; garnments which don't cover also the torso in a single piece.
+> ; garments which don't cover also the torso in a single piece.
 > DBG_CLOTHES pantyhose
 'white pantyhose' VALUES: | botcover: 8 | 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > wear skirt
 You pick up the skirt and put it on.
@@ -138,11 +140,12 @@ You take off the white pantyhose.
 > ; ------------------------------------------------------------------------------
 > ; W/ SKIRT -> WEAR/REMOVE-> SWIMSUIT
 > ; ------------------------------------------------------------------------------
-> ; A worn skirt should prevent wearing lower-body garnments which cover both legs
+> ; A worn skirt should prevent wearing lower-body garments which cover both legs
 > ; and torso in a single clothing piece, like a one-piece swimsuit or a teddy.
 > DBG_CLOTHES swimsuit
 'swimsuit' VALUES: | topcover: 2 | botcover: 2 | 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > ; /// WEAR -> NO (OK!) ///
 > wear swimsuit
@@ -174,7 +177,8 @@ You take off the swimsuit.
 > ; piece are disjointed.
 > DBG_CLOTHES bikini
 'bikini' VALUES: | topcover: 2 | botcover: 2 | IS twopieces | 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > wear skirt
 You put on the skirt.
@@ -190,15 +194,17 @@ You take off the bikini.
 > ; ------------------------------------------------------------------------------
 > ; W/ SKIRT + SHIRT -> WEAR/REMOVE-> BIKINI
 > ; ------------------------------------------------------------------------------
-> ; But a bikini shouldn't be wearable if also wearing a torso garnment occupying
-> ; a higher layer (the blocker is not the skirt but the top garnment).
+> ; But a bikini shouldn't be wearable if also wearing a torso garment occupying
+> ; a higher layer (the blocker is not the skirt but the top garment).
 > DBG_CLOTHES black shirt
 'black shirt' VALUES: | topcover: 8 | 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > DBG_CLOTHES bikini
 'bikini' VALUES: | topcover: 2 | botcover: 2 | IS twopieces | 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > wear skirt
 You are already wearing the skirt.
@@ -226,7 +232,7 @@ In order to remove the bikini you should first take off the black shirt.
 > ; ==============================================================================
 > ; TEST COAT
 > ; ==============================================================================
-> ; A worn coat should not prevent wearing/removing lower-body only garnments, but
+> ; A worn coat should not prevent wearing/removing lower-body only garments, but
 > ; it will always block a clothing item which also covers the torso.
 > undress
 You remove all the items you were wearing.

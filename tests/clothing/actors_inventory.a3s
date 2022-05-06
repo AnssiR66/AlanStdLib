@@ -18,7 +18,7 @@ DBG_INV manager
 ; ******************************************************************************
 ; HERO -> INVENTORY
 ; ******************************************************************************
-; We must check that the new custom loops are hanndling correctly separators in
+; We must check that the new custom loops are handling correctly separators in
 ; the list: "," after each element up to the second last, and then "and" between
 ; second last and last, and "." to end the list.
 ; We must also check that messages for when the hero is not carrying/wearing
@@ -27,7 +27,7 @@ DBG_INV manager
 ; CARRIED: 0 | WORN: 5
 ; ------------------------------------------------------------------------------
 ; The verb will report if the Hero is not carrying anything, because the player
-; is expliciting asking for inventory.
+; is explicitly asking for inventory.
 inventory
 remove sneakers
 ; ------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ remove boxers
 ; CARRIED: 4 | WORN: 0
 ; ------------------------------------------------------------------------------
 ; The fact that the Hero is not wearing anything will not be mentioned. It's
-; implicit and, beside being verbose, pointing out to the Hero's nakedeness
+; implicit and, beside being verbose, pointing out to the Hero's nakedness
 ; would interfere with adventures that don't use clothing at all.
 inventory
 ; ******************************************************************************
@@ -96,8 +96,5 @@ examine assistant
 ; LIST HERO/PNG
 ; ******************************************************************************
 ; Test LIST again...
-;
-; ** NOTE ** Some items are still reported as being worn because the `ask` verb
-;            hasn't yet been adapated to the new system!
 DBG_INV me
 DBG_INV assistant

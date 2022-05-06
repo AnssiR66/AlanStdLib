@@ -3,7 +3,7 @@
 Emporium Giorgio Alani 
 An adventure to test clothing. 
 Version 1. 
-(C) 2020 by Tristano Ajmone. 
+(C) 2022 by Tristano Ajmone. 
 Programmed with the ALAN Interactive Fiction Language v3.0beta8. 
 Standard Library v2.2.0. 
 All rights reserved. 
@@ -25,7 +25,7 @@ fashion consumerism.
 > ; ******************************************************************************
 > ; The hero starts the adventure with some clothing of his own. During the game
 > ; we need to keep track of clothing items belonging to the hero vs items of the
-> ; store for various reasons (eg. when we'll script store clerks to carry the
+> ; store for various reasons (e.g. when we'll script store clerks to carry the
 > ; hero clothing while he tries on store items, and to pick up and put back store
 > ; items dropped by the hero).
 > ; ==============================================================================
@@ -40,7 +40,8 @@ Your old and beloved black Converse sneakers, a bit worn out.
 
 > DBG_CLOTHES sneakers
 'sneakers' VALUES: | feetcover: 4 | 
-WORN: Yes (by hero)
+WORN: Yes 
+WEARER: the hero
 
 > examine socks
 A pair of plain white socks turned nicotine yellow in the course of time.
@@ -48,21 +49,24 @@ The right sock has a hole big enough for your toe to pop out.
 
 > DBG_CLOTHES socks
 'socks' VALUES: | feetcover: 2 | 
-WORN: Yes (by hero)
+WORN: Yes 
+WEARER: the hero
 
 > examine boxers
 Just your boxer shorts (the loose type), white and plain.
 
 > DBG_CLOTHES boxers
 'boxers' VALUES: | botcover: 2 | 
-WORN: Yes (by hero)
+WORN: Yes 
+WEARER: the hero
 
 > examine undershirt
 A plain white T-shaped undershirt, a few stains here and there.
 
 > DBG_CLOTHES undershirt
 'undershirt' VALUES: | topcover: 2 | 
-WORN: Yes (by hero)
+WORN: Yes 
+WEARER: the hero
 
 > 
 

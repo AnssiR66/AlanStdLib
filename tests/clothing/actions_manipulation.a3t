@@ -3,7 +3,7 @@
 Emporium Giorgio Alani 
 An adventure to test clothing. 
 Version 1. 
-(C) 2020 by Tristano Ajmone. 
+(C) 2022 by Tristano Ajmone. 
 Programmed with the ALAN Interactive Fiction Language v3.0beta8. 
 Standard Library v2.2.0. 
 All rights reserved. 
@@ -60,7 +60,8 @@ Taken.
 > ; //// CHECK 'NOT worn' (OK!): ////
 > DBG_CLOTHES kippah
 'kippah' VALUES: (none) 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > ; To be safe, let's test it also with a non-clothing item:
 > take wallet
@@ -79,7 +80,8 @@ You put your kippah into your khakis.
 > ; Let's check that the settings of wearables are correctly preserved:
 > DBG_CLOTHES kippah
 'kippah' VALUES: (none) 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > inventory
 You are empty-handed. You are wearing your socks, your boxers, your 
@@ -106,7 +108,8 @@ fashion consumerism. There is your wallet and your kippah here.
 > ; Let's check that the 'worn' state of the trousers hasn't changed:
 > DBG_CLOTHES khakis
 'khakis' VALUES: | botcover: 16 | 
-WORN: Yes (by hero)
+WORN: Yes 
+WEARER: the hero
 
 > ; [... intermediate actions ...]
 > take wallet
@@ -116,7 +119,7 @@ Taken.
 As you move toward the doors they automagically slide open before you.
 
 Emporium Alani Main Hall
-This luxurious hall is the crossroad to the various clothing departments
+This luxurious hall is the crossroads to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
 fashion temple and back into the world of mortal souls. There is a 
 trashcan here. Behind a desk stands the emporium manager. There is your
@@ -140,14 +143,15 @@ You take off your khakis.
 You put your khakis on the desk.
 
 > x desk
-This luxurios mahogany desk is where customers go and pay their purchased
-merchandise, a bit like the supermarket cash, but more discrete. On the 
-desk you see your khakis.
+This luxurious mahogany desk is where customers go and pay their
+purchased merchandise, a bit like the supermarket cash, but more discrete. 
+On the desk you see your khakis.
 
 > ; //// CHECK 'NOT worn' (OK!): ////
 > DBG_CLOTHES khakis
 'khakis' VALUES: | botcover: 16 | 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > ; [... intermediate actions ...]
 > wear khakis
@@ -172,12 +176,13 @@ Inside the trashcan you can see your khakis.
 > ; //// CHECK 'NOT worn' (OK!): ////
 > DBG_CLOTHES khakis
 'khakis' VALUES: | botcover: 16 | 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > ; ==============================================================================
 > ; THROWING
 > ; ==============================================================================
-> ; Let's try throwing clothing worn by the Hero, the action should alwyas be
+> ; Let's try throwing clothing worn by the Hero, the action should always be
 > ; blocked.
 > ; ------------------------------------------------------------------------------
 > ; TEST: 'THROW'
@@ -234,7 +239,8 @@ You give your undershirt to the assistant.
 > ; //// CHECK 'NOT worn' (OK!): ////
 > DBG_CLOTHES undershirt
 'undershirt' VALUES: | topcover: 2 | 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > x assistant
 She's your personal shopping assistant. The assistant is carrying your 
@@ -282,7 +288,8 @@ The assistant gives the uniform to you.
 > ; //// CHECK 'NOT worn' (OK!): ////
 > DBG_CLOTHES uniform
 'uniform' VALUES: | topcover: 8 | botcover: 32 | NOT blockslegs | 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > inventory
 You are carrying a uniform and your wallet. You are wearing your socks, 
@@ -303,7 +310,8 @@ That seems to belong to the assistant.
 
 > DBG_CLOTHES boots
 'fashion boots' VALUES: | feetcover: 4 | 
-WORN: Yes (by assistant)
+WORN: Yes 
+WEARER: the assistant
 
 > ; ------------------------------------------------------------------------------
 > ; TEST: 'TAKE' -> NPC COMPLIANT
@@ -323,14 +331,15 @@ Taken.
 > ; //// CHECK 'NOT worn' (OK!): ////
 > DBG_CLOTHES boots
 'fashion boots' VALUES: | feetcover: 4 | 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > ; ******************************************************************************
 > ; MISC VERBS
 > ; ******************************************************************************
 > look behind desk
-Peeking behind the desk you notice a gun, hidden out of sight but readily
-grabbable if the need comes. They must keep it there for emergencies.
+Peeking behind the desk you notice a gun, hidden out of sight but easy to
+grab in case of need. They must keep it there for emergencies.
 
 > take gun
 Taken.

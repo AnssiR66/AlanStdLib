@@ -3,7 +3,7 @@
 Emporium Giorgio Alani 
 An adventure to test clothing. 
 Version 1. 
-(C) 2020 by Tristano Ajmone. 
+(C) 2022 by Tristano Ajmone. 
 Programmed with the ALAN Interactive Fiction Language v3.0beta8. 
 Standard Library v2.2.0. 
 All rights reserved. 
@@ -50,14 +50,14 @@ You are not wearing your kippah.
 As you move toward the doors they automagically slide open before you.
 
 Emporium Alani Main Hall
-This luxurious hall is the crossroad to the various clothing departments
+This luxurious hall is the crossroads to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
 fashion temple and back into the world of mortal souls. There is a 
 trashcan here. Behind a desk stands the emporium manager. There is your
 personal assistant here.
 
 > west
-Womensware Department
+Womenswear Department
 No woman's fashion dreams could be left unfulfilled by the clothes in
 this department. 
 
@@ -105,7 +105,8 @@ holes for the eyes and mouth, like the ones used in robberies.
 
 > DBG_CLOTHES it
 'balaclava' VALUES: | headcover: 1 | facecover: 1 | 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > wear it
 You put on the balaclava.
@@ -113,7 +114,8 @@ You put on the balaclava.
 > ; /// VERIFY -> IS DONNED (OK!)
 > DBG_CLOTHES it
 'balaclava' VALUES: | headcover: 1 | facecover: 1 | 
-WORN: Yes (by hero)
+WORN: Yes 
+WEARER: the hero
 
 > ; ------------------------------------------------------------------------------
 > ; BALACLAVA & GOGGLES
@@ -124,7 +126,8 @@ Its front B-shaped single lens has a special coating adaptative to light.
 
 > DBG_CLOTHES it
 'ski goggles' VALUES: | facecover: 2 | 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > wear it
 You put on the ski goggles.
@@ -132,7 +135,8 @@ You put on the ski goggles.
 > ; /// VERIFY -> IS DONNED (OK!)
 > DBG_CLOTHES it
 'ski goggles' VALUES: | facecover: 2 | 
-WORN: Yes (by hero)
+WORN: Yes 
+WEARER: the hero
 
 > ; /// REMOVE -> NO -> BLOCKERS: GOGGLES (OK!) ///
 > remove balaclava
@@ -148,7 +152,8 @@ inside. A chinstrap allows securing it firmly in place.
 
 > DBG_CLOTHES it
 'ski helmet' VALUES: | headcover: 2 | 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > wear it
 You put on the ski helmet.

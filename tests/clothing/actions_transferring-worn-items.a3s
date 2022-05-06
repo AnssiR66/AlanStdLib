@@ -21,7 +21,7 @@ remove XYZZY
 ; ------------------------------------------------------------------------------
 ; Using 'put' verb with a worn item...
 examine basket
-; NOTE: boxers are currently bing worn by hero, underneath trousers (khakis)!
+; NOTE: boxers are currently being worn by hero, underneath trousers (khakis)!
 inventory
 examine boxers
 DBG_CLOTHES boxers
@@ -47,9 +47,9 @@ wear boots
 ; ------------------------------------------------------------------------------
 remove XYZZY
 ; ** NOTE ** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;            In the past attempting again to remove a non exisiting item, like
+;            In the past attempting again to remove a non existing item, like
 ;            we did at the beginning, used to fail silently, probably indicating
-;            that somehing during the tests had messed up Alan memory. Now the
+;            that something during the tests had messed up Alan memory. Now the
 ;            problem seems fixed, but we'll keep this test in place so we'll
 ;            catch the bug if it ever creeps back.
 ;            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

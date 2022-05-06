@@ -209,12 +209,7 @@ EVERY clothing IsA OBJECT
   --       ELSE
   --         IF obj IN hero
   --           THEN SAY my_game:check_obj2_not_in_hero3.
-  --           ELSE
-  --             FOR EACH ac IsA actor DO
-  --               IF THIS IN ac
-  --                 THEN SAY THE ac. "is wearing $+2."
-  --               END IF.
-  --             END FOR.
+  --           ELSE SAY THE wearer OF THIS. "is wearing $+2."
   --         END IF.
   -- END VERB ask_for.
   -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -232,11 +227,7 @@ EVERY clothing IsA OBJECT
                 THEN SAY my_game:check_obj1_not_worn_by_NPC_sg.
                 ELSE SAY my_game:check_obj1_not_worn_by_NPC_pl.
               END IF.
-              FOR EACH ac IsA actor DO
-                IF obj IN ac
-                  THEN SAY THE ac. "."
-                END IF.
-              END FOR.
+              SAY THE wearer OF THIS. "."
           END IF.
   END VERB give.
 
@@ -253,11 +244,7 @@ EVERY clothing IsA OBJECT
                 THEN SAY my_game:check_obj1_not_worn_by_NPC_sg.
                 ELSE SAY my_game:check_obj1_not_worn_by_NPC_pl.
               END IF.
-              FOR EACH ac IsA actor DO
-                IF obj IN ac
-                  THEN SAY THE ac. "."
-                END IF.
-              END FOR.
+              SAY THE wearer OF THIS. "."
           END IF.
   END VERB put_in.
 
@@ -274,11 +261,7 @@ EVERY clothing IsA OBJECT
                 THEN SAY my_game:check_obj1_not_worn_by_NPC_sg.
                 ELSE SAY my_game:check_obj1_not_worn_by_NPC_pl.
               END IF.
-              FOR EACH ac IsA actor DO
-                IF obj IN ac
-                  THEN SAY THE ac. "."
-                END IF.
-              END FOR.
+              SAY THE wearer OF THIS. "."
           END IF.
   END VERB put_on.
 
@@ -294,11 +277,7 @@ EVERY clothing IsA OBJECT
               THEN SAY my_game:check_obj1_not_worn_by_NPC_sg.
               ELSE SAY my_game:check_obj1_not_worn_by_NPC_pl.
             END IF.
-            FOR EACH ac IsA actor DO
-              IF projectile IN ac
-                THEN SAY THE ac. "."
-              END IF.
-            END FOR.
+            SAY THE wearer OF THIS. "."
         END IF.
   END VERB throw.
 
@@ -315,11 +294,7 @@ EVERY clothing IsA OBJECT
                 THEN SAY my_game:check_obj1_not_worn_by_NPC_sg.
                 ELSE SAY my_game:check_obj1_not_worn_by_NPC_pl.
               END IF.
-              FOR EACH ac IsA actor DO
-                IF projectile IN ac
-                  THEN SAY THE ac. "."
-                END IF.
-              END FOR.
+              SAY THE wearer OF THIS. "."
           END IF.
   END VERB throw_at.
 
@@ -336,11 +311,7 @@ EVERY clothing IsA OBJECT
                 THEN SAY my_game:check_obj1_not_worn_by_NPC_sg.
                 ELSE SAY my_game:check_obj1_not_worn_by_NPC_pl.
               END IF.
-              FOR EACH ac IsA actor DO
-                IF projectile IN ac
-                  THEN SAY THE ac. "."
-                END IF.
-              END FOR.
+              SAY THE wearer OF THIS. "."
           END IF.
   END VERB throw_in.
 
@@ -357,11 +328,7 @@ EVERY clothing IsA OBJECT
                 THEN SAY my_game:check_obj1_not_worn_by_NPC_sg.
                 ELSE SAY my_game:check_obj1_not_worn_by_NPC_pl.
               END IF.
-              FOR EACH ac IsA actor DO
-                IF projectile IN ac
-                  THEN SAY THE ac. "."
-                END IF.
-              END FOR.
+              SAY THE wearer OF THIS. "."
           END IF.
   END VERB throw_to.
 
@@ -378,11 +345,7 @@ EVERY clothing IsA OBJECT
                 THEN SAY my_game:check_obj1_not_worn_by_NPC_sg.
                 ELSE SAY my_game:check_obj1_not_worn_by_NPC_pl.
               END IF.
-              FOR EACH ac IsA actor DO
-                IF obj IN ac
-                  THEN SAY THE ac. "."
-                END IF.
-              END FOR.
+              SAY THE wearer OF THIS. "."
           END IF.
   END VERB tie_to.
 
@@ -412,11 +375,7 @@ EVERY clothing IsA OBJECT
               THEN SAY my_game:check_obj1_not_worn_by_NPC_sg.
               ELSE SAY my_game:check_obj1_not_worn_by_NPC_pl.
             END IF.
-            FOR EACH ac IsA actor DO
-              IF THIS IN ac
-                THEN SAY THE ac. "."
-              END IF.
-            END FOR.
+            SAY THE wearer OF THIS. "."
         END IF.
 
     DOES ONLY
@@ -531,6 +490,7 @@ EVERY clothing IsA OBJECT
           END IF.
           LOCATE THIS IN hero.
           MAKE THIS worn.
+          SET wearer OF THIS TO hero.
       END IF.
   END VERB wear.
 
@@ -628,6 +588,7 @@ EVERY clothing IsA OBJECT
           "You take off $+1."
           LOCATE THIS IN hero.
           MAKE THIS NOT worn.
+          SET wearer OF THIS TO nobody.
       END IF.
   END VERB remove.
 END EVERY.

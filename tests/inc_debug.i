@@ -106,23 +106,18 @@ ADD TO EVERY clothing
           END IF.
           "|"
       END IF.
-      ---------------------------
-      -- Show if it's worn or not
-      ---------------------------
+      --------------------------------
+      -- Show whether it's worn or not
+      --------------------------------
       "$nWORN:"
       IF obj IS NOT worn
         THEN "No"
         ELSE "Yes"
-          -------------------------------
-          -- Show who's the wearing actor
-          -------------------------------
-          FOR EACH ac IsA ACTOR
-            DO
-              IF obj IN ac
-                THEN "($$by" SAY ac. "$$)"
-              END IF.
-          END FOR.
       END IF.
+      -------------------------------
+      -- Show who's the wearing actor
+      -------------------------------
+      "$nWEARER:" Say the wearer of obj.
   END VERB dbg_clothes.
 END ADD TO clothing.
 

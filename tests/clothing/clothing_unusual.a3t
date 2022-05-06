@@ -3,7 +3,7 @@
 Emporium Giorgio Alani 
 An adventure to test clothing. 
 Version 1. 
-(C) 2020 by Tristano Ajmone. 
+(C) 2022 by Tristano Ajmone. 
 Programmed with the ALAN Interactive Fiction Language v3.0beta8. 
 Standard Library v2.2.0. 
 All rights reserved. 
@@ -28,14 +28,14 @@ fashion consumerism.
 As you move toward the doors they automagically slide open before you.
 
 Emporium Alani Main Hall
-This luxurious hall is the crossroad to the various clothing departments
+This luxurious hall is the crossroads to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
 fashion temple and back into the world of mortal souls. There is a 
 trashcan here. Behind a desk stands the emporium manager. There is your
 personal assistant here.
 
 > west
-Womensware Department
+Womenswear Department
 No woman's fashion dreams could be left unfulfilled by the clothes in
 this department. 
 
@@ -59,7 +59,8 @@ holes for the eyes and mouth, like the ones used in robberies.
 
 > DBG_CLOTHES balaclava
 'balaclava' VALUES: | headcover: 1 | facecover: 1 | 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > ; These goggles have headcover=4, so they can be worn over the balaclava:
 > examine ski goggles
@@ -68,7 +69,8 @@ Its front B-shaped single lens has a special coating adaptative to light.
 
 > DBG_CLOTHES ski goggles
 'ski goggles' VALUES: | facecover: 2 | 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > ; ** NOTE ** The problem here is that these will conflict with other headgear,
 > ;            like hats, for there isn't a distinction between the face area and
@@ -103,14 +105,15 @@ In order to wear the balaclava you should first take off the ski goggles.
 > ; VALUELESS ITEMS (ORNAMENTALS)
 > ; ==============================================================================
 > ; Some small items, like watches, necklaces, etc., might be created without any
-> ; coverage values at all, so they can be freely worn reagardless of other items.
+> ; coverage values at all, so they can be freely worn regardless of other items.
 > examine watch
 A digital watch with all sorts of apps to monitor the heart, measure the
 temperature, geo-localize, etc.
 
 > DBG_CLOTHES watch
 'sports watch' VALUES: (none) 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > wear it
 You pick up the sports watch and put it on.
@@ -130,21 +133,24 @@ Just a white wool scarf.
 
 > DBG_CLOTHES white scarf
 'white scarf' VALUES: (none) 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > examine blue scarf
 Just a blue wool scarf.
 
 > DBG_CLOTHES blue scarf
 'blue wool scarf' VALUES: (none) 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > examine black scarf
 A black wool scarf.
 
 > DBG_CLOTHES black scarf
 'black scarf' VALUES: (none) 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > ; WEAR MULTIPLE SCARFS:
 > wear white scarf

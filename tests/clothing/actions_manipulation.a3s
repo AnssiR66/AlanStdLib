@@ -83,7 +83,7 @@ DBG_CLOTHES khakis
 ; ==============================================================================
 ; THROWING
 ; ==============================================================================
-; Let's try throwing clothing worn by the Hero, the action should alwyas be
+; Let's try throwing clothing worn by the Hero, the action should always be
 ; blocked.
 ; ------------------------------------------------------------------------------
 ; TEST: 'THROW'

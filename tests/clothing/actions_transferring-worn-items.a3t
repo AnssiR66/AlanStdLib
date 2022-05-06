@@ -3,7 +3,7 @@
 Emporium Giorgio Alani 
 An adventure to test clothing. 
 Version 1. 
-(C) 2020 by Tristano Ajmone. 
+(C) 2022 by Tristano Ajmone. 
 Programmed with the ALAN Interactive Fiction Language v3.0beta8. 
 Standard Library v2.2.0. 
 All rights reserved. 
@@ -30,7 +30,7 @@ fashion consumerism.
 As you move toward the doors they automagically slide open before you.
 
 Emporium Alani Main Hall
-This luxurious hall is the crossroad to the various clothing departments
+This luxurious hall is the crossroads to the various clothing departments
 of the emporium. Two large brass doors lead the way south, out of the
 fashion temple and back into the world of mortal souls. There is a 
 trashcan here. Behind a desk stands the emporium manager. There is your
@@ -61,7 +61,7 @@ I don't know the word 'XYZZY'.
 It's a wicker basket where you can drop discarded clothing items. The 
 basket is empty.
 
-> ; NOTE: boxers are currently bing worn by hero, underneath trousers (khakis)!
+> ; NOTE: boxers are currently being worn by hero, underneath trousers (khakis)!
 > inventory
 You are empty-handed. You are wearing your socks, your boxers, your 
 undershirt, your sneakers and your khakis.
@@ -71,14 +71,16 @@ Just your boxer shorts (the loose type), white and plain.
 
 > DBG_CLOTHES boxers
 'boxers' VALUES: | botcover: 2 | 
-WORN: Yes (by hero)
+WORN: Yes 
+WEARER: the hero
 
 > put boxers in basket
 You'll have to take off your boxers first.
 
 > DBG_CLOTHES boxers
 'boxers' VALUES: | botcover: 2 | 
-WORN: Yes (by hero)
+WORN: Yes 
+WEARER: the hero
 
 > examine basket
 It's a wicker basket where you can drop discarded clothing items. The 
@@ -103,7 +105,8 @@ and a pair of fashion boots.
 
 > DBG_CLOTHES boots
 'fashion boots' VALUES: | feetcover: 4 | 
-WORN: Yes (by assistant)
+WORN: Yes 
+WEARER: the assistant
 
 > take assistant boots
 That seems to belong to the assistant.
@@ -113,7 +116,8 @@ The assistant gives the fashion boots to you.
 
 > DBG_CLOTHES boots
 'fashion boots' VALUES: | feetcover: 4 | 
-WORN: No
+WORN: No 
+WEARER: nobody
 
 > wear boots
 In order to wear the fashion boots you should first take off your sneakers
@@ -132,9 +136,9 @@ You put on the fashion boots.
 I don't know the word 'XYZZY'.
 
 > ; ** NOTE ** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> ;            In the past attempting again to remove a non exisiting item, like
+> ;            In the past attempting again to remove a non existing item, like
 > ;            we did at the beginning, used to fail silently, probably indicating
-> ;            that somehing during the tests had messed up Alan memory. Now the
+> ;            that something during the tests had messed up Alan memory. Now the
 > ;            problem seems fixed, but we'll keep this test in place so we'll
 > ;            catch the bug if it ever creeps back.
 > ;            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

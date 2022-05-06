@@ -108,8 +108,8 @@ End users wishing to study and customize the StdLib will find the new structure 
 The clothing system has been totally revamped, and it's now more flexible, more powerful, and easier to use.
 The new system is very similar to the previous one, and migrating an adventure to StdLib `v2.2.0` might require just a few small adjustments (if any).
 
-** The `worn` entity and the `wearing` set have been dropped, replaced by the `worn` boolean attribute, which is now used to track if a clothing items is being donned by a character (hero or NPC).
-The `worn` attribute is defined on the `thing` class so that authors might also use it for wearables other than clothes (e.g. wearable devices, like VR headsets, etc.), by defining their own custom wearable classes, unconnected to the `clothing` class.
+** The old `worn` entity and the `wearing` set have been dropped, replaced by the `worn` (boolean) and `wearer` (reference) attributes: the former is now used to track if a clothing items is being donned by a character (hero or NPC), and the latter to quickly obtain a reference to its wearer (or the `nobody` dummy actor if unworn), e.g. in verbs CHECK failure responses when attempting to move around a worn item.
+The `worn` and `wearer` attributes are defined on the `thing` class so that authors might also use them for wearables other than clothes (e.g. wearable devices, like VR headsets, etc.), by defining their own custom wearable classes, unconnected to the `clothing` class.
 
 ** The `inventory` and `examine <NPC>` commands will now produce separate lists for the items carried by the actor and the clothes being worn.
 
@@ -127,7 +127,7 @@ Unlike a single-piece legs and torso item (e.g. a one-piece swimming suite), a `
 
 ** The `worn_clothing_check` EVENT was removed because it was crashing the interpreter when moving around worn clothing items (see {Issue_57}).
 
-** The library now implements a new strategy for tracking worn clothing items, preventing any verb from dislocating a worn item from its wearing actor, and ensuring that any verb which legitimately dislocates an item worn by an actor (e.g. dropping it, throwing it giving it to an NPC, or asking a compliant NPC for it) also changes its status to `NOT worn`.
+** The library now implements a new strategy for tracking worn clothing items, preventing any verb from dislocating a worn item from its wearing actor, and ensuring that any verb which legitimately dislocates an item worn by an actor (e.g. dropping it, throwing it giving it to an NPC, or asking a compliant NPC for it) also changes its status to being `NOT worn` and `HAS wearer nobody`.
 
 * *[red]#Library Attributes#* -- The behavior for some library attributes has been improved, without breaking backward compatibility:
 

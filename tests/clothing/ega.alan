@@ -1,8 +1,8 @@
 ﻿--==============================================================================
--- "Emporium Giorgio Alani" by Tristano Ajmone, 2020.
+-- "Emporium Giorgio Alani" by Tristano Ajmone, 2020-2022.
 --==============================================================================
 -- A small adventure for testing the StdLib's clothing functionality and the
--- predefined verb reponses.
+-- predefined verb responses.
 
 -- Released into the public domain via the Unlicense:
 --    http://unlicense.org/
@@ -19,7 +19,7 @@ THE my_game IsA DEFINITION_BLOCK
   HAS title    "Emporium Giorgio Alani".
   HAS subtitle "An adventure to test clothing.".
   HAS author   "Tristano Ajmone".
-  HAS year     2020.
+  HAS year     2022.
   HAS version  "1".
   HAS AlanV    "v3.0beta8".
 
@@ -32,7 +32,7 @@ END THE.
 -- Let's add to all locations some custom attributes:
 
 -- 1. A string attribute with an alternative room name to show when referencing
---    the room in custom output. Usally a shorter and lowercase version of the
+--    the room in custom output. Usually a shorter and lowercase version of the
 --    location printed name. Currently used in the 'Reactivate_Assistant' EVENT
 --    to mention where she came from (if the string is empty, 'LOCATION OF' will
 --    be used instead).
@@ -132,10 +132,10 @@ THE ega_hall IsA room.
       "The assistant greets your farewell as you leave."
   END EXIT.
   DESCRIPTION
-    "This luxurious hall is the crossroad to the various clothing departments of
-     the emporium."
+    "This luxurious hall is the crossroads to the various
+     clothing departments of the emporium."
   HAS room_exits
-    "EAST to Menswear dept., WEST to Womenswear dept., and
+    "EAST to Menswear Dept., WEST to Womenswear Dept., and
      NORTH to the dressing room.".
 END THE ega_hall.
 
@@ -144,7 +144,7 @@ END THE ega_hall.
 -- The Dressing Room
 
 -- =============================================================================
--- We'll place the drssing room at the center of the EGA square, so it can be
+-- We'll place the dressing room at the centre of the EGA square, so it can be
 -- accessed from all departments.
 
 THE dressing_room IsA room.
@@ -201,12 +201,12 @@ END THE dressing_room.
 
 -- =============================================================================
 
--- The Mensware Department
+-- The Menswear Department
 
 -- =============================================================================
 THE ega_menswear IsA room.
-  NAME 'Mensware Department'.
-  HAS room_alt_name "mensware dept.".
+  NAME 'Menswear Department'.
+  HAS room_alt_name "menswear dept.".
   EXIT west      TO ega_hall.
   EXIT north     TO ega_costumes.
   EXIT northwest TO dressing_room.
@@ -218,12 +218,12 @@ THE ega_menswear IsA room.
 
 -- =============================================================================
 
--- The Womensware Department
+-- The Womenswear Department
 
 -- =============================================================================
 THE ega_womenswear IsA room.
-  NAME 'Womensware Department'.
-  HAS room_alt_name "womensware dept.".
+  NAME 'Womenswear Department'.
+  HAS room_alt_name "womenswear dept.".
   EXIT east      TO ega_hall.
   EXIT north     TO ega_sportswear.
   EXIT northeast TO dressing_room.
@@ -246,9 +246,9 @@ THE ega_costumes IsA room.
   EXIT west  TO dressing_room.
   EXIT north TO ega_free2.
   DESCRIPTION
-    "All around you, you can see costume for any occasion that comes to mind."
+    "All around you, you can see costumes for any occasion that comes to mind."
   HAS room_exits
-    "SOUTH to Mensware, NORTH to Dept. 2, and WEST to the dressing room.".
+    "SOUTH to Menswear , NORTH to Dept. 2, and WEST to the dressing room.".
 END THE ega_costumes.
 
 -- =============================================================================
@@ -265,7 +265,7 @@ THE ega_sportswear IsA room.
   DESCRIPTION
     "Can't think of any sport that you couldn't find gear for in this room."
   HAS room_exits
-    "NORTH to Workswear, SOUTH to Womensware, and EAST to the dressing room.".
+    "NORTH to Workswear, SOUTH to Womenswear , and EAST to the dressing room.".
 END THE ega_sportswear.
 
 
@@ -356,7 +356,7 @@ END THE ega_free2.
 -- >>> FIXME >>> EGA Clothing Table
 --     +-----------------------------------------------------------------------+
 --     | Since the new clothing system doesn't enforce any more exponential    |
---     | layer values, I shuould customize these values according to needs.    |
+--     | layer values, I should customize these values according to needs.     |
 --     +-----------------------------------------------------------------------+
 
 -- Custom Clothing Table
@@ -375,7 +375,7 @@ END THE ega_free2.
 --| jacket                 0 |       32 |        0 |         0 |          0 |
 --| coat                   0 |       64 |       64 |         0 |          0 |
 --| socks/stockings        0 |        0 |        0 |         2 |          0 |
---| tights/pantiehose      0 |        0 |        8 |         2 |          0 |
+--| tights/pantyhose       0 |        0 |        8 |         2 |          0 |
 --| shoes/boots            0 |        0 |        0 |         4 |          0 |
 --| gloves                 0 |        0 |        0 |         0 |          2 |
 --+--------------------------+----------+----------+-----------+------------+
@@ -384,7 +384,8 @@ END THE ega_free2.
 -- HEADWEAR & FACEWEAR
 --==============================================================================
 -- Hats will cover layer 2 of the head, layer 1 being reserved for balaclavas
--- which are in direct skin contact and can be worn underneath hats, helmets, etc..
+-- which are in direct contact with the skin and can be worn underneath hats,
+-- helmets, etc.
 
 EVERY proto_headwear IsA clothing.
   HAS headcover 2.
@@ -540,7 +541,7 @@ END EVERY.
 -- LIST EXITS
 --==============================================================================
 
--- The list of exits in most rooms is too long (and hugly) to be shown in the
+-- The list of exits in most rooms is too long (and ugly) to be shown in the
 -- description, so I've added a new 'room_exits' attribute on every location to
 -- store a string with the exits lists, which will be shown  on demand via the
 -- EXITS verb.
@@ -582,9 +583,9 @@ END VERB exits.
 --==============================================================================
 -- Emporium Doors
 --==============================================================================
--- These fake doors are automatic-opening doors. They are moved from the emporium
--- entrance to the main hall when the hero wals in and out of it, to avoid having
--- recreate them inside too.
+-- These fake doors are automatic-opening doors. They are moved from the
+-- emporium entrance to the main hall when the hero walks in and out of it, to
+-- avoid having recreate them inside too.
 
 THE ega_doors IsA object AT ega_entrance.
   NAME 'emporium doors'.
@@ -629,12 +630,12 @@ END THE ega_doorframe.
 THE desk IsA supporter AT ega_hall.
   DESCRIPTION "" -- We'll describe the desk along with the manager.
   HAS ex
-    "This luxurios mahogany desk is where customers go and pay their purchased
+    "This luxurious mahogany desk is where customers go and pay their purchased
      merchandise, a bit like the supermarket cash, but more discrete.".
   VERB look_behind
     DOES ONLY
-      "Peeking behind the desk you notice a gun, hidden out of sight but readily
-       grabbable if the need comes. They must keep it there for emergencies."
+      "Peeking behind the desk you notice a gun, hidden out of sight but easy
+       to grab in case of need. They must keep it there for emergencies."
       LOCATE gun AT ega_hall.
   END VERB look_behind.
 END THE desk.
@@ -730,7 +731,7 @@ THE manager IsA male AT ega_hall.
 END THE manager.
 
 --==============================================================================
--- Abbigliamento Manager
+-- Emporium Manager
 --==============================================================================
 THE manager_trousers IsA proto_trousers IN manager.
   IS worn.
@@ -755,7 +756,7 @@ END THE.
 --------------------------------------------------------------------------------
 --==============================================================================
 -- This NPC is intended not just a simple clerk but as "personal assistant"
--- thuroughout the whole visit to the Emporium.
+-- throughout the whole visit to the Emporium.
 -- It should be automated to carry out some basic chores:
 --   [x] follow the hero inside the emporium, but:
 --       [x] not leave the Emporium when the Hero does.
@@ -849,7 +850,7 @@ THE dungarees IsA proto_overall AT dressing_room.
   NAME dungarees.
   IS plural.
   INDEFINITE ARTICLE "a pair of"
-  HAS ex "It's a bib-and-brace overalls, fashioned out of blue denim.".
+  HAS ex "It's a pair of bib-and-brace overalls, fashioned out of blue denim.".
 END THE.
 
 THE red_skirt IsA proto_skirt AT dressing_room.
@@ -870,7 +871,7 @@ END THE.
 --=============================================================================
 --\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 --------------------------------------------------------------------------------
--- Mensware Department Clothing
+-- Menswear Department Clothing
 -------------------------------------------------------------------------------
 --//////////////////////////////////////////////////////////////////////////////
 --=============================================================================
@@ -896,7 +897,7 @@ END THE.
 --=============================================================================
 --\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 --------------------------------------------------------------------------------
--- Sportsware Department Clothing
+-- Sportswear  Department Clothing
 -------------------------------------------------------------------------------
 --//////////////////////////////////////////////////////////////////////////////
 --=============================================================================
