@@ -9,6 +9,15 @@ For a detailed description of the new clothing system and its differences from t
 - [`CLOTHING_NEW.md`][CLOTHING_NEW]
 
 
+> __WARNING__ — This document was no longer updated in the course of time, therefore some new changes to the clothing system are not mentioned here.
+> Don't assume that its contents mirror the latest state of the library codebase, because most likely they don't.
+> Always double check any information contained herein against the actual code.
+>
+> I'm keeping it just because it will come in handy when writing the final documentation on the new clothings system, since I can copy and paste bits and pieces from this doc.
+>
+> It also serves as a reminder on the main steps involved in the migration from the old clothing system to the new one — these are well covered here! what's missing are the various improvement tweaks done after the new clothing system was created.
+
+
 -----
 
 **Table of Contents**
