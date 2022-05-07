@@ -28,6 +28,7 @@
 :docinfodir: ../../_assets/rouge
 :imagesdir: ../../_assets/images
 // CUSTOM ATTRIBUTES DEFINITIONS:
+include::../_shared-attributes.adoc[]
 include::StdLibMan-inc_attributes.adoc[]
 
 // ***************************************************************************

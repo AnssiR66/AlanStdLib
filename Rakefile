@@ -1,4 +1,4 @@
-=begin "Rakefile" v0.2.1 | 2022/04/29 | by Tristano Ajmone
+=begin "Rakefile" v0.2.2 | 2022/05/07 | by Tristano Ajmone
 ================================================================================
 This is the Rakefile for the Alan-StdLib repository.
 
@@ -106,7 +106,10 @@ task :lib_docs => CreateAsciiDocHTMLTasksFromFolder(:lib_docs,'StdLib', nil, ADO
 task :manual => [:man_doc, :man_examples]
 
 task :man_doc
-MAN_DEPS = STDLIB_SOURCES + FileList['extras_src/manual/*.a3s'].ext('.a3t-adoc') + FileList['extras_src/manual/*.adoc']
+MAN_DEPS = FileList[
+  'extras_src/manual/*.adoc',
+  'extras_src/*.adoc'
+] + FileList['extras_src/manual/*.a3s'].ext('.a3t-adoc') + STDLIB_SOURCES
 
 CreateADocTranscriptingTasksFromFolder(:man_doc,'extras_src/manual', STDLIB_SOURCES)
 CreateAsciiDocHTMLTasksFromFolder(:man_doc,'extras_src/manual', MAN_DEPS, ADOC_OPTS)
@@ -123,7 +126,9 @@ CreateSanitizeAndDeployAlanSourcesTasksFromFolder(:man_examples, 'extras_src/man
 task :tutorials => [:tut_doc, :tut_examples]
 
 task :tut_doc
-TUTORIALS_DOCS_DEPS = FileList['extras_src/tutorials/*.a3s'].ext('.a3t-adoc')
+TUTORIALS_DOCS_DEPS = FileList[
+    'extras_src/*.adoc'
+] + FileList['extras_src/tutorials/*.a3s'].ext('.a3t-adoc')
 
 CreateADocTranscriptingTasksFromFolder(:tut_doc,'extras_src/tutorials', STDLIB_SOURCES)
 CreateAsciiDocHTMLTasksFromFolder(:tut_doc,'extras_src/tutorials', TUTORIALS_DOCS_DEPS, ADOC_OPTS)

@@ -24,6 +24,7 @@ This directory contains the source files and assets required to build the docume
 
 - [`/manual/`][manual/] — Sources for [`../extras/manual/`][extras/manual/] (_Standard Library User's Manual_).
 - [`/tutorials/`][tutorials/] — Sources for [`../extras/tutorials/`][extras/tutorials/] (_The Clothing Guide_).
+- [`_shared-attributes.adoc`][_shared-attributes.adoc] — attributes definitions for links, paths and assets, shared by all docs in this directory tree.
 
 
 # Introduction
@@ -96,7 +97,7 @@ For details on how to install the above dependencies, see the main README file.
                                REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
-<!-- project folders -->
+<!-- project files & folders -->
 
 [extras/]: ../extras/ "Navigate to folder"
 
@@ -105,6 +106,8 @@ For details on how to install the above dependencies, see the main README file.
 
 [manual/]: ./manual/ "Navigate to folder"
 [extras/manual/]: ../extras/manual/ "Navigate to folder"
+
+[_shared-attributes.adoc]: ./_shared-attributes.adoc "View source file"
 
 <!-- dependencies -->
 
