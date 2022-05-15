@@ -100,6 +100,7 @@ ADD TO EVERY THING
   NOT writeable. -- The `write` verbs only works on `writable` things.
   HAS text "".   -- Holds the readable text; null by default.
 
+-- tag::clothing-attributes[]
   NOT wearable. -- Only `clothing` instances are wearable, by default.
   NOT worn.     -- (for `clothing` instances) it's not worn by any actor.
   HAS wearer nobody. -- dummy actor = unworn state (defined in "lib_actors.i").
@@ -107,6 +108,7 @@ ADD TO EVERY THING
                      -- or reference who's wearing any given item. E.g.
                      --    Say the wearer of obj.
                      --    If wearer of this = hero then ...
+-- end::clothing-attributes[]
     -- ------------------------------------------------------------------------
     -- NOTE: Authors can also use this attribute to implement wearables other
     --       than clothing (e.g. devices, like headphones, a VR headset, etc.).

@@ -87,6 +87,7 @@ END ADD TO definition_block.
 --    headphones, VR headsets, etc.), therefore the 'worn' state should not be
 --    exclusive to the clothing class.
 
+-- tag::clothing-attributes[]
 EVERY clothing IsA OBJECT
 
   IS wearable.
@@ -113,6 +114,7 @@ EVERY clothing IsA OBJECT
     -- cover legs and torso via two separate pieces.
 
   IS sex 0. -- If not zero, restricts wearing to actors with same 'sex' value.
+-- end::clothing-attributes[]
 
 -- --------------------------------
 -- Actors & Clothes `sex` Attribute
@@ -132,10 +134,10 @@ EVERY clothing IsA OBJECT
 -- non-zero `sex` value to the hero and to all clothing items that the hero can
 -- wear.
 
--- The identifier `sex` was originally picked to indicate the possiblity of
+-- The identifier `sex` was originally picked to indicate the possibility of
 -- distinguishing male and female clothing, since this attribute is only used by
 -- the library in conjunction with wearing clothes, so it was kept mainly for
--- hystorical reasons and to preserve backward compatibility.
+-- historical reasons and to preserve backward compatibility.
 -- In hindsight, `gender` would have probably been a better choice.
 
 -- Bear in mind that this was mostly an experimental feature that was never

@@ -12,7 +12,7 @@
 -- This library module defines various classes that enable authors to create
 -- complex game objects that mimic their real-life counterparts in a realistic
 -- manner, thanks to dedicated attributes and event, and their class-based verbs
--- variants that enforce behavior consistency:
+-- variants that enforce behaviour consistency:
 
 --   * DEVICE
 --   * DOOR

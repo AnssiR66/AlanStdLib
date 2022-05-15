@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.17">
-<meta name="author" content="Tristano Ajmone">
+<meta name="author" content="Tristano Ajmone &lt;tajmone@gmail.com&gt;">
 <title>The Clothing Guide</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -917,15 +917,19 @@ pre[lang=bnf] > code.language-bnf[data-lang=bnf] {
 <div id="header">
 <h1>The Clothing Guide</h1>
 <div class="details">
-<span id="author" class="author">Tristano Ajmone</span><br>
-<span id="email" class="email"><a href="mailto:tajmone@gmail.com">tajmone@gmail.com</a></span><br>
-<span id="revnumber">version 3,</span>
-<span id="revdate">2021-10-12</span>
+<span id="author" class="author">Tristano Ajmone &lt;tajmone@gmail.com&gt;</span><br>
+<span id="revnumber">stdlib 2.2.0-WIP,</span>
+<span id="revdate">2022-05-26</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_introduction">Introduction</a></li>
+<li><a href="#_basic_clothes">Basic Clothes</a>
+<ul class="sectlevel2">
+<li><a href="#_the_wearability_attributes">The Wearability Attributes</a></li>
+</ul>
+</li>
 <li><a href="#_the_clothing_class">The Clothing Class</a>
 <ul class="sectlevel2">
 <li><a href="#_body_coverage_attributes">Body Coverage Attributes</a></li>
@@ -945,7 +949,7 @@ pre[lang=bnf] > code.language-bnf[data-lang=bnf] {
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>An introductory reference guide to using the Standard Library clothing features and undestanding the coverage attributes of the <code>clothing</code> class, and how to set their values in clothes istances.</p>
+<p>An introductory reference guide to using the Standard Library clothing features and understanding the coverage attributes of the <code>clothing</code> class, and how to set their values in clothes instances.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -962,19 +966,326 @@ The text needs to be revised, and since there is no fixed-values <em>Clothing Ta
 </tr>
 </table>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For a Live HTML Preview of the latest version of this document on branch <code>dev-2.2.0</code> (e.g. to compare with local development):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://htmlpreview.github.io/?https://github.com/AnssiR66/AlanStdLib/blob/dev-2.2.0/extras/tutorials/Clothing_Guide.html" target="_blank" rel="noopener">Clothing_Guide.html</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Standard Library adds some useful classes and verbs for handling clothing to allow the main character to wear and disrobe clothes in a layered manner&#8201;&#8212;&#8201;i.e. to prevent putting on or removing a clothing item when a worn item of a higher layer stands in the way (e.g. wearing socks on top of shoes).</p>
+<p>The Standard Library adds a specialized class and dedicated attributes and verbs for handling clothing to allow the main character to optionally wear and disrobe clothes in a layered manner&#8201;&#8212;&#8201;i.e. to prevent putting on or removing a clothing item when a worn item of a higher layer stands in the way (e.g. wearing socks on top of shoes).</p>
 </div>
 <div class="paragraph">
-<p>Optionally, the library also allows to assign a <code>sex</code> value to clothes, in order to prevent the main character from wearing clothes that don&#8217;t match his/her own <code>sex</code> value.</p>
+<p>Optionally, the library also allows to assign a <code>sex</code> value to clothes, in order to prevent the main character from wearing clothes that don&#8217;t match his/her own gender.</p>
 </div>
 <div class="paragraph">
-<p>This document explores these features and provides some examples on how to implement clothing in your own adventures.</p>
+<p>This document explores these clothing related features and provides some examples on how to implement clothes in your own adventures.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_basic_clothes"><a class="anchor" href="#_basic_clothes"></a>Basic Clothes</h2>
+<div class="sectionbody">
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="title">EDITORS' NOTE</div>
+<div class="paragraph">
+<p><strong>TBD!</strong> Explain the conditions for a clothing item to be worn:</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-check-square-o"></i> How the <code>worn</code> and <code>wearer</code> attributes work.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> How the library takes carer of the <code>wearer</code> attribute during initialization:</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Example of worn items at game start.</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Explain that during initialization the <code>wearer</code> attribute of worn items is set by the library.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Explain that any programmatic changes to worn items during the game need to take care of updating both <code>worn</code> and <code>wearer</code>.</p>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Provide practical example.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll begin by looking at how to implement some very basic clothing, without using the layered-clothing and body regions features, nor the <code>sex</code> attribute to create gender-specific clothes&#8201;&#8212;&#8201;al features which are readily available but entirely optional.</p>
+</div>
+<div class="paragraph">
+<p>The ALAN Standard Library emulates clothing in a very similar manner to how they work in real life.
+Let&#8217;s consider the question &#8220;What are clothes?&#8221;
+If we break down the essence of any clothing item to its basics, we&#8217;ll realize that it can be described as being:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An object which is wearable.</p>
+</li>
+<li>
+<p>Can be carried or worn by someone.</p>
+</li>
+<li>
+<p>Might also be laying around.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Therefore, in terms of implementation, the only difference between an object and a clothing item is that the latter might also be worn by an actor&#8201;&#8212;&#8201;and this exactly how the library models clothing items, via three dedicated attributes: <code>wearable</code>, <code>worn</code> and <code>wearer</code>, which answer the following questions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>wearable</code>&#8201;&#8212;&#8201;<em>Can this object be worn?</em> (yes/no)</p>
+</li>
+<li>
+<p><code>worn</code>&#8201;&#8212;&#8201;<em>Is it currently being worn?</em> (yes/no)</p>
+</li>
+<li>
+<p><code>wearer</code>&#8201;&#8212;&#8201;<em>Who&#8217;s wearing it?</em> (actor ID or <code>nobody</code>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Now that we understand the basics of how wearable items are tracked by the library, let&#8217;s take a closer look at how these attributes work in practice.</p>
+</div>
+<div class="sect2">
+<h3 id="_the_wearability_attributes"><a class="anchor" href="#_the_wearability_attributes"></a>The Wearability Attributes</h3>
+<div class="paragraph">
+<p>The three attributes which track the wearability status of clothes (i.e. <code>wearable</code>, <code>worn</code> and <code>wearer</code>) are not specific to the <code>clothing</code> class&#8201;&#8212;&#8201;as a matter of fact, they are defined on <code>EVERY THING</code>:</p>
+</div>
+<div class="listingblock lib">
+<div class="title">Wearables' attributes on <code>THING</code>&#8201;&#8212;&#8201;defined in <a href="../../StdLib/lib_definitions.i" title="View library source file" target="_blank" rel="noopener"><code>lib_definitions.i</code></a></div>
+<div class="content">
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">ADD</span><span class="w"> </span><span class="kr">TO</span><span class="w"> </span><span class="kr">EVERY</span><span class="w"> </span><span class="nb">THING</span><span class="w">
+  </span><span class="p">...</span><span class="w">
+  </span><span class="kr">NOT</span><span class="w"> </span><span class="n">wearable</span><span class="p">.</span><span class="w"> </span><span class="c1">-- Only `clothing` instances are wearable, by default.</span><span class="w">
+  </span><span class="kr">NOT</span><span class="w"> </span><span class="n">worn</span><span class="p">.</span><span class="w">     </span><span class="c1">-- (for `clothing` instances) it's not worn by any actor.</span><span class="w">
+  </span><span class="kr">HAS</span><span class="w"> </span><span class="n">wearer</span><span class="w"> </span><span class="n">nobody</span><span class="p">.</span><span class="w"> </span><span class="c1">-- dummy actor = unworn state (defined in "lib_actors.i").</span><span class="w">
+                     </span><span class="c1">-- The `wearer` attribute provides a quick mean to track</span><span class="w">
+                     </span><span class="c1">-- or reference who's wearing any given item. E.g.</span><span class="w">
+                     </span><span class="c1">--    Say the wearer of obj.</span><span class="w">
+                     </span><span class="c1">--    If wearer of this = hero then ...</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The reason for defining these attributes on <code>THING</code> is twofold, one technical and the other a design choice:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Since all library verbs should be usable on <code>clothing</code> instances (e.g. trying to wear a <code>NOT wearable</code> object should fail with a response) these attributes must be defined on the common root class to which verbs apply (i.e. <code>THING</code>) in order to allow verb CHECKs like <code>CHECK obj IS NOT worn</code>.</p>
+</li>
+<li>
+<p>If authors wish to implement some custom non-clothing wearable items, these attributes are readily available to be used in custom classes and verbs.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Although these attributes are defined on <code>THING</code>, only instances of <code>OBJECT</code> could ever be wearable, since <code>ACTOR</code> instances would never be wearable for the simple reason that ALAN doesn&#8217;t allow actors being inside containers (a worn item needs to be inside the wearing actor).
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>By default, all non-clothing instances are defined as being <code>NOT wearable</code>, whereas all <code>clothing</code> instances are wearable by default:</p>
+</div>
+<div class="listingblock lib">
+<div class="title">The <code>wearable</code> attribute in <code>clothing</code> class&#8201;&#8212;&#8201;defined in <a href="../../StdLib/lib_clothing.i" title="View library source file" target="_blank" rel="noopener"><code>lib_clothing.i</code></a></div>
+<div class="content">
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">EVERY</span><span class="w"> </span><span class="n">clothing</span><span class="w"> </span><span class="kr">IsA</span><span class="w"> </span><span class="nb">OBJECT</span><span class="w">
+
+  </span><span class="kr">IS</span><span class="w"> </span><span class="n">wearable</span><span class="p">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>At its core a clothing item is just an instance of the <code>clothing</code> class, which is a sub-class of <code>object</code>, and any <code>clothing</code> instance is either worn by the hero or an NPC, or not worn by anyone.</p>
+</div>
+<div class="paragraph">
+<p>In other words, clothes are a specialized version of wearable items, and they are natively supported by the library.
+Although the library potentially supports wearable items in general, only clothes are provisioned for in terms of special verbs handling, etc.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+These three attributes can be used for any wearable item, not just for clothing, but the library only provides built-in facilities for clothing items.
+So you could also implement other wearable types (e.g. devices like VR-headset, night-vision goggles, etc.), but that&#8217;s the subject matter of a separate tutorial.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>So, how do these attributes help the library (and us authors) keep track of clothing items and their status?
+Let&#8217;s expand on the exact role of these attributes and the info they provide us.</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<code>wearable</code> 
+</td>
+<td class="hdlist2">
+<p>(<em>boolean</em>) An <code>object</code> is either wearable or <code>NOT wearable</code>.
+All <code>clothing</code> instances are <code>IS wearable</code> by default.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>worn</code> 
+</td>
+<td class="hdlist2">
+<p>(<em>boolean</em>) A clothing item is either worn or <code>NOT worn</code>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A worn item is always <code>DIRECTLY IN</code> its wearing actor.</p>
+</li>
+<li>
+<p>If a <code>wearable</code> item is <code>DIRECTLY IN</code> an actor but it&#8217;s <code>NOT worn</code> then it&#8217;s just being carried.</p>
+</li>
+<li>
+<p>Any <code>wearable</code> item which is <code>INDIRECTLY IN</code> an actor can never be <code>worn</code>, it&#8217;s just being carried (e.g. a shirt inside a bag, where the latter is <code>DIRECTLY IN</code> the hero since it&#8217;s in his inventory, and the former is <code>DIRECTLY IN</code> the bag but <code>INDIRECTLY IN</code> the hero).</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>wearer</code> 
+</td>
+<td class="hdlist2">
+<p>(<em>reference</em>) Every <code>worn</code> item must have a wearer.
+The <code>wearer</code> attribute points to the actor instance which is currently wearing the item.
+An unworn item <code>HAS wearer nobody</code>, which is a dummy actor instance indicating that no one is wearing the item.</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We don&#8217;t really have to worry about the <code>wearable</code> attribute, since all clothing instances are always wearable by default.
+This leaves us with the <code>worn</code> and <code>wearer</code> attributes, which are closely interconnected since a change in status in either of them affects the other one too.</p>
+</div>
+<div class="paragraph">
+<p>The <code>worn</code> attribute is the one used to track whether wearable items are being worn or not, whereas the <code>wearer</code> attribute is provided as a convenient mean to obtain a reference to its wearing actor without having to iterate through all actors in order to find out who&#8217;s wearing the item.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example of how to define a clothing item which is worn at game start:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">The</span><span class="w"> </span><span class="n">jumper</span><span class="w"> </span><span class="kr">IsA</span><span class="w"> </span><span class="n">clothing</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nx">hero</span><span class="p">.</span><span class="w"> <i class="conum" data-value="1"></i><b>(1)</b>
+  </span><span class="kr">Is</span><span class="w"> </span><span class="n">worn</span><span class="p">.</span><span class="w"> <i class="conum" data-value="2"></i><b>(2)</b> <i class="conum" data-value="3"></i><b>(3)</b>
+</span><span class="kr">End</span><span class="w"> </span><span class="kr">the</span><span class="p">.</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The clothing instance must be <em>directly</em> <code>IN</code> the wearing actor.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>It must be set as being <code>worn</code>, otherwise it would be just carried by the actor.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>For items which are worn at game start we don&#8217;t need to set their <code>wearer</code> attribute since the library will handle them for us at game initialization time.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To make authors' life easier, the library automatically handles on our behalf setting correctly the <code>wearer</code> attribute for any wearable item which is <code>worn</code> at game start, by iterating over each each <code>worn</code> instance <em>directly</em> inside an actor (during initialization of the <code>actor</code> class) and setting the actor as the <code>wearer</code> of that item.
+Since most clothing items will either be either worn at game start or handled by the player via the dedicated library verbs, this feature spears authors from having to set the <code>wearer</code> attribute of most clothing items.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If your adventure code moves around clothing items <em>during gameplay</em> (e.g. in events, scripts, rules, verbs or any other custom code) you must remember to update the <code>wearer</code> attribute accordingly, otherwise the adventure will end up in a corrupt status.</p>
+</div>
+<div class="paragraph">
+<p>E.g. when implementing a new game scene where the hero and other NPCs are automatically moved to a new a location, wearing different clothes, in this case you must take care of the <code>wearer</code> attribute of any clothes that were shifted around by the code that handles the transition to the new scene.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Library verbs take care of properly updating the <code>worn</code> and <code>wearer</code> attributes.
+E.g. when a clothing item is worn, the <code>wear</code> verb will update the item&#8217;s attributes to <code>IS worn</code> and <code>HAS wearer hero</code>; and conversely, whenever a clothing item is removed, they are set to <code>IS NOT worn</code> and <code>HAS wearer nobody</code> (the dummy actor for unworn items).
+Various verbs are overridden on the <code>clothing</code> class to ensure proper handling of clothes, but also verbs which are not specific to clothes provide safeguards for these attributes&#8201;&#8212;&#8201;e.g. any verb that moves around an object will set it to <code>IS NOT worn</code> and <code>HAS wearer nobody</code>, as a precaution (when an object is outside an actor we know it can&#8217;t be worn, unless we&#8217;re specifically donning the item to an actor).</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Fully understanding how these attributes work is very important because, although the library automatically takes care of them in its predefined verbs, whenever you handle wearable items in your custom verbs, events, scripts or rules you&#8217;ll need to ensure that the <code>worn</code> and <code>wearer</code> attributes are correctly updated to mirror the worn status of an object.
+</td>
+</tr>
+</table>
+</div>
+<hr>
 </div>
 </div>
 </div>
@@ -982,16 +1293,14 @@ The text needs to be revised, and since there is no fixed-values <em>Clothing Ta
 <h2 id="_the_clothing_class"><a class="anchor" href="#_the_clothing_class"></a>The Clothing Class</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The library defines the <code>clothing</code> class for clothing items, which adds to its instances some special attributes:</p>
+<p>The library defines the <code>clothing</code> class for clothes items, which adds to its instances some special attributes:</p>
 </div>
 <div class="listingblock lib">
-<div class="title">Predefined attributes of <code>clothing</code> class&#8201;&#8212;&#8201;defined in <code>lib_classes.i</code></div>
+<div class="title">Predefined attributes of <code>clothing</code> class&#8201;&#8212;&#8201;defined in <a href="../../StdLib/lib_clothing.i" title="View library source file" target="_blank" rel="noopener"><code>lib_clothing.i</code></a></div>
 <div class="content">
-<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">EVERY</span><span class="w"> </span><span class="n">clothing</span><span class="w"> </span><span class="kr">ISA</span><span class="w"> </span><span class="nb">OBJECT</span><span class="w">
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">EVERY</span><span class="w"> </span><span class="n">clothing</span><span class="w"> </span><span class="kr">IsA</span><span class="w"> </span><span class="nb">OBJECT</span><span class="w">
 
   </span><span class="kr">IS</span><span class="w"> </span><span class="n">wearable</span><span class="p">.</span><span class="w">
-
-  </span><span class="kr">IS</span><span class="w"> </span><span class="n">sex</span><span class="w"> </span><span class="m">0</span><span class="p">.</span><span class="w"> </span><span class="c1">-- If not zero, restricts wearing to actors with same 'sex' value.</span><span class="w">
 
   </span><span class="c1">-- Body coverage layered-values, by area:</span><span class="w">
   </span><span class="kr">IS</span><span class="w"> </span><span class="n">headcover</span><span class="w">  </span><span class="m">0</span><span class="p">.</span><span class="w">  </span><span class="c1">-- Head.</span><span class="w">
@@ -1004,35 +1313,21 @@ The text needs to be revised, and since there is no fixed-values <em>Clothing Ta
   </span><span class="c1">-- Attributes for special clothing (skirts, coats, bikinis, etc.):</span><span class="w">
 
   </span><span class="kr">IS</span><span class="w"> </span><span class="n">blockslegs</span><span class="p">.</span><span class="w">
-  </span><span class="c1">-- i.e. the item prevents wearing/removing legsware from the layers below</span><span class="w">
-  </span><span class="c1">-- (skirts and coats are 'NOT blockslegs').</span><span class="w">
+    </span><span class="c1">-- i.e. the item prevents wearing/removing legsware from the layers below</span><span class="w">
+    </span><span class="c1">-- (skirts and coats are 'NOT blockslegs').</span><span class="w">
 
   </span><span class="kr">IS</span><span class="w"> </span><span class="kr">NOT</span><span class="w"> </span><span class="n">twopieces</span><span class="p">.</span><span class="w">
-  </span><span class="c1">-- For items covering legs + torso ('topcover' &amp; 'botcover' &lt;&gt; 0) that should</span><span class="w">
-  </span><span class="c1">-- be treated as a single piece (e.g. a one-piece swimming suite).</span><span class="w">
-  </span><span class="c1">-- Items which are 'twopieces' (eg. a bikini) can be worn/removed while</span><span class="w">
-  </span><span class="c1">-- wearing a skirt for, although handled as a single clothing item, they cover</span><span class="w">
-  </span><span class="c1">-- legs and torso via two separate pieces.</span></code></pre>
+    </span><span class="c1">-- For items covering legs + torso ('topcover' &amp; 'botcover' &lt;&gt; 0) that</span><span class="w">
+    </span><span class="c1">-- should be treated as a single piece (e.g. a one-piece swimming suite).</span><span class="w">
+    </span><span class="c1">-- Items which are 'twopieces' (eg. a bikini) can be worn/removed while</span><span class="w">
+    </span><span class="c1">-- wearing a skirt for, although handled as a single clothing item, they</span><span class="w">
+    </span><span class="c1">-- cover legs and torso via two separate pieces.</span><span class="w">
+
+  </span><span class="kr">IS</span><span class="w"> </span><span class="n">sex</span><span class="w"> </span><span class="m">0</span><span class="p">.</span><span class="w"> </span><span class="c1">-- If not zero, restricts wearing to actors with same 'sex' value.</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Clothing also rely on the <code>worn</code> attribute, which is defined on <code>EVERY THING</code> in <code>lib_definitions.i</code>:</p>
-</div>
-<div class="listingblock lib">
-<div class="title">The <code>worn</code> attribute on <code>THING</code>&#8201;&#8212;&#8201;defined in <code>lib_definitions.i</code></div>
-<div class="content">
-<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">ADD</span><span class="w"> </span><span class="kr">TO</span><span class="w"> </span><span class="kr">EVERY</span><span class="w"> </span><span class="nb">THING</span><span class="w">
-  </span><span class="p">...</span><span class="w">
-  </span><span class="kr">IS</span><span class="w"> </span><span class="kr">NOT</span><span class="w"> </span><span class="n">worn</span><span class="p">.</span><span class="w">
-    </span><span class="c1">-- (for 'clothing' instances) it's not worn by any actor.</span><span class="w">
-    </span><span class="c1">-- -------------------------------------------------------------------------</span><span class="w">
-    </span><span class="c1">-- NOTE: Authors can also use this attribute to implement wearables other</span><span class="w">
-    </span><span class="c1">--       than clothing (eg. devices, like headphones, a VR headset, etc.).</span><span class="w">
-    </span><span class="c1">--       The library ensures that any verbs which could remove a thing from</span><span class="w">
-    </span><span class="c1">--       an actor also set the thing as 'NOT worn', in case authors are</span><span class="w">
-    </span><span class="c1">--       using this attribute outside of the 'clothing' class context.</span><span class="w">
-    </span><span class="c1">-- -------------------------------------------------------------------------</span></code></pre>
-</div>
+<p>Clothing also rely on the <code>wearable</code>, <code>worn</code> and <code>wearer</code> attributes, which are defined on <code>EVERY THING</code> in <code>lib_definitions.i</code>:</p>
 </div>
 <div class="paragraph">
 <p>We shall now look into these attributes and how they can be used to personalize clothing in your adventures.</p>
@@ -1040,7 +1335,7 @@ The text needs to be revised, and since there is no fixed-values <em>Clothing Ta
 <div class="sect2">
 <h3 id="_body_coverage_attributes"><a class="anchor" href="#_body_coverage_attributes"></a>Body Coverage Attributes</h3>
 <div class="paragraph">
-<p>By default, all new clothing instances will have all body coverage attributes set to zero.
+<p>By default, a new clothing instance will have all its body coverage attributes set to zero.
 When you create new clothing items, you need to assign to them some arbitrary body coverage values that are consistent throughout your adventure.</p>
 </div>
 <div class="paragraph">
@@ -1057,12 +1352,20 @@ When you create new clothing items, you need to assign to them some arbitrary bo
 </ol>
 </div>
 <div class="paragraph">
-<p>The body area is indicated by the attribute name, where a value of zero indicates that the clothing item doesn&#8217;t affect that area at all.
-The layer of interest is indicated by the value itself, where higher values indicate higher layers (i.e. further away from the skin).
-Layer values are integer numbers, and authors are free to chose arbitrary layers values without constraints&#8201;&#8212;&#8201;i.e. you are not obliged to assign layers in consecutive order, you can for example start from layer 5, and assing to every next layer the value of the previous one plus 3.</p>
+<p>The body areas correspond to the six area-attributes predefined by the library: <code>headcover</code>, <code>facecover</code>, <code>handscover</code>, <code>feetcover</code>, <code>topcover</code> and <code>botcover</code>, which map a clothing item to the head, face, hands, feet, chest-and-arms, and pelvis-and-legs body areas, respectively.
+Since these areas are hard-coded into the library you can&#8217;t change them (unless you&#8217;re willing to tweak the library sources).
+When a body area has a zero-value it means that the clothing item doesn&#8217;t affect that area at all, whereas any positive value will indicate the layer (or wearing-strata) occupied by the item on that body area, where higher values indicate a higher layering order (i.e. further away from the skin).</p>
 </div>
 <div class="paragraph">
-<p>Leaving gaps between layers is actually a good strategy, for if you later on realize that you need to assign a new layer to accomodate new clothing items in intermediate layers (e.g. a jumper that goes on top of a shirt and below a coat) you can use the unassigned layers for it.</p>
+<p>For example, socks and shoes occupy the same body area (feet &#8594; <code>feetcover</code>) but belong to different wearing layers since socks are worn directly on the skin and shoes on top of socks.
+Therefore, you could assign to all socks instances a layer value of <code>1</code>, and to shoes a value of <code>2</code>; this will prevent wearing multiple socks or shoes at the same time, or wearing and removing socks while wearing shoes.
+Both socks and shoes will have a zero-value in all other body area attributes, since they don&#8217;t occupy them.</p>
+</div>
+<div class="paragraph">
+<p>Layer values are integer numbers, and authors are free to chose arbitrary layers values without constraints&#8201;&#8212;&#8201;i.e. you are not obliged to assign layers in a consecutive numerical order, you can for example start from layer 5, and assign to every next layer the value of the previous one plus 3.</p>
+</div>
+<div class="paragraph">
+<p>Leaving gaps between layer values is actually a good strategy because if later on you realize that you need to assign a new layer to accommodate new clothing items in intermediate layers (e.g. a jumper that goes on top of a shirt and below a coat) you can use the unassigned in-between layer values for the task, rather than having to renumber all existing layer values to make space for the new layer strata.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -1071,17 +1374,19 @@ Layer values are integer numbers, and authors are free to chose arbitrary layers
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
+<div class="title">EDITORS' NOTE</div>
 <div class="paragraph">
-<p>These must be expanded upon, broken in smaller senteces and provide examples, to make it simpler for the reader.</p>
+<p>These must be expanded upon, broken in smaller sentences and provide examples, to make it simpler for the reader.</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Some body areas can take multiple layers of clothes, but each body layer can only be wearing one item at the time.
+<p>Each body area can accommodate multiple clothing items, but only one item for any given layer value.
+Just like in real life, clothes are worn in a stratified manner.
 For example, the hero can be wearing over his chest a vest, a shirt and a sweater, for each one of them occupies a different layer in the <code>topcover</code> area (e.g. 1, 2 and 3).
-But he can&#8217;t wear a sweater and a pullover at the same time, for they both occupy the same area and layer (<code>topcover 3</code>).</p>
+But he can&#8217;t wear a sweater and a pullover at the same time, because these two item usually belong the same area and layer (e.g. <code>topcover 3</code>).</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -1090,6 +1395,7 @@ But he can&#8217;t wear a sweater and a pullover at the same time, for they both
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
+<div class="title">EDITORS' NOTE</div>
 <div class="paragraph">
 <p>The paragraph above only made sense in reference to the old <em>Clothing Table</em>, which had fixed values.
 I&#8217;ll need to add an example at the start of the tutorial, to provide references to an arbitrary layer numbering system that the reader can related to.</p>
@@ -1099,11 +1405,15 @@ I&#8217;ll need to add an example at the start of the tutorial, to provide refer
 </table>
 </div>
 <div class="paragraph">
-<p>Although he might put on trousers even if he isn&#8217;t wearing any underpants, he can neither put on nor remove underpants while wearing trousers, because the latter prevent access to the layer occupied by the former.
-In other words, while the library doesn&#8217;t impose wearing clothes on each layer, it will prevent putting on or removing clothing when another item stands in the way.</p>
+<p>Although he might put on trousers even if he isn&#8217;t wearing any underpants, he can neither put on nor remove underpants while wearing trousers because the latter prevent access to the layer occupied by the former.
+In other words, while the library doesn&#8217;t impose wearing clothes on each intermediate layer (the hero may wear a coat on the naked skin) it will prevent donning or removing clothing when other items stand in the way.</p>
 </div>
 <div class="paragraph">
-<p>As you might have noticed, the library tries to implement a realistic approach to clothing, simulating how common cases are handled in real life.</p>
+<p>Of course, as an author you can enforce your own wearing rules by adding custom CHECKs on specific wearing items (or specialized <code>clothing</code> sub-classes), e.g. preventing the hero from wearing trousers if he&#8217;s not wearing underpants, and so on.</p>
+</div>
+<div class="paragraph">
+<p>Since each adventure might implement clothing in its own unique way, the library doesn&#8217;t enforce any predefined clothing presets; instead, it provides authors with flexible mechanisms to design their own <em>ad hoc</em> clothes, according to need.
+Whether you&#8217;ll implement a simple clothing system where whole attires are handled as single items (e.g. <span class="play">&gt; <em>wear uniform</em></span> dons the entire uniform, shoes and hat included), or a fine-grained system where each item must be handled individually, it&#8217;s entirely up to you.</p>
 </div>
 </div>
 </div>
@@ -1238,8 +1548,8 @@ We&#8217;ll create it as an object and add to it the <code>take</code> verb.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The actual <code>Check</code> only needs to verify that the uniform is <code>not in hero</code>, for the action is to be prevented regarless of wether the clothing item is being carried or worn&#8201;&#8212;&#8201;the whole idea is that it shouldn&#8217;t get wet.
-If the check condition is violated, we then resort to an <code>If</code> statement in order to produce an appropriate response depending on wether the uniform <code>is worn</code> or just carried (<code>else</code>) by the Hero.</p>
+<p>The actual <code>Check</code> only needs to verify that the uniform is <code>not in hero</code>, for the action is to be prevented regardless of whether the clothing item is being carried or worn&#8201;&#8212;&#8201;the whole idea is that it shouldn&#8217;t get wet.
+If the check condition is violated, we then resort to an <code>If</code> statement in order to produce an appropriate response depending on whether the uniform <code>is worn</code> or just carried (<code>else</code>) by the Hero.</p>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s compile our draft adventure to test that it&#8217;s behaving as expected.</p>
@@ -1369,10 +1679,10 @@ Edit the <code>bedroom</code> code as follows:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>In this context we could have omitted <code>directly</code> and use just <code>Check uniform in hero</code> instead, since there are no carriable containers in the game.</p>
+<p>In this context we could have omitted <code>directly</code> and use just <code>Check uniform in hero</code> instead, since there are no transportable containers in the game.</p>
 </div>
 <div class="paragraph">
-<p>Acutally, it would have been sufficient to just <code>Check uniform is worn</code>, since there are no other actors in this game it&#8217;s implicit that only the Hero could be wearing it&#8201;&#8212;&#8201;but, hey, this is a tutorial!</p>
+<p>Actually, it would have been sufficient to just <code>Check uniform is worn</code>, since there are no other actors in this game it&#8217;s implicit that only the Hero could be wearing it&#8201;&#8212;&#8201;but, hey, this is a tutorial!</p>
 </div>
 </td>
 </tr>
@@ -1476,16 +1786,16 @@ We&#8217;ll be focusing just on the various types of clothes, so to keep things 
 </div>
 </div>
 <div class="paragraph">
-<p>The next step is about deciding how to asign the various layers to clothes types; the number of layers involved depends on which clothes we&#8217;re going to create in the actual game.
+<p>The next step is about deciding how to assign the various layers to clothes types; the number of layers involved depends on which clothes we&#8217;re going to create in the actual game.
 The best approach is to do some initial brainstorming on the various types of clothes that we&#8217;d like to use.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Underwear</strong>&#8201;&#8212;&#8201;Garnments in direct contact with the skin (socks, underpants, vest).</p>
+<p><strong>Underwear</strong>&#8201;&#8212;&#8201;Garments in direct contact with the skin (socks, underpants, vest).</p>
 </li>
 <li>
-<p><strong>Outer clothing</strong>&#8201;&#8212;&#8201;The first layer of outer garnments when the person is dressed (trousers, shirt, shoes, hat).</p>
+<p><strong>Outer clothing</strong>&#8201;&#8212;&#8201;The first layer of outer garments when the person is dressed (trousers, shirt, shoes, hat).</p>
 </li>
 </ul>
 </div>
@@ -1655,17 +1965,17 @@ To be continued!
 </table>
 <div class="paragraph">
 <p>Of course, every adventure is different, so you&#8217;ll need to work out your own layering system to cover the needs of your adventure.
-Some adventure genres might envolve more clothing items (and therefore, layers) than others&#8201;&#8212;&#8201;e.g. in the <em>fantasy</em> genre you might need dedicated layers for armors, cloaks, magic garnments (talismans, etc.).</p>
+Some adventure genres might involve more clothing items (and therefore, layers) than others&#8201;&#8212;&#8201;e.g. in the <em>fantasy</em> genre you might need dedicated layers for armours, cloaks, magic garments (talismans, etc.).</p>
 </div>
 <div class="paragraph">
-<p>It&#8217;s strongly reccomended that you do layout a clothing table like the above, so you can use it as a lookup reference when creating new clothing items.</p>
+<p>It&#8217;s strongly recommended that you do layout a clothing table like the above, so you can use it as a lookup reference when creating new clothing items.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 3<br>
+StdLib 2.2.0-WIP<br>
 </div>
 </div>
 </body>
