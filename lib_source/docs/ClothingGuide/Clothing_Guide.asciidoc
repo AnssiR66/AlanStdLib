@@ -23,11 +23,12 @@
 :sectanchors:
 // REPO ENV:
 :docinfo: shared-head
-:docinfodir: ../../_assets/rouge
-:imagesdir: ../../_assets/images
+:docinfodir: ../../../_assets/rouge
+:imagesdir: ../../../_assets/images
 
 // CUSTOM ATTRIBUTES DEFINITIONS:
-include::../_shared-attributes.adoc[]
+:PathToMainDir: ../../
+include::../../_shared-attributes.adoc[]
 
 // Preamble
 // ========
@@ -44,7 +45,7 @@ The text needs to be revised, and since there is no fixed-values _Clothing Table
 ====================================================
 For a Live HTML Preview of the latest version of this document on branch `dev-2.2.0` (e.g. to compare with local development):
 
-* https://htmlpreview.github.io/?https://github.com/AnssiR66/AlanStdLib/blob/dev-2.2.0/extras/tutorials/Clothing_Guide.html[Clothing_Guide.html^]
+* https://htmlpreview.github.io/?https://github.com/AnssiR66/AlanStdLib/blob/dev/lib_distro/docs/ClothingGuide/Clothing_Guide.html[Clothing_Guide.html^]
 ====================================================
 
 

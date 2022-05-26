@@ -20,15 +20,32 @@ alternative links on the GH Pages website, etc.).
 :AlanWWW: link:https://www.alanif.se/[www.alanif.se^,title="Visit Alan website"]
 
 
+// PathToMainDir
+// =================
+// PathToMainDir is the relative upward path-jumps to the main folder of
+// either 'lib_source/' or 'lib_distro/', used for include directives or
+// links, respectively. Since the source and distro folders are symmetrical,
+// relative paths are equivalent.
+// AsciiDoc source documents in subfolders of 'lib_source/' should define
+// the PathToMainDir attribute correctly before including this file, so that
+// assets can be reached as expected.
+// Lacking such a definition, the fallback value will be "./", i.e. assume
+// we're dealing with a document rooted in 'lib_source/'.
+ifndef::PathToMainDir[]
+:PathToMainDir: ./
+endif::[]
+
 // Directories Paths
 // =================
-:StdLibDir: ../../StdLib
-:ExtrasDir: ../../extras
+// @FIXME: Rel.paths might change in new repo structure!
+:StdLibDir: {PathToMainDir}StdLib
+:ExtrasDir: {PathToMainDir}extras
 
 
 // Links to Additional StdLib Assets
 // =================================
-:CHANGELOG: pass:q,a[link:{StdLibDir}/CHANGELOG.html[`CHANGELOG.html`^,title="View the CHANGELOG"]]
+// @FIXME: CHANGELOG paths will change in new repo structure!
+:CHANGELOG: pass:q,a[link:{PathToMainDir}CHANGELOG.html[`CHANGELOG.html`^,title="View the CHANGELOG"]]
 :COPYING: pass:q,a[link:{StdLibDir}/COPYING[`COPYING`^,title="View the StdLib license file"] ]
 :newgame_alan: pass:q,a[link:{ExtrasDir}/newgame.alan[`newgame.alan`^,title="Open adventure template"]]
 :testgame_alan: pass:q,a[link:{ExtrasDir}/testgame.alan[`testgame.alan`^,title="Open source adventure"]]

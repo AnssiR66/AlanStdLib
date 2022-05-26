@@ -25,10 +25,12 @@
 :sectanchors:
 // REPO ENV:
 :docinfo: shared-head
-:docinfodir: ../../_assets/rouge
-:imagesdir: ../../_assets/images
+:docinfodir: ../../../_assets/rouge
+:imagesdir: ../../../_assets/images
+
 // CUSTOM ATTRIBUTES DEFINITIONS:
-include::../_shared-attributes.adoc[]
+:PathToMainDir: ../../
+include::../../_shared-attributes.adoc[]
 include::StdLibMan-inc_attributes.adoc[]
 
 // ***************************************************************************

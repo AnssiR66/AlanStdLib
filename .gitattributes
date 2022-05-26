@@ -148,6 +148,8 @@ LICENSE      text
 ## Repo Settings etc.
 #####################
 /.git/           export-ignore
+/*.*             export-ignore
+*.md             export-ignore
 .editorconfig    export-ignore
 .gitattributes   export-ignore
 .gitconfig       export-ignore
@@ -160,19 +162,8 @@ Rakefile         export-ignore
 #####################
 /_assets/       export-ignore
 /_assets_src/   export-ignore
-/extras_src/    export-ignore
-/tests/         export-ignore
-
-## Build Scripts
-################
-*.bat   export-ignore
-*.sh    export-ignore
-
-## Developer and source documents
-#################################
-# Docs destined to end users will be converted to HTML.
-*.adoc       export-ignore
-*.asciidoc   export-ignore
-*.md         export-ignore
+/lib_source/    export-ignore
+/lib_tests/     export-ignore
+/tbd/           export-ignore
 
 # EOF #

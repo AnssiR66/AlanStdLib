@@ -2,7 +2,7 @@
 
 Porting the _Alan Standard Library v2.1 User's Manual_ from PDF to AsciiDoc, and updating its contents to the upcoming `v2.2.0` of the Library.
 
-- [`../../ALAN Library2.1 manual.pdf`][Man PDF]
+- [`../../../ALAN Library2.1 manual.pdf`][Man PDF]
 
 -----
 
@@ -70,14 +70,14 @@ In order to ensure that the code and transcript examples in the Manual always re
 
 We try to keep the number of source adventures and transcripts down to the minimum, packing together as many examples as possible into the same adventure — by creating multiple locations, and making a smart use of Asciidoctor tagged regions in both Alan sources and transcripts.
 
-During conversion, these source adventures will be stripped of all the comment lines for AsciiDoc tag regions and then copied to the `extras/manual/` folder, so that end users can access the source code of the Manual examples — except for adventures with filenames starting with `_` (see below).
+During conversion, these source adventures will be stripped of all the comment lines for AsciiDoc tag regions and then copied to the `lib_distro/manual/` folder, so that end users can access the source code of the Manual examples — except for adventures with filenames starting with `_` (see below).
 
 Because the Manual often illustrates multiple ways to do the same thing, separate files are required to host these variations (otherwise the Alan compiler will complain about instances being defined multiple times).
 Therefore, some adventures will have variations in the form `<adventure1>.alan`,  `<adventure2>.alan`, etc. (for as many variations as required), along with their associated `<adventureX>.a3t` files.
 
 ## Internal Examples
 
-Adventures sources starting with underscore (`_*.alan`, `_*.i`) _will not_ be deployed (copied) to `extras/manual/` for end-users consumption, but only used internally for building the documentation.
+Adventures sources starting with underscore (`_*.alan`, `_*.i`) _will not_ be deployed (copied) to `lib_distro/manual/` for end-users consumption, but only used internally for building the documentation.
 
 These internal-use-only adventures contain all those code snippets that don't need to be included in the distributed code examples — e.g. hypothetical code alternatives that end users are not supposed to use, like the alternative verbose code that would be required if there wasn't a given library feature, and other similar code _minutiae_ or trivia provided for information purposes only.
 
@@ -95,7 +95,7 @@ It must be manually fixed, element by element, using the original PDF as a visua
                                REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
-[Man PDF]: ../../ALAN%20Library2.1%20manual.pdf "View the original PDF Manual"
+[Man PDF]: ../../../ALAN%20Library2.1%20manual.pdf "View the original PDF Manual"
 
 <!-- Manual ADoc sources -->
 

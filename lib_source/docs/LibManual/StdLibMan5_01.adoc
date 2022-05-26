@@ -21,9 +21,9 @@ If you need to change any of these messages in your game, open `lib_messages_run
 The `lib_messages_runtime.i` module contains the definitions of _all_ the messages available in ALAN, not just those that were changed; this was done on purpose, in order to facilitate game authors who would like to customize messages.
 
 [source,alan, role="lib"]
----------------------------------------------
+------------------------------------------------
 include::{StdLibDir}/lib_messages_runtime.i[]
----------------------------------------------
+------------------------------------------------
 
 // EOF //
 
