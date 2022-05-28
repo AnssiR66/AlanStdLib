@@ -1,17 +1,19 @@
-=begin "asciidoc.rb" v0.3.0| 2021/12/18 | by Tristano Ajmone | MIT License
+=begin "asciidoc.rb" v0.3.1 | 2022/05/28 | by Tristano Ajmone | MIT License
 ================================================================================
 Some custom Rake helper methods for automating common Asciidoctor operations
 that we use across different documentation projects.
 ================================================================================
 =end
 
-require 'asciidoctor'
+require 'asciidoctor' # needed for Rouge!
+require 'open3'
 
-def AsciidoctorConvert(source_file, adoc_opts = "")
+def AsciidoctorConvert(source_file, adoc_opts = "", dest_dir = nil)
   # ----------------------------------------------------------------------------
   TaskHeader("Converting to HTML: #{source_file}")
   src_dir = source_file.pathmap("%d")
   src_file = source_file.pathmap("%f")
+  adoc_opts = adoc_opts.chomp + " --destination-dir #{$repo_root}/#{dest_dir}" unless !dest_dir
   adoc_opts = adoc_opts.chomp + " #{src_file}"
   cd "#{$repo_root}/#{src_dir}"
   begin
@@ -43,19 +45,21 @@ end
 def CreateAsciiDocHTMLTasksFromFolder(target_task,
                                       target_folder,
                                       dependencies = nil,
-                                      adoc_opts = "")
+                                      adoc_opts = "",
+                                      dest_dir = nil)
   # ----------------------------------------------------------------------------
   # Give a 'target_task', a 'target_folder' and a list of 'dependencies', create
   # a file task to convert every '.asciidoc' file to HTML with 'dependencies' as
   # its prerequisites and 'adoc_opts' as Asciidoctor invocations options.
+  # The optional 'dest_dir' parameter allows specifying the output folder.
   # ----------------------------------------------------------------------------
   adoc_sources = FileList["#{target_folder}/*.asciidoc"].each do |adoc_fpath|
-    html_fpath = adoc_fpath.ext('.html')
+    html_fpath = (dest_dir ? dest_dir + '/' + adoc_fpath.pathmap("%f") : adoc_fpath).ext('.html')
     task target_task => html_fpath
     file html_fpath => adoc_fpath
     file html_fpath => dependencies if dependencies
     file html_fpath do
-      AsciidoctorConvert(adoc_fpath, adoc_opts)
+      AsciidoctorConvert(adoc_fpath, adoc_opts, dest_dir)
     end
   end
 end
