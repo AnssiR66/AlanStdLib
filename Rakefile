@@ -101,7 +101,7 @@ end
 ################
 
 desc "Documentation and examples"
-task :docs => [:lib_docs, :tutorials, :manual]
+task :docs => [:lib_docs, :tutorials, :manual, :qstart]
 
 
 ## Library Info Docs
@@ -146,3 +146,15 @@ CreateAsciiDocHTMLTasksFromFolder(:tut_doc,'lib_source/docs/ClothingGuide', TUTO
 
 task :tut_examples
 CreateSanitizeAndDeployAlanSourcesTasksFromFolder(:tut_examples, 'lib_source/docs/ClothingGuide', 'lib_distro/docs/ClothingGuide')
+
+## Quick Start Guide
+####################
+
+QS_ADOC = 'lib_source/docs/QuickStart.asciidoc'
+QS_HTML = 'lib_distro/docs/QuickStart.html'
+
+task :qstart => QS_HTML
+
+file QS_HTML => QS_ADOC do |t|
+  AsciidoctorConvert(QS_ADOC, ADOC_OPTS, t.name.pathmap("%d"))
+end
