@@ -438,6 +438,184 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge {
+  color: #faf6e4;
+  background-color: #122b3b;
+}
+pre.rouge .gl {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+pre.rouge .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cm, pre.rouge .cpf, pre.rouge .c1, pre.rouge .cs {
+  color: #6c8b9f;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+pre.rouge .err {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+pre.rouge .gr {
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .k, pre.rouge .kd, pre.rouge .kv {
+  color: #f6dd62;
+  font-weight: bold;
+}
+pre.rouge .o, pre.rouge .ow {
+  color: #4df4ff;
+  font-weight: bold;
+}
+pre.rouge .p, pre.rouge .pi {
+  color: #4df4ff;
+}
+pre.rouge .gd {
+  color: #cc0000;
+}
+pre.rouge .gi {
+  color: #b2fd6d;
+}
+pre.rouge .ge {
+  font-style: italic;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gt {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+pre.rouge .kc {
+  color: #f696db;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #ffb000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #ffb000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #ffb000;
+  font-weight: bold;
+}
+pre.rouge .gh {
+  color: #ffb000;
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #ffb000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+pre.rouge .nc {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+pre.rouge .nd {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+pre.rouge .bp {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+pre.rouge .ne {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #ffb000;
+  font-weight: bold;
+}
+pre.rouge .nt {
+  color: #ffb000;
+  font-weight: bold;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mf, pre.rouge .mh, pre.rouge .mi, pre.rouge .il, pre.rouge .mo, pre.rouge .mx {
+  color: #f696db;
+  font-weight: bold;
+}
+pre.rouge .ld {
+  color: #f696db;
+  font-weight: bold;
+}
+pre.rouge .ss {
+  color: #f696db;
+  font-weight: bold;
+}
+pre.rouge .s, pre.rouge .sb, pre.rouge .dl, pre.rouge .sd, pre.rouge .s2, pre.rouge .sh, pre.rouge .sx, pre.rouge .sr, pre.rouge .s1 {
+  color: #fff0a6;
+  font-weight: bold;
+}
+pre.rouge .sa {
+  color: #f6dd62;
+  font-weight: bold;
+}
+pre.rouge .se {
+  color: #4df4ff;
+  font-weight: bold;
+}
+pre.rouge .sc {
+  color: #4df4ff;
+  font-weight: bold;
+}
+pre.rouge .si {
+  color: #4df4ff;
+  font-weight: bold;
+}
+pre.rouge .nb {
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #BBBBBB;
+}
+pre.rouge .go {
+  color: #BBBBBB;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #a8e1fe;
+}
+pre.rouge .py {
+  color: #a8e1fe;
+}
+pre.rouge .na {
+  color: #a8e1fe;
+}
+pre.rouge .nv, pre.rouge .vc, pre.rouge .vg, pre.rouge .vi, pre.rouge .vm {
+  color: #a8e1fe;
+  font-weight: bold;
+}
+</style>
+<style>
 /* Alan Code Notation Mockup */
 .listingblock.alan pre {
   color: #333333;
@@ -735,7 +913,7 @@ pre[lang=bnf] > code.language-bnf[data-lang=bnf] {
 /*# sourceMappingURL=rouge.css.map */
 </style>
 </head>
-<body class="book toc2 toc-left">
+<body class="article toc2 toc-left">
 <div id="header">
 <h1>Quick Start Guide for ALAN Standard Library</h1>
 <div class="details">
@@ -748,6 +926,9 @@ pre[lang=bnf] > code.language-bnf[data-lang=bnf] {
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">Introduction</a></li>
+<li><a href="#importing_the_library">1. Importing The Library</a></li>
+<li><a href="#defining_my_game">2. Defining <code>my_game</code></a></li>
+<li><a href="#write_your_adventure">3. Write Your Adventure</a></li>
 </ul>
 </div>
 </div>
@@ -769,6 +950,134 @@ quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="importing_the_library"><a class="anchor" href="#importing_the_library"></a>1. Importing The Library</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Import the five library files (<code>lib_classes.i</code>, <code>lib_definitions.i</code>, <code>lib_locations.i</code>, <code>lib_messages.i</code> and <code>lib_verbs.i</code>) into your game source (make sure that they are in the same folder as your game source file).
+Importing happens through placing the following code in your game source file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">IMPORT</span><span class="w"> </span><span class="dl">'</span><span class="s1">lib_classes.i</span><span class="dl">'</span><span class="p">.</span><span class="w">
+</span><span class="kr">IMPORT</span><span class="w"> </span><span class="dl">'</span><span class="s1">lib_definitions.i</span><span class="dl">'</span><span class="p">.</span><span class="w">
+</span><span class="kr">IMPORT</span><span class="w"> </span><span class="dl">'</span><span class="s1">lib_locations.i</span><span class="dl">'</span><span class="p">.</span><span class="w">
+</span><span class="kr">IMPORT</span><span class="w"> </span><span class="dl">'</span><span class="s1">lib_messages.i</span><span class="dl">'</span><span class="p">.</span><span class="w">
+</span><span class="kr">IMPORT</span><span class="w"> </span><span class="dl">'</span><span class="s1">lib_verbs.i</span><span class="dl">'</span><span class="p">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can just import the file <code>library.i</code> included in the library distribution package, and it automatically includes the five files above.
+Make sure that <code>library.i</code> is in the same folder as the other library files and your own game source file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">IMPORT</span><span class="w"> </span><span class="dl">'</span><span class="s1">library.i</span><span class="dl">'</span><span class="p">.</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="defining_my_game"><a class="anchor" href="#defining_my_game"></a>2. Defining <code>my_game</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Define the instance <code>my_game</code> in your own source file, in the following way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">The</span><span class="w"> </span><span class="n">my_game</span><span class="w"> </span><span class="kr">IsA</span><span class="w"> </span><span class="n">DEFINITION_BLOCK</span><span class="w">
+</span><span class="kr">End</span><span class="w"> </span><span class="kr">the</span><span class="p">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The above is the shortest possible formulation of this &#8220;meta instance&#8221; inside which you can define many things affecting the gameplay on a general level, for example default verb outcomes in your game.
+Let&#8217;s say you&#8217;re not happy with the way the library defines the outcome of the examine verb for objects and actors (&#8220;You see nothing special about [the object or actor].&#8221;)
+Instead, you would like to have &#8220;It&#8217;s just an ordinary [object or actor].&#8221;
+Here, the <code>my_game</code> instance comes in handy.
+You can change the default wording for the examine verb by editing the <code>my_game</code> instance like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">The</span><span class="w"> </span><span class="n">my_game</span><span class="w"> </span><span class="kr">IsA</span><span class="w"> </span><span class="n">DEFINITION_BLOCK</span><span class="w">
+
+  </span><span class="kr">Verb</span><span class="w"> </span><span class="n">examine</span><span class="w">
+    </span><span class="kr">Does</span><span class="w"> </span><span class="kr">only</span><span class="w"> </span><span class="dl">"</span><span class="s2">It's just an ordinary</span><span class="dl">"</span><span class="w"> </span><span class="kr">say</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="w"> </span><span class="dl">"</span><span class="s2">.</span><span class="dl">"</span><span class="w">
+  </span><span class="kr">End</span><span class="w"> </span><span class="kr">verb</span><span class="p">.</span><span class="w">
+
+</span><span class="kr">End</span><span class="w"> </span><span class="kr">the</span><span class="p">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, the default library message for examine has been replaced by your own message throughout the game.</p>
+</div>
+<div class="paragraph">
+<p>The <code>my_game</code> instance can be placed anywhere in your source code (as long as it comes before the <code>Start</code> section and naturally is not inside any other instance).
+It needs to be declared even if you didn&#8217;t use it at all, because the game won&#8217;t compile correctly without it.</p>
+</div>
+<div class="paragraph">
+<p>Besides changing the default verb responses, you can edit check messages provided by the library if you wish.
+You can also add a check of your own to any library verb, edit illegal parameter messages, and add general attributes needed in the game.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">The</span><span class="w"> </span><span class="n">my_game</span><span class="w"> </span><span class="kr">IsA</span><span class="w"> </span><span class="n">DEFINITION_BLOCK</span><span class="w">
+  </span><span class="kr">Has</span><span class="w"> </span><span class="n">treasures_found</span><span class="w"> </span><span class="m">0</span><span class="p">.</span><span class="w">
+  </span><span class="kr">Has</span><span class="w"> </span><span class="n">time_left</span><span class="w"> </span><span class="m">300</span><span class="p">.</span><span class="w">
+
+  </span><span class="kr">Verb</span><span class="w"> </span><span class="n">examine</span><span class="w">
+    </span><span class="kr">Does</span><span class="w"> </span><span class="kr">only</span><span class="w">
+      </span><span class="dl">"</span><span class="s2">Nothing special.</span><span class="dl">"</span><span class="w">  </span><span class="c1">-- Your own response overriding the</span><span class="w">
+  </span><span class="kr">End</span><span class="w"> </span><span class="kr">verb</span><span class="p">.</span><span class="w">               </span><span class="c1">-- library response for 'examine'</span><span class="w">
+
+  </span><span class="kr">Verb</span><span class="w"> </span><span class="n">jump</span><span class="w">
+    </span><span class="kr">Check</span><span class="w"> </span><span class="n">health</span><span class="w"> </span><span class="kr">of</span><span class="w"> </span><span class="nx">hero</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">5</span><span class="w">    </span><span class="c1">-- Your own check added here,</span><span class="w">
+      </span><span class="kr">Else</span><span class="w"> </span><span class="dl">"</span><span class="s2">You feel too weak.</span><span class="dl">"</span><span class="w"> </span><span class="c1">-- and not to the library file!</span><span class="w">
+    </span><span class="kr">Does</span><span class="w"> </span><span class="kr">only</span><span class="w">
+      </span><span class="dl">"</span><span class="s2">Wheeeee!</span><span class="dl">"</span><span class="w">                </span><span class="c1">-- Your own response overriding the</span><span class="w">
+                                </span><span class="c1">-- library response.</span><span class="w">
+  </span><span class="kr">End</span><span class="w"> </span><span class="kr">verb</span><span class="p">.</span><span class="w">
+
+  </span><span class="kr">Verb</span><span class="w"> </span><span class="n">eat</span><span class="w">
+    </span><span class="kr">Check</span><span class="w"> </span><span class="nx">hero</span><span class="w"> </span><span class="kr">not</span><span class="w"> </span><span class="n">tied_up</span><span class="w">
+      </span><span class="kr">Else</span><span class="w"> </span><span class="dl">"</span><span class="s2">You can't possibly do that while tied up.</span><span class="dl">"</span><span class="w">
+  </span><span class="kr">End</span><span class="w"> </span><span class="kr">verb</span><span class="p">.</span><span class="w">
+
+        </span><span class="c1">-- Note that there is no DOES ONLY part in the 'eat' verb above.</span><span class="w">
+        </span><span class="c1">-- The library default outcome for the 'eat' verb would be carried</span><span class="w">
+        </span><span class="c1">-- out here if the check was passed. In other words, if you're happy</span><span class="w">
+        </span><span class="c1">-- with the default verb response (what happens after DOES), it's</span><span class="w">
+        </span><span class="c1">-- enough to just add a check to the verb in this way.</span><span class="w">
+
+
+
+  </span><span class="kr">Has</span><span class="w"> </span><span class="n">check_obj_not_obj2_with</span><span class="w"> </span><span class="dl">"</span><span class="s2">It would be rather absurd to </span><span class="si">$v</span><span class="s2"> something
+                               with itself, don't you think?</span><span class="dl">"</span><span class="p">.</span><span class="w">
+
+        </span><span class="c1">-- This check message would be shown in all cases throughout the game</span><span class="w">
+        </span><span class="c1">-- when the hero would try to use an object with itself (that is, if</span><span class="w">
+        </span><span class="c1">-- you don't like the default that the library provides).</span><span class="w">
+
+  </span><span class="kr">Has</span><span class="w"> </span><span class="n">illegal_parameter_there</span><span class="p">:</span><span class="w"> </span><span class="dl">"</span><span class="s2">You can't </span><span class="si">$v</span><span class="s2"> there.</span><span class="dl">"</span><span class="w">
+
+</span><span class="kr">End</span><span class="w"> </span><span class="kr">the</span><span class="w"> </span><span class="n">my_game</span><span class="p">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>All various attributes and editable messages for the <code>my_game</code> instance are listed further down in this manual.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="write_your_adventure"><a class="anchor" href="#write_your_adventure"></a>3. Write Your Adventure</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Go on designing your game as usual, implementing locations, actors, objects, and so forth.</p>
+</div>
+<div class="paragraph">
+<p>&#8201;&#8212;&#8201;end of the very quick start guide.</p>
 </div>
 </div>
 </div>

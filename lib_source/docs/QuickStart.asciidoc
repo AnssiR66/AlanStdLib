@@ -7,7 +7,7 @@
 :revremark: WIP
 // :version-label: Version
 :lang: en
-:doctype: book
+:doctype: article
 // TOC Settings:
 :toclevels: 5
 :toc: left
@@ -41,7 +41,7 @@ include::../_shared-attributes.adoc[]
 Preamble: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 [preface]
-= Introduction
+== Introduction
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -66,107 +66,124 @@ include::XXXXXXXXXX.adoc[]
 ////
 The very quick start guide
 for ALAN Standard Library v2.1
+////
 
 
-1)
+== Importing The Library
 
-Import the five library files (‘lib_classes.i’, ‘lib_definitions.i’, ‘lib_locations.i’, ‘lib_messages.i’ and ‘lib_verbs.i’) into your game source (make sure that they are in the same folder as your game source file). Importing happens through placing the following code in your game source file:
+Import the five library files (`lib_classes.i`, `lib_definitions.i`, `lib_locations.i`, `lib_messages.i` and `lib_verbs.i`) into your game source (make sure that they are in the same folder as your game source file).
+Importing happens through placing the following code in your game source file:
 
+[source,alan]
+------------------------------------------------------------------------------
 IMPORT 'lib_classes.i'.
 IMPORT 'lib_definitions.i'.
 IMPORT 'lib_locations.i'.
 IMPORT 'lib_messages.i'.
 IMPORT 'lib_verbs.i'.
+------------------------------------------------------------------------------
 
 
-Alternatively, you can just import the file ‘library.i’ included in the library distribution package, and it automatically includes the five files above. Make sure that ‘library.i’ is in the same folder as the other library files and your own game source file:
+Alternatively, you can just import the file `library.i` included in the library distribution package, and it automatically includes the five files above.
+Make sure that `library.i` is in the same folder as the other library files and your own game source file:
 
-IMPORT ‘library.i’.
-
-
-2)
-
-
-Define the instance  “my_game”  in your own source file, in the following way:
-
-THE my_game ISA DEFINITION_BLOCK
-END THE.
-
-The above is the shortest possible formulation of this “meta instance” inside which you can define many things affecting the gameplay on a general level, for example default verb outcomes in your game. Let’s say you’re not happy with the way the library defines the outcome of the examine verb for objects and actors (“You see nothing special about [the object or actor].”) Instead, you would like to have “It’s just an ordinary [object or actor].” Here, the my_game instance comes in handy. You can change the default wording for the examine verb by editing the my_game instance like this:
+[source,alan]
+------------------------------------------------------------------------------
+IMPORT 'library.i'.
+------------------------------------------------------------------------------
 
 
-THE my_game ISA DEFINITION_BLOCK
 
-VERB examine
-DOES ONLY “It’s just an ordinary” SAY obj. “.”
-END THE.
+== Defining `my_game`
 
-END THE.
+Define the instance `my_game` in your own source file, in the following way:
+
+[source,alan]
+------------------------------------------------------------------------------
+The my_game IsA DEFINITION_BLOCK
+End the.
+------------------------------------------------------------------------------
+
+The above is the shortest possible formulation of this "`meta instance`" inside which you can define many things affecting the gameplay on a general level, for example default verb outcomes in your game.
+Let's say you're not happy with the way the library defines the outcome of the examine verb for objects and actors ("`You see nothing special about [the object or actor].`")
+Instead, you would like to have "`It's just an ordinary [object or actor].`"
+Here, the `my_game` instance comes in handy.
+You can change the default wording for the examine verb by editing the `my_game` instance like this:
+
+
+[source,alan]
+------------------------------------------------------------------------------
+The my_game IsA DEFINITION_BLOCK
+
+  Verb examine
+    Does only "It's just an ordinary" say obj. "."
+  End verb.
+
+End the.
+------------------------------------------------------------------------------
 
 Now, the default library message for examine has been replaced by your own message throughout the game.
 
-The my_game instance can be placed anywhere in your source code (as long as it comes before the start section and naturally is not inside any other instance). It needs to be declared even if you didn’t use it at all, because the game won’t compile correctly without it.
+The `my_game` instance can be placed anywhere in your source code (as long as it comes before the `Start` section and naturally is not inside any other instance).
+It needs to be declared even if you didn't use it at all, because the game won't compile correctly without it.
 
-Besides changing the default verb responses, you can edit check messages provided by the library if you wish. You can also add a check of your own to any library verb, edit illegal parameter messages, and add general attributes needed in the game.
-
-
-THE my_game ISA DEFINITION_BLOCK
-  HAS treasures_found 0.
-  HAS time_left 300.
-
-  VERB examine
-     DOES ONLY
-“Nothing special.”      -- your own response overriding the
-              -- library response for ‘examine’
-  END VERB.
-
-  VERB jump
-     CHECK health OF hero > 5           -- your own check added here,
-           ELSE “You feel too weak.”       -- and not to the library file!
-    DOES ONLY
-“Wheeeee!”           -- your own response overriding the
-                      --  library response.
-
-  END VERB.
-
-  VERB eat
-       CHECK hero NOT tied_up
-            ELSE “You can’t possibly do that while tied up.”
-  END VERB.
+Besides changing the default verb responses, you can edit check messages provided by the library if you wish.
+You can also add a check of your own to any library verb, edit illegal parameter messages, and add general attributes needed in the game.
 
 
-     -- Note that there is no DOES ONLY part in the ‘eat’ verb above.
-     -- The library default outcome for the ‘eat’ verb would be carried
-     -- out here if the check was passed. In other words, if you’re happy
-     -- with the default verb response (what happens after DOES), it’s
-     -- enough to just add a check to the verb in this way.
+[source,alan]
+------------------------------------------------------------------------------
+The my_game IsA DEFINITION_BLOCK
+  Has treasures_found 0.
+  Has time_left 300.
 
+  Verb examine
+    Does only
+      "Nothing special."  -- Your own response overriding the
+  End verb.               -- library response for 'examine'
 
-  HAS check_obj_not_obj2_with "It would be rather absurd to $v something
-           with itself, don’t you think?".
+  Verb jump
+    Check health of hero > 5    -- Your own check added here,
+      Else "You feel too weak." -- and not to the library file!
+    Does only
+      "Wheeeee!"                -- Your own response overriding the
+                                -- library response.
+  End verb.
 
-  -- This check message would be shown in all cases throughout the game
-  -- when the hero would try to use an object with itself (that is, if
-  -- you don’t like the default that the library provides).
+  Verb eat
+    Check hero not tied_up
+      Else "You can't possibly do that while tied up."
+  End verb.
 
-  HAS illegal_parameter_there: “You can’t $v there.”
-
-END THE my_game.
-
-All various attributes and editable messages for the my_game instance are listed further down in this manual.
+        -- Note that there is no DOES ONLY part in the 'eat' verb above.
+        -- The library default outcome for the 'eat' verb would be carried
+        -- out here if the check was passed. In other words, if you're happy
+        -- with the default verb response (what happens after DOES), it's
+        -- enough to just add a check to the verb in this way.
 
 
 
+  Has check_obj_not_obj2_with "It would be rather absurd to $v something
+                               with itself, don't you think?".
 
-3)
+        -- This check message would be shown in all cases throughout the game
+        -- when the hero would try to use an object with itself (that is, if
+        -- you don't like the default that the library provides).
+
+  Has illegal_parameter_there: "You can't $v there."
+
+End the my_game.
+------------------------------------------------------------------------------
+
+All various attributes and editable messages for the `my_game` instance are listed further down in this manual.
+
+
+
+== Write Your Adventure
 
 Go on designing your game as usual, implementing locations, actors, objects, and so forth.
 
 
-
 -- end of the very quick start guide.
-_______________________________________________
-
-////
 
 // EOF //
