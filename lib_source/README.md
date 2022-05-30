@@ -25,6 +25,7 @@ This directory contains the source files and assets required to build the final 
 - [`/docs/`][docs/] — library documentation sources:
     + [`/LibManual/`][LibManual/] — Sources for [`../lib_distro/docs/LibManual/`][lib_distro/docs/LibManual/]: _Standard Library User's Manual_ + examples.
     + [`/ClothingGuide/`][ClothingGuide/] — Sources for [`../lib_distro/docs/ClothingGuide/`][lib_distro/docs/ClothingGuide/]: _The Clothing Guide_ + examples.
+- [`/extras/`][extras/] — Sources for [`../lib_distro/extras/`][lib_distro/extras/]: sanitized extra library assets files.
 - [`/StdLib/`][StdLib/] — Sources for [`../lib_distro/StdLib/`][lib_distro/StdLib/]: sanitized Standard Library files.
 - [`_shared-attributes.adoc`][_shared-attributes.adoc] — attributes definitions for links, paths and assets, shared by multiple docs in this directory tree.
 - [`CLOTHING_DEV.md`][CLOTHING_DEV.md] — new clothing system: temporary dev notes.
@@ -122,6 +123,9 @@ For details on how to install the above dependencies, see the main README file.
 
 [LibManual/]: ./docs/LibManual/ "Navigate to folder"
 [lib_distro/docs/LibManual/]: ../lib_distro/docs/LibManual/ "Navigate to folder"
+
+[extras/]: ./extras/ "Navigate to folder"
+[lib_distro/extras/]: ../lib_distro/extras/ "Navigate to folder"
 
 [StdLib/]: ./StdLib/ "Navigate to folder"
 [lib_distro/StdLib/]: ../lib_distro/StdLib/ "Navigate to folder"

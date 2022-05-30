@@ -5,7 +5,6 @@ This directory contains leftover files from the previous _Standard Library_ dist
 |                 file                 |                     description                     |   size ca    |  lib  |        status       |         to-do         |
 |--------------------------------------|-----------------------------------------------------|--------------|-------|---------------------|-----------------------|
 | [`mygame_import.i`][mygame_import.i] | Auxiliary game source                               | 2172 LL      | 2.1   | extremely outdated  | update or discard     |
-| [`newgame.alan`][newgame.alan]       | Adventure template                                  | 30 LL        | 2.2.0 | slightly outdated   | update & polish       |
 | [`QuickRef.txt`][QuickRef.txt]       | _Quick Reference_                                   | 1000&nbsp;LL | 2.0   | extremely outdated  | port to ADoc & update |
 | [`QuickStart.docx`][QuickStart.docx] | _Quick Start Guide_ (original)                      | 3 pp         | 2.1   | outdated            | port to ADoc & update |
 | [`QuickStart.txt`][QuickStart.txt]   | _Quick&nbsp;Start&nbsp;Guide_&nbsp;(txt&nbsp;conv.) | 104 LL       | —     | —                   | —                     |
@@ -25,7 +24,6 @@ For more info, see [Issue #91][#91].
 <!-- assets files -->
 
 [mygame_import.i]: ./mygame_import.i "View source file"
-[newgame.alan]: ./newgame.alan "View source file"
 [QuickRef.txt]: ./QuickRef.txt "View source document"
 [QuickStart.docx]: ./QuickStart.docx "Open document"
 [QuickStart.txt]: ./QuickStart.txt "View source document"

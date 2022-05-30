@@ -1,4 +1,4 @@
-=begin "Rakefile" v0.3.0 | 2022/05/28 | by Tristano Ajmone
+=begin "Rakefile" v0.3.1 | 2022/05/30 | by Tristano Ajmone
 ================================================================================
 This is the Rakefile for the Alan-StdLib repository.
 
@@ -43,7 +43,7 @@ HEREDOC
 # -------------------------------{  T A S K S  }--------------------------------
 # ==============================================================================
 
-task :default => [:tests, :library, :docs]
+task :default => [:tests, :library, :extras, :docs]
 
 
 ## Clean & Clobber
@@ -56,6 +56,7 @@ CLOBBER.include('**/*.a3c')
 CLOBBER.include('**/*.a3t')
 CLOBBER.include('**/*.html').exclude('_assets/**/*.html', '_assets_src/**/*.html')
 CLOBBER.include('lib_distro/docs/**/*.alan')
+CLOBBER.include('lib_distro/extras/*.alan')
 CLOBBER.include('lib_distro/StdLib/*.*')
 
 
@@ -77,9 +78,23 @@ CreateTranscriptingTasksFromFolder(:tests,'lib_tests/misc', TESTS_DEPS)
 ## Sanitized Library
 ####################
 
-desc "Sanitized StdLib distro folder"
+desc "Sanitize StdLib to distro folder"
 task :library
 CreateSanitizeAndDeployAlanSourcesTasksFromFolder(:library, 'lib_source/StdLib', 'lib_distro/StdLib')
+
+
+## Extras Folder
+################
+
+desc "Sanitize 'extras' folder to distro"
+task :extras
+FileList['lib_source/extras/*.alan'].each do |alan_src|
+  alan_out = 'lib_distro/extras/' + alan_src.pathmap("%f")
+  task :extras => alan_out
+  file alan_out => alan_src do
+    SanitizeAndDeployAlanSources(alan_src, alan_out)
+  end
+end
 
 
 ## Documentation

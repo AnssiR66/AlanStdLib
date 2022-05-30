@@ -1,0 +1,35 @@
+﻿-- newgame.alan | ALAN Standard Library v2.2.0-WIP
+-- =============================================================================
+-- An ALAN boilerplate for creating new adventures using the Standard Library.
+-- For instructions on how to use this template, see the "Quick Start" guide.
+-- =============================================================================
+
+-- tag::import_section[]
+Import 'library.i'.
+-- end::import_section[]
+
+
+-- tag::my_game_section[]
+The my_game IsA DEFINITION_BLOCK
+    Has  title  "My Adventure".
+      subtitle  "".
+       version  "1".
+        author  "John Doe".
+          year  2022.
+         AlanV  "v3.0 beta8".
+End the.
+-- end::my_game_section[]
+
+
+-- tag::starloc_section[]
+The MY_START_LOC IsA location. -- or: IsA ROOM|SITE|DARK_ROOM|DARK_SITE
+  -- Define you starting location ...
+End the.
+-- end::starloc_section[]
+
+-- tag::start_section[]
+--/// Start Section ///---------------------------------------------------------
+
+Start at MY_START_LOC.
+Describe banner.
+-- end::start_section[]
