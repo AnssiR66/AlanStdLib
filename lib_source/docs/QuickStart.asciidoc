@@ -1,11 +1,10 @@
+= Quick Start Guide for ALAN Standard Library
+Anssi Räisänen; Tristano Ajmone
 :StdLibVer: 2.2.0
-:doctitle: Quick Start Guide for ALAN Standard Library
-:author: Anssi Räisänen
-// :email: <tajmone@gmail.com>
 :revnumber: {StdLibVer}-WIP
 :revdate: 2022-05-30
-:revremark: WIP
-// :version-label: Version
+:revremark: DRAFT
+:version-label: StdLib
 :lang: en
 :doctype: article
 // TOC Settings:
@@ -38,38 +37,56 @@ include::../_shared-attributes.adoc[]
 // Preamble
 // ========
 
-Preamble: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+A very quick guide on how to setup your own ALAN adventure using the Standard Library.
+
+If you need help or have any questions, you can contact the authors at the {AlanGoogle}.
+
+.EDITORS' NOTE
+[CAUTION]
+=====================================
+*TBD!* Since we had to add section titles to the document, because AsciiDoc requires it, we might as well better organize the document structure.
+
+I think it would make sense to split the guide into two Parts:
+
+* Part I: Adventure Set-up
+** Copying the `new_game.alan` template and `StdLib/` folder into the adventure work folder.
+** Editing the template to customize the banner info and ensuring the library files are reachable via the `Import` statements.
+** Demonstrate how to compile and run the source adventure (via CLI or GUI compiler and interpreter).
+* Part II: Quick Tips
+** The various tips on how to use `my_game` to customize verbs and messages.
+=====================================
+
 
 [preface]
 == Introduction
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+.EDITORS' NOTE
+[CAUTION]
+=====================================
+*TBD!* Add intro text.
+=====================================
 
-////
-:leveloffset: +1
+.EDITORS' NOTE
+[CAUTION]
+=====================================
+*TBD!* We should mentione the `new_game.alan` template here!
 
-include::XXXXXXXXXX.adoc[]
+In fact, the entire guide should push for using the template, instead of hand-writing the code line by line.
+The current sections would still hold true, they would simply become a commentary on the various parts of the template and how to customize it.
 
-include::XXXXXXXXXX.adoc[]
-
-include::XXXXXXXXXX.adoc[]
-
-:leveloffset: 0
-////
-
-
-////
-The very quick start guide
-for ALAN Standard Library v2.1
-////
+* [ ] Add to `new_game.alan` template region-tag comments so that we can selectively `include::` its various parts in this document.
+=====================================
 
 
 == Importing The Library
+
+.EDITORS' NOTE
+[CAUTION]
+=====================================
+*TBD!* We should probably remove the instructions on how to import each module individually and just keep the `Import 'library.i'.` approach, especially now that the library has been split into more smaller modules.
+
+Also, since there are no optional modules there's no benefit in importing them individually.
+=====================================
 
 Import the five library files (`lib_classes.i`, `lib_definitions.i`, `lib_locations.i`, `lib_messages.i` and `lib_verbs.i`) into your game source (make sure that they are in the same folder as your game source file).
 Importing happens through placing the following code in your game source file:
@@ -109,6 +126,16 @@ Let's say you're not happy with the way the library defines the outcome of the e
 Instead, you would like to have "`It's just an ordinary [object or actor].`"
 Here, the `my_game` instance comes in handy.
 You can change the default wording for the examine verb by editing the `my_game` instance like this:
+
+.EDITORS' NOTE
+[CAUTION]
+=====================================
+*TBD!* This example needs to be externalized and tested to see if it still holds true.
+
+IRC, we've tweaked the `examine` verb in various places, so this example overriding it via `DOES ONLY` might interfere with class-specific implementations -- e.g. examining NPCs, which now lists carried and worn items -- and would also vanquish any custom `ex` description (maybe the `ex` attribute was added _after_ this document was written).
+
+Probably an example with less drastic consequences would be better for a beginner's guide like this! E.g. changing the default description of the Hero, which is also more practical since it's something needed in most adventures.
+=====================================
 
 
 [source,alan]
@@ -177,6 +204,14 @@ End the my_game.
 
 All various attributes and editable messages for the `my_game` instance are listed further down in this manual.
 
+.EDITORS' NOTE
+[CAUTION]
+=====================================
+*TBD!* The above sentence seems to have been pasted from the Manual.
+Should be changed by providing a cross reference to the _StdLib Manual_ section on library messages (possibly with a real link, although section titles and anchors are still WIP).
+
+Alternatively, instruct the reader to look up the `lib_messages_library.i` source module to find out which messages are available.
+=====================================
 
 
 == Write Your Adventure

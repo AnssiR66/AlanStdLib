@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.17">
-<meta name="author" content="Anssi Räisänen">
+<meta name="author" content="Anssi Räisänen, Tristano Ajmone">
 <title>Quick Start Guide for ALAN Standard Library</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -918,9 +918,10 @@ pre[lang=bnf] > code.language-bnf[data-lang=bnf] {
 <h1>Quick Start Guide for ALAN Standard Library</h1>
 <div class="details">
 <span id="author" class="author">Anssi Räisänen</span><br>
-<span id="revnumber">version 2.2.0-WIP,</span>
+<span id="author2" class="author">Tristano Ajmone</span><br>
+<span id="revnumber">stdlib 2.2.0-WIP,</span>
 <span id="revdate">2022-05-30</span>
-<br><span id="revremark">WIP</span>
+<br><span id="revremark">DRAFT</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -936,26 +937,128 @@ pre[lang=bnf] > code.language-bnf[data-lang=bnf] {
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Preamble: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<p>A very quick guide on how to setup your own ALAN adventure using the Standard Library.</p>
+</div>
+<div class="paragraph">
+<p>If you need help or have any questions, you can contact the authors at the <a href="https://groups.google.com/g/alan-if" title="Visit ALAN IF discussions at Google Groups" target="_blank" rel="noopener">Alan IF discussions group</a>.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="title">EDITORS' NOTE</div>
+<div class="paragraph">
+<p><strong>TBD!</strong> Since we had to add section titles to the document, because AsciiDoc requires it, we might as well better organize the document structure.</p>
+</div>
+<div class="paragraph">
+<p>I think it would make sense to split the guide into two Parts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Part I: Adventure Set-up</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Copying the <code>new_game.alan</code> template and <code>StdLib/</code> folder into the adventure work folder.</p>
+</li>
+<li>
+<p>Editing the template to customize the banner info and ensuring the library files are reachable via the <code>Import</code> statements.</p>
+</li>
+<li>
+<p>Demonstrate how to compile and run the source adventure (via CLI or GUI compiler and interpreter).</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Part II: Quick Tips</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The various tips on how to use <code>my_game</code> to customize verbs and messages.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="introduction"><a class="anchor" href="#introduction"></a>Introduction</h2>
 <div class="sectionbody">
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="title">EDITORS' NOTE</div>
 <div class="paragraph">
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p><strong>TBD!</strong> Add intro text.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="title">EDITORS' NOTE</div>
+<div class="paragraph">
+<p><strong>TBD!</strong> We should mentione the <code>new_game.alan</code> template here!</p>
+</div>
+<div class="paragraph">
+<p>In fact, the entire guide should push for using the template, instead of hand-writing the code line by line.
+The current sections would still hold true, they would simply become a commentary on the various parts of the template and how to customize it.</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Add to <code>new_game.alan</code> template region-tag comments so that we can selectively <code>include::</code> its various parts in this document.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="importing_the_library"><a class="anchor" href="#importing_the_library"></a>1. Importing The Library</h2>
 <div class="sectionbody">
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="title">EDITORS' NOTE</div>
+<div class="paragraph">
+<p><strong>TBD!</strong> We should probably remove the instructions on how to import each module individually and just keep the <code>Import 'library.i'.</code> approach, especially now that the library has been split into more smaller modules.</p>
+</div>
+<div class="paragraph">
+<p>Also, since there are no optional modules there&#8217;s no benefit in importing them individually.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Import the five library files (<code>lib_classes.i</code>, <code>lib_definitions.i</code>, <code>lib_locations.i</code>, <code>lib_messages.i</code> and <code>lib_verbs.i</code>) into your game source (make sure that they are in the same folder as your game source file).
 Importing happens through placing the following code in your game source file:</p>
@@ -998,6 +1101,27 @@ Let&#8217;s say you&#8217;re not happy with the way the library defines the outc
 Instead, you would like to have &#8220;It&#8217;s just an ordinary [object or actor].&#8221;
 Here, the <code>my_game</code> instance comes in handy.
 You can change the default wording for the examine verb by editing the <code>my_game</code> instance like this:</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="title">EDITORS' NOTE</div>
+<div class="paragraph">
+<p><strong>TBD!</strong> This example needs to be externalized and tested to see if it still holds true.</p>
+</div>
+<div class="paragraph">
+<p>IRC, we&#8217;ve tweaked the <code>examine</code> verb in various places, so this example overriding it via <code>DOES ONLY</code> might interfere with class-specific implementations&#8201;&#8212;&#8201;e.g. examining NPCs, which now lists carried and worn items&#8201;&#8212;&#8201;and would also vanquish any custom <code>ex</code> description (maybe the <code>ex</code> attribute was added <em>after</em> this document was written).</p>
+</div>
+<div class="paragraph">
+<p>Probably an example with less drastic consequences would be better for a beginner&#8217;s guide like this! E.g. changing the default description of the Hero, which is also more practical since it&#8217;s something needed in most adventures.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1068,6 +1192,25 @@ You can also add a check of your own to any library verb, edit illegal parameter
 <div class="paragraph">
 <p>All various attributes and editable messages for the <code>my_game</code> instance are listed further down in this manual.</p>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="title">EDITORS' NOTE</div>
+<div class="paragraph">
+<p><strong>TBD!</strong> The above sentence seems to have been pasted from the Manual.
+Should be changed by providing a cross reference to the <em>StdLib Manual</em> section on library messages (possibly with a real link, although section titles and anchors are still WIP).</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, instruct the reader to look up the <code>lib_messages_library.i</code> source module to find out which messages are available.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1084,7 +1227,7 @@ You can also add a check of your own to any library verb, edit illegal parameter
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 2.2.0-WIP<br>
+StdLib 2.2.0-WIP<br>
 </div>
 </div>
 </body>
