@@ -6,11 +6,13 @@ Anssi Räisänen; Tristano Ajmone
 :revremark: DRAFT
 :version-label: StdLib
 :lang: en
-:doctype: article
+:doctype: book
 // TOC Settings:
 :toclevels: 5
 :toc: left
 // Sections Numbering:
+:!part-signifier:
+:!partnums:
 :sectnums:
 :sectnumlevels: 2
 // Cross References:
@@ -37,9 +39,19 @@ include::../_shared-attributes.adoc[]
 // Preamble
 // ========
 
+--
 A very quick guide on how to setup your own ALAN adventure using the Standard Library.
 
 If you need help or have any questions, you can contact the authors at the {AlanGoogle}.
+--
+
+.Original Doc
+[NOTE]
+=====================================
+For comparison, see the
+https://github.com/AnssiR66/AlanStdLib/blob/497378b/tbd/QuickStart.txt[original document^].
+=====================================
+
 
 .EDITORS' NOTE
 [CAUTION]
@@ -75,6 +87,27 @@ In fact, the entire guide should push for using the template, instead of hand-wr
 The current sections would still hold true, they would simply become a commentary on the various parts of the template and how to customize it.
 
 * [ ] Add to `new_game.alan` template region-tag comments so that we can selectively `include::` its various parts in this document.
+=====================================
+
+
+= Preparing The Files
+
+Setting up your copy of the library and the adventure template.
+
+
+== Work FOlder
+
+
+* * *
+
+= Original Text
+
+.EDITORS' NOTE
+[CAUTION]
+=====================================
+*TBD!* This part contains the original text ported to AsciiDoc.
+
+We'll keep it until the new version is ready, so we can compare the new and original versions in the same place.
 =====================================
 
 

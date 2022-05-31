@@ -68,6 +68,9 @@ endif::[]
 :lib_verbs_restrictions: pass:q,a[link:{StdLibDir}/lib_verbs_restrictions.i[`lib_verbs_restrictions.i`^,title="View library source file"]]
 :COPYING: pass:q,a[link:{StdLibDir}/COPYING[`COPYING`^,title="View library license file"]]
 
+// Links to Extras assets
+// ======================
+:newgame: pass:q,a[link:{ExtrasDir}/newgame.alan[`newgame.alan`^,title="View newgame source file"]]
 
 // Links to repository Issues
 // ==========================
