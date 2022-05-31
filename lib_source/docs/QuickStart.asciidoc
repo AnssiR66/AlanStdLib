@@ -14,7 +14,7 @@ Anssi Räisänen; Tristano Ajmone
 :!part-signifier:
 :!partnums:
 :sectnums:
-:sectnumlevels: 2
+:sectnumlevels: 1
 // Cross References:
 :idprefix:
 :xrefstyle: full
@@ -72,6 +72,8 @@ I think it would make sense to split the guide into two Parts:
 [preface]
 == Introduction
 
+
+
 .EDITORS' NOTE
 [CAUTION]
 =====================================
@@ -95,8 +97,86 @@ The current sections would still hold true, they would simply become a commentar
 Setting up your copy of the library and the adventure template.
 
 
-== Work FOlder
+== Copying Library Files
 
+.EDITORS' NOTE
+[CAUTION]
+=====================================
+*TBD!* Explain how to copy contents of `StdLib/` folder plus `newgame.alan` into source adventure working folder, then rename the boilerplate.
+
+Then test that the boilerplate compiles.
+=====================================
+
+
+
+== Editing The Game Boilerplate
+
+.EDITORS' NOTE
+[CAUTION]
+=====================================
+*TBD!* In this chapter we'll go through the various sections of the boilerplate, and how to tweak it.
+=====================================
+
+
+=== The my_game Meta Instacne
+
+The `my_game` ...
+
+////
+Zork I Example:
+
+https://www.ifwiki.org/Zork_I
+https://ifdb.org/viewgame?ifid=ZCODE-88-840726
+////
+
+// @TODO: Externalize sample adventure, so we can test it and get a real
+//        transcript (use subfolder with '_' in name: '_quickstart/')
+
+.Custom Banner Example: Zork I
+[source,alan]
+------------------------------------------------------------------------------
+The my_game IsA DEFINITION_BLOCK
+    Has  title  "ZORK I".
+      subtitle  "The Great Underground Empire".
+       version  "1".
+        author  "Marc Blank and Dave Lebling".
+          year  1981.
+         AlanV  "v3.0 beta8".
+End the.
+------------------------------------------------------------------------------
+
+
+=== The Starting Location
+
+////
+West of House
+You are standing in an open field west of a white house, with a boarded front door.
+There is a small mailbox here.
+////
+
+// @CHECK: There seems to be an error in the boilerplate:
+//          * Missing '.' after "IsA location".
+
+.Custom Starting Location: Zork I
+[source,alan]
+------------------------------------------------------------------------------
+The house_west IsA site.
+  Name 'West of House'.
+  Description "You are standing in an open field
+               west of a white house,
+               with a boarded front door."
+End the.
+------------------------------------------------------------------------------
+
+You must then remember to also rename `MY_START_LOC` in the `Start` section, at the end of the template:
+
+.Custom Starting Location: Zork I
+[source,alan]
+------------------------------------------------------------------------------
+--/// Start Section ///---------------------------------------------------------
+
+Start at house_west.
+------------------------------------------------------------------------------
 
 * * *
 

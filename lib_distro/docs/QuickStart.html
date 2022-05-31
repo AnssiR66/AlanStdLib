@@ -929,14 +929,20 @@ pre[lang=bnf] > code.language-bnf[data-lang=bnf] {
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#preparing_the_files">Preparing The Files</a>
 <ul class="sectlevel1">
-<li><a href="#work_folder">1. Work FOlder</a></li>
+<li><a href="#copying_library_files">1. Copying Library Files</a></li>
+<li><a href="#editing_the_game_boilerplate">2. Editing The Game Boilerplate</a>
+<ul class="sectlevel2">
+<li><a href="#the_my_game_meta_instacne">The my_game Meta Instacne</a></li>
+<li><a href="#the_starting_location">The Starting Location</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#original_text">Original Text</a>
 <ul class="sectlevel1">
-<li><a href="#importing_the_library">2. Importing The Library</a></li>
-<li><a href="#defining_my_game">3. Defining <code>my_game</code></a></li>
-<li><a href="#write_your_adventure">4. Write Your Adventure</a></li>
+<li><a href="#importing_the_library">3. Importing The Library</a></li>
+<li><a href="#defining_my_game">4. Defining <code>my_game</code></a></li>
+<li><a href="#write_your_adventure">5. Write Your Adventure</a></li>
 </ul>
 </li>
 </ul>
@@ -1074,9 +1080,91 @@ Setting up your copy of the library and the adventure template.
 </div>
 </div>
 <div class="sect1">
-<h2 id="work_folder"><a class="anchor" href="#work_folder"></a>1. Work FOlder</h2>
+<h2 id="copying_library_files"><a class="anchor" href="#copying_library_files"></a>1. Copying Library Files</h2>
 <div class="sectionbody">
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="title">EDITORS' NOTE</div>
+<div class="paragraph">
+<p><strong>TBD!</strong> Explain how to copy contents of <code>StdLib/</code> folder plus <code>newgame.alan</code> into source adventure working folder, then rename the boilerplate.</p>
+</div>
+<div class="paragraph">
+<p>Then test that the boilerplate compiles.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="editing_the_game_boilerplate"><a class="anchor" href="#editing_the_game_boilerplate"></a>2. Editing The Game Boilerplate</h2>
+<div class="sectionbody">
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="title">EDITORS' NOTE</div>
+<div class="paragraph">
+<p><strong>TBD!</strong> In this chapter we&#8217;ll go through the various sections of the boilerplate, and how to tweak it.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="the_my_game_meta_instacne"><a class="anchor" href="#the_my_game_meta_instacne"></a>The my_game Meta Instacne</h3>
+<div class="paragraph">
+<p>The <code>my_game</code> &#8230;&#8203;</p>
+</div>
+<div class="listingblock">
+<div class="title">Custom Banner Example: Zork I</div>
+<div class="content">
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">The</span><span class="w"> </span><span class="n">my_game</span><span class="w"> </span><span class="kr">IsA</span><span class="w"> </span><span class="n">DEFINITION_BLOCK</span><span class="w">
+    </span><span class="kr">Has</span><span class="w">  </span><span class="n">title</span><span class="w">  </span><span class="dl">"</span><span class="s2">ZORK I</span><span class="dl">"</span><span class="p">.</span><span class="w">
+      </span><span class="n">subtitle</span><span class="w">  </span><span class="dl">"</span><span class="s2">The Great Underground Empire</span><span class="dl">"</span><span class="p">.</span><span class="w">
+       </span><span class="n">version</span><span class="w">  </span><span class="dl">"</span><span class="s2">1</span><span class="dl">"</span><span class="p">.</span><span class="w">
+        </span><span class="n">author</span><span class="w">  </span><span class="dl">"</span><span class="s2">Marc Blank and Dave Lebling</span><span class="dl">"</span><span class="p">.</span><span class="w">
+          </span><span class="n">year</span><span class="w">  </span><span class="m">1981</span><span class="p">.</span><span class="w">
+         </span><span class="n">AlanV</span><span class="w">  </span><span class="dl">"</span><span class="s2">v3.0 beta8</span><span class="dl">"</span><span class="p">.</span><span class="w">
+</span><span class="kr">End</span><span class="w"> </span><span class="kr">the</span><span class="p">.</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the_starting_location"><a class="anchor" href="#the_starting_location"></a>The Starting Location</h3>
+<div class="listingblock">
+<div class="title">Custom Starting Location: Zork I</div>
+<div class="content">
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="kr">The</span><span class="w"> </span><span class="n">house_west</span><span class="w"> </span><span class="kr">IsA</span><span class="w"> </span><span class="n">site</span><span class="p">.</span><span class="w">
+  </span><span class="kr">Name</span><span class="w"> </span><span class="n">'West of House'</span><span class="p">.</span><span class="w">
+  </span><span class="kr">Description</span><span class="w"> </span><span class="dl">"</span><span class="s2">You are standing in an open field
+               west of a white house,
+               with a boarded front door.</span><span class="dl">"</span><span class="w">
+</span><span class="kr">End</span><span class="w"> </span><span class="kr">the</span><span class="p">.</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You must then remember to also rename <code>MY_START_LOC</code> in the <code>Start</code> section, at the end of the template:</p>
+</div>
+<div class="listingblock">
+<div class="title">Custom Starting Location: Zork I</div>
+<div class="content">
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="c1">--/// Start Section ///---------------------------------------------------------</span><span class="w">
+
+</span><span class="kr">Start</span><span class="w"> </span><span class="kr">at</span><span class="w"> </span><span class="n">house_west</span><span class="p">.</span></code></pre>
+</div>
+</div>
 <hr>
+</div>
 </div>
 </div>
 <h1 id="original_text" class="sect0"><a class="anchor" href="#original_text"></a>Original Text</h1>
@@ -1103,7 +1191,7 @@ Setting up your copy of the library and the adventure template.
 </div>
 </div>
 <div class="sect1">
-<h2 id="importing_the_library"><a class="anchor" href="#importing_the_library"></a>2. Importing The Library</h2>
+<h2 id="importing_the_library"><a class="anchor" href="#importing_the_library"></a>3. Importing The Library</h2>
 <div class="sectionbody">
 <div class="admonitionblock caution">
 <table>
@@ -1148,7 +1236,7 @@ Make sure that <code>library.i</code> is in the same folder as the other library
 </div>
 </div>
 <div class="sect1">
-<h2 id="defining_my_game"><a class="anchor" href="#defining_my_game"></a>3. Defining <code>my_game</code></h2>
+<h2 id="defining_my_game"><a class="anchor" href="#defining_my_game"></a>4. Defining <code>my_game</code></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Define the instance <code>my_game</code> in your own source file, in the following way:</p>
@@ -1278,7 +1366,7 @@ Should be changed by providing a cross reference to the <em>StdLib Manual</em> s
 </div>
 </div>
 <div class="sect1">
-<h2 id="write_your_adventure"><a class="anchor" href="#write_your_adventure"></a>4. Write Your Adventure</h2>
+<h2 id="write_your_adventure"><a class="anchor" href="#write_your_adventure"></a>5. Write Your Adventure</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Go on designing your game as usual, implementing locations, actors, objects, and so forth.</p>
