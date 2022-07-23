@@ -1,7 +1,9 @@
-=begin "globals.rb" v0.2.1 | 2021/10/25 | by Tristano Ajmone | MIT License
+=begin "globals.rb" v0.2.1 | 2022/07/23 | by Tristano Ajmone | MIT License
 ================================================================================
-Some custom Rake helpers required by our custom Ruby modules and which are used
-in most of our Rakefiles.
+Some shared Rake helpers required by our custom Ruby modules.
+
+For the latest version of this file, check the ALAN i18n project:
+https://github.com/alan-if/alan-i18n/tree/main/_assets/rake
 ================================================================================
 =end
 

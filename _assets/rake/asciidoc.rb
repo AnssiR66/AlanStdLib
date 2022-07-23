@@ -1,7 +1,10 @@
-=begin "asciidoc.rb" v0.3.1 | 2022/05/28 | by Tristano Ajmone | MIT License
+=begin "asciidoc.rb" v0.3.2 | 2022/07/23 | by Tristano Ajmone | MIT License
 ================================================================================
 Some custom Rake helper methods for automating common Asciidoctor operations
 that we use across different documentation projects.
+
+For the latest version of this file, check the ALAN i18n project:
+https://github.com/alan-if/alan-i18n/tree/main/_assets/rake
 ================================================================================
 =end
 
@@ -13,7 +16,7 @@ def AsciidoctorConvert(source_file, adoc_opts = "", dest_dir = nil)
   TaskHeader("Converting to HTML: #{source_file}")
   src_dir = source_file.pathmap("%d")
   src_file = source_file.pathmap("%f")
-  adoc_opts = adoc_opts.chomp + " --destination-dir #{$repo_root}/#{dest_dir}" unless !dest_dir
+  adoc_opts = adoc_opts.chomp + " --destination-dir \"#{$repo_root}/#{dest_dir}\"" unless !dest_dir
   adoc_opts = adoc_opts.chomp + " #{src_file}"
   cd "#{$repo_root}/#{src_dir}"
   begin

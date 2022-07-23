@@ -1,8 +1,11 @@
-=begin "alan.rb" v0.4.1 | 2021/10/26 | by Tristano Ajmone | MIT License
+=begin "alan.rb" v0.4.2 | 2022/07/23 | by Tristano Ajmone | MIT License
 ================================================================================
 Some custom Rake helper methods for automating common Alan SDK operations that
 we use across different Alan projects.
-Require ALAN SDK >= Beta8 and UFT-8 encoded sources and solutions.
+Requires ALAN SDK >= Beta8 and UFT-8 encoded sources and solutions.
+
+For the latest version of this file, check the ALAN i18n project:
+https://github.com/alan-if/alan-i18n/tree/main/_assets/rake
 ================================================================================
 =end
 
@@ -29,7 +32,7 @@ def CreateTranscript(storyfile, solution)
 
   cd "#{$repo_root}/#{target_folder}"
   sol_file = File.open(a3s, mode: "rt", encoding: "BOM|UTF-8")
-  IO.popen("arun -r -u #{a3c} > #{a3t}", "r+") do |transcript|
+  IO.popen("arun -r -u \"#{a3c}\" > \"#{a3t}\"", "r+") do |transcript|
     transcript.puts sol_file.read
   end
   sol_file.close
@@ -85,7 +88,7 @@ def CreateADocTranscript(storyfile, solution)
   cd "#{$repo_root}/#{target_folder}"
   sol_file = File.open(a3s, mode: "rt", encoding: "BOM|UTF-8").read
   adoc_file = File.open(a3t, mode: "w", encoding: "UTF-8")
-  stdout, stderr, status = Open3.capture3("arun -r -u #{a3c}", :stdin_data=>sol_file)
+  stdout, stderr, status = Open3.capture3("arun -r -u \"#{a3c}\"", :stdin_data=>sol_file)
   stdout.each_line(chomp: true) do |line|
     line.sub(/ *\Z/, '') # Strip trailing spaces
     # ------------------------------------------------
@@ -300,7 +303,7 @@ rule ".a3c" => ".alan" do |t|
 
   cd "#{$repo_root}/#{adv_dir}"
   begin
-    alan_cmd = "alan#{inc_opt} #{adv_src}"
+    alan_cmd = "alan#{inc_opt} \"#{adv_src}\""
     puts alan_cmd
     stdout, stderr, status = Open3.capture3(alan_cmd)
     raise unless status.success?
