@@ -36,12 +36,25 @@ ifndef::PathToMainDir[]
 :PathToMainDir: ./
 endif::[]
 
-// Directories Paths
-// =================
+:PathDistroDir: {PathToMainDir}../lib_distro/
+
+// Source Directories Paths
+// ========================
 // @FIXME: Rel.paths might change in new repo structure!
 :StdLibDir: {PathToMainDir}StdLib
 :ExtrasDir: {PathToMainDir}extras
 
+// Distro Directories Paths
+// ========================
+// @FIXME: Rel.paths might change in new repo structure!
+:StdLibDistro: {PathDistroDir}StdLib
+:ExtrasDistro: {PathDistroDir}extras
+
+// Links to Distro Folders
+// =======================
+// These are used within documentation to allow readers to quickly
+// open the mentioned folder
+:ExtrasLink: pass:q,a[link:{ExtrasDir}[`extras/`^,title="open 'extras/' folder"]]
 
 // Links to Additional StdLib Assets
 // =================================

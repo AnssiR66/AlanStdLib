@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.18">
 <meta name="author" content="Anssi Räisänen, Tristano Ajmone">
 <title>Quick Start Guide for ALAN Standard Library</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -85,10 +85,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -920,19 +920,19 @@ pre[lang=bnf] > code.language-bnf[data-lang=bnf] {
 <span id="author" class="author">Anssi Räisänen</span><br>
 <span id="author2" class="author">Tristano Ajmone</span><br>
 <span id="revnumber">stdlib 2.2.0-WIP,</span>
-<span id="revdate">2022-05-30</span>
+<span id="revdate">2022-12-19</span>
 <br><span id="revremark">DRAFT</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#preparing_the_files">Preparing The Files</a>
+<li><a href="#preparing_the_files">Preparing the Files</a>
 <ul class="sectlevel1">
 <li><a href="#copying_library_files">1. Copying Library Files</a></li>
-<li><a href="#editing_the_game_boilerplate">2. Editing The Game Boilerplate</a>
+<li><a href="#editing_the_game_boilerplate">2. Editing the Game Boilerplate</a>
 <ul class="sectlevel2">
-<li><a href="#the_my_game_meta_instacne">The my_game Meta Instacne</a></li>
+<li><a href="#the_my_game_meta_instance">The my_game Meta Instance</a></li>
 <li><a href="#the_starting_location">The Starting Location</a></li>
 </ul>
 </li>
@@ -940,7 +940,7 @@ pre[lang=bnf] > code.language-bnf[data-lang=bnf] {
 </li>
 <li><a href="#original_text">Original Text</a>
 <ul class="sectlevel1">
-<li><a href="#importing_the_library">3. Importing The Library</a></li>
+<li><a href="#importing_the_library">3. Importing the Library</a></li>
 <li><a href="#defining_my_game">4. Defining <code>my_game</code></a></li>
 <li><a href="#write_your_adventure">5. Write Your Adventure</a></li>
 </ul>
@@ -998,7 +998,7 @@ pre[lang=bnf] > code.language-bnf[data-lang=bnf] {
 <div class="ulist">
 <ul>
 <li>
-<p>Copying the <code>new_game.alan</code> template and <code>StdLib/</code> folder into the adventure work folder.</p>
+<p>Copying the <code>newgame.alan</code> template and <code>StdLib/</code> folder into the adventure work folder.</p>
 </li>
 <li>
 <p>Editing the template to customize the banner info and ensuring the library files are reachable via the <code>Import</code> statements.</p>
@@ -1054,7 +1054,7 @@ pre[lang=bnf] > code.language-bnf[data-lang=bnf] {
 <td class="content">
 <div class="title">EDITORS' NOTE</div>
 <div class="paragraph">
-<p><strong>TBD!</strong> We should mentione the <code>new_game.alan</code> template here!</p>
+<p><strong>TBD!</strong> We should mention the <code>newgame.alan</code> template here!</p>
 </div>
 <div class="paragraph">
 <p>In fact, the entire guide should push for using the template, instead of hand-writing the code line by line.
@@ -1063,7 +1063,7 @@ The current sections would still hold true, they would simply become a commentar
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-square-o"></i> Add to <code>new_game.alan</code> template region-tag comments so that we can selectively <code>include::</code> its various parts in this document.</p>
+<p><i class="fa fa-square-o"></i> Add to <code>newgame.alan</code> template region-tag comments so that we can selectively <code>include::</code> its various parts in this document.</p>
 </li>
 </ul>
 </div>
@@ -1071,9 +1071,44 @@ The current sections would still hold true, they would simply become a commentar
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>To facilitate the creation of new adventures using the ALAN StdLib we&#8217;ve included in the <a href="../extras" title="open 'extras/' folder" target="_blank" rel="noopener"><code>extras/</code></a> folder of the library distribution the <a href="../extras/newgame.alan" title="Open adventure template" target="_blank" rel="noopener"><code>newgame.alan</code></a> template file:</p>
+</div>
+<div class="listingblock lib">
+<div class="content">
+<pre class="rouge highlight" lang="alan"><code class="language-alan" data-lang="alan"><span class="c1">-- newgame.alan | ALAN Standard Library v2.2.0-WIP</span><span class="w">
+</span><span class="c1">-- =============================================================================</span><span class="w">
+</span><span class="c1">-- An ALAN boilerplate for creating new adventures using the Standard Library.</span><span class="w">
+</span><span class="c1">-- For instructions on how to use this template, see the "Quick Start" guide.</span><span class="w">
+</span><span class="c1">-- =============================================================================</span><span class="w">
+
+</span><span class="kr">Import</span><span class="w"> </span><span class="dl">'</span><span class="s1">library.i</span><span class="dl">'</span><span class="p">.</span><span class="w">
+
+</span><span class="kr">The</span><span class="w"> </span><span class="n">my_game</span><span class="w"> </span><span class="kr">IsA</span><span class="w"> </span><span class="n">DEFINITION_BLOCK</span><span class="w">
+    </span><span class="kr">Has</span><span class="w">  </span><span class="n">title</span><span class="w">  </span><span class="dl">"</span><span class="s2">My Adventure</span><span class="dl">"</span><span class="p">.</span><span class="w">
+      </span><span class="n">subtitle</span><span class="w">  </span><span class="dl">""</span><span class="p">.</span><span class="w">
+       </span><span class="n">version</span><span class="w">  </span><span class="dl">"</span><span class="s2">1</span><span class="dl">"</span><span class="p">.</span><span class="w">
+        </span><span class="n">author</span><span class="w">  </span><span class="dl">"</span><span class="s2">John Doe</span><span class="dl">"</span><span class="p">.</span><span class="w">
+          </span><span class="n">year</span><span class="w">  </span><span class="m">2022</span><span class="p">.</span><span class="w">
+         </span><span class="n">AlanV</span><span class="w">  </span><span class="dl">"</span><span class="s2">v3.0 beta8</span><span class="dl">"</span><span class="p">.</span><span class="w">
+</span><span class="kr">End</span><span class="w"> </span><span class="kr">the</span><span class="p">.</span><span class="w">
+
+</span><span class="kr">The</span><span class="w"> </span><span class="n">MY_START_LOC</span><span class="w"> </span><span class="kr">IsA</span><span class="w"> </span><span class="nb">location</span><span class="p">.</span><span class="w"> </span><span class="c1">-- or: IsA ROOM|SITE|DARK_ROOM|DARK_SITE</span><span class="w">
+  </span><span class="c1">-- Define you starting location ...</span><span class="w">
+</span><span class="kr">End</span><span class="w"> </span><span class="kr">the</span><span class="p">.</span><span class="w">
+
+</span><span class="c1">--/// Start Section ///---------------------------------------------------------</span><span class="w">
+
+</span><span class="kr">Start</span><span class="w"> </span><span class="kr">at</span><span class="w"> </span><span class="n">MY_START_LOC</span><span class="p">.</span><span class="w">
+</span><span class="kr">Describe</span><span class="w"> </span><span class="n">banner</span><span class="p">.</span></code></pre>
 </div>
 </div>
-<h1 id="preparing_the_files" class="sect0"><a class="anchor" href="#preparing_the_files"></a>Preparing The Files</h1>
+<div class="paragraph">
+<p>This template contains the minimum required code to setup an ALAN StdLib adventure which compiles to a working game (provided the library files are correctly setup and reachable to the template).</p>
+</div>
+</div>
+</div>
+<h1 id="preparing_the_files" class="sect0"><a class="anchor" href="#preparing_the_files"></a>Preparing the Files</h1>
 <div class="openblock partintro">
 <div class="content">
 Setting up your copy of the library and the adventure template.
@@ -1103,7 +1138,7 @@ Setting up your copy of the library and the adventure template.
 </div>
 </div>
 <div class="sect1">
-<h2 id="editing_the_game_boilerplate"><a class="anchor" href="#editing_the_game_boilerplate"></a>2. Editing The Game Boilerplate</h2>
+<h2 id="editing_the_game_boilerplate"><a class="anchor" href="#editing_the_game_boilerplate"></a>2. Editing the Game Boilerplate</h2>
 <div class="sectionbody">
 <div class="admonitionblock caution">
 <table>
@@ -1121,7 +1156,7 @@ Setting up your copy of the library and the adventure template.
 </table>
 </div>
 <div class="sect2">
-<h3 id="the_my_game_meta_instacne"><a class="anchor" href="#the_my_game_meta_instacne"></a>The my_game Meta Instacne</h3>
+<h3 id="the_my_game_meta_instance"><a class="anchor" href="#the_my_game_meta_instance"></a>The my_game Meta Instance</h3>
 <div class="paragraph">
 <p>The <code>my_game</code> &#8230;&#8203;</p>
 </div>
@@ -1191,7 +1226,7 @@ Setting up your copy of the library and the adventure template.
 </div>
 </div>
 <div class="sect1">
-<h2 id="importing_the_library"><a class="anchor" href="#importing_the_library"></a>3. Importing The Library</h2>
+<h2 id="importing_the_library"><a class="anchor" href="#importing_the_library"></a>3. Importing the Library</h2>
 <div class="sectionbody">
 <div class="admonitionblock caution">
 <table>

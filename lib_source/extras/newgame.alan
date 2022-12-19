@@ -8,7 +8,6 @@
 Import 'library.i'.
 -- end::import_section[]
 
-
 -- tag::my_game_section[]
 The my_game IsA DEFINITION_BLOCK
     Has  title  "My Adventure".
@@ -19,7 +18,6 @@ The my_game IsA DEFINITION_BLOCK
          AlanV  "v3.0 beta8".
 End the.
 -- end::my_game_section[]
-
 
 -- tag::starloc_section[]
 The MY_START_LOC IsA location. -- or: IsA ROOM|SITE|DARK_ROOM|DARK_SITE

@@ -2,7 +2,7 @@
 Anssi Räisänen; Tristano Ajmone
 :StdLibVer: 2.2.0
 :revnumber: {StdLibVer}-WIP
-:revdate: 2022-05-30
+:revdate: 2022-12-19
 :revremark: DRAFT
 :version-label: StdLib
 :lang: en
@@ -61,7 +61,7 @@ https://github.com/AnssiR66/AlanStdLib/blob/497378b/tbd/QuickStart.txt[original 
 I think it would make sense to split the guide into two Parts:
 
 * Part I: Adventure Set-up
-** Copying the `new_game.alan` template and `StdLib/` folder into the adventure work folder.
+** Copying the `newgame.alan` template and `StdLib/` folder into the adventure work folder.
 ** Editing the template to customize the banner info and ensuring the library files are reachable via the `Import` statements.
 ** Demonstrate how to compile and run the source adventure (via CLI or GUI compiler and interpreter).
 * Part II: Quick Tips
@@ -69,10 +69,9 @@ I think it would make sense to split the guide into two Parts:
 =====================================
 
 
+
 [preface]
 == Introduction
-
-
 
 .EDITORS' NOTE
 [CAUTION]
@@ -83,16 +82,27 @@ I think it would make sense to split the guide into two Parts:
 .EDITORS' NOTE
 [CAUTION]
 =====================================
-*TBD!* We should mentione the `new_game.alan` template here!
+*TBD!* We should mention the `newgame.alan` template here!
 
 In fact, the entire guide should push for using the template, instead of hand-writing the code line by line.
 The current sections would still hold true, they would simply become a commentary on the various parts of the template and how to customize it.
 
-* [ ] Add to `new_game.alan` template region-tag comments so that we can selectively `include::` its various parts in this document.
+* [ ] Add to `newgame.alan` template region-tag comments so that we can selectively `include::` its various parts in this document.
 =====================================
 
+To facilitate the creation of new adventures using the ALAN StdLib we've included in the {ExtrasLink} folder of the library distribution the {newgame_alan} template file:
 
-= Preparing The Files
+[source,alan,role=lib]
+--------------------------------------
+include::{ExtrasDistro}/newgame.alan[]
+--------------------------------------
+
+This template contains the minimum required code to setup an ALAN StdLib adventure which compiles to a working game (provided the library files are correctly setup and reachable to the template).
+
+
+
+
+= Preparing the Files
 
 Setting up your copy of the library and the adventure template.
 
@@ -109,7 +119,7 @@ Then test that the boilerplate compiles.
 
 
 
-== Editing The Game Boilerplate
+== Editing the Game Boilerplate
 
 .EDITORS' NOTE
 [CAUTION]
@@ -118,7 +128,7 @@ Then test that the boilerplate compiles.
 =====================================
 
 
-=== The my_game Meta Instacne
+=== The my_game Meta Instance
 
 The `my_game` ...
 
@@ -191,7 +201,7 @@ We'll keep it until the new version is ready, so we can compare the new and orig
 =====================================
 
 
-== Importing The Library
+== Importing the Library
 
 .EDITORS' NOTE
 [CAUTION]

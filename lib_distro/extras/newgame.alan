@@ -6,7 +6,6 @@
 
 Import 'library.i'.
 
-
 The my_game IsA DEFINITION_BLOCK
     Has  title  "My Adventure".
       subtitle  "".
@@ -15,7 +14,6 @@ The my_game IsA DEFINITION_BLOCK
           year  2022.
          AlanV  "v3.0 beta8".
 End the.
-
 
 The MY_START_LOC IsA location. -- or: IsA ROOM|SITE|DARK_ROOM|DARK_SITE
   -- Define you starting location ...
